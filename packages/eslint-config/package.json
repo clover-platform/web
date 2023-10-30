@@ -1,0 +1,24 @@
+{
+    "name": "@prime-web/eslint-config",
+    "version": "1.0.0",
+    "description": "> TODO: description",
+    "author": "赵振华 <zhenhua.zhao@metalpha.finance>",
+    "homepage": "",
+    "license": "ISC",
+    "main": "lib/index.js",
+    "directories": {
+        "lib": "lib"
+    },
+    "files": [
+        "lib"
+    ],
+    "publishConfig": {
+        "access": "public"
+    },
+    "dependencies": {
+        "@typescript-eslint/eslint-plugin": "5.12.0",
+        "@typescript-eslint/parser": "5.12.0",
+        "typescript": "4.5.5",
+        "eslint-config-next": "13.5.1"
+    }
+}
