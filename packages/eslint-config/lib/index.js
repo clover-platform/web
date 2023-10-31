@@ -15,8 +15,7 @@ module.exports = {
         "sourceType": "module"
     },
     "plugins": [
-        "@typescript-eslint",
-        "prime"
+        "@typescript-eslint"
     ],
     "rules": {
         "indent": ["error", 4, {
@@ -32,7 +31,6 @@ module.exports = {
         "jsx-a11y/alt-text": 0,
         "@next/next/link-passhref": 0,
         "import/no-anonymous-default-export": 0,
-        "@next/next/no-sync-scripts": 0,
-        "prime/lodash-introduce-on-demand": 2,
+        "@next/next/no-sync-scripts": 0
     }
 };

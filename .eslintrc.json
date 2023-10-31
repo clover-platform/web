@@ -1,7 +1,7 @@
 {
     "root": true,
     "extends": [
-        "@prime-web/eslint-config"
+        "@clover/eslint-config"
     ],
     "ignorePatterns": [
         "node_modules/",
