@@ -32,3 +32,4 @@ yarn-error.log*
 packages/*/i18n/
 .idea/
 *.iml
+dist/
