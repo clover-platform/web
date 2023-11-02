@@ -1,0 +1,23 @@
+{
+    "en-us": {
+        "crowdin": "en",
+        "LANG": "en-us",
+        "LANG_CODE": "en",
+        "LANG_AREA": "us",
+        "ROOT": "/en-us/"
+    },
+    "zh-cn": {
+        "crowdin": "zh-CN",
+        "LANG": "zh-cn",
+        "LANG_CODE": "zh",
+        "LANG_AREA": "cn",
+        "ROOT": "/zh-cn/"
+    },
+    "zh-tw": {
+        "crowdin": "zh-TW",
+        "LANG": "zh-tw",
+        "LANG_CODE": "zh",
+        "LANG_AREA": "tw",
+        "ROOT": "/zh-tw/"
+    }
+}

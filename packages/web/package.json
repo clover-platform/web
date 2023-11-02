@@ -2,8 +2,9 @@
     "name": "@clover/web",
     "version": "0.1.0",
     "private": true,
+    "type": "module",
     "scripts": {
-        "dev": "next dev",
+        "dev": "next dev -p 3070",
         "build": "next build",
         "start": "next start",
         "lint": "next lint"
@@ -19,6 +20,13 @@
         "@types/react-dom": "^18",
         "autoprefixer": "^10",
         "postcss": "^8",
-        "tailwindcss": "^3"
+        "tailwindcss": "^3",
+        "find-yarn-workspace-root": "^2.0.0"
+    },
+    "postcss": {
+        "plugins": {
+            "tailwindcss": {},
+            "autoprefixer": {}
+        }
     }
 }
