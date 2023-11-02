@@ -7,8 +7,11 @@ const client = new Redis(parseInt(process.env.REDIS_PORT), process.env.REDIS_HOS
 })
 
 const redlock = new Redlock([client], {
-    retryDelay: 200, // time in ms
-    retryCount: 5,
+    driftFactor: 0.01,
+    retryCount: 10,
+    retryDelay: 200,
+    retryJitter: 200,
+    automaticExtensionThreshold: 500
 });
 
 export default redlock;
