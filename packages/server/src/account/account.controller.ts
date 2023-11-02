@@ -30,4 +30,10 @@ export class AccountController {
     async info(@Param("id") id: number): Promise<Account> {
         return await this.accountService.findOne(id);
     }
+
+    @Public()
+    @Get("/profile")
+    profile(): Account {
+        return new Account();
+    }
 }

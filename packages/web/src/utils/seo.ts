@@ -3,7 +3,7 @@ import isString from "lodash/isString";
 
 export const title = (title: string) => {
     const titles = [
-        "{#Antalpha Prime#}"
+        "{#幸运草#}"
     ];
     if(title) {
         titles.unshift(title);
@@ -11,12 +11,12 @@ export const title = (title: string) => {
     return titles.join(' - ');
 }
 
-export const keywords = (desc?: string | Array<string>) => {
-    const list = ["{#Crypto#}", "{#Antalpha#}"];
-    if(isString(desc)) {
-        list.push(desc);
-    }else if(isArray(desc)) {
-        list.push(...desc);
+export const keywords = (keyword?: string | Array<string>) => {
+    const list = ["{#幸运草#}", "{#任务管理#}", "{#甘特图#}", "{#问题管理#}"];
+    if(isString(keyword)) {
+        list.push(keyword);
+    }else if(isArray(keyword)) {
+        list.push(...keyword);
     }
     return list.join(', ');
 }

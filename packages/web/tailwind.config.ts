@@ -1,5 +1,5 @@
 import type { Config } from 'tailwindcss';
-import plugin from '@clover/common/tailwind.js';
+import plugin from '../common/plugin/tailwind.js';
 
 const config: Config = {
     content: [
