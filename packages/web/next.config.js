@@ -1,5 +1,6 @@
 import findWorkspaceRoot from 'find-yarn-workspace-root';
 import { webpackConfig } from "@clover/i18n/utils/config.js";
+import withConfig from '@next/router-config';
 
 const isDev = process.env.NODE_ENV !== 'production';
 // 语言默认值
@@ -15,6 +16,7 @@ const nextConfig = {
     reactStrictMode: false,
     trailingSlash: true,
     output: isDev ? 'standalone' : "export",
+    transpilePackages: ['@clover/common'],
     devIndicators: {
         buildActivity: false
     },
@@ -36,4 +38,5 @@ const nextConfig = {
     }
 }
 
-export default nextConfig;
+const config = withConfig();
+export default config(nextConfig);

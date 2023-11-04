@@ -1,0 +1,33 @@
+@font-face {
+    font-family: 'dinpro';
+    src: url('~@clover/common/assets/fonts/dinpro-regular.woff2') format('woff2'),
+    url('~@clover/common/assets/fonts/dinpro-regular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+@font-face {
+    font-family: 'roboto';
+    src: url('~@clover/common/assets/fonts/roboto-regular.woff2') format('woff2'),
+    url('~@clover/common/assets/fonts/roboto-regular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+body {
+    font-family: 'dinpro', "roboto", "PingFang SC", "Hiragino Sans GB", "Heiti SC", "Microsoft YaHei", "WenQuanYi Micro Hei", Helvetica, Arial, monospace,serif;
+}
+html.en-us {
+    body {
+        font-family: 'dinpro', "roboto", "PingFang SC", "Hiragino Sans GB", "Heiti SC", "Microsoft YaHei", "WenQuanYi Micro Hei", Helvetica, Arial, monospace,serif;
+    }
+}
+input, button {
+    font-family:'dinpro', "roboto", "PingFang SC", "Hiragino Sans GB", "Heiti SC", "Microsoft YaHei", "WenQuanYi Micro Hei", Helvetica, Arial, monospace,serif;
+}
+
+.aa_multi_lang {
+    font-family: "PingFang SC", "Hiragino Sans GB", "Heiti SC", "Microsoft YaHei", "WenQuanYi Micro Hei", Helvetica, Arial, monospace,serif !important;
+}
+
