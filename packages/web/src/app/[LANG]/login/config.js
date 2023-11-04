@@ -1,3 +1,3 @@
 export const layoutConfig = {
-    name: 'main'
+    name: 'login'
 }

@@ -9,6 +9,7 @@ import componentConfig from "@/config/component";
 import {ARCO_LANG} from "@clover/common/config/arco";
 import {routers} from "@/config/layout/router";
 
+import "@/plugin/rest";
 import '@/assets/style/reset.css';
 import '@/assets/style/index.scss';
 import '@clover/common/assets/style/font.scss';

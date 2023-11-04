@@ -31,7 +31,6 @@ export class AccountController {
         return await this.accountService.findOne(id);
     }
 
-    @Public()
     @Get("/profile")
     profile(): Account {
         return new Account();

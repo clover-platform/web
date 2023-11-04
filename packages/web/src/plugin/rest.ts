@@ -1,14 +1,15 @@
 // Rest 配置
 import * as Rest from '@clover/common/utils/rest.js';
 import {get} from "@/utils/headers";
+import bus from '@clover/common/events';
+import {LOGIN} from "@/events/account";
 
 Rest.config({
     useTransId: true,
     onResponse: (data: any, config: any) => {
-        const { needLogin = true } = config.config;
         const { code } = data
-        if (code === 401 && needLogin) { // 未登录
-            // goLogin().then();
+        if (code === 401) { // 未登录
+            bus.emit(LOGIN);
         }
     }
 });
