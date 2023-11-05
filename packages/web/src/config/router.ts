@@ -3,5 +3,7 @@
 export default [{ path: "/", config:  {
     name: 'main'
 } },{ path: "/login/", config:  {
+    name: 'login',
+} },{ path: "/register/", config:  {
     name: 'login'
 } }]

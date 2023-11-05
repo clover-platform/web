@@ -5,10 +5,10 @@ import {genConfig} from "./router.js";
 
 export const init = (config = {}) => {
     Object.assign(config, DEFAULT_CONFIG);
-    const root = resolve('./app');
+    const root = resolve(config.base);
     let timer = null;
     chokidar.watch(root).on('all', (event, path) => {
-        if(event === 'change' && path.endsWith('config.js')) {
+        if(event === 'change' && (path.endsWith('config.js') || path.endsWith('config.ts'))) {
             clearTimeout(timer);
             timer = setTimeout(() => {
                 genConfig(config);

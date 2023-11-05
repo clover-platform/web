@@ -102,3 +102,7 @@ meter {
     all: revert;
     box-sizing: border-box;
 }
+
+button {
+    text-align: center;
+}

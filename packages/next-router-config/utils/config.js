@@ -1,6 +1,7 @@
 export const DEFAULT_CONFIG = {
-    supports: ['js', 'jsx', 'ts', 'tsx'],
+    base: "./src/app/",
+    dist: './src/config/router.ts',
+    supports: ['js', 'ts'],
     fileName: 'config',
-    dist: './src/config/router.js',
     varName: 'layoutConfig',
 }
