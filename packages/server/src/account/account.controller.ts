@@ -3,6 +3,7 @@ import { AccountService, CheckRegisterEmailRequest, CheckRegisterEmailResult } f
 import { Account } from "./account.entity";
 import { CacheInterceptor, CacheKey, CacheTTL } from "@nestjs/cache-manager";
 import { Public } from "../auth/auth.decorator";
+import {Redlock} from "../plugin/redlock.decorator";
 
 @Controller("/api/account")
 export class AccountController {
@@ -26,6 +27,13 @@ export class AccountController {
     @Get("/info/:id")
     async info(@Param("id") id: number): Promise<Account> {
         return await this.accountService.findOne(id);
+    }
+
+    @Public()
+    @Get("/test")
+    @Redlock(["test"], 5000)
+    test(): string {
+        return "test";
     }
 
     @Get("/profile")
