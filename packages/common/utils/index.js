@@ -2,18 +2,15 @@ import cloneDeep from 'lodash/cloneDeep';
 import omit from 'lodash/omit';
 import QRCode from 'qrcode';
 import { isValidElement } from 'react';
+import { EMAIL, URL as URL_REG } from "./regular.js";
 
 // TODO 语言列表
 const langList = [];
 
 const isServer = typeof window === 'undefined';
 
-export const EMAIL_REG = /^\w+([-._]\w+)*@\w+([-._]\w+)*\.\w+([-._]\w+)*$/;
-
-export const URL_REG = /^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\*\+,;=.]+$/;
-
 export const isEmail = (text) => {
-    return EMAIL_REG.test(text);
+    return EMAIL.test(text);
 }
 
 export const isUrl = (text) => {

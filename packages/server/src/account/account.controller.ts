@@ -1,5 +1,5 @@
 import {Body, Controller, Get, Param, Post, UseInterceptors} from "@nestjs/common";
-import { AccountService } from "./account.service";
+import { AccountService, CheckRegisterEmailRequest, CheckRegisterEmailResult } from "./account.service";
 import { Account } from "./account.entity";
 import { CacheInterceptor, CacheKey, CacheTTL } from "@nestjs/cache-manager";
 import { Public } from "../auth/auth.decorator";
@@ -17,12 +17,9 @@ export class AccountController {
     }
 
     @Public()
-    @Post("/login")
-    async login(
-        @Body() info: {username: string, password: string},
-    ): Promise<LoginResult> {
-        console.log(info);
-        return await this.accountService.login(info.username, info.password);
+    @Post("/register/email/check")
+    async checkRegisterEmail(@Body() request: CheckRegisterEmailRequest,): Promise<CheckRegisterEmailResult> {
+        return this.accountService.checkRegisterEmail(request);
     }
 
     @Public()

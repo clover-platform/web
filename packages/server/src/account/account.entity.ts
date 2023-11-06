@@ -6,6 +6,8 @@ export class Account {
 
     @Column() username: string;
 
+    @Column() email: string;
+
     @Column() password: string;
 
     @Column() enable: boolean;

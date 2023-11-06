@@ -6,6 +6,17 @@ import { CACHE_MANAGER } from '@nestjs/cache-manager';
 import { Cache } from 'cache-manager';
 import { JwtService } from '@nestjs/jwt';
 import { Redlock } from "../plugin/redlock.decorator";
+import { ADD_ACCOUNT_LOCK_KEY, LOCK_TIME } from "./account.const";
+
+export interface CheckRegisterEmailRequest {
+    username: string;
+    email: string;
+    code: string;
+}
+
+export interface CheckRegisterEmailResult {
+    token: string;
+}
 
 @Injectable()
 export class AccountService {
@@ -15,11 +26,35 @@ export class AccountService {
         private jwtService: JwtService
     ) {}
 
+    @Redlock([ADD_ACCOUNT_LOCK_KEY], LOCK_TIME)
+    async add(account: Account): Promise<Account> {
+        const size = await this.accountRepository.countBy({
+            username: account.username,
+        });
+        if(size === 0) {
+            await this.accountRepository.insert(account);
+        }
+        return this.accountRepository.findOneBy({
+            username: account.username,
+        })
+    }
+
+    async checkRegisterEmail(request: CheckRegisterEmailRequest): Promise<CheckRegisterEmailResult> {
+        let account = new Account();
+        account.username = request.username;
+        account.email = request.email;
+        // 插入数据库，并返回一个示例
+        account = await this.add(account);
+
+        return {
+            token: ""
+        };
+    }
+
     findAll(): Promise<Account[]> {
         return this.accountRepository.find();
     }
 
-    @Redlock(["account:by:id"], 5000)
     async findOne(id: number): Promise<Account | null> {
         console.log('id', id);
         await new Promise((resolve) => {

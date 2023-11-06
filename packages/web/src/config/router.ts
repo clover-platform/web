@@ -6,4 +6,6 @@ export default [{ path: "/", config:  {
     name: 'login',
 } },{ path: "/register/", config:  {
     name: 'login'
+} },{ path: "/reset-password/", config:  {
+    name: 'login'
 } }]

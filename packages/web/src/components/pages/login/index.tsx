@@ -5,10 +5,18 @@ import Quick from "@/components/pages/login/quick";
 import Link from "next/link";
 
 const LoginPage = () => {
+    const passwordLabel = <div className={"flex justify-center items-center"}>
+        <div className={"flex-1"}>{"{#密码#}"}</div>
+        <div className={"ml-[10px]"}>
+            <Link href={"/{#LANG#}/reset-password/"}>
+                <ArcoLink>{"{#找回密码#}"}</ArcoLink>
+            </Link>
+        </div>
+    </div>
     return <div className={"w-[400px]"}>
         <div className={"flex justify-center items-center"}>
             <div className={"text-[24px] font-bold flex-1"}>{"{#登录#}"}</div>
-            <div>
+            <div className={"ml-[10px]"}>
                 <span>{"{#没有账号？#}"}</span>
                 <Link href={"/{#LANG#}/register/"}>
                     <ArcoLink>{"{#注册#}"}</ArcoLink>
@@ -20,7 +28,7 @@ const LoginPage = () => {
                 <Form.Item label={"{#邮箱或用户名#}"}>
                     <Input placeholder={"{#请输入邮箱或用户名#}"} />
                 </Form.Item>
-                <Form.Item label={"{#密码#}"}>
+                <Form.Item label={passwordLabel}>
                     <Input.Password placeholder={"{#请输入密码#}"} />
                 </Form.Item>
                 <Form.Item>
