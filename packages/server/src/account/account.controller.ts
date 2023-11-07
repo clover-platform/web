@@ -1,4 +1,4 @@
-import {Body, Controller, Get, Param, Post, UseInterceptors} from "@nestjs/common";
+import {Body, Catch, Controller, Get, Param, Post, UseInterceptors} from "@nestjs/common";
 import { AccountService, CheckRegisterEmailRequest, CheckRegisterEmailResult } from "./account.service";
 import { Account } from "./account.entity";
 import { CacheInterceptor, CacheKey, CacheTTL } from "@nestjs/cache-manager";

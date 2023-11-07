@@ -1,4 +1,4 @@
-import { Injectable, Inject, UnauthorizedException } from "@nestjs/common";
+import { Injectable, Inject, UnauthorizedException, Catch } from "@nestjs/common";
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Account } from './account.entity';
@@ -56,10 +56,9 @@ export class AccountService {
     }
 
     async findOne(id: number): Promise<Account | null> {
-        console.log('id', id);
-        await new Promise((resolve) => {
-            setTimeout(resolve, 2000);
-        })
+        // await new Promise((resolve) => {
+        //     setTimeout(resolve, 2000);
+        // })
         let account = await this.cacheService.get<Account | null>(id.toString());
         if(!account) {
             account = await this.accountRepository.findOneBy({ id });
@@ -68,6 +67,7 @@ export class AccountService {
             }
             await this.cacheService.set(id.toString(), account);
         }
+        Promise.reject(new Error("test"));
         return account;
     }
 
