@@ -5,6 +5,7 @@ import { CacheInterceptor, CacheKey, CacheTTL } from "@nestjs/cache-manager";
 import { Public } from "../auth/auth.decorator";
 import {Redlock} from "../public/redlock.decorator";
 import {Result} from "../public/result.entity";
+import {Throttle} from "@nestjs/throttler";
 
 @Controller("/api/account")
 export class AccountController {
@@ -25,9 +26,10 @@ export class AccountController {
     }
 
     @Public()
+    @Throttle({default: { limit: 1, ttl: 60000 }})
     @Post("/register/email/send")
     async sendRegisterEmail(@Body() request: {email: string},): Promise<Result<any>> {
-        return this.accountService.sendRegisterEmail(request.email);
+        return await this.accountService.sendRegisterEmail(request.email);
     }
 
     @Public()

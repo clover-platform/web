@@ -1,7 +1,6 @@
 import {Module} from "@nestjs/common";
 import AppConfig from '../config/app';
 import OrmConfig from "../config/orm";
-import { DataSource } from 'typeorm';
 import { AccountModule } from "../account/account.module";
 import CacheConfig from "../config/cache";
 import { JwtModule } from "@nestjs/jwt";
@@ -10,6 +9,7 @@ import { AuthGuard } from "../auth/auth.guard";
 import { JWT_SECRET } from "../auth/auth.config";
 import { RolesGuard } from "../auth/roles.guard";
 import { PublicModule } from "../public/public.module";
+import { ThrottlerGuard, ThrottlerModule } from "@nestjs/throttler";
 
 @Module({
     imports: [
@@ -22,7 +22,11 @@ import { PublicModule } from "../public/public.module";
             global: true,
             secret: JWT_SECRET,
             signOptions: { expiresIn: '24h' },
-        })
+        }),
+        ThrottlerModule.forRoot([{
+            ttl: 60000,
+            limit: 120,
+        }]),
     ],
     controllers: [],
     providers: [
@@ -33,9 +37,11 @@ import { PublicModule } from "../public/public.module";
         {
             provide: APP_GUARD,
             useClass: RolesGuard
+        },
+        {
+            provide: APP_GUARD,
+            useClass: ThrottlerGuard
         }
     ]
 })
-export class AppModule {
-    constructor(private dataSource: DataSource) {}
-}
+export class AppModule {}

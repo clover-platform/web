@@ -31,7 +31,11 @@ export class AccountService {
     ) {}
 
     async sendRegisterEmail(email: string): Promise<Result<any>> {
-        await this.emailService.singleSendMail(email);
+        // await this.emailService.singleSendMail({
+        //     email,
+        //     subject: "注册",
+        //     body: "注册成功",
+        // });
         return Result.success(null);
     }
 

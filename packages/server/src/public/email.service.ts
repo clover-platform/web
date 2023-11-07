@@ -65,8 +65,10 @@ export class EmailService {
         });
         try{
             const { httpStatus } = await client.callApi(params, request, runtime);
+            console.log(httpStatus);
             return httpStatus === 200;
-        } catch{
+        } catch (e) {
+            console.log(e);
             return false;
         }
     }

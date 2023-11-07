@@ -45,7 +45,7 @@ rest.interceptors.response.use(
             success: false,
             message: ERROR_MESSAGE,
         };
-        if (response.status === 200) {
+        if ([200, 201].includes(response.status)) {
             data = response.data;
         }
         if (typeof onResponse === 'function') {
