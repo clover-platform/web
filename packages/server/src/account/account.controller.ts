@@ -3,7 +3,8 @@ import { AccountService, CheckRegisterEmailRequest, CheckRegisterEmailResult } f
 import { Account } from "./account.entity";
 import { CacheInterceptor, CacheKey, CacheTTL } from "@nestjs/cache-manager";
 import { Public } from "../auth/auth.decorator";
-import {Redlock} from "../plugin/redlock.decorator";
+import {Redlock} from "../public/redlock.decorator";
+import {Result} from "../public/result.entity";
 
 @Controller("/api/account")
 export class AccountController {
@@ -21,6 +22,12 @@ export class AccountController {
     @Post("/register/email/check")
     async checkRegisterEmail(@Body() request: CheckRegisterEmailRequest,): Promise<CheckRegisterEmailResult> {
         return this.accountService.checkRegisterEmail(request);
+    }
+
+    @Public()
+    @Post("/register/email/send")
+    async sendRegisterEmail(@Body() request: {email: string},): Promise<Result<any>> {
+        return this.accountService.sendRegisterEmail(request.email);
     }
 
     @Public()

@@ -5,8 +5,11 @@ import { Account } from './account.entity';
 import { CACHE_MANAGER } from '@nestjs/cache-manager';
 import { Cache } from 'cache-manager';
 import { JwtService } from '@nestjs/jwt';
-import { Redlock } from "../plugin/redlock.decorator";
+import { Redlock } from "../public/redlock.decorator";
 import { ADD_ACCOUNT_LOCK_KEY, LOCK_TIME } from "./account.const";
+import { Result } from "../public/result.entity";
+import {EmailService} from "../public/email.service";
+import e from "express";
 
 export interface CheckRegisterEmailRequest {
     username: string;
@@ -23,8 +26,14 @@ export class AccountService {
     constructor(
         @InjectRepository(Account) private accountRepository: Repository<Account>,
         @Inject(CACHE_MANAGER) private cacheService: Cache,
-        private jwtService: JwtService
+        private jwtService: JwtService,
+        private emailService: EmailService,
     ) {}
+
+    async sendRegisterEmail(email: string): Promise<Result<any>> {
+        await this.emailService.singleSendMail(email);
+        return Result.success(null);
+    }
 
     @Redlock([ADD_ACCOUNT_LOCK_KEY], LOCK_TIME)
     async add(account: Account): Promise<Account> {

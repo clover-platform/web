@@ -9,14 +9,14 @@ import { APP_GUARD } from "@nestjs/core";
 import { AuthGuard } from "../auth/auth.guard";
 import { JWT_SECRET } from "../auth/auth.config";
 import { RolesGuard } from "../auth/roles.guard";
-import {GlobalModule} from "./global.module";
+import { PublicModule } from "../public/public.module";
 
 @Module({
     imports: [
         CacheConfig,
         AppConfig,
         OrmConfig,
-        GlobalModule,
+        PublicModule,
         AccountModule,
         JwtModule.register({
             global: true,

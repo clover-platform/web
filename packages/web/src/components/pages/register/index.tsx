@@ -4,8 +4,8 @@ import { Button, Form, Input, Link as ArcoLink, Steps } from "@arco-design/web-r
 import Link from "next/link";
 import { useState } from "react";
 import SecretItem from "@/components/pages/register/secret";
-import EmailCodeInput from "../../../../../common/components/input/email-code";
-import { emailCode } from "@/rest/auth";
+import EmailCodeInput from "@clover/common/components/input/email-code";
+import {sendEmailCode} from "@/rest/auth";
 import * as v from '@clover/common/validators';
 
 const RegisterPage = () => {
@@ -56,7 +56,7 @@ const RegisterPage = () => {
                         {required: true, message: '{#请输入正确的邮箱#}'},
                         {length: 6, message: "{#邮箱验证码长度为 6#}"},
                     ]}>
-                        <EmailCodeInput placeholder={"{#请输入邮箱验证码#}"} api={emailCode} email={formData1.email} />
+                        <EmailCodeInput placeholder={"{#请输入邮箱验证码#}"} api={sendEmailCode} email={formData1.email} />
                     </Form.Item>
                     <Form.Item>
                         <Button htmlType={"submit"} long type={"primary"}>{"{#下一步#}"}</Button>
