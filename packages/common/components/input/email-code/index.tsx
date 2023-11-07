@@ -46,14 +46,14 @@ const EmailCodeInput = (props: EmailCodeInputProps) => {
 
     const sendCode = useCallback(async () => {
         setLoading(true);
-        const { success, message } = await api();
+        const { success, message } = await api(email);
         setLoading(false);
         if(success) {
             startTimer();
         }else{
             Message.error(message);
         }
-    }, [api]);
+    }, [api, email]);
 
     const buttonDisabled = useMemo(() => {
         return !isEmail(email) || loading || waiting

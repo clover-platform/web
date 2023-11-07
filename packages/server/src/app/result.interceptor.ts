@@ -6,6 +6,7 @@ import {
 } from '@nestjs/common';
 import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
+import {Result} from "@/public/result.entity";
 interface Response<T> {
     data: T;
 }
@@ -18,6 +19,12 @@ export class ResultInterceptor<T> implements NestInterceptor<T, Response<T>> {
         const request = context.switchToHttp().getRequest();
         return next.handle().pipe(
             map(data => {
+                if(data instanceof Result) {
+                    return {
+                        ...data,
+                        path: request['originalUrl'],
+                    };
+                }
                 return {
                     data,
                     code: 0,

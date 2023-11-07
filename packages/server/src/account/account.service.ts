@@ -1,15 +1,15 @@
-import { Injectable, Inject, UnauthorizedException, Catch } from "@nestjs/common";
+import { Injectable, Inject, UnauthorizedException } from "@nestjs/common";
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Account } from './account.entity';
 import { CACHE_MANAGER } from '@nestjs/cache-manager';
 import { Cache } from 'cache-manager';
 import { JwtService } from '@nestjs/jwt';
-import { Redlock } from "../public/redlock.decorator";
+import { Redlock } from "@/public/redlock.decorator";
 import { ADD_ACCOUNT_LOCK_KEY, LOCK_TIME } from "./account.const";
-import { Result } from "../public/result.entity";
-import {EmailService} from "../public/email.service";
-import e from "express";
+import { Result } from "@/public/result.entity";
+import {EmailService} from "@/public/email.service";
+import { genCode } from "@/utils/random";
 
 export interface CheckRegisterEmailRequest {
     username: string;
@@ -31,11 +31,22 @@ export class AccountService {
     ) {}
 
     async sendRegisterEmail(email: string): Promise<Result<any>> {
-        // await this.emailService.singleSendMail({
-        //     email,
-        //     subject: "注册",
-        //     body: "注册成功",
-        // });
+        const redisKey = `register:email:code:${email}`;
+        let code = await this.cacheService.get<string>(redisKey);
+        if(code) {
+            return Result.error({code: 1, message: "请稍后重试。"})
+        } else {
+            code = genCode();
+            await this.cacheService.set(redisKey, code, { ttl: 60 * 5 });
+        }
+        const sent = await this.emailService.singleSendMail({
+            email,
+            subject: "【幸运草】注册验证码",
+            body: "验证码为：" + code,
+        });
+        if(!sent) {
+            return Result.error({code: 2, message: "邮件发送失败。"})
+        }
         return Result.success(null);
     }
 

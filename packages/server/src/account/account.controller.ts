@@ -2,9 +2,9 @@ import {Body, Catch, Controller, Get, Param, Post, UseInterceptors} from "@nestj
 import { AccountService, CheckRegisterEmailRequest, CheckRegisterEmailResult } from "./account.service";
 import { Account } from "./account.entity";
 import { CacheInterceptor, CacheKey, CacheTTL } from "@nestjs/cache-manager";
-import { Public } from "../auth/auth.decorator";
-import {Redlock} from "../public/redlock.decorator";
-import {Result} from "../public/result.entity";
+import { Public } from "@/auth/auth.decorator";
+import {Redlock} from "@/public/redlock.decorator";
+import {Result} from "@/public/result.entity";
 import {Throttle} from "@nestjs/throttler";
 
 @Controller("/api/account")

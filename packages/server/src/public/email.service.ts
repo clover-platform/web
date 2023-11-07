@@ -58,15 +58,13 @@ export class EmailService {
         queries["ToAddress"] = data.email;
         queries["Subject"] = data.subject;
         queries["HtmlBody"] = data.body;
-        // runtime options
         let runtime = new $Util.RuntimeOptions({ });
         let request = new $OpenApi.OpenApiRequest({
             query: OpenApiUtil.query(queries),
         });
         try{
-            const { httpStatus } = await client.callApi(params, request, runtime);
-            console.log(httpStatus);
-            return httpStatus === 200;
+            const { statusCode } = await client.callApi(params, request, runtime);
+            return statusCode === 200;
         } catch (e) {
             console.log(e);
             return false;
