@@ -16,6 +16,7 @@ import {
     EmailCode,
     LoginResult
 } from "@/account/account.interface";
+import { I18n, I18nContext } from "nestjs-i18n";
 
 @Injectable()
 export class AccountService {
@@ -23,7 +24,7 @@ export class AccountService {
         @InjectRepository(Account) private accountRepository: Repository<Account>,
         @Inject(CACHE_MANAGER) private cacheService: Cache,
         private jwtService: JwtService,
-        private emailService: EmailService,
+        private emailService: EmailService
     ) {}
 
     private async newCode(redisKey: string): Promise<EmailCode> {
@@ -35,7 +36,7 @@ export class AccountService {
         return code;
     }
 
-    async sendRegisterEmail(email: string): Promise<Result<any>> {
+    async sendRegisterEmail(i18n: I18nContext, email: string): Promise<Result<any>> {
         const codeKey = `register:email:code:${email}`;
         const timeKey = `register:email:code:${email}:send:time`;
         let code = await this.cacheService.get<EmailCode>(codeKey);
@@ -43,7 +44,7 @@ export class AccountService {
             const lastTime = await this.cacheService.get<number>(timeKey);
             const offset = Date.now() - code.createdAt;
             if(lastTime && Date.now()  - lastTime < 60 * 1000)
-                return Result.error({code: 1, message: "请稍后重试。"})
+                return Result.error({code: 1, message: i18n.t("public.throttle")})
             if(offset > 4 * 60 * 1000)
                 code = await this.newCode(codeKey);
         } else {
@@ -52,7 +53,7 @@ export class AccountService {
         await this.cacheService.set(timeKey, Date.now(), { ttl: 60 });
         const sent = await this.emailService.singleSendMail({
             email,
-            subject: "【幸运草】注册验证码",
+            subject: i18n.t("mail.title.code"),
             template: "code",
             data: {
                 code: code.code
@@ -61,7 +62,7 @@ export class AccountService {
         if(!sent) {
             await this.cacheService.del(codeKey);
             await this.cacheService.del(timeKey);
-            return Result.error({code: 2, message: "邮件发送失败。"})
+            return Result.error({code: 2, message: i18n.t("mail.fail")})
         }
         return Result.success(null);
     }

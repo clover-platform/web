@@ -5,6 +5,7 @@ import OpenApiUtil from '@alicloud/openapi-util';
 import * as $Util from '@alicloud/tea-util';
 import * as ejs from 'ejs';
 import { resolve } from "path";
+import { I18nContext } from "nestjs-i18n";
 
 @Injectable()
 export class EmailService {
@@ -80,7 +81,9 @@ export class EmailService {
     }
 
     async renderTemplate(template: string, data: any): Promise<string> {
-        return await ejs.renderFile(`${resolve('./')}/src/template/mail/${template}.ejs`, data);
+        const lang = I18nContext.current().lang;
+        this.logger.log('current lang', lang);
+        return await ejs.renderFile(`${resolve('./')}/src/template/mail/${template}.${lang}.ejs`, data);
     }
 
 }

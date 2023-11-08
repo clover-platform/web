@@ -7,6 +7,7 @@ import { Redlock } from "@/public/redlock.decorator";
 import { Result } from "@/public/result.entity";
 import { Throttle } from "@nestjs/throttler";
 import { AccountService } from "@/account/account.service";
+import { I18n, I18nContext } from "nestjs-i18n";
 
 @Controller("/api/account")
 export class AccountController {
@@ -29,8 +30,8 @@ export class AccountController {
     @Public()
     @Throttle({default: { limit: 10, ttl: 60000 }})
     @Post("/register/email/send")
-    async sendRegisterEmail(@Body() request: {email: string},): Promise<Result<any>> {
-        return await this.accountService.sendRegisterEmail(request.email);
+    async sendRegisterEmail(@Body() request: {email: string}, @I18n() i18n: I18nContext): Promise<Result<any>> {
+        return await this.accountService.sendRegisterEmail(i18n, request.email);
     }
 
     @Public()
