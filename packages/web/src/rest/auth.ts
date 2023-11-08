@@ -6,3 +6,13 @@ export const profile = async () =>
 
 export const sendEmailCode = async (email: string) =>
     await post(`@account/register/email/send/`, {email});
+
+export const emailCheck = async (data: {
+    username: string;
+    email: string;
+    code: string;
+}) =>
+    await post(`@account/register/email/check/`, data);
+
+export const otpSecret = async () =>
+    await get(`@account/otp/secret/`);

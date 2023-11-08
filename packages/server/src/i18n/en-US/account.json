@@ -1,0 +1,10 @@
+{
+    "notfound": "User not found",
+    "otp": {
+        "is_bind": "Authenticator is bound"
+    },
+    "register": {
+        "code": "The email verification code is incorrect.",
+        "has": "Username or email already exists."
+    }
+}

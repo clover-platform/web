@@ -1,10 +1,16 @@
-export interface LoginResult {
+export interface TokenResult {
     token: string;
+    expiresIn: number;
 }
 
 export interface EmailCode {
     code: string,
     createdAt: number,
+}
+
+export interface OTPSecretResult {
+    secret: string;
+    url: string;
 }
 
 export interface CheckRegisterEmailRequest {
@@ -13,6 +19,6 @@ export interface CheckRegisterEmailRequest {
     code: string;
 }
 
-export interface CheckRegisterEmailResult {
-    token: string;
+export interface TokenOptions {
+    expiresIn: string;
 }

@@ -6,17 +6,18 @@
     ],
     "dependencies": {
         "@arco-design/web-react": "2.55.1",
-        "@arco-themes/react-clover": "0.0.2",
         "@arco-iconbox/react-clover": "0.0.1",
+        "@arco-themes/react-clover": "0.0.2",
         "axios": "1.6.0",
         "localforage": "1.10.0",
         "lodash": "4.17.21",
-        "qrcode": "1.5.3",
+        "qrcode": "^1.5.3",
         "recoil": "0.7.7",
         "sass": "1.69.5"
     },
     "devDependencies": {
         "@types/lodash": "4.14.200",
+        "@types/qrcode": "^1.5.5",
         "eslint": "8.53.0",
         "fs-jetpack": "5.1.0",
         "lerna": "7.4.2"

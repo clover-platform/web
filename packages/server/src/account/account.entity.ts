@@ -1,14 +1,51 @@
-import { Entity, PrimaryGeneratedColumn, Column } from "typeorm";
+import {Entity, PrimaryGeneratedColumn, Column, Index} from "typeorm";
 
 @Entity()
 export class Account {
-    @PrimaryGeneratedColumn() id: number;
+    @PrimaryGeneratedColumn({
+        comment: "主键"
+    }) id: number;
 
-    @Column() username: string;
+    @Column({
+        comment: "用户名",
+        length: 32
+    }) username: string;
 
-    @Column() email: string;
+    @Column({
+        comment: "邮箱",
+        length: 255
+    }) email: string;
 
-    @Column() password: string;
+    @Column({
+        comment: "密码",
+        length: 64,
+        nullable: true
+    }) password: string;
 
-    @Column() enable: boolean;
+    @Column({
+        comment: "状态: 0 未激活 1 正常 2 禁用",
+        default: 0
+    }) status: number;
+
+    @Column({
+        comment: "是否已删除",
+        default: false
+    }) deleted: boolean;
+
+    @Column({
+        comment: "创建时间",
+    }) createTime: Date;
+
+    @Column({
+        comment: "OTP密钥",
+        nullable: true
+    }) otpSecret: string;
+
+    @Column({
+        comment: "OTP绑定状态: 0 未绑定 1 已绑定",
+        nullable: true
+    }) otpStatus: number;
+
+    // 权限
+    perms: string[];
 }
