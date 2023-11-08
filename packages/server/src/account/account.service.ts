@@ -10,16 +10,12 @@ import { ADD_ACCOUNT_LOCK_KEY, LOCK_TIME } from "./account.const";
 import { Result } from "@/public/result.entity";
 import {EmailService} from "@/public/email.service";
 import { genCode } from "@/utils/random";
-
-export interface CheckRegisterEmailRequest {
-    username: string;
-    email: string;
-    code: string;
-}
-
-export interface CheckRegisterEmailResult {
-    token: string;
-}
+import {
+    CheckRegisterEmailRequest,
+    CheckRegisterEmailResult,
+    EmailCode,
+    LoginResult
+} from "@/account/account.interface";
 
 @Injectable()
 export class AccountService {
@@ -30,21 +26,41 @@ export class AccountService {
         private emailService: EmailService,
     ) {}
 
+    private async newCode(redisKey: string): Promise<EmailCode> {
+        const code = {
+            code: genCode(),
+            createdAt: Date.now(),
+        };
+        await this.cacheService.set<EmailCode>(redisKey, code, { ttl: 60 * 5 });
+        return code;
+    }
+
     async sendRegisterEmail(email: string): Promise<Result<any>> {
-        const redisKey = `register:email:code:${email}`;
-        let code = await this.cacheService.get<string>(redisKey);
+        const codeKey = `register:email:code:${email}`;
+        const timeKey = `register:email:code:${email}:send:time`;
+        let code = await this.cacheService.get<EmailCode>(codeKey);
         if(code) {
-            return Result.error({code: 1, message: "请稍后重试。"})
+            const lastTime = await this.cacheService.get<number>(timeKey);
+            const offset = Date.now() - code.createdAt;
+            if(lastTime && Date.now()  - lastTime < 60 * 1000)
+                return Result.error({code: 1, message: "请稍后重试。"})
+            if(offset > 4 * 60 * 1000)
+                code = await this.newCode(codeKey);
         } else {
-            code = genCode();
-            await this.cacheService.set(redisKey, code, { ttl: 60 * 5 });
+            code = await this.newCode(codeKey);
         }
+        await this.cacheService.set(timeKey, Date.now(), { ttl: 60 });
         const sent = await this.emailService.singleSendMail({
             email,
             subject: "【幸运草】注册验证码",
-            body: "验证码为：" + code,
+            template: "code",
+            data: {
+                code: code.code
+            }
         });
         if(!sent) {
+            await this.cacheService.del(codeKey);
+            await this.cacheService.del(timeKey);
             return Result.error({code: 2, message: "邮件发送失败。"})
         }
         return Result.success(null);

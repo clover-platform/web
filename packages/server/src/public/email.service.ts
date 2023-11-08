@@ -1,13 +1,17 @@
-import {Injectable} from "@nestjs/common";
+import { Injectable, Logger } from "@nestjs/common";
 import {ConfigService} from "@nestjs/config";
 import OpenApi, * as $OpenApi from '@alicloud/openapi-client';
 import OpenApiUtil from '@alicloud/openapi-util';
 import * as $Util from '@alicloud/tea-util';
+import * as ejs from 'ejs';
+import { resolve } from "path";
 
 @Injectable()
 export class EmailService {
 
     constructor(private configService: ConfigService) {}
+
+    private readonly logger = new Logger(EmailService.name);
 
     private createClient(): OpenApi {
         const emailConfig = this.configService.get("email");
@@ -46,7 +50,8 @@ export class EmailService {
     async singleSendMail(data: {
         email: string,
         subject: string,
-        body: string,
+        data: any,
+        template: string,
     }): Promise<boolean> {
         const emailConfig = this.configService.get("email");
         let client = this.createClient();
@@ -57,7 +62,10 @@ export class EmailService {
         queries["ReplyToAddress"] = true;
         queries["ToAddress"] = data.email;
         queries["Subject"] = data.subject;
-        queries["HtmlBody"] = data.body;
+        queries["HtmlBody"] = await this.renderTemplate(data.template, {
+            ...data.data,
+            title: data.subject
+        });
         let runtime = new $Util.RuntimeOptions({ });
         let request = new $OpenApi.OpenApiRequest({
             query: OpenApiUtil.query(queries),
@@ -66,9 +74,13 @@ export class EmailService {
             const { statusCode } = await client.callApi(params, request, runtime);
             return statusCode === 200;
         } catch (e) {
-            console.log(e);
+            this.logger.error(e);
             return false;
         }
+    }
+
+    async renderTemplate(template: string, data: any): Promise<string> {
+        return await ejs.renderFile(`${resolve('./')}/src/template/mail/${template}.ejs`, data);
     }
 
 }
