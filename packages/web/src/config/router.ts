@@ -2,6 +2,8 @@
 
 export default [{ path: "/", config:  {
     name: 'main'
+} },{ path: "/link/github/", config:  {
+    name: 'login',
 } },{ path: "/login/", config:  {
     name: 'login',
 } },{ path: "/register/", config:  {

@@ -21,12 +21,12 @@ const SUPPORT_WAY = [
 const QuickLogin = () => {
     return <div className={"flex flex-wrap justify-center"}>
         {SUPPORT_WAY.map((item) => {
-            return <div key={item.id} className={"m-[10px] flex flex-col items-center justify-center"}>
+            return <a href={`/api/account/auth/link/${item.id}/`} key={item.id} className={"m-[10px] flex flex-col items-center justify-center"}>
                 <div className={"w-[40px] h-[40px] rounded-full bg-[#2E3340] flex items-center justify-center"}>
                     {item.icon}
                 </div>
                 <div className={"mt-[10px] text-[14px] text-[#666]"}>{item.title}</div>
-            </div>
+            </a>
         })}
     </div>
 };
