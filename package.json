@@ -13,10 +13,12 @@
         "lodash": "4.17.21",
         "qrcode": "^1.5.3",
         "recoil": "0.7.7",
-        "sass": "1.69.5"
+        "sass": "1.69.5",
+        "node-rsa": "^1.1.1"
     },
     "devDependencies": {
         "@types/lodash": "4.14.200",
+        "@types/node-rsa": "^1.1.4",
         "@types/qrcode": "^1.5.5",
         "eslint": "8.53.0",
         "fs-jetpack": "5.1.0",

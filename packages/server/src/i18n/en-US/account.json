@@ -1,7 +1,8 @@
 {
     "notfound": "User not found",
     "otp": {
-        "is_bind": "Authenticator is bound"
+        "is_bind": "Authenticator is bound",
+        "verify": "Authentication code verification failed"
     },
     "register": {
         "code": "The email verification code is incorrect.",

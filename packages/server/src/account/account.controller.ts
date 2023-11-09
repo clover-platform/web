@@ -1,9 +1,12 @@
-import {Body, Controller, Get, Param, Post, Req, UseInterceptors} from "@nestjs/common";
-import {CheckRegisterEmailRequest, OTPSecretResult, TokenResult} from "@/account/account.interface";
+import {Body, Controller, Get, Post, Req} from "@nestjs/common";
+import {
+    CheckRegisterEmailRequest,
+    OTPSecretResult,
+    SetPasswordRequest,
+    TokenResult
+} from "@/account/account.interface";
 import { Account } from "./account.entity";
-import { CacheInterceptor, CacheKey, CacheTTL } from "@nestjs/cache-manager";
 import { Public } from "@/auth/auth.decorator";
-import { Redlock } from "@/public/redlock.decorator";
 import { Result } from "@/public/result.entity";
 import { Throttle } from "@nestjs/throttler";
 import { AccountService } from "@/account/account.service";
@@ -13,19 +16,28 @@ import {SessionUser} from "@/auth/auth.interface";
 export class AccountController {
     constructor(private readonly accountService: AccountService) {}
 
-    @UseInterceptors(CacheInterceptor)
-    @CacheKey('account:list')
-    @CacheTTL(5000)
-    @Get("/list")
-    async list(): Promise<Account[]> {
-        // return await this.accountService.findAll();
-        return [];
-    }
+    // @UseInterceptors(CacheInterceptor)
+    // @CacheKey('account:list')
+    // @CacheTTL(5000)
+    // @Get("/list")
+    // async list(): Promise<Account[]> {
+    //     return await this.accountService.findAll();
+    // }
 
     @Get("/otp/secret/")
     async otpSecret(@Req() request: Request): Promise<OTPSecretResult|Result<any>> {
         const user: SessionUser = request['user'];
         return await this.accountService.otpSecret(user.sub);
+    }
+
+    @Post("/register/password/set")
+    async setPassword(
+        @Req() req: Request,
+        @Body() request: SetPasswordRequest
+    ): Promise<TokenResult|Result<any>> {
+        const user: SessionUser = req['user'];
+        request.id = user.sub;
+        return this.accountService.setPassword(request);
     }
 
     @Public()
@@ -39,19 +51,6 @@ export class AccountController {
     @Post("/register/email/send")
     async sendRegisterEmail(@Body() request: {email: string}): Promise<Result<any>> {
         return await this.accountService.sendRegisterEmail(request.email);
-    }
-
-    @Public()
-    @Get("/info/:id")
-    async info(@Param("id") id: number): Promise<Account> {
-        return await this.accountService.findOne(id);
-    }
-
-    @Public()
-    @Get("/test")
-    @Redlock(["test"], 5000)
-    test(): string {
-        return "test";
     }
 
     @Get("/profile")

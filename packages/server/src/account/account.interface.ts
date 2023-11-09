@@ -19,6 +19,12 @@ export interface CheckRegisterEmailRequest {
     code: string;
 }
 
+export interface SetPasswordRequest {
+    id?: number;
+    password: string;
+    otpCode: string;
+}
+
 export interface TokenOptions {
     expiresIn: string;
 }

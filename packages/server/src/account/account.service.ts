@@ -1,24 +1,28 @@
-import {Injectable, Inject, UnauthorizedException, Logger} from "@nestjs/common";
-import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
-import { Account } from './account.entity';
-import { CACHE_MANAGER } from '@nestjs/cache-manager';
-import { Cache } from 'cache-manager';
-import { JwtService } from '@nestjs/jwt';
+import { Inject, Injectable, Logger, UnauthorizedException } from "@nestjs/common";
+import { InjectRepository } from "@nestjs/typeorm";
+import { Repository } from "typeorm";
+import { Account } from "./account.entity";
+import { CACHE_MANAGER } from "@nestjs/cache-manager";
+import { Cache } from "cache-manager";
+import { JwtService } from "@nestjs/jwt";
 import { Redlock } from "@/public/redlock.decorator";
 import { ADD_ACCOUNT_LOCK_KEY, LOCK_TIME } from "./account.const";
 import { Result } from "@/public/result.entity";
-import {EmailService} from "@/public/email.service";
+import { EmailService } from "@/public/email.service";
 import { genCode } from "@/utils/random";
 import {
     CheckRegisterEmailRequest,
-    EmailCode, OTPSecretResult,
-    TokenOptions, TokenResult
+    EmailCode,
+    OTPSecretResult,
+    SetPasswordRequest,
+    TokenOptions,
+    TokenResult
 } from "@/account/account.interface";
 import { I18nService } from "nestjs-i18n";
-import {md5} from "@/utils/crypto";
-import ms from 'ms';
-import speakeasy from 'speakeasy';
+import { decrypt, md5 } from "@/utils/crypto";
+import ms from "ms";
+import { ConfigService } from "@nestjs/config";
+import { authenticator } from "otplib";
 
 @Injectable()
 export class AccountService {
@@ -30,6 +34,7 @@ export class AccountService {
         private jwtService: JwtService,
         private emailService: EmailService,
         private i18n: I18nService,
+        private configService: ConfigService,
     ) {}
 
     private async newCode(redisKey: string): Promise<EmailCode> {
@@ -139,8 +144,7 @@ export class AccountService {
                 return Result.error({code: 1, message: this.i18n.t("account.otp.is_bind")} );
             }
         }else{
-            const secretObject = speakeasy.generateSecret();
-            account.otpSecret = secretObject.base32;
+            account.otpSecret = authenticator.generateSecret();
             await this.accountRepository.createQueryBuilder()
                 .update()
                 .set({
@@ -150,33 +154,54 @@ export class AccountService {
                 .where("id = :id", { id })
                 .execute();
         }
-        const url = speakeasy.otpauthURL({
-            secret: account.otpSecret,
-            label: `${this.i18n.t('public.app')}:${account.username}`,
-            algorithm: 'sha512',
-        })
+        const url = authenticator.keyuri(account.username, this.i18n.t('public.app'), account.otpSecret);
         return { secret: account.otpSecret, url };
     }
 
-    async findOne(id: number): Promise<Account | null> {
-        // await new Promise((resolve) => {
-        //     setTimeout(resolve, 2000);
-        // })
-        let account = await this.cacheService.get<Account | null>(id.toString());
+    async setPassword(request: SetPasswordRequest): Promise<TokenResult|Result<any>> {
+        const account = await this.accountRepository.findOneBy({ id: request.id });
         if(!account) {
-            account = await this.accountRepository.findOneBy({ id });
-            if(!account) {
-                return null;
-            }
-            await this.cacheService.set(id.toString(), account);
+            return Result.error({code: 1, message: this.i18n.t("account.notfound")} );
         }
-        Promise.reject(new Error("test"));
-        return account;
+        const verified = authenticator.verify({
+            secret: account.otpSecret,
+            token: request.otpCode
+        });
+        this.logger.log(verified);
+        if(!verified) {
+            return Result.error({code: 2, message: this.i18n.t("account.otp.verify")} );
+        }
+        await this.accountRepository.createQueryBuilder()
+            .update()
+            .set({
+                password: decrypt(request.password, this.configService.get("privateKey")),
+                otpStatus: 1,
+                status: 1
+            })
+            .where("id = :id", { id: request.id })
+            .execute();
+        return await this.createToken(account, {expiresIn: "1d"});
     }
 
-    async remove(id: number): Promise<void> {
-        await this.accountRepository.delete(id);
-    }
+    // async findOne(id: number): Promise<Account | null> {
+    //     // await new Promise((resolve) => {
+    //     //     setTimeout(resolve, 2000);
+    //     // })
+    //     let account = await this.cacheService.get<Account | null>(id.toString());
+    //     if(!account) {
+    //         account = await this.accountRepository.findOneBy({ id });
+    //         if(!account) {
+    //             return null;
+    //         }
+    //         await this.cacheService.set(id.toString(), account);
+    //     }
+    //     Promise.reject(new Error("test"));
+    //     return account;
+    // }
+    //
+    // async remove(id: number): Promise<void> {
+    //     await this.accountRepository.delete(id);
+    // }
 
     async login(username: string, password: string): Promise<TokenResult> {
         const account = await this.accountRepository.findOneBy({

@@ -10,7 +10,7 @@ const MainLayout = (props: PropsWithChildren) => {
     const path = usePathname();
 
     const onLogin = useCallback(() => {
-        router.push(`/{#LANG#}/login/?form=${encodeURIComponent(path)}`)
+        router.push(`/{#LANG#}/login/?from=${encodeURIComponent(path)}`)
     }, [path]);
 
     useEffect(() => {

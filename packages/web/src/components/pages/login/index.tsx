@@ -1,16 +1,14 @@
 'use client';
 
-import {Button, Divider, Form, Input, Link as ArcoLink} from "@arco-design/web-react";
+import { Button, Divider, Form, Input } from "@arco-design/web-react";
 import Quick from "@/components/pages/login/quick";
-import Link from "next/link";
+import LoginLink from "@/components/common/login/link";
 
 const LoginPage = () => {
     const passwordLabel = <div className={"flex justify-center items-center"}>
         <div className={"flex-1"}>{"{#密码#}"}</div>
         <div className={"ml-[10px]"}>
-            <Link href={"/{#LANG#}/reset-password/"}>
-                <ArcoLink>{"{#找回密码#}"}</ArcoLink>
-            </Link>
+            <LoginLink href={"/{#LANG#}/reset-password/"}>{"{#找回密码#}"}</LoginLink>
         </div>
     </div>
     return <div className={"w-[400px]"}>
@@ -18,9 +16,7 @@ const LoginPage = () => {
             <div className={"text-[24px] font-bold flex-1"}>{"{#登录#}"}</div>
             <div className={"ml-[10px]"}>
                 <span>{"{#没有账号？#}"}</span>
-                <Link href={"/{#LANG#}/register/"}>
-                    <ArcoLink>{"{#注册#}"}</ArcoLink>
-                </Link>
+                <LoginLink href={"/{#LANG#}/register/"}>{"{#注册#}"}</LoginLink>
             </div>
         </div>
         <div className={"mt-[30px]"}>

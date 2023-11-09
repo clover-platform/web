@@ -16,3 +16,9 @@ export const emailCheck = async (data: {
 
 export const otpSecret = async () =>
     await get(`@account/otp/secret/`);
+
+export const passwordSet = async (data: {
+    password: string;
+    code: string;
+}) =>
+    await post(`@account/register/password/set/`, data);
