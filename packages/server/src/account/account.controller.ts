@@ -1,7 +1,7 @@
-import {Body, Controller, Get, Post, Req} from "@nestjs/common";
+import { Body, Controller, Get, Post, Req } from "@nestjs/common";
 import {
-    CheckRegisterEmailRequest,
-    OTPSecretResult,
+    CheckRegisterEmailRequest, CheckResetEmailRequest,
+    OTPSecretResult, ResetPasswordRequest,
     SetPasswordRequest,
     TokenResult
 } from "@/account/account.interface";
@@ -10,7 +10,7 @@ import { Public } from "@/auth/auth.decorator";
 import { Result } from "@/public/result.entity";
 import { Throttle } from "@nestjs/throttler";
 import { AccountService } from "@/account/account.service";
-import {SessionUser} from "@/auth/auth.interface";
+import { SessionUser } from "@/auth/auth.interface";
 
 @Controller("/api/account")
 export class AccountController {
@@ -30,6 +30,19 @@ export class AccountController {
         return await this.accountService.otpSecret(user.sub);
     }
 
+    @Public()
+    @Throttle({default: { limit: 10, ttl: 60000 }})
+    @Post("/register/email/send")
+    async sendRegisterEmail(@Body() request: {email: string}): Promise<Result<any>> {
+        return await this.accountService.sendRegisterEmail(request.email);
+    }
+
+    @Public()
+    @Post("/register/email/check")
+    async checkRegisterEmail(@Body() request: CheckRegisterEmailRequest): Promise<TokenResult|Result<any>> {
+        return this.accountService.checkRegisterEmail(request);
+    }
+
     @Post("/register/password/set")
     async setPassword(
         @Req() req: Request,
@@ -41,16 +54,26 @@ export class AccountController {
     }
 
     @Public()
-    @Post("/register/email/check")
-    async checkRegisterEmail(@Body() request: CheckRegisterEmailRequest): Promise<TokenResult|Result<any>> {
-        return this.accountService.checkRegisterEmail(request);
+    @Throttle({default: { limit: 10, ttl: 60000 }})
+    @Post("/reset/email/send")
+    async sendResetEmail(@Body() request: {email: string}): Promise<Result<any>> {
+        return await this.accountService.sendResetEmail(request.email);
     }
 
     @Public()
-    @Throttle({default: { limit: 10, ttl: 60000 }})
-    @Post("/register/email/send")
-    async sendRegisterEmail(@Body() request: {email: string}): Promise<Result<any>> {
-        return await this.accountService.sendRegisterEmail(request.email);
+    @Post("/reset/email/check")
+    async checkResetEmail(@Body() request: CheckResetEmailRequest): Promise<TokenResult|Result<any>> {
+        return this.accountService.checkResetEmail(request);
+    }
+
+    @Post("/reset/password")
+    async resetPassword(
+        @Req() req: Request,
+        @Body() request: ResetPasswordRequest
+    ): Promise<TokenResult|Result<any>> {
+        const user: SessionUser = req['user'];
+        request.id = user.sub;
+        return this.accountService.resetPassword(request);
     }
 
     @Get("/profile")

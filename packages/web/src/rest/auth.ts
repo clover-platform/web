@@ -22,3 +22,17 @@ export const passwordSet = async (data: {
     code: string;
 }) =>
     await post(`@account/register/password/set/`, data);
+
+export const sendResetEmailCode = async (email: string) =>
+    await post(`@account/reset/email/send/`, {email});
+
+export const resetEmailCheck = async (data: {
+    email: string;
+    code: string;
+}) =>
+    await post(`@account/reset/email/check/`, data);
+
+export const passwordReset = async (data: {
+    password: string;
+}) =>
+    await post(`@account/reset/password/`, data);

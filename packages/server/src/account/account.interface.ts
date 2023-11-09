@@ -19,10 +19,20 @@ export interface CheckRegisterEmailRequest {
     code: string;
 }
 
+export interface CheckResetEmailRequest {
+    email: string;
+    code: string;
+}
+
 export interface SetPasswordRequest {
     id?: number;
     password: string;
     otpCode: string;
+}
+
+export interface ResetPasswordRequest {
+    id?: number;
+    password: string;
 }
 
 export interface TokenOptions {

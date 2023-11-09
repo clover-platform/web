@@ -8,12 +8,9 @@ import { JwtService } from "@nestjs/jwt";
 import { Redlock } from "@/public/redlock.decorator";
 import { ADD_ACCOUNT_LOCK_KEY, LOCK_TIME } from "./account.const";
 import { Result } from "@/public/result.entity";
-import { EmailService } from "@/public/email.service";
-import { genCode } from "@/utils/random";
 import {
-    CheckRegisterEmailRequest,
-    EmailCode,
-    OTPSecretResult,
+    CheckRegisterEmailRequest, CheckResetEmailRequest,
+    OTPSecretResult, ResetPasswordRequest,
     SetPasswordRequest,
     TokenOptions,
     TokenResult
@@ -23,6 +20,7 @@ import { decrypt, md5 } from "@/utils/crypto";
 import ms from "ms";
 import { ConfigService } from "@nestjs/config";
 import { authenticator } from "otplib";
+import {CodeService} from "@/public/code.service";
 
 @Injectable()
 export class AccountService {
@@ -32,49 +30,37 @@ export class AccountService {
         @InjectRepository(Account) private accountRepository: Repository<Account>,
         @Inject(CACHE_MANAGER) private cacheService: Cache,
         private jwtService: JwtService,
-        private emailService: EmailService,
         private i18n: I18nService,
         private configService: ConfigService,
+        private codeService: CodeService,
     ) {}
 
-    private async newCode(redisKey: string): Promise<EmailCode> {
-        const code = {
-            code: genCode(),
-            createdAt: Date.now(),
-        };
-        await this.cacheService.set<EmailCode>(redisKey, code, { ttl: 60 * 5 });
-        return code;
+    async sendResetEmail(email: string): Promise<Result<any>> {
+        const size = await this.accountRepository.countBy({
+            email,
+            status: 1
+        });
+        if(size === 0) {
+            return Result.error({code: 1, message: this.i18n.t("account.notfound")})
+        }
+        return await this.codeService.send({
+            email,
+            action: "reset"
+        });
     }
 
     async sendRegisterEmail(email: string): Promise<Result<any>> {
-        const codeKey = `register:email:code:${email}`;
-        const timeKey = `register:email:code:${email}:send:time`;
-        let code = await this.cacheService.get<EmailCode>(codeKey);
-        if(code) {
-            const lastTime = await this.cacheService.get<number>(timeKey);
-            const offset = Date.now() - code.createdAt;
-            if(lastTime && Date.now()  - lastTime < 60 * 1000)
-                return Result.error({code: 1, message: this.i18n.t("public.throttle")})
-            if(offset > 4 * 60 * 1000)
-                code = await this.newCode(codeKey);
-        } else {
-            code = await this.newCode(codeKey);
-        }
-        await this.cacheService.set(timeKey, Date.now(), { ttl: 60 });
-        const sent = await this.emailService.singleSendMail({
+        const size = await this.accountRepository.countBy({
             email,
-            subject: this.i18n.t("mail.title.code"),
-            template: "code",
-            data: {
-                code: code.code
-            }
+            status: 1
         });
-        if(!sent) {
-            await this.cacheService.del(codeKey);
-            await this.cacheService.del(timeKey);
-            return Result.error({code: 2, message: this.i18n.t("mail.fail")})
+        if(size > 0) {
+            return Result.error({code: 1, message: this.i18n.t("account.register.has")})
         }
-        return Result.success(null);
+        return await this.codeService.send({
+            email,
+            action: "register"
+        });
     }
 
     @Redlock([ADD_ACCOUNT_LOCK_KEY], LOCK_TIME)
@@ -114,9 +100,12 @@ export class AccountService {
     }
 
     async checkRegisterEmail(request: CheckRegisterEmailRequest): Promise<TokenResult | Result<any>> {
-        const codeKey = `register:email:code:${request.email}`;
-        let code = await this.cacheService.get<EmailCode>(codeKey);
-        if(!code || code.code !== request.code) {
+        const checked = await this.codeService.check({
+            email: request.email,
+            action: "register",
+            code: request.code
+        });
+        if(!checked) {
             return Result.error({code: 1, message: this.i18n.t("account.register.code")})
         }
         let account = new Account();
@@ -183,25 +172,41 @@ export class AccountService {
         return await this.createToken(account, {expiresIn: "1d"});
     }
 
-    // async findOne(id: number): Promise<Account | null> {
-    //     // await new Promise((resolve) => {
-    //     //     setTimeout(resolve, 2000);
-    //     // })
-    //     let account = await this.cacheService.get<Account | null>(id.toString());
-    //     if(!account) {
-    //         account = await this.accountRepository.findOneBy({ id });
-    //         if(!account) {
-    //             return null;
-    //         }
-    //         await this.cacheService.set(id.toString(), account);
-    //     }
-    //     Promise.reject(new Error("test"));
-    //     return account;
-    // }
-    //
-    // async remove(id: number): Promise<void> {
-    //     await this.accountRepository.delete(id);
-    // }
+    async checkResetEmail(request: CheckResetEmailRequest): Promise<TokenResult | Result<any>> {
+        const checked = await this.codeService.check({
+            email: request.email,
+            action: "reset",
+            code: request.code
+        });
+        if(!checked) {
+            return Result.error({code: 1, message: this.i18n.t("account.reset.code")})
+        }
+        // 插入数据库，并返回一个示例
+        const account = await this.accountRepository.findOneBy({
+            email: request.email,
+            status: 1
+        });
+        if(!account) {
+            return Result.error({code: 2, message: this.i18n.t("account.notfound")} );
+        }
+        // 生成五分钟的临时token
+        return await this.createToken(account, {expiresIn: "5m"});
+    }
+
+    async resetPassword(request: ResetPasswordRequest): Promise<TokenResult|Result<any>> {
+        const account = await this.accountRepository.findOneBy({ id: request.id });
+        if(!account) {
+            return Result.error({code: 1, message: this.i18n.t("account.notfound")} );
+        }
+        await this.accountRepository.createQueryBuilder()
+            .update()
+            .set({
+                password: decrypt(request.password, this.configService.get("privateKey")),
+            })
+            .where("id = :id", { id: request.id })
+            .execute();
+        return await this.createToken(account, {expiresIn: "1d"});
+    }
 
     async login(username: string, password: string): Promise<TokenResult> {
         const account = await this.accountRepository.findOneBy({
