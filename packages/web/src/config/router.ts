@@ -6,6 +6,8 @@ export default [{ path: "/", config:  {
     name: 'login',
 } },{ path: "/link/github/", config:  {
     name: 'login',
+} },{ path: "/link/wechat/", config:  {
+    name: 'login',
 } },{ path: "/login/", config:  {
     name: 'login',
 } },{ path: "/register/", config:  {

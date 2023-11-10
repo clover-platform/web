@@ -4,12 +4,12 @@ import React, {PropsWithChildren, useCallback, useEffect, useState} from "react"
 import {Button, Form, Input, Result, Space, Spin, Image, Message} from "@arco-design/web-react";
 import {linkCode, loginAndLink} from "@/rest/auth";
 import {useRouter, useSearchParams} from "next/navigation";
-import {ICON_PROPS} from "@/components/pages/login/quick";
 import Link from "next/link";
 import {IconGithub} from "@arco-iconbox/react-clover";
 import {setPassword} from "@clover/common/validators";
 import {encrypt} from "@/utils/crypto";
 import {setToken} from "@/utils/token";
+import {SUPPORT_WAY} from "@/config/pages/login/quick";
 
 export interface LinkPageProps extends PropsWithChildren {
     type: string
@@ -72,6 +72,8 @@ const LinkPage = (props: LinkPageProps) => {
         </Link>
     </Space>
 
+    const icon = SUPPORT_WAY.find((item) => item.id === type)?.icon;
+
     return loading ? <Spin size={32 }/> : <>
         {
             error ? <Result
@@ -81,7 +83,7 @@ const LinkPage = (props: LinkPageProps) => {
             ></Result> : <div className={"w-[360px]"}>
                 <div className={"flex justify-start items-center"}>
                     <div className={"w-[40px] h-[40px] rounded-full bg-[#2E3340] flex items-center justify-center"}>
-                        <IconGithub {...ICON_PROPS} />
+                        { icon }
                     </div>
                     <div className={"text-[24px] font-bold mx-[10px]"}>
                         {"{#账号绑定#}"}
