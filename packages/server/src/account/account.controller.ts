@@ -1,6 +1,6 @@
 import { Body, Controller, Get, Post, Req } from "@nestjs/common";
 import {
-    CheckRegisterEmailRequest, CheckResetEmailRequest,
+    CheckRegisterEmailRequest, CheckResetEmailRequest, LoginRequest,
     OTPSecretResult, ResetPasswordRequest,
     SetPasswordRequest,
     TokenResult
@@ -15,14 +15,6 @@ import { SessionUser } from "@/auth/auth.interface";
 @Controller("/api/account")
 export class AccountController {
     constructor(private readonly accountService: AccountService) {}
-
-    // @UseInterceptors(CacheInterceptor)
-    // @CacheKey('account:list')
-    // @CacheTTL(5000)
-    // @Get("/list")
-    // async list(): Promise<Account[]> {
-    //     return await this.accountService.findAll();
-    // }
 
     @Get("/otp/secret/")
     async otpSecret(@Req() request: Request): Promise<OTPSecretResult|Result<any>> {
@@ -74,6 +66,11 @@ export class AccountController {
         const user: SessionUser = req['user'];
         request.id = user.sub;
         return this.accountService.resetPassword(request);
+    }
+
+    @Post("/login")
+    async login(@Body() request: LoginRequest): Promise<Result<any>> {
+        return this.accountService.login(request.account, request.password);
     }
 
     @Get("/profile")

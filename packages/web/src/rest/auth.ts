@@ -50,3 +50,9 @@ export const loginAndLink = async (data: {
     token: string;
 }) =>
     await post(`@account/auth/bind/`, data);
+
+export const login = async (data: {
+    account: string;
+    password: string;
+}) =>
+    await post(`@account/login/`, data);

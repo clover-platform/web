@@ -1,10 +1,34 @@
 'use client';
 
-import { Button, Divider, Form, Input } from "@arco-design/web-react";
+import {Button, Divider, Form, Input, Message} from "@arco-design/web-react";
 import Quick from "@/components/pages/login/quick";
 import LoginLink from "@/components/common/login/link";
+import React, {useState} from "react";
+import {setPassword} from "../../../../../common/validators";
+import {login} from "@/rest/auth";
+import {setToken} from "@/utils/token";
+import {useRouter, useSearchParams} from "next/navigation";
+import {encrypt} from "@/utils/crypto";
 
 const LoginPage = () => {
+    const router = useRouter();
+    const params = useSearchParams();
+    const from = params.get("from");
+    const [submitting, setSubmitting] = useState(false);
+
+    const onSubmit = async (data: any) => {
+        setSubmitting(true);
+        data.password = encrypt(data.password);
+        const { message, success, data: result } = await login(data);
+        setSubmitting(false);
+        if(success) {
+            setToken(result);
+            router.push(from || "/{#LANG#}/");
+        }else{
+            Message.error(message);
+        }
+    }
+
     const passwordLabel = <div className={"flex justify-center items-center"}>
         <div className={"flex-1"}>{"{#密码#}"}</div>
         <div className={"ml-[10px]"}>
@@ -20,15 +44,23 @@ const LoginPage = () => {
             </div>
         </div>
         <div className={"mt-[30px]"}>
-            <Form size={"large"} layout={"vertical"} autoComplete='off'>
-                <Form.Item label={"{#邮箱或用户名#}"}>
+            <Form
+                onSubmit={onSubmit}
+                size={"large"} layout={"vertical"} autoComplete='off'
+            >
+                <Form.Item field="account" label={"{#邮箱或用户名#}"} rules={[
+                    { required: true, message: "{#请输入邮箱或用户名#}" },
+                ]}>
                     <Input placeholder={"{#请输入邮箱或用户名#}"} />
                 </Form.Item>
-                <Form.Item label={passwordLabel}>
+                <Form.Item field="password" label={"{#密码#}"} rules={[
+                    { required: true, message: "{#请输入密码#}" },
+                    { validator: setPassword }
+                ]}>
                     <Input.Password placeholder={"{#请输入密码#}"} />
                 </Form.Item>
                 <Form.Item>
-                    <Button long type={"primary"}>{"{#立即登录#}"}</Button>
+                    <Button loading={submitting} long type={"primary"} htmlType={"submit"}>{"{#立即登录#}"}</Button>
                 </Form.Item>
             </Form>
         </div>
