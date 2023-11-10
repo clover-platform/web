@@ -1,17 +1,13 @@
-import {CanActivate, ExecutionContext, Inject, Injectable, Logger, UnauthorizedException} from "@nestjs/common";
-import {JwtService} from "@nestjs/jwt";
-import {IS_PUBLIC_KEY, JWT_SECRET} from "./auth.config";
+import {CanActivate, ExecutionContext, Injectable, UnauthorizedException} from "@nestjs/common";
+import {IS_PUBLIC_KEY} from "./auth.config";
 import {Reflector} from "@nestjs/core";
-import {CACHE_MANAGER} from "@nestjs/cache-manager";
-import {Cache} from "cache-manager";
+import {TokenService} from "@/public/token.service";
 
 @Injectable()
 export class AuthGuard implements CanActivate {
-    private logger = new Logger(AuthGuard.name);
     constructor(
-        private jwtService: JwtService,
         private reflector: Reflector,
-        @Inject(CACHE_MANAGER) private cacheService: Cache,
+        private tokenService: TokenService,
     ) {}
 
     async canActivate(
@@ -30,21 +26,11 @@ export class AuthGuard implements CanActivate {
         if (!token) {
             throw new UnauthorizedException();
         }
-        const jwtToken = await this.cacheService.get<string>(`token:${token}`);
-        if(!jwtToken) {
+        const sessionUser = await this.tokenService.verify(token);
+        if(!sessionUser) {
             throw new UnauthorizedException();
         }
-        try {
-            request['user'] = await this.jwtService.verifyAsync(
-                jwtToken,
-                {
-                    secret: JWT_SECRET
-                }
-            );
-        } catch(e) {
-            this.logger.error(e);
-            throw new UnauthorizedException();
-        }
+        request['user'] = sessionUser;
         return true;
     }
 

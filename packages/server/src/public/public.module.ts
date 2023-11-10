@@ -3,6 +3,7 @@ import { EmailService } from "./email.service";
 import {RedlockService} from "./redlock.service";
 import {HttpModule} from "@nestjs/axios";
 import {CodeService} from "@/public/code.service";
+import {TokenService} from "@/public/token.service";
 
 @Global()
 @Module({
@@ -12,13 +13,15 @@ import {CodeService} from "@/public/code.service";
     providers: [
         EmailService,
         RedlockService,
-        CodeService
+        CodeService,
+        TokenService
     ],
     controllers: [],
     exports: [
         EmailService,
         RedlockService,
-        CodeService
+        CodeService,
+        TokenService
     ]
 })
 export class PublicModule {}

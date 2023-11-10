@@ -4,10 +4,10 @@ export class Result<T> {
     data: T;
     success: boolean;
 
-    static success<T>(r?: {data: T, message?: string}): Result<T> {
+    static success<T>(r?: {data: T, message?: string, code?: number}): Result<T> {
         r = r || {data: null};
         const result = new Result<T>();
-        result.code = 0;
+        result.code = r.code || 0;
         result.message = r.message;
         result.data = r.data;
         result.success = true;

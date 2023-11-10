@@ -36,3 +36,17 @@ export const passwordReset = async (data: {
     password: string;
 }) =>
     await post(`@account/reset/password/`, data);
+
+export const linkCode = async (data: {
+    type: string;
+    code: string;
+}) =>
+    await get(`@account/auth/link/${data.type}/code/`, { code: data.code });
+
+
+export const loginAndLink = async (data: {
+    account: string;
+    password: string;
+    token: string;
+}) =>
+    await post(`@account/auth/bind/`, data);

@@ -4,8 +4,20 @@
         "is_bind": "Authenticator is bound",
         "verify": "Authentication code verification failed"
     },
+    "login": {
+        "error": "Incorrect username or password"
+    },
     "register": {
         "code": "The email verification code is incorrect.",
         "has": "Username or email already exists."
+    },
+    "auth": {
+        "app": {
+            "api": "Interface call failed",
+            "unsupported": "Unsupported third-party login"
+        },
+        "token": {
+            "invalid": "The information to be bound does not exist"
+        }
     }
 }

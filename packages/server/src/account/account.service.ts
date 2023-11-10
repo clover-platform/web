@@ -6,7 +6,7 @@ import { CACHE_MANAGER } from "@nestjs/cache-manager";
 import { Cache } from "cache-manager";
 import { JwtService } from "@nestjs/jwt";
 import { Redlock } from "@/public/redlock.decorator";
-import { ADD_ACCOUNT_LOCK_KEY, LOCK_TIME } from "./account.const";
+import { ACCOUNT_LOCK_KEY, LOCK_TIME } from "./account.const";
 import { Result } from "@/public/result.entity";
 import {
     CheckRegisterEmailRequest, CheckResetEmailRequest,
@@ -21,6 +21,8 @@ import ms from "ms";
 import { ConfigService } from "@nestjs/config";
 import { authenticator } from "otplib";
 import {CodeService} from "@/public/code.service";
+import {TokenService} from "@/public/token.service";
+import {isEmail} from "@/utils";
 
 @Injectable()
 export class AccountService {
@@ -28,11 +30,10 @@ export class AccountService {
 
     constructor(
         @InjectRepository(Account) private accountRepository: Repository<Account>,
-        @Inject(CACHE_MANAGER) private cacheService: Cache,
-        private jwtService: JwtService,
         private i18n: I18nService,
         private configService: ConfigService,
         private codeService: CodeService,
+        private tokenService: TokenService,
     ) {}
 
     async sendResetEmail(email: string): Promise<Result<any>> {
@@ -63,7 +64,7 @@ export class AccountService {
         });
     }
 
-    @Redlock([ADD_ACCOUNT_LOCK_KEY], LOCK_TIME)
+    @Redlock([ACCOUNT_LOCK_KEY], LOCK_TIME)
     async add(account: Account): Promise<Account> {
         this.logger.log(account);
         const where = {
@@ -86,17 +87,9 @@ export class AccountService {
         return size > 0;
     }
 
-    async createToken(account: Account, options: TokenOptions): Promise<TokenResult> {
+    private async createToken(account: Account, options: TokenOptions): Promise<TokenResult> {
         const payload = { sub: account.id, username: account.username };
-        const token = await this.jwtService.signAsync(payload, { expiresIn: options.expiresIn });
-        const hash = md5(token);
-        const tokenKey = `token:${hash}`;
-        const ttl = ms(options.expiresIn)/1000;
-        await this.cacheService.set(tokenKey,token, { ttl });
-        return {
-            token: hash,
-            expiresIn: Date.now() + ttl
-        };
+        return this.tokenService.create(payload, options);
     }
 
     async checkRegisterEmail(request: CheckRegisterEmailRequest): Promise<TokenResult | Result<any>> {
@@ -208,14 +201,28 @@ export class AccountService {
         return await this.createToken(account, {expiresIn: "1d"});
     }
 
-    async login(username: string, password: string): Promise<TokenResult> {
-        const account = await this.accountRepository.findOneBy({
-            username,
-            password,
-        })
-        if(!account) {
-            throw new UnauthorizedException();
+    async login(account: string, password: string): Promise<Result<TokenResult>> {
+        let info = null;
+        const pwd = decrypt(password, this.configService.get("privateKey"));
+        if(isEmail(account)) {
+            info = await this.accountRepository.findOneBy({
+                email: account,
+                password: pwd
+            })
+        }else{
+            info = await this.accountRepository.findOneBy({
+                username: account,
+                password: pwd
+            })
         }
-        return await this.createToken(account, {expiresIn: "1d"});
+        if(!info) {
+            return Result.error({code: 1, message: this.i18n.t("account.login.error")} );
+        }
+        const token = await this.createToken(info, {expiresIn: "1d"});
+        return Result.success({data: token});
+    }
+
+    async findById(id: number): Promise<Account> {
+        return await this.accountRepository.findOneBy({ id });
     }
 }

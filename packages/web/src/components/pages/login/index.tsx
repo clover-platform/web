@@ -11,7 +11,7 @@ const LoginPage = () => {
             <LoginLink href={"/{#LANG#}/reset-password/"}>{"{#找回密码#}"}</LoginLink>
         </div>
     </div>
-    return <div className={"w-[400px]"}>
+    return <div className={"w-[360px]"}>
         <div className={"flex justify-center items-center"}>
             <div className={"text-[24px] font-bold flex-1"}>{"{#登录#}"}</div>
             <div className={"ml-[10px]"}>

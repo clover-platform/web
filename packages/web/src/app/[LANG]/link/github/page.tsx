@@ -6,6 +6,6 @@ export const metadata = {
     keywords: keywords(),
 }
 
-const Page = () => <LinkPage />
+const Page = () => <LinkPage type={"github"} />
 
 export default Page;
