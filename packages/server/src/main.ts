@@ -1,7 +1,7 @@
 import { NestFactory } from "@nestjs/core";
-import { AppModule } from "./app/app.module";
-import {GlobalExceptionFilter} from "./app/exception.filter";
-import {ResultInterceptor} from "./app/result.interceptor";
+import { AppModule } from "./app.module";
+import {GlobalExceptionFilter} from "@easy-kit/public/exception.filter";
+import {ResultInterceptor} from "@easy-kit/public/result.interceptor";
 import {ConfigService} from "@nestjs/config";
 import agent from 'skywalking-backend-js';
 

@@ -8,3 +8,8 @@ export interface CheckCodeParams {
     action: string;
     code: string;
 }
+
+export interface EmailCode {
+    code: string,
+    createdAt: number,
+}

@@ -19,18 +19,18 @@
         "noFallthroughCasesInSwitch": false,
         "esModuleInterop": true,
         "paths": {
-            "@clover-lib/common": [
-                "packages/common"
-            ],
-            "@clover-lib/common/*": [
-                "packages/common/*"
-            ],
-            "@/": [
-                "packages/server/src"
-            ],
-            "@/*": [
-                "packages/server/src/*"
-            ]
+            "@easy-kit/common": [ "packages/common" ],
+            "@easy-kit/common/*": [ "packages/common/*"],
+            "@easy-kit/config": [ "packages/config" ],
+            "@easy-kit/config/*": [ "packages/config/*"],
+            "@easy-kit/public": [ "packages/public/src" ],
+            "@easy-kit/public/*": [ "packages/public/src/*" ],
+            "@easy-kit/auth": [ "packages/auth/src" ],
+            "@easy-kit/auth/*": [ "packages/auth/src/*" ],
+            "@easy-kit/account": [ "packages/account/src" ],
+            "@easy-kit/account/*": [ "packages/account/src/*"],
+            "@/": [ "packages/server/src" ],
+            "@/*": [ "packages/server/src/*" ]
         }
     }
 }

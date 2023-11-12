@@ -4,17 +4,21 @@ import {
     OTPSecretResult, ResetPasswordRequest,
     SetPasswordRequest,
     TokenResult
-} from "@/account/account.interface";
-import { Account } from "./account.entity";
-import { Public } from "@/auth/auth.decorator";
-import { Result } from "@/public/result.entity";
+} from "@easy-kit/account/account.interface";
+import { Public } from "@easy-kit/auth/auth.decorator";
+import { Result } from "@easy-kit/public/result.entity";
 import { Throttle } from "@nestjs/throttler";
-import { AccountService } from "@/account/account.service";
-import { SessionUser } from "@/auth/auth.interface";
+import { AccountService } from "@easy-kit/account/account.service";
+import { SessionUser } from "@easy-kit/auth/auth.interface";
+import {AppAccount} from "@/account/account.entity";
+import {AppAccountService} from "@/account/account.service";
 
 @Controller("/api/account")
-export class AccountController {
-    constructor(private readonly accountService: AccountService) {}
+export class AppAccountController {
+    constructor(
+        private readonly service: AppAccountService,
+        private readonly accountService: AccountService
+    ) {}
 
     @Get("/otp/secret/")
     async otpSecret(@Req() request: Request): Promise<OTPSecretResult|Result<any>> {
@@ -26,13 +30,13 @@ export class AccountController {
     @Throttle({default: { limit: 10, ttl: 60000 }})
     @Post("/register/email/send")
     async sendRegisterEmail(@Body() request: {email: string}): Promise<Result<any>> {
-        return await this.accountService.sendRegisterEmail(request.email);
+        return this.service.sendRegisterEmail(request.email);
     }
 
     @Public()
     @Post("/register/email/check")
     async checkRegisterEmail(@Body() request: CheckRegisterEmailRequest): Promise<TokenResult|Result<any>> {
-        return this.accountService.checkRegisterEmail(request);
+        return this.service.checkRegisterEmail(request);
     }
 
     @Post("/register/password/set")
@@ -75,7 +79,7 @@ export class AccountController {
     }
 
     @Get("/profile")
-    profile(): Account {
-        return new Account();
+    profile(): AppAccount {
+        return new AppAccount();
     }
 }

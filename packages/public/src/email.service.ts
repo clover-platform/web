@@ -6,6 +6,7 @@ import * as $Util from '@alicloud/tea-util';
 import * as ejs from 'ejs';
 import { resolve } from "path";
 import { I18nContext } from "nestjs-i18n";
+import {EmailConfig} from "@easy-kit/config/interface";
 
 @Injectable()
 export class EmailService {
@@ -15,7 +16,7 @@ export class EmailService {
     private readonly logger = new Logger(EmailService.name);
 
     private createClient(): OpenApi {
-        const emailConfig = this.configService.get("email");
+        const emailConfig = this.configService.get<EmailConfig>("email");
         let config = new $OpenApi.Config({
             // 必填，您的 AccessKey ID
             accessKeyId: emailConfig.accessKeyId,
@@ -81,9 +82,10 @@ export class EmailService {
     }
 
     async renderTemplate(template: string, data: any): Promise<string> {
+        const emailConfig = this.configService.get<EmailConfig>("email");
         const lang = I18nContext.current().lang;
         this.logger.log('current lang', lang);
-        return await ejs.renderFile(`${resolve('./')}/src/template/mail/${template}.${lang}.ejs`, data);
+        return await ejs.renderFile(`${resolve('./')}${emailConfig.templateDir}/${template}.${lang}.ejs`, data);
     }
 
 }

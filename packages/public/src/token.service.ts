@@ -1,12 +1,13 @@
 import {Inject, Injectable, Logger, UnauthorizedException} from "@nestjs/common";
-import {TokenOptions, TokenResult} from "@/account/account.interface";
-import {md5} from "@clover-lib/common/utils/crypto";
+import {TokenOptions, TokenResult} from "@easy-kit/account/account.interface";
+import {md5} from "@easy-kit/common/utils/crypto";
 import ms from "ms";
 import {CACHE_MANAGER} from "@nestjs/cache-manager";
 import {Cache} from "cache-manager";
 import {JwtService} from "@nestjs/jwt";
-import {JWT_SECRET} from "@/auth/auth.config";
-import {SessionUser} from "@/auth/auth.interface";
+import {SessionUser} from "@easy-kit/auth/auth.interface";
+import {ConfigService} from "@nestjs/config";
+import {AuthConfig} from "@easy-kit/config/interface";
 
 @Injectable()
 export class TokenService {
@@ -16,10 +17,15 @@ export class TokenService {
     constructor(
         @Inject(CACHE_MANAGER) private cacheService: Cache,
         private jwtService: JwtService,
+        private configService: ConfigService
     ) {}
 
     async create(payload: object, options: TokenOptions): Promise<TokenResult> {
-        const token = await this.jwtService.signAsync(payload, { expiresIn: options.expiresIn });
+        const authConfig = this.configService.get<AuthConfig>("auth");
+        const token = await this.jwtService.signAsync(payload, {
+            secret: authConfig.jwtSecret,
+            expiresIn: options.expiresIn
+        });
         const hash = md5(token);
         const tokenKey = `token:${hash}`;
         const ttl = ms(options.expiresIn)/1000;
@@ -36,11 +42,10 @@ export class TokenService {
             throw new UnauthorizedException();
         }
         try {
+            const authConfig = this.configService.get<AuthConfig>("auth");
             return await this.jwtService.verifyAsync(
                 jwtToken,
-                {
-                    secret: JWT_SECRET
-                }
+                { secret: authConfig.jwtSecret }
             );
         } catch(e) {
             this.logger.error(e);

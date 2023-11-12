@@ -1,16 +1,16 @@
 import {Injectable, Logger} from "@nestjs/common";
 import {InjectRepository} from "@nestjs/typeorm";
 import {Repository} from "typeorm";
-import {AccountAuthApp, AccountAuthOpenUser} from "@/account/account.auth.entity";
-import {Result} from "@/public/result.entity";
+import {AccountAuthApp, AccountAuthOpenUser} from "@easy-kit/account/account.auth.entity";
+import {Result} from "@easy-kit/public/result.entity";
 import {I18nService} from "nestjs-i18n";
 import {HttpService} from "@nestjs/axios";
 import {firstValueFrom} from "rxjs";
-import {Redlock} from "@/public/redlock.decorator";
-import {ACCOUNT_OPEN_USER_LOCK_KEY, LOCK_TIME} from "@/account/account.const";
-import {TokenService} from "@/public/token.service";
-import {BindRequest} from "@/account/account.auth.interface";
-import {AccountService} from "@/account/account.service";
+import {Redlock} from "@easy-kit/public/redlock.decorator";
+import {ACCOUNT_OPEN_USER_LOCK_KEY, LOCK_TIME} from "@easy-kit/account/account.const";
+import {TokenService} from "@easy-kit/public/token.service";
+import {BindRequest} from "@easy-kit/account/account.auth.interface";
+import {AccountService} from "@easy-kit/account/account.service";
 
 @Injectable()
 export class AccountAuthService {

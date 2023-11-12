@@ -1,12 +1,12 @@
 import {Inject, Injectable} from "@nestjs/common";
-import {Result} from "@/public/result.entity";
-import {CheckCodeParams, SendCodeParams} from "@/public/public.interface";
-import {EmailCode} from "@/account/account.interface";
+import {Result} from "@easy-kit/public/result.entity";
+import {CheckCodeParams, SendCodeParams} from "@easy-kit/public/public.interface";
+import {EmailCode} from "@easy-kit/public/public.interface";
 import {CACHE_MANAGER} from "@nestjs/cache-manager";
 import {Cache} from "cache-manager";
-import {EmailService} from "@/public/email.service";
+import {EmailService} from "@easy-kit/public/email.service";
 import {I18nService} from "nestjs-i18n";
-import {genCode} from "@clover-lib/common/utils/random";
+import {genCode} from "@easy-kit/common/utils/random";
 
 @Injectable()
 export class CodeService {

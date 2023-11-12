@@ -6,7 +6,7 @@ import {
 } from '@nestjs/common';
 import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
-import {Result} from "@/public/result.entity";
+import {Result} from "@easy-kit/public/result.entity";
 interface Response<T> {
     data: T;
 }

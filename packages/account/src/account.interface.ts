@@ -3,11 +3,6 @@ export interface TokenResult {
     expiresIn: number;
 }
 
-export interface EmailCode {
-    code: string,
-    createdAt: number,
-}
-
 export interface OTPSecretResult {
     secret: string;
     url: string;
