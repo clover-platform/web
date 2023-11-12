@@ -23,8 +23,7 @@ export class AppAccountService {
     ) {}
 
     async sendRegisterEmail(email: string): Promise<Result<any>> {
-        const size = await this.repository.countBy({ email });
-        if(size > 0) {
+        if(await this.hasEmail(email)) {
             return Result.error({code: 1, message: this.i18n.t("account.register.has")})
         }
         return await this.codeService.send({
@@ -33,27 +32,38 @@ export class AppAccountService {
         });
     }
 
-    async has(account: AppAccount): Promise<boolean> {
-        const size = await this.repository.createQueryBuilder()
-            .where("deleted = :deleted", { deleted: false })
-            .andWhere("(username = :username or email = :email)", account).getCount();
-        return size > 0;
+    async hasEmail(email: string) : Promise<boolean> {
+        const appAccount = await this.repository.findOneBy({ email });
+        if(appAccount) {
+            return this.hasUsername(appAccount.username);
+        }
+        return false;
+    }
+
+    async hasUsername(username: string): Promise<boolean> {
+        const account = await this.accountService.findByUsername(username);
+        return account && account.status !== 0;
     }
 
     @Redlock([APP_ACCOUNT_LOCK_KEY], LOCK_TIME)
-    async add(appAccount: AppAccount): Promise<Account> {
+    async add(appAccount: AppAccount): Promise<AppAccount> {
         const where = {
             username: appAccount.username,
-            deleted: false,
+            email: appAccount.email,
         }
         const size = await this.repository.countBy(where);
         if(size === 0) {
             await this.repository.insert(appAccount);
         }
-        let account = new Account();
-        account.username = appAccount.username;
-        account.createTime = new Date();
-        return this.accountService.add(account);
+        let account = await this.accountService.findByUsername(appAccount.username);
+        if(!account) {
+            account = new Account();
+            account.username = appAccount.username;
+            account = await this.accountService.add(account);
+        }
+        const result = await this.repository.findOneBy({username: appAccount.username});
+        result.account = account;
+        return result;
     }
 
     async checkRegisterEmail(request: CheckRegisterEmailRequest): Promise<TokenResult | Result<any>> {
@@ -65,17 +75,17 @@ export class AppAccountService {
         if(!checked) {
             return Result.error({code: 1, message: this.i18n.t("account.register.code")})
         }
-        const appAccount = new AppAccount();
+        let appAccount = new AppAccount();
         appAccount.username = request.username;
         appAccount.email = request.email;
-        const has = await this.has(appAccount);
+        const has = await this.hasUsername(appAccount.username);
         if(has) {
             return Result.error({code: 2, message: this.i18n.t("account.register.has")})
         }
         // 插入数据库，并返回一个实例
-        const account = await this.add(appAccount);
+        appAccount = await this.add(appAccount);
         // 生成五分钟的临时token
-        return await this.accountService.createToken(account, {expiresIn: "5m"});
+        return await this.accountService.createToken(appAccount.account, {expiresIn: "5m"});
     }
 
 }

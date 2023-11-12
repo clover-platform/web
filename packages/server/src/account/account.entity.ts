@@ -1,4 +1,5 @@
 import { Entity, PrimaryGeneratedColumn, Column } from "typeorm";
+import {Account} from "@easy-kit/account/account.entity";
 
 @Entity()
 export class AppAccount {
@@ -26,4 +27,6 @@ export class AppAccount {
         comment: "是否已删除",
         default: false
     }) deleted: boolean;
+
+    account: Account;
 }

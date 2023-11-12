@@ -49,14 +49,13 @@ export class AccountService {
 
     @Redlock([ACCOUNT_LOCK_KEY], LOCK_TIME)
     async add(account: Account): Promise<Account> {
-        const where = {
-            username: account.username
-        }
-        const size = await this.repository.countBy(where);
-        if(size === 0) {
-            await this.repository.insert(account);
-        }
-        return this.repository.findOneBy(where);
+        account.createTime = new Date();
+        await this.repository.insert(account);
+        return this.repository.findOneBy({ username: account.username });
+    }
+
+    async findByUsername(username: string): Promise<Account> {
+        return await this.repository.findOneBy({ username });
     }
 
     async createToken(account: Account, options: TokenOptions): Promise<TokenResult> {
