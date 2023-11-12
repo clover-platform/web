@@ -19,7 +19,18 @@
         "noFallthroughCasesInSwitch": false,
         "esModuleInterop": true,
         "paths": {
-            "@/*": ["src/*"]
+            "@clover-lib/common": [
+                "packages/common"
+            ],
+            "@clover-lib/common/*": [
+                "packages/common/*"
+            ],
+            "@/": [
+                "packages/server/src"
+            ],
+            "@/*": [
+                "packages/server/src/*"
+            ]
         }
-    },
+    }
 }

@@ -1,6 +1,6 @@
 import {Inject, Injectable, Logger, UnauthorizedException} from "@nestjs/common";
 import {TokenOptions, TokenResult} from "@/account/account.interface";
-import {md5} from "@/utils/crypto";
+import {md5} from "@clover-lib/common/utils/crypto";
 import ms from "ms";
 import {CACHE_MANAGER} from "@nestjs/cache-manager";
 import {Cache} from "cache-manager";

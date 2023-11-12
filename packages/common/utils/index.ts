@@ -2,23 +2,23 @@ import cloneDeep from 'lodash/cloneDeep';
 import omit from 'lodash/omit';
 import QRCode from 'qrcode';
 import { isValidElement } from 'react';
-import { EMAIL, URL as URL_REG } from "./regular.js";
+import { EMAIL, URL as URL_REG } from "./regular";
 
 // TODO 语言列表
 const langList = [];
 
 const isServer = typeof window === 'undefined';
 
-export const isEmail = (text) => {
+export const isEmail = (text: string) => {
     return EMAIL.test(text);
 }
 
-export const isUrl = (text) => {
+export const isUrl = (text: string) => {
     return URL_REG.test(text);
 }
 
 // 容错'0'
-export const failover = (v) => {
+export const failover = (v: string) => {
     if(v === '0') return '';
     return v;
 }
@@ -61,27 +61,27 @@ export const startWithLang = (path) => {
     return false;
 }
 
-const getLang = (list = langList, fallback = ['en-us', 'zh-cn']) => {
-    if(isServer) return getConfig(CONFIG_KEY.DEFAULT_LANG);
-    const langInLocal = localStorage.getItem(getConfig(CONFIG_KEY.LANG_KEY));
-    if(langInLocal) {
-        const l = list.find(({key}) => (key === langInLocal));
-        if(l) return langInLocal;
-    }
-    let lang = localStorage.lang; const nl = navigator.language.toLowerCase(); let sl = ''; const ll = fallback;
-    if (!lang) {
-        for (let i = 0; i < ll.length; i++) {
-            if (!sl) {
-                sl = nl.substr(0, 2) === ll[i].substr(0, 2) ? ll[i] : '';
-            }
-            if (!lang) {
-                lang = ll[i] === nl ? nl : '';
-            }
-        }
-        lang = lang || sl || getConfig(CONFIG_KEY.DEFAULT_LANG);
-    }
-    return lang;
-}
+// const getLang = (list = langList, fallback = ['en-us', 'zh-cn']) => {
+//     if(isServer) return getConfig(CONFIG_KEY.DEFAULT_LANG);
+//     const langInLocal = localStorage.getItem(getConfig(CONFIG_KEY.LANG_KEY));
+//     if(langInLocal) {
+//         const l = list.find(({key}) => (key === langInLocal));
+//         if(l) return langInLocal;
+//     }
+//     let lang = localStorage.lang; const nl = navigator.language.toLowerCase(); let sl = ''; const ll = fallback;
+//     if (!lang) {
+//         for (let i = 0; i < ll.length; i++) {
+//             if (!sl) {
+//                 sl = nl.substr(0, 2) === ll[i].substr(0, 2) ? ll[i] : '';
+//             }
+//             if (!lang) {
+//                 lang = ll[i] === nl ? nl : '';
+//             }
+//         }
+//         lang = lang || sl || getConfig(CONFIG_KEY.DEFAULT_LANG);
+//     }
+//     return lang;
+// }
 
 function uuid() {
     return 'xxxxxxxxxxxx4xxxyxxxxxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
@@ -92,7 +92,7 @@ function uuid() {
 
 function loadScript(id, url) {
     return new Promise(resolve => {
-        let script = document.getElementById(id);
+        let script = document.getElementById(id) as any;
         if(!script) {
             script = document.createElement('script');
             script.id = id;
@@ -128,7 +128,7 @@ function loadScript(id, url) {
 
 function loadStyle(id, url) {
     return new Promise(resolve => {
-        let link = document.getElementById(id);
+        let link = document.getElementById(id) as any;
         if(!link) {
             link = document.createElement('link');
             link.id = id;
@@ -210,11 +210,11 @@ const parseParams = m => {
             /**
              * uk、fk 二者 必须同为 数据（长度相同）或者函数
              * */
-            const [uk, fk] = v;
+            const [uk, fk] = v as any;
             // 当同为函数时; 注：此处可优化，如果uk为函数，直接使用uk方法的返回值，不用判断其他情况
             if(typeof uk === 'function') {
                 // 拿到当前配置所属参数的参数值
-                let pv = params[keys[i]];
+                let pv = params[keys[i] as any];
                 // 处理值的特殊情况
                 if(pv === 'false' || pv === 'true') {
                     pv = pv === 'true'
@@ -230,7 +230,7 @@ const parseParams = m => {
                     // 只有非特殊情况才会执行uk处理值
                     pv = uk(pv);
                 }
-                ret[keys[i]] = pv;
+                ret[keys[i] as any] = pv;
             } else {
                 /**
                  * 此时uk为数组，fk为数组；这里主要针对表单key和接口参数key不一致的情况（之所以是数组是因为有复合表单项会抛出多个值）
@@ -242,7 +242,7 @@ const parseParams = m => {
                  *  此分支会把 url查询参数的 { ..., userName: 'xxx', userNameLike: bool } 转换成 { ..., user: { data: 'xxx', fuzzy: bool }
                  *
                  * */
-                ret[keys[i]] = fk.reduce((prev, next, index) => {
+                ret[keys[i] as any] = fk.reduce((prev, next, index) => {
                     usedKeys.push(uk[index]);
                     let pv = params[uk[index]];
                     if(pv === 'false' || pv === 'true') {
@@ -282,10 +282,10 @@ const parseParams = m => {
          *
          * */
         keys.forEach((k, i) => {
-            const [uk, fk] = values[i];
+            const [uk, fk] = values[i] as any;
             if(typeof uk !== 'function') {
                 usedKeys.push(k)
-                const fv = params[k] || {};
+                const fv = params[k as any] || {};
                 fk.forEach((f, index )=> {
                     ret[uk[index]] = fv[f];
                 });
@@ -303,7 +303,7 @@ const getPopupContainer = node => {
 
 const optionsCreator = (options = [], format = {}) => {
     if(!options.length) return [[], {}];
-    const { value = 'value', label = 'label' } = format;
+    const { value = 'value', label = 'label' } = format as any;
     return [
         [
             {
@@ -440,7 +440,7 @@ export {
     isMobile,
     loadScript,
     loadStyle,
-    getLang,
+    // getLang,
     parseParams,
     getPopupContainer,
     optionsCreator,

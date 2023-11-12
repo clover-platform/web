@@ -6,7 +6,7 @@ import {CACHE_MANAGER} from "@nestjs/cache-manager";
 import {Cache} from "cache-manager";
 import {EmailService} from "@/public/email.service";
 import {I18nService} from "nestjs-i18n";
-import {genCode} from "@/utils/random";
+import {genCode} from "@clover-lib/common/utils/random";
 
 @Injectable()
 export class CodeService {

@@ -68,6 +68,7 @@ export class AccountController {
         return this.accountService.resetPassword(request);
     }
 
+    @Public()
     @Post("/login")
     async login(@Body() request: LoginRequest): Promise<Result<any>> {
         return this.accountService.login(request.account, request.password);

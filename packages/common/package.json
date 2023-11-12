@@ -4,9 +4,9 @@
     "type": "module",
     "license": "MIT",
     "dependencies": {
-        "decimal.js-light": "^2.5.1",
-        "markdown-it": "^13.0.1",
-        "path-to-regexp": "^6.2.1",
+        "decimal.js-light": "2.5.1",
+        "markdown-it": "13.0.2",
+        "path-to-regexp": "6.2.1",
         "supports-color": "9.4.0",
         "unescape-js": "1.1.4",
         "chalk": "5.3.0",
