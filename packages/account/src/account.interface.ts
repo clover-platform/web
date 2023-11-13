@@ -33,8 +33,3 @@ export interface ResetPasswordRequest {
 export interface TokenOptions {
     expiresIn: string;
 }
-
-export interface LoginRequest {
-    account: string;
-    password: string;
-}

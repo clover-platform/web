@@ -53,7 +53,7 @@ const LoginPage = () => {
                 ]}>
                     <Input placeholder={"{#请输入邮箱或用户名#}"} />
                 </Form.Item>
-                <Form.Item field="password" label={"{#密码#}"} rules={[
+                <Form.Item field="password" label={passwordLabel} rules={[
                     { required: true, message: "{#请输入密码#}" },
                     { validator: setPassword }
                 ]}>

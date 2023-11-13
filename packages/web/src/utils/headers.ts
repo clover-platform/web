@@ -7,7 +7,7 @@ export const get = () => {
     const browser = Bowser.parse(window.navigator.userAgent);
     const acceptLanguage = getLangCode();
     const headers: any = {
-        "Accept-Language": acceptLanguage === "zh-CN" ? 'zh-TW' : acceptLanguage,
+        "Accept-Language": acceptLanguage,
         'CLIENT-PLATFORM-TYPE': isMobile() ? 'H5': 'PC',
         "CLIENT-BUNDLE-ID": location.hostname,
         "CLIENT-VERSION": packageInfo.version,

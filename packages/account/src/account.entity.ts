@@ -13,7 +13,7 @@ export class Account {
 
     @Column({
         comment: "密码",
-        length: 64,
+        length: 255,
         nullable: true
     }) password: string;
 

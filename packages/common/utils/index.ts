@@ -4,8 +4,23 @@ import QRCode from 'qrcode';
 import { isValidElement } from 'react';
 import { EMAIL, URL as URL_REG } from "./regular";
 
-// TODO 语言列表
-const langList = [];
+const langList = [
+    {
+        key: 'zh-cn',
+        value: '简体中文',
+        code: 'zh-CN',
+    },
+    {
+        key: 'zh-tw',
+        value: '繁體中文',
+        code: 'zh-TW',
+    },
+    {
+        key: 'en-us',
+        value: 'English',
+        code: 'en-US',
+    }
+];
 
 const isServer = typeof window === 'undefined';
 
@@ -26,9 +41,8 @@ export const failover = (v: string) => {
 export const getLangCode = () => {
     const lang = "{#LANG#}";
     const item = langList.find(({key}) => (key === lang))
-    if(item) return item.apiKey;
-    const langArray = lang.split('-');
-    return `${langArray[0]}-${langArray[1].toUpperCase()}`
+    if(item) return item.code;
+    return 'zh-CN';
 }
 
 function isMobile(){
@@ -60,28 +74,6 @@ export const startWithLang = (path) => {
     }
     return false;
 }
-
-// const getLang = (list = langList, fallback = ['en-us', 'zh-cn']) => {
-//     if(isServer) return getConfig(CONFIG_KEY.DEFAULT_LANG);
-//     const langInLocal = localStorage.getItem(getConfig(CONFIG_KEY.LANG_KEY));
-//     if(langInLocal) {
-//         const l = list.find(({key}) => (key === langInLocal));
-//         if(l) return langInLocal;
-//     }
-//     let lang = localStorage.lang; const nl = navigator.language.toLowerCase(); let sl = ''; const ll = fallback;
-//     if (!lang) {
-//         for (let i = 0; i < ll.length; i++) {
-//             if (!sl) {
-//                 sl = nl.substr(0, 2) === ll[i].substr(0, 2) ? ll[i] : '';
-//             }
-//             if (!lang) {
-//                 lang = ll[i] === nl ? nl : '';
-//             }
-//         }
-//         lang = lang || sl || getConfig(CONFIG_KEY.DEFAULT_LANG);
-//     }
-//     return lang;
-// }
 
 function uuid() {
     return 'xxxxxxxxxxxx4xxxyxxxxxxxxxxxxxxx'.replace(/[xy]/g, function(c) {

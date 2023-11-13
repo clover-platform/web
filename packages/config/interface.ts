@@ -46,8 +46,8 @@ export interface KeyPair {
 
 export interface AuthConfig {
     jwtSecret: string;
+    aesKey: string;
     transport: KeyPair;
-    storage: KeyPair;
 }
 
 

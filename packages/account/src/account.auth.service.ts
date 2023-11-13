@@ -3,7 +3,6 @@ import {InjectRepository} from "@nestjs/typeorm";
 import {Repository} from "typeorm";
 import {AccountAuthApp, AccountAuthOpenUser} from "@easy-kit/account/account.auth.entity";
 import {Result} from "@easy-kit/public/result.entity";
-import {I18nService} from "nestjs-i18n";
 import {HttpService} from "@nestjs/axios";
 import {firstValueFrom} from "rxjs";
 import {Redlock} from "@easy-kit/public/redlock.decorator";
@@ -11,6 +10,7 @@ import {ACCOUNT_OPEN_USER_LOCK_KEY, LOCK_TIME} from "@easy-kit/account/account.c
 import {TokenService} from "@easy-kit/public/token.service";
 import {BindRequest} from "@easy-kit/account/account.auth.interface";
 import {AccountService} from "@easy-kit/account/account.service";
+import {I18nService} from "@easy-kit/public/i18n.service";
 
 @Injectable()
 export class AccountAuthService {

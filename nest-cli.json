@@ -5,7 +5,14 @@
     "compilerOptions": {
         "deleteOutDir": true,
         "webpack": true,
-        "tsConfigPath": "packages/server/tsconfig.app.json"
+        "tsConfigPath": "packages/server/tsconfig.app.json",
+        "assets": [
+            {
+                "include": "packages/server/i18n/**/*",
+                "watchAssets": true,
+                "outDir": "dist/apps/api"
+            }
+        ]
     },
     "monorepo": true,
     "root": "packages/server",

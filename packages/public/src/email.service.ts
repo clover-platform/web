@@ -84,7 +84,6 @@ export class EmailService {
     async renderTemplate(template: string, data: any): Promise<string> {
         const emailConfig = this.configService.get<EmailConfig>("email");
         const lang = I18nContext.current().lang;
-        this.logger.log('current lang', lang);
         return await ejs.renderFile(`${resolve('./')}${emailConfig.templateDir}/${template}.${lang}.ejs`, data);
     }
 

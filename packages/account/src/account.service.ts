@@ -6,20 +6,19 @@ import { Redlock } from "@easy-kit/public/redlock.decorator";
 import { ACCOUNT_LOCK_KEY, LOCK_TIME } from "./account.const";
 import { Result } from "@easy-kit/public/result.entity";
 import {
-    CheckRegisterEmailRequest, CheckResetEmailRequest,
+    CheckResetEmailRequest,
     OTPSecretResult, ResetPasswordRequest,
     SetPasswordRequest,
     TokenOptions,
     TokenResult
 } from "@easy-kit/account/account.interface";
-import { I18nService } from "nestjs-i18n";
-import { decrypt } from "@easy-kit/common/utils/crypto";
+import {aesDecrypt, aesEncrypt, decrypt} from "@easy-kit/common/utils/crypto";
 import { ConfigService } from "@nestjs/config";
 import { authenticator } from "otplib";
 import {CodeService} from "@easy-kit/public/code.service";
 import {TokenService} from "@easy-kit/public/token.service";
-import {isEmail} from "@easy-kit/common/utils";
 import {AuthConfig} from "@easy-kit/config/interface";
+import {I18nService} from "@easy-kit/public/i18n.service";
 
 @Injectable()
 export class AccountService {
@@ -101,10 +100,11 @@ export class AccountService {
             return Result.error({code: 2, message: this.i18n.t("account.otp.verify")} );
         }
         const authConfig = this.configService.get<AuthConfig>("auth");
+        const password = aesEncrypt(decrypt(request.password, authConfig.transport.privateKey), authConfig.aesKey)
         await this.repository.createQueryBuilder()
             .update()
             .set({
-                password: decrypt(request.password, authConfig.transport.privateKey),
+                password,
                 otpStatus: 1,
                 status: 1
             })
@@ -151,21 +151,15 @@ export class AccountService {
     }
 
     async login(account: string, password: string): Promise<Result<TokenResult>> {
-        let info = null;
         const authConfig = this.configService.get<AuthConfig>("auth");
         const pwd = decrypt(password, authConfig.transport.privateKey);
-        if(isEmail(account)) {
-            info = await this.repository.findOneBy({
-                // email: account,
-                password: pwd
-            })
-        }else{
-            info = await this.repository.findOneBy({
-                username: account,
-                password: pwd
-            })
-        }
+        const info = await this.repository.findOneBy({
+            username: account
+        })
         if(!info) {
+            return Result.error({code: 1, message: this.i18n.t("account.login.error")} );
+        }
+        if(pwd !== aesDecrypt(info.password, authConfig.aesKey)) {
             return Result.error({code: 1, message: this.i18n.t("account.login.error")} );
         }
         const token = await this.createToken(info, {expiresIn: "1d"});

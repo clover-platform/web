@@ -5,8 +5,8 @@ import {EmailCode} from "@easy-kit/public/public.interface";
 import {CACHE_MANAGER} from "@nestjs/cache-manager";
 import {Cache} from "cache-manager";
 import {EmailService} from "@easy-kit/public/email.service";
-import {I18nService} from "nestjs-i18n";
 import {genCode} from "@easy-kit/common/utils/random";
+import {I18nService} from "@easy-kit/public/i18n.service";
 
 @Injectable()
 export class CodeService {

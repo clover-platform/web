@@ -1,6 +1,6 @@
-import { Body, Controller, Get, Post, Req } from "@nestjs/common";
+import {Body, Controller, Get, Logger, Post, Req} from "@nestjs/common";
 import {
-    CheckRegisterEmailRequest, CheckResetEmailRequest, LoginRequest,
+    CheckRegisterEmailRequest, CheckResetEmailRequest,
     OTPSecretResult, ResetPasswordRequest,
     SetPasswordRequest,
     TokenResult
@@ -12,9 +12,13 @@ import { AccountService } from "@easy-kit/account/account.service";
 import { SessionUser } from "@easy-kit/auth/auth.interface";
 import {AppAccount} from "@/account/account.entity";
 import {AppAccountService} from "@/account/account.service";
+import {I18nContext} from "nestjs-i18n";
+import {LoginRequest} from "@/account/account.interface";
 
 @Controller("/api/account")
 export class AppAccountController {
+    private logger = new Logger(AppAccountController.name);
+
     constructor(
         private readonly service: AppAccountService,
         private readonly accountService: AccountService
@@ -75,7 +79,7 @@ export class AppAccountController {
     @Public()
     @Post("/login")
     async login(@Body() request: LoginRequest): Promise<Result<any>> {
-        return this.accountService.login(request.account, request.password);
+        return this.service.login(request.account, request.password);
     }
 
     @Get("/profile")

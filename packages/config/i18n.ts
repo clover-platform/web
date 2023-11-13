@@ -12,6 +12,7 @@ export default I18nModule.forRootAsync({
                 path: resolve('./packages/server/src/i18n/'),
                 watch: true,
             },
+            logging: true
         };
     },
     resolvers: [

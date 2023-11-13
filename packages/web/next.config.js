@@ -4,7 +4,7 @@ import withConfig from '@next/router-config';
 
 const isDev = process.env.NODE_ENV !== 'production';
 // 语言默认值
-process.env.UI_LANG = process.env.UI_LANG || 'zh-tw';
+process.env.UI_LANG = process.env.UI_LANG || 'zh-cn';
 // 接口代理
 const apiConfig = {
     dev: 'http://localhost:3000', // 开发
