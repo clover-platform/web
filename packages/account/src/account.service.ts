@@ -34,20 +34,6 @@ export class AccountService {
         private otpService: OTPService,
     ) {}
 
-    async sendResetEmail(email: string): Promise<Result<any>> {
-        const size = await this.repository.countBy({
-            // email,
-            status: 1
-        });
-        if(size === 0) {
-            return Result.error({code: 1, message: this.i18n.t("account.notfound")})
-        }
-        return await this.codeService.send({
-            email,
-            action: "reset"
-        });
-    }
-
     @Redlock([ACCOUNT_LOCK_KEY], LOCK_TIME)
     async add(account: Account): Promise<Account> {
         account.createTime = new Date();
@@ -114,38 +100,16 @@ export class AccountService {
         return await this.createToken(account, {expiresIn: "1d"});
     }
 
-    async checkResetEmail(request: CheckResetEmailRequest): Promise<TokenResult | Result<any>> {
-        const checked = await this.codeService.check({
-            email: request.email,
-            action: "reset",
-            code: request.code
-        });
-        if(!checked) {
-            return Result.error({code: 1, message: this.i18n.t("account.reset.code")})
-        }
-        // 插入数据库，并返回一个示例
-        const account = await this.repository.findOneBy({
-            // email: request.email,
-            status: 1
-        });
-        if(!account) {
-            return Result.error({code: 2, message: this.i18n.t("account.notfound")} );
-        }
-        // 生成五分钟的临时token
-        return await this.createToken(account, {expiresIn: "5m"});
-    }
-
     async resetPassword(request: ResetPasswordRequest): Promise<TokenResult|Result<any>> {
         const account = await this.repository.findOneBy({ id: request.id });
         if(!account) {
             return Result.error({code: 1, message: this.i18n.t("account.notfound")} );
         }
         const authConfig = this.configService.get<AuthConfig>("auth");
+        const password = aesEncrypt(decrypt(request.password, authConfig.transport.privateKey), authConfig.aesKey)
         await this.repository.createQueryBuilder()
             .update()
-            .set({
-                password: decrypt(request.password, authConfig.transport.privateKey),
-            })
+            .set({ password })
             .where("id = :id", { id: request.id })
             .execute();
         return await this.createToken(account, {expiresIn: "1d"});

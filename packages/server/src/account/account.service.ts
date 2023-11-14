@@ -4,7 +4,7 @@ import {InjectRepository} from "@nestjs/typeorm";
 import {Repository} from "typeorm";
 import {CodeService} from "@easy-kit/public/code.service";
 import {AppAccount} from "@/account/account.entity";
-import {CheckRegisterEmailRequest, TokenResult} from "@easy-kit/account/account.interface";
+import { CheckRegisterEmailRequest, CheckResetEmailRequest, TokenResult } from "@easy-kit/account/account.interface";
 import {Account} from "@easy-kit/account/account.entity";
 import {Redlock} from "@easy-kit/public/redlock.decorator";
 import {LOCK_TIME} from "@easy-kit/account/account.const";
@@ -113,6 +113,45 @@ export class AppAccountService {
             username = info.username;
         }
         return this.accountService.login(username, password);
+    }
+
+    async sendResetEmail(email: string): Promise<Result<any>> {
+        const size = await this.repository.countBy({
+            email,
+            deleted: false
+        });
+        if(size === 0) {
+            return Result.error({code: 1, message: this.i18n.t("account.notfound")})
+        }
+        return await this.codeService.send({
+            email,
+            action: "reset"
+        });
+    }
+
+    async checkResetEmail(request: CheckResetEmailRequest): Promise<TokenResult | Result<any>> {
+        const checked = await this.codeService.check({
+            email: request.email,
+            action: "reset",
+            code: request.code
+        });
+        if(!checked) {
+            return Result.error({code: 1, message: this.i18n.t("account.reset.code")})
+        }
+        // 插入数据库，并返回一个示例
+        const appAccount = await this.repository.findOneBy({
+            email: request.email,
+            deleted: false
+        });
+        if(!appAccount) {
+            return Result.error({code: 2, message: this.i18n.t("account.notfound")} );
+        }
+        const account = await this.accountService.findByUsername(appAccount.username);
+        if(!appAccount) {
+            return Result.error({code: 2, message: this.i18n.t("account.notfound")} );
+        }
+        // 生成五分钟的临时token
+        return await this.accountService.createToken(account, {expiresIn: "5m"});
     }
 
 }

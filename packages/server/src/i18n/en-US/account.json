@@ -1,5 +1,8 @@
 {
     "notfound": "User not found",
+    "reset": {
+        "code": "Incorrect verification code"
+    },
     "otp": {
         "is_bind": "Authenticator is bound",
         "verify": "Authentication code verification failed"

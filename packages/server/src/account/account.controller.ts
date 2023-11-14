@@ -57,13 +57,13 @@ export class AppAccountController {
     @Throttle({default: { limit: 10, ttl: 60000 }})
     @Post("/reset/email/send")
     async sendResetEmail(@Body() request: {email: string}): Promise<Result<any>> {
-        return await this.accountService.sendResetEmail(request.email);
+        return await this.service.sendResetEmail(request.email);
     }
 
     @Public()
     @Post("/reset/email/check")
     async checkResetEmail(@Body() request: CheckResetEmailRequest): Promise<TokenResult|Result<any>> {
-        return this.accountService.checkResetEmail(request);
+        return this.service.checkResetEmail(request);
     }
 
     @Post("/reset/password")
