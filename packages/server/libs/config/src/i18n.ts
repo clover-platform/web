@@ -1,6 +1,6 @@
 import { ConfigService } from "@nestjs/config";
 import { I18nModule, AcceptLanguageResolver } from 'nestjs-i18n';
-import { resolve } from "path";
+import { join } from "path";
 import {I18nConfig} from "@easy-kit/config/interface";
 
 export default I18nModule.forRootAsync({
@@ -9,7 +9,7 @@ export default I18nModule.forRootAsync({
         return {
             fallbackLanguage: i18nConfig.fallbackLanguage,
             loaderOptions: {
-                path: resolve('./packages/server/src/i18n/'),
+                path: join(__dirname, i18nConfig.path),
                 watch: true,
             },
             logging: true

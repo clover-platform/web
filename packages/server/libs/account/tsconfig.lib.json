@@ -1,11 +1,11 @@
 {
     "extends": "../../tsconfig.json",
     "compilerOptions": {
-        "declaration": false,
-        "outDir": "../../dist/packages/server"
+        "declaration": true,
+        "outDir": "../../dist/libs/account"
     },
     "include": [
-        "src/**/*"
+        "./**/*"
     ],
     "exclude": [
         "node_modules",

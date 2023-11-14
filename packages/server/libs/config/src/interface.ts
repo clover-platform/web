@@ -37,6 +37,7 @@ export interface EmailConfig {
 
 export interface I18nConfig {
     fallbackLanguage: string;
+    path: string;
 }
 
 export interface KeyPair {

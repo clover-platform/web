@@ -11,10 +11,7 @@ import {LOCK_TIME} from "@easy-kit/account/account.const";
 import {APP_ACCOUNT_LOCK_KEY} from "@/account/account.const";
 import {AccountService} from "@easy-kit/account/account.service";
 import {I18nService} from "@easy-kit/public/i18n.service";
-import {AuthConfig} from "@easy-kit/config/interface";
-import {decrypt} from "@easy-kit/common/utils/crypto";
 import {isEmail} from "@easy-kit/common/utils";
-import {I18nContext} from "nestjs-i18n";
 import {ConfigService} from "@nestjs/config";
 
 @Injectable()

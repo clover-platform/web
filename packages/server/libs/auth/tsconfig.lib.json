@@ -2,7 +2,7 @@
     "extends": "../../tsconfig.json",
     "compilerOptions": {
         "declaration": true,
-        "outDir": "../../dist/packages/auth"
+        "outDir": "../../dist/libs/auth"
     },
     "include": [
         "./**/*"

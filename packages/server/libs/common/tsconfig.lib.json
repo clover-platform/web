@@ -2,7 +2,7 @@
     "extends": "../../tsconfig.json",
     "compilerOptions": {
         "declaration": true,
-        "outDir": "../../dist/packages/account"
+        "outDir": "../../dist/libs/common"
     },
     "include": [
         "./**/*"
