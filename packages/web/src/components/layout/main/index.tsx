@@ -3,6 +3,7 @@ import {useLayoutState} from "@/components/layout/hooks/main";
 import bus from '@clover/common/events';
 import {LOGIN} from "@/events/account";
 import {usePathname, useRouter} from "next/navigation";
+import AdminLayout from "@clover/common/components/layout/admin";
 
 const MainLayout = (props: PropsWithChildren) => {
     const [loading, isLogin, account] = useLayoutState();
@@ -20,9 +21,9 @@ const MainLayout = (props: PropsWithChildren) => {
         }
     }, []);
 
-    return <div>
+    return <AdminLayout>
         { props.children }
-    </div>
+    </AdminLayout>
 };
 
 export default MainLayout;

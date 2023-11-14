@@ -18,6 +18,7 @@
         "forceConsistentCasingInFileNames": false,
         "noFallthroughCasesInSwitch": false,
         "esModuleInterop": true,
+        "jsx": "react",
         "paths": {
             "@easy-kit/common": [ "packages/common" ],
             "@easy-kit/common/*": [ "packages/common/*"],
