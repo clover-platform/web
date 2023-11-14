@@ -13,3 +13,13 @@ export interface EmailCode {
     code: string,
     createdAt: number,
 }
+
+export interface OTPResult {
+    secret: string,
+    qrcode: string,
+}
+
+export interface OTPVerifyData {
+    secret: string,
+    token: string,
+}

@@ -1,7 +1,7 @@
 import {Body, Controller, Get, Logger, Post, Req} from "@nestjs/common";
 import {
     CheckRegisterEmailRequest, CheckResetEmailRequest,
-    OTPSecretResult, ResetPasswordRequest,
+    ResetPasswordRequest,
     SetPasswordRequest,
     TokenResult
 } from "@easy-kit/account/account.interface";
@@ -12,8 +12,8 @@ import { AccountService } from "@easy-kit/account/account.service";
 import { SessionUser } from "@easy-kit/auth/auth.interface";
 import {AppAccount} from "@/account/account.entity";
 import {AppAccountService} from "@/account/account.service";
-import {I18nContext} from "nestjs-i18n";
 import {LoginRequest} from "@/account/account.interface";
+import { OTPResult } from "@easy-kit/public/public.interface";
 
 @Controller("/api/account")
 export class AppAccountController {
@@ -25,7 +25,7 @@ export class AppAccountController {
     ) {}
 
     @Get("/otp/secret/")
-    async otpSecret(@Req() request: Request): Promise<OTPSecretResult|Result<any>> {
+    async otpSecret(@Req() request: Request): Promise<OTPResult|Result<any>> {
         const user: SessionUser = request['user'];
         return await this.accountService.otpSecret(user.sub);
     }

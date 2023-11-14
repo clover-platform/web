@@ -1,4 +1,4 @@
-import {Inject, Injectable} from "@nestjs/common";
+import { Inject, Injectable, Logger } from "@nestjs/common";
 import {Result} from "@easy-kit/public/result.entity";
 import {CheckCodeParams, SendCodeParams} from "@easy-kit/public/public.interface";
 import {EmailCode} from "@easy-kit/public/public.interface";
@@ -7,19 +7,23 @@ import {Cache} from "cache-manager";
 import {EmailService} from "@easy-kit/public/email.service";
 import {genCode} from "@easy-kit/common/utils/random";
 import {I18nService} from "@easy-kit/public/i18n.service";
+import { ConfigService } from "@nestjs/config";
+import { AuthConfig } from "@easy-kit/config/interface";
 
 @Injectable()
 export class CodeService {
-
+    private logger = new Logger(CodeService.name);
     constructor(
         @Inject(CACHE_MANAGER) private cacheService: Cache,
         private emailService: EmailService,
         private i18n: I18nService,
+        private configService: ConfigService,
     ) {}
 
     private async newCode(redisKey: string): Promise<EmailCode> {
+        const authConfig = this.configService.get<AuthConfig>("auth");
         const code = {
-            code: genCode(),
+            code: authConfig.debug ? `${authConfig.emailCode}` : genCode(),
             createdAt: Date.now(),
         };
         await this.cacheService.set<EmailCode>(redisKey, code, { ttl: 60 * 5 });
@@ -42,18 +46,21 @@ export class CodeService {
             code = await this.newCode(codeKey);
         }
         await this.cacheService.set(timeKey, Date.now(), { ttl: 60 });
-        const sent = await this.emailService.singleSendMail({
-            email,
-            subject: this.i18n.t(`mail.title.code.${action}`),
-            template: "code",
-            data: {
-                code: code.code
+        const authConfig = this.configService.get<AuthConfig>("auth");
+        if(!authConfig.debug) { // 如果不调试，则真的发送验证码
+            const sent = await this.emailService.singleSendMail({
+                email,
+                subject: this.i18n.t(`mail.title.code.${action}`),
+                template: "code",
+                data: {
+                    code: code.code
+                }
+            });
+            if(!sent) {
+                await this.cacheService.del(codeKey);
+                await this.cacheService.del(timeKey);
+                return Result.error({code: 2, message: this.i18n.t("mail.fail")})
             }
-        });
-        if(!sent) {
-            await this.cacheService.del(codeKey);
-            await this.cacheService.del(timeKey);
-            return Result.error({code: 2, message: this.i18n.t("mail.fail")})
         }
         return Result.success(null);
     }

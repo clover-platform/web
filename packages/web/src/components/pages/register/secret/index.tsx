@@ -21,8 +21,8 @@ const SecretItem = (props: FormItemProps) => {
     }
 
     useEffect(() => {
-        otpData?.url && import('qrcode').then((QRCode) => {
-            QRCode.toDataURL(otpData.url).then((result) => {
+        otpData?.qrcode && import('qrcode').then((QRCode) => {
+            QRCode.toDataURL(otpData.qrcode).then((result) => {
                 setQrcode(result);
             });
         });
@@ -47,13 +47,13 @@ const SecretItem = (props: FormItemProps) => {
                     alt={"{#二维码#}"}
                 />
             </div>
-            <div className={"break-all py-[5px] px-[10px] bg-[#F2F3F5] inline-block"}>
+            <div className={"break-all my-[10px] py-[5px] px-[10px] bg-[#F2F3F5] inline-block"}>
                 {otpData.secret}
                 <CopyToClipboard text={otpData.secret} onCopy={onCopy}>
                     <IconCopy className={"ml-[10px]"} />
                 </CopyToClipboard>
             </div>
-            <div className={"text-center mt-[10px] opacity-50"}>
+            <div className={"text-center opacity-50"}>
                 {"{#使用身份验证 App 扫码二维码或复制密钥到 App 。#}"}
             </div>
         </div>

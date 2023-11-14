@@ -7,18 +7,19 @@ import { ACCOUNT_LOCK_KEY, LOCK_TIME } from "./account.const";
 import { Result } from "@easy-kit/public/result.entity";
 import {
     CheckResetEmailRequest,
-    OTPSecretResult, ResetPasswordRequest,
+    ResetPasswordRequest,
     SetPasswordRequest,
     TokenOptions,
     TokenResult
 } from "@easy-kit/account/account.interface";
 import {aesDecrypt, aesEncrypt, decrypt} from "@easy-kit/common/utils/crypto";
 import { ConfigService } from "@nestjs/config";
-import { authenticator } from "otplib";
 import {CodeService} from "@easy-kit/public/code.service";
 import {TokenService} from "@easy-kit/public/token.service";
 import {AuthConfig} from "@easy-kit/config/interface";
 import {I18nService} from "@easy-kit/public/i18n.service";
+import { OTPService } from "@easy-kit/public/otp.service";
+import { OTPResult } from "@easy-kit/public/public.interface";
 
 @Injectable()
 export class AccountService {
@@ -30,6 +31,7 @@ export class AccountService {
         private configService: ConfigService,
         private codeService: CodeService,
         private tokenService: TokenService,
+        private otpService: OTPService,
     ) {}
 
     async sendResetEmail(email: string): Promise<Result<any>> {
@@ -62,17 +64,18 @@ export class AccountService {
         return this.tokenService.create(payload, options);
     }
 
-    async otpSecret(id: number): Promise<OTPSecretResult|Result<any>> {
+    async otpSecret(id: number): Promise<OTPResult|Result<any>> {
         const account = await this.repository.findOneBy({ id });
         if(!account) {
             return Result.error({code: 1, message: this.i18n.t("account.notfound")} );
         }
+        const otp = await this.otpService.generate(account.username);
         if(account.otpSecret) {
             if(account.otpStatus === 1) {
                 return Result.error({code: 1, message: this.i18n.t("account.otp.is_bind")} );
             }
         }else{
-            account.otpSecret = authenticator.generateSecret();
+            account.otpSecret = otp.secret;
             await this.repository.createQueryBuilder()
                 .update()
                 .set({
@@ -82,8 +85,7 @@ export class AccountService {
                 .where("id = :id", { id })
                 .execute();
         }
-        const url = authenticator.keyuri(account.username, this.i18n.t('public.app'), account.otpSecret);
-        return { secret: account.otpSecret, url };
+        return otp;
     }
 
     async setPassword(request: SetPasswordRequest): Promise<TokenResult|Result<any>> {
@@ -91,11 +93,10 @@ export class AccountService {
         if(!account) {
             return Result.error({code: 1, message: this.i18n.t("account.notfound")} );
         }
-        const verified = authenticator.verify({
+        const verified = this.otpService.verify({
             secret: account.otpSecret,
             token: request.otpCode
         });
-        this.logger.log(verified);
         if(!verified) {
             return Result.error({code: 2, message: this.i18n.t("account.otp.verify")} );
         }

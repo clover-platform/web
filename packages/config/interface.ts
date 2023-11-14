@@ -48,6 +48,9 @@ export interface AuthConfig {
     jwtSecret: string;
     aesKey: string;
     transport: KeyPair;
+    debug: boolean;
+    emailCode: string,
+    otpCode: string,
 }
 
 

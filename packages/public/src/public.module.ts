@@ -5,6 +5,7 @@ import {HttpModule} from "@nestjs/axios";
 import {CodeService} from "@easy-kit/public/code.service";
 import {TokenService} from "@easy-kit/public/token.service";
 import {I18nService} from "@easy-kit/public/i18n.service";
+import { OTPService } from "@easy-kit/public/otp.service";
 
 @Global()
 @Module({
@@ -16,7 +17,8 @@ import {I18nService} from "@easy-kit/public/i18n.service";
         RedlockService,
         CodeService,
         TokenService,
-        I18nService
+        I18nService,
+        OTPService
     ],
     controllers: [],
     exports: [
@@ -24,7 +26,8 @@ import {I18nService} from "@easy-kit/public/i18n.service";
         RedlockService,
         CodeService,
         TokenService,
-        I18nService
+        I18nService,
+        OTPService
     ]
 })
 export class PublicModule {}

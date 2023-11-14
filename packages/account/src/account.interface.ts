@@ -3,11 +3,6 @@ export interface TokenResult {
     expiresIn: number;
 }
 
-export interface OTPSecretResult {
-    secret: string;
-    url: string;
-}
-
 export interface CheckRegisterEmailRequest {
     username: string;
     email: string;

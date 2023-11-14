@@ -76,11 +76,9 @@ export class AppAccountService {
         username: string,
         email: string,
     }): Promise<boolean> {
-        const account = await this.repository.findOneBy(where);
-        if(account) {
-            return await this.hasUsername(account.username);
-        }
-        return false;
+        const hasEmail = await this.hasEmail(where.email);
+        const hasUsername = await this.hasUsername(where.username);
+        return hasEmail || hasUsername;
     }
 
     async checkRegisterEmail(request: CheckRegisterEmailRequest): Promise<TokenResult | Result<any>> {
