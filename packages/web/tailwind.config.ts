@@ -1,15 +1,19 @@
 import type { Config } from 'tailwindcss';
-import plugin from '../common/plugin/tailwind.js';
+import plugin from '../common/plugin/tailwind';
+import ta from 'tailwindcss-animate';
+import coreConfig from '@clover/core/lib/tailwind';
 
 const config: Config = {
+    ...coreConfig,
     content: [
-        "./src/**/*.{js,ts,jsx,tsx,mdx}",
+        "../core/**/*.{js,ts,jsx,tsx,mdx}",
         "../common/**/*.{js,ts,jsx,tsx,mdx}",
+        "./src/**/*.{js,ts,jsx,tsx,mdx}",
     ],
-    theme: {
-        extend: {},
-    },
-    plugins: [ plugin ],
+    plugins: [
+        ta,
+        plugin
+    ],
     corePlugins: {
         preflight: false,
     }

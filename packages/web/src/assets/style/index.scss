@@ -1,3 +1,3 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "reset.css";
+@import "@clover/common/assets/style/font.scss";
+@import "@clover/core/style/globals.css";

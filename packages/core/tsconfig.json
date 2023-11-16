@@ -1,0 +1,9 @@
+{
+    "compilerOptions": {
+        "baseUrl": ".",
+        "paths": {
+            "@clover/core/*": ["./*"]
+        },
+        "jsx": "react"
+    }
+}

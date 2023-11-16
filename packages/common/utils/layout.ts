@@ -1,13 +1,13 @@
 import {isServer} from "@clover/common/utils";
 import localforage from "localforage";
 
-export const detectLang = async (langList, fallback = 'en-us') => {
+export const detectLang = async (langList: [], fallback = 'en-us') => {
     if(!isServer) {
-        const supportLangList = langList.map(({code}) => {return code});
+        const supportLangList: string[] = langList.map(({code}) => {return code});
         const nLang = navigator.language;
-        let targetLang = (nLang || fallback).toLowerCase();
+        let targetLang: string = (nLang || fallback).toLowerCase();
         const langInLocal = await localforage.getItem("lang");
-        targetLang = langInLocal || targetLang;
+        targetLang = (langInLocal || targetLang) as string;
         if(!supportLangList.includes(targetLang)) { // 如果浏览器和本地语言并不支持，则 fallback
             targetLang = fallback;
         }

@@ -4,12 +4,12 @@ import {useParams, usePathname} from "next/navigation";
 import {useEffect, useMemo, useState} from "react";
 import { isMobile } from "@clover/common/utils";
 
-const getDefaultLayout = (routers) => {
-    const defaultLayout = (routers || []).find(({path}) => (!path));
+const getDefaultLayout = (routers: any) => {
+    const defaultLayout = (routers || []).find(({path}: any) => (!path));
     return defaultLayout ? defaultLayout.component : null;
 }
 
-const LayoutAdaptor = (props) => {
+const LayoutAdaptor = (props: any) => {
     const {
         children,
         routers = []
@@ -22,8 +22,8 @@ const LayoutAdaptor = (props) => {
     useEffect(() => {
         const resize = () => {
             isMobile() ?
-                document.querySelector("html").classList.add("mobile") :
-                document.querySelector("html").classList.remove("mobile");
+                document.querySelector("html")?.classList.add("mobile") :
+                document.querySelector("html")?.classList.remove("mobile");
             setInit(false);
         }
         resize();

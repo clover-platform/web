@@ -4,21 +4,15 @@ import { RecoilRoot } from 'recoil';
 import langList from "@/config/lang.list";
 import {detectLang} from "@clover/common/utils/layout";
 import LayoutAdaptor from "@clover/common/components/layout/adaptor";
-import {ConfigProvider} from "@arco-design/web-react";
-import componentConfig from "@/config/component";
-import {ARCO_LANG} from "@clover/common/config/arco";
 import {routers} from "@/config/layout/router";
 
 import "@/plugin/rest";
-import '@/assets/style/reset.css';
 import '@/assets/style/index.scss';
-import '@clover/common/assets/style/font.scss';
-import "@arco-themes/react-clover/css/arco.css";
 
 const AppRootLayout = ({children}: PropsWithChildren) => {
     const [loading, setLoading] = useState(true);
     useEffect (() => {
-        detectLang(langList).then((detected: boolean) => {
+        detectLang(langList as any).then((detected: boolean) => {
             if(!detected) setLoading(false);
         });
     }, []);
@@ -34,9 +28,7 @@ const AppRootLayout = ({children}: PropsWithChildren) => {
             {
                 loading ? null : <RecoilRoot>
                     <LayoutAdaptor routers={routers}>
-                        <ConfigProvider componentConfig={componentConfig} locale={ARCO_LANG["{#LANG#}"]}>
-                            {children}
-                        </ConfigProvider>
+                        { children }
                     </LayoutAdaptor>
                 </RecoilRoot>
             }

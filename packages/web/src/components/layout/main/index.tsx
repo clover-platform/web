@@ -1,6 +1,6 @@
 import {PropsWithChildren, useCallback, useEffect} from "react";
 import {useLayoutState} from "@/components/layout/hooks/main";
-import bus from '@clover/common/events';
+import bus from '../../../../../common/events';
 import {LOGIN} from "@/events/account";
 import {usePathname, useRouter} from "next/navigation";
 import AdminLayout from "@clover/common/components/layout/admin";

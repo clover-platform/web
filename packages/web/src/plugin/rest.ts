@@ -1,7 +1,7 @@
 // Rest 配置
 import * as Rest from '@clover/common/utils/rest.js';
 import {get} from "@/utils/headers";
-import bus from '@clover/common/events';
+import bus from '../../../common/events';
 import {LOGIN} from "@/events/account";
 
 Rest.config({
