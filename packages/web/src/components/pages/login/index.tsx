@@ -1,20 +1,25 @@
 'use client';
 
-import {Button, Divider, Form, Input, Message} from "@arco-design/web-react";
+import { Input } from "@clover/core/components/ui/input";
+import Button from "@clover/core/components/extend/button";
+import Divider from "@clover/core/components/extend/divider";
 import Quick from "@/components/pages/login/quick";
 import LoginLink from "@/components/common/login/link";
 import React, {useState} from "react";
-import {setPassword} from "../../../../../common/validators";
 import {login} from "@/rest/auth";
 import {setToken} from "@/utils/token";
 import {useRouter, useSearchParams} from "next/navigation";
 import {encrypt} from "@/utils/crypto";
+import Form from "@clover/core/components/extend/form";
+import { SCHEMA } from "@/config/pages/login/form";
+import useMessage from "@clover/core/components/extend/message";
 
 const LoginPage = () => {
     const router = useRouter();
     const params = useSearchParams();
     const from = params.get("from");
     const [submitting, setSubmitting] = useState(false);
+    const Message = useMessage();
 
     const onSubmit = async (data: any) => {
         setSubmitting(true);
@@ -45,23 +50,24 @@ const LoginPage = () => {
         </div>
         <div className={"mt-[30px]"}>
             <Form
+                fields={[
+                    {
+                        name: "account",
+                        label: "{#邮箱或用户名#}",
+                        placeholder: "{#请输入邮箱或用户名#}",
+                        render: (field) => <Input {...field} />
+                    },
+                    {
+                        name: "password",
+                        label: passwordLabel,
+                        placeholder: "{#请输入密码#}",
+                        render: (field) => <Input {...field} type={"password"} />
+                    }
+                ]}
+                schema={SCHEMA}
                 onSubmit={onSubmit}
-                size={"large"} layout={"vertical"} autoComplete='off'
             >
-                <Form.Item field="account" label={"{#邮箱或用户名#}"} rules={[
-                    { required: true, message: "{#请输入邮箱或用户名#}" },
-                ]}>
-                    <Input placeholder={"{#请输入邮箱或用户名#}"} />
-                </Form.Item>
-                <Form.Item field="password" label={passwordLabel} rules={[
-                    { required: true, message: "{#请输入密码#}" },
-                    { validator: setPassword }
-                ]}>
-                    <Input.Password placeholder={"{#请输入密码#}"} />
-                </Form.Item>
-                <Form.Item>
-                    <Button loading={submitting} long type={"primary"} htmlType={"submit"}>{"{#立即登录#}"}</Button>
-                </Form.Item>
+                <Button loading={submitting} long htmlType={"submit"}>{"{#立即登录#}"}</Button>
             </Form>
         </div>
         <Divider orientation={"center"}>{"{#第三方快捷登录#}"}</Divider>

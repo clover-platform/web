@@ -5,7 +5,6 @@ import {Button, Form, Input, Result, Space, Spin, Image, Message} from "@arco-de
 import {linkCode, loginAndLink} from "@/rest/auth";
 import {useRouter, useSearchParams} from "next/navigation";
 import Link from "next/link";
-import {IconGithub} from "@arco-iconbox/react-clover";
 import {setPassword} from "@clover/common/validators";
 import {encrypt} from "@/utils/crypto";
 import {setToken} from "@/utils/token";

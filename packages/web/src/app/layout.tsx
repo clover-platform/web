@@ -4,8 +4,8 @@ import { RecoilRoot } from 'recoil';
 import langList from "@/config/lang.list";
 import {detectLang} from "@clover/common/utils/layout";
 import LayoutAdaptor from "@clover/common/components/layout/adaptor";
+import {Toaster} from "@clover/core/components/ui/toaster";
 import {routers} from "@/config/layout/router";
-
 import "@/plugin/rest";
 import '@/assets/style/index.scss';
 
@@ -32,6 +32,7 @@ const AppRootLayout = ({children}: PropsWithChildren) => {
                     </LayoutAdaptor>
                 </RecoilRoot>
             }
+            <Toaster />
         </body>
     </html>
 };

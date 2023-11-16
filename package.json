@@ -6,8 +6,8 @@
     ],
     "scripts": {},
     "dependencies": {
-        "@arco-iconbox/react-clover": "0.0.1",
-        "axios": "1.6.1",
+        "@arco-iconbox/react-clover": "0.0.2",
+        "axios": "1.6.2",
         "localforage": "1.10.0",
         "lodash": "4.17.21",
         "qrcode": "^1.5.3",

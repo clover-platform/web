@@ -1,5 +1,4 @@
-import { Link as ArcoLink } from "@arco-design/web-react";
-import Link from "next/link";
+import Link from "@clover/common/components/link";
 import { PropsWithChildren, useMemo } from "react";
 import { useSearchParams } from "next/navigation";
 
@@ -18,9 +17,7 @@ const LoginLink = (props: LoginLinkProps) => {
         return props.href;
     }, [from, props.href])
 
-    return <Link href={href}>
-        <ArcoLink>{props.children}</ArcoLink>
-    </Link>
+    return <Link href={href}>{props.children}</Link>
 };
 
 export default LoginLink;

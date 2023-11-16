@@ -5,10 +5,10 @@ const QuickLogin = () => {
         {
             SUPPORT_WAY.map((item) => {
                 return <a href={`/api/account/auth/link/${item.id}/`} key={item.id} className={"my-[10px] mx-[15px] flex flex-col items-center justify-center"}>
-                    <div className={"w-[40px] h-[40px] rounded-full bg-[#2E3340] flex items-center justify-center"}>
+                    <div className={"w-[40px] h-[40px] rounded-full bg-primary flex items-center justify-center"}>
                         {item.icon}
                     </div>
-                    <div className={"mt-[10px] text-[14px] text-[#666]"}>{item.title}</div>
+                    <div className={"mt-[10px] text-[14px] text-muted-foreground"}>{item.title}</div>
                 </a>
             })
         }

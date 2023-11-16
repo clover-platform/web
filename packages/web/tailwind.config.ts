@@ -14,8 +14,5 @@ const config: Config = {
         ta,
         plugin
     ],
-    corePlugins: {
-        preflight: false,
-    }
 }
 export default config

@@ -1,6 +1,6 @@
 import {PropsWithChildren} from "react";
 import Logo from "@/components/common/logo";
-import {IconCheck} from "@arco-design/web-react/icon";
+import {CheckIcon} from "@radix-ui/react-icons";
 
 const LoginLayout = (props: PropsWithChildren) => {
     return <div className={"flex justify-center w-full min-h-[100vh] flex-col"}>
@@ -21,13 +21,13 @@ const LoginLayout = (props: PropsWithChildren) => {
                         </div>
                         <ul>
                             <li>
-                                <IconCheck /> {"{#最适合个人和团队#}"}
+                                <span><CheckIcon /></span> {"{#最适合个人和团队#}"}
                             </li>
                             <li>
-                                <IconCheck /> {"{#提供免费订阅计划#}"}
+                                <span><CheckIcon /></span> {"{#提供免费订阅计划#}"}
                             </li>
                             <li>
-                                <IconCheck /> {"{#数百个应用程序和集成#}"}
+                                <span><CheckIcon /></span> {"{#数百个应用程序和集成#}"}
                             </li>
                         </ul>
                         <div className={"mt-[40px] text-[16px] opacity-[0.7]"}>{"{#感谢优秀的平台#}"}</div>

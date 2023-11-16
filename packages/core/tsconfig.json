@@ -4,6 +4,6 @@
         "paths": {
             "@clover/core/*": ["./*"]
         },
-        "jsx": "react"
+        "jsx": "react-jsx"
     }
 }
