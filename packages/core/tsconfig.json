@@ -4,6 +4,7 @@
         "paths": {
             "@clover/core/*": ["./*"]
         },
-        "jsx": "react-jsx"
+        "jsx": "react-jsx",
+        "esModuleInterop": true
     }
 }

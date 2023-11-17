@@ -1,13 +1,11 @@
 import {keywords, title} from "@/utils/seo";
-import { Button } from '@clover/core/components/ui/button';
+import HomePage from "@/components/pages/home";
 
 export const metadata = {
     title: title("{#首页#}"),
     keywords: keywords(),
 }
 
-const Page = () => <>
-    <Button>Test</Button>
-</>
+const Page = () => <HomePage />
 
 export default Page;

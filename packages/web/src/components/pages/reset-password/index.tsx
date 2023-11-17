@@ -1,22 +1,22 @@
 'use client';
 
-import {Button, Form, Input, Message, Steps} from "@arco-design/web-react";
+import { Button, Form, FormItem, FormValues, Input, Steps, StepsItem, useMessage } from "@clover/core";
 import { useState } from "react";
-import * as v from "@clover/common/validators";
 import EmailCodeInput from "@clover/common/components/input/email-code";
 import {passwordReset, resetEmailCheck, sendResetEmailCode} from "@/rest/auth";
 import {useRouter, useSearchParams} from "next/navigation";
 import {setToken} from "@/utils/token";
 import {samePassword, setPassword} from "@clover/common/validators";
 import {encrypt} from "@/utils/crypto";
+import { EMAIL_FORM_SCHEMA, PASSWORD_FORM_SCHEMA } from "@/config/pages/reset-password/form";
 
 const ResetPasswordPage = () => {
+    const Message = useMessage();
     const params = useSearchParams();
     const from = params.get("from");
     const router = useRouter();
     const [step, setStep] = useState(1);
-    const [formData1, setFormData1] = useState({} as any);
-    const [formData2, setFormData2] = useState({} as any);
+    const [formData1, setFormData1] = useState<FormValues>({});
     const [step1Submitting, setStep1Submitting] = useState(false);
     const [formKey, setFormKey] = useState(Date.now());
     const [step2Submitting, setStep2Submitting] = useState(false);
@@ -59,59 +59,39 @@ const ResetPasswordPage = () => {
         </div>
         <div className={"mt-[30px]"}>
             <Steps current={step} className={"mb-[30px]"}>
-                <Steps.Step title='{#邮箱验证#}' />
-                <Steps.Step title='{#设置密码#}' />
+                <StepsItem title='{#邮箱验证#}' />
+                <StepsItem title='{#设置密码#}' />
             </Steps>
             <Form
-                onValuesChange={(v, values) =>  setFormData1(values)}
+                onValuesChange={setFormData1}
                 onSubmit={onStep1Submit}
-                size={"large"}
-                layout={"vertical"}
-                autoComplete='off'
+                schema={EMAIL_FORM_SCHEMA}
                 style={{ display: step === 1 ? 'block' : 'none' }}
             >
-                <Form.Item label={"{#邮箱#}"} field="email" rules={[
-                    {required: true, message: '{#请输入正确的邮箱#}'},
-                    {validator: v.email},
-                ]}>
+                <FormItem name={"email"} label={"{#邮箱#}"}>
                     <Input placeholder={"{#请输入正确的邮箱#}"} />
-                </Form.Item>
-                <Form.Item label={"{#邮箱验证码#}"} field="code" rules={[
-                    {required: true, message: '{#请输入正确的邮箱#}'},
-                    {length: 6, message: "{#邮箱验证码长度为 6#}"},
-                ]}>
+                </FormItem>
+                <FormItem name={"code"} label={"{#邮箱验证码#}"}>
                     <EmailCodeInput placeholder={"{#请输入邮箱验证码#}"} api={sendResetEmailCode} email={formData1.email} />
-                </Form.Item>
-                <Form.Item>
-                    <Button loading={step1Submitting} htmlType={"submit"} long type={"primary"}>{"{#下一步#}"}</Button>
-                </Form.Item>
+                </FormItem>
+                <Button loading={step1Submitting} type={"submit"} long>{"{#下一步#}"}</Button>
             </Form>
             <Form
                 style={{ display: step === 2 ? 'block' : 'none' }}
-                size={"large"} layout={"vertical"} autoComplete='off'
                 key={formKey}
-                onValuesChange={(v, values) =>  setFormData2(values)}
                 onSubmit={onStep2Submit}
+                schema={PASSWORD_FORM_SCHEMA}
             >
-                <Form.Item label={"{#密码#}"} field="password" rules={[
-                    { required: true, message: "{#请输入密码#}" },
-                    { validator: setPassword }
-                ]}>
-                    <Input.Password placeholder={"{#请输入密码#}"} />
-                </Form.Item>
-                <Form.Item label={"{#确认密码#}"} field="password2" rules={[
-                    {required: true, message: "{#请输入密码#}"},
-                    { validator: setPassword },
-                    {validator: (value, callback) => samePassword(value, callback, formData2.password)}
-                ]}>
-                    <Input.Password placeholder={"{#请再次输入密码#}"} />
-                </Form.Item>
-                <Form.Item>
-                    <div className={"flex mx-[-10px]"}>
-                        <Button disabled={step2Submitting} onClick={onPrev} className={"mx-[10px]"} long>{"{#上一步#}"}</Button>
-                        <Button loading={step2Submitting} className={"mx-[10px]"} long type={"primary"} htmlType={"submit"}>{"{#修改密码#}"}</Button>
-                    </div>
-                </Form.Item>
+                <FormItem name={"password"} label={"{#密码#}"}>
+                    <Input type={"password"} placeholder={"{#请输入正确的邮箱#}"} />
+                </FormItem>
+                <FormItem name={"password2"} label={"{#确认密码#}"}>
+                    <Input type={"password"} placeholder={"{#请再次输入密码#}"} />
+                </FormItem>
+                <div className={"flex mx-[-10px]"}>
+                    <Button disabled={step2Submitting} onClick={onPrev} className={"mx-[10px]"} variant={"outline"} long>{"{#上一步#}"}</Button>
+                    <Button loading={step2Submitting} className={"mx-[10px]"} long type={"submit"}>{"{#修改密码#}"}</Button>
+                </div>
             </Form>
         </div>
     </div>

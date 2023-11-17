@@ -1,5 +1,5 @@
 import * as z from "zod";
-import {PASSWORD, USERNAME} from "@clover/common/utils/regular";
+import { PASSWORD } from "@clover/common/utils/regular";
 
 export const SCHEMA = z.object({
     account: z.string({

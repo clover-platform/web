@@ -1,8 +1,6 @@
 'use client';
 
-import { Input } from "@clover/core/components/ui/input";
-import Button from "@clover/core/components/extend/button";
-import Divider from "@clover/core/components/extend/divider";
+import { Button, Divider, Input, Form, useMessage, FormItem } from "@clover/core";
 import Quick from "@/components/pages/login/quick";
 import LoginLink from "@/components/common/login/link";
 import React, {useState} from "react";
@@ -10,9 +8,7 @@ import {login} from "@/rest/auth";
 import {setToken} from "@/utils/token";
 import {useRouter, useSearchParams} from "next/navigation";
 import {encrypt} from "@/utils/crypto";
-import Form from "@clover/core/components/extend/form";
 import { SCHEMA } from "@/config/pages/login/form";
-import useMessage from "@clover/core/components/extend/message";
 
 const LoginPage = () => {
     const router = useRouter();
@@ -50,24 +46,16 @@ const LoginPage = () => {
         </div>
         <div className={"mt-[30px]"}>
             <Form
-                fields={[
-                    {
-                        name: "account",
-                        label: "{#邮箱或用户名#}",
-                        placeholder: "{#请输入邮箱或用户名#}",
-                        render: (field) => <Input {...field} />
-                    },
-                    {
-                        name: "password",
-                        label: passwordLabel,
-                        placeholder: "{#请输入密码#}",
-                        render: (field) => <Input {...field} type={"password"} />
-                    }
-                ]}
                 schema={SCHEMA}
                 onSubmit={onSubmit}
             >
-                <Button loading={submitting} long htmlType={"submit"}>{"{#立即登录#}"}</Button>
+                <FormItem name="account" label="{#邮箱或用户名#}">
+                    <Input placeholder={"{#请输入邮箱或用户名#}"} />
+                </FormItem>
+                <FormItem name="password" label={passwordLabel}>
+                    <Input placeholder="{#请输入密码#}" type={"password"} />
+                </FormItem>
+                <Button loading={submitting} long type={"submit"}>{"{#立即登录#}"}</Button>
             </Form>
         </div>
         <Divider orientation={"center"}>{"{#第三方快捷登录#}"}</Divider>

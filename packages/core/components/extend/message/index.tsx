@@ -1,6 +1,6 @@
 import { useToast } from "@clover/core/components/ui/use-toast"
 
-const useMessage = () => {
+export const useMessage = () => {
     const { toast } = useToast();
     return {
         success: (message: string) => {
@@ -16,5 +16,3 @@ const useMessage = () => {
         }
     }
 };
-
-export default useMessage;

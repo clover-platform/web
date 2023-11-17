@@ -1,4 +1,4 @@
-import {IconGithub, IconWechat} from "@arco-iconbox/react-clover";
+import {IconGithub, IconWechat} from "../../../../../core/icon";
 
 export const ICON_PROPS = {
     color: "white",

@@ -1,21 +1,23 @@
-import { Button, Input, InputProps, Message } from "@arco-design/web-react";
-import { useMemo, useState, useCallback, useRef, useEffect } from 'react';
+import { Button, Input, useMessage, InputProps } from "@clover/core";
+import { useMemo, useState, useCallback, useRef, useEffect, ChangeEvent, forwardRef } from "react";
 import { isEmail } from "@clover/common/utils";
 import { i18n } from '@clover/i18n/utils';
 
 interface EmailCodeInputProps extends InputProps {
     api: Function;
     email: string;
+    placeholder: string;
 }
 
-const EmailCodeInput = (props: EmailCodeInputProps) => {
+const EmailCodeInput = forwardRef<HTMLInputElement, EmailCodeInputProps>((props: EmailCodeInputProps, ref) => {
     const {
         api = () => {},
         email = "",
-        onChange = (v: string, e: any) => {},
+        onChange = (e) => {},
         ...rest
     } = props;
 
+    const Message = useMessage();
     const [loading, setLoading] = useState(false);
     const [waiting, setWaiting] = useState(false);
     const [time, setTime] = useState(60);
@@ -63,8 +65,11 @@ const EmailCodeInput = (props: EmailCodeInputProps) => {
         return waiting ?  i18n("{#%time秒后重发#}", {time}): "{#发送验证码#}";
     }, [waiting, time])
 
-    const handleChange = (v: string) => {
-        onChange(v ? v.replace(/[^\d]/g, '') : v, null);
+    const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+        let v = e.target.value;
+        v = v ? v.replace(/[^\d]/g, '') : v;
+        e.target.value = v;
+        onChange(e);
     }
 
     return <div className={"flex justify-center items-center"}>
@@ -72,16 +77,18 @@ const EmailCodeInput = (props: EmailCodeInputProps) => {
             className={"flex-1"} {...rest}
             onChange={handleChange}
             maxLength={6}
+            ref={ref}
         />
         <Button
             loading={loading}
             disabled={buttonDisabled}
             className={"ml-[10px]"}
             onClick={sendCode}
+            variant="secondary"
         >
             {buttonText}
         </Button>
     </div>
-};
+});
 
 export default EmailCodeInput;

@@ -4,7 +4,7 @@ export interface DividerProps extends PropsWithChildren {
     orientation: 'left' | 'center' | 'right';
 }
 
-const Divider = (props: DividerProps) => {
+export const Divider = (props: DividerProps) => {
     return <div className="relative my-6">
         <div className="absolute inset-0 flex items-center">
             <span className="w-full border-t" />
@@ -16,5 +16,3 @@ const Divider = (props: DividerProps) => {
         </div>
     </div>
 };
-
-export default Divider;
