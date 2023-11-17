@@ -1,9 +1,14 @@
 import NextLink from "next/link";
 import type { LinkProps } from "next/link";
 import {PropsWithChildren, FC} from "react";
+import {Button} from "@clover/core";
 
 const Link: FC<LinkProps & PropsWithChildren> = (props) => {
-    return <NextLink className={"inline-block no-underline transition-colors hover:text-foreground text-muted-foreground"} {...props}>{props.children}</NextLink>;
+    return <NextLink {...props}>
+        <Button variant={"link"} className={"p-0"}>
+            {props.children}
+        </Button>
+    </NextLink>;
 };
 
 export default Link;

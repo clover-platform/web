@@ -19,6 +19,18 @@ export default {
                     hover: "rgba(var(--primary-hover))",
                     foreground: "hsl(var(--primary-foreground))",
                 },
+                success: {
+                    DEFAULT: "rgba(var(--success))",
+                    foreground: "rgba(var(--success-foreground))",
+                },
+                error: {
+                    DEFAULT: "rgba(var(--error))",
+                    foreground: "rgba(var(--error-foreground))",
+                },
+                warning: {
+                    DEFAULT: "rgba(var(--warning))",
+                    foreground: "rgba(var(--warning-foreground))",
+                },
                 secondary: {
                     DEFAULT: "hsl(var(--secondary))",
                     foreground: "hsl(var(--secondary-foreground))",

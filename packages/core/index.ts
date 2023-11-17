@@ -15,3 +15,7 @@ export { Steps, StepsItem } from './components/extend/steps';
 export type {  StepsProps, StepsItemProps  } from './components/extend/steps';
 export { Image } from './components/extend/image';
 export type { ImageProps } from './components/extend/image';
+export { Result } from './components/extend/result';
+export type { ResultProps } from './components/extend/result';
+export { Space } from './components/extend/space';
+export { Spin } from './components/extend/spin';

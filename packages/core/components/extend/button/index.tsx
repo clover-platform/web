@@ -1,7 +1,7 @@
-import {ButtonProps as UIButtonProps} from "@clover/core/components/ui/button";
+import { ButtonProps as UIButtonProps } from "@clover/core/components/ui/button";
 import { Button as UIButton } from "@clover/core/components/ui/button";
-import { IconSpin } from "@clover/core/icon";
 import { cn } from '@clover/core/lib/utils';
+import { Spin } from "@clover/core/components/extend/spin";
 
 export interface ButtonProps extends UIButtonProps {
     loading?: boolean;
@@ -23,7 +23,7 @@ export const Button = (props: ButtonProps) => {
         className={cn(className, long ? 'w-full' : null)}
         disabled={loading || disabled}
     >
-        { loading ? <IconSpin className="animate-spin mr-1" /> : null }
+        { loading ? <Spin /> : null }
         { props.children }
     </UIButton>
 };

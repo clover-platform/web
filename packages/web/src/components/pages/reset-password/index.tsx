@@ -6,7 +6,6 @@ import EmailCodeInput from "@clover/common/components/input/email-code";
 import {passwordReset, resetEmailCheck, sendResetEmailCode} from "@/rest/auth";
 import {useRouter, useSearchParams} from "next/navigation";
 import {setToken} from "@/utils/token";
-import {samePassword, setPassword} from "@clover/common/validators";
 import {encrypt} from "@/utils/crypto";
 import { EMAIL_FORM_SCHEMA, PASSWORD_FORM_SCHEMA } from "@/config/pages/reset-password/form";
 
@@ -15,7 +14,7 @@ const ResetPasswordPage = () => {
     const params = useSearchParams();
     const from = params.get("from");
     const router = useRouter();
-    const [step, setStep] = useState(1);
+    const [step, setStep] = useState(0);
     const [formData1, setFormData1] = useState<FormValues>({});
     const [step1Submitting, setStep1Submitting] = useState(false);
     const [formKey, setFormKey] = useState(Date.now());
@@ -28,14 +27,14 @@ const ResetPasswordPage = () => {
         if(success) {
             setToken(result);
             setFormKey(Date.now());
-            setStep(2);
+            setStep(1);
         }else{
             Message.error(message);
         }
     }
 
     const onPrev = () => {
-        setStep(1);
+        setStep(0);
     }
 
     const onStep2Submit = async (data: any) => {
@@ -66,7 +65,7 @@ const ResetPasswordPage = () => {
                 onValuesChange={setFormData1}
                 onSubmit={onStep1Submit}
                 schema={EMAIL_FORM_SCHEMA}
-                style={{ display: step === 1 ? 'block' : 'none' }}
+                style={{ display: step === 0 ? 'block' : 'none' }}
             >
                 <FormItem name={"email"} label={"{#邮箱#}"}>
                     <Input placeholder={"{#请输入正确的邮箱#}"} />
@@ -77,7 +76,7 @@ const ResetPasswordPage = () => {
                 <Button loading={step1Submitting} type={"submit"} long>{"{#下一步#}"}</Button>
             </Form>
             <Form
-                style={{ display: step === 2 ? 'block' : 'none' }}
+                style={{ display: step === 1 ? 'block' : 'none' }}
                 key={formKey}
                 onSubmit={onStep2Submit}
                 schema={PASSWORD_FORM_SCHEMA}

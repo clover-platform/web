@@ -21,13 +21,13 @@ const LoginLayout = (props: PropsWithChildren) => {
                         </div>
                         <ul>
                             <li>
-                                <span><CheckIcon /></span> {"{#最适合个人和团队#}"}
+                                <CheckIcon /> {"{#最适合个人和团队#}"}
                             </li>
                             <li>
-                                <span><CheckIcon /></span> {"{#提供免费订阅计划#}"}
+                                <CheckIcon /> {"{#提供免费订阅计划#}"}
                             </li>
                             <li>
-                                <span><CheckIcon /></span> {"{#数百个应用程序和集成#}"}
+                                <CheckIcon /> {"{#数百个应用程序和集成#}"}
                             </li>
                         </ul>
                         <div className={"mt-[40px] text-[16px] opacity-[0.7]"}>{"{#感谢优秀的平台#}"}</div>

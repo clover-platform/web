@@ -1,14 +1,14 @@
 'use client';
 
 import React, {PropsWithChildren, useCallback, useEffect, useState} from "react";
-import {Button, Form, Input, Result, Space, Spin, Image, Message} from "@arco-design/web-react";
+import {Button, Form, Input, Result, Space, Spin, Image, useMessage, FormItem} from "@clover/core";
 import {linkCode, loginAndLink} from "@/rest/auth";
 import {useRouter, useSearchParams} from "next/navigation";
 import Link from "next/link";
-import {setPassword} from "@clover/common/validators";
 import {encrypt} from "@/utils/crypto";
 import {setToken} from "@/utils/token";
 import {SUPPORT_WAY} from "@/config/pages/login/quick";
+import {SCHEMA} from "@/config/pages/link/form";
 
 export interface LinkPageProps extends PropsWithChildren {
     type: string
@@ -19,6 +19,7 @@ const LinkPage = (props: LinkPageProps) => {
         type
     } = props;
 
+    const Message = useMessage();
     const router = useRouter();
     const params = useSearchParams();
     const code = params.get('code') as string;
@@ -65,15 +66,15 @@ const LinkPage = (props: LinkPageProps) => {
     }, [user])
 
     const buttons = <Space>
-        <Button onClick={() => load()} size={"small"} type={"text"}>{"{#重试#}"}</Button>
+        <Button onClick={() => load()} variant={"secondary"}>{"{#重试#}"}</Button>
         <Link href={"/{#LANG#}/login/"}>
-            <Button size={"small"} type='primary'>{"{#返回登录#}"}</Button>
+            <Button>{"{#返回登录#}"}</Button>
         </Link>
     </Space>
 
     const icon = SUPPORT_WAY.find((item) => item.id === type)?.icon;
 
-    return loading ? <Spin size={32 }/> : <>
+    return loading ? <Spin /> : <>
         {
             error ? <Result
                 status='error'
@@ -91,7 +92,6 @@ const LinkPage = (props: LinkPageProps) => {
                         user ? <>
                             <div className={"rounded-[50%] overflow-hidden"}>
                                 <Image
-                                    preview={false}
                                     width={28}
                                     height={28}
                                     src={(user as any).avatar}
@@ -106,23 +106,16 @@ const LinkPage = (props: LinkPageProps) => {
                 </div>
                 <div className={"mt-[30px]"}>
                     <Form
+                        schema={SCHEMA}
                         onSubmit={onSubmit}
-                        size={"large"} layout={"vertical"} autoComplete='off'
                     >
-                        <Form.Item field="account" label={"{#邮箱或用户名#}"} rules={[
-                            { required: true, message: "{#请输入邮箱或用户名#}" },
-                        ]}>
+                        <FormItem name={"account"} label={"{#邮箱或用户名#}"}>
                             <Input placeholder={"{#请输入邮箱或用户名#}"} />
-                        </Form.Item>
-                        <Form.Item field="password" label={"{#密码#}"} rules={[
-                            { required: true, message: "{#请输入密码#}" },
-                            { validator: setPassword }
-                        ]}>
-                            <Input.Password placeholder={"{#请输入密码#}"} />
-                        </Form.Item>
-                        <Form.Item>
-                            <Button loading={submitting} long type={"primary"} htmlType={"submit"}>{"{#登录并绑定#}"}</Button>
-                        </Form.Item>
+                        </FormItem>
+                        <FormItem name={"password"} label={"{#密码#}"}>
+                            <Input type={"password"} placeholder={"{#请输入密码#}"} />
+                        </FormItem>
+                        <Button loading={submitting} long type={"submit"}>{"{#登录并绑定#}"}</Button>
                     </Form>
                 </div>
             </div>

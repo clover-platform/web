@@ -6,7 +6,7 @@
     ],
     "scripts": {},
     "dependencies": {
-        "@arco-iconbox/react-clover": "0.0.2",
+        "@arco-iconbox/react-clover": "0.0.3",
         "axios": "1.6.2",
         "localforage": "1.10.0",
         "lodash": "4.17.21",

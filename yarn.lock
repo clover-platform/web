@@ -142,10 +142,10 @@
     ora "5.4.1"
     rxjs "7.8.1"
 
-"@arco-iconbox/react-clover@0.0.2":
-  version "0.0.2"
-  resolved "https://registry.yarnpkg.com/@arco-iconbox/react-clover/-/react-clover-0.0.2.tgz#9f70a2fc21112458fe6ab96500006ea74854890d"
-  integrity sha512-SdNQCsfiWmLet1d6KFXxIvgVBPDXJiM+i2KaLdp6x41WpIpgNgWgpyHf0083CvyOvou6ZBVem0g+t19b08DvBg==
+"@arco-iconbox/react-clover@0.0.3":
+  version "0.0.3"
+  resolved "https://registry.yarnpkg.com/@arco-iconbox/react-clover/-/react-clover-0.0.3.tgz#983142bee604985f99eb8f4e64bb315faf82c43f"
+  integrity sha512-+T0YjixCxS040SQBBVOjlQQ3qv7a5Bh3LFMdcukAckK2akaiM7+C1QfZ08J7tyykeoru1UuNDFh5IAgJa0dXjw==
 
 "@babel/code-frame@^7.0.0", "@babel/code-frame@^7.12.13", "@babel/code-frame@^7.16.7", "@babel/code-frame@^7.22.13":
   version "7.22.13"

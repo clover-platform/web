@@ -10,34 +10,34 @@ import { encrypt } from "@/utils/crypto";
 import { useRouter, useSearchParams } from "next/navigation";
 import LoginLink from "@/components/common/login/link";
 import { FORM_STEP1_SCHEMA, FORM_STEP2_SCHEMA } from "@/config/pages/register/form";
+import CodeInput from "@clover/common/components/input/code";
 
 const RegisterPage = () => {
     const Message = useMessage();
     const router = useRouter();
     const params = useSearchParams();
     const from = params.get("from");
-    const [step, setStep] = useState(1);
+    const [step, setStep] = useState(0);
     const [formData1, setFormData1] = useState<FormValues>({});
     const [step1Submitting, setStep1Submitting] = useState(false);
     const [formKey, setFormKey] = useState(Date.now());
     const [step2Submitting, setStep2Submitting] = useState(false);
 
     const onStep1Submit = async (data: FormValues) => {
-        console.log(data);
         setStep1Submitting(true);
         const { success, message, data: result } = await emailCheck(data);
         setStep1Submitting(false);
         if(success) {
             setToken(result);
             setFormKey(Date.now());
-            setStep(2);
+            setStep(1);
         }else{
             Message.error(message);
         }
     }
 
     const onPrev = () => {
-        setStep(1);
+        setStep(0);
     }
 
     const onStep2Submit = async (data: FormValues) => {
@@ -72,7 +72,7 @@ const RegisterPage = () => {
                 onValuesChange={setFormData1}
                 onSubmit={onStep1Submit}
                 schema={FORM_STEP1_SCHEMA}
-                style={{ display: step === 1 ? 'block' : 'none' }}
+                style={{ display: step === 0 ? 'block' : 'none' }}
             >
                 <FormItem name={"username"} label={"{#用户名#}"}>
                     <Input placeholder={"{#请输入用户名，字母数字或下划线，字母开头#}"} />
@@ -89,7 +89,7 @@ const RegisterPage = () => {
                 key={formKey}
                 onSubmit={onStep2Submit}
                 schema={FORM_STEP2_SCHEMA}
-                style={{ display: step === 2 ? 'block' : 'none' }}
+                style={{ display: step === 1 ? 'block' : 'none' }}
             >
                 <FormItem name="password" label={"{#密码#}"}>
                     <Input type={"password"} placeholder={"{#请输入密码#}"} />
@@ -97,9 +97,9 @@ const RegisterPage = () => {
                 <FormItem name="password2" label={"{#确认密码#}"}>
                     <Input type={"password"} placeholder={"{#请再次输入密码#}"} />
                 </FormItem>
-                { step === 2 ? <SecretItem /> : null }
+                { step === 1 ? <SecretItem /> : null }
                 <FormItem name="otpCode" label={"{#验证码#}"}>
-                    <Input type={"number"} placeholder={"{#请输入身份验证 App 验证码#}"} />
+                    <CodeInput placeholder={"{#请输入身份验证 App 验证码#}"} />
                 </FormItem>
                 <div className={"flex mx-[-10px]"}>
                     <Button disabled={step2Submitting} onClick={onPrev} className={"mx-[10px]"} long variant={"outline"}>{"{#上一步#}"}</Button>

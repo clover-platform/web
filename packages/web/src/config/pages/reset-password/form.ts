@@ -21,7 +21,6 @@ export const PASSWORD_FORM_SCHEMA = z.object({
     }).regex(PASSWORD, "{#密码格式不正确#}"),
 }).superRefine(({password, password2}, ctx) => {
     if (password !== password2) {
-        console.log(password, password2);
         ctx.addIssue({
             code: 'custom',
             path: ['password2'],

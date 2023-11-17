@@ -22,10 +22,11 @@ export const FORM_STEP2_SCHEMA = z.object({
     password2:z.string({
         required_error: "{#请输入密码#}",
     }).regex(PASSWORD, "{#密码格式不正确#}"),
-    otpCode: z.string().regex(CODE, code),
+    otpCode: z.string({
+        required_error: code,
+    }).regex(CODE, code),
 }).superRefine(({password, password2}, ctx) => {
     if (password !== password2) {
-        console.log(password, password2);
         ctx.addIssue({
             code: 'custom',
             path: ['password2'],
