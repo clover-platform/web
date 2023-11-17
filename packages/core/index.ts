@@ -1,8 +1,11 @@
+// utils
+export * from './lib/utils';
 // base
 export { Toaster } from './components/ui/toaster';
 export { Input } from './components/ui/input';
 export type { InputProps } from './components/ui/input';
 export { useToast } from "./components/ui/use-toast"
+export { ScrollArea, ScrollBar } from "./components/ui/scroll-area"
 // extend
 export { Divider } from "./components/extend/divider";
 export type { DividerProps } from './components/extend/divider';

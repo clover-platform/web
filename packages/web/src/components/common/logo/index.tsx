@@ -21,8 +21,8 @@ const Logo = (props: LogoProps) => {
     }
 
     return <div className={"flex justify-center items-center cursor-default"}>
-        <div className={`${image} rounded-[4px] bg-[length:77%] bg-no-repeat bg-center ${bg}`} style={{width: size, height: size}}/>
-        <div className={"ml-[10px] text-[18px] font-bold select-none"}>{title}</div>
+        <div className={`${image} rounded-sm bg-[length:66%] bg-no-repeat bg-center ${bg}`} style={{width: size, height: size}}/>
+        <div className={"ml-[10px] text-[16px] font-bold select-none"}>{title}</div>
     </div>
 };
 

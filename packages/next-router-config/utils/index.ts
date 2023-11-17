@@ -1,6 +1,6 @@
-export const getRouters = (config) => {
+export const getRouters = (config: any) => {
     const { layouts, configs, defaultComponent } = config;
-    const _routers = [
+    const _routers: any[] = [
         { component: defaultComponent, },
     ]
     Object.keys(layouts).forEach((key) => {

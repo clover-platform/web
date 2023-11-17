@@ -1,0 +1,7 @@
+.layout-admin {
+    --header-height: 52px;
+    --sidebar-width: 245px;
+    --sidebar-bg: #f5f7f8;
+    --border-color: rgba(38,50,56,0.1);
+    --action-hover: rgba(38, 50, 56, 0.05);
+}

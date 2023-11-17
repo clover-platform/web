@@ -1,12 +1,18 @@
 import type { PropsWithChildren } from 'react';
-import React from 'react';
-import Sidebar from "@clover/common/components/layout/admin/sidebar";
+import Sidebar, {SidebarProps} from "./sidebar";
+import "./style.css";
 
-export interface AdminLayoutProps extends PropsWithChildren {}
+export interface AdminLayoutProps extends PropsWithChildren {
 
-const AdminLayout = (props: AdminLayoutProps) => {
-    return <div className={"flex justify-center w-full items-stretch min-h-[100vh]"}>
-        <Sidebar />
+}
+
+const AdminLayout = (props: AdminLayoutProps & SidebarProps) => {
+    return <div className={"layout-admin flex justify-center w-full items-stretch min-h-[100vh]"}>
+        <Sidebar
+            navMenus={props.navMenus}
+            logo={props.logo}
+            active={props.active}
+        />
         <div className={"flex-1"}>
             { props.children }
         </div>
