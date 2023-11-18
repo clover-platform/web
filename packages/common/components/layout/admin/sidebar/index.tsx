@@ -3,6 +3,10 @@ import { cloneElement } from 'react';
 import { cn } from '@clover/core';
 import { HamburgerMenuIcon } from '@radix-ui/react-icons';
 import Link from "next/link";
+import {useRecoilState} from "recoil";
+import {sidebarOpenState} from "@clover/common/components/layout/admin/state";
+import Switch from "@clover/common/components/layout/admin/switch";
+import {useLayoutState} from "@clover/common/components/layout/admin/hooks";
 
 export interface MenuItemProps {
     id: string;
@@ -44,32 +48,31 @@ const Sidebar: FC<SidebarProps> = (props) => {
     const {
         logo,
         navMenus = [],
+        extendMenus = [],
         active,
     } = props;
 
+    const { sidebarOpen } = useLayoutState();
+
     return <div className={cn(
         "w-[var(--sidebar-width)] bg-[var(--sidebar-bg)] border-0 border-r border-solid border-[var(--border-color)]",
-        "flex flex-col px-2"
+        sidebarOpen ? "flex" : "hidden",
+        "flex-col px-2",
     )}>
         <div className={cn(
             "border-0 border-solid border-b border-[var(--border-color)] h-[var(--header-height)]",
             "flex justify-center items-center"
         )}>
-            <div className={cn(
-                "w-[40px] h-[40px] rounded-sm flex justify-center items-center mr-2 cursor-pointer",
-                "hover:bg-[var(--action-hover)]"
-            )}>
-                <HamburgerMenuIcon width={20} height={20} />
-            </div>
+            <Switch />
             <div className={"flex-1 flex justify-start items-center"}>
                 { logo }
             </div>
         </div>
-        <div className={"flex-1 py-1"}>
+        <div className={"flex-1"}>
             { navMenus.map((menu) => <MenuItem key={menu.id} {...menu} active={active === menu.id} />) }
         </div>
-        <div>
-            footer
+        <div className={"border-0 border-solid border-t border-[var(--border-color)]"}>
+            { extendMenus.map((menu) => <MenuItem key={menu.id} {...menu} active={active === menu.id} />) }
         </div>
     </div>
 };

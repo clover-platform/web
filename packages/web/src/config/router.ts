@@ -1,8 +1,11 @@
 //文件自动生成，请勿编辑
 
-export default [{ path: "/access/", config:  {
-    name: 'main',
-    active: "access",
+export default [{ path: "/access/authority/", config:  {
+    name: 'access',
+    active: "authority",
+} },{ path: "/access/", config:  {
+    name: 'access',
+    active: "role",
 } },{ path: "/", config:  {
     name: 'main',
     active: "home",

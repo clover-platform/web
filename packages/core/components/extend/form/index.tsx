@@ -85,7 +85,7 @@ export const Form: FC<FormProps> = (props) => {
         resolver: zodResolver(schema),
         defaultValues,
     })
-    form.watch(onValuesChange)
+    form.watch(onValuesChange);
 
     const children = useMemo<ReactNode[]>(() => {
         return Children.map(props.children, (child, index) => {

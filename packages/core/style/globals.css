@@ -97,4 +97,7 @@
     svg {
         display: inline;
     }
+    button:focus-visible {
+        outline: none;
+    }
 }
