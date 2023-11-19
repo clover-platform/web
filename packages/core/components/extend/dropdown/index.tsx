@@ -19,7 +19,7 @@ export type onDropdownMenuClick = (item: DropdownMenuItemProps) => void;
 export type onCheckedChange = (item: DropdownMenuItemProps, checked: boolean) => void;
 
 export interface DropdownMenuItemProps {
-    label: ReactNode;
+    label?: ReactNode;
     id: string;
     type: "label" | "separator" | "item" | "checkbox";
     checked?: boolean;

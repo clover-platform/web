@@ -57,7 +57,7 @@ const Sidebar: FC<SidebarProps> = (props) => {
     return <div className={cn(
         "w-[var(--sidebar-width)] bg-[var(--sidebar-bg)] border-0 border-r border-solid border-[var(--border-color)]",
         sidebarOpen ? "flex" : "hidden",
-        "flex-col px-2",
+        "flex-col px-2 flex-shrink-0",
     )}>
         <div className={cn(
             "border-0 border-solid border-b border-[var(--border-color)] h-[var(--header-height)]",

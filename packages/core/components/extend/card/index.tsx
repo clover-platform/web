@@ -25,12 +25,12 @@ export const Card: FC<CardProps> = (props) => {
 
     return <UICard className={className}>
         {
-            title || description ? <CardHeader>
+            title || description ? <CardHeader className={"pb-0"}>
                 { title ? <CardTitle>{ title }</CardTitle> : null }
                 { description ? <CardDescription>{ description }</CardDescription> : null }
             </CardHeader> : null
         }
-        <CardContent>{ props.children }</CardContent>
+        <CardContent className={"p-6"}>{ props.children }</CardContent>
         { footer ? <CardFooter>{ footer }</CardFooter> : null }
     </UICard>
 }

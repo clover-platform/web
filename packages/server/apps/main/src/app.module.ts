@@ -5,7 +5,7 @@ import OrmConfig from "@easy-kit/config/orm";
 import I18nConfig from '@easy-kit/config/i18n';
 import ThrottlerConfig from '@easy-kit/config/throttler';
 import CacheConfig from "@easy-kit/config/cache";
-import { APP_GUARD } from "@nestjs/core";
+import {APP_GUARD} from "@nestjs/core";
 import { AuthGuard } from "@easy-kit/auth/auth.guard";
 import { RolesGuard } from "@easy-kit/auth/roles.guard";
 import { PublicModule } from "@easy-kit/public/public.module";
@@ -23,7 +23,7 @@ import { AppAccountModule } from "@/account/account.module";
         I18nConfig,
         PublicModule,
         AccountModule,
-        AppAccountModule
+        AppAccountModule,
     ],
     controllers: [],
     providers: [

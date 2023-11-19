@@ -1,12 +1,12 @@
 import {Body, Controller, Get, Param, Post, Query, Res} from "@nestjs/common";
-import {AccountAuthService} from "@easy-kit/account/account.auth.service";
+import {AuthService} from "@easy-kit/account/auth/auth.service";
 import {Public} from "@easy-kit/auth/auth.decorator";
 import { Response } from 'express';
-import {BindRequest} from "@easy-kit/account/account.auth.interface";
+import {BindRequest} from "@easy-kit/account/auth/auth.interface";
 
 @Controller("/api/account/auth")
-export class AccountAuthController {
-    constructor(private readonly accountAuthService: AccountAuthService) {}
+export class AuthController {
+    constructor(private readonly accountAuthService: AuthService) {}
 
     @Get("/link/:type")
     @Public()

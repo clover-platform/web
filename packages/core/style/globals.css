@@ -100,4 +100,11 @@
     button:focus-visible {
         outline: none;
     }
+    table {
+        & thead {
+            & tr {
+                border-bottom-width: 2px !important;
+            }
+        }
+    }
 }

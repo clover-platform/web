@@ -6,6 +6,9 @@ export default [{ path: "/access/authority/", config:  {
 } },{ path: "/access/", config:  {
     name: 'access',
     active: "role",
+} },{ path: "/access/role/add/", config:  {
+    name: 'access',
+    active: "role",
 } },{ path: "/", config:  {
     name: 'main',
     active: "home",

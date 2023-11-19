@@ -2,15 +2,18 @@ import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Account } from './account.entity';
 import { AccountService } from "./account.service";
-import {AccountAuthApp, AccountAuthOpenUser} from "@easy-kit/account/account.auth.entity";
-import {AccountAuthController} from "@easy-kit/account/account.auth.controller";
-import {AccountAuthService} from "@easy-kit/account/account.auth.service";
+import {AccountAuthApp, AccountAuthOpenUser} from "@easy-kit/account/auth/auth.entity";
+import {AuthController} from "@easy-kit/account/auth/auth.controller";
+import {AuthService} from "@easy-kit/account/auth/auth.service";
 import {HttpModule} from "@nestjs/axios";
+import {AccessApi} from "@easy-kit/account/access/api.entity";
+import {AccessApiService} from "@easy-kit/account/access/api.service";
 
 export const AccountOrmModule = TypeOrmModule.forFeature([
     Account,
     AccountAuthApp,
-    AccountAuthOpenUser
+    AccountAuthOpenUser,
+    AccessApi
 ]);
 
 @Module({
@@ -20,15 +23,17 @@ export const AccountOrmModule = TypeOrmModule.forFeature([
     ],
     providers: [
         AccountService,
-        AccountAuthService
+        AuthService,
+        AccessApiService
     ],
     controllers: [
-        AccountAuthController
+        AuthController
     ],
     exports: [
         AccountService,
-        AccountAuthService,
-        AccountOrmModule
+        AuthService,
+        AccessApiService,
+        AccountOrmModule,
     ]
 })
 export class AccountModule {}

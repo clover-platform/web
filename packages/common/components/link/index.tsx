@@ -5,7 +5,7 @@ import {Button} from "@clover/core";
 
 const Link: FC<LinkProps & PropsWithChildren> = (props) => {
     return <NextLink {...props}>
-        <Button variant={"link"} className={"p-0"}>
+        <Button variant={"link"} className={"p-0 h-4"}>
             {props.children}
         </Button>
     </NextLink>;

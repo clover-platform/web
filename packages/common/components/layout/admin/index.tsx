@@ -17,9 +17,9 @@ const AdminLayout: FC<AdminLayoutProps> = (props) => {
 
     const init = useInitLayoutState();
 
-    return init ? <div className={"layout-admin flex justify-center w-full items-stretch min-h-[100vh]"}>
+    return init ? <div className={"layout-admin flex justify-start w-full items-stretch min-h-[100vh]"}>
         <Sidebar {...sidebarProps} />
-        <div className={"flex-1 px-2"}>
+        <div className={"flex-1 px-2 w-0"}>
             { !hideHeader ? <Header {...headerProps} /> : null }
             <div className={"m-2"}>
                 { props.children }

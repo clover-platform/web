@@ -1,15 +1,6 @@
 import { ColumnDef } from "@tanstack/react-table"
-import {Button, FilterItemProps, Input, Select} from "@clover/core"
-import {
-    DropdownMenu,
-    DropdownMenuContent,
-    DropdownMenuItem,
-    DropdownMenuLabel,
-    DropdownMenuSeparator,
-    DropdownMenuTrigger,
-} from "@clover/core";
-import { DotsHorizontalIcon, CaretSortIcon } from '@radix-ui/react-icons';
-import { Checkbox } from "@clover/core"
+import {DropdownMenuItemProps, FilterItemProps, Input, Select} from "@clover/core"
+import { CaretSortIcon } from '@radix-ui/react-icons';
 
 export type Payment = {
     id: string
@@ -43,25 +34,6 @@ export const FILTERS: FilterItemProps[] = [
 
 export const COLUMNS: ColumnDef<Payment>[] = [
     {
-        id: "select",
-        header: ({ table }) => (
-            <Checkbox
-                checked={table.getIsAllPageRowsSelected()}
-                onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}
-                aria-label="Select all"
-            />
-        ),
-        cell: ({ row }) => (
-            <Checkbox
-                checked={row.getIsSelected()}
-                onCheckedChange={(value) => row.toggleSelected(!!value)}
-                aria-label="Select row"
-            />
-        ),
-        enableSorting: false,
-        enableHiding: false,
-    },
-    {
         accessorKey: "status",
         header: "{#状态#}",
     },
@@ -89,30 +61,50 @@ export const COLUMNS: ColumnDef<Payment>[] = [
             return <div className="text-right font-medium">{formatted}</div>
         },
     },
+]
+
+export const ROW_ACTIONS: DropdownMenuItemProps[] = [
     {
-        id: "actions",
-        enableHiding: false,
-        cell: ({ row }) => {
-            const payment = row.original
-            return (
-                <DropdownMenu>
-                    <DropdownMenuTrigger>
-                        <DotsHorizontalIcon />
-                    </DropdownMenuTrigger>
-                    <DropdownMenuContent align="end">
-                        <DropdownMenuLabel>Actions</DropdownMenuLabel>
-                        <DropdownMenuItem
-                            onClick={() => navigator.clipboard.writeText(payment.id)}
-                        >
-                            Copy payment ID
-                        </DropdownMenuItem>
-                        <DropdownMenuSeparator />
-                        <DropdownMenuItem>View customer</DropdownMenuItem>
-                        <DropdownMenuItem>View payment details</DropdownMenuItem>
-                    </DropdownMenuContent>
-                </DropdownMenu>
-            )
-        },
+        id: "my.account",
+        type: "label",
+        label: "{#我的账户#}"
+    },
+    {
+        type: "separator",
+        id: 'separator.1'
+    },
+    {
+        id: "profile",
+        type: "item",
+        label: "{#Profile#}",
+        shortcut: "⇧⌘P"
+    },
+    {
+        id: "billing",
+        type: "item",
+        label: "{#Billing#}",
+        shortcut: "⌘B",
+        children: [
+            {
+                id: "email",
+                type: "item",
+                label: "{#Email#}",
+            },
+            {
+                id: "message",
+                type: "item",
+                label: "{#Message#}",
+            },
+        ]
+    },
+    {
+        type: "separator",
+        id: 'separator.2'
+    },
+    {
+        id: 'log.out',
+        type: "item",
+        label: "{#Log out#}"
     },
 ]
 
@@ -121,6 +113,6 @@ export const DATA: Payment[] = [
         id: "728ed52f",
         amount: 100,
         status: "pending",
-        email: "m@example.com",
+        email: "m@example.comm@example.comm@example.comm@example.com",
     },
 ]

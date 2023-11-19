@@ -3,7 +3,7 @@ import {
     IconHome, IconProject, IconTodo,
     IconAccess, IconUser, IconHelp, IconNew
 } from "@arco-iconbox/react-clover";
-import { DropdownMenuItem } from "@clover/core";
+import { DropdownMenuItemProps } from "@clover/core";
 
 export const NAV_MENUS: MenuItemProps[] = [
     {
@@ -58,7 +58,7 @@ export const FOOTER_MENUS: MenuItemProps[] = [
     },
 ]
 
-export const PROFILE_MENUS: DropdownMenuItem[] = [
+export const PROFILE_MENUS: DropdownMenuItemProps[] = [
     {
         id: "my.account",
         type: "label",

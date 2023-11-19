@@ -2,16 +2,21 @@ import { PropsWithChildren, FC, Children } from "react";
 import {cn} from "@clover/core/lib/utils";
 
 export interface SpaceProps extends PropsWithChildren {
-    itemClassName?: string;
     className?: string;
+    direction?: "horizontal" | "vertical";
 }
 
 export const Space: FC<SpaceProps> = (props) => {
-    return <div className={cn("flex justify-center items-center", props.className)}>
-        {
-            Children.map(props.children, (child) => {
-                return <div className={cn("m-2", props.itemClassName)}>{ child }</div>;
-            })
-        }
+    const {
+        direction = "horizontal",
+        className,
+    } = props;
+    return <div className={cn(
+        "flex justify-center items-center",
+        direction === "vertical" ? "flex-col space-y-2" : null,
+        direction === "horizontal" ? "flex-row space-x-2" : null,
+        className,
+    )}>
+        { props.children }
     </div>
 };
