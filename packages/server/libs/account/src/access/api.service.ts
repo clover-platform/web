@@ -18,13 +18,13 @@ export class AccessApiService {
         const uniqueApis = apis.map((api) => `${api.method}${api.path}`);
         const insert = apis.filter((api) => !unique.includes(`${api.method}${api.path}`));
         const remove = list.filter((api) => !uniqueApis.includes(`${api.method}${api.path}`));
-        this.logger.log('insert', insert);
+        this.logger.log(`insert ${insert.length}`);
         await this.repository.createQueryBuilder()
             .insert()
             .into(AccessApi)
             .values(insert)
             .execute();
-        this.logger.log('remove', remove);
+        this.logger.log(`remove ${remove.length}`);
         await this.repository.createQueryBuilder()
             .delete()
             .from(AccessApi)
