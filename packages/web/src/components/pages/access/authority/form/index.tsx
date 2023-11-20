@@ -1,6 +1,7 @@
 import { FC, PropsWithChildren, useState } from "react";
-import {SCHEMA} from "@/config/pages/login/form";
+import {SCHEMA} from "@/config/pages/access/authority/form";
 import {Button, Form, FormItem, Input} from "@clover/core";
+import ApiSelector from "@/components/pages/access/authority/form/api-selector";
 
 export interface AuthorityFormProps extends PropsWithChildren {}
 
@@ -19,6 +20,9 @@ const AuthorityForm: FC<AuthorityFormProps> = (props) => {
         </FormItem>
         <FormItem name="password" label={"{#密码#}"}>
             <Input placeholder="{#请输入密码#}" type={"password"} />
+        </FormItem>
+        <FormItem name="apis" label={"{#关联接口#}"}>
+            <ApiSelector />
         </FormItem>
         <Button loading={submitting} long type={"submit"}>{"{#立即登录#}"}</Button>
     </Form>

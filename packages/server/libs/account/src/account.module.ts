@@ -8,6 +8,7 @@ import {AuthService} from "@easy-kit/account/auth/auth.service";
 import {HttpModule} from "@nestjs/axios";
 import {AccessApi} from "@easy-kit/account/access/api.entity";
 import {AccessApiService} from "@easy-kit/account/access/api.service";
+import { AccessApiController } from "@easy-kit/account/access/api.controller";
 
 export const AccountOrmModule = TypeOrmModule.forFeature([
     Account,
@@ -27,7 +28,8 @@ export const AccountOrmModule = TypeOrmModule.forFeature([
         AccessApiService
     ],
     controllers: [
-        AuthController
+        AuthController,
+        AccessApiController
     ],
     exports: [
         AccountService,

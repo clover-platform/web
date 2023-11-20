@@ -1,7 +1,7 @@
 // Rest 配置
-import * as Rest from '@clover/common/utils/rest.js';
+import * as Rest from '@clover/common/utils/rest';
 import {get} from "@/utils/headers";
-import bus from '../../../common/events';
+import bus from '@clover/common/events';
 import {LOGIN} from "@/events/account";
 
 Rest.config({
@@ -18,6 +18,10 @@ Rest.config({
 Rest.alias({
     '@account': {
         url: '/api/account',
+        headers: get
+    },
+    '@access': {
+        url: '/api/access',
         headers: get
     }
 });

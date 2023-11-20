@@ -19,6 +19,7 @@ import { useMemo, Children } from "react";
 import isObject from "lodash/isObject";
 import { Control } from "react-hook-form/dist/types";
 import { ZodEffects } from "zod/lib/types";
+import { cn } from "@clover/core/lib/utils";
 
 export interface RenderProps extends ControllerRenderProps {
     placeholder?: string;
@@ -62,7 +63,9 @@ export const FormItem: FC<FieldItem> = (props) => {
             <UIFormItem>
                 { props.label ? <FormLabel>{ props.label }</FormLabel> : null }
                 <FormControl>
-                    { render(field) }
+                    <div>
+                        { render(field) }
+                    </div>
                 </FormControl>
                 { props.description ? <FormDescription>{props.description}</FormDescription> : null }
                 <FormMessage />

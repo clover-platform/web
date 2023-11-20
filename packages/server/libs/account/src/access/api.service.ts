@@ -32,4 +32,8 @@ export class AccessApiService {
             .execute();
     }
 
+    async list(): Promise<AccessApi[]> {
+        return await this.repository.find();
+    }
+
 }

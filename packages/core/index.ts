@@ -50,3 +50,4 @@ export { TableTree } from './components/extend/table-tree';
 export type { TableTreeProps } from './components/extend/table-tree';
 export { Dialog } from './components/extend/dialog';
 export type { DialogProps } from './components/extend/dialog';
+export { ComboSelect } from './components/extend/combo-select';

@@ -6,6 +6,7 @@ import {
 } from "@clover/core/components/ui/dialog";
 import { FC, PropsWithChildren } from "react";
 import * as React from "react";
+import { cn } from "@clover/core/lib/utils";
 
 export type EventCallback = () => void;
 
@@ -39,7 +40,7 @@ export const Dialog: FC<DialogProps> = (props) => {
             showClose={closable}
             onCloseClick={onCancel}
             onOverlayClick={maskClosable ? onCancel : () => {}}
-            className={className}
+            className={cn(className)}
         >
             {
                 title || description ? <DialogHeader>
@@ -50,7 +51,6 @@ export const Dialog: FC<DialogProps> = (props) => {
             <div className={"my-2"}>
                 { props.children }
             </div>
-
             {
                 footer ? <DialogFooter>
                     { footer }

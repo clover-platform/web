@@ -5,7 +5,7 @@ import {
     SelectTrigger,
     SelectValue,
 } from "../../ui/select"
-import {forwardRef, PropsWithChildren, ElementRef} from "react";
+import {forwardRef, ElementRef} from "react";
 
 
 export interface SelectOptionProps {
