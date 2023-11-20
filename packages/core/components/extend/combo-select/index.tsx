@@ -4,10 +4,10 @@ import { FC, forwardRef, PropsWithRef, ReactNode, useEffect, useRef, useState } 
 import { CaretSortIcon, CheckIcon, PlusCircledIcon } from "@radix-ui/react-icons";
 import {
     Command,
-    CommandEmpty,
+    CommandEmpty, CommandGroup,
     CommandInput,
     CommandItem,
-    CommandList
+    CommandList, CommandSeparator
 } from "@clover/core/components/ui/command";
 import { cn } from "@clover/core/lib/utils";
 import { Spin } from "@clover/core/components/extend/spin";
@@ -32,6 +32,8 @@ export interface ComboSelectProps extends PropsWithRef<any>{
     filter?: (value: string, search: string) => number;
     multiple?: boolean;
     title?: string;
+    clearable?: boolean;
+    clearText?: string;
 }
 
 export const ComboSelect: FC<ComboSelectProps> = forwardRef((props, ref) => {
@@ -46,6 +48,8 @@ export const ComboSelect: FC<ComboSelectProps> = forwardRef((props, ref) => {
         loading = false,
         multiple = false,
         title,
+        clearable = true,
+        clearText = "Clear",
     } = props;
 
     const [open, setOpen] = useState(false)
@@ -55,7 +59,7 @@ export const ComboSelect: FC<ComboSelectProps> = forwardRef((props, ref) => {
     const [selectedValues, setSelectedValues] = useState<string[]>(value || []);
 
     const resize = () => {
-        setWidth(containerRef.current.clientWidth);
+        setWidth(containerRef.current.offsetWidth);
     }
 
     useEffect(() => {
@@ -80,10 +84,10 @@ export const ComboSelect: FC<ComboSelectProps> = forwardRef((props, ref) => {
                 role="combobox"
                 aria-expanded={open}
                 className={cn(
-                    "justify-between min-w-[150px] items-center",
+                    "justify-between min-w-[150px] items-center h-10",
+                    multiple ? "border-dashed justify-start flex-wrap" : null,
+                    multiple && selectedValues && selectedValues.length ? "p-1 pb-2 space-x-1 space-y-1 h-auto" : null,
                     className,
-                    multiple ? "border-dashed justify-start flex-wrap max-h-[100px] overflow-auto" : null,
-                    multiple && selectedValues && selectedValues.length ? "px-2 space-x-1 space-y-1 h-auto" : null,
                 )}
                 disabled={loading}
             >
@@ -166,6 +170,24 @@ export const ComboSelect: FC<ComboSelectProps> = forwardRef((props, ref) => {
                         })
                     }
                 </CommandList>
+                {
+                    clearable &&  selectedValues.length > 0 ? (
+                        <>
+                            <CommandSeparator />
+                            <CommandGroup>
+                                <CommandItem
+                                    onSelect={() => {
+                                        setSelectedValues([]);
+                                        onChange([]);
+                                    }}
+                                    className="justify-center text-center"
+                                >
+                                    { clearText }
+                                </CommandItem>
+                            </CommandGroup>
+                        </>
+                    ) : null
+                }
             </Command>
         </PopoverContent>
     </Popover>

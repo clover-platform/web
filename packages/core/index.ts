@@ -51,3 +51,6 @@ export type { TableTreeProps } from './components/extend/table-tree';
 export { Dialog } from './components/extend/dialog';
 export type { DialogProps } from './components/extend/dialog';
 export { ComboSelect } from './components/extend/combo-select';
+export type { ComboSelectProps, ComboSelectOptionProps } from './components/extend/combo-select';
+export { Tree } from './components/extend/tree';
+export type { TreeProps, TreeItemProps } from './components/extend/tree';

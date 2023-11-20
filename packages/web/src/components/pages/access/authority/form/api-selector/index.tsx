@@ -54,13 +54,14 @@ const ApiSelector = forwardRef((props, ref) => {
     return <ComboSelect
         {...props}
         ref={ref}
-        className={"w-full"}
+        className={"w-full max-h-[150px] overflow-auto"}
         placeholder={"{#请选择#}"}
         searchPlaceholder={"{#关键词#}"}
         options={options}
         loading={loading}
         multiple={true}
         title={"{#接口#}"}
+        clearText={"{#清空选择#}"}
         filter={(value: string, search: string) => {
             const result = options.filter((option) => (value === option.value && (option.raw?.path.includes(search) || option.raw?.method.includes(search))));
             return result.length;

@@ -1,9 +1,37 @@
 import { FC, PropsWithChildren, useState } from "react";
 import {SCHEMA} from "@/config/pages/access/authority/form";
-import {Button, Form, FormItem, Input} from "@clover/core";
+import {Button, Form, FormItem, Input, Tree, TreeItemProps} from "@clover/core";
 import ApiSelector from "@/components/pages/access/authority/form/api-selector";
 
 export interface AuthorityFormProps extends PropsWithChildren {}
+
+const items: TreeItemProps[] = [
+    {
+        id: 'item1',
+        content: {
+            id: 'item1',
+            label: 'item1'
+        },
+        children: [],
+    },
+    {
+        id: 'item2',
+        content: {
+            id: 'item2',
+            label: 'Item 2'
+        },
+        hasChildren: true,
+        children: [
+            {
+                id: 'child2.1',
+                content: {
+                    id: 'child2.1',
+                    label: 'child2.1'
+                },
+            },
+        ],
+    },
+];
 
 const AuthorityForm: FC<AuthorityFormProps> = (props) => {
     const [submitting, setSubmitting] = useState(false);
@@ -15,6 +43,12 @@ const AuthorityForm: FC<AuthorityFormProps> = (props) => {
         schema={SCHEMA}
         onSubmit={onSubmit}
     >
+        <FormItem name="parentId" label="{#上级#}">
+            <Tree
+                checkbox={true}
+                items={items}
+            />
+        </FormItem>
         <FormItem name="account" label="{#邮箱或用户名#}">
             <Input placeholder={"{#请输入邮箱或用户名#}"} />
         </FormItem>
