@@ -12,7 +12,6 @@ export {
     DropdownMenu, DropdownMenuCheckboxItem, DropdownMenuContent,
     DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger
 } from "./components/ui/dropdown-menu";
-export { Checkbox } from "./components/ui/checkbox";
 export { Separator } from "./components/ui/separator"
 // extend
 export { Divider } from "./components/extend/divider";
@@ -54,3 +53,5 @@ export { ComboSelect } from './components/extend/combo-select';
 export type { ComboSelectProps, ComboSelectOptionProps } from './components/extend/combo-select';
 export { Tree } from './components/extend/tree';
 export type { TreeProps, TreeItemProps } from './components/extend/tree';
+export { Checkbox } from "./components/extend/checkbox";
+export type { CheckboxProps } from "./components/extend/checkbox";

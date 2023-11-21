@@ -3,8 +3,11 @@
 }
 .tree div[role='row'] {
     border-bottom: none;
-    border-top: 1px solid var(--ds-border, #EBECF0);
 }
 .tree > div > div:last-child > div > div[role='row']:first-child {
     border-top: none;
+}
+
+.tree div[role='gridcell'] {
+    border-radius: 4px;
 }

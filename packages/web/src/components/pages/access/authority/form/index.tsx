@@ -1,6 +1,6 @@
 import { FC, PropsWithChildren, useState } from "react";
 import {SCHEMA} from "@/config/pages/access/authority/form";
-import {Button, Form, FormItem, Input, Tree, TreeItemProps} from "@clover/core";
+import { Button, Form, FormItem, Input, Tree, TreeItemProps } from "@clover/core";
 import ApiSelector from "@/components/pages/access/authority/form/api-selector";
 
 export interface AuthorityFormProps extends PropsWithChildren {}
@@ -20,13 +20,36 @@ const items: TreeItemProps[] = [
             id: 'item2',
             label: 'Item 2'
         },
-        hasChildren: true,
         children: [
             {
                 id: 'child2.1',
                 content: {
                     id: 'child2.1',
                     label: 'child2.1'
+                },
+            },
+            {
+                id: 'child2.2',
+                disabled: true,
+                content: {
+                    id: 'child2.2',
+                    label: 'child2.2'
+                },
+                children: [
+                    {
+                        id: 'child2.2.1',
+                        content: {
+                            id: 'child2.2.1',
+                            label: 'child2.2.1'
+                        },
+                    },
+                ]
+            },
+            {
+                id: 'child2.3',
+                content: {
+                    id: 'child2.3',
+                    label: 'child2.3'
                 },
             },
         ],

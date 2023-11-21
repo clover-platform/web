@@ -1,4 +1,4 @@
-import ATableTree, { Cell, Header, Headers, Row, Rows } from '@atlaskit/table-tree';
+import ATableTree, { Cell, Header, Headers, Row, Rows } from '../../plugin/table-tree';
 import {FC} from "react";
 
 export interface TableTreeProps {}

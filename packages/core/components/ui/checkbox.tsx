@@ -23,6 +23,7 @@ const Checkbox = React.forwardRef<
         >
             <CheckIcon className="h-4 w-4"/>
         </CheckboxPrimitive.Indicator>
+        { props.children }
     </CheckboxPrimitive.Root>
 ))
 Checkbox.displayName = CheckboxPrimitive.Root.displayName
