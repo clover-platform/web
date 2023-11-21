@@ -1,9 +1,16 @@
 import TableTree from '../../plugin/table-tree';
-import { FC, ReactNode, useMemo, useState } from "react";
+import {FC, ReactNode, useEffect, useMemo, useState} from "react";
 import { cn } from "@clover/core/lib/utils";
 import { Checkbox } from "@clover/core/components/extend/checkbox";
 import './style.css';
-import { findNodeById, handleCheckedChange, handleItem, unSelectedAllNotById } from "./utils";
+import {
+    findNodeById,
+    getAllExpanded,
+    handleCheckedChange,
+    handleItem,
+    initExpanded, initSelected,
+    unSelectedAllNotById
+} from "./utils";
 
 type ContentData = {
     id: string,
@@ -27,6 +34,7 @@ export interface TreeItemProps {
     checked?: boolean,
     selected?: boolean;
     disabled?: boolean;
+    expanded?: boolean;
 }
 
 export interface TreeProps {
@@ -34,8 +42,11 @@ export interface TreeProps {
     border?: boolean;
     checkbox?: boolean;
     selectable?: boolean;
-    onSelectedChange?: (selected: TreeItemProps[]) => void;
+    onSelectedChange?: (id:string, selected: TreeItemProps) => void;
     onCheckedChange?: (nodes: TreeItemProps[]) => void;
+    onExpandedChange?: (expansion: string[]) => void;
+    expanded?: string[];
+    selected?: string;
 }
 
 const Item = (props: ItemProps) => {
@@ -69,9 +80,13 @@ export const Tree:FC<TreeProps> = (props) => {
         border = true,
         checkbox = false,
         selectable = true,
+        expanded = [],
+        onExpandedChange = (expansion: string[]) => {},
+        onSelectedChange = (id: string, selected: TreeItemProps) => {},
+        selected,
     } = props;
 
-    const [itemsState, setItemsState] = useState(items);
+    const [itemsState, setItemsState] = useState(initSelected(initExpanded(items, expanded), selected));
 
     const treeNodes = useMemo(() => {
         return itemsState.map((item) => handleItem(item, null));
@@ -79,7 +94,7 @@ export const Tree:FC<TreeProps> = (props) => {
 
     return <div
         className={cn(
-            "tree",
+            "tree rounded overflow-hidden",
             border && "border rounded shadow-sm p-1",
         )}
     >
@@ -106,7 +121,19 @@ export const Tree:FC<TreeProps> = (props) => {
                 node.selected = !node.selected;
                 unSelectedAllNotById(treeNodes, id);
                 setItemsState(treeNodes);
+                if(node.selected) {
+                    onSelectedChange && onSelectedChange(id, node);
+                }else{
+                    onSelectedChange && onSelectedChange(null, null);
+                }
             }: null}
+            onExpandedChange={(id: string, expanded: boolean) => {
+                const node = findNodeById(treeNodes, id);
+                node.expanded = expanded;
+                setItemsState(treeNodes);
+                const all = getAllExpanded(treeNodes);
+                onExpandedChange && onExpandedChange(all);
+            }}
         />
     </div>
 }

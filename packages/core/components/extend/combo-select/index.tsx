@@ -13,6 +13,7 @@ import { cn } from "@clover/core/lib/utils";
 import { Spin } from "@clover/core/components/extend/spin";
 import remove from 'lodash/remove';
 import cloneDeep from "lodash/cloneDeep";
+import {useSize} from "@clover/core/components/hooks/resize";
 
 export interface ComboSelectOptionProps<Data> {
     value: string;
@@ -54,27 +55,9 @@ export const ComboSelect: FC<ComboSelectProps> = forwardRef((props, ref) => {
 
     const [open, setOpen] = useState(false)
     const containerRef = useRef(null);
-    const [width, setWidth] = useState(200);
     const [valueState, setValueState] = useState(value);
     const [selectedValues, setSelectedValues] = useState<string[]>(value || []);
-
-    const resize = () => {
-        setWidth(containerRef.current.offsetWidth);
-    }
-
-    useEffect(() => {
-        const ro = new ResizeObserver( entries => {
-            for (let entry of entries) {
-                const cr = entry.contentRect;
-                resize();
-            }
-        });
-        // 观察一个或多个元素
-        ro.observe(containerRef.current);
-        return () => {
-            ro.disconnect();
-        }
-    }, []);
+    const size = useSize(containerRef);
 
     return <Popover open={open} onOpenChange={setOpen}>
         <PopoverTrigger asChild>
@@ -118,7 +101,7 @@ export const ComboSelect: FC<ComboSelectProps> = forwardRef((props, ref) => {
                 }
             </Button>
         </PopoverTrigger>
-        <PopoverContent className="p-0" style={{width}}>
+        <PopoverContent className="p-0" style={{width: size.width}}>
             <Command filter={props.filter}>
                 <CommandInput placeholder={searchPlaceholder} className="h-9" />
                 <CommandEmpty>{ empty }</CommandEmpty>

@@ -26,6 +26,7 @@ export interface CellProps {
    * Children content, used when composing table-tree from internal components
    */
   children?: ReactNode;
+    style?: React.CSSProperties;
 }
 
 class Cell extends Component<CellProps> {

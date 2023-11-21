@@ -1,26 +1,54 @@
 'use client';
 
-import {Button, Filters, TableTree} from "@clover/core";
-import {FILTERS} from "@/config/pages/access/role/table";
-import {useState} from "react";
-import AddAuthorityDialog from "@/components/pages/access/authority/dialog/add";
+import {TreeTable} from "@clover/core";
+import {useEffect, useState} from "react";
+import {COLUMNS} from "@/config/pages/access/authority/table";
+import {authorityTree} from "@/rest/access";
+import AddAuthorityButton from "@/components/pages/access/authority/button/add";
 
 const AuthorityPage = () => {
-    const [visible, setVisible] = useState(false);
+    const [tree, setTree] = useState<any>([]);
+    const [loading, setLoading] = useState(false);
 
-    return <div>
-        <div className={"border-0 border-solid border-b border-secondary pb-2"}>
-            <Filters items={FILTERS} />
+    const load = async () => {
+        setLoading(true);
+        const {success, data} = await authorityTree();
+        setLoading(false);
+        if(success) {
+            setTree(data);
+        }
+    }
+
+    useEffect(() => {
+        load().then();
+    }, []);
+
+    return <>
+        <div className={"my-2 flex justify-start items-center mt-3"}>
+            <AddAuthorityButton onSuccess={() => load().then()} />
         </div>
-        <div className={"my-2 flex justify-start items-center"}>
-            <Button onClick={() => setVisible(true)}>{"{#添加#}"}</Button>
-        </div>
-        <TableTree />
-        <AddAuthorityDialog
-            visible={visible}
-            onCancel={() => setVisible(false)}
+        <TreeTable
+            loading={loading}
+            emptyText={"{#暂无权限#}"}
+            columns={[
+                ...COLUMNS,
+                {
+                    key: "actions",
+                    label: "",
+                    style: {
+                        textAlign: "right"
+                    },
+                    width: 100,
+                    render: (item) => {
+                        return <div>
+                            test
+                        </div>
+                    }
+                }
+            ]}
+            data={tree}
         />
-    </div>
+    </>
 };
 
 export default AuthorityPage;

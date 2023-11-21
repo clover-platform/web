@@ -66,3 +66,39 @@ export const unSelectedAllNotById = (nodes: TreeItemProps[], id: string) => {
         }
     }
 }
+
+export const initExpanded = (nodes: TreeItemProps[], expanded: string[]) => {
+    for(let node of nodes) {
+        node.expanded = false;
+        if(expanded.includes(node.id)) {
+            node.expanded = true;
+        }
+        if(node.hasChildren) {
+            initExpanded(node.children, expanded);
+        }
+    }
+    return nodes;
+}
+
+export const getAllExpanded = (nodes: TreeItemProps[]) => {
+    const expanded = [];
+    for(let node of nodes) {
+        if(node.expanded) {
+            expanded.push(node.id);
+        }
+        if(node.hasChildren) {
+            expanded.push(...getAllExpanded(node.children));
+        }
+    }
+    return expanded;
+}
+
+export const initSelected = (nodes: TreeItemProps[], selected: string) => {
+    for(let node of nodes) {
+        node.selected = node.id === selected;
+        if(node.hasChildren) {
+            initSelected(node.children, selected);
+        }
+    }
+    return nodes;
+}

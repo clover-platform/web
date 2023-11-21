@@ -1,7 +1,7 @@
 import { cn, ComboSelect } from "@clover/core";
 import { forwardRef, useEffect, useState } from "react";
 import { ComboSelectOptionProps } from "@clover/core/components/extend/combo-select";
-import { AccessApi, list } from "@/rest/access";
+import { AccessApi, apiList } from "@/rest/access";
 
 type COLOR_MAP_TYPE = {
     [key: string]: string;
@@ -34,7 +34,7 @@ const ApiSelector = forwardRef((props, ref) => {
 
     const load = async () => {
         setLoading(true)
-        const { success, data } = await list();
+        const { success, data } = await apiList();
         setLoading(false);
         if(success) {
             setOptions(data?.map((item) => {

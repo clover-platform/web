@@ -26,8 +26,8 @@ class Header extends Component<any> {
             <ColumnCell
                 css={headerStyles}
                 role="columnheader"
-                style={{ width: props.width }}
                 {...props}
+                style={{ ...(props.style || {}), width: props.width }}
             >
                 {props.children}
             </ColumnCell>

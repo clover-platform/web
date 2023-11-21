@@ -14,7 +14,6 @@ import {
 } from "@easy-kit/account/account.interface";
 import {aesDecrypt, aesEncrypt, decrypt} from "@easy-kit/common/utils/crypto";
 import { ConfigService } from "@nestjs/config";
-import {CodeService} from "@easy-kit/public/code.service";
 import {TokenService} from "@easy-kit/public/token.service";
 import {AuthConfig} from "@easy-kit/config/interface";
 import {I18nService} from "@easy-kit/public/i18n.service";
@@ -29,7 +28,6 @@ export class AccountService {
         @InjectRepository(Account) private repository: Repository<Account>,
         private i18n: I18nService,
         private configService: ConfigService,
-        private codeService: CodeService,
         private tokenService: TokenService,
         private otpService: OTPService,
     ) {}
