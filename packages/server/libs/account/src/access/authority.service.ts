@@ -17,7 +17,7 @@ export class AccessAuthorityService {
     ) {}
 
     async saveApis(id: number, apis: number[]){
-        this.repositoryAccessAuthorityApi.delete({authorityId: id});
+        await this.repositoryAccessAuthorityApi.delete({authorityId: id});
         if(apis && apis.length > 0) {
             const as = apis.map(api => {
                 return {authorityId: id, apiId: api}
@@ -46,7 +46,7 @@ export class AccessAuthorityService {
         if (exist && exist.id !== id) { // 存在且不是自己
             return Result.error({message: this.i18n.t("access.authority.exist")} );
         }
-        await this.repository.save({id, parentId, name, key});
+        await this.repository.update({id}, {parentId, name, key});
         await this.saveApis(id, authority.apis);
         return Result.success();
     }
@@ -94,6 +94,46 @@ export class AccessAuthorityService {
             key: authority.key,
             apis: apis.map(api => api.apiId),
         };
+    }
+
+    private findNodeById = (nodes: AuthorityTree[], id: number): AuthorityTree => {
+        for(let node of nodes) {
+            if(node.id === id) {
+                return node;
+            }
+            if(node.children) {
+                const n = this.findNodeById(node.children, id);
+                if(n) return n;
+            }
+        }
+        return null;
+    }
+
+    private getIds(node: AuthorityTree) {
+        const ids = [node.id];
+        if(node.children) {
+            node.children.forEach((n) => {
+                ids.push(...this.getIds(n));
+            });
+        }
+        return ids;
+    }
+
+    async delete(id: number): Promise<Result<any>> {
+        this.logger.log(`delete authority ${id}`);
+        const tree = await this.tree();
+        const node = this.findNodeById(tree, Number(id));
+        const ids = this.getIds(node);
+        await this.repository.createQueryBuilder()
+            .delete()
+            .where("id in (:ids)", {ids})
+            .execute()
+        await this.repositoryAccessAuthorityApi.createQueryBuilder()
+            .delete()
+            .where("authorityId in (:ids)", {ids})
+            .execute()
+        // TODO: 删除角色权限关联
+        return Result.success();
     }
 
 }

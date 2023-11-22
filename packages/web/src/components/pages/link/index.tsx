@@ -19,7 +19,7 @@ const LinkPage = (props: LinkPageProps) => {
         type
     } = props;
 
-    const Message = useMessage();
+    const msg = useMessage();
     const router = useRouter();
     const params = useSearchParams();
     const code = params.get('code') as string;
@@ -61,7 +61,7 @@ const LinkPage = (props: LinkPageProps) => {
             setToken(result);
             router.push("/{#LANG#}/");
         }else{
-            Message.error(message);
+            msg.error(message);
         }
     }, [user])
 

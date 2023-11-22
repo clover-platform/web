@@ -42,7 +42,7 @@ const AuthorityForm: FC<AuthorityFormProps> = (props) => {
         defaultValues={authority}
     >
         <FormItem name="parentId" label="{#上级#}">
-            <AuthoritySelector />
+            <AuthoritySelector disabledNodeId={authority?.id} />
         </FormItem>
         <FormItem name="name" label="{#名称#}">
             <Input placeholder={"{#请输入权限名称#}"} />

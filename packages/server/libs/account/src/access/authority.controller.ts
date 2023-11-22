@@ -1,4 +1,4 @@
-import {Body, Controller, Get, Post, Param, Put} from "@nestjs/common";
+import {Body, Controller, Get, Post, Param, Put, Delete} from "@nestjs/common";
 import {AccessAuthorityService} from "@easy-kit/account/access/authority.service";
 import {Public} from "@easy-kit/auth/auth.decorator";
 import {AccessAuthorityDTO, AuthorityTree} from "@easy-kit/account/access/access.interface";
@@ -26,9 +26,16 @@ export class AccessAuthorityController {
         return this.service.detail(params.id);
     }
 
-    @Put("/edit")
+    @Put("/:id")
     @Public()
-    async edit(@Body() authority: AccessAuthorityDTO): Promise<Result<any>> {
+    async edit(@Param() params: {id: number}, @Body() authority: AccessAuthorityDTO): Promise<Result<any>> {
+        authority.id = Number(params.id);
         return this.service.edit(authority);
+    }
+
+    @Delete("/:id")
+    @Public()
+    async delete(@Param() params: {id: number}): Promise<Result<any>> {
+        return this.service.delete(params.id);
     }
 }

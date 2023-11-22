@@ -13,7 +13,7 @@ import { FORM_STEP1_SCHEMA, FORM_STEP2_SCHEMA } from "@/config/pages/register/fo
 import CodeInput from "@clover/common/components/input/code";
 
 const RegisterPage = () => {
-    const Message = useMessage();
+    const msg = useMessage();
     const router = useRouter();
     const params = useSearchParams();
     const from = params.get("from");
@@ -32,7 +32,7 @@ const RegisterPage = () => {
             setFormKey(Date.now());
             setStep(1);
         }else{
-            Message.error(message);
+            msg.error(message);
         }
     }
 
@@ -51,7 +51,7 @@ const RegisterPage = () => {
             setToken(result);
             router.push(from || "/{#LANG#}/");
         }else{
-            Message.error(message);
+            msg.error(message);
         }
     }
 

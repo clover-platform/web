@@ -5,7 +5,7 @@ import { authorityDetail } from "@/rest/access";
 
 export interface EditAuthorityDialogProps extends PropsWithChildren<DialogProps>{
     onSuccess?: () => void;
-    dataId: number;
+    dataId?: number;
 }
 
 const EditAuthorityDialog: FC<EditAuthorityDialogProps> = (props) => {

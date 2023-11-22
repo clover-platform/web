@@ -15,7 +15,7 @@ const LoginPage = () => {
     const params = useSearchParams();
     const from = params.get("from");
     const [submitting, setSubmitting] = useState(false);
-    const Message = useMessage();
+    const msg = useMessage();
 
     const onSubmit = async (data: any) => {
         setSubmitting(true);
@@ -26,7 +26,7 @@ const LoginPage = () => {
             setToken(result);
             router.push(from || "/{#LANG#}/");
         }else{
-            Message.error(message);
+            msg.error(message);
         }
     }
 

@@ -5,7 +5,7 @@ import { CopyIcon } from "@radix-ui/react-icons";
 import {CopyToClipboard} from 'react-copy-to-clipboard';
 
 const SecretItem: FC<PropsWithChildren> = (props) => {
-    const Message = useMessage();
+    const msg = useMessage();
     const [loading, setLoading] = useState(false);
     const [otpData, setOtpData] = useState({} as any);
     const [qrcode, setQrcode] = useState('' as any);
@@ -17,7 +17,7 @@ const SecretItem: FC<PropsWithChildren> = (props) => {
         if(success) {
             setOtpData(data);
         }else{
-            Message.error(message);
+            msg.error(message);
         }
     }
 
@@ -34,7 +34,7 @@ const SecretItem: FC<PropsWithChildren> = (props) => {
     }, []);
 
     const onCopy = () => {
-        Message.success("{#复制成功#}")
+        msg.success("{#复制成功#}")
     }
 
     return <FormItem name={"qrcode"} label={"{#身份验证 App 密钥#}"}>

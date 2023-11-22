@@ -10,7 +10,7 @@ import {encrypt} from "@/utils/crypto";
 import { EMAIL_FORM_SCHEMA, PASSWORD_FORM_SCHEMA } from "@/config/pages/reset-password/form";
 
 const ResetPasswordPage = () => {
-    const Message = useMessage();
+    const msg = useMessage();
     const params = useSearchParams();
     const from = params.get("from");
     const router = useRouter();
@@ -29,7 +29,7 @@ const ResetPasswordPage = () => {
             setFormKey(Date.now());
             setStep(1);
         }else{
-            Message.error(message);
+            msg.error(message);
         }
     }
 
@@ -48,7 +48,7 @@ const ResetPasswordPage = () => {
             setToken(result);
             router.push(from || "/{#LANG#}/");
         }else{
-            Message.error(message);
+            msg.error(message);
         }
     }
 

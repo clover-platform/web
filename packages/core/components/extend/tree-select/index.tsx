@@ -22,7 +22,7 @@ export const TreeSelect: FC<TreeSelectProps> = forwardRef((props, ref) => {
         items,
         value,
         onChange = (v: string) => {},
-        placeholder = "Please select"
+        placeholder = "Please select",
     } = props;
 
     const initValue = `${value || ''}`;

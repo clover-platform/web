@@ -1,7 +1,7 @@
-import {forwardRef, useEffect, useState} from "react";
+import {FC, forwardRef, PropsWithRef, useEffect, useState} from "react";
 import {TreeItemProps, TreeSelect} from "@clover/core";
 import {AuthorityTree, authorityTree} from "@/rest/access";
-import { handleItem } from "@clover/core/components/extend/tree/utils";
+import {findNodeById, handleItem} from "@clover/core/components/extend/tree/utils";
 
 const toItems = (data: AuthorityTree[]): TreeItemProps[] => {
     return data.map<TreeItemProps>(item => {
@@ -16,7 +16,28 @@ const toItems = (data: AuthorityTree[]): TreeItemProps[] => {
     }).map((item) => handleItem(item, null))
 }
 
-const AuthoritySelector = forwardRef((props, ref) => {
+const setChildrenDisabled = (items?: TreeItemProps[]) => {
+    if(items && items.length) {
+        items.forEach(item => {
+            item.disabled = true;
+            setChildrenDisabled(item.children);
+        })
+    }
+}
+
+const setDisabled = (id: string, items: TreeItemProps[]) => {
+    const node = findNodeById(items, id);
+    if(node) {
+        node.disabled = true;
+        setChildrenDisabled(node.children);
+    }
+}
+
+export interface AuthoritySelectorProps{
+    disabledNodeId?: string;
+}
+
+const AuthoritySelector: FC<AuthoritySelectorProps> = forwardRef((props, ref) => {
     const [loading, setLoading] = useState(false);
     const [items, setItems] = useState<TreeItemProps[]>([]);
 
@@ -25,7 +46,9 @@ const AuthoritySelector = forwardRef((props, ref) => {
         const {success, data} = await authorityTree();
         setLoading(false);
         if(success) {
-            setItems(toItems(data || []))
+            const items = toItems(data || []);
+            props.disabledNodeId && setDisabled(`${props.disabledNodeId}`, items);
+            setItems(items)
         }
     }
 
