@@ -3,15 +3,19 @@ import {SCHEMA} from "@/config/pages/access/authority/form";
 import { Button, Form, FormItem, Input, useMessage } from "@clover/core";
 import ApiSelector from "@/components/pages/access/authority/form/api-selector";
 import AuthoritySelector from "@/components/pages/access/authority/form/authority-selector";
-import {addAuthority} from "@/rest/access";
+import {addAuthority, editAuthority} from "@/rest/access";
 
 export interface AuthorityFormProps extends PropsWithChildren {
     onSuccess?: () => void;
+    authority?: any;
+    type: 'add' | 'edit'
 }
 
 const AuthorityForm: FC<AuthorityFormProps> = (props) => {
     const {
-        onSuccess = () => {}
+        onSuccess = () => {},
+        authority,
+        type
     } = props
 
     const [submitting, setSubmitting] = useState(false);
@@ -19,7 +23,11 @@ const AuthorityForm: FC<AuthorityFormProps> = (props) => {
 
     const onSubmit = async (data: any) => {
         setSubmitting(true);
-        const { success, message } = await addAuthority(data);
+        const api = type === 'add' ? addAuthority : editAuthority;
+        if(type === 'edit') {
+            data.id = authority.id;
+        }
+        const { success, message } = await api(data);
         setSubmitting(false);
         if(success) {
             onSuccess();
@@ -31,6 +39,7 @@ const AuthorityForm: FC<AuthorityFormProps> = (props) => {
     return <Form
         schema={SCHEMA}
         onSubmit={onSubmit}
+        defaultValues={authority}
     >
         <FormItem name="parentId" label="{#上级#}">
             <AuthoritySelector />

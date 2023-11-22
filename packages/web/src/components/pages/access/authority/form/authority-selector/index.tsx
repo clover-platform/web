@@ -1,9 +1,10 @@
 import {forwardRef, useEffect, useState} from "react";
 import {TreeItemProps, TreeSelect} from "@clover/core";
 import {AuthorityTree, authorityTree} from "@/rest/access";
+import { handleItem } from "@clover/core/components/extend/tree/utils";
 
 const toItems = (data: AuthorityTree[]): TreeItemProps[] => {
-    return data.map(item => {
+    return data.map<TreeItemProps>(item => {
         return {
             id: `${item.id}`,
             content: {
@@ -12,7 +13,7 @@ const toItems = (data: AuthorityTree[]): TreeItemProps[] => {
             },
             children: toItems(item.children || [])
         }
-    })
+    }).map((item) => handleItem(item, null))
 }
 
 const AuthoritySelector = forwardRef((props, ref) => {

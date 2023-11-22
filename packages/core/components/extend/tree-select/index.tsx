@@ -1,10 +1,10 @@
 import {Popover, PopoverContent, PopoverTrigger} from "@clover/core/components/ui/popover";
-import {FC, forwardRef, PropsWithRef, useMemo, useRef, useState} from "react";
+import { FC, forwardRef, PropsWithRef, useEffect, useMemo, useRef, useState } from "react";
 import {cn} from "@clover/core/lib/utils";
 import { Button } from "@clover/core/components/ui/button";
 import {useSize} from "@clover/core/components/hooks/resize";
 import {Tree, TreeProps} from "@clover/core/components/extend/tree";
-import {findNodeById} from "@clover/core/components/extend/tree/utils";
+import { findNodeById, initExpansion } from "@clover/core/components/extend/tree/utils";
 import {Spin} from "@clover/core/components/extend/spin";
 
 export interface TreeSelectProps extends PropsWithRef<TreeProps>{
@@ -25,12 +25,17 @@ export const TreeSelect: FC<TreeSelectProps> = forwardRef((props, ref) => {
         placeholder = "Please select"
     } = props;
 
+    const initValue = `${value || ''}`;
     const [open, setOpen] = useState(false);
     const containerRef = useRef(null);
     const size = useSize(containerRef);
-    const [expansion, setExpansion] = useState([]);
-    const [selected, setSelected] = useState(value);
+    const [expansion, setExpansion] = useState(initExpansion(items, initValue));
+    const [selected, setSelected] = useState(initValue);
     const node = useMemo(() => findNodeById(items, selected), [selected, items])
+
+    useEffect(() => {
+        setExpansion(initExpansion(items, initValue));
+    }, [items]);
 
     return <Popover open={open} onOpenChange={setOpen}>
         <PopoverTrigger asChild>

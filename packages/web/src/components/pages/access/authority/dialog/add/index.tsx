@@ -20,6 +20,7 @@ const AddAuthorityDialog: FC<AddAuthorityDialogProps> = (props) => {
         className={"w-[460px]"}
     >
         <AuthorityForm
+            type={"add"}
             key={formKey}
             onSuccess={props.onSuccess}
         />

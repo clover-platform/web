@@ -33,13 +33,14 @@ interface CommonCellProps {
  */
 const CommonCell: FC<HTMLAttributes<HTMLDivElement> & CommonCellProps> = ({
     indent,
-    width,style = {},
+    width,style = {},className,
     ...props
 }) => (
     <div
         {...props}
         style={{ '--indent': indent, width, ...style } as CSSProperties}
         css={commonStyles}
+        className={className}
     />
 );
 

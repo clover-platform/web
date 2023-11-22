@@ -42,7 +42,7 @@ export const TreeTable:FC<TreeTableProps> = (props) => {
                         hasChildren={item.children?.length > 0}
                         // isDefaultExpanded
                     >
-                        { columns.map((col) => <Cell key={`${col.key}${item[rowKey]}`} singleLine style={col.style}>{isFunction(col.render) ? col.render(item) : item[col.key]}</Cell>) }
+                        { columns.map((col) => <Cell className={"!py-1"} key={`${col.key}${item[rowKey]}`} singleLine style={col.style}>{isFunction(col.render) ? col.render(item) : item[col.key]}</Cell>) }
                     </Row>
                 )}
             />

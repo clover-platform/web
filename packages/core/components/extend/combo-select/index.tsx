@@ -1,6 +1,6 @@
 import { Popover, PopoverContent, PopoverTrigger } from "@clover/core/components/ui/popover";
 import { Button } from "@clover/core/components/ui/button";
-import { FC, forwardRef, PropsWithRef, ReactNode, useEffect, useRef, useState } from "react";
+import { FC, forwardRef, PropsWithRef, ReactNode, useRef, useState } from "react";
 import { CaretSortIcon, CheckIcon, PlusCircledIcon } from "@radix-ui/react-icons";
 import {
     Command,
@@ -56,7 +56,7 @@ export const ComboSelect: FC<ComboSelectProps> = forwardRef((props, ref) => {
     const [open, setOpen] = useState(false)
     const containerRef = useRef(null);
     const [valueState, setValueState] = useState(value);
-    const [selectedValues, setSelectedValues] = useState<string[]>(value || []);
+    const [selectedValues, setSelectedValues] = useState<string[]>((value || []).map((v) => `${v || ''}`));
     const size = useSize(containerRef);
 
     return <Popover open={open} onOpenChange={setOpen}>

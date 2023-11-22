@@ -1,10 +1,11 @@
 'use client';
 
-import {TreeTable} from "@clover/core";
+import { TreeTable } from "@clover/core";
 import {useEffect, useState} from "react";
-import {COLUMNS} from "@/config/pages/access/authority/table";
+import { COLUMNS } from "@/config/pages/access/authority/table";
 import {authorityTree} from "@/rest/access";
 import AddAuthorityButton from "@/components/pages/access/authority/button/add";
+import TableActions from "@/components/pages/access/authority/table-actions";
 
 const AuthorityPage = () => {
     const [tree, setTree] = useState<any>([]);
@@ -36,14 +37,15 @@ const AuthorityPage = () => {
                     key: "actions",
                     label: "",
                     style: {
-                        textAlign: "right"
+                        display: "flex",
+                        justifyContent: "flex-end",
+                        alignItems: "center",
                     },
                     width: 100,
-                    render: (item) => {
-                        return <div>
-                            test
-                        </div>
-                    }
+                    render: (item) => <TableActions
+                        onReload={load}
+                        item={item}
+                    />
                 }
             ]}
             data={tree}

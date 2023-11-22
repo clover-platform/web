@@ -1,4 +1,4 @@
-import {ColumnsProps} from "@clover/core";
+import { ColumnsProps, DropdownMenuItemProps } from "@clover/core";
 
 export const COLUMNS: ColumnsProps[] = [
     {
@@ -14,5 +14,17 @@ export const COLUMNS: ColumnsProps[] = [
         label: "{#权限码#}",
         width: 300
     },
-
 ]
+
+export const ACTIONS: DropdownMenuItemProps[] = [
+    {
+        id: "edit",
+        type: "item",
+        label: "{#编辑#}"
+    },
+    {
+        id: "delete",
+        type: "item",
+        label: "{#删除#}"
+    },
+];

@@ -1,6 +1,6 @@
 import { TreeItemProps } from "@clover/core/components/extend/tree/index";
 
-export const handleItem = (item: TreeItemProps, parent: TreeItemProps) => {
+export const handleItem = (item: TreeItemProps, parent: TreeItemProps | null | undefined) => {
     const { children = [] } = item;
     item.hasChildren = children.length > 0;
     item.parent = parent;
@@ -13,7 +13,7 @@ export const findNodeById = (nodes: TreeItemProps[], id: string): TreeItemProps 
         if(node.id === id) {
             return node;
         }
-        if(node.hasChildren) {
+        if(node.children) {
             const n = findNodeById(node.children, id);
             if(n) return n;
         }
@@ -101,4 +101,20 @@ export const initSelected = (nodes: TreeItemProps[], selected: string) => {
         }
     }
     return nodes;
+}
+
+
+export const initExpansion = (items:TreeItemProps[], selected: string) => {
+    const node = findNodeById(items, selected);
+    const expansion = [];
+    if(node) {
+        let parent = node.parent;
+        while(parent) {
+            if(parent.children && parent.children.length) {
+                expansion.push(parent.id);
+            }
+            parent = parent.parent;
+        }
+    }
+    return expansion;
 }
