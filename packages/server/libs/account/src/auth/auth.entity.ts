@@ -1,7 +1,7 @@
 import {Entity, PrimaryGeneratedColumn, Column} from "typeorm";
 
 @Entity()
-export class AccountAuthApp {
+export class AuthApp {
     @PrimaryGeneratedColumn({
         comment: "主键"
     }) id: number;
@@ -37,7 +37,7 @@ export class AccountAuthApp {
 
 
 @Entity()
-export class AccountAuthOpenUser {
+export class AuthOpenUser {
     @PrimaryGeneratedColumn({
         comment: "主键"
     }) id: number;

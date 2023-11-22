@@ -1,15 +1,15 @@
 import {Injectable, Logger} from "@nestjs/common";
 import {InjectRepository} from "@nestjs/typeorm";
 import {Repository} from "typeorm";
-import {AccountAuthApp, AccountAuthOpenUser} from "@easy-kit/account/auth/auth.entity";
+import {AuthApp, AuthOpenUser} from "@easy-kit/account/auth/auth.entity";
 import {Result} from "@easy-kit/public/result.entity";
 import {HttpService} from "@nestjs/axios";
 import {firstValueFrom} from "rxjs";
 import {Redlock} from "@easy-kit/public/redlock.decorator";
-import {ACCOUNT_OPEN_USER_LOCK_KEY, LOCK_TIME} from "@easy-kit/account/account.const";
+import {ACCOUNT_OPEN_USER_LOCK_KEY, LOCK_TIME} from "@easy-kit/account/auth/account.const";
 import {TokenService} from "@easy-kit/public/token.service";
 import {BindRequest} from "@easy-kit/account/auth/auth.interface";
-import {AccountService} from "@easy-kit/account/account.service";
+import {AuthAccountService} from "@easy-kit/account/auth/account.service";
 import {I18nService} from "@easy-kit/public/i18n.service";
 
 @Injectable()
@@ -17,12 +17,12 @@ export class AuthService {
     private logger = new Logger(AuthService.name);
 
     constructor(
-        @InjectRepository(AccountAuthApp) private accountAuthAppRepository: Repository<AccountAuthApp>,
-        @InjectRepository(AccountAuthOpenUser) private accountAuthOpenUserRepository: Repository<AccountAuthOpenUser>,
+        @InjectRepository(AuthApp) private accountAuthAppRepository: Repository<AuthApp>,
+        @InjectRepository(AuthOpenUser) private accountAuthOpenUserRepository: Repository<AuthOpenUser>,
         private i18n: I18nService,
         private httpService: HttpService,
         private tokenService: TokenService,
-        private accountService: AccountService,
+        private accountService: AuthAccountService,
     ) {}
 
     async getUrl(name: string): Promise<string> {
@@ -38,7 +38,7 @@ export class AuthService {
     }
 
     @Redlock([ACCOUNT_OPEN_USER_LOCK_KEY], LOCK_TIME)
-    async addOrUpdateOpenUser(openUser: AccountAuthOpenUser): Promise<AccountAuthOpenUser> {
+    async addOrUpdateOpenUser(openUser: AuthOpenUser): Promise<AuthOpenUser> {
         let user = await this.accountAuthOpenUserRepository.findOneBy({
             platform: openUser.platform,
             openId: openUser.openId
@@ -59,7 +59,7 @@ export class AuthService {
             openUser.createTime = new Date();
             await this.accountAuthOpenUserRepository.save(openUser);
         }
-        const result = new AccountAuthOpenUser();
+        const result = new AuthOpenUser();
         user = await this.accountAuthOpenUserRepository.findOneBy({
             platform: openUser.platform,
             openId: openUser.openId
@@ -73,7 +73,7 @@ export class AuthService {
         return result;
     }
 
-    private async infoOrLoginToken(openUser: AccountAuthOpenUser): Promise<Result<any>> {
+    private async infoOrLoginToken(openUser: AuthOpenUser): Promise<Result<any>> {
         const user = await this.addOrUpdateOpenUser(openUser);
         if(user.accountId) {
             const account = await this.accountService.findById(user.accountId);
@@ -93,7 +93,7 @@ export class AuthService {
         });
     }
 
-    private async githubInfo(code: string, app: AccountAuthApp): Promise<Result<any>> {
+    private async githubInfo(code: string, app: AuthApp): Promise<Result<any>> {
         // 请求 access token
         const tokenResult = await firstValueFrom(
             this.httpService.get(
@@ -133,7 +133,7 @@ export class AuthService {
             node_id,
         } = infoResult.data;
 
-        const openUser = new AccountAuthOpenUser();
+        const openUser = new AuthOpenUser();
         openUser.username = login;
         openUser.avatar = avatar_url;
         openUser.accessToken = access_token;
@@ -144,7 +144,7 @@ export class AuthService {
         return await this.infoOrLoginToken(openUser);
     }
 
-    private async wechatInfo(code: string, app: AccountAuthApp): Promise<Result<any>> {
+    private async wechatInfo(code: string, app: AuthApp): Promise<Result<any>> {
         // 请求 access token
         const tokenResult = await firstValueFrom(
             this.httpService.get(
@@ -173,7 +173,7 @@ export class AuthService {
             headimgurl
         } = infoResult.data;
 
-        const openUser = new AccountAuthOpenUser();
+        const openUser = new AuthOpenUser();
         openUser.username = nickname;
         openUser.avatar = headimgurl;
         openUser.accessToken = access_token;

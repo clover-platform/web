@@ -1,7 +1,7 @@
 import { Entity, PrimaryGeneratedColumn, Column } from "typeorm";
 
 @Entity()
-export class Account {
+export class AuthAccount {
     @PrimaryGeneratedColumn({
         comment: "主键"
     }) id: number;

@@ -10,8 +10,8 @@ import { AuthGuard } from "@easy-kit/auth/auth.guard";
 import { RolesGuard } from "@easy-kit/auth/roles.guard";
 import { PublicModule } from "@easy-kit/public/public.module";
 import { ThrottlerGuard } from "@nestjs/throttler";
-import { AccountModule } from "@easy-kit/account/account.module";
-import { AppAccountModule } from "@/account/account.module";
+import { AuthAccountModule } from "@easy-kit/account";
+import { AccountModule } from "@/account/account.module";
 
 @Module({
     imports: [
@@ -22,8 +22,8 @@ import { AppAccountModule } from "@/account/account.module";
         ThrottlerConfig,
         I18nConfig,
         PublicModule,
+        AuthAccountModule,
         AccountModule,
-        AppAccountModule,
     ],
     controllers: [],
     providers: [

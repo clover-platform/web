@@ -1,17 +1,16 @@
 import { Injectable, Logger } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 import { Repository } from "typeorm";
-import { Account } from "./account.entity";
+import { AuthAccount } from "./account.entity";
 import { Redlock } from "@easy-kit/public/redlock.decorator";
 import { ACCOUNT_LOCK_KEY, LOCK_TIME } from "./account.const";
 import { Result } from "@easy-kit/public/result.entity";
 import {
-    CheckResetEmailRequest,
     ResetPasswordRequest,
     SetPasswordRequest,
     TokenOptions,
     TokenResult
-} from "@easy-kit/account/account.interface";
+} from "@easy-kit/account/auth/account.interface";
 import {aesDecrypt, aesEncrypt, decrypt} from "@easy-kit/common/utils/crypto";
 import { ConfigService } from "@nestjs/config";
 import {TokenService} from "@easy-kit/public/token.service";
@@ -21,11 +20,11 @@ import { OTPService } from "@easy-kit/public/otp.service";
 import { OTPResult } from "@easy-kit/public/public.interface";
 
 @Injectable()
-export class AccountService {
-    private logger = new Logger(AccountService.name);
+export class AuthAccountService {
+    private logger = new Logger(AuthAccountService.name);
 
     constructor(
-        @InjectRepository(Account) private repository: Repository<Account>,
+        @InjectRepository(AuthAccount) private repository: Repository<AuthAccount>,
         private i18n: I18nService,
         private configService: ConfigService,
         private tokenService: TokenService,
@@ -33,17 +32,17 @@ export class AccountService {
     ) {}
 
     @Redlock([ACCOUNT_LOCK_KEY], LOCK_TIME)
-    async add(account: Account): Promise<Account> {
+    async add(account: AuthAccount): Promise<AuthAccount> {
         account.createTime = new Date();
         await this.repository.insert(account);
         return this.repository.findOneBy({ username: account.username });
     }
 
-    async findByUsername(username: string): Promise<Account> {
+    async findByUsername(username: string): Promise<AuthAccount> {
         return await this.repository.findOneBy({ username });
     }
 
-    async createToken(account: Account, options: TokenOptions): Promise<TokenResult> {
+    async createToken(account: AuthAccount, options: TokenOptions): Promise<TokenResult> {
         const payload = { sub: account.id, username: account.username };
         return this.tokenService.create(payload, options);
     }
@@ -129,7 +128,7 @@ export class AccountService {
         return Result.success({data: token});
     }
 
-    async findById(id: number): Promise<Account> {
+    async findById(id: number): Promise<AuthAccount> {
         return await this.repository.findOneBy({ id });
     }
 }

@@ -1,22 +1,22 @@
 import {Module} from "@nestjs/common";
 import {TypeOrmModule} from "@nestjs/typeorm";
-import {AppAccountController} from "@/account/account.controller";
-import {AppAccountService} from "@/account/account.service";
-import {AppAccount} from "@/account/account.entity";
-import {AccountModule} from "@easy-kit/account";
+import {AccountController} from "@/account/account.controller";
+import {AccountService} from "@/account/account.service";
+import {Account} from "@/account/account.entity";
+import {AuthAccountModule} from "@easy-kit/account";
 
 @Module({
     imports: [
-        AccountModule,
+        AuthAccountModule,
         TypeOrmModule.forFeature([
-            AppAccount
+            Account
         ])
     ],
     providers: [
-        AppAccountService,
+        AccountService,
     ],
     controllers: [
-        AppAccountController
+        AccountController
     ],
 })
-export class AppAccountModule {}
+export class AccountModule {}

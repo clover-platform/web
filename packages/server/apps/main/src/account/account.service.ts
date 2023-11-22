@@ -3,24 +3,22 @@ import {Result} from "@easy-kit/public/result.entity";
 import {InjectRepository} from "@nestjs/typeorm";
 import {Repository} from "typeorm";
 import {CodeService} from "@easy-kit/public/code.service";
-import {AppAccount} from "@/account/account.entity";
-import { CheckRegisterEmailRequest, CheckResetEmailRequest, TokenResult } from "@easy-kit/account/account.interface";
-import {Account} from "@easy-kit/account/account.entity";
+import {Account} from "@/account/account.entity";
+import { CheckRegisterEmailRequest, CheckResetEmailRequest, TokenResult } from "@easy-kit/account/auth/account.interface";
+import {AuthAccount} from "@easy-kit/account/auth/account.entity";
 import {Redlock} from "@easy-kit/public/redlock.decorator";
-import {LOCK_TIME} from "@easy-kit/account/account.const";
+import {LOCK_TIME} from "@easy-kit/account/auth/account.const";
 import {APP_ACCOUNT_LOCK_KEY} from "@/account/account.const";
-import {AccountService} from "@easy-kit/account/account.service";
+import {AuthAccountService} from "@easy-kit/account/auth/account.service";
 import {I18nService} from "@easy-kit/public/i18n.service";
 import {isEmail} from "@easy-kit/common/utils";
-import {ConfigService} from "@nestjs/config";
 
 @Injectable()
-export class AppAccountService {
+export class AccountService {
 
     constructor(
-        @InjectRepository(AppAccount) private repository: Repository<AppAccount>,
-        private accountService: AccountService,
-        private configService: ConfigService,
+        @InjectRepository(Account) private repository: Repository<Account>,
+        private accountService: AuthAccountService,
         private i18n: I18nService,
         private codeService: CodeService,
     ) {}
@@ -49,7 +47,7 @@ export class AppAccountService {
     }
 
     @Redlock([APP_ACCOUNT_LOCK_KEY], LOCK_TIME)
-    async add(appAccount: AppAccount): Promise<AppAccount> {
+    async add(appAccount: Account): Promise<Account> {
         const where = {
             username: appAccount.username,
             email: appAccount.email,
@@ -60,7 +58,7 @@ export class AppAccountService {
         }
         let account = await this.accountService.findByUsername(appAccount.username);
         if(!account) {
-            account = new Account();
+            account = new AuthAccount();
             account.username = appAccount.username;
             account = await this.accountService.add(account);
         }
@@ -87,7 +85,7 @@ export class AppAccountService {
         if(!checked) {
             return Result.error({code: 1, message: this.i18n.t("account.register.code")})
         }
-        let appAccount = new AppAccount();
+        let appAccount = new Account();
         appAccount.username = request.username;
         appAccount.email = request.email;
         const has = await this.has(appAccount);

@@ -1,5 +1,5 @@
 import {Inject, Injectable, Logger, UnauthorizedException} from "@nestjs/common";
-import {TokenOptions, TokenResult} from "@easy-kit/account/account.interface";
+import {TokenOptions, TokenResult} from "@easy-kit/account/auth/account.interface";
 import {md5} from "@easy-kit/common/utils/crypto";
 import ms from "ms";
 import {CACHE_MANAGER} from "@nestjs/cache-manager";

@@ -4,24 +4,24 @@ import {
     ResetPasswordRequest,
     SetPasswordRequest,
     TokenResult
-} from "@easy-kit/account/account.interface";
+} from "@easy-kit/account/auth/account.interface";
 import { Public } from "@easy-kit/auth/auth.decorator";
 import { Result } from "@easy-kit/public/result.entity";
 import { Throttle } from "@nestjs/throttler";
-import { AccountService } from "@easy-kit/account/account.service";
+import { AuthAccountService } from "@easy-kit/account/auth/account.service";
 import { SessionUser } from "@easy-kit/auth/auth.interface";
-import {AppAccount} from "@/account/account.entity";
-import {AppAccountService} from "@/account/account.service";
+import { Account } from "@/account/account.entity";
+import { AccountService } from "@/account/account.service";
 import {LoginRequest} from "@/account/account.interface";
 import { OTPResult } from "@easy-kit/public/public.interface";
 
 @Controller("/api/account")
-export class AppAccountController {
-    private logger = new Logger(AppAccountController.name);
+export class AccountController {
+    private logger = new Logger(AccountController.name);
 
     constructor(
-        private readonly service: AppAccountService,
-        private readonly accountService: AccountService
+        private readonly service: AccountService,
+        private readonly accountService: AuthAccountService
     ) {}
 
     @Get("/otp/secret/")
@@ -83,7 +83,7 @@ export class AppAccountController {
     }
 
     @Get("/profile")
-    profile(): AppAccount {
-        return new AppAccount();
+    profile(): Account {
+        return new Account();
     }
 }

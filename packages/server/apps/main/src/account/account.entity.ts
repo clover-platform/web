@@ -1,8 +1,8 @@
 import { Entity, PrimaryGeneratedColumn, Column } from "typeorm";
-import {Account} from "@easy-kit/account/account.entity";
+import { AuthAccount } from "@easy-kit/account/auth/account.entity";
 
 @Entity()
-export class AppAccount {
+export class Account {
     @PrimaryGeneratedColumn({
         comment: "主键"
     }) id: number;
@@ -28,5 +28,5 @@ export class AppAccount {
         default: false
     }) deleted: boolean;
 
-    account: Account;
+    account: AuthAccount;
 }
