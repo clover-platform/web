@@ -32,7 +32,7 @@ export const Select = forwardRef<ElementRef<typeof UISelect>, SelectProps>((prop
     return <UISelect
         {...rest}
         onValueChange={onChange}
-        defaultValue={value}
+        value={value}
     >
         <SelectTrigger className="w-[180px]">
             <SelectValue placeholder={placeholder} />

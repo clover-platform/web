@@ -1,5 +1,5 @@
 import TableTree from '../../plugin/table-tree';
-import {FC, ReactNode, useEffect, useMemo, useState} from "react";
+import {FC, forwardRef, ReactNode, useMemo, useState} from "react";
 import { cn } from "@clover/core/lib/utils";
 import { Checkbox } from "@clover/core/components/extend/checkbox";
 import './style.css';
@@ -8,9 +8,12 @@ import {
     getAllExpanded,
     handleCheckedChange,
     handleItem,
-    initExpanded, initSelected,
-    unSelectedAllNotById
+    initExpanded,
+    initSelected,
+    unSelectedAllNotById,
+    getAllChecked, initChecked
 } from "./utils";
+import {Spin} from "@clover/core/components/extend/spin";
 
 type ContentData = {
     id: string,
@@ -47,6 +50,9 @@ export interface TreeProps {
     onExpandedChange?: (expansion: string[]) => void;
     expanded?: string[];
     selected?: string;
+    emptyText?: string;
+    loading?: boolean;
+    checked?: string[];
 }
 
 const Item = (props: ItemProps) => {
@@ -63,7 +69,7 @@ const Item = (props: ItemProps) => {
         {
             checkbox && <div className={"mx-1 flex justify-center items-center"}>
                 <Checkbox
-                    indeterminate={node.indeterminate}
+                    indeterminate={`${node.indeterminate}`}
                     checked={node.disabled ? false: node.checked}
                     disabled={node.disabled}
                     onCheckedChange={(checked) => onCheckedChange(!!checked, node)}
@@ -74,7 +80,7 @@ const Item = (props: ItemProps) => {
     </div>;
 };
 
-export const Tree:FC<TreeProps> = (props) => {
+export const Tree:FC<TreeProps> = forwardRef((props, ref) => {
     const {
         items = [],
         border = true,
@@ -83,14 +89,23 @@ export const Tree:FC<TreeProps> = (props) => {
         expanded = [],
         onExpandedChange = (expansion: string[]) => {},
         onSelectedChange = (id: string, selected: TreeItemProps) => {},
+        onCheckedChange = (nodes: TreeItemProps[]) => {},
         selected,
+        emptyText = "No data",
+        loading = false,
+        checked = [],
     } = props;
 
-    const [itemsState, setItemsState] = useState(initSelected(initExpanded(items, expanded), selected));
+    const [itemsState, setItemsState] = useState(initChecked(initSelected(initExpanded(items, expanded), selected), checked));
 
     const treeNodes = useMemo(() => {
         return itemsState.map((item) => handleItem(item, null));
     }, [itemsState]);
+
+    const checkedChange = () => {
+        const checked = getAllChecked(treeNodes);
+        onCheckedChange(checked);
+    }
 
     return <div
         className={cn(
@@ -98,42 +113,50 @@ export const Tree:FC<TreeProps> = (props) => {
             border && "border rounded shadow-sm p-1",
         )}
     >
-        <TableTree
-            columns={[(content: ContentData) => {
-                return <Item
-                    nodes={treeNodes}
-                    data={content}
-                    checkbox={checkbox}
-                    onCheckedChange={(checked, node) => {
-                        handleCheckedChange(node, checked);
+        {
+            loading ? <div className={"flex justify-start items-center m-2"}>
+                <Spin />
+            </div> : <>
+                { itemsState.length === 0 && <div className={"my-2 text-center text-secondary-foreground/50"}>{emptyText}</div> }
+                <TableTree
+                    columns={[(content: ContentData) => {
+                        return <Item
+                            nodes={treeNodes}
+                            data={content}
+                            checkbox={checkbox}
+                            onCheckedChange={(checked, node) => {
+                                handleCheckedChange(node, checked);
+                                setItemsState(treeNodes);
+                                checkedChange();
+                            }}
+                        />;
+                    }]}
+                    headers={['']}
+                    columnWidths={['100%']}
+                    items={treeNodes}
+                    rowClassName={"hover:bg-muted/50 px-1"}
+                    rowSelectedClassName={"!bg-muted"}
+                    rowDisabledClassName={"opacity-30 cursor-not-allowed"}
+                    onRowClick={(selectable && !checkbox) ? (id: string) => {
+                        const node = findNodeById(treeNodes, id);
+                        node.selected = !node.selected;
+                        unSelectedAllNotById(treeNodes, id);
                         setItemsState(treeNodes);
+                        if(node.selected) {
+                            onSelectedChange && onSelectedChange(id, node);
+                        }else{
+                            onSelectedChange && onSelectedChange(null, null);
+                        }
+                    }: null}
+                    onExpandedChange={(id: string, expanded: boolean) => {
+                        const node = findNodeById(treeNodes, id);
+                        node.expanded = expanded;
+                        setItemsState(treeNodes);
+                        const all = getAllExpanded(treeNodes);
+                        onExpandedChange && onExpandedChange(all);
                     }}
-                />;
-            }]}
-            headers={['']}
-            columnWidths={['100%']}
-            items={treeNodes}
-            rowClassName={"hover:bg-muted/50 px-1"}
-            rowSelectedClassName={"!bg-muted"}
-            rowDisabledClassName={"opacity-30 cursor-not-allowed"}
-            onRowClick={(selectable && !checkbox) ? (id: string) => {
-                const node = findNodeById(treeNodes, id);
-                node.selected = !node.selected;
-                unSelectedAllNotById(treeNodes, id);
-                setItemsState(treeNodes);
-                if(node.selected) {
-                    onSelectedChange && onSelectedChange(id, node);
-                }else{
-                    onSelectedChange && onSelectedChange(null, null);
-                }
-            }: null}
-            onExpandedChange={(id: string, expanded: boolean) => {
-                const node = findNodeById(treeNodes, id);
-                node.expanded = expanded;
-                setItemsState(treeNodes);
-                const all = getAllExpanded(treeNodes);
-                onExpandedChange && onExpandedChange(all);
-            }}
-        />
+                />
+            </>
+        }
     </div>
-}
+})

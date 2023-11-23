@@ -1,6 +1,7 @@
 import { ColumnDef } from "@tanstack/react-table"
 import {DropdownMenuItemProps, FilterItemProps, Input, Select} from "@clover/core"
 import { CaretSortIcon } from '@radix-ui/react-icons';
+import EnableSelector from "@/components/pages/access/role/form/enable-selector";
 
 export type Payment = {
     id: string
@@ -12,53 +13,35 @@ export type Payment = {
 export const FILTERS: FilterItemProps[] = [
     {
         field: 'keyword',
-        label: '{#角色名#}',
         render: () => <Input placeholder={"{#请输入关键词#}"}/>,
     },
     {
-        field: 'test',
-        render: () => <Input placeholder={"{#请输入关键词#}"}/>,
-    },
-    {
-        field: 'status',
-        label: '{#状态#}',
-        render: () => <Select
-            placeholder={"{#请选择状态#}"}
-            options={[
-                { label: "测试", value: '1' },
-                { label: "测试2", value: '2' }
-            ]}
-        />,
+        field: 'enable',
+        label: '{#启用状态#}',
+        render: () => <EnableSelector />,
     }
 ]
 
 export const COLUMNS: ColumnDef<Payment>[] = [
     {
-        accessorKey: "status",
-        header: "{#状态#}",
-    },
-    {
-        accessorKey: "email",
+        accessorKey: "name",
+        header: "{#名称#}",
         enableHiding: false,
-        header: ({ column }) => {
-            return (
-                <div className={"flex justify-start items-center cursor-pointer"} onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}>
-                    Email
-                    <CaretSortIcon className="ml-2 h-4 w-4" />
-                </div>
-            )
-        },
+        className: "w-[300px] min-w-[200px]",
     },
     {
-        accessorKey: "amount",
-        header: () => <div className="text-right">Amount</div>,
+        accessorKey: "description",
+        header: "{#描述#}",
+        enableHiding: false,
+        className: "min-w-[300px]"
+    },
+    {
+        accessorKey: "enable",
+        enableHiding: false,
+        header: "{#启用状态#}",
+        className: "w-[100px] min-w-[100px]",
         cell: ({ row }) => {
-            const amount = parseFloat(row.getValue("amount"))
-            const formatted = new Intl.NumberFormat("en-US", {
-                style: "currency",
-                currency: "USD",
-            }).format(amount)
-            return <div className="text-right font-medium">{formatted}</div>
+            return "test";
         },
     },
 ]
@@ -105,14 +88,5 @@ export const ROW_ACTIONS: DropdownMenuItemProps[] = [
         id: 'log.out',
         type: "item",
         label: "{#Log out#}"
-    },
-]
-
-export const DATA: Payment[] = [
-    {
-        id: "728ed52f",
-        amount: 100,
-        status: "pending",
-        email: "m@example.comm@example.comm@example.comm@example.com",
     },
 ]

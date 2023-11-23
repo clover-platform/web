@@ -43,17 +43,22 @@ export interface StickyColumnProps {
 
 export type onRowActionClick = <TData>(item: DropdownMenuItemProps, row: Row<TData>) => void;
 
+export type DataTableColumn<TData> = ColumnDef<TData, unknown> & {
+    className?: string;
+}
+
 export interface DataTableProps<TData, TValue> {
-    columns: ColumnDef<TData, unknown>[];
+    columns: DataTableColumn<TData>[];
     data: TData[];
     actions?: ReactNode;
     filters?: FilterItemProps[];
-    defaultValues?: object;
     showColumnVisibility?: boolean;
     stickyColumns?: StickyColumnProps[];
     checkbox?: boolean;
     rowActions?: DropdownMenuItemProps[];
     onRowActionClick?: onRowActionClick;
+    loading?: boolean;
+    filter?: FiltersProps;
 }
 
 export const getSticky = (id: string, leftStickyColumns: StickyColumnProps[], rightStickyColumns: StickyColumnProps[]) => {
@@ -111,9 +116,9 @@ export const DataTable = <TData, TValue>(props: DataTableProps<TData, TValue>) =
         checkbox = false,
         stickyColumns = [],
         onRowActionClick = () => {},
-        ...rest
+        filter,
+        loading,
     } = props;
-    const filtersProps: FiltersProps = {...rest, items: filters }
 
     const [sorting, setSorting] = useState<SortingState>([]);
     const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({})
@@ -241,14 +246,14 @@ export const DataTable = <TData, TValue>(props: DataTableProps<TData, TValue>) =
 
     return <>
         {
-            filters && filters.length ? <div className={"border-0 border-solid border-b border-secondary pb-2"}>
-                <Filters {...filtersProps} />
+            filter ? <div className={"border-0 border-solid border-b border-secondary pb-2"}>
+                <Filters {...filter} loading={loading} />
             </div> : null
         }
         <Space className="flex items-center my-2 justify-start">
             { actions }
             {
-                showColumnVisibility ? <>
+                showColumnVisibility && columnSettings.length ? <>
                     <div className={"h-5 mx-1"}>
                         <Separator orientation={"vertical"} />
                     </div>
@@ -267,12 +272,14 @@ export const DataTable = <TData, TValue>(props: DataTableProps<TData, TValue>) =
                         <TableRow key={headerGroup.id}>
                             {headerGroup.headers.map((header) => {
                                 const sticky = getSticky(header.column.id, leftStickyColumns, rightStickyColumns);
+                                console.log(header.column);
                                 return (
                                     <TableHead
                                         className={cn(
                                             sticky.enable ? "sticky table-sticky-row" : null,
                                             sticky.last ? "table-sticky-row-last" : null,
                                             sticky.first ? "table-sticky-row-first" : null,
+                                            header.column.columnDef['className']
                                         )}
                                         style={ sticky.enable ? {zIndex: 10, width: sticky.width, [sticky.position]: sticky.offset} : null }
                                         key={header.id}>
@@ -313,7 +320,7 @@ export const DataTable = <TData, TValue>(props: DataTableProps<TData, TValue>) =
                         ))
                     ) : (
                         <TableRow>
-                            <TableCell colSpan={columns.length} className="h-24 text-center">
+                            <TableCell colSpan={tableColumns.length} className="h-24 text-center">
                                 No results.
                             </TableCell>
                         </TableRow>

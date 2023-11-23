@@ -19,7 +19,6 @@ import { useMemo, Children } from "react";
 import isObject from "lodash/isObject";
 import { Control } from "react-hook-form/dist/types";
 import { ZodEffects } from "zod/lib/types";
-import { cn } from "@clover/core/lib/utils";
 
 export interface RenderProps extends ControllerRenderProps {
     placeholder?: string;
@@ -30,7 +29,6 @@ export interface FieldItem extends PropsWithChildren {
     label: string | ReactNode
     description?: string;
     control?: Control<FieldValues>;
-    defaultValue?: any;
 }
 
 export type FormValues = DeepPartial<FieldValues>;
@@ -50,7 +48,7 @@ export const FormItem: FC<FieldItem> = (props) => {
             return cloneElement(ele, {
                 ...ele.props,
                 ...field,
-                value: field.value || props.defaultValue || '', // a component is changing an uncontrolled input to be controlled
+                value: field.value || '', // a component is changing an uncontrolled input to be controlled
             })
         }
         return props.children;
@@ -97,8 +95,7 @@ export const Form: FC<FormProps> = (props) => {
                 if(ele.type === FormItem) {
                     return cloneElement(ele, {
                         ...ele.props,
-                        control: form.control,
-                        defaultValue: (defaultValues || {})[ele.props.name],
+                        control: form.control
                     })
                 }
             }

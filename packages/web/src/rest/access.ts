@@ -21,6 +21,7 @@ export interface AuthorityTree extends Authority {
     children?: AuthorityTree[];
 }
 
+// 权限管理
 export const addAuthority = async (data: any): Promise<RestResult<any>> =>
     post(`@access/authority/add/`, data);
 
@@ -35,3 +36,10 @@ export const authorityTree = async (): Promise<RestResult<AuthorityTree[]>> =>
 
 export const authorityDetail = async (id?: number): Promise<RestResult<Authority>> =>
     get(`@access/authority/${id}/detail/`);
+
+// 角色管理
+export const addRole = async (data: any): Promise<RestResult<any>> =>
+    post(`@access/role/create/`, data);
+
+export const roleList = async (params: any): Promise<RestResult<any>> =>
+    get(`@access/role/list/`, params);

@@ -18,9 +18,9 @@ export class AccessRole {
     }) description: string;
 
     @Column({
-        comment: "是否禁用",
-        default: false
-    }) disabled: boolean;
+        comment: "是否启用",
+        default: true
+    }) enable: boolean;
 }
 
 @Entity()

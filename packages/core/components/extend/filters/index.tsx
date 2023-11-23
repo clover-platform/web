@@ -1,4 +1,4 @@
-import {PropsWithChildren, FC, useEffect, cloneElement, ReactElement, useRef} from "react";
+import {PropsWithChildren, FC, cloneElement, ReactElement, useRef} from "react";
 import {useForm, Controller, SubmitHandler} from "react-hook-form"
 import {Control} from "react-hook-form/dist/types";
 import {Button} from "@clover/core/components/extend/button";
@@ -10,11 +10,16 @@ export interface FilterItemProps {
 }
 
 export interface FiltersProps extends PropsWithChildren{
-    items: FilterItemProps[];
-    defaultValues?: object;
+    items?: FilterItemProps[];
+    defaultValues?: any;
+    query?: any;
+    loading?: boolean;
+    load?: (params?: any) => Promise<any>;
+    searchText?: string;
+    resetText?: string;
 }
 
-const renderItem = (item: FilterItemProps, form: {control: Control, defaultValue: any}) => {
+const renderItem = (item: FilterItemProps, form: {control: Control}) => {
     const ele = item.render();
 
     return <div key={item.field} className={"m-2 my-1"}>
@@ -23,7 +28,7 @@ const renderItem = (item: FilterItemProps, form: {control: Control, defaultValue
             <Controller
                 name={item.field}
                 control={form.control}
-                render={({ field }) => cloneElement(ele, {...ele.props, ...field, value: field.value || form.defaultValue})}
+                render={({ field }) => cloneElement(ele, {...ele.props, ...field, value: field.value})}
             />
         </div>
     </div>
@@ -32,24 +37,37 @@ const renderItem = (item: FilterItemProps, form: {control: Control, defaultValue
 export const Filters: FC<FiltersProps> = (props) => {
     const {
         items = [],
-        defaultValues = null
+        defaultValues = null,
+        loading,
+        load,
+        query,
+        searchText = "Search",
+        resetText = "Reset",
     } = props;
 
-    const { control, handleSubmit } = useForm({
-        defaultValues,
+    const {
+        reset,
+        control,
+        handleSubmit
+    } = useForm({
+        defaultValues: query,
     })
 
     const onSubmit: SubmitHandler<any> = (data) => {
-        console.log(data);
+        load && load(data).then();
     }
 
-    return <form onSubmit={handleSubmit(onSubmit)}>
+    return <form
+        onSubmit={handleSubmit(onSubmit)}>
         <div className={"flex justify-start items-end -mx-2 flex-wrap"}>
-            { items.map((item) => renderItem(item, {control, defaultValue: (defaultValues||{})[item.field] || ''})) }
+            { items.map((item) => renderItem(item, {control})) }
             {
                 items && items.length ? <div className={"m-2 my-1 flex justify-start items-center flex-1"}>
-                    <Button type={"submit"}>提交</Button>
-                    <Button type={"reset"} className={"ml-2"} variant={"secondary"}>重置</Button>
+                    <Button disabled={loading} type={"submit"}>{searchText}</Button>
+                    <Button disabled={loading} type={"reset"} className={"ml-2"} variant={"secondary"} onClick={() => {
+                        load && load(defaultValues).then();
+                        reset(defaultValues);
+                    }}>{resetText}</Button>
                 </div> : null
             }
         </div>

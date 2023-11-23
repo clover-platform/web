@@ -1,13 +1,29 @@
 'use client';
 
-import {Button, Card, Space, Breadcrumbs, BreadcrumbsItem} from "@clover/core";
+import {Button, Card, Space, Breadcrumbs, BreadcrumbsItem, useMessage} from "@clover/core";
 import Link from "@clover/common/components/link";
+import RoleForm from "@/components/pages/access/role/form";
+import {useState} from "react";
+import {addRole} from "@/rest/access";
+import {useRouter} from "next/navigation";
+import BackButton from "@clover/common/components/button/back";
 
 const AddRolePage = () => {
-    const footer = <Space>
-        <Button>{"{#保存#}"}</Button>
-        <Button variant={"outline"}>{"{#取消#}"}</Button>
-    </Space>
+    const [loading, setLoading] = useState(false);
+    const msg = useMessage();
+    const router = useRouter();
+
+    const onSubmit = async (data: any) => {
+        setLoading(true);
+        const { success, message } = await addRole(data);
+        setLoading(false);
+        if(success) {
+            router.push("/{#LANG#}/access/")
+        }else{
+            msg.error(message);
+        }
+    }
+
     return <>
         <Breadcrumbs className={"mx-2"}>
             <BreadcrumbsItem>
@@ -17,9 +33,13 @@ const AddRolePage = () => {
         </Breadcrumbs>
         <Card
             className={"w-7/12 mx-auto"}
-            footer={footer}
         >
-            <h1>添加角色</h1>
+            <RoleForm onSubmit={onSubmit}>
+                <Space>
+                    <Button loading={loading} type={"submit"}>{"{#保存#}"}</Button>
+                    <BackButton />
+                </Space>
+            </RoleForm>
         </Card>
     </>;
 };

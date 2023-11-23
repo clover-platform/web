@@ -31,13 +31,14 @@ export const setNodeAntChildrenChecked = (node: TreeItemProps, checked: boolean)
     }
 }
 
-export const setParentChecked = (node: TreeItemProps, checked: boolean) => {
+export const setParentChecked = (node: TreeItemProps) => {
     if(node.parent && !node.parent.disabled) {
         const parent = node.parent;
         const children = parent.children;
         const checkedChildren = children.filter((n) => n.checked);
         const disabledChildren = children.filter((n) => n.disabled);
-        if(checkedChildren.length === 0) {
+        const indeterminateChildren = children.filter((n) => n.indeterminate);
+        if((checkedChildren.length + indeterminateChildren.length) === 0) {
             parent.checked = false;
             parent.indeterminate = false;
         } else if(checkedChildren.length === children.length - disabledChildren.length) {
@@ -47,13 +48,13 @@ export const setParentChecked = (node: TreeItemProps, checked: boolean) => {
             parent.checked = false;
             parent.indeterminate = true;
         }
-        setParentChecked(parent, checked);
+        setParentChecked(parent);
     }
 }
 
 export const handleCheckedChange = (node: TreeItemProps, checked: boolean) => {
     setNodeAntChildrenChecked(node, checked);
-    setParentChecked(node, checked);
+    setParentChecked(node);
 }
 
 export const unSelectedAllNotById = (nodes: TreeItemProps[], id: string) => {
@@ -103,6 +104,17 @@ export const initSelected = (nodes: TreeItemProps[], selected: string) => {
     return nodes;
 }
 
+export const initChecked = (nodes: TreeItemProps[], checked: string[]) => {
+    for(let node of nodes) {
+        node.checked = checked.includes(node.id);
+        handleCheckedChange(node, node.checked);
+        if(node.hasChildren) {
+            initChecked(node.children, checked);
+        }
+    }
+    return nodes;
+}
+
 
 export const initExpansion = (items:TreeItemProps[], selected: string) => {
     const node = findNodeById(items, selected);
@@ -117,4 +129,17 @@ export const initExpansion = (items:TreeItemProps[], selected: string) => {
         }
     }
     return expansion;
+}
+
+export const getAllChecked = (nodes: TreeItemProps[]) => {
+    const checked = [];
+    for(let node of nodes) {
+        if(node.checked) {
+            checked.push(node);
+        }
+        if(node.hasChildren) {
+            checked.push(...getAllChecked(node.children));
+        }
+    }
+    return checked;
 }

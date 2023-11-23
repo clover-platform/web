@@ -1,20 +1,8 @@
-import {FC, forwardRef, PropsWithRef, useEffect, useState} from "react";
+import {FC, forwardRef, useEffect, useState} from "react";
 import {TreeItemProps, TreeSelect} from "@clover/core";
-import {AuthorityTree, authorityTree} from "@/rest/access";
-import {findNodeById, handleItem} from "@clover/core/components/extend/tree/utils";
-
-const toItems = (data: AuthorityTree[]): TreeItemProps[] => {
-    return data.map<TreeItemProps>(item => {
-        return {
-            id: `${item.id}`,
-            content: {
-                id: `${item.id}`,
-                label: item.name
-            },
-            children: toItems(item.children || [])
-        }
-    }).map((item) => handleItem(item, null))
-}
+import {authorityTree} from "@/rest/access";
+import {findNodeById} from "@clover/core/components/extend/tree/utils";
+import {toItems} from "@/components/pages/access/authority/form/utils";
 
 const setChildrenDisabled = (items?: TreeItemProps[]) => {
     if(items && items.length) {

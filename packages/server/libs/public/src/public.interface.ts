@@ -23,3 +23,16 @@ export interface OTPVerifyData {
     secret: string,
     token: string,
 }
+
+
+export interface PageParams {
+    page: number;
+    size: number;
+}
+
+export interface PageResult<T> {
+    total: number;
+    list: T[];
+    page: number;
+    size: number;
+}

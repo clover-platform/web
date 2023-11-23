@@ -3,7 +3,6 @@ import { AppModule } from "./app.module";
 import {GlobalExceptionFilter} from "@easy-kit/public/exception.filter";
 import {ResultInterceptor} from "@easy-kit/public/result.interceptor";
 import {ConfigService} from "@nestjs/config";
-import agent from 'skywalking-backend-js';
 import expressListRoutes from 'express-list-routes';
 import {AccessApiService} from "@easy-kit/account/access/api.service";
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
@@ -13,14 +12,6 @@ async function bootstrap() {
     const configService = app.get(ConfigService);
     app.useGlobalFilters(new GlobalExceptionFilter());
     app.useGlobalInterceptors(new ResultInterceptor());
-
-    // skyWalking
-    const skyWalking = configService.get("skywalking");
-    agent.start({
-        serviceName: skyWalking.serviceName,
-        serviceInstance: skyWalking.serviceInstance,
-        collectorAddress: skyWalking.collectorAddress,
-    });
 
     // swagger
     const config = new DocumentBuilder()
