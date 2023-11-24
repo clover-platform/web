@@ -6,6 +6,7 @@ import Link from "next/link";
 import {useTableLoader} from "@clover/common/hooks";
 import {roleList} from "@/rest/access";
 import {useEffect} from "react";
+import { useRouter } from "next/navigation";
 
 const initialParams = {
     keyword: '',
@@ -13,6 +14,7 @@ const initialParams = {
 }
 
 const RolePage = () => {
+    const router = useRouter();
     const [loading, result, query, load] = useTableLoader({
         initialParams,
         action: roleList,
@@ -38,9 +40,15 @@ const RolePage = () => {
         columns={COLUMNS}
         rowActions={ROW_ACTIONS}
         data={result?.data || []}
-        total={result?.total}
         actions={actions}
         loading={loading}
+        onRowActionClick={({id: key}, {original}) => {
+            if(key === "detail") {
+                router.push("/{#LANG#}/access/role/detail/?id=" + original.id);
+            }else if(key === "edit") {
+                router.push("/{#LANG#}/access/role/edit/?id=" + original.id);
+            }
+        }}
     />
 };
 

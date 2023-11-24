@@ -12,7 +12,6 @@ export interface TableLoaderOptions {
     action: (data: any) => Promise<RestResult<any>>;
     withURL?: boolean;
     encodeParams?: string[];
-    scroll?: boolean;
 }
 
 const reqInit = {
@@ -77,9 +76,7 @@ export const useTableLoader = (options: TableLoaderOptions) => {
                     searchParams = { ...urlParam, ...params };
                 }
                 const queryString = new URLSearchParams(searchParams).toString();
-                history.replaceState(queryString, "", `${path}?${queryString}`);   //暂时先解决next.js13硬重载问题，后期有其他方式再替换
-                //router.replace(`${path}?${queryString}`)
-                //router.replace(`${path}?${queryString}`, null, { scroll })
+                router.replace(`${path}?${queryString}`)
             }
             const data: any = standardRestParams(pick(params, legalKeys.current));
             encodeParams.forEach((key) => data[key] = encodeURIComponent(data[key]));

@@ -12,9 +12,11 @@ export interface AccessRoleDTO {
     description?: string;
     enable?: boolean;
     authorities?: number[];
+    authorityTree?: AuthorityTree[];
 }
 
 export interface AuthorityTree {
+    parent?: AuthorityTree;
     id: number;
     name: string;
     key: string;

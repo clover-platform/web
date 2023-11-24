@@ -9,6 +9,7 @@ import {PageParams} from "@easy-kit/public/public.interface";
 import {types} from "sass";
 import List = types.List;
 import {PageResult} from "@easy-kit/public/page.result.entity";
+import { AccessAuthorityService } from "@easy-kit/account/access/authority.service";
 
 @Injectable()
 export class AccessRoleService {
@@ -18,6 +19,7 @@ export class AccessRoleService {
         @InjectRepository(AccessRole) private repository: Repository<AccessRole>,
         @InjectRepository(AccessRoleAuthority) private accessRoleAuthorityRepository: Repository<AccessRoleAuthority>,
         private i18n: I18nService,
+        private accessAuthorityService: AccessAuthorityService,
     ) {
     }
 
@@ -60,5 +62,22 @@ export class AccessRoleService {
             .take(page.size)
             .getMany();
         return Result.success({data: PageResult.of<AccessRole>(total, all)});
+    }
+
+    async detail(id: number): Promise<Result<AccessRoleDTO>> {
+        const role = await this.repository.findOne({where: {id}});
+        const authorities = await this.accessRoleAuthorityRepository.find({where: {roleId: id}});
+        const authorityIds = authorities.map(authority => authority.authorityId);
+        const tree = await this.accessAuthorityService.treeByIds(authorityIds);
+        return Result.success({
+            data: {
+                id: role.id,
+                name: role.name,
+                description: role.description,
+                enable: role.enable,
+                authorities: authorityIds,
+                authorityTree: tree
+            }
+        });
     }
 }

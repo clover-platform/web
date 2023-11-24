@@ -92,7 +92,6 @@ export const Dropdown: FC<DropdownProps> = (props) => {
         <DropdownMenuContent
             align={align}
             className={cn(
-                "w-48",
                 props.className
             )}
         >

@@ -5,15 +5,18 @@ import AuthorityTree from "../../authority/form/tree";
 
 export interface RoleFormProps extends PropsWithChildren {
     onSubmit?: (data: any) => void;
+    defaultValues?: any;
 }
 
 const RoleForm:FC<RoleFormProps> = (props) => {
+    const {
+        defaultValues = {}
+    } = props;
+
     return <Form
         schema={SCHEMA}
         onSubmit={props.onSubmit}
-        defaultValues={{
-            enable: true,
-        }}
+        defaultValues={defaultValues}
     >
         <FormItem name="name" label="{#名称#}">
             <Input placeholder={"{#请输入角色名称#}"} />

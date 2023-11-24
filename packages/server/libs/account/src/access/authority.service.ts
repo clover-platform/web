@@ -5,6 +5,7 @@ import {AccessAuthority, AccessAuthorityApi} from "@easy-kit/account/access/auth
 import {AccessAuthorityDTO, AuthorityTree} from "@easy-kit/account/access/access.interface";
 import {Result} from "@easy-kit/public/result.entity";
 import {I18nService} from "@easy-kit/public/i18n.service";
+import { uniq } from "lodash";
 
 @Injectable()
 export class AccessAuthorityService {
@@ -56,6 +57,7 @@ export class AccessAuthorityService {
         all.forEach(item => {
             if (item.parentId === id) {
                 children.push({
+                    parent: all.find(i => i.id === item.parentId),
                     id: item.id,
                     name: item.name,
                     key: item.key,
@@ -73,6 +75,7 @@ export class AccessAuthorityService {
         data.forEach(item => {
             if (!item.parentId) {
                 tree.push({
+                    parent: data.find(i => i.id === item.parentId),
                     id: item.id,
                     name: item.name,
                     key: item.key,
@@ -134,6 +137,41 @@ export class AccessAuthorityService {
             .execute()
         // TODO: 删除角色权限关联
         return Result.success();
+    }
+
+    private getAllParentIds(node: AuthorityTree) {
+        const ids = [];
+        let parent = node.parent;
+        while(parent) {
+            ids.push(parent.id);
+            parent = parent.parent;
+        }
+        return ids;
+    }
+
+    private filterTreeByIds(tree: AuthorityTree[], ids: number[]): AuthorityTree[] {
+        const newTree: AuthorityTree[] = [];
+        tree.forEach(node => {
+            if(ids.includes(node.id)) {
+                newTree.push(node);
+            }
+            if(node.children) {
+                node.children = this.filterTreeByIds(node.children, ids);
+            }
+        });
+        return newTree;
+    }
+
+    async treeByIds(ids: number[]): Promise<AuthorityTree[]> {
+        const fullTree = await this.tree();
+        const allIds = [...ids];
+        ids.forEach(id => {
+            const node = this.findNodeById(fullTree, id);
+            const allParentIds = this.getAllParentIds(node);
+            allIds.push(...allParentIds)
+        });
+        const uniqIds = uniq(allIds);
+        return this.filterTreeByIds(fullTree, uniqIds)
     }
 
 }

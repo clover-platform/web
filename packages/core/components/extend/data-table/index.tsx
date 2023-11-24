@@ -27,10 +27,11 @@ import {
     Filters,
     FiltersProps,
     Separator,
-    Space,
-} from "@clover/core"
+    Space, Spin
+} from "@clover/core";
 import {IconColumns} from "@arco-iconbox/react-clover";
 import isFunction from "lodash/isFunction";
+import isArray from "lodash/isArray";
 import {isString} from "lodash";
 import {DotsHorizontalIcon} from "@radix-ui/react-icons";
 import "./style.css";
@@ -55,7 +56,7 @@ export interface DataTableProps<TData, TValue> {
     showColumnVisibility?: boolean;
     stickyColumns?: StickyColumnProps[];
     checkbox?: boolean;
-    rowActions?: DropdownMenuItemProps[];
+    rowActions?: DropdownMenuItemProps[] | ((cell: TData) => DropdownMenuItemProps[]);
     onRowActionClick?: onRowActionClick;
     loading?: boolean;
     filter?: FiltersProps;
@@ -105,6 +106,15 @@ export const getSticky = (id: string, leftStickyColumns: StickyColumnProps[], ri
     return { enable: false };
 }
 
+const hasActions = (rowActions: DropdownMenuItemProps[] | ((cell: any) => DropdownMenuItemProps[])) => {
+    if(isFunction(rowActions)) {
+        return true;
+    }else if (isArray(rowActions)) {
+        return !!rowActions.length;
+    }
+    return false;
+}
+
 export const DataTable = <TData, TValue>(props: DataTableProps<TData, TValue>) => {
     const {
         data,
@@ -152,16 +162,20 @@ export const DataTable = <TData, TValue>(props: DataTableProps<TData, TValue>) =
             },)
         }
         newColumns.push(...columns);
-        if(rowActions && rowActions.length) {
+        if(hasActions(rowActions)) {
             newColumns.push({
                 id: "actions",
                 enableHiding: false,
                 size: 50,
                 enableResizing: false,
                 cell: ({ row }) => {
+                    let items = rowActions;
+                    if(isFunction(rowActions)) {
+                        items = rowActions(row.original);
+                    }
                     return <div className="text-center">
                         <Dropdown
-                            items={rowActions}
+                            items={items as DropdownMenuItemProps[]}
                             onItemClick={(item) => onRowActionClick(item, row)}
                         >
                             <Action className={"w-6 h-6 p-0"}>
@@ -207,7 +221,7 @@ export const DataTable = <TData, TValue>(props: DataTableProps<TData, TValue>) =
     const rightStickyColumns = useMemo<StickyColumnProps[]>(() => {
         const columns = [];
         columns.push(...stickyColumns.filter(({position}) => (position === 'right')));
-        if(rowActions && rowActions.length) {
+        if(hasActions(rowActions)) {
             columns.push({
                 key: "actions",
                 position: "right",
@@ -265,14 +279,13 @@ export const DataTable = <TData, TValue>(props: DataTableProps<TData, TValue>) =
                 </> : null
             }
         </Space>
-        <div>
+        <div className={"relative"}>
             <Table className={"data-table"}>
                 <TableHeader>
                     {table.getHeaderGroups().map((headerGroup) => (
                         <TableRow key={headerGroup.id}>
                             {headerGroup.headers.map((header) => {
                                 const sticky = getSticky(header.column.id, leftStickyColumns, rightStickyColumns);
-                                console.log(header.column);
                                 return (
                                     <TableHead
                                         className={cn(
@@ -327,24 +340,25 @@ export const DataTable = <TData, TValue>(props: DataTableProps<TData, TValue>) =
                     )}
                 </TableBody>
             </Table>
-        </div>
-        <div className="flex items-center justify-end space-x-2 py-4">
-            <Button
-                variant="outline"
-                size="sm"
-                onClick={() => table.previousPage()}
-                disabled={!table.getCanPreviousPage()}
-            >
-                Previous
-            </Button>
-            <Button
-                variant="outline"
-                size="sm"
-                onClick={() => table.nextPage()}
-                disabled={!table.getCanNextPage()}
-            >
-                Next
-            </Button>
+            <div className="flex items-center justify-end space-x-2 py-4">
+                <Button
+                    variant="outline"
+                    size="sm"
+                    onClick={() => table.previousPage()}
+                    disabled={!table.getCanPreviousPage()}
+                >
+                    Previous
+                </Button>
+                <Button
+                    variant="outline"
+                    size="sm"
+                    onClick={() => table.nextPage()}
+                    disabled={!table.getCanNextPage()}
+                >
+                    Next
+                </Button>
+            </div>
+            { loading ? <div className={"absolute top-0 left-0 bottom-0 right-0 flex justify-center items-center bg-white/50"}><Spin /></div> : null }
         </div>
     </>
 }

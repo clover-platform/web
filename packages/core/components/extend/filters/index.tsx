@@ -57,19 +57,22 @@ export const Filters: FC<FiltersProps> = (props) => {
         load && load(data).then();
     }
 
-    return <form
-        onSubmit={handleSubmit(onSubmit)}>
-        <div className={"flex justify-start items-end -mx-2 flex-wrap"}>
-            { items.map((item) => renderItem(item, {control})) }
-            {
-                items && items.length ? <div className={"m-2 my-1 flex justify-start items-center flex-1"}>
-                    <Button disabled={loading} type={"submit"}>{searchText}</Button>
-                    <Button disabled={loading} type={"reset"} className={"ml-2"} variant={"secondary"} onClick={() => {
-                        load && load(defaultValues).then();
-                        reset(defaultValues);
-                    }}>{resetText}</Button>
-                </div> : null
-            }
-        </div>
-    </form>
+    return <div className={"relative"}>
+        <form
+            onSubmit={handleSubmit(onSubmit)}>
+            <div className={"flex justify-start items-end -mx-2 flex-wrap"}>
+                { items.map((item) => renderItem(item, {control})) }
+                {
+                    items && items.length ? <div className={"m-2 my-1 flex justify-start items-center flex-1"}>
+                        <Button disabled={loading} type={"submit"}>{searchText}</Button>
+                        <Button disabled={loading} type={"reset"} className={"ml-2"} variant={"secondary"} onClick={() => {
+                            load && load(defaultValues).then();
+                            reset(defaultValues);
+                        }}>{resetText}</Button>
+                    </div> : null
+                }
+            </div>
+        </form>
+        { loading ? <div className={"absolute top-0 right-0 bottom-0 left-0 bg-white/50"} /> : null }
+    </div>
 }

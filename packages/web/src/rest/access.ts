@@ -43,3 +43,6 @@ export const addRole = async (data: any): Promise<RestResult<any>> =>
 
 export const roleList = async (params: any): Promise<RestResult<any>> =>
     get(`@access/role/list/`, params);
+
+export const roleDetail = async (id?: number): Promise<RestResult<any>> =>
+    get(`@access/role/${id}/detail/`);

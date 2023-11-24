@@ -96,7 +96,8 @@ export const Tree:FC<TreeProps> = forwardRef((props, ref) => {
         checked = [],
     } = props;
 
-    const [itemsState, setItemsState] = useState(initChecked(initSelected(initExpanded(items, expanded), selected), checked));
+    const checkedValue = (checked||[]).map((id) => `${id}`);
+    const [itemsState, setItemsState] = useState(initChecked(initSelected(initExpanded(items, expanded), selected), checkedValue));
 
     const treeNodes = useMemo(() => {
         return itemsState.map((item) => handleItem(item, null));
