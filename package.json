@@ -8,6 +8,7 @@
     "dependencies": {
         "@arco-iconbox/react-clover": "0.0.7",
         "axios": "1.6.2",
+        "dayjs": "^1.11.10",
         "localforage": "1.10.0",
         "lodash": "4.17.21",
         "node-rsa": "1.1.1",

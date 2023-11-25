@@ -46,3 +46,15 @@ export const roleList = async (params: any): Promise<RestResult<any>> =>
 
 export const roleDetail = async (id?: number): Promise<RestResult<any>> =>
     get(`@access/role/${id}/detail/`);
+
+export const editRole = async (data: any): Promise<RestResult<any>> =>
+    put(`@access/role/${data.id}/`, data);
+
+export const disableRole = async (id: any): Promise<RestResult<any>> =>
+    put(`@access/role/${id}/disable/`);
+
+export const enableRole = async (id: any): Promise<RestResult<any>> =>
+    put(`@access/role/${id}/enable/`);
+
+export const deleteRole = async (id: any): Promise<RestResult<any>> =>
+    del(`@access/role/${id}/`);

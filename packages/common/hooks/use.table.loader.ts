@@ -16,7 +16,7 @@ export interface TableLoaderOptions {
 
 const reqInit = {
     page: 1,
-    size: 20
+    size: 10
 };
 
 export const useUrlQuery = () => {

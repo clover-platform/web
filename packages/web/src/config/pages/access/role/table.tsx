@@ -1,13 +1,7 @@
-import { DropdownMenuItemProps, FilterItemProps, Input } from "@clover/core"
+import {DropdownMenuItemProps, FilterItemProps, Input} from "@clover/core"
 import EnableSelector from "@/components/pages/access/role/form/enable-selector";
 import { DataTableColumn } from "@clover/core/components/extend/data-table";
-
-export type Payment = {
-    id: string
-    amount: number
-    status: "pending" | "processing" | "success" | "failed"
-    email: string
-}
+import {RoleStatus} from "@/components/pages/access/role/status";
 
 export const FILTERS: FilterItemProps[] = [
     {
@@ -40,7 +34,8 @@ export const COLUMNS: DataTableColumn<any>[] = [
         header: "{#启用状态#}",
         className: "w-[100px] min-w-[100px]",
         cell: ({ row }) => {
-            return "test";
+            const data = row.original as any;
+            return <RoleStatus value={data.enable} />;
         },
     },
 ]

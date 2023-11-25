@@ -1,4 +1,4 @@
-import {Body, Controller, Get, Logger, Post, Query, Param} from "@nestjs/common";
+import {Body, Controller, Get, Logger, Post, Query, Param, Put, Delete} from "@nestjs/common";
 import {AccessRoleService} from "@easy-kit/account/access/role.service";
 import {Public} from "@easy-kit/auth/auth.decorator";
 import {AccessRoleDTO, RoleQueryParams} from "@easy-kit/account/access/access.interface";
@@ -29,5 +29,30 @@ export class AccessRoleController {
     @Public()
     async detail(@Param() params: {id: number}): Promise<Result<AccessRoleDTO>> {
         return this.service.detail(Number(params.id));
+    }
+
+    @Put("/:id")
+    @Public()
+    async edit(@Param() params: {id: number}, @Body() role: AccessRoleDTO): Promise<Result<any>> {
+        role.id = Number(params.id);
+        return this.service.edit(role);
+    }
+
+    @Put("/:id/disable")
+    @Public()
+    async disable(@Param() params: {id: number}): Promise<Result<any>> {
+        return this.service.disable(Number(params.id));
+    }
+
+    @Put("/:id/enable")
+    @Public()
+    async enable(@Param() params: {id: number}): Promise<Result<any>> {
+        return this.service.enable(Number(params.id));
+    }
+
+    @Delete("/:id")
+    @Public()
+    async delete(@Param() params: {id: number}): Promise<Result<any>> {
+        return this.service.delete(Number(params.id));
     }
 }

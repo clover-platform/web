@@ -14,6 +14,7 @@ export {
 } from "./components/ui/dropdown-menu";
 export { Separator } from "./components/ui/separator";
 export { Textarea } from "./components/ui/textarea";
+export { Badge } from "./components/ui/badge";
 // extend
 export { Divider } from "./components/extend/divider";
 export type { DividerProps } from './components/extend/divider';
@@ -62,3 +63,9 @@ export { RadioGroup } from "./components/extend/radio-group";
 export type { RadioGroupProps, RadioGroupOptionProps } from "./components/extend/radio-group";
 export { Switch } from "./components/extend/switch";
 export type { SwitchProps } from "./components/extend/switch";
+export { Loading } from "./components/extend/loading";
+export type { LoadingProps } from "./components/extend/loading";
+export { ValueFormatter } from "./components/extend/value-formatter";
+export type { ValueFormatterProps } from "./components/extend/value-formatter";
+export { Pagination } from "./components/extend/pagination";
+export type { PaginationProps } from "./components/extend/pagination";

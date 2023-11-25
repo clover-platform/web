@@ -3,7 +3,6 @@ import {
     flexRender,
     getCoreRowModel,
     useReactTable,
-    getPaginationRowModel,
     SortingState,
     getSortedRowModel,
     VisibilityState, Row,
@@ -25,7 +24,7 @@ import {
     DropdownMenuItemProps,
     FilterItemProps,
     Filters,
-    FiltersProps,
+    FiltersProps, Pagination, PaginationProps,
     Separator,
     Space, Spin
 } from "@clover/core";
@@ -59,7 +58,9 @@ export interface DataTableProps<TData, TValue> {
     rowActions?: DropdownMenuItemProps[] | ((cell: TData) => DropdownMenuItemProps[]);
     onRowActionClick?: onRowActionClick;
     loading?: boolean;
+    load?: (params?: any) => Promise<any>;
     filter?: FiltersProps;
+    pagination?: PaginationProps;
 }
 
 export const getSticky = (id: string, leftStickyColumns: StickyColumnProps[], rightStickyColumns: StickyColumnProps[]) => {
@@ -120,7 +121,6 @@ export const DataTable = <TData, TValue>(props: DataTableProps<TData, TValue>) =
         data,
         columns,
         actions,
-        filters,
         showColumnVisibility = true,
         rowActions,
         checkbox = false,
@@ -128,6 +128,8 @@ export const DataTable = <TData, TValue>(props: DataTableProps<TData, TValue>) =
         onRowActionClick = () => {},
         filter,
         loading,
+        pagination,
+        load,
     } = props;
 
     const [sorting, setSorting] = useState<SortingState>([]);
@@ -193,7 +195,6 @@ export const DataTable = <TData, TValue>(props: DataTableProps<TData, TValue>) =
         data,
         columns: tableColumns,
         getCoreRowModel: getCoreRowModel(),
-        getPaginationRowModel: getPaginationRowModel(),
         onSortingChange: setSorting,
         getSortedRowModel: getSortedRowModel(),
         onColumnVisibilityChange: setColumnVisibility,
@@ -261,7 +262,11 @@ export const DataTable = <TData, TValue>(props: DataTableProps<TData, TValue>) =
     return <>
         {
             filter ? <div className={"border-0 border-solid border-b border-secondary pb-2"}>
-                <Filters {...filter} loading={loading} />
+                <Filters
+                    {...filter}
+                    loading={loading}
+                    load={load}
+                />
             </div> : null
         }
         <Space className="flex items-center my-2 justify-start">
@@ -340,23 +345,16 @@ export const DataTable = <TData, TValue>(props: DataTableProps<TData, TValue>) =
                     )}
                 </TableBody>
             </Table>
-            <div className="flex items-center justify-end space-x-2 py-4">
-                <Button
-                    variant="outline"
-                    size="sm"
-                    onClick={() => table.previousPage()}
-                    disabled={!table.getCanPreviousPage()}
-                >
-                    Previous
-                </Button>
-                <Button
-                    variant="outline"
-                    size="sm"
-                    onClick={() => table.nextPage()}
-                    disabled={!table.getCanNextPage()}
-                >
-                    Next
-                </Button>
+            <div className="py-4">
+                <Pagination
+                    {...pagination}
+                    onChange={(page: number) => {
+                        load && load({page}).then();
+                    }}
+                    onSizeChange={(size: number) => {
+                        load && load({size, page: 1}).then();
+                    }}
+                />
             </div>
             { loading ? <div className={"absolute top-0 left-0 bottom-0 right-0 flex justify-center items-center bg-white/50"}><Spin /></div> : null }
         </div>

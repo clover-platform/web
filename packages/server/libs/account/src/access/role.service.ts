@@ -47,9 +47,21 @@ export class AccessRoleService {
     }
 
     async query(page: PageParams, query: RoleQueryParams):Promise<Result<PageResult<AccessRole>>> {
-        const sql = "(name like :keyword or description like :keyword)";
+        const ENABLE_MAP = {
+            "2": null,
+            "1": true,
+            "0": false,
+            "": null,
+        }
+        const enable = ENABLE_MAP[query.enable];
+        this.logger.log('enable', enable, query.enable);
+        let sql = "(name like :keyword or description like :keyword)";
+        if(enable !== null) {
+            sql += " and enable = :enable";
+        }
         const params = {
-            keyword: `%${query.keyword}%`
+            keyword: `%${query.keyword}%`,
+            enable,
         };
         const total = await this.repository.createQueryBuilder()
             .select()
@@ -79,5 +91,33 @@ export class AccessRoleService {
                 authorityTree: tree
             }
         });
+    }
+
+    async edit(role: AccessRoleDTO): Promise<Result<any>> {
+        const {id, name, description, enable} = role;
+        const exist = await this.repository.findOne({where: {name}});
+        if (exist && exist.id !== id) {
+            return Result.error({message: this.i18n.t("access.role.exist")} );
+        }
+        await this.repository.update({id}, {name, description, enable});
+        await this.saveAuthorities(id, role.authorities);
+        return Result.success();
+    }
+
+    async disable(id: number): Promise<Result<any>> {
+        await this.repository.update({id}, {enable: false});
+        return Result.success();
+    }
+
+    async enable(id: number): Promise<Result<any>> {
+        await this.repository.update({id}, {enable: true});
+        return Result.success();
+    }
+
+    async delete(id: number): Promise<Result<any>> {
+        await this.repository.delete({id});
+        await this.accessRoleAuthorityRepository.delete({roleId: id});
+        // TODO 与用户关联的
+        return Result.success();
     }
 }

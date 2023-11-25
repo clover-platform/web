@@ -16,7 +16,6 @@ export default {
                 foreground: "hsl(var(--foreground))",
                 primary: {
                     DEFAULT: "rgba(var(--primary))",
-                    hover: "rgba(var(--primary-hover))",
                     foreground: "hsl(var(--primary-foreground))",
                 },
                 success: {

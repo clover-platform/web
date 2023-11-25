@@ -6,6 +6,7 @@ import {
     SelectValue,
 } from "../../ui/select"
 import {forwardRef, ElementRef} from "react";
+import {cn} from "@clover/core/lib/utils";
 
 
 export interface SelectOptionProps {
@@ -18,6 +19,7 @@ export interface SelectProps {
     value?: string;
     onChange?: (value: string) => void;
     placeholder?: string;
+    className?: string;
 }
 
 export const Select = forwardRef<ElementRef<typeof UISelect>, SelectProps>((props, ref) => {
@@ -26,6 +28,7 @@ export const Select = forwardRef<ElementRef<typeof UISelect>, SelectProps>((prop
         value,
         onChange,
         placeholder,
+        className,
         ...rest
     } = props;
 
@@ -34,7 +37,10 @@ export const Select = forwardRef<ElementRef<typeof UISelect>, SelectProps>((prop
         onValueChange={onChange}
         value={value}
     >
-        <SelectTrigger className="w-[180px]">
+        <SelectTrigger className={cn(
+            "w-[180px]",
+            className
+        )}>
             <SelectValue placeholder={placeholder} />
         </SelectTrigger>
         <SelectContent>

@@ -6,6 +6,7 @@ import {AccessAuthorityDTO, AuthorityTree} from "@easy-kit/account/access/access
 import {Result} from "@easy-kit/public/result.entity";
 import {I18nService} from "@easy-kit/public/i18n.service";
 import { uniq } from "lodash";
+import {AccessRoleAuthority} from "@easy-kit/account/access/role.entity";
 
 @Injectable()
 export class AccessAuthorityService {
@@ -14,6 +15,7 @@ export class AccessAuthorityService {
     constructor(
         @InjectRepository(AccessAuthority) private repository: Repository<AccessAuthority>,
         @InjectRepository(AccessAuthorityApi) private repositoryAccessAuthorityApi: Repository<AccessAuthorityApi>,
+        @InjectRepository(AccessRoleAuthority) private repositoryAccessRoleAuthority: Repository<AccessRoleAuthority>,
         private i18n: I18nService,
     ) {}
 
@@ -135,7 +137,10 @@ export class AccessAuthorityService {
             .delete()
             .where("authorityId in (:ids)", {ids})
             .execute()
-        // TODO: 删除角色权限关联
+        await this.repositoryAccessRoleAuthority.createQueryBuilder()
+            .delete()
+            .where("authorityId in (:ids)", {ids})
+            .execute()
         return Result.success();
     }
 

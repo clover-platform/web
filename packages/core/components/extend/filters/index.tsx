@@ -41,8 +41,8 @@ export const Filters: FC<FiltersProps> = (props) => {
         loading,
         load,
         query,
-        searchText = "Search",
-        resetText = "Reset",
+        searchText = "搜索",
+        resetText = "重置",
     } = props;
 
     const {
@@ -54,7 +54,10 @@ export const Filters: FC<FiltersProps> = (props) => {
     })
 
     const onSubmit: SubmitHandler<any> = (data) => {
-        load && load(data).then();
+        load && load({
+            ...(data || {}),
+            page: 1
+        }).then();
     }
 
     return <div className={"relative"}>
@@ -66,7 +69,11 @@ export const Filters: FC<FiltersProps> = (props) => {
                     items && items.length ? <div className={"m-2 my-1 flex justify-start items-center flex-1"}>
                         <Button disabled={loading} type={"submit"}>{searchText}</Button>
                         <Button disabled={loading} type={"reset"} className={"ml-2"} variant={"secondary"} onClick={() => {
-                            load && load(defaultValues).then();
+
+                            load && load({
+                                ...(defaultValues || {}),
+                                page: 1
+                            }).then();
                             reset(defaultValues);
                         }}>{resetText}</Button>
                     </div> : null
