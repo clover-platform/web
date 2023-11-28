@@ -1,1 +1,1 @@
-declare module "@clover/common/utils/rest";
+declare module "@easy-kit/common/utils/rest";

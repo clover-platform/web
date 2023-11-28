@@ -1,4 +1,4 @@
-import { getLangCode, isMobile } from "@clover/common/utils";
+import { getLangCode, isMobile } from "@easy-kit/common/utils";
 import packageInfo from '../../package.json';
 import Bowser from 'bowser';
 import { getToken } from "@/utils/token";

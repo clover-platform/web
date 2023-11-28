@@ -7,7 +7,7 @@ import {
     FormItem,
     Switch, Form, Loading, ValueFormatter, Tree
 } from "@atom-ui/core";
-import Link from "@clover/common/components/link";
+import Link from "@easy-kit/common/components/link";
 import {useSearchParams} from "next/navigation";
 import {useRole} from "@/components/pages/access/role/hooks";
 import {toItems} from "@/components/pages/access/authority/form/utils";

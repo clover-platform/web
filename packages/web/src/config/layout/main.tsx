@@ -1,4 +1,4 @@
-import { MenuItemProps } from "@clover/common/components/layout/admin/sidebar";
+import { MenuItemProps } from "@easy-kit/common/components/layout/admin/sidebar";
 import {
     IconHome, IconProject, IconTodo,
     IconAccess, IconUser, IconHelp, IconNew

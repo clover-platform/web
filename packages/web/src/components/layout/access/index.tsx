@@ -2,7 +2,7 @@ import {PropsWithChildren, FC} from "react";
 import MainLayout from "../main";
 import {Tabs, TabsList, TabsTrigger} from "@atom-ui/core";
 import {TABS} from "@/config/layout/access";
-import {useLayoutTitle} from "@clover/common/components/layout/admin/hooks";
+import {useLayoutTitle} from "@easy-kit/common/components/layout/admin/hooks";
 import {useRouter} from "next/navigation";
 
 export interface AccessLayoutProps extends PropsWithChildren {

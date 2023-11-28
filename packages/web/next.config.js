@@ -16,7 +16,7 @@ const nextConfig = {
     reactStrictMode: false,
     trailingSlash: true,
     output: isDev ? 'standalone' : "export",
-    transpilePackages: ['@clover/common'],
+    transpilePackages: ['@easy-kit/common'],
     devIndicators: {
         buildActivity: false
     },

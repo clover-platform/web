@@ -1,4 +1,4 @@
-import {get, post} from "@clover/common/utils/rest";
+import {get, post} from "@easy-kit/common/utils/rest";
 
 // 获取个人信息
 export const profile = async () =>

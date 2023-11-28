@@ -1,5 +1,5 @@
-import {del, get, post, put} from "@clover/common/utils/rest";
-import { RestResult } from "@clover/common/utils/rest.interface";
+import {del, get, post, put} from "@easy-kit/common/utils/rest";
+import { RestResult } from "@easy-kit/common/utils/rest.interface";
 
 export interface AccessApi {
     id: number;

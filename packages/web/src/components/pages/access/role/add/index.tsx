@@ -1,12 +1,12 @@
 'use client';
 
 import {Button, Card, Space, Breadcrumbs, BreadcrumbsItem, useMessage} from "@atom-ui/core";
-import Link from "@clover/common/components/link";
+import Link from "@easy-kit/common/components/link";
 import RoleForm from "@/components/pages/access/role/form";
 import {useState} from "react";
 import {addRole} from "@/rest/access";
 import {useRouter} from "next/navigation";
-import BackButton from "@clover/common/components/button/back";
+import BackButton from "@easy-kit/common/components/button/back";
 
 const AddRolePage = () => {
     const [loading, setLoading] = useState(false);

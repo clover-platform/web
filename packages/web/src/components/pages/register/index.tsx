@@ -3,14 +3,14 @@
 import { Form, Steps, StepsItem, Button, Input, useMessage, FormItem, FormValues } from "@atom-ui/core";
 import { useState } from "react";
 import SecretItem from "@/components/pages/register/secret";
-import EmailCodeInput from "@clover/common/components/input/email-code";
+import EmailCodeInput from "@easy-kit/common/components/input/email-code";
 import { emailCheck, passwordSet, sendEmailCode } from "@/rest/auth";
 import { setToken } from "@/utils/token";
 import { encrypt } from "@/utils/crypto";
 import { useRouter, useSearchParams } from "next/navigation";
 import LoginLink from "@/components/common/login/link";
 import { FORM_STEP1_SCHEMA, FORM_STEP2_SCHEMA } from "@/config/pages/register/form";
-import CodeInput from "@clover/common/components/input/code";
+import CodeInput from "@easy-kit/common/components/input/code";
 
 const RegisterPage = () => {
     const msg = useMessage();

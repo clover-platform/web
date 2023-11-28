@@ -1,15 +1,15 @@
 import {FC, PropsWithChildren, useCallback, useEffect} from "react";
 import {useLayoutState} from "@/components/layout/hooks/main";
-import bus from '@clover/common/events';
+import bus from '@easy-kit/common/events';
 import {LOGIN} from "@/events/account";
 import {usePathname, useRouter} from "next/navigation";
-import AdminLayout from "@clover/common/components/layout/admin";
+import AdminLayout from "@easy-kit/common/components/layout/admin";
 import Logo from "@/components/common/logo";
 import {FOOTER_MENUS, NAV_MENUS, PROFILE_MENUS} from "@/config/layout/main";
 import {Avatar, Button, Dropdown, DropdownMenuItemProps, Space} from "@atom-ui/core";
 import { Action } from "@atom-ui/core";
 import { IconSetting, IconAdd } from "@arco-iconbox/react-clover";
-import SearchInput from "@clover/common/components/input/search";
+import SearchInput from "@easy-kit/common/components/input/search";
 
 export interface MainLayoutProps extends PropsWithChildren {
     active?: string;

@@ -1,6 +1,6 @@
 'use client';
 
-import {useLayoutTitle} from "@clover/common/components/layout/admin/hooks";
+import {useLayoutTitle} from "@easy-kit/common/components/layout/admin/hooks";
 
 const HomePage = () => {
     useLayoutTitle("{#首页#}");

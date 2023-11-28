@@ -2,8 +2,8 @@
 import {PropsWithChildren, useEffect, useState} from 'react';
 import { RecoilRoot } from 'recoil';
 import langList from "@/config/lang.list";
-import {detectLang} from "@clover/common/utils/layout";
-import LayoutAdaptor from "@clover/common/components/layout/adaptor";
+import {detectLang} from "@easy-kit/common/utils/layout";
+import LayoutAdaptor from "@easy-kit/common/components/layout/adaptor";
 import { Toaster } from "@atom-ui/core";
 import {routers} from "@/config/layout/router";
 import "@/plugin/rest";

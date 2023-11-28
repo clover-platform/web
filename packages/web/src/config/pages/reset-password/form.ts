@@ -1,5 +1,5 @@
 import * as z from "zod";
-import { CODE, EMAIL, PASSWORD, USERNAME } from "@clover/common/utils/regular";
+import { CODE, EMAIL, PASSWORD, USERNAME } from "@easy-kit/common/utils/regular";
 
 const code = "{#请输入6位数字验证码#}";
 

@@ -1,13 +1,12 @@
 'use client';
 
-import {Button, DataTable, Space, useMessage} from "@atom-ui/core";
+import {Button, DataTable, Space, useMessage, useAlert} from "@atom-ui/core";
 import {COLUMNS, FILTERS, ROW_ACTIONS} from "@/config/pages/access/role/table";
 import Link from "next/link";
-import {useTableLoader} from "@clover/common/hooks";
+import {useTableLoader} from "@easy-kit/common/hooks";
 import {disableRole, enableRole, roleList, deleteRole} from "@/rest/access";
 import {useEffect} from "react";
 import { useRouter } from "next/navigation";
-import {useAlert} from "@atom-ui/core/components/extend/alert";
 
 const initialParams = {
     keyword: '',

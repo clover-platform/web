@@ -1,7 +1,7 @@
 import {FC, forwardRef, useEffect, useState} from "react";
 import {TreeItemProps, TreeSelect} from "@atom-ui/core";
 import {authorityTree} from "@/rest/access";
-import {findNodeById} from "@atom-ui/core/components/extend/tree/utils";
+import {findNodeById} from "@atom-ui/core/components/uix/tree/utils";
 import {toItems} from "@/components/pages/access/authority/form/utils";
 
 const setChildrenDisabled = (items?: TreeItemProps[]) => {

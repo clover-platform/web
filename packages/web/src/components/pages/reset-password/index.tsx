@@ -2,7 +2,7 @@
 
 import { Button, Form, FormItem, FormValues, Input, Steps, StepsItem, useMessage } from "@atom-ui/core";
 import { useState } from "react";
-import EmailCodeInput from "@clover/common/components/input/email-code";
+import EmailCodeInput from "@easy-kit/common/components/input/email-code";
 import {passwordReset, resetEmailCheck, sendResetEmailCode} from "@/rest/auth";
 import {useRouter, useSearchParams} from "next/navigation";
 import {setToken} from "@/utils/token";

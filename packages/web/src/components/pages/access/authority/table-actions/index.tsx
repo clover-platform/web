@@ -3,7 +3,7 @@ import {Action, Dropdown, useMessage} from "@atom-ui/core";
 import { DotsHorizontalIcon } from "@radix-ui/react-icons";
 import { FC, useState } from "react";
 import EditAuthorityDialog from "@/components/pages/access/authority/dialog/edit";
-import {useAlert} from "@atom-ui/core/components/extend/alert";
+import {useAlert} from "@atom-ui/core/components/uix/alert";
 import {deleteAuthority} from "@/rest/access";
 
 export interface TableActionsProps {
