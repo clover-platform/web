@@ -1,4 +1,4 @@
-import { Dialog, DialogProps } from "@clover/core";
+import { Dialog, DialogProps } from "@atom-ui/core";
 import { FC, PropsWithChildren, useEffect, useState } from "react";
 import AuthorityForm from "@/components/pages/access/authority/form";
 import { authorityDetail } from "@/rest/access";

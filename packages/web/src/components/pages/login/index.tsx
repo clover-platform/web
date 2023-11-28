@@ -1,6 +1,6 @@
 'use client';
 
-import { Button, Divider, Input, Form, useMessage, FormItem } from "@clover/core";
+import { Button, Divider, Input, Form, useMessage, FormItem } from "@atom-ui/core";
 import Quick from "@/components/pages/login/quick";
 import LoginLink from "@/components/common/login/link";
 import React, {useState} from "react";

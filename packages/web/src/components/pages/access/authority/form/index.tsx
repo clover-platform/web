@@ -1,6 +1,6 @@
 import { FC, PropsWithChildren, useState } from "react";
 import {SCHEMA} from "@/config/pages/access/authority/form";
-import { Button, Form, FormItem, Input, useMessage } from "@clover/core";
+import { Button, Form, FormItem, Input, useMessage } from "@atom-ui/core";
 import ApiSelector from "@/components/pages/access/authority/form/api-selector";
 import AuthoritySelector from "@/components/pages/access/authority/form/authority-selector";
 import {addAuthority, editAuthority} from "@/rest/access";

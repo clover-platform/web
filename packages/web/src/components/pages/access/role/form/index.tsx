@@ -1,5 +1,5 @@
 import {SCHEMA} from "@/config/pages/access/role/form";
-import {Form, FormItem, Input, Switch, Textarea} from "@clover/core";
+import {Form, FormItem, Input, Switch, Textarea} from "@atom-ui/core";
 import {FC, PropsWithChildren} from "react";
 import AuthorityTree from "../../authority/form/tree";
 

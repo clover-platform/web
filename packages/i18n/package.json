@@ -1,9 +1,0 @@
-{
-    "name": "@clover/i18n",
-    "version": "2.4.0",
-    "description": "> TODO: description",
-    "author": "赵振华 <zhenhua.zhao@antalpha.com>",
-    "homepage": "",
-    "license": "MIT",
-    "type": "module"
-}

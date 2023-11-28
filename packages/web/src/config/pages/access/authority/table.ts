@@ -1,4 +1,4 @@
-import { ColumnsProps, DropdownMenuItemProps } from "@clover/core";
+import { ColumnsProps, DropdownMenuItemProps } from "@atom-ui/core";
 
 export const COLUMNS: ColumnsProps[] = [
     {

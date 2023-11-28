@@ -1,5 +1,5 @@
 import {FC, useState} from "react";
-import {Button} from "@clover/core";
+import {Button} from "@atom-ui/core";
 import AddAuthorityDialog from "@/components/pages/access/authority/dialog/add";
 
 export interface AddAuthorityButtonProps {

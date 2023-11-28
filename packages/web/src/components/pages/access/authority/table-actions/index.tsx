@@ -1,9 +1,9 @@
 import { ACTIONS } from "@/config/pages/access/authority/table";
-import {Action, Dropdown, useMessage} from "@clover/core";
+import {Action, Dropdown, useMessage} from "@atom-ui/core";
 import { DotsHorizontalIcon } from "@radix-ui/react-icons";
 import { FC, useState } from "react";
 import EditAuthorityDialog from "@/components/pages/access/authority/dialog/edit";
-import {useAlert} from "@clover/core/components/extend/alert";
+import {useAlert} from "@atom-ui/core/components/extend/alert";
 import {deleteAuthority} from "@/rest/access";
 
 export interface TableActionsProps {

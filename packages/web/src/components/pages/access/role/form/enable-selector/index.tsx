@@ -1,4 +1,4 @@
-import {Select} from "@clover/core";
+import {Select} from "@atom-ui/core";
 import {forwardRef} from "react";
 
 const EnableSelector = forwardRef((props, ref) => {

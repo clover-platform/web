@@ -1,6 +1,6 @@
-import { cn, ComboSelect } from "@clover/core";
+import { cn, ComboSelect } from "@atom-ui/core";
 import { forwardRef, useEffect, useState } from "react";
-import { ComboSelectOptionProps } from "@clover/core/components/extend/combo-select";
+import { ComboSelectOptionProps } from "@atom-ui/core/components/extend/combo-select";
 import { AccessApi, apiList } from "@/rest/access";
 
 type COLOR_MAP_TYPE = {

@@ -1,4 +1,4 @@
-import {Badge} from "@clover/core";
+import {Badge} from "@atom-ui/core";
 import {FC, forwardRef} from "react";
 
 export interface RoleStatusProps {

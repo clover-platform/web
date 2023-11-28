@@ -1,6 +1,6 @@
 'use client';
 
-import {Button, Card, Space, Breadcrumbs, BreadcrumbsItem, useMessage, Loading} from "@clover/core";
+import {Button, Card, Space, Breadcrumbs, BreadcrumbsItem, useMessage, Loading} from "@atom-ui/core";
 import Link from "@clover/common/components/link";
 import RoleForm from "@/components/pages/access/role/form";
 import { useState } from "react";

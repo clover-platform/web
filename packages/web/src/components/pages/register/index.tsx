@@ -1,6 +1,6 @@
 'use client';
 
-import { Form, Steps, StepsItem, Button, Input, useMessage, FormItem, FormValues } from "@clover/core";
+import { Form, Steps, StepsItem, Button, Input, useMessage, FormItem, FormValues } from "@atom-ui/core";
 import { useState } from "react";
 import SecretItem from "@/components/pages/register/secret";
 import EmailCodeInput from "@clover/common/components/input/email-code";

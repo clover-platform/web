@@ -1,6 +1,6 @@
-import {DropdownMenuItemProps, FilterItemProps, Input} from "@clover/core"
+import {DropdownMenuItemProps, FilterItemProps, Input} from "@atom-ui/core"
 import EnableSelector from "@/components/pages/access/role/form/enable-selector";
-import { DataTableColumn } from "@clover/core/components/extend/data-table";
+import { DataTableColumn } from "@atom-ui/core/components/extend/data-table";
 import {RoleStatus} from "@/components/pages/access/role/status";
 
 export const FILTERS: FilterItemProps[] = [

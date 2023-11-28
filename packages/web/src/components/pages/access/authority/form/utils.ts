@@ -1,6 +1,6 @@
 import {AuthorityTree} from "@/rest/access";
-import {TreeItemProps} from "@clover/core";
-import {handleItem} from "@clover/core/components/extend/tree/utils";
+import {TreeItemProps} from "@atom-ui/core";
+import {handleItem} from "@atom-ui/core/components/extend/tree/utils";
 
 export const toItems = (data: AuthorityTree[]): TreeItemProps[] => {
     return data.map<TreeItemProps>(item => {

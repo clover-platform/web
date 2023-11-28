@@ -1,4 +1,4 @@
-import { FormItem, useMessage, Image } from "@clover/core";
+import { FormItem, useMessage, Image } from "@atom-ui/core";
 import { FC, PropsWithChildren, useEffect, useState } from "react";
 import {otpSecret} from "@/rest/auth";
 import { CopyIcon } from "@radix-ui/react-icons";

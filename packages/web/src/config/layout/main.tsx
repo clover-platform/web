@@ -3,7 +3,7 @@ import {
     IconHome, IconProject, IconTodo,
     IconAccess, IconUser, IconHelp, IconNew
 } from "@arco-iconbox/react-clover";
-import { DropdownMenuItemProps } from "@clover/core";
+import { DropdownMenuItemProps } from "@atom-ui/core";
 
 export const NAV_MENUS: MenuItemProps[] = [
     {

@@ -1,7 +1,7 @@
 'use client';
 
 import React, {PropsWithChildren, useCallback, useEffect, useState} from "react";
-import {Button, Form, Input, Result, Space, Spin, Image, useMessage, FormItem} from "@clover/core";
+import {Button, Form, Input, Result, Space, Spin, Image, useMessage, FormItem} from "@atom-ui/core";
 import {linkCode, loginAndLink} from "@/rest/auth";
 import {useRouter, useSearchParams} from "next/navigation";
 import Link from "next/link";

@@ -6,8 +6,8 @@ import {usePathname, useRouter} from "next/navigation";
 import AdminLayout from "@clover/common/components/layout/admin";
 import Logo from "@/components/common/logo";
 import {FOOTER_MENUS, NAV_MENUS, PROFILE_MENUS} from "@/config/layout/main";
-import {Avatar, Button, Dropdown, DropdownMenuItemProps, Space} from "@clover/core";
-import { Action } from "@clover/core";
+import {Avatar, Button, Dropdown, DropdownMenuItemProps, Space} from "@atom-ui/core";
+import { Action } from "@atom-ui/core";
 import { IconSetting, IconAdd } from "@arco-iconbox/react-clover";
 import SearchInput from "@clover/common/components/input/search";
 

@@ -1,5 +1,5 @@
 import findWorkspaceRoot from 'find-yarn-workspace-root';
-import { webpackConfig } from "@clover/i18n/utils/config.js";
+import { webpackConfig } from "@easy-kit/i18n/utils/config.js";
 import withConfig from '@next/router-config';
 
 const isDev = process.env.NODE_ENV !== 'production';

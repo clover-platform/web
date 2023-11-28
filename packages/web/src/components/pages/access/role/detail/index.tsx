@@ -6,7 +6,7 @@ import {
     BreadcrumbsItem,
     FormItem,
     Switch, Form, Loading, ValueFormatter, Tree
-} from "@clover/core";
+} from "@atom-ui/core";
 import Link from "@clover/common/components/link";
 import {useSearchParams} from "next/navigation";
 import {useRole} from "@/components/pages/access/role/hooks";
