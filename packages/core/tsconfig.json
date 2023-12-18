@@ -1,0 +1,11 @@
+{
+    "compilerOptions": {
+        "baseUrl": ".",
+        "paths": {
+            "@atom-ui/core/*": ["./*"]
+        },
+        "jsx": "react-jsx",
+        "esModuleInterop": true,
+        "resolveJsonModule": true
+    }
+}

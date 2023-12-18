@@ -29,6 +29,8 @@
             "@easy-kit/auth/*": [ "libs/auth/src/*" ],
             "@easy-kit/account": [ "libs/account/src" ],
             "@easy-kit/account/*": [ "libs/account/src/*"],
+            "@easy-kit/assets": [ "libs/assets/src" ],
+            "@easy-kit/assets/*": [ "libs/assets/src/*"],
             "@/": [ "apps/main/src" ],
             "@/*": [ "apps/main/src/*" ]
         }

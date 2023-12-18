@@ -14,7 +14,8 @@
         "node-rsa": "1.1.1",
         "qrcode": "^1.5.3",
         "recoil": "0.7.7",
-        "sass": "1.69.5"
+        "sass": "1.69.5",
+        "date-fns": "^2.30.0"
     },
     "devDependencies": {
         "@types/lodash": "4.14.201",

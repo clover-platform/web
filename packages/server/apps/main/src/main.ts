@@ -7,6 +7,7 @@ import expressListRoutes from 'express-list-routes';
 import {AccessApiService} from "@easy-kit/account/access/api.service";
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 import {Logger} from "@nestjs/common";
+import { AppContext } from "@easy-kit/public/app.context";
 
 async function bootstrap() {
     const logger = new Logger('bootstrap');
@@ -14,6 +15,7 @@ async function bootstrap() {
     const configService = app.get(ConfigService);
     app.useGlobalFilters(new GlobalExceptionFilter());
     app.useGlobalInterceptors(new ResultInterceptor());
+    app.get(AppContext).setApp(app);
 
     // swagger
     const config = new DocumentBuilder()

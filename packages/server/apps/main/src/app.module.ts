@@ -7,7 +7,6 @@ import ThrottlerConfig from '@easy-kit/config/throttler';
 import CacheConfig from "@easy-kit/config/cache";
 import {APP_GUARD} from "@nestjs/core";
 import { AuthGuard } from "@easy-kit/auth/auth.guard";
-import { RolesGuard } from "@easy-kit/auth/roles.guard";
 import { PublicModule } from "@easy-kit/public/public.module";
 import { ThrottlerGuard } from "@nestjs/throttler";
 import { AuthAccountModule } from "@easy-kit/account";
@@ -30,10 +29,6 @@ import { AccountModule } from "@/account/account.module";
         {
             provide: APP_GUARD,
             useClass: AuthGuard
-        },
-        {
-            provide: APP_GUARD,
-            useClass: RolesGuard
         },
         {
             provide: APP_GUARD,

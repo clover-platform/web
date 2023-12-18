@@ -11,6 +11,11 @@
                 "include": "i18n/**/*",
                 "watchAssets": true,
                 "outDir": "dist/apps/main/src/"
+            },
+            {
+                "include": "template/**/*",
+                "watchAssets": true,
+                "outDir": "dist/apps/main/src/"
             }
         ]
     },
@@ -69,6 +74,15 @@
             "sourceRoot": "libs/account/src",
             "compilerOptions": {
                 "tsConfigPath": "libs/account/tsconfig.lib.json"
+            }
+        },
+        "assets": {
+            "type": "library",
+            "root": "libs/assets",
+            "entryFile": "index",
+            "sourceRoot": "libs/assets/src",
+            "compilerOptions": {
+                "tsConfigPath": "libs/assets/tsconfig.lib.json"
             }
         }
     }

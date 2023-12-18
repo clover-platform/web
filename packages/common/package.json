@@ -1,0 +1,19 @@
+{
+    "name": "@easy-kit/common",
+    "version": "2.4.0",
+    "type": "module",
+    "license": "MIT",
+    "dependencies": {
+        "chalk": "5.3.0",
+        "decimal.js-light": "2.5.1",
+        "gulp": "4.0.2",
+        "gulp-replace": "1.1.4",
+        "markdown-it": "13.0.2",
+        "path-to-regexp": "6.2.1",
+        "supports-color": "9.4.0",
+        "unescape-js": "1.1.4"
+    },
+    "devDependencies": {
+        "next": "14.0.0"
+    }
+}

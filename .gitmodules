@@ -1,3 +1,0 @@
-[submodule "support"]
-	path = support
-	url = ssh://git@git.zkit.org:8922/zkit/support.git

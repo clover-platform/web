@@ -1,7 +1,7 @@
 {
     "root": true,
     "extends": [
-        "@clover/eslint-config"
+        "@easy-kit/eslint-config"
     ],
     "ignorePatterns": [
         "node_modules/",
