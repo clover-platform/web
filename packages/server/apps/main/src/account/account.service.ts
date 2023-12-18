@@ -12,6 +12,7 @@ import {APP_ACCOUNT_LOCK_KEY} from "@/account/account.const";
 import {AuthAccountService} from "@easy-kit/account/auth/account.service";
 import {I18nService} from "@easy-kit/public/i18n.service";
 import {isEmail} from "@easy-kit/common/utils";
+import { LoginRequest } from "@/account/account.interface";
 
 @Injectable()
 export class AccountService {
@@ -98,16 +99,23 @@ export class AccountService {
         return await this.accountService.createToken(appAccount.account, {expiresIn: "5m"});
     }
 
-    async login(account: string, password: string): Promise<Result<TokenResult>> {
+    async login(request: LoginRequest): Promise<Result<TokenResult>> {
         let info = null;
-        let username = account;
-        if(isEmail(account)) {
+        let username = request.account;
+        if(isEmail(username)) {
             info = await this.repository.findOneBy({
-                email: account
+                email: username
             });
             username = info.username;
         }
-        return this.accountService.login(username, password);
+        const has = await this.repository.findOneBy({
+            username,
+            enable: true,
+        });
+        if(!has) {
+            return Result.error({code: 1, message: this.i18n.t("account.notfound")})
+        }
+        return this.accountService.login(username, request.password, request.code);
     }
 
     async sendResetEmail(email: string): Promise<Result<any>> {

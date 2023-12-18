@@ -4,6 +4,7 @@ import { useSearchParams } from "next/navigation";
 
 export interface LoginLinkProps extends PropsWithChildren {
     href: string,
+    tabIndex?: number,
 }
 
 const LoginLink = (props: LoginLinkProps) => {
@@ -17,7 +18,7 @@ const LoginLink = (props: LoginLinkProps) => {
         return props.href;
     }, [from, props.href])
 
-    return <Link href={href}>{props.children}</Link>
+    return <Link {...props} href={href}>{props.children}</Link>
 };
 
 export default LoginLink;

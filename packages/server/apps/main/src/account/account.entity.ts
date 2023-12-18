@@ -24,6 +24,11 @@ export class Account {
     }) avatar: string;
 
     @Column({
+        comment: "是否启用",
+        default: true
+    }) enable: boolean;
+
+    @Column({
         comment: "是否已删除",
         default: false
     }) deleted: boolean;

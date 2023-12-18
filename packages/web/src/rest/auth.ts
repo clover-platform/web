@@ -49,4 +49,5 @@ export const loginAndLink = async (data: {
 export const login = async (data: {
     account: string;
     password: string;
+    code: string;
 }) => post(`@account/login/`, data);

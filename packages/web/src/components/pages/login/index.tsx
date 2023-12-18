@@ -9,6 +9,7 @@ import {setToken} from "@/utils/token";
 import {useRouter, useSearchParams} from "next/navigation";
 import {encrypt} from "@/utils/crypto";
 import { SCHEMA } from "@/config/pages/login/form";
+import CodeInput from "@easy-kit/common/components/input/code";
 
 const LoginPage = () => {
     const router = useRouter();
@@ -33,7 +34,7 @@ const LoginPage = () => {
     const passwordLabel = <div className={"flex justify-center items-center"}>
         <div className={"flex-1"}>{"{#密码#}"}</div>
         <div className={"ml-[10px]"}>
-            <LoginLink href={"/{#LANG#}/reset-password/"}>{"{#找回密码#}"}</LoginLink>
+            <LoginLink href={"/{#LANG#}/reset-password/"} tabIndex={-1}>{"{#找回密码#}"}</LoginLink>
         </div>
     </div>
     return <div className={"w-[360px]"}>
@@ -54,6 +55,9 @@ const LoginPage = () => {
                 </FormItem>
                 <FormItem name="password" label={passwordLabel}>
                     <Input placeholder="{#请输入密码#}" type={"password"} />
+                </FormItem>
+                <FormItem name="code" label={"{#身份验证应用#}"} description={"{#重置身份验证应用请在管理员重置后输入：000000#}"}>
+                    <CodeInput placeholder="{#请输入验证码#}" />
                 </FormItem>
                 <Button loading={submitting} long type={"submit"}>{"{#立即登录#}"}</Button>
             </Form>

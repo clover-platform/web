@@ -79,7 +79,7 @@ export class AccountController {
     @Public()
     @Post("/login")
     async login(@Body() request: LoginRequest): Promise<Result<any>> {
-        return this.service.login(request.account, request.password);
+        return this.service.login(request);
     }
 
     @Get("/profile")
