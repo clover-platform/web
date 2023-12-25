@@ -18,6 +18,9 @@ export default [{ path: "/access/authority/", config:  {
 } },{ path: "/", config:  {
     name: 'main',
     active: "home",
+} },{ path: "/i18n/", config:  {
+    name: 'main',
+    active: "i18n",
 } },{ path: "/link/error/", config:  {
     name: 'login',
 } },{ path: "/link/github/", config:  {
@@ -39,4 +42,7 @@ export default [{ path: "/access/authority/", config:  {
 } },{ path: "/user/", config:  {
     name: 'main',
     active: "user",
+} },{ path: "/wiki/", config:  {
+    name: 'main',
+    active: "wiki",
 } }]

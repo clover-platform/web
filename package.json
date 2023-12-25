@@ -6,7 +6,7 @@
     ],
     "scripts": {},
     "dependencies": {
-        "@arco-iconbox/react-clover": "0.0.7",
+        "@arco-iconbox/react-clover": "0.0.8",
         "axios": "1.6.2",
         "dayjs": "^1.11.10",
         "localforage": "1.10.0",
@@ -15,17 +15,17 @@
         "qrcode": "^1.5.3",
         "recoil": "0.7.7",
         "sass": "1.69.5",
-        "date-fns": "^2.30.0"
+        "date-fns": "3.0.6"
     },
     "devDependencies": {
-        "@types/lodash": "4.14.201",
+        "@types/lodash": "4.14.202",
         "@types/node-rsa": "1.1.4",
         "@types/qrcode": "^1.5.5",
         "cross-env": "7.0.3",
-        "eslint": "8.53.0",
+        "eslint": "8.56.0",
         "fs-jetpack": "5.1.0",
-        "lerna": "7.4.2",
+        "lerna": "8.0.1",
         "source-map-support": "0.5.21",
-        "typescript": "5.2.2"
+        "typescript": "5.3.3"
     }
 }

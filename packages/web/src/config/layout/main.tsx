@@ -1,7 +1,7 @@
 import { MenuItemProps } from "@easy-kit/common/components/layout/admin/sidebar";
 import {
     IconHome, IconProject, IconTodo,
-    IconAccess, IconUser, IconHelp, IconNew, IconSetting
+    IconAccess, IconUser, IconHelp, IconNew, IconSetting, IconWiki, IconI18n
 } from "@arco-iconbox/react-clover";
 import {DropdownMenuItemProps} from "@atom-ui/core";
 
@@ -41,7 +41,7 @@ export const NAV_MENUS: MenuItemWithPerm[] = [
         title: "{#文档#}",
         url: "/{#LANG#}/wiki/",
         active: true,
-        icon: <IconHome />,
+        icon: <IconWiki />,
         perm: "menu:wiki"
     },
     {
@@ -49,7 +49,7 @@ export const NAV_MENUS: MenuItemWithPerm[] = [
         title: "{#国际化#}",
         url: "/{#LANG#}/i18n/",
         active: true,
-        icon: <IconHome />,
+        icon: <IconI18n />,
         perm: "menu:i18n"
     },
     {
