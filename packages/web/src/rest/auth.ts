@@ -1,4 +1,5 @@
 import {get, post} from "@easy-kit/common/utils/rest";
+import {RestResult} from "@easy-kit/common/utils/rest.interface";
 
 // 获取个人信息
 export const profile = async () =>
@@ -51,3 +52,6 @@ export const login = async (data: {
     password: string;
     code: string;
 }) => post(`@account/login/`, data);
+
+export const logout = async (): Promise<RestResult<any>> =>
+    post(`@account/logout/`);

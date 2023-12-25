@@ -1,41 +1,77 @@
 import { MenuItemProps } from "@easy-kit/common/components/layout/admin/sidebar";
 import {
     IconHome, IconProject, IconTodo,
-    IconAccess, IconUser, IconHelp, IconNew
+    IconAccess, IconUser, IconHelp, IconNew, IconSetting
 } from "@arco-iconbox/react-clover";
-import { DropdownMenuItemProps } from "@atom-ui/core";
+import {DropdownMenuItemProps} from "@atom-ui/core";
 
-export const NAV_MENUS: MenuItemProps[] = [
+export type MenuItemWithPerm = {
+    perm?: string | string[];
+} & MenuItemProps;
+
+export type DropdownMenuItemWithPerm = {
+    perm?: string | string[];
+} & DropdownMenuItemProps;
+
+export const NAV_MENUS: MenuItemWithPerm[] = [
     {
         id: "home",
         title: "{#首页#}",
         url: "/{#LANG#}/",
         active: true,
-        icon: <IconHome />
+        icon: <IconHome />,
+        perm: "menu:home"
     },
     {
         id: "project",
-        title: "{#项目管理#}",
+        title: "{#项目#}",
         url: "/{#LANG#}/project/",
-        icon: <IconProject />
+        icon: <IconProject />,
+        perm: "menu:project"
     },
     {
         id: "todo",
         title: "{#待办事项#}",
         url: "/{#LANG#}/todo/",
-        icon: <IconTodo />
+        icon: <IconTodo />,
+        perm: "menu:todo"
+    },
+    {
+        id: "wiki",
+        title: "{#文档#}",
+        url: "/{#LANG#}/wiki/",
+        active: true,
+        icon: <IconHome />,
+        perm: "menu:wiki"
+    },
+    {
+        id: "i18n",
+        title: "{#国际化#}",
+        url: "/{#LANG#}/i18n/",
+        active: true,
+        icon: <IconHome />,
+        perm: "menu:i18n"
     },
     {
         id: "user",
         title: "{#用户管理#}",
         url: "/{#LANG#}/user/",
-        icon: <IconUser />
+        icon: <IconUser />,
+        perm: "menu:user"
     },
     {
         id: "access",
         title: "{#权限管理#}",
         url: "/{#LANG#}/access/",
-        icon: <IconAccess />
+        icon: <IconAccess />,
+        perm: "menu:access"
+    },
+    {
+        id: "setting",
+        title: "{#系统设置#}",
+        url: "/{#LANG#}/setting/",
+        icon: <IconSetting />,
+        perm: "menu:setting"
     }
 ]
 
@@ -58,7 +94,7 @@ export const FOOTER_MENUS: MenuItemProps[] = [
     },
 ]
 
-export const PROFILE_MENUS: DropdownMenuItemProps[] = [
+export const PROFILE_MENUS: DropdownMenuItemWithPerm[] = [
     {
         id: "my.account",
         type: "label",
@@ -71,34 +107,39 @@ export const PROFILE_MENUS: DropdownMenuItemProps[] = [
     {
         id: "profile",
         type: "item",
-        label: "{#Profile#}",
-        shortcut: "⇧⌘P"
+        label: "{#账号信息#}",
+        perm: "module:setting:profile"
     },
     {
-        id: "billing",
+        id: "password",
         type: "item",
-        label: "{#Billing#}",
-        shortcut: "⌘B",
-        children: [
-            {
-                id: "email",
-                type: "item",
-                label: "{#Email#}",
-            },
-            {
-                id: "message",
-                type: "item",
-                label: "{#Message#}",
-            },
-        ]
+        label: "{#修改密码#}",
+        perm: "module:setting:password"
     },
     {
         type: "separator",
-        id: 'separator.2'
+        id: 'separator.2',
+        perm: ["module:setting:profile", "module:setting:password"]
     },
     {
-        id: 'log.out',
+        id: 'logout',
         type: "item",
-        label: "{#Log out#}"
+        label: "{#退出#}"
     },
 ]
+
+export const ADD_MENUS: DropdownMenuItemWithPerm[] = [
+    {
+        id: "project",
+        type: "item",
+        label: "{#新建项目#}",
+        perm: "module:project:add"
+    },
+    {
+        id: "user",
+        type: "item",
+        label: "{#新建用户#}",
+        perm: "module:user:add"
+    },
+]
+

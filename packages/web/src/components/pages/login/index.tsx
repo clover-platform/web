@@ -56,9 +56,6 @@ const LoginPage = () => {
                 <FormItem name="password" label={passwordLabel}>
                     <Input placeholder="{#请输入密码#}" type={"password"} />
                 </FormItem>
-                <FormItem name="code" label={"{#身份验证应用#}"} description={"{#重置身份验证应用请在管理员重置后输入：000000#}"}>
-                    <CodeInput placeholder="{#请输入验证码#}" />
-                </FormItem>
                 <Button loading={submitting} long type={"submit"}>{"{#立即登录#}"}</Button>
             </Form>
         </div>

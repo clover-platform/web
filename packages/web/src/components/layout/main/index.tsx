@@ -1,41 +1,95 @@
-import {FC, PropsWithChildren, useCallback, useEffect} from "react";
+import {FC, KeyboardEvent, PropsWithChildren, useCallback, useEffect, useMemo, useState} from "react";
 import {useLayoutState} from "@/components/layout/hooks/main";
 import bus from '@easy-kit/common/events';
 import {LOGIN} from "@/events/account";
 import {usePathname, useRouter} from "next/navigation";
 import AdminLayout from "@easy-kit/common/components/layout/admin";
 import Logo from "@/components/common/logo";
-import {FOOTER_MENUS, NAV_MENUS, PROFILE_MENUS} from "@/config/layout/main";
-import {Avatar, Button, Dropdown, DropdownMenuItemProps, Space} from "@atom-ui/core";
+import {FOOTER_MENUS, NAV_MENUS, PROFILE_MENUS, ADD_MENUS} from "@/config/layout/main";
+import {Avatar, Button, Dropdown, DropdownMenuItemProps, Space, Spin, useAlert, useMessage} from "@atom-ui/core";
 import { Action } from "@atom-ui/core";
 import { IconSetting, IconAdd } from "@arco-iconbox/react-clover";
 import SearchInput from "@easy-kit/common/components/input/search";
+import Access from "@easy-kit/common/components/access";
+import {useRecoilValue} from "recoil";
+import {useAccess} from "@easy-kit/common/hooks";
+import {accountInfoState} from "@/state/account";
+import {logout} from "@/rest/auth";
 
 export interface MainLayoutProps extends PropsWithChildren {
     active?: string;
 }
 
 const LayoutActions: FC = () => {
+    const router = useRouter();
+    const access = useAccess();
+    const account = useRecoilValue<any>(accountInfoState);
+    const [keyword, setKeyword] = useState('');
+    const alert = useAlert();
+    const msg = useMessage();
+
     const onItemClick = ({id}: DropdownMenuItemProps) => {
-        console.log(id);
+        if(id === "profile") {
+            router.push(`/{#LANG#}/setting/`)
+        }else if(id === "password") {
+            router.push(`/{#LANG#}/setting/password/`)
+        }else if(id === "logout") {
+            alert.confirm({
+                title: "{#退出#}",
+                description: "{#请确认没有为保存的数据，是否要退出登录？#}",
+                cancelText: "{#取消#}",
+                okText: "{#退出#}",
+                onOk: async () => {
+                    const { success, message } = await logout();
+                    if(success) {
+                        bus.emit(LOGIN);
+                    }else{
+                        msg.error(message);
+                    }
+                    return success;
+                }
+            })
+        }
     }
 
-    return <Space
-        itemClassName={"m-1"}
-        className={"flex justify-center items-center mx-1"}
-    >
-        <SearchInput />
-        <Button variant="outline" size="icon">
-            <IconAdd fontSize={20} />
-        </Button>
-        <Action>
+    const onAddItemClick = ({id}: DropdownMenuItemProps) => {
+        router.push(`/{#LANG#}/${id}/add/`)
+    }
+
+    const onSearch = (e: KeyboardEvent) => {
+        if (e.key === "Enter") {
+            location.href = `/{#LANG#}/project/?name=${encodeURIComponent(keyword)}`;
+            setKeyword('');
+        }
+    }
+
+    const fallback = useMemo(() => {
+        const { name = "" } = account || {};
+        return name.substring(0, 1).toUpperCase();
+    }, [account])
+
+    return <Space className={"flex justify-center items-center mx-1"}>
+        <Access value={"module:project:list"}>
+            <SearchInput
+                value={keyword}
+                onChange={(e) => setKeyword(e.target.value)}
+                onKeyDown={onSearch}
+            />
+        </Access>
+        <Dropdown asChild={true} align={"end"} className={"w-[120px]"} items={ADD_MENUS.filter(item => access(item.perm))} onItemClick={onAddItemClick}>
+            <Button variant="outline" size="icon">
+                <IconAdd fontSize={20} />
+            </Button>
+        </Dropdown>
+        <Action onClick={() => router.push("/{#LANG#}/setting/")}>
             <IconSetting fontSize={20} />
         </Action>
-        <Dropdown items={PROFILE_MENUS} onItemClick={onItemClick}>
+        <Dropdown align={"end"} className={"w-[180px]"} items={PROFILE_MENUS.filter(item => access(item.perm, false))} onItemClick={onItemClick}>
             <Action>
                 <Avatar
                     className={"w-7 h-7"}
-                    src={"https://avatars.githubusercontent.com/u/10261133?v=4"}
+                    src={account['avatar']}
+                    fallback={fallback}
                 />
             </Action>
         </Dropdown>
@@ -43,6 +97,7 @@ const LayoutActions: FC = () => {
 }
 
 const MainLayout: FC<MainLayoutProps> = (props) => {
+    const access = useAccess();
     const [loading, isLogin, account] = useLayoutState();
     const router = useRouter();
     const path = usePathname();
@@ -58,9 +113,11 @@ const MainLayout: FC<MainLayoutProps> = (props) => {
         }
     }, []);
 
-    return <AdminLayout
+    return loading ? <div className={"min-h-[100vh] flex justify-center items-center"}>
+        <Spin />
+    </div> : <AdminLayout
         logo={<Logo theme={"dark"} />}
-        navMenus={NAV_MENUS}
+        navMenus={NAV_MENUS.filter(item => access(item.perm))}
         active={props.active}
         extendMenus={FOOTER_MENUS}
         actions={<LayoutActions />}

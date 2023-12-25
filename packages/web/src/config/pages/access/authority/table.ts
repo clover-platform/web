@@ -14,6 +14,11 @@ export const COLUMNS: ColumnsProps[] = [
         label: "{#权限码#}",
         width: 300
     },
+    {
+        key: "sort",
+        label: "{#排序#}",
+        width: 100
+    },
 ]
 
 export const ACTIONS: DropdownMenuItemProps[] = [

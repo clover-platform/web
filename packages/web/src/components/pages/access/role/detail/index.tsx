@@ -5,7 +5,7 @@ import {
     Breadcrumbs,
     BreadcrumbsItem,
     FormItem,
-    Switch, Form, Loading, ValueFormatter, Tree
+    Switch, Form, Loading, ValueFormatter, Tree, Separator
 } from "@atom-ui/core";
 import Link from "@easy-kit/common/components/link";
 import {useSearchParams} from "next/navigation";
@@ -27,8 +27,9 @@ const RoleDetailPage = () => {
             </BreadcrumbsItem>
             <BreadcrumbsItem>{"{#角色详情#}"}</BreadcrumbsItem>
         </Breadcrumbs>
+        <Separator className={"my-4"} />
         <Loading loading={loading}>
-            <Card className={"w-[550px] mx-auto"}>
+            <div className={"w-[550px] mx-auto"}>
                 <Form key={key} defaultValues={role}>
                     <FormItem name="name" label="{#名称#}">
                         <ValueFormatter />
@@ -50,7 +51,7 @@ const RoleDetailPage = () => {
                         />
                     </FormItem>
                 </Form>
-            </Card>
+            </div>
         </Loading>
     </>;
 };

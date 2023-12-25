@@ -157,4 +157,12 @@ export class AccountService {
         return await this.accountService.createToken(account, {expiresIn: "5m"});
     }
 
+    async findByUsername(username: string): Promise<Account> {
+        return await this.repository.findOneBy({username});
+    }
+
+    async logout(token: string): Promise<Result<any>> {
+        return this.accountService.logout(token);
+    }
+
 }

@@ -14,7 +14,9 @@ export interface AuthorityFormProps extends PropsWithChildren {
 const AuthorityForm: FC<AuthorityFormProps> = (props) => {
     const {
         onSuccess = () => {},
-        authority,
+        authority = {
+            sort: `0`
+        },
         type
     } = props
 
@@ -49,6 +51,9 @@ const AuthorityForm: FC<AuthorityFormProps> = (props) => {
         </FormItem>
         <FormItem name="key" label={"{#权限码#}"}>
             <Input placeholder="{#请输入权限码#}" />
+        </FormItem>
+        <FormItem name="sort" label={"{#排序#}"}>
+            <Input placeholder="{#请输入排序号#}" />
         </FormItem>
         <FormItem name="apis" label={"{#关联接口#}"}>
             <ApiSelector />

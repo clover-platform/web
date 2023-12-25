@@ -3,6 +3,7 @@ export interface AccessAuthorityDTO {
     id?: number;
     name: string;
     key: string;
+    sort: number;
     apis: number[];
 }
 

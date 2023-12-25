@@ -16,7 +16,10 @@ import {AuthAccountModule} from "@easy-kit/account";
         AccountService,
     ],
     controllers: [
-        AccountController
+        AccountController,
     ],
+    exports: [
+        AccountService
+    ]
 })
 export class AccountModule {}

@@ -20,6 +20,12 @@ export class AccessAuthority {
         comment: "权限码",
         length: 200
     }) key: string;
+
+    @Column({
+        comment: "排序",
+        nullable: false,
+        default: 0
+    }) sort: number;
 }
 
 @Entity()

@@ -11,6 +11,7 @@ import { PublicModule } from "@easy-kit/public/public.module";
 import { ThrottlerGuard } from "@nestjs/throttler";
 import { AuthAccountModule } from "@easy-kit/account";
 import { AccountModule } from "@/account/account.module";
+import {AppAuthGuard} from "@/auth/app.auth.guard";
 
 @Module({
     imports: [
@@ -29,6 +30,10 @@ import { AccountModule } from "@/account/account.module";
         {
             provide: APP_GUARD,
             useClass: AuthGuard
+        },
+        {
+            provide: APP_GUARD,
+            useClass: AppAuthGuard
         },
         {
             provide: APP_GUARD,

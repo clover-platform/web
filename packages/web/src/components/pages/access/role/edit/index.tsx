@@ -1,6 +1,6 @@
 'use client';
 
-import {Button, Card, Space, Breadcrumbs, BreadcrumbsItem, useMessage, Loading} from "@atom-ui/core";
+import {Button, Card, Space, Breadcrumbs, BreadcrumbsItem, useMessage, Loading, Separator} from "@atom-ui/core";
 import Link from "@easy-kit/common/components/link";
 import RoleForm from "@/components/pages/access/role/form";
 import { useState } from "react";
@@ -36,8 +36,9 @@ const EditRolePage = () => {
             </BreadcrumbsItem>
             <BreadcrumbsItem>{"{#编辑角色#}"}</BreadcrumbsItem>
         </Breadcrumbs>
+        <Separator className={"my-4"} />
         <Loading loading={loading}>
-            <Card className={"w-[550px] mx-auto"}>
+            <div className={"w-[550px] mx-auto"}>
                 <RoleForm
                     defaultValues={role}
                     key={key}
@@ -48,7 +49,7 @@ const EditRolePage = () => {
                         <BackButton />
                     </Space>
                 </RoleForm>
-            </Card>
+            </div>
         </Loading>
     </>;
 };

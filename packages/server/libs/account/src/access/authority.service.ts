@@ -44,12 +44,12 @@ export class AccessAuthorityService {
 
     async edit(authority: AccessAuthorityDTO): Promise<Result<any>> {
         this.logger.log("edit authority", authority);
-        const {id, parentId, name, key} = authority;
+        const {id, parentId, name, key, sort} = authority;
         const exist = await this.repository.findOne({where: {key}});
         if (exist && exist.id !== id) { // 存在且不是自己
             return Result.error({message: this.i18n.t("access.authority.exist")} );
         }
-        await this.repository.update({id}, {parentId, name, key});
+        await this.repository.update({id}, {parentId, name, key, sort});
         await this.saveApis(id, authority.apis);
         return Result.success();
     }
@@ -69,7 +69,8 @@ export class AccessAuthorityService {
 
     async tree(): Promise<AuthorityTree[]> {
         this.logger.log("get authority tree");
-        const data = await this.repository.find();
+        const data = await this.repository.createQueryBuilder()
+            .select().orderBy("sort", "DESC").getMany();
         const tree: AuthorityTree[] = [];
         data.forEach(item => {
             if (!item.parentId) {
@@ -91,6 +92,7 @@ export class AccessAuthorityService {
             parentId: authority.parentId,
             name: authority.name,
             key: authority.key,
+            sort: authority.sort,
             apis: apis.map(api => api.apiId),
         };
     }

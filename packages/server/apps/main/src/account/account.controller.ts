@@ -14,6 +14,7 @@ import { Account } from "@/account/account.entity";
 import { AccountService } from "@/account/account.service";
 import {LoginRequest} from "@/account/account.interface";
 import { OTPResult } from "@easy-kit/public/public.interface";
+import {AccessService} from "@easy-kit/account/access/access.service";
 
 @Controller("/api/account")
 export class AccountController {
@@ -21,7 +22,8 @@ export class AccountController {
 
     constructor(
         private readonly service: AccountService,
-        private readonly accountService: AuthAccountService
+        private readonly accountService: AuthAccountService,
+        private readonly accessService: AccessService,
     ) {}
 
     @Get("/otp/secret/")
@@ -83,7 +85,21 @@ export class AccountController {
     }
 
     @Get("/profile")
-    profile(): Account {
-        return new Account();
+    async profile(@Req() req: Request,): Promise<Result<any>> {
+        const account: Account = req['userInfo'];
+        const user: SessionUser = req['user'];
+        const authorities = await this.accessService.authorities(user.username);
+        return Result.success({
+            data: {
+                ...account,
+                authorities,
+            }
+        })
+    }
+
+    @Post("/logout")
+    async logout(@Req() req: Request,): Promise<Result<Account[]>> {
+        const [_, token] = req.headers['authorization']?.split(' ') ?? [];
+        return this.service.logout(token);
     }
 }
