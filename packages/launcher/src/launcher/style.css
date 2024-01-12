@@ -1,0 +1,14 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+    :root {
+        --layer-bg: 1;
+        --layer-main: 10;
+        --layer-control: 100;
+    }
+    .cover-full {
+        @apply top-0 right-0 bottom-0 left-0;
+    }
+}

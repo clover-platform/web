@@ -1,5 +1,7 @@
-import CloverLauncher from "@clover/launcher";
+import { TabLauncher } from "@clover/launcher";
 
-const NewTab = () => <CloverLauncher />;
+const NewTab = () => {
+    return <TabLauncher />;
+};
 
 export default NewTab;

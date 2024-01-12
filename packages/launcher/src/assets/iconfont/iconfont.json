@@ -1,0 +1,65 @@
+{
+  "id": "4408929",
+  "name": "clover-tab",
+  "font_family": "clover-tab",
+  "css_prefix_text": "tab-",
+  "description": "幸运草起始页",
+  "glyphs": [
+    {
+      "icon_id": "592835",
+      "name": "baidu",
+      "font_class": "baidu",
+      "unicode": "e650",
+      "unicode_decimal": 58960
+    },
+    {
+      "icon_id": "3211651",
+      "name": "s-control 控制",
+      "font_class": "controls",
+      "unicode": "e668",
+      "unicode_decimal": 58984
+    },
+    {
+      "icon_id": "4765734",
+      "name": "plus-circle",
+      "font_class": "plus",
+      "unicode": "e781",
+      "unicode_decimal": 59265
+    },
+    {
+      "icon_id": "4936694",
+      "name": "setting-fill",
+      "font_class": "setting",
+      "unicode": "e871",
+      "unicode_decimal": 59505
+    },
+    {
+      "icon_id": "4936951",
+      "name": "google",
+      "font_class": "google",
+      "unicode": "e87a",
+      "unicode_decimal": 59514
+    },
+    {
+      "icon_id": "10294689",
+      "name": "more",
+      "font_class": "more",
+      "unicode": "e607",
+      "unicode_decimal": 58887
+    },
+    {
+      "icon_id": "5550869",
+      "name": "绿化",
+      "font_class": "leaf",
+      "unicode": "e629",
+      "unicode_decimal": 58921
+    },
+    {
+      "icon_id": "6988343",
+      "name": "apps",
+      "font_class": "apps",
+      "unicode": "ec0e",
+      "unicode_decimal": 60430
+    }
+  ]
+}

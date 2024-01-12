@@ -17,22 +17,27 @@ const globals = {
 // https://vitejs.dev/config/
 export default defineConfig({
     plugins: [react()],
+    resolve: {
+        alias:{
+            '@': resolve('./src')
+        }
+    },
     build: {
         // 输出文件夹
         outDir: 'dist',
         lib: {
             // 组件库源码的入口文件
-            entry: resolve('src/index.tsx'),
+            entry: resolve('src/index.ts'),
             // 组件库名称
-            name: 'CloverLauncher',
+            name: 'TabLauncher',
             // 文件名称, 打包结果举例: suemor.cjs
-            fileName: 'clover-launcher',
+            fileName: 'launcher',
             // 打包格式
             formats: ['es', 'cjs'],
         },
         rollupOptions: {
             //排除不相关的依赖
-            external: ['react', 'react-dom', ...Object.keys(globals)],
+            external: ['react', 'react-dom', "react/jsx-runtime", ...Object.keys(globals)],
         },
     },
 })
