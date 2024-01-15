@@ -1,0 +1,10 @@
+{
+    "extensionName": {
+        "message": "New Tab - Clover",
+        "description": "Name of the extension."
+    },
+    "extensionDescription": {
+        "message": "Convenient navigation, team collaboration, development tools, and more.",
+        "description": "Description of the extension."
+    }
+}
