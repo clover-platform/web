@@ -7,6 +7,12 @@
         --layer-bg: 1;
         --layer-main: 10;
         --layer-control: 100;
+
+        --desktop-icon-size: 80px;
+        --desktop-icon-gap-x: 0px;
+        --desktop-icon-gap-y: 0px;
+        --task-bar-icon-size: 36px;
+        --task-bar-icon-gap: 0px;
     }
     .cover-full {
         @apply top-0 right-0 bottom-0 left-0;

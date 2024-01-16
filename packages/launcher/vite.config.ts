@@ -30,7 +30,7 @@ export default defineConfig({
             entry: resolve('src/index.ts'),
             // 组件库名称
             name: 'TabLauncher',
-            // 文件名称, 打包结果举例: suemor.cjs
+            // 文件名称
             fileName: 'launcher',
             // 打包格式
             formats: ['es', 'cjs'],

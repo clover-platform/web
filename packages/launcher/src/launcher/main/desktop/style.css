@@ -1,0 +1,18 @@
+.apps {
+    max-height: calc(100vh - 80px - 120px);
+    overflow: auto;
+    scrollbar-width: none; /* firefox */
+    -ms-overflow-style: none; /* IE 10+ */
+    &::-webkit-scrollbar {
+        display: none; /* Chrome Safari */
+    }
+    @apply max-w-[1200px] mx-auto my-0 w-full;
+}
+.apps .app-icons {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, var(--desktop-icon-size));
+    grid-template-rows: repeat(auto-fill, var(--desktop-icon-size));
+    grid-auto-flow: dense;
+    position: relative;
+    justify-content: center;
+}
