@@ -1,8 +1,8 @@
 @font-face {
   font-family: "clover-tab"; /* Project id 4408929 */
-  src: url('iconfont.woff2?t=1705044144750') format('woff2'),
-       url('iconfont.woff?t=1705044144750') format('woff'),
-       url('iconfont.ttf?t=1705044144750') format('truetype');
+  src: url('iconfont.woff2?t=1705474406223') format('woff2'),
+       url('iconfont.woff?t=1705474406223') format('woff'),
+       url('iconfont.ttf?t=1705474406223') format('truetype');
 }
 
 .clover-tab {
@@ -11,6 +11,18 @@
   font-style: normal;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+.tab-home:before {
+  content: "\e62a";
+}
+
+.tab-design:before {
+  content: "\e757";
+}
+
+.tab-develop:before {
+  content: "\e73c";
 }
 
 .tab-baidu:before {

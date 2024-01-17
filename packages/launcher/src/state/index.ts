@@ -10,10 +10,23 @@ export const configState = atom<LauncherConfig>({
             mode: "full",
             test: 123,
         },
-        background: {
-            type: "image",
-            image: "https://clover-assets.oss-accelerate.aliyuncs.com/background.jpeg",
-        }
+        groups: [
+            {
+                id: "home",
+                title: "首页",
+                icon: "home",
+            },
+            {
+                id: "develop",
+                title: "开发",
+                icon: "develop",
+            },
+            {
+                id: "design",
+                title: "设计",
+                icon: "design",
+            }
+        ]
     }
 });
 

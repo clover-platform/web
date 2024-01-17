@@ -1,6 +1,9 @@
 // utils
 export * from './lib/utils';
 
+// hooks
+export * from './components/hooks';
+
 // base
 export { Toaster } from './components/ui/toaster';
 export { Input } from './components/ui/input';

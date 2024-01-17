@@ -25,7 +25,7 @@ export const ViewController = () => {
     return <div className={classNames(
         "group p-1 flex justify-center items-center space-x-2",
         "absolute left-2 top-2",
-        "hover:bg-black/20 rounded-md"
+        "hover:bg-black/40 rounded-md"
     )}>
         <IconButton type={ICON_MAP[view]} onClick={changeView} />
         { view === "simple" ? <IconButton type={"controls"} /> : null }

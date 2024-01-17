@@ -4,6 +4,7 @@ export type DesktopApp = {
     supportSize: string[];
     color: string;
     title: string;
+    group: string;
     type: "image" | "widget";
     image?: string;
     triggerType: "window" | "url";
@@ -11,8 +12,14 @@ export type DesktopApp = {
     url?: string;
 }
 
+export type DesktopGroup = {
+    id: string;
+    title: string;
+    icon: string;
+}
+
 export type LauncherConfig = {
-    view: {
+    view?: {
         mode: "full" | "simple";
         test?: number;
     },
@@ -20,5 +27,6 @@ export type LauncherConfig = {
         type: "image" | "color";
         image?: string;
     };
-    apps?: DesktopApp[]
+    apps?: DesktopApp[],
+    groups?: DesktopGroup[],
 }

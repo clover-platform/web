@@ -6,6 +6,27 @@
   "description": "幸运草起始页",
   "glyphs": [
     {
+      "icon_id": "1381390",
+      "name": "home",
+      "font_class": "home",
+      "unicode": "e62a",
+      "unicode_decimal": 58922
+    },
+    {
+      "icon_id": "24698575",
+      "name": "design",
+      "font_class": "design",
+      "unicode": "e757",
+      "unicode_decimal": 59223
+    },
+    {
+      "icon_id": "34023650",
+      "name": "develop_line",
+      "font_class": "develop",
+      "unicode": "e73c",
+      "unicode_decimal": 59196
+    },
+    {
       "icon_id": "592835",
       "name": "baidu",
       "font_class": "baidu",

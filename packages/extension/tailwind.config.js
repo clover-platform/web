@@ -1,14 +1,15 @@
+import ta from 'tailwindcss-animate';
+import coreConfig from '@atom-ui/core/lib/tailwind';
+
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-    mode: "jit",
-    darkMode: "class",
+    ...coreConfig,
     content: [
         "../core/**/*.tsx",
         "../launcher/**/*.tsx"
     ],
-    theme: {
-        extend: {},
-    },
-    plugins: [],
+    plugins: [
+        ta,
+    ],
 }
 
