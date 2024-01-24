@@ -3,7 +3,7 @@ import type { LauncherConfig } from "@clover/launcher";
 export const defaultConfig: LauncherConfig = {
     background: {
         type: "image",
-        image: "/assets/image/background.jpeg",
+        image: "/assets/image/background.jpg",
     },
     apps: [
         {

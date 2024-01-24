@@ -10,6 +10,7 @@ export const configState = atom<LauncherConfig>({
             mode: "full",
             test: 123,
         },
+        activeGroup: "home",
         groups: [
             {
                 id: "home",

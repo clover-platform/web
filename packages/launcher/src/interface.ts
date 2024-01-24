@@ -29,4 +29,5 @@ export type LauncherConfig = {
     };
     apps?: DesktopApp[],
     groups?: DesktopGroup[],
+    activeGroup?: string;
 }

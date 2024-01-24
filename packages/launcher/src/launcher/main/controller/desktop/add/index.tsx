@@ -13,8 +13,8 @@ export const AddDesktop = () => {
 
     return <Popover open={open} onOpenChange={setOpen}>
         <PopoverTrigger asChild>
-            <div ref={triggerRef} className={"leading-none flex justify-center items-center group cursor-pointer"}>
-                <Icon className={"!text-[36px] text-white/70 group-hover:text-white"} type={"plus"} />
+            <div ref={triggerRef} className={"leading-none flex justify-center items-center group cursor-pointer w-[36px] h-[36px]"}>
+                <Icon className={"!text-[28px] text-white/70 group-hover:text-white"} type={"plus"} />
             </div>
         </PopoverTrigger>
         <div ref={contentRef} className={classNames(!open && "hidden")}>
