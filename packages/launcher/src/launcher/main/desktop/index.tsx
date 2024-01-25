@@ -4,16 +4,16 @@ import Sortable from 'sortablejs';
 import { useConfig } from "@/state";
 import { DesktopIcon } from "@/launcher/main/desktop/icon";
 import { DesktopApp, DesktopGroup } from "@/interface";
-// @ts-ignore
-import { Swiper, SwiperSlide } from 'swiper/swiper-react';
-import { Mousewheel } from 'swiper/modules';
+import classNames from "classnames";
+import { useScrollAndWheel } from "@/hooks/use.scroll.ts";
 
 type AppContainerProps = {
     apps: DesktopApp[];
+    active?: boolean;
 }
 
 const AppContainer: FC<AppContainerProps> = (props) => {
-    const { apps } = props;
+    const { apps, active } = props;
     const appsRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
@@ -23,19 +23,29 @@ const AppContainer: FC<AppContainerProps> = (props) => {
     }, [])
 
     const desktopIcons = useMemo(() => {
-        console.log(apps);
         return apps?.map((props) => {
             return <DesktopIcon key={props.id} {...props}/>
         })
     }, [apps]);
 
-    return <div className={"app-icons"} ref={appsRef}>
-        {desktopIcons}
+    return <div
+        className={classNames(
+            "app-icons z-0",
+            active && "z-10"
+        )}
+        ref={appsRef}
+    >
+        { desktopIcons }
     </div>;
 }
 
 export const Desktop = () => {
     const { config } = useConfig();
+    const innerRef = useRef<HTMLDivElement>(null);
+
+    useScrollAndWheel(({scroll, wheel}) => {
+        console.log(scroll, wheel);
+    }, innerRef.current)
 
     const groups = useMemo(() => {
         const { apps, groups } = config;
@@ -48,24 +58,12 @@ export const Desktop = () => {
     }, [config]);
 
     return <div className={"flex-1 apps"}>
-        <Swiper
-            direction={'vertical'}
-            slidesPerView={1}
-            spaceBetween={30}
-            mousewheel={true}
-            pagination={{
-                clickable: true,
-            }}
-            modules={[Mousewheel]}
-            className="mySwiper"
-        >
+        <div className={"inner"} ref={innerRef}>
             {
                 groups.map((group) => {
-                    return <SwiperSlide key={group.id}>
-                        <AppContainer apps={group.apps} />
-                    </SwiperSlide>
+                    return <AppContainer active={group.id === config.activeGroup} key={group.id} apps={group.apps} />
                 })
             }
-        </Swiper>
+        </div>
     </div>;
 }

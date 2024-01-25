@@ -15,6 +15,7 @@
         --task-bar-icon-gap: 0px;
 
         --desktop-max-width: 1200px;
+        --view-control-padding: 50px;
     }
     .cover-full {
         @apply top-0 right-0 bottom-0 left-0;

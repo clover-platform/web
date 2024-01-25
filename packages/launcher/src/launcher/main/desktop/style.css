@@ -1,5 +1,9 @@
 .apps {
     @apply max-w-[var(--desktop-max-width)] mx-auto my-0 w-full overflow-auto;
+}
+.apps .inner {
+    @apply absolute top-0 bottom-0 left-[var(--view-control-padding)] right-[var(--view-control-padding)];
+    @apply overflow-auto;
     scrollbar-width: none; /* firefox */
     -ms-overflow-style: none; /* IE 10+ */
     &::-webkit-scrollbar {
@@ -8,12 +12,13 @@
 }
 @media screen and (max-width: 1300px) {
     .apps {
-        @apply px-[50px] box-border;
+        @apply box-border;
     }
 }
-.apps .app-icons {
-    @apply grid justify-center relative;
+.apps .inner .app-icons {
+    @apply grid justify-center;
     @apply grid-flow-dense;
     grid-template-columns: repeat(auto-fill, var(--desktop-icon-size));
     grid-template-rows: repeat(auto-fill, var(--desktop-icon-size));
+    @apply pt-[180px] pb-[30px] absolute top-0 right-0 left-0;
 }

@@ -13,7 +13,7 @@ export const DesktopController = () => {
         })
     }
 
-    return <div className={"absolute top-[50%] -translate-y-[50%] bg-black/40 rounded-full left-2 p-2 flex justify-center items-center flex-col"}>
+    return <div className={"absolute top-[50%] -translate-y-[50%] bg-black/40 rounded-full left-2 p-2 flex justify-center items-center flex-col z-50"}>
         <div>
             <Avatar
                 className={"w-[36px] h-[36px]"}
