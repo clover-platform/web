@@ -1,9 +1,0 @@
-{
-    "fail": "Email sending failed.",
-    "title": {
-        "code": {
-            "register": "【Clover】Registration Verification Code",
-            "reset": "【Clover】Reset Password Verification Code"
-        }
-    }
-}

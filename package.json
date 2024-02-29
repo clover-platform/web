@@ -4,7 +4,10 @@
     "workspaces": [
         "packages/*"
     ],
-    "scripts": {},
+    "scripts": {
+        "dev": "lerna run dev",
+        "dev:web": "lerna run dev --scope @clover/web"
+    },
     "dependencies": {
         "@arco-iconbox/react-clover": "0.0.8",
         "axios": "1.6.2",

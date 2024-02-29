@@ -1,8 +1,0 @@
-{
-    "authority": {
-        "exist": "Permission code already exists"
-    },
-    "role": {
-        "exist": "The role already exists"
-    }
-}
