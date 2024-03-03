@@ -7,7 +7,10 @@ const isDev = process.env.NODE_ENV !== 'production';
 process.env.UI_LANG = process.env.UI_LANG || 'zh-cn';
 // 接口代理
 const apiConfig = {
-    dev: 'http://localhost:3000', // 开发
+    dev: { // 开发
+        main: 'http://localhost:3000',
+        account: 'http://localhost:3001',
+    },
 };
 const apiBase = apiConfig[process.env.API || 'dev'];
 
@@ -24,7 +27,12 @@ const nextConfig = {
         removeConsole: !isDev,
     },
     rewrites: isDev ? async () => {
-        return { fallback: [{ source: '/api/:path*', destination: `${apiBase}/api/:path*`}] }
+        return {
+            fallback: Object.keys(apiBase).map(key => ({
+                source: `/api/${key}/:path*`,
+                destination: `${apiBase[key]}/api/:path*`
+            })),
+        }
     } : null,
     webpack: (config, ctx) => {
         config.resolve = {

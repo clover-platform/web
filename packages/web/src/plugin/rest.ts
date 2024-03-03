@@ -16,12 +16,12 @@ Rest.config({
 
 // 别名配置
 Rest.alias({
-    '@account': {
-        url: '/api/account',
+    '@main': {
+        url: '/api/main',
         headers: get
     },
-    '@access': {
-        url: '/api/access',
+    '@account': {
+        url: '/api/account',
         headers: get
     }
 });
