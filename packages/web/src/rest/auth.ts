@@ -54,4 +54,4 @@ export const login = async (data: {
 }) => post(`@main/account/login/`, data);
 
 export const logout = async (): Promise<RestResult<any>> =>
-    post(`@account/logout/`);
+    post(`@main/account/logout/`);
