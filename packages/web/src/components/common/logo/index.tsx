@@ -1,28 +1,38 @@
-import {PropsWithChildren} from "react";
+import { PropsWithChildren, useMemo } from "react";
 
 interface LogoProps extends PropsWithChildren {
-    title?: string,
-    theme?: "light" | "dark",
+    type?: "normal" | "light" | "dark",
     size?: number
 }
 
 const Logo = (props: LogoProps) => {
     const {
-        title = "{#幸运草#}",
-        theme = "light",
+        type = "normal",
         size = 32
     } = props;
 
-    let bg = "bg-white";
-    let image = "bg-[url(~@/assets/image/logo-dark.svg)]";
-    if(theme === "dark") {
+    let bg = "bg-transparent";
+    let image = "bg-[url(~@/assets/image/logo/normal.png)]";
+    if(type === "dark") {
         bg = "bg-[#2E3340]";
-        image = "bg-[url(~@/assets/image/logo-light.svg)]";
+        image = "bg-[url(~@/assets/image/logo/light.png)]";
+    }else if(type === "light"){
+        bg = "bg-white";
+        image = "bg-[url(~@/assets/image/logo/dark.png)]";
     }
 
+    const margin = useMemo(() => Math.floor(size * 0.1), [size]);
+    const imageSize = useMemo(() => size - (margin * 2), [size, margin]);
+
     return <div className={"flex justify-center items-center cursor-default"}>
-        <div className={`${image} rounded-sm bg-[length:66%] bg-no-repeat bg-center ${bg}`} style={{width: size, height: size}}/>
-        <div className={"ml-[10px] text-[16px] font-bold select-none"}>{title}</div>
+        <div
+            className={`${image} rounded-sm bg-contain bg-no-repeat bg-center ${bg}`}
+            style={{
+                width: imageSize,
+                height: imageSize,
+                margin
+            }}
+        />
     </div>
 };
 

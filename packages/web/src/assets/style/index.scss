@@ -1,2 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 @import "@easy-kit/common/assets/style/font.scss";
 @import "@atom-ui/core/style/globals.css";
+@import "tailwind";
