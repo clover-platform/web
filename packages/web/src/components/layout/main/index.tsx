@@ -6,7 +6,7 @@ import {usePathname, useRouter} from "next/navigation";
 import AdminLayout from "@easy-kit/common/components/layout/admin";
 import Logo from "@/components/common/logo";
 import {FOOTER_MENUS, NAV_MENUS, PROFILE_MENUS, ADD_MENUS} from "@/config/layout/main";
-import {Avatar, Button, Dropdown, DropdownMenuItemProps, Space, Spin, useAlert, useMessage} from "@atom-ui/core";
+import {Avatar, Button, Dropdown, DropdownMenuItemProps, Space, useAlert, useMessage} from "@atom-ui/core";
 import { Action } from "@atom-ui/core";
 import { IconSetting, IconAdd } from "@arco-iconbox/react-clover";
 import SearchInput from "@easy-kit/common/components/input/search";
@@ -114,13 +114,13 @@ const MainLayout: FC<MainLayoutProps> = (props) => {
     }, []);
 
     return loading ? <div className={"min-h-[100vh] flex justify-center items-center"}>
-        <Spin />
+        <Logo type={"light"} className={"bg-transparent animate-spin"} />
     </div> : <AdminLayout
-        logo={<Logo theme={"dark"} />}
+        logo={<Logo type={"dark"} size={28} className={"bg-transparent"} />}
         navMenus={NAV_MENUS.filter(item => access(item.perm))}
         active={props.active}
         extendMenus={FOOTER_MENUS}
-        actions={<LayoutActions />}
+        // actions={<LayoutActions />}
     >
         { props.children }
     </AdminLayout>

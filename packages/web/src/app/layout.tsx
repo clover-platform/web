@@ -1,5 +1,5 @@
 'use client';
-import {PropsWithChildren, useEffect, useState} from 'react';
+import { PropsWithChildren, useEffect, useState } from "react";
 import langList from "@/config/lang.list";
 import {detectLang} from "@easy-kit/common/utils/layout";
 import LayoutAdaptor from "@easy-kit/common/components/layout/adaptor";

@@ -19,6 +19,10 @@ export interface SelectProps {
     onChange?: (value: string) => void;
     placeholder?: string;
     className?: string;
+    side?: "top" | "right" | "bottom" | "left";
+    sideOffset?: number;
+    align?: "start" | "center" | "end";
+    alignOffset?: number;
 }
 
 export const Select = forwardRef<HTMLSelectElement, SelectProps>((props, ref) => {
@@ -42,7 +46,12 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>((props, ref) =>
         )}>
             <SelectValue placeholder={placeholder} />
         </SelectTrigger>
-        <SelectContent>
+        <SelectContent
+            side={props.side}
+            sideOffset={props.sideOffset}
+            align={props.align}
+            alignOffset={props.alignOffset}
+        >
             { options.map((option) => <SelectItem key={option.value} value={option.value}>{option.label}</SelectItem>) }
         </SelectContent>
     </UISelect>

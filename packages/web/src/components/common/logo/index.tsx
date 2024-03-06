@@ -1,14 +1,17 @@
 import { PropsWithChildren, useMemo } from "react";
+import classNames from "classnames";
 
 interface LogoProps extends PropsWithChildren {
-    type?: "normal" | "light" | "dark",
-    size?: number
+    type?: "normal" | "light" | "dark";
+    size?: number;
+    className?: string;
 }
 
 const Logo = (props: LogoProps) => {
     const {
         type = "normal",
-        size = 32
+        size = 32,
+        className,
     } = props;
 
     let bg = "bg-transparent";
@@ -24,9 +27,13 @@ const Logo = (props: LogoProps) => {
     const margin = useMemo(() => Math.floor(size * 0.1), [size]);
     const imageSize = useMemo(() => size - (margin * 2), [size, margin]);
 
-    return <div className={"flex justify-center items-center cursor-default"}>
+    return <div className={classNames(
+        "flex justify-center items-center cursor-default rounded-sm",
+        bg,
+        className
+    )}>
         <div
-            className={`${image} rounded-sm bg-contain bg-no-repeat bg-center ${bg}`}
+            className={`${image} bg-contain bg-no-repeat bg-center`}
             style={{
                 width: imageSize,
                 height: imageSize,

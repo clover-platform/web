@@ -52,7 +52,7 @@ const ResetPasswordPage = () => {
         }
     }
 
-    return <div className={"w-[400px] m-[20px]"}>
+    return <div className={"w-[360px] m-[20px]"}>
         <div className={"flex justify-center items-center"}>
             <div className={"text-[24px] font-bold flex-1"}>{"{#重置密码#}"}</div>
         </div>

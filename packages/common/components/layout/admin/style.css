@@ -1,7 +1,7 @@
 .layout-admin {
-    --header-height: 52px;
-    --sidebar-width: 245px;
-    --sidebar-bg: #f5f7f8;
+    --sidebar-width: 18em;
+    --sidebar-bg: #eef3f7;
+    --sidebar-user-bg: rgba(var(--primary));
     --border-color: rgba(38,50,56,0.1);
     --action-hover: rgba(38, 50, 56, 0.05);
 }

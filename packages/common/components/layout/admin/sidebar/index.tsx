@@ -1,12 +1,13 @@
-import type {FC, PropsWithChildren, ReactNode, ReactElement} from 'react';
+import { FC, PropsWithChildren, ReactNode, ReactElement, useEffect } from "react";
 import { cloneElement } from 'react';
 import { cn } from '@atom-ui/core';
 import { HamburgerMenuIcon } from '@radix-ui/react-icons';
 import Link from "next/link";
-import {useRecoilState} from "recoil";
-import {sidebarOpenState} from "@easy-kit/common/components/layout/admin/state";
+import { useRecoilState, useRecoilValue } from "recoil";
+import { loadingState, sidebarOpenState } from "@easy-kit/common/components/layout/admin/state";
 import Switch from "@easy-kit/common/components/layout/admin/switch";
 import {useLayoutState} from "@easy-kit/common/components/layout/admin/hooks";
+import classNames from 'classnames';
 
 export interface MenuItemProps {
     id: string;
@@ -52,21 +53,29 @@ const Sidebar: FC<SidebarProps> = (props) => {
         active,
     } = props;
 
+    const loading = useRecoilValue(loadingState);
     const { sidebarOpen } = useLayoutState();
 
     return <div className={cn(
         "w-[var(--sidebar-width)] bg-[var(--sidebar-bg)] border-0 border-r border-solid border-[var(--border-color)]",
         sidebarOpen ? "flex" : "hidden",
-        "flex-col px-2 flex-shrink-0",
+        "flex-col flex-shrink-0",
     )}>
+        <div className={"bg-[var(--sidebar-user-bg)] text-white p-2"}>
+            <div className={"flex justify-center items-center"}>
+                <div className={classNames(loading ? "animate-spin" : "")}>
+                    { logo }
+                </div>
+                <div className={"flex-1 flex justify-end items-center"}>
+                    icon s
+                </div>
+            </div>
+        </div>
         <div className={cn(
             "border-0 border-solid border-b border-[var(--border-color)] h-[var(--header-height)]",
             "flex justify-center items-center"
         )}>
             <Switch />
-            <div className={"flex-1 flex justify-start items-center"}>
-                { logo }
-            </div>
         </div>
         <div className={"flex-1"}>
             { navMenus.map((menu) => <MenuItem key={menu.id} {...menu} active={active === menu.id} />) }
