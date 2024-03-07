@@ -1,13 +1,15 @@
 import { FC, PropsWithChildren, ReactNode, ReactElement, useEffect } from "react";
 import { cloneElement } from 'react';
 import { cn } from '@atom-ui/core';
-import { HamburgerMenuIcon } from '@radix-ui/react-icons';
 import Link from "next/link";
-import { useRecoilState, useRecoilValue } from "recoil";
-import { loadingState, sidebarOpenState } from "@easy-kit/common/components/layout/admin/state";
-import Switch from "@easy-kit/common/components/layout/admin/switch";
-import {useLayoutState} from "@easy-kit/common/components/layout/admin/hooks";
+import { useRecoilValue } from "recoil";
 import classNames from 'classnames';
+import { IconAdd } from "@arco-iconbox/react-clover";
+import { loadingState } from "@/components/layout/main/state";
+import { useLayoutState } from "@/components/layout/main/hooks";
+import Logo from "@/components/common/logo";
+import Switch from "@/components/layout/main/switch";
+import { Action } from "@/components/layout/main/action";
 
 export interface MenuItemProps {
     id: string;
@@ -57,25 +59,22 @@ const Sidebar: FC<SidebarProps> = (props) => {
     const { sidebarOpen } = useLayoutState();
 
     return <div className={cn(
-        "w-[var(--sidebar-width)] bg-[var(--sidebar-bg)] border-0 border-r border-solid border-[var(--border-color)]",
+        "w-[var(--sidebar-width)] bg-[var(--sidebar-bg)] border-0 border-r border-solid",
         sidebarOpen ? "flex" : "hidden",
         "flex-col flex-shrink-0",
     )}>
         <div className={"bg-[var(--sidebar-user-bg)] text-white p-2"}>
             <div className={"flex justify-center items-center"}>
                 <div className={classNames(loading ? "animate-spin" : "")}>
-                    { logo }
+                    <Logo type={"dark"} size={28} className={"bg-transparent"} />
                 </div>
-                <div className={"flex-1 flex justify-end items-center"}>
-                    icon s
+                <div className={"flex-1 flex justify-end items-center space-x-0.5"}>
+                    <Switch />
+                    <Action>
+                        <IconAdd fontSize={16} />
+                    </Action>
                 </div>
             </div>
-        </div>
-        <div className={cn(
-            "border-0 border-solid border-b border-[var(--border-color)] h-[var(--header-height)]",
-            "flex justify-center items-center"
-        )}>
-            <Switch />
         </div>
         <div className={"flex-1"}>
             { navMenus.map((menu) => <MenuItem key={menu.id} {...menu} active={active === menu.id} />) }

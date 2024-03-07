@@ -2,7 +2,6 @@ import {PropsWithChildren, FC} from "react";
 import MainLayout from "../main";
 import {Tabs, TabsList, TabsTrigger} from "@atom-ui/core";
 import {TABS} from "@/config/layout/access";
-import {useLayoutTitle} from "@easy-kit/common/components/layout/admin/hooks";
 import {useRouter} from "next/navigation";
 
 export interface AccessLayoutProps extends PropsWithChildren {
@@ -16,7 +15,6 @@ export interface TabItem {
 }
 
 const AccessLayout: FC<AccessLayoutProps> = (props) => {
-    useLayoutTitle("{#权限管理#}");
     const router = useRouter();
 
     const onTabClick = (v: TabItem) => {

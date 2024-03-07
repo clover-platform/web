@@ -3,10 +3,9 @@ import {useLayoutState} from "@/components/layout/hooks/main";
 import bus from '@easy-kit/common/events';
 import {LOGIN} from "@/events/account";
 import {usePathname, useRouter} from "next/navigation";
-import AdminLayout from "@easy-kit/common/components/layout/admin";
 import Logo from "@/components/common/logo";
 import {FOOTER_MENUS, NAV_MENUS, PROFILE_MENUS, ADD_MENUS} from "@/config/layout/main";
-import {Avatar, Button, Dropdown, DropdownMenuItemProps, Space, useAlert, useMessage} from "@atom-ui/core";
+import { Avatar, Button, cn, Dropdown, DropdownMenuItemProps, Space, useAlert, useMessage } from "@atom-ui/core";
 import { Action } from "@atom-ui/core";
 import { IconSetting, IconAdd } from "@arco-iconbox/react-clover";
 import SearchInput from "@easy-kit/common/components/input/search";
@@ -15,6 +14,10 @@ import {useRecoilValue} from "recoil";
 import {useAccess} from "@easy-kit/common/hooks";
 import {accountInfoState} from "@/state/account";
 import {logout} from "@/rest/auth";
+import { useInitLayoutState } from "@/components/layout/main/hooks";
+import { AdminLayoutLoading } from "@/components/layout/main/loading";
+import Sidebar from "@/components/layout/main/sidebar";
+import "./style.css";
 
 export interface MainLayoutProps extends PropsWithChildren {
     active?: string;
@@ -101,6 +104,7 @@ const MainLayout: FC<MainLayoutProps> = (props) => {
     const [loading, isLogin, account] = useLayoutState();
     const router = useRouter();
     const path = usePathname();
+    const init = useInitLayoutState();
 
     const onLogin = useCallback(() => {
         router.push(`/{#LANG#}/login/?from=${encodeURIComponent(path)}`)
@@ -113,17 +117,19 @@ const MainLayout: FC<MainLayoutProps> = (props) => {
         }
     }, []);
 
-    return loading ? <div className={"min-h-[100vh] flex justify-center items-center"}>
+    return (loading || !init) ? <div className={"min-h-[100vh] flex justify-center items-center"}>
         <Logo type={"light"} className={"bg-transparent animate-spin"} />
-    </div> : <AdminLayout
-        logo={<Logo type={"dark"} size={28} className={"bg-transparent"} />}
-        navMenus={NAV_MENUS.filter(item => access(item.perm))}
-        active={props.active}
-        extendMenus={FOOTER_MENUS}
-        // actions={<LayoutActions />}
-    >
-        { props.children }
-    </AdminLayout>
+    </div> : <div className={"layout-admin flex justify-start w-full items-stretch min-h-[100vh]"}>
+        <Sidebar />
+        <div className={"flex-1 w-0"}>
+            <div className={cn(
+                "container p-0",
+            )}>
+                {props.children}
+            </div>
+        </div>
+        <AdminLayoutLoading />
+    </div>
 };
 
 export default MainLayout;

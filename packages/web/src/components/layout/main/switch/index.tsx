@@ -1,12 +1,12 @@
-import {HamburgerMenuIcon} from "@radix-ui/react-icons";
 import {FC, HTMLAttributes, useEffect} from "react";
 import {useRecoilState} from "recoil";
-import {sidebarOpenState} from "@easy-kit/common/components/layout/admin/state";
+import {sidebarOpenState} from "@/components/layout/main/state";
 import localforage from "localforage";
-import {SIDEBAR_OPEN_KEY} from "@easy-kit/common/components/layout/admin/const";
-import {Action, cn} from "@atom-ui/core";
+import {SIDEBAR_OPEN_KEY} from "@/components/layout/main/const";
+import { IconSidebar } from "@arco-iconbox/react-clover";
+import { Action } from "@/components/layout/main/action";
 
-export interface SwitchProps extends HTMLAttributes<HTMLDivElement>{}
+export interface SwitchProps extends HTMLAttributes<HTMLButtonElement>{}
 
 const Switch: FC<SwitchProps> = (props) => {
     const {
@@ -21,15 +21,14 @@ const Switch: FC<SwitchProps> = (props) => {
     }, [open]);
 
     const onSwitchClick = () => {
+        console.log('onSwitchClick');
         setOpen(!open);
     }
 
     return <Action
-        className={cn("mr-2", className)}
         onClick={onSwitchClick}
-        {...rest}
     >
-        <HamburgerMenuIcon width={20} height={20} />
+        <IconSidebar fontSize={16} />
     </Action>
 }
 

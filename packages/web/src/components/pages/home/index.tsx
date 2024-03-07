@@ -1,10 +1,12 @@
 'use client';
 
-import {useLayoutTitle} from "@easy-kit/common/components/layout/admin/hooks";
+import { LayoutNavbar } from "@/components/layout/main/navbar";
 
 const HomePage = () => {
-    useLayoutTitle("{#首页#}");
-    return "home";
+    return <>
+        <LayoutNavbar />
+        <div>home</div>
+    </>;
 };
 
 export default HomePage;
