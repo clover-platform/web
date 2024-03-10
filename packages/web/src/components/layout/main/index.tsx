@@ -18,6 +18,7 @@ import { useInitLayoutState } from "@/components/layout/main/hooks";
 import { AdminLayoutLoading } from "@/components/layout/main/loading";
 import Sidebar from "@/components/layout/main/sidebar";
 import "./style.css";
+import {LayoutNavbar} from "@/components/layout/main/navbar";
 
 export interface MainLayoutProps extends PropsWithChildren {
     active?: string;
@@ -122,10 +123,11 @@ const MainLayout: FC<MainLayoutProps> = (props) => {
     </div> : <div className={"layout-admin flex justify-start w-full items-stretch min-h-[100vh]"}>
         <Sidebar />
         <div className={"flex-1 w-0"}>
+            <LayoutNavbar />
             <div className={cn(
-                "container p-0",
+                "container p-0 px-2",
             )}>
-                {props.children}
+                { props.children }
             </div>
         </div>
         <AdminLayoutLoading />
