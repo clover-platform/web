@@ -1,5 +1,5 @@
 import { useSetRecoilState } from "recoil";
-import { loadingState } from "@/components/layout/main/state";
+import { loadingState } from "@clover/public//components/layout/main/state";
 import { useNavigationEvents } from "@easy-kit/common/hooks/use.navigation.events";
 import { useRef } from "react";
 

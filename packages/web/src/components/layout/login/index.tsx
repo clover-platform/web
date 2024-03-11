@@ -1,10 +1,8 @@
 import {PropsWithChildren} from "react";
-import Logo from "@/components/common/logo";
+import Logo from "@clover/public/components/common/logo";
 import classNames from "classnames";
 import Link from "@easy-kit/common/components/link";
-import { LangSelect } from "@/components/common/select/lang";
-
-
+import { LangSelect } from "@clover/public/components/common/select/lang";
 
 const LoginLayout = (props: PropsWithChildren) => {
     return <div className={"flex justify-center w-full min-h-[100vh] flex-col"}>

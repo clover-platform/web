@@ -5,11 +5,11 @@ import Link from "next/link";
 import { useRecoilValue } from "recoil";
 import classNames from 'classnames';
 import { IconAdd } from "@arco-iconbox/react-clover";
-import { loadingState } from "@/components/layout/main/state";
-import { useLayoutState } from "@/components/layout/main/hooks";
-import Logo from "@/components/common/logo";
-import Switch from "@/components/layout/main/switch";
-import { Action } from "@/components/layout/main/action";
+import { loadingState } from "@clover/public/components/layout/main/state";
+import { useLayoutState } from "@clover/public/components/layout/main/hooks";
+import Logo from "@clover/public//components/common/logo";
+import Switch from "@clover/public//components/layout/main/switch";
+import { Action } from "@clover/public//components/layout/main/action";
 
 export interface MenuItemProps {
     id: string;

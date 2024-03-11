@@ -8,8 +8,7 @@ const config: Config = {
     content: [
         "../core/**/*.{js,ts,jsx,tsx,mdx}",
         "../common/**/*.{js,ts,jsx,tsx,mdx}",
-        "../public/**/*.{js,ts,jsx,tsx,mdx}",
-        "./src/**/*.{js,ts,jsx,tsx,mdx}",
+        "./**/*.{js,ts,jsx,tsx,mdx}",
     ],
     plugins: [
         ta,

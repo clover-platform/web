@@ -1,8 +1,8 @@
 import {useRecoilState, useRecoilValue} from "recoil";
-import {sidebarOpenState} from "@/components/layout/main/state";
+import {sidebarOpenState} from "@clover/public/components/layout/main/state";
 import {useEffect, useState} from "react";
 import localforage from "localforage";
-import {SIDEBAR_OPEN_KEY} from "@/components/layout/main/const";
+import {SIDEBAR_OPEN_KEY} from "@clover/public/components/layout/main/const";
 
 export const useLayoutState = () => {
     const sidebarOpen = useRecoilValue(sidebarOpenState);

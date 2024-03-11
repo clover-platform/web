@@ -6,10 +6,7 @@ import coreConfig from '@atom-ui/core/lib/tailwind';
 const config: Config = {
     ...coreConfig,
     content: [
-        "../core/**/*.{js,ts,jsx,tsx,mdx}",
-        "../common/**/*.{js,ts,jsx,tsx,mdx}",
-        "../public/**/*.{js,ts,jsx,tsx,mdx}",
-        "./src/**/*.{js,ts,jsx,tsx,mdx}",
+        "./**/*.{js,ts,jsx,tsx,mdx}",
     ],
     plugins: [
         ta,

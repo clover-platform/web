@@ -2,7 +2,7 @@
 import * as Rest from '@easy-kit/common/utils/rest';
 import {get} from "@/utils/headers";
 import bus from '@easy-kit/common/events';
-import {LOGIN} from "@/events/account";
+import {LOGIN} from "@clover/public/events/account";
 
 Rest.config({
     useTransId: true,
