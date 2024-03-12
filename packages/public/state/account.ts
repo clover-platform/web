@@ -5,7 +5,7 @@ export const isLoginState = atom({
     default: false
 })
 
-export const accountInfoState = atom({
+export const accountInfoState = atom<any>({
     key: 'account/info',
     default: {}
 })

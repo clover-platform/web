@@ -6,9 +6,10 @@ import {UNAUTHORIZED} from "@clover/public/events/auth";
 
 Rest.config({
     useTransId: true,
-    onResponse: (data: any, config: any) => {
+    onResponse: (data: any, response: any) => {
+        const { needLogin = true } = response?.config || {};
         const { code } = data
-        if (code === 401) { // 未登录
+        if (code === 401 && needLogin) { // 未登录
             bus.emit(UNAUTHORIZED);
         }
     }

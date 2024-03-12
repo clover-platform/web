@@ -10,6 +10,7 @@ import { useLayoutState } from "@clover/public/components/layout/main/hooks";
 import Logo from "@clover/public//components/common/logo";
 import Switch from "@clover/public//components/layout/main/switch";
 import { Action } from "@clover/public//components/layout/main/action";
+import { SidebarProfile } from "@clover/public/components/layout/main/sidebar/profile";
 
 export interface MenuItemProps {
     id: string;
@@ -49,7 +50,6 @@ const MenuItem: FC<MenuItemProps> = (props) => {
 
 const Sidebar: FC<SidebarProps> = (props) => {
     const {
-        logo,
         navMenus = [],
         extendMenus = [],
         active,
@@ -73,6 +73,7 @@ const Sidebar: FC<SidebarProps> = (props) => {
                     <Action>
                         <IconAdd fontSize={16} />
                     </Action>
+                    <SidebarProfile />
                 </div>
             </div>
         </div>

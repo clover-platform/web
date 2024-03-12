@@ -1,5 +1,4 @@
 import {get, post} from "@easy-kit/common/utils/rest";
-import {RestResult} from "@easy-kit/common/types/rest";
 
 export const sendEmailCode = async (email: string) =>
     post(`@main/account/register/email/send/`, {email});
@@ -16,7 +15,7 @@ export const otpSecret = async () => get(`@main/account/otp/secret/`);
 export const passwordSet = async (data: {
     password: string;
     code: string;
-}) => post(`@amain/ccount/register/password/set/`, data);
+}) => post(`@main/account/register/password/set/`, data);
 
 export const sendResetEmailCode = async (email: string) =>
     post(`@main/account/reset/email/send/`, {email});
@@ -48,6 +47,3 @@ export const login = async (data: {
     password: string;
     code: string;
 }) => post(`@main/account/login/`, data);
-
-export const logout = async (): Promise<RestResult<any>> =>
-    post(`@main/account/logout/`);

@@ -5,6 +5,7 @@ const ERROR_MESSAGE = "{#网络错误#}";
 const ERROR_CODE = -999;
 
 export type RestConfig = {
+    useTransId?: boolean;
     onResponse?: (data: any, response: any) => void;
 }
 export type RestRequestConfig = AxiosRequestConfig & {
@@ -54,17 +55,13 @@ rest.interceptors.response.use(
             success: false,
             message: ERROR_MESSAGE,
         };
-        if (response.status === 200) {
+        if ([200, 201].includes(response.status)) {
             data = response.data;
         }
         if (typeof onResponse === 'function') {
             onResponse(data, response);
         }
-        response = {
-            ...data,
-            ...response
-        };
-        return response;
+        return data as any;
     },
     (error) => {
         const { onResponse } = _config;

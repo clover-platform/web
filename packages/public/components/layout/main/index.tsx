@@ -3,7 +3,6 @@ import {FC, PropsWithChildren, useCallback, useEffect} from "react";
 import bus from '@easy-kit/common/events';
 import {usePathname, useRouter} from "next/navigation";
 import Logo from "@clover/public/components/common/logo";
-import {useAccess} from "@easy-kit/common/hooks";
 import { AdminLayoutLoading } from "@clover/public/components/layout/main/loading";
 import Sidebar from "@clover/public/components/layout/main/sidebar";
 import { useLayoutState } from "@clover/public/components/layout/hooks/main";
@@ -14,10 +13,9 @@ export interface MainLayoutProps extends PropsWithChildren {
 }
 
 export const MainLayout: FC<MainLayoutProps> = (props) => {
-    const access = useAccess();
     const router = useRouter();
     const path = usePathname();
-    const { loading } = useLayoutState();
+    const { loading, isLogin } = useLayoutState();
 
     const goLogin = useCallback(() => {
         router.push(`/{#LANG#}/login/?from=${encodeURIComponent(path)}`)
@@ -30,7 +28,13 @@ export const MainLayout: FC<MainLayoutProps> = (props) => {
         }
     }, []);
 
-    return loading ? <div className={"min-h-[100vh] flex justify-center items-center"}>
+    useEffect(() => {
+        if(!loading && !isLogin) {
+            goLogin();
+        }
+    }, [loading, isLogin])
+
+    return loading || !isLogin ? <div className={"min-h-[100vh] flex justify-center items-center"}>
         <Logo type={"light"} className={"bg-transparent animate-spin"} />
     </div> : <div className={"layout-admin flex justify-start w-full items-stretch min-h-[100vh]"}>
         <Sidebar />

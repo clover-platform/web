@@ -1,10 +1,11 @@
 import {useRecoilState} from "recoil";
 import {accountInfoState, isLoginState} from "@clover/public/state/account";
-import {isLoadingState} from "@clover/public/state";
+import {isLoadingState} from "@clover/public/state/public";
 import { useEffect, useMemo } from "react";
 import {profile} from "@clover/public/rest/auth";
 import {accessState} from "@easy-kit/common/state/access";
 import { useInitLayoutState } from "@clover/public/components/layout/main/hooks";
+import { my } from "@clover/public/rest/team";
 
 export const useLayoutState = () => {
     const init = useInitLayoutState();
@@ -17,8 +18,9 @@ export const useLayoutState = () => {
         setLoading(true);
         const { success, data } = await profile();
         success && setAccount(data);
-        success && setAccess(data.authorities);
+        success && setAccess(data?.authorities || []);
         setIsLogin(success);
+        const team = await my();
         setLoading(false);
     }
 
