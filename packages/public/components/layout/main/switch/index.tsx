@@ -4,7 +4,7 @@ import {sidebarOpenState} from "@clover/public/components/layout/main/state";
 import localforage from "localforage";
 import {SIDEBAR_OPEN_KEY} from "@clover/public/components/layout/main/const";
 import { IconSidebar } from "@arco-iconbox/react-clover";
-import {Action, ActionProps} from "@clover/public/components/layout/main/action";
+import {Action, ActionProps} from "../../../common/action";
 
 export type SwitchProps = HTMLAttributes<HTMLButtonElement> & ActionProps;
 

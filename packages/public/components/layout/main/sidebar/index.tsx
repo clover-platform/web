@@ -9,7 +9,7 @@ import { loadingState } from "@clover/public/components/layout/main/state";
 import { useLayoutState } from "@clover/public/components/layout/main/hooks";
 import Logo from "@clover/public//components/common/logo";
 import Switch from "@clover/public//components/layout/main/switch";
-import { Action } from "@clover/public//components/layout/main/action";
+import { Action } from "../../../common/action";
 import { SidebarProfile } from "@clover/public/components/layout/main/sidebar/profile";
 
 export interface MenuItemProps {

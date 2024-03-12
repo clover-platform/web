@@ -4,8 +4,9 @@ import classNames from "classnames";
 import {LangSelect} from "@clover/public/components/common/select/lang";
 import { useRecoilValue } from "recoil";
 import { sidebarOpenState } from "@clover/public/components/layout/main/state";
-import { Popover, PopoverContent, PopoverTrigger, Separator } from "@atom-ui/core";
-import { ChevronDownIcon } from "@radix-ui/react-icons";
+import { Separator, } from "@atom-ui/core";
+import {TeamsSwitcher} from "@clover/public/components/layout/main/navbar/switcher/teams";
+import {ProjectsSwitcher} from "@clover/public/components/layout/main/navbar/switcher/projects";
 
 export type LayoutNavbarProps = {} & PropsWithChildren;
 
@@ -23,23 +24,9 @@ export const LayoutNavbar: FC<LayoutNavbarProps> = (props) => {
                     <Separator className={"h-6 mx-2"} orientation={"vertical"} />
                 </> : null
             }
-            <Popover>
-                <PopoverTrigger>
-                    请选择项目 <ChevronDownIcon />
-                </PopoverTrigger>
-                <PopoverContent align={"start"}>
-                    content
-                </PopoverContent>
-            </Popover>
-            <span className={"mx-1 opacity-60"}>@</span>
-            <Popover>
-                <PopoverTrigger>
-                    请选择团队 <ChevronDownIcon />
-                </PopoverTrigger>
-                <PopoverContent align={"start"}>
-                    content
-                </PopoverContent>
-            </Popover>
+            <ProjectsSwitcher />
+            <span className={"mx-2 opacity-60"}>@</span>
+            <TeamsSwitcher />
             { props.children }
         </div>
         <LangSelect />

@@ -26,6 +26,16 @@ export {
 } from "./components/ui/popover";
 export { Calendar } from "./components/ui/calendar";
 export { Progress } from "./components/ui/progress";
+export {
+    Command,
+    CommandEmpty,
+    CommandGroup,
+    CommandInput,
+    CommandItem,
+    CommandList,
+    CommandSeparator,
+    CommandShortcut,
+} from "./components/ui/command";
 
 // extend
 export { Divider } from "./components/uix/divider";

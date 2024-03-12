@@ -1,4 +1,4 @@
-import { Action } from "@clover/public/components/layout/main/action";
+import { Action } from "../../../../common/action";
 import { Dropdown, DropdownMenuItemProps, useAlert, useMessage } from "@atom-ui/core";
 import classNames from 'classnames';
 import { logout } from "@clover/public/rest/auth";
