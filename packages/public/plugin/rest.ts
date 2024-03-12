@@ -1,15 +1,15 @@
 // Rest 配置
 import * as Rest from '@easy-kit/common/utils/rest';
-import {get} from "@/utils/headers";
+import {get} from "@clover/public/utils/headers";
 import bus from '@easy-kit/common/events';
-import {LOGIN} from "@clover/public/events/account";
+import {UNAUTHORIZED} from "@clover/public/events/auth";
 
 Rest.config({
     useTransId: true,
     onResponse: (data: any, config: any) => {
         const { code } = data
         if (code === 401) { // 未登录
-            bus.emit(LOGIN);
+            bus.emit(UNAUTHORIZED);
         }
     }
 });

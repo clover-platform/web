@@ -1,7 +1,7 @@
 import { getLangCode, isMobile } from "@easy-kit/common/utils";
-import packageInfo from '../../package.json';
+import packageInfo from '../../web/package.json';
 import Bowser from 'bowser';
-import { getToken } from "@/utils/token";
+import { getToken } from "@clover/web/src/utils/token";
 
 export const get = () => {
     const browser = Bowser.parse(window.navigator.userAgent);

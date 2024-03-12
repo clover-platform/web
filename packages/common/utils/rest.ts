@@ -1,13 +1,22 @@
-import Axios from 'axios';
+import Axios, {AxiosRequestConfig} from 'axios';
 const CancelToken = Axios.CancelToken;
 
 const ERROR_MESSAGE = "{#网络错误#}";
 const ERROR_CODE = -999;
 
-let _aliasMap = {};
-let _config = {};
+export type RestConfig = {
+    onResponse?: (data: any, response: any) => void;
+}
+export type RestRequestConfig = AxiosRequestConfig & {
+    fileName?: string;
+    trailingSlash?: boolean;
+    needLogin?: boolean;
+}
+
+let _aliasMap: any = {};
+let _config: RestConfig = {};
 let _currentQueueId = `${Date.now()}`;
-const _requestQueue = {};
+const _requestQueue: any = {};
 
 _requestQueue[_currentQueueId] = [];
 
@@ -29,7 +38,7 @@ rest.interceptors.response.use(
             const url = URL.createObjectURL(file);
             const a = document.createElement("a");
             a.href = url;
-            a.download = config.fileName;
+            a.download = (config as any).fileName;
             a.click();
         }
         return response;
@@ -45,13 +54,17 @@ rest.interceptors.response.use(
             success: false,
             message: ERROR_MESSAGE,
         };
-        if ([200, 201].includes(response.status)) {
+        if (response.status === 200) {
             data = response.data;
         }
         if (typeof onResponse === 'function') {
             onResponse(data, response);
         }
-        return data;
+        response = {
+            ...data,
+            ...response
+        };
+        return response;
     },
     (error) => {
         const { onResponse } = _config;
@@ -75,7 +88,7 @@ rest.interceptors.request.use(
     (config) => {
         // next.js trailingSlash 开启以后，会要求url以 / 结尾
         const { url } = config;
-        if(url.includes('?')) {
+        if(url?.includes('?')) {
             const urls = url.split('?');
             let base = urls[0];
             const query = urls[1];
@@ -84,7 +97,7 @@ rest.interceptors.request.use(
             }
             config.url = base + '?' + query;
         }else {
-            if(url.lastIndexOf('/') !== url.length - 1) {
+            if(url?.lastIndexOf('/') !== (url ||'').length - 1) {
                 config.url = url + '/';
             }
         }
@@ -95,7 +108,7 @@ rest.interceptors.request.use(
     },
 );
 
-const _handleUrl = (url) => {
+const _handleUrl = (url: string) => {
     Object.keys(_aliasMap).forEach((key) => {
         const config = _aliasMap[key];
         url = url.replace(key, config.url);
@@ -103,7 +116,7 @@ const _handleUrl = (url) => {
     return url;
 };
 
-const _handleHeaders = (headers) => {
+const _handleHeaders = (headers: any) => {
     const result = {
         ...(headers || {}),
         timezone: - (new Date().getTimezoneOffset() / 60)
@@ -122,22 +135,22 @@ const _handleHeaders = (headers) => {
     return aliasHeaders;
 };
 
-const alias = (map) => {
+const alias = (map: any) => {
     _aliasMap = map;
 };
 
-const config = (config) => {
+const config = (config: RestConfig) => {
     _config = config;
 };
 
-const pushQueue = (requestPromise) => {
+const pushQueue = (requestPromise: any) => {
     _requestQueue[_currentQueueId].push(requestPromise);
 }
 
-const request = (config) => {
+function request<T> (config: RestRequestConfig): Promise<T> {
     const { url, headers } = config;
     const source = CancelToken.source();
-    const p = new Promise((resolve) => {
+    const p = new Promise<T>((resolve) => {
         if(url) {
             rest({
                 ...config,
@@ -145,7 +158,7 @@ const request = (config) => {
                 headers: _handleHeaders(headers),
                 cancelToken: source.token
             }).then((res) => {
-                resolve(res);
+                resolve(res as any);
             }).catch((err) => {
                 resolve(err);
             });
@@ -155,37 +168,37 @@ const request = (config) => {
                 success: false,
                 message: ERROR_MESSAGE
             };
-            resolve(result);
+            resolve(result as any);
         }
-    });
-    p._url = url;
-    p.abort = () => {
+    }) as any;
+    p['_url'] = url;
+    p['abort'] = () => {
         source.cancel('Operation canceled by the user.');
     };
     pushQueue(p);
     return p;
-};
+}
 
-const get = (url, params, config) => {
-    return request({
+function get<T> (url: string, params?: any, config?: RestRequestConfig): Promise<T> {
+    return request<T>({
         ...config,
         url,
         method: 'get',
         params
     });
-};
+}
 
-const post = (url, params, config) => {
-    return request({
+function post<T> (url: string, params?: any, config?: RestRequestConfig): Promise<T> {
+    return request<T>({
         ...config,
         url,
         method: 'post',
         data: params || {}
     });
-};
+}
 
-const put = (url, params, config) => {
-    return request({
+function put<T> (url: string, params?: any, config?: RestRequestConfig): Promise<T> {
+    return request<T>({
         ...config,
         url,
         method: 'put',
@@ -193,26 +206,24 @@ const put = (url, params, config) => {
     });
 };
 
-const del = (url, params, config) => {
-    return request({
+function del<T> (url: string, params?: any, config?: RestRequestConfig): Promise<T> {
+    return request<T>({
         ...config,
         url,
         method: 'delete',
         data: params || {}
     });
 };
-const setCurrentQueueId = (id) => {
+const setCurrentQueueId = (id: string) => {
     _currentQueueId = id;
     _requestQueue[id] = [];
 }
-const abortByQueueId = (id) => {
-    console.log('abortByQueueId',id, _requestQueue);
-    _requestQueue[id].forEach((p) => {
-        console.log(p);
+const abortByQueueId = (id: string) => {
+    _requestQueue[id].forEach((p: any) => {
         p.abort();
     })
 }
-const download = (url, params, fileName) => {
+const download = (url: string, params?: any, fileName?: string) => {
     return get(url, params, { responseType: 'blob', fileName, trailingSlash: false, timeout: 0 })
 }
 export {

@@ -4,7 +4,7 @@ import langList from "@/config/lang.list";
 import {detectLang} from "@easy-kit/common/utils/layout";
 import LayoutAdaptor from "@easy-kit/common/components/layout/adaptor";
 import {routers} from "@/config/layout/router";
-import "@/plugin/rest";
+import "@clover/public/plugin/rest";
 import '@/assets/style/index.scss';
 import { StateRoot } from "@easy-kit/common/state/root";
 import { ConfigProvider } from "@atom-ui/core";

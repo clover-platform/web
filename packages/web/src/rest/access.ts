@@ -1,5 +1,5 @@
 import {del, get, post, put} from "@easy-kit/common/utils/rest";
-import { RestResult } from "@easy-kit/common/utils/rest.interface";
+import {RestResult} from "@easy-kit/common/types/rest";
 
 export interface AccessApi {
     id: number;

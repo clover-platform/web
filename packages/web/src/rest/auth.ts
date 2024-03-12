@@ -1,9 +1,5 @@
 import {get, post} from "@easy-kit/common/utils/rest";
-import {RestResult} from "@easy-kit/common/utils/rest.interface";
-
-// 获取个人信息
-export const profile = async () =>
-    get(`@main/account/profile/`, null, { needLogin: false });
+import {RestResult} from "@easy-kit/common/types/rest";
 
 export const sendEmailCode = async (email: string) =>
     post(`@main/account/register/email/send/`, {email});
