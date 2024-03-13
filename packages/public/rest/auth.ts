@@ -10,8 +10,6 @@ export type ProfileResult = RestResult<{
 }>
 
 // 获取个人信息
-export const profile = async (): Promise<ProfileResult> =>
-    get(`@main/account/profile/`, null, { needLogin: false });
+export const profile = async (): Promise<ProfileResult> => get(`@main/account/profile/`);
 
-export const logout = async (): Promise<RestResult<any>> =>
-    post(`@main/account/logout/`);
+export const logout = async (): Promise<RestResult<any>> => post(`@main/account/logout/`);

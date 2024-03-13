@@ -21,12 +21,15 @@ export const LayoutNavbar: FC<LayoutNavbarProps> = (props) => {
             {
                 !open ? <>
                     <Switch type={"dark"} />
-                    <Separator className={"h-6 mx-2"} orientation={"vertical"} />
+                    <Separator className={"h-5 mx-2"} orientation={"vertical"} />
                 </> : null
             }
-            <ProjectsSwitcher />
-            <span className={"mx-2 opacity-60"}>@</span>
-            <TeamsSwitcher />
+            <div className={"ml-1"}>
+                <ProjectsSwitcher />
+                <span className={"mx-2 opacity-60"}>@</span>
+                <TeamsSwitcher />
+            </div>
+            { props.children ? <Separator className={"h-5 mx-3"} orientation={"vertical"} /> : null }
             { props.children }
         </div>
         <LangSelect />

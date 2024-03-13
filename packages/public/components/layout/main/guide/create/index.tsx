@@ -1,8 +1,10 @@
 import { IconCreateTeam } from "@arco-iconbox/react-clover";
 import { IconTitle } from "@clover/public/components/common/icon-title";
-import { Button, Form, FormItem, Input, Space } from "@atom-ui/core";
+import {Button, Form, FormItem, Input, Space, useMessage} from "@atom-ui/core";
 import * as z from "zod";
 import { useState } from "react";
+import {init, TeamInitData} from "@clover/public/rest/team";
+import {useDataLoader} from "@clover/public/components/layout/hooks/main";
 
 const SCHEMA = z.object({
     name: z.string()
@@ -15,8 +17,17 @@ const SCHEMA = z.object({
 
 export const GuideCreate = () => {
     const [loading, setLoading] = useState(false);
-    const onSubmit = (data: any) => {
-        console.log(data);
+    const loadData = useDataLoader();
+    const msg = useMessage();
+    const onSubmit = async (data: TeamInitData) => {
+        setLoading(true);
+        const { success, message } = await init(data);
+        if(success) {
+            await loadData();
+        }else{
+            msg.error(message);
+        }
+        setLoading(false);
     }
 
     const description = <>

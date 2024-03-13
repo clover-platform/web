@@ -1,6 +1,6 @@
 import { FC, PropsWithChildren, ReactNode, ReactElement, useEffect } from "react";
 import { cloneElement } from 'react';
-import { cn } from '@atom-ui/core';
+import {cn, Tooltip} from '@atom-ui/core';
 import Link from "next/link";
 import { useRecoilValue } from "recoil";
 import classNames from 'classnames';
@@ -65,14 +65,20 @@ const Sidebar: FC<SidebarProps> = (props) => {
     )}>
         <div className={"bg-[var(--sidebar-user-bg)] text-white p-2"}>
             <div className={"flex justify-center items-center"}>
-                <div className={classNames(loading ? "animate-spin" : "")}>
-                    <Logo type={"dark"} size={28} className={"bg-transparent"} />
-                </div>
+                <Link href={"/{#LANG#}/"}>
+                    <Tooltip content={"{#首页#}"}>
+                        <div className={classNames(loading ? "animate-spin" : "")}>
+                            <Logo type={"dark"} size={28} className={"bg-transparent cursor-pointer"}/>
+                        </div>
+                    </Tooltip>
+                </Link>
                 <div className={"flex-1 flex justify-end items-center space-x-0.5"}>
-                    <Switch />
-                    <Action>
-                        <IconAdd fontSize={16} />
-                    </Action>
+                    <Switch/>
+                    <Tooltip content={"{#创建新的...#}"}>
+                        <Action>
+                            <IconAdd fontSize={16} />
+                        </Action>
+                    </Tooltip>
                     <SidebarProfile />
                 </div>
             </div>

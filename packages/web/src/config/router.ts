@@ -18,6 +18,17 @@ export default [{ path: "/access/authority/", config:  {
 } },{ path: "/", config:  {
     name: 'main',
     active: "home",
+    path: [
+        {
+            title: "{#Wiki#}",
+            type: "link",
+            href: "/{#LANG#}/wiki/"
+        },
+        {
+            title: "{#创建#}",
+            type: "item",
+        }
+    ],
 } },{ path: "/i18n/", config:  {
     name: 'main',
     active: "i18n",

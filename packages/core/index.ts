@@ -36,6 +36,14 @@ export {
     CommandSeparator,
     CommandShortcut,
 } from "./components/ui/command";
+export {
+    Breadcrumb,
+    BreadcrumbItem,
+    BreadcrumbLink,
+    BreadcrumbList,
+    BreadcrumbPage,
+    BreadcrumbSeparator,
+} from "./components/ui/breadcrumb"
 
 // extend
 export { Divider } from "./components/uix/divider";
@@ -106,3 +114,5 @@ export { Uploader } from "./components/uix/uploader";
 export type { UploaderProps } from "./components/uix/uploader";
 export { DatePicker } from "./components/uix/date-picker";
 export type { DatePickerProps } from "./components/uix/date-picker";
+export {Tooltip} from './components/uix/tooltip';
+export type { TooltipProps } from './components/uix/tooltip';

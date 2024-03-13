@@ -1,7 +1,7 @@
 import {createContext, FC, PropsWithChildren, useEffect} from "react";
 import omit from "lodash/omit";
-import {Toaster} from "@atom-ui/core/components/ui/toaster";
-import zhCN from '../../../locales/zh-CN';
+import {Toaster} from "@atom-ui/core";
+import zhCN from "@atom-ui/core/locales/zh-CN";
 
 export interface UIXContextProps {
     locale?: any;

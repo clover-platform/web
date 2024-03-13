@@ -31,10 +31,17 @@ export type SwitcherProps = {
 };
 
 export const Switcher: FC<SwitcherProps> = (props) => {
+    const {
+        items,
+        value
+    } = props;
+
+    const current = items.find(item => item.value === value);
+
     return <Popover>
         <PopoverTrigger>
             <div className={"flex justify-center items-center"}>
-                请选择项目 <ChevronDownIcon />
+                {current?.label || '--'} <ChevronDownIcon />
             </div>
         </PopoverTrigger>
         <PopoverContent align={"start"} className={"p-0"}>

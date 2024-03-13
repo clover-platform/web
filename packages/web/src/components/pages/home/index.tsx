@@ -1,11 +1,9 @@
 'use client';
 
-import { PageLayout } from "@/components/layout/page";
-
 const HomePage = () => {
-    return <PageLayout>
+    return <>
         home
-    </PageLayout>
+    </>
 };
 
 export default HomePage;
