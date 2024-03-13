@@ -15,6 +15,7 @@ export interface CardProps extends PropsWithChildren{
     description?: string;
     className?: string;
     contentClassName?: string;
+    onClick?: () => void;
 }
 
 export const Card: FC<CardProps> = (props) => {
@@ -26,7 +27,10 @@ export const Card: FC<CardProps> = (props) => {
         footer
     } = props;
 
-    return <UICard className={className}>
+    return <UICard
+        onClick={props.onClick}
+        className={className}
+    >
         {
             title || description ? <CardHeader className={"pb-0"}>
                 { title ? <CardTitle>{ title }</CardTitle> : null }

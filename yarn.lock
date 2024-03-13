@@ -25,10 +25,10 @@
   resolved "https://r.zkit.org/repository/npm/@arco-iconbox/react-atom-ui/-/react-atom-ui-0.0.2.tgz#d286282ee56ee4c76b5964e82f96de1b0171476f"
   integrity sha512-fhvGKLBHZ3GY0dlFK1zSbixAjQb15oBXFvgSyYKPZLZKseFLvKXbrkZd5+sdxIkNC73B4QpftYnohIvwPGgwvQ==
 
-"@arco-iconbox/react-clover@0.0.11":
-  version "0.0.11"
-  resolved "https://r.zkit.org/repository/npm/@arco-iconbox/react-clover/-/react-clover-0.0.11.tgz#5c09ce440af2364c51117981a870bb2b382fd4c6"
-  integrity sha512-clabhc8Rx5iBwJqAdYUeOpIIIAG4nxTLbmwVt7wtGxgYla01M2vpq0I0/xIn2/LN74tRKhP1mMxa2v6DKaU4Yw==
+"@arco-iconbox/react-clover@0.0.12":
+  version "0.0.12"
+  resolved "https://r.zkit.org/repository/npm/@arco-iconbox/react-clover/-/react-clover-0.0.12.tgz#4c629159cd56d7dab8f2c1f280c7c1a376aab6e1"
+  integrity sha512-CB8AZr6WFulHbzSzN3XV6ElsxTjw2C+HEB/k7ZRjMQctmHEkcv36fGBYe6wXL4hXIiQO5/5Ke9NHMBgsl/nwDQ==
 
 "@atlaskit/analytics-next-stable-react-context@1.0.1":
   version "1.0.1"

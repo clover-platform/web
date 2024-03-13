@@ -12,7 +12,7 @@ export interface ConfirmProps {
     description?: string;
     cancelText?: string;
     okText?: string;
-    onOk?: () => void | Promise<boolean|void> ;
+    onOk?: () => boolean | void | Promise<boolean|void> ;
     onCancel?: () => void;
     open?: boolean;
     confirmLoading?: boolean;
@@ -52,20 +52,22 @@ const AlertDialog: FC<ConfirmProps> = (props) => {
                 <Button
                     loading={loading}
                     onClick={async () => {
-                        const isAsync = onOk.constructor.name === 'AsyncFunction';
-                        if(isAsync) {
-                            setLoading(true);
-                            const result = await onOk();
-                            setLoading(false);
-                            if(typeof result !== 'boolean') {
-                                setOpen(false);
-                            }else{
-                                if(result) {
-                                    setOpen(false);
-                                }
+                        setLoading(true);
+                        const result = onOk();
+                        let value: boolean|void;
+                        if(result instanceof Promise) {
+                            value = (await result);
+                            if(typeof value === 'undefined') {
+                                value = true;
                             }
+                        }else if(typeof result === 'undefined') {
+                            value = true;
                         }else{
-                            onOk();
+                            value = result;
+                        }
+                        setLoading(false);
+                        if(value) {
+                            setOpen(false);
                         }
                     }}
                 >
