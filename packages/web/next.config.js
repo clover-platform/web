@@ -19,6 +19,7 @@ const nextConfig = {
     reactStrictMode: false,
     trailingSlash: true,
     output: isDev ? 'standalone' : "export",
+    pageExtensions: ['js', 'jsx', 'mdx', 'ts', 'tsx'],
     transpilePackages: ['@easy-kit/common'],
     devIndicators: {
         buildActivity: false

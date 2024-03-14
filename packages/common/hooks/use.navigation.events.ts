@@ -23,18 +23,6 @@ export const useNavigationEvents = (props: UseNavigationEventsProps) => {
         return current.href.split('#')[0] === next.href.split('#')[0];
     };
 
-    const onPopstate = (evt: PopStateEvent) => {
-        start?.();
-    }
-
-    useEffect(() => {
-        done?.();
-        return () => {
-            start?.();
-        }
-    }, [pathname, query]);
-
-    // window.addEventListener("popstate", onPopstate, false)
     function isAnchorOfCurrentUrl(currentUrl: string, newUrl: string) {
         const currentUrlObj = new URL(currentUrl);
         const newUrlObj = new URL(newUrl);
@@ -113,7 +101,6 @@ export const useNavigationEvents = (props: UseNavigationEventsProps) => {
         // Clean up the global click event listener when the component is unmounted
         return () => {
             document.removeEventListener('click', handleClick);
-            window.removeEventListener("popstate", onPopstate)
         };
     }, []);
 }

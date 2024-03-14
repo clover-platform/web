@@ -1,14 +1,9 @@
 export const layoutConfig = {
     name: 'main',
-    active: "home",
+    active: "project",
     path: [
         {
-            title: "{#Wiki#}",
-            type: "link",
-            href: "/{#LANG#}/wiki/"
-        },
-        {
-            title: "{#创建#}",
+            title: "{#项目#}",
             type: "item",
         }
     ],

@@ -12,6 +12,7 @@ import {
 import Link from "next/link";
 import {IconHome} from "@arco-iconbox/react-clover";
 import classNames from "classnames";
+import { NAV_MENUS } from "@/config/layout/main";
 
 export type PathProps = {
     type: "item" | "link";
@@ -54,7 +55,13 @@ export const MainLayout: FC<MainLayoutProps> = (props) => {
         return nodes;
     }, [path])
 
-    return <PublicMainLayout>
+    return <PublicMainLayout
+        sidebarProps={{
+            menus: NAV_MENUS,
+            title: "你的工作",
+            active: props.active
+        }}
+    >
         <Navbar>
             {
                 path ? <Breadcrumb>

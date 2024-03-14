@@ -1,67 +1,43 @@
 import { FC, PropsWithChildren, ReactNode, ReactElement, useEffect } from "react";
 import { cloneElement } from 'react';
-import {cn, Tooltip} from '@atom-ui/core';
+import { cn, ScrollArea, Tooltip } from "@atom-ui/core";
 import Link from "next/link";
 import { useRecoilValue } from "recoil";
 import classNames from 'classnames';
-import { IconAdd } from "@arco-iconbox/react-clover";
+import { IconAdd, IconGantt, IconProject, IconSearch, IconWiki } from "@arco-iconbox/react-clover";
 import { loadingState } from "@clover/public/components/layout/main/state";
-import { useLayoutState } from "@clover/public/components/layout/main/hooks";
+import { useSidebarState } from "@clover/public/components/layout/main/hooks";
 import Logo from "@clover/public//components/common/logo";
 import Switch from "@clover/public//components/layout/main/switch";
 import { Action } from "../../../common/action";
 import { SidebarProfile } from "@clover/public/components/layout/main/sidebar/profile";
-
-export interface MenuItemProps {
-    id: string;
-    title: string;
-    url: string;
-    icon: ReactElement;
-    external?: boolean;
-    target?: string;
-    group?: string;
-    active?: boolean;
-}
+import { ActionButton } from "@clover/public/components/common/action/button";
+import { MenuItem, MenuItemProps } from "@clover/public/components/layout/main/sidebar/menu-item";
 
 export interface SidebarProps extends PropsWithChildren {
     active?: string;
-    logo?: ReactNode;
-    navMenus?: MenuItemProps[];
-    extendMenus?: MenuItemProps[];
-}
-
-const MenuItem: FC<MenuItemProps> = (props) => {
-    const {
-        active = false,
-        external = false
-    } = props;
-
-    const body = <div className={cn(
-        "px-4 py-2 my-1 flex justify-start items-center text-[rgba(38,50,56,0.87)] rounded-md cursor-pointer relative",
-        "hover:bg-[var(--action-hover)] hover:text-[#263238]",
-        active ? "!bg-white before:absolute before:w-[4px] before:top-[9px] before:bottom-[9px] before:left-0 before:bg-primary before:rounded-r-lg" : null,
-    )}>
-        <span className={"flex justify-center items-center mr-3"}>{cloneElement(props.icon, {className: 'w-[20px] h-[20px]'})}</span>
-        <span className={"text-sm"}>{ props.title }</span>
-    </div>;
-
-    return external ? <a href={props.url} target={props.target}>{body}</a> : <Link href={props.url}>{body}</Link>
+    title?: string;
+    menus?: MenuItemProps[];
 }
 
 const Sidebar: FC<SidebarProps> = (props) => {
     const {
-        navMenus = [],
-        extendMenus = [],
+        menus = [],
+        title = "{#导航#}",
         active,
     } = props;
 
     const loading = useRecoilValue(loadingState);
-    const { sidebarOpen } = useLayoutState();
+    const open = useSidebarState();
+
+    const iconClassName = "text-base font-bold";
+    const groupClassName = "flex justify-center items-center -mx-1 mt-1";
 
     return <div className={cn(
         "w-[var(--sidebar-width)] bg-[var(--sidebar-bg)] border-0 border-r border-solid",
-        sidebarOpen ? "flex" : "hidden",
-        "flex-col flex-shrink-0",
+        "top-0 left-0 bottom-0",
+        "flex flex-col",
+        open ? "fixed" : "hidden",
     )}>
         <div className={"bg-[var(--sidebar-user-bg)] text-white p-2"}>
             <div className={"flex justify-center items-center"}>
@@ -82,12 +58,51 @@ const Sidebar: FC<SidebarProps> = (props) => {
                     <SidebarProfile />
                 </div>
             </div>
+            <div className={groupClassName}>
+                <div className={"m-1 flex-1"}>
+                    <Tooltip side={"bottom"} content={"{#项目#}"}>
+                        <Link href={"/{#LANG#}/project/"}>
+                            <ActionButton className={"w-full"}>
+                                <IconProject className={iconClassName} />
+                            </ActionButton>
+                        </Link>
+                    </Tooltip>
+                </div>
+                <div className={"m-1 flex-1"}>
+                    <Tooltip side={"bottom"} content={"{#任务#}"}>
+                        <Link href={"/{#LANG#}/task/"}>
+                            <ActionButton className={"w-full"}>
+                                <IconGantt className={iconClassName} />
+                            </ActionButton>
+                        </Link>
+                    </Tooltip>
+                </div>
+                <div className={"m-1 flex-1"}>
+                    <Tooltip side={"bottom"} content={"{#Wiki#}"}>
+                        <Link href={"/{#LANG#}/wiki/"}>
+                            <ActionButton className={"w-full"}>
+                                <IconWiki className={iconClassName} />
+                            </ActionButton>
+                        </Link>
+                    </Tooltip>
+                </div>
+            </div>
+            <div className={groupClassName}>
+                <div className={"m-1 flex-1"}>
+                    <ActionButton className={"w-full"}>
+                        <IconSearch className={classNames(iconClassName, "mr-1")} />
+                        {"{#搜索或跳转到...#}"}
+                    </ActionButton>
+                </div>
+            </div>
         </div>
-        <div className={"flex-1"}>
-            { navMenus.map((menu) => <MenuItem key={menu.id} {...menu} active={active === menu.id} />) }
-        </div>
-        <div className={"border-0 border-solid border-t border-[var(--border-color)]"}>
-            { extendMenus.map((menu) => <MenuItem key={menu.id} {...menu} active={active === menu.id} />) }
+        <div className={"flex-1 flex-shrink-0 h-0"}>
+            <ScrollArea className="h-full w-full rounded-md border">
+                <div className={"mx-2 my-1 font-bold text-primary"}>{ props.title }</div>
+                <div className={"mx-2"}>
+                    {menus.map((menu) => <MenuItem key={menu.id} {...menu} active={active === menu.id} />)}
+                </div>
+            </ScrollArea>
         </div>
     </div>
 };

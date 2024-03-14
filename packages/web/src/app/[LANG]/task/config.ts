@@ -1,9 +1,9 @@
 export const layoutConfig = {
     name: 'main',
-    active: "wiki",
+    active: "task",
     path: [
         {
-            title: "{#文档#}",
+            title: "{#任务#}",
             type: "item",
         }
     ],

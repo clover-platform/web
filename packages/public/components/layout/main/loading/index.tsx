@@ -1,13 +1,13 @@
 import { useSetRecoilState } from "recoil";
 import { loadingState } from "@clover/public//components/layout/main/state";
-import { useNavigationEvents } from "@easy-kit/common/hooks/use.navigation.events";
 import { useRef } from "react";
+import { useFetchIntercept } from "@easy-kit/common/hooks/use.fetch.intercept";
 
 export const AdminLayoutLoading = () => {
     const setLoading = useSetRecoilState(loadingState);
     const timerRef = useRef<any>();
 
-    useNavigationEvents({
+    useFetchIntercept({
         start: () => {
             clearTimeout(timerRef.current);
             timerRef.current = setTimeout(() => {
@@ -20,6 +20,6 @@ export const AdminLayoutLoading = () => {
                 setLoading(false);
             }, 50);
         }
-    })
+    });
     return null;
 }
