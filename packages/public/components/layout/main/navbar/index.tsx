@@ -8,14 +8,17 @@ import { Separator, } from "@atom-ui/core";
 import {TeamsSwitcher} from "@clover/public/components/layout/main/navbar/switcher/teams";
 import {ProjectsSwitcher} from "@clover/public/components/layout/main/navbar/switcher/projects";
 
-export type LayoutNavbarProps = {} & PropsWithChildren;
+export type LayoutNavbarProps = {
+    className?: string;
+} & PropsWithChildren;
 
 export const LayoutNavbar: FC<LayoutNavbarProps> = (props) => {
     const open = useRecoilValue(sidebarOpenState);
 
     return <div className={classNames(
         "h-12 border-0 border-b border-solid flex justify-start items-center px-2",
-        "flex justify-center items-center"
+        "flex justify-center items-center",
+        props.className
     )}>
         <div className={"flex-1 flex items-center"}>
             {

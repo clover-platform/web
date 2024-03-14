@@ -15,6 +15,15 @@ export default [{ path: "/access/authority/", config:  {
 } },{ path: "/access/role/edit/", config:  {
     name: 'access',
     active: "role",
+} },{ path: "/admin/", config:  {
+    name: 'admin',
+    active: "i18n",
+    path: [
+        {
+            title: "{#管理中心#}",
+            type: "item",
+        }
+    ],
 } },{ path: "/", config:  {
     name: 'main',
     active: "project",

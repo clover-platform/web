@@ -13,6 +13,7 @@ import Link from "next/link";
 import {IconHome} from "@arco-iconbox/react-clover";
 import classNames from "classnames";
 import { NAV_MENUS } from "@/config/layout/main";
+import {MenuItemProps} from "@clover/public/components/layout/main/sidebar/menu-item";
 
 export type PathProps = {
     type: "item" | "link";
@@ -24,6 +25,8 @@ export type MainLayoutProps = {
     active?: string;
     path: PathProps[];
     className?: string;
+    menus?: MenuItemProps[];
+    title?: string;
 } & PropsWithChildren;
 
 export const MainLayout: FC<MainLayoutProps> = (props) => {
@@ -57,12 +60,12 @@ export const MainLayout: FC<MainLayoutProps> = (props) => {
 
     return <PublicMainLayout
         sidebarProps={{
-            menus: NAV_MENUS,
-            title: "你的工作",
+            menus: props.menus || NAV_MENUS,
+            title: props.title || "你的工作",
             active: props.active
         }}
     >
-        <Navbar>
+        <Navbar className={"sticky top-0"}>
             {
                 path ? <Breadcrumb>
                     <BreadcrumbList>

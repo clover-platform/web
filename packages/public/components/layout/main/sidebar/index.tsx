@@ -4,7 +4,7 @@ import { cn, ScrollArea, Tooltip } from "@atom-ui/core";
 import Link from "next/link";
 import { useRecoilValue } from "recoil";
 import classNames from 'classnames';
-import { IconAdd, IconGantt, IconProject, IconSearch, IconWiki } from "@arco-iconbox/react-clover";
+import {IconAdd, IconGantt, IconHelp, IconProject, IconSearch, IconSetting, IconWiki} from "@arco-iconbox/react-clover";
 import { loadingState } from "@clover/public/components/layout/main/state";
 import { useSidebarState } from "@clover/public/components/layout/main/hooks";
 import Logo from "@clover/public//components/common/logo";
@@ -49,10 +49,10 @@ const Sidebar: FC<SidebarProps> = (props) => {
                     </Tooltip>
                 </Link>
                 <div className={"flex-1 flex justify-end items-center space-x-0.5"}>
-                    <Switch/>
+                    <Switch className={"w-8 h-8 !p-0"} />
                     <Tooltip content={"{#创建新的...#}"}>
-                        <Action>
-                            <IconAdd fontSize={16} />
+                        <Action className={"w-8 h-8 !p-0"}>
+                            <IconAdd fontSize={20} />
                         </Action>
                     </Tooltip>
                     <SidebarProfile />
@@ -97,12 +97,28 @@ const Sidebar: FC<SidebarProps> = (props) => {
             </div>
         </div>
         <div className={"flex-1 flex-shrink-0 h-0"}>
-            <ScrollArea className="h-full w-full rounded-md border">
+            <ScrollArea className="h-full w-full">
                 <div className={"mx-2 my-1 font-bold text-primary"}>{ props.title }</div>
                 <div className={"mx-2"}>
                     {menus.map((menu) => <MenuItem key={menu.id} {...menu} active={active === menu.id} />)}
                 </div>
             </ScrollArea>
+        </div>
+        <div className={"flex p-1 border-t"}>
+            <div className={"flex-1 m-1"}>
+                <Link href={"/{#LANG#}/help/"}>
+                    <Action type={"dark"} className={"w-full py-1"}>
+                        <IconHelp className={"mr-1 text-base"} /> {"{#帮助#}"}
+                    </Action>
+                </Link>
+            </div>
+            <div className={"flex-1 m-1"}>
+                <Link href={"/{#LANG#}/admin/"}>
+                    <Action type={"dark"} className={"w-full py-1"}>
+                        <IconSetting className={"mr-1 text-base"} /> {"{#管理中心#}"}
+                    </Action>
+                </Link>
+            </div>
         </div>
     </div>
 };

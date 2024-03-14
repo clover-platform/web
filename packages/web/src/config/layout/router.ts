@@ -3,11 +3,13 @@ import { getRouters } from "@next/router-config/utils";
 import LoginLayout from "@/components/layout/login";
 import AccessLayout from "@/components/layout/access";
 import { MainLayout } from "@/components/layout/main";
+import {AdminLayout} from "@/components/layout/admin";
 
 export const LAYOUTS = {
     "main": MainLayout,
     "login": LoginLayout,
     "access": AccessLayout,
+    "admin": AdminLayout,
 }
 
 /**

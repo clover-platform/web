@@ -48,7 +48,7 @@ export const SidebarProfile = () => {
         align={"end"}
         asChild
     >
-        <Action type={"light"}>
+        <Action type={"light"} className={"w-8 h-8 !p-0"}>
             <div
                 className={classNames(
                     "w-6 h-6 rounded-full bg-[url(~@clover/public/assets/image/default/avatar.png)] bg-contain bg-center",
