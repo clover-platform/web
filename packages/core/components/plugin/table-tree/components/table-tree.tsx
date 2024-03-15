@@ -43,7 +43,7 @@ export const TableTree: FC<TableTreeProps> = (props) => {
         onExpandedChange = (id: string, expanded: boolean) => {},
     } = props;
 
-    const [widths, setWidths] = useState([]);
+    const [widths, setWidths] = useState<ColumnWidth[]>([]);
 
     useEffect(() => {
         setWidths(columnWidths);

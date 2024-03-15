@@ -152,7 +152,7 @@ export const DataTable = <TData, TValue>(props: DataTableProps<TData, TValue>) =
                 id: "select",
                 enableSorting: false,
                 enableHiding: false,
-                header: ({ table }) => (
+                header: ({ table }: { table: any }) => (
                     <div className="pr-2 flex justify-center items-center">
                         <Checkbox
                             checked={table.getIsAllPageRowsSelected()}
@@ -161,7 +161,7 @@ export const DataTable = <TData, TValue>(props: DataTableProps<TData, TValue>) =
                         />
                     </div>
                 ),
-                cell: ({ row }) => (
+                cell: ({ row }: {row: any}) => (
                     <div className="pr-2 flex justify-center items-center">
                         <Checkbox
                             checked={row.getIsSelected()}
@@ -173,13 +173,13 @@ export const DataTable = <TData, TValue>(props: DataTableProps<TData, TValue>) =
             },)
         }
         newColumns.push(...columns);
-        if(hasActions(rowActions)) {
+        if(hasActions(rowActions!)) {
             newColumns.push({
                 id: "actions",
                 enableHiding: false,
                 size: 50,
                 enableResizing: false,
-                cell: ({ row }) => {
+                cell: ({ row }: {row:any}) => {
                     let items = rowActions;
                     if(isFunction(rowActions)) {
                         items = rowActions(row.original);
@@ -216,7 +216,7 @@ export const DataTable = <TData, TValue>(props: DataTableProps<TData, TValue>) =
     });
 
     const leftStickyColumns = useMemo<StickyColumnProps[]>(() => {
-        const columns = [];
+        const columns: StickyColumnProps[] = [];
         if(checkbox) {
             columns.push({
                 key: "select",
@@ -229,9 +229,9 @@ export const DataTable = <TData, TValue>(props: DataTableProps<TData, TValue>) =
     }, [stickyColumns, checkbox]);
 
     const rightStickyColumns = useMemo<StickyColumnProps[]>(() => {
-        const columns = [];
+        const columns: StickyColumnProps[] = [];
         columns.push(...stickyColumns.filter(({position}) => (position === 'right')));
-        if(hasActions(rowActions)) {
+        if(hasActions(rowActions!)) {
             columns.push({
                 key: "actions",
                 position: "right",
@@ -246,14 +246,14 @@ export const DataTable = <TData, TValue>(props: DataTableProps<TData, TValue>) =
             .getAllColumns()
             .filter((column) => column.getCanHide())
             .map((column) => {
-                const item = columns.find((col) => {
+                const item = columns.find((col: any) => {
                     const key = col.id || col['accessorKey'];
                     return key === column.id;
                 });
                 let label = column.id;
                 if(item) {
                     if(isFunction(item.header)) {
-                        label = item.header({ table, column, header: table.getFlatHeaders().find((col) => col.id === column.id) });
+                        label = item.header({ table, column, header: table.getFlatHeaders().find((col) => col.id === column.id)! });
                     }else if(isString(item.header)) {
                         label = item.header;
                     }
@@ -314,9 +314,9 @@ export const DataTable = <TData, TValue>(props: DataTableProps<TData, TValue>) =
                                             sticky.enable ? "sticky table-sticky-row" : null,
                                             sticky.last ? "table-sticky-row-last" : null,
                                             sticky.first ? "table-sticky-row-first" : null,
-                                            header.column.columnDef['className']
+                                            (header.column.columnDef as any)['className']
                                         )}
-                                        style={ sticky.enable ? {zIndex: 10, minWidth: sticky.width, [sticky.position]: sticky.offset} : null }
+                                        style={ sticky.enable ? {zIndex: 10, minWidth: sticky.width, [sticky.position as string]: sticky.offset} : undefined }
                                         key={header.id}>
                                         { sticky.enable ? <div className={"h-10 px-2 flex items-center inner"}>{content}</div> : content }
                                     </TableHead>
@@ -336,7 +336,7 @@ export const DataTable = <TData, TValue>(props: DataTableProps<TData, TValue>) =
                                     const sticky = getSticky(cell.column.id, leftStickyColumns, rightStickyColumns);
                                     const ctx = cell.getContext();
                                     const render = ctx.renderValue;
-                                    const formatters = cell.column.columnDef['formatters'] || [];
+                                    const formatters = (cell.column.columnDef as any)['formatters'] || [];
                                     ctx.renderValue = () => {
                                         if(!formatters.includes("defaultValue")) formatters.push('defaultValue');
                                         return formatValue(cellFormatters, formatters, render());
@@ -349,7 +349,7 @@ export const DataTable = <TData, TValue>(props: DataTableProps<TData, TValue>) =
                                             sticky.last ? "table-sticky-row-last" : null,
                                             sticky.first ? "table-sticky-row-first" : null,
                                         )}
-                                        style={ sticky.enable ? {zIndex: 10,minWidth: sticky.width, [sticky.position]: sticky.offset} : null }
+                                        style={ sticky.enable ? {zIndex: 10,minWidth: sticky.width, [sticky.position as string]: sticky.offset} : undefined }
                                     >
                                         { sticky.enable ? <div className={"h-10 px-2 flex items-center inner"}>{content}</div> : content }
                                     </TableCell>;

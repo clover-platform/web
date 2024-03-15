@@ -50,8 +50,6 @@
         "slate-history": "^0.100.0",
         "slate-react": "^0.101.1",
         "tailwind-merge": "^2.0.0",
-        "tailwindcss": "^3",
-        "tailwindcss-animate": "^1.0.7",
         "uuid": "9.0.1",
         "zod": "^3.22.4",
         "zod-i18n-map": "^2.21.0"

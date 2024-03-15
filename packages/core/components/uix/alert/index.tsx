@@ -81,7 +81,7 @@ const AlertDialog: FC<ConfirmProps> = (props) => {
 export const useAlert = () => {
     return {
         confirm: (props: ConfirmProps) => {
-            let root;
+            let root: any;
             const div = document.createElement('div');
             document.body.appendChild(div);
             const close = () => {

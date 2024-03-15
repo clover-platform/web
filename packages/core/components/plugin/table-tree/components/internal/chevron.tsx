@@ -23,7 +23,7 @@ export default class Chevron extends Component<ChevronProps> {
         collapseLabel: 'Collapse',
     };
 
-    handleClick = (e) => {
+    handleClick = (e: any) => {
         e.stopPropagation();
         if (this.props.onExpandToggle) {
             this.props.onExpandToggle();

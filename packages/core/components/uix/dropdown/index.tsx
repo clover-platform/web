@@ -57,7 +57,7 @@ const renderItem = (item: DropdownMenuItemProps, call: Callback) => {
             key={item.id}
             className="capitalize"
             checked={item.checked}
-            onCheckedChange={(value) => checkedCall(item, value)}
+            onCheckedChange={(value) => checkedCall?.(item, value)}
         >
             {item.label}
         </DropdownMenuCheckboxItem>
@@ -72,7 +72,7 @@ const renderItem = (item: DropdownMenuItemProps, call: Callback) => {
                 </DropdownMenuPortal>
             </DropdownMenuSub>
         }else {
-            return <DropdownMenuItem onClick={() => clickCall(item)} key={item.id} disabled={item.disabled}>
+            return <DropdownMenuItem onClick={() => clickCall?.(item)} key={item.id} disabled={item.disabled}>
                 { item.label }
                 { item.shortcut && <DropdownMenuShortcut>{ item.shortcut }</DropdownMenuShortcut> }
             </DropdownMenuItem>

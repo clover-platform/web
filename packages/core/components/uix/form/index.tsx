@@ -12,13 +12,10 @@ import {ControllerRenderProps, SubmitHandler, useForm} from "react-hook-form"
 import * as z from "zod"
 import { FC, PropsWithChildren, ReactElement, ReactNode, cloneElement, FormHTMLAttributes } from "react";
 import { ZodObject } from "zod";
-import { FieldValues } from "react-hook-form/dist/types/fields";
-import { DeepPartial } from "react-hook-form/dist/types/utils";
-import { WatchObserver } from "react-hook-form/dist/types/form";
+import type { Control, FieldValues, DeepPartial, WatchObserver } from "react-hook-form";
 import { useMemo, Children } from "react";
 import isObject from "lodash/isObject";
-import { Control } from "react-hook-form/dist/types";
-import { ZodEffects } from "zod/lib/types";
+import type { ZodEffects } from "zod";
 import {cn} from "@atom-ui/core/lib/utils";
 
 export interface RenderProps extends ControllerRenderProps {
@@ -85,13 +82,13 @@ export const Form: FC<FormProps> = (props) => {
         ...rest
     } = props;
 
-    const form = useForm<z.infer<typeof schema>>({
-        resolver: zodResolver(schema),
-        defaultValues,
+    const form = useForm({
+        resolver: zodResolver(schema!),
+        defaultValues: defaultValues as any,
     })
-    form.watch(onValuesChange);
+    form.watch(onValuesChange as any);
 
-    const children = useMemo<ReactNode[]>(() => {
+    const children = useMemo<ReactNode>(() => {
         return Children.map(props.children, (child, index) => {
             if(isObject(child) && ('type' in (child as ReactElement))) {
                 const ele = (child as ReactElement);

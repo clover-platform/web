@@ -1,0 +1,20 @@
+{
+    "name": "@clover/main",
+    "version": "0.1.0",
+    "private": true,
+    "type": "module",
+    "scripts": {
+        "dev": "next dev -p 3700",
+        "build": "next build",
+        "start": "next start",
+        "lint": "next lint"
+    },
+    "dependencies": {},
+    "devDependencies": {},
+    "postcss": {
+        "plugins": {
+            "tailwindcss": {},
+            "autoprefixer": {}
+        }
+    }
+}

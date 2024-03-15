@@ -112,12 +112,12 @@ export const BlockButton: FC<ButtonProps> = ({ format, icon }) => {
         <ToolButton
             active={isBlockActive(
                 editor,
-                format,
-                TEXT_ALIGN_TYPES.includes(format) ? 'align' : 'type'
+                format! as string,
+                TEXT_ALIGN_TYPES.includes(format! as string) ? 'align' : 'type'
             )}
             onClick={(event) => {
                 event.preventDefault()
-                toggleBlock(editor, format)
+                toggleBlock(editor, format! as string)
             }}
         >
             { icon }
@@ -129,10 +129,10 @@ export const MarkButton: FC<ButtonProps> = ({ format, icon }) => {
     const editor = useSlate()
     return (
         <ToolButton
-            active={isMarkActive(editor, format)}
+            active={isMarkActive(editor, format! as string)}
             onClick={(event) => {
                 event.preventDefault()
-                toggleMark(editor, format)
+                toggleMark(editor, format! as string)
             }}
         >
             { icon }

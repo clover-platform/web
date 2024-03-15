@@ -63,8 +63,7 @@ export const DateRangePicker = forwardRef<HTMLDivElement, DateRangePickerProps>(
                     selected={date}
                     onSelect={(v) => {
                         setDate(v);
-                        console.log(v);
-                        onChange && onChange(v);
+                        onChange?.(v!);
                     }}
                     numberOfMonths={2}
                 />

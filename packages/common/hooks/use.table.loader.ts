@@ -5,7 +5,7 @@ import cloneDeep from 'lodash/cloneDeep';
 import pick from 'lodash/pick';
 import {usePathname, useRouter, useSearchParams} from "next/navigation";
 import {useMessage} from "@atom-ui/core";
-import {RestResult} from "@easy-kit/common/utils/rest.interface";
+import { RestResult } from "@easy-kit/common/types/rest";
 
 export interface TableLoaderOptions {
     initialParams: any;

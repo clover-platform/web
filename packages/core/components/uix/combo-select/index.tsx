@@ -59,12 +59,12 @@ export const ComboSelect: FC<ComboSelectProps> = forwardRef((props, ref) => {
     const [open, setOpen] = useState(false)
     const containerRef = useRef(null);
     const [valueState, setValueState] = useState(value);
-    const [selectedValues, setSelectedValues] = useState<string[]>(multiple ? (value || []).map((v) => `${v || ''}`) : (value ? [`${value || ''}`] : []));
+    const [selectedValues, setSelectedValues] = useState<string[]>(multiple ? (value || []).map((v: any) => `${v || ''}`) : (value ? [`${value || ''}`] : []));
     const size = useSize(containerRef);
 
     useEffect(() => {
         if(multiple) {
-            setSelectedValues(multiple ? (value || []).map((v) => `${v || ''}`) : (value ? [`${value || ''}`] : []))
+            setSelectedValues(multiple ? (value || []).map((v: any) => `${v || ''}`) : (value ? [`${value || ''}`] : []))
         }else{
             setValueState(value);
         }

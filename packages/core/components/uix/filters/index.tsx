@@ -1,6 +1,6 @@
 import {PropsWithChildren, FC, cloneElement, ReactElement, useContext} from "react";
 import {useForm, Controller, SubmitHandler} from "react-hook-form"
-import {Control} from "react-hook-form/dist/types";
+import type {Control} from "react-hook-form";
 import {Button} from "@atom-ui/core/components/uix/button";
 import {UIXContext} from "@atom-ui/core/components/uix/config-provider";
 
