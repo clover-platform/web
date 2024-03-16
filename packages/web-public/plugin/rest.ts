@@ -1,10 +1,10 @@
 // Rest 配置
-import * as Rest from '@easy-kit/common/utils/rest';
-import {get} from "@clover/public/utils/headers";
+import { config, alias } from '@easy-kit/common/utils/rest';
+import { get } from "@clover/public/utils/headers";
 import bus from '@easy-kit/common/events';
-import {UNAUTHORIZED} from "@clover/public/events/auth";
+import { UNAUTHORIZED } from "@clover/public/events/auth";
 
-Rest.config({
+config({
     useTransId: true,
     onResponse: (data: any, response: any) => {
         const { needLogin = true } = response?.config || {};
@@ -16,7 +16,7 @@ Rest.config({
 });
 
 // 别名配置
-Rest.alias({
+alias({
     '@main': {
         url: '/api/main',
         headers: get
@@ -24,5 +24,5 @@ Rest.alias({
     '@account': {
         url: '/api/account',
         headers: get
-    }
+    },
 });

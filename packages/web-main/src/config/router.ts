@@ -1,21 +1,6 @@
 //文件自动生成，请勿编辑
 
-export default [{ path: "/access/authority/", config:  {
-    name: 'access',
-    active: "authority",
-} },{ path: "/access/", config:  {
-    name: 'access',
-    active: "role",
-} },{ path: "/access/role/add/", config:  {
-    name: 'access',
-    active: "role",
-} },{ path: "/access/role/detail/", config:  {
-    name: 'access',
-    active: "role",
-} },{ path: "/access/role/edit/", config:  {
-    name: 'access',
-    active: "role",
-} },{ path: "/", config:  {
+export default [{ path: "/", config:  {
     name: 'main',
     active: "project",
     path: [
@@ -59,7 +44,16 @@ export default [{ path: "/access/authority/", config:  {
     name: 'login'
 } },{ path: "/task/", config:  {
     name: 'main',
-    active: "task",
+    active: "task.list",
+    path: [
+        {
+            title: "{#任务#}",
+            type: "item",
+        }
+    ],
+} },{ path: "/task/gantt/", config:  {
+    name: 'main',
+    active: "task.gantt",
     path: [
         {
             title: "{#任务#}",

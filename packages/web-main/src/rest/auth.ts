@@ -11,7 +11,7 @@ export const emailCheck = async (data: {
 }): Promise<RestResult<any>> =>
     post(`@main/account/register/email/check/`, data);
 
-export const otpSecret = async () => get(`@main/account/otp/secret/`);
+export const otpSecret = async (): Promise<RestResult<any>> => get(`@main/account/otp/secret/`);
 
 export const passwordSet = async (data: {
     password: string;
@@ -42,9 +42,3 @@ export const loginAndLink = async (data: {
     password: string;
     token: string;
 }): Promise<RestResult<any>> => post(`@account/auth/bind/`, data);
-
-export const login = async (data: {
-    account: string;
-    password: string;
-    code: string;
-}): Promise<RestResult<any>> => post(`@main/account/login/`, data);

@@ -6,7 +6,7 @@ import EmailCodeInput from "@easy-kit/common/components/input/email-code";
 import {passwordReset, resetEmailCheck, sendResetEmailCode} from "@/rest/auth";
 import {useRouter, useSearchParams} from "next/navigation";
 import {setToken} from "@clover/public/utils/token";
-import {encrypt} from "@/utils/crypto";
+import {encrypt} from "@clover/public/utils/crypto";
 import { EMAIL_FORM_SCHEMA, PASSWORD_FORM_SCHEMA } from "@/config/pages/reset-password/form";
 
 const ResetPasswordPage = () => {

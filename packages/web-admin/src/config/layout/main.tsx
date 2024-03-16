@@ -13,7 +13,7 @@ export const NAV_MENUS: MenuItemProps[] = [
                 url: "/{#LANG#}/admin/dashboard/",
             },
             {
-                id: "overview.user",
+                id: "overview.team",
                 title: "{#团队#}",
                 url: "/{#LANG#}/admin/team/",
             },
@@ -40,9 +40,9 @@ export const NAV_MENUS: MenuItemProps[] = [
                 url: "/{#LANG#}/admin/access/role/",
             },
             {
-                id: "access.role",
+                id: "access.authority",
                 title: "{#资源管理#}",
-                url: "/{#LANG#}/admin/access/role/",
+                url: "/{#LANG#}/admin/access/authority/",
             },
         ]
     },

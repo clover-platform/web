@@ -5,7 +5,7 @@ import {Button, Form, Input, Result, Space, Spin, Image, useMessage, FormItem} f
 import {linkCode, loginAndLink} from "@/rest/auth";
 import {useRouter, useSearchParams} from "next/navigation";
 import Link from "next/link";
-import {encrypt} from "@/utils/crypto";
+import {encrypt} from "@clover/public/utils/crypto";
 import {setToken} from "@clover/public/utils/token";
 import {SUPPORT_WAY} from "@/config/pages/login/quick";
 import {SCHEMA} from "@/config/pages/link/form";

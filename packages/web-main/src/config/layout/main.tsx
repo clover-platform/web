@@ -14,8 +14,19 @@ export const NAV_MENUS: MenuItemProps[] = [
     {
         id: "task",
         title: "{#任务#}",
-        url: "/{#LANG#}/task/",
         icon: <IconGantt />,
+        children: [
+            {
+                id: "task.list",
+                title: "{#任务列表#}",
+                url: "/{#LANG#}/task/",
+            },
+            {
+                id: "task.gantt",
+                title: "{#甘特图#}",
+                url: "/{#LANG#}/task/gantt",
+            },
+        ]
     },
     {
         id: "wiki",

@@ -5,13 +5,13 @@ import { webpackConfig } from "@easy-kit/i18n/utils/config.js";
 process.env.UI_LANG = process.env.UI_LANG || 'zh-cn';
 const isDev = process.env.NODE_ENV !== 'production';
 
-export const apiRewrites = (prefix, apiConfig) => {
+export const apiRewrites = (apiConfig) => {
     const apiBase = apiConfig[process.env.API || 'dev'];
     return isDev ? async () => {
         return {
             fallback: Object.keys(apiBase).map(key => ({
-                source: `${prefix}${key}/:path*`,
-                destination: `${apiBase[key]}${prefix}:path*`
+                source: `/api/${key}/:path*`,
+                destination: `${apiBase[key]}/api/:path*`
             })),
         }
     } : undefined;

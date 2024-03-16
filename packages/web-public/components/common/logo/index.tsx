@@ -15,13 +15,13 @@ const Logo = (props: LogoProps) => {
     } = props;
 
     let bg = "bg-transparent";
-    let image = "bg-[url(~@/assets/image/logo/normal.png)]";
+    let image = "bg-[url(~@clover/public/assets/image/logo/normal.png)]";
     if(type === "dark") {
         bg = "bg-[#2E3340]";
-        image = "bg-[url(~@/assets/image/logo/light.png)]";
+        image = "bg-[url(~@clover/public/assets/image/logo/light.png)]";
     }else if(type === "light"){
         bg = "bg-white";
-        image = "bg-[url(~@/assets/image/logo/dark.png)]";
+        image = "bg-[url(~@clover/public/assets/image/logo/dark.png)]";
     }
 
     const margin = useMemo(() => Math.floor(size * 0.1), [size]);

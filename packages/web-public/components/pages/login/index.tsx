@@ -1,21 +1,19 @@
 'use client';
 
-import { Button, Divider, Input, Form, useMessage, FormItem } from "@atom-ui/core";
-import Quick from "@/components/pages/login/quick";
-import LoginLink from "@/components/common/login/link";
+import {Button, Form, FormItem, Input, useMessage} from "@atom-ui/core";
+import {SCHEMA} from "@clover/public/config/pages/login/form";
 import React, {useState} from "react";
+import {encrypt} from "@clover/public/utils/crypto";
 import {login} from "@clover/public/rest/auth";
 import {setToken} from "@clover/public/utils/token";
 import {useRouter, useSearchParams} from "next/navigation";
-import {encrypt} from "@clover/public/utils/crypto";
-import {SCHEMA} from "@clover/public/config/pages/login/form";
 
-const LoginPage = () => {
+export const PublicLoginPage = () => {
     const router = useRouter();
+    const msg = useMessage();
     const params = useSearchParams();
     const from = params.get("from");
     const [submitting, setSubmitting] = useState(false);
-    const msg = useMessage();
 
     const onSubmit = async (data: any) => {
         setSubmitting(true);
@@ -30,19 +28,9 @@ const LoginPage = () => {
         }
     }
 
-    const passwordLabel = <div className={"flex justify-center items-center"}>
-        <div className={"flex-1"}>{"{#密码#}"}</div>
-        <div className={"ml-[10px]"}>
-            <LoginLink href={"/{#LANG#}/reset-password/"} tabIndex={-1}>{"{#找回密码#}"}</LoginLink>
-        </div>
-    </div>
     return <div className={"w-[360px]"}>
         <div className={"flex justify-center items-center"}>
             <div className={"text-[24px] font-bold flex-1"}>{"{#登录#}"}</div>
-            <div className={"ml-[10px]"}>
-                <span>{"{#没有账号？#}"}</span>
-                <LoginLink href={"/{#LANG#}/register/"}>{"{#注册#}"}</LoginLink>
-            </div>
         </div>
         <div className={"mt-[30px]"}>
             <Form
@@ -50,17 +38,13 @@ const LoginPage = () => {
                 onSubmit={onSubmit}
             >
                 <FormItem name="account" label="{#邮箱或用户名#}">
-                    <Input placeholder={"{#请输入邮箱或用户名#}"} />
+                    <Input placeholder={"{#请输入邮箱或用户名#}"}/>
                 </FormItem>
-                <FormItem name="password" label={passwordLabel}>
-                    <Input placeholder="{#请输入密码#}" type={"password"} />
+                <FormItem name="password" label="{#密码#}">
+                    <Input placeholder="{#请输入密码#}" type={"password"}/>
                 </FormItem>
                 <Button loading={submitting} long type={"submit"}>{"{#立即登录#}"}</Button>
             </Form>
         </div>
-        <Divider orientation={"center"}>{"{#第三方快捷登录#}"}</Divider>
-        <Quick />
     </div>
-};
-
-export default LoginPage;
+}

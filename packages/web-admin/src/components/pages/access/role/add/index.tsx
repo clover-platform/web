@@ -7,6 +7,7 @@ import {useState} from "react";
 import {addRole} from "@/rest/access";
 import {useRouter} from "next/navigation";
 import BackButton from "@easy-kit/common/components/button/back";
+import {TitleBar} from "@clover/public/components/common/title-bar";
 
 const AddRolePage = () => {
     const [loading, setLoading] = useState(false);
@@ -25,13 +26,7 @@ const AddRolePage = () => {
     }
 
     return <>
-        <Breadcrumbs className={"mx-2"}>
-            <BreadcrumbsItem>
-                <Link href={"/{#LANG#}/access/"}>{"{#角色管理#}"}</Link>
-            </BreadcrumbsItem>
-            <BreadcrumbsItem>{"{#添加角色#}"}</BreadcrumbsItem>
-        </Breadcrumbs>
-        <Separator className={"my-4"} />
+        <TitleBar title={"{#添加角色#}"} />
         <div className={"w-[550px] mx-auto"}>
             <RoleForm onSubmit={onSubmit}>
                 <Space>

@@ -16,14 +16,14 @@ export const LayoutNavbar: FC<LayoutNavbarProps> = (props) => {
     const open = useRecoilValue(sidebarOpenState);
 
     return <div className={classNames(
-        "h-12 border-0 border-b border-solid flex justify-start items-center px-2",
+        "h-12 border-0 border-b border-solid flex justify-start items-center px-4",
         "flex justify-center items-center",
         props.className
     )}>
         <div className={"flex-1 flex items-center"}>
             {
                 !open ? <>
-                    <Switch type={"dark"} />
+                    <Switch type={"dark"} className={"-ml-2"} />
                     <Separator className={"h-5 mx-2"} orientation={"vertical"} />
                 </> : null
             }

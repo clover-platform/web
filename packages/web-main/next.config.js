@@ -5,10 +5,10 @@ const config = withConfig();
 /** @type {import('next').NextConfig} */
 export default config({
     ...publicConfig,
-    rewrites: apiRewrites('/api/', {
+    rewrites: apiRewrites({
         dev: { // 开发
-            main: 'http://localhost:3000',
-            account: 'http://localhost:3001',
+            'main': 'http://localhost:3000',
+            'account': 'http://localhost:3001',
         },
     }),
 });

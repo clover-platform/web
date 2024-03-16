@@ -52,7 +52,6 @@ export type DataTableColumn<TData> = ColumnDef<TData, unknown> & {
 export interface DataTableProps<TData, TValue> {
     columns: DataTableColumn<TData>[];
     data: TData[];
-    actions?: ReactNode;
     filters?: FilterItemProps[];
     showColumnVisibility?: boolean;
     stickyColumns?: StickyColumnProps[];
@@ -125,7 +124,6 @@ export const DataTable = <TData, TValue>(props: DataTableProps<TData, TValue>) =
     const {
         data,
         columns,
-        actions,
         showColumnVisibility = true,
         rowActions,
         checkbox = false,
@@ -268,33 +266,32 @@ export const DataTable = <TData, TValue>(props: DataTableProps<TData, TValue>) =
             });
     }, [columns, columnVisibility]);
 
+    const showVisibilityControl = useMemo(() => showColumnVisibility && columnSettings.length, [showColumnVisibility, columnSettings])
+
+    const showToolbar = useMemo(() => filter || showVisibilityControl, [filter, showVisibilityControl])
+
     return <>
         {
-            filter ? <div className={"border-0 border-solid border-b border-secondary pb-2"}>
-                <Filters
-                    {...filter}
-                    loading={loading}
-                    load={load}
-                />
+            showToolbar ? <div className={cn(
+                "border-0 border-solid border-b border-secondary pb-2",
+                "flex justify-between items-end",
+            )}>
+                {
+                    filter ? <Filters
+                        {...filter}
+                        loading={loading}
+                        load={load}
+                    /> : null
+                }
+                {
+                    showVisibilityControl ? <Dropdown align={"end"} items={columnSettings}>
+                        <Action className={"w-9 h-9"}>
+                            <IconColumns fontSize={18}/>
+                        </Action>
+                    </Dropdown> : null
+                }
             </div> : null
         }
-        <Space className="flex items-center my-2 justify-start">
-            { actions }
-            {
-                showColumnVisibility && columnSettings.length ? <>
-                    {
-                        actions ?  <div className={"h-5 mx-1"}>
-                            <Separator orientation={"vertical"} />
-                        </div> : null
-                    }
-                    <Dropdown align={"start"} items={columnSettings}>
-                        <Action className={"w-9 h-9"}>
-                            <IconColumns fontSize={18} />
-                        </Action>
-                    </Dropdown>
-                </> : null
-            }
-        </Space>
         <div className={"relative"}>
             <Table className={"data-table"}>
                 <TableHeader>

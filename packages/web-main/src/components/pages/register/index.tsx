@@ -6,7 +6,7 @@ import SecretItem from "@/components/pages/register/secret";
 import EmailCodeInput from "@easy-kit/common/components/input/email-code";
 import { emailCheck, passwordSet, sendEmailCode } from "@/rest/auth";
 import { setToken } from "@clover/public/utils/token";
-import { encrypt } from "@/utils/crypto";
+import { encrypt } from "@clover/public/utils/crypto";
 import { useRouter, useSearchParams } from "next/navigation";
 import LoginLink from "@/components/common/login/link";
 import { FORM_STEP1_SCHEMA, FORM_STEP2_SCHEMA } from "@/config/pages/register/form";
@@ -23,7 +23,7 @@ const RegisterPage = () => {
     const [formKey, setFormKey] = useState(Date.now());
     const [step2Submitting, setStep2Submitting] = useState(false);
 
-    const onStep1Submit = async (data: FormValues) => {
+    const onStep1Submit = async (data: any) => {
         setStep1Submitting(true);
         const { success, message, data: result } = await emailCheck(data);
         setStep1Submitting(false);
@@ -40,7 +40,7 @@ const RegisterPage = () => {
         setStep(0);
     }
 
-    const onStep2Submit = async (data: FormValues) => {
+    const onStep2Submit = async (data: any) => {
         data.password2 = undefined;
         delete data.password2;
         data.password = encrypt(data.password);

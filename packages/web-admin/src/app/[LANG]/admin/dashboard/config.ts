@@ -1,6 +1,6 @@
 export const layoutConfig = {
-    name: 'admin',
-    active: "i18n",
+    name: 'main',
+    active: "overview.dashboard",
     path: [
         {
             title: "{#管理中心#}",

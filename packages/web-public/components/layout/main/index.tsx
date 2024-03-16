@@ -121,7 +121,7 @@ export const MainLayout: FC<MainLayoutProps> = (props) => {
                     </Breadcrumb> : null
                 }
             </LayoutNavbar>
-            <div className={classNames("container p-2", className)}>{ props.children }</div>
+            <div className={classNames("container p-4", className)}>{ props.children }</div>
         </div>
         <AdminLayoutLoading />
     </div>

@@ -98,26 +98,26 @@ const Sidebar: FC<SidebarProps> = (props) => {
         </div>
         <div className={"flex-1 flex-shrink-0 h-0"}>
             <ScrollArea className="h-full w-full">
-                <div className={"mx-2 my-1 font-bold text-primary"}>{ props.title }</div>
+                <div className={"mx-3 my-2 font-bold text-xs text-primary"}>{ props.title }</div>
                 <div className={"mx-2"}>
-                    {menus.map((menu) => <MenuItem key={menu.id} {...menu} active={active === menu.id} />)}
+                    {menus.map((menu) => <MenuItem key={menu.id} {...menu} active={active} />)}
                 </div>
             </ScrollArea>
         </div>
-        <div className={"flex p-1 border-t"}>
-            <div className={"flex-1 m-1"}>
+        <div className={"flex p-1 py-0 border-t"}>
+            <div className={"flex-1 mx-0.5 my-1"}>
                 <Link href={"/{#LANG#}/help/"}>
                     <Action type={"dark"} className={"w-full py-1"}>
                         <IconHelp className={"mr-1 text-base"} /> {"{#帮助#}"}
                     </Action>
                 </Link>
             </div>
-            <div className={"flex-1 m-1"}>
-                <Link href={"/{#LANG#}/admin/"}>
+            <div className={"flex-1 mx-0.5 my-1"}>
+                <a href={"/{#LANG#}/admin/"}>
                     <Action type={"dark"} className={"w-full py-1"}>
                         <IconSetting className={"mr-1 text-base"} /> {"{#管理中心#}"}
                     </Action>
-                </Link>
+                </a>
             </div>
         </div>
     </div>

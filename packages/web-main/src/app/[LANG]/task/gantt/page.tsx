@@ -1,10 +1,10 @@
 import {keywords, title} from "@/utils/seo";
 
 export const metadata = {
-    title: title("{#任务列表#}"),
+    title: title("{#甘特图#}"),
     keywords: keywords(),
 }
 
-const Page = () => "task";
+const Page = () => "gantt";
 
 export default Page;

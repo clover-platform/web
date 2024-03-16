@@ -1,9 +1,11 @@
 import routerConfig from '@/config/router';
 import { getRouters } from "@next/router-config/utils";
 import { MainLayout } from "@/components/layout/main";
+import { LoginLayout } from "@clover/public/components/layout/login";
 
 export const LAYOUTS = {
     "main": MainLayout,
+    "login": LoginLayout,
 }
 
 /**

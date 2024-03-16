@@ -1,6 +1,6 @@
 export const layoutConfig = {
     name: 'main',
-    active: "task.list",
+    active: "task.gantt",
     path: [
         {
             title: "{#任务#}",
