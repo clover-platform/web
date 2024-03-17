@@ -1,4 +1,4 @@
-import {keywords, title} from "@/utils/seo";
+import {keywords, title} from "@clover/public/utils/seo";
 
 export const metadata = {
     title: title("{#管理中心#}"),

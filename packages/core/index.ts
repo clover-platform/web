@@ -44,6 +44,11 @@ export {
     BreadcrumbPage,
     BreadcrumbSeparator,
 } from "./components/ui/breadcrumb"
+export {
+    HoverCard,
+    HoverCardContent,
+    HoverCardTrigger,
+} from "./components/ui/hover-card"
 
 // extend
 export { Divider } from "./components/uix/divider";

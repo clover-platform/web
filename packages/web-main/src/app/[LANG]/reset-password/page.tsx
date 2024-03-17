@@ -1,4 +1,4 @@
-import {keywords, title} from "@/utils/seo";
+import {keywords, title} from "@clover/public/utils/seo";
 import ResetPasswordPage from "@/components/pages/reset-password";
 
 export const metadata = {

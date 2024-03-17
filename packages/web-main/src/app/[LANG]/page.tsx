@@ -1,4 +1,4 @@
-import {keywords, title} from "@/utils/seo";
+import {keywords, title} from "@clover/public/utils/seo";
 import HomePage from "@/components/pages/home";
 
 export const metadata = {

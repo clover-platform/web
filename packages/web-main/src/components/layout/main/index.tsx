@@ -1,6 +1,6 @@
 import { MainLayout as PublicMainLayout, PathProps } from "@clover/public/components/layout/main";
 import {FC, PropsWithChildren} from "react";
-import { NAV_MENUS } from "@/config/layout/main";
+import { NAV_MENUS } from "@clover/public/config/layout/main";
 
 export type MainLayoutProps = {
     active?: string;

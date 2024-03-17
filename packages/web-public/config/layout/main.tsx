@@ -10,6 +10,7 @@ export const NAV_MENUS: MenuItemProps[] = [
         title: "{#项目#}",
         url: "/{#LANG#}/project/",
         icon: <IconProject />,
+        external: true,
     },
     {
         id: "task",
@@ -20,11 +21,13 @@ export const NAV_MENUS: MenuItemProps[] = [
                 id: "task.list",
                 title: "{#任务列表#}",
                 url: "/{#LANG#}/task/",
+                external: true,
             },
             {
                 id: "task.gantt",
                 title: "{#甘特图#}",
                 url: "/{#LANG#}/task/gantt",
+                external: true,
             },
         ]
     },
@@ -33,12 +36,14 @@ export const NAV_MENUS: MenuItemProps[] = [
         title: "{#文档#}",
         url: "/{#LANG#}/wiki/",
         icon: <IconWiki />,
+        external: true,
     },
     {
         id: "i18n",
         title: "{#国际化#}",
         url: "/{#LANG#}/i18n/",
         icon: <IconI18n />,
+        external: true,
     },
 ]
 
