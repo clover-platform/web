@@ -104,7 +104,7 @@ export const MainLayout: FC<MainLayoutProps> = (props) => {
             "flex-1 w-0",
             open && "ml-[var(--sidebar-width)]"
         )}>
-            <LayoutNavbar className={"sticky top-0"}>
+            <LayoutNavbar className={"sticky top-0 z-50 bg-white"}>
                 {
                     path ? <Breadcrumb>
                         <BreadcrumbList>

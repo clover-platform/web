@@ -11,7 +11,7 @@ export const apiRewrites = (apiConfig) => {
         return {
             fallback: Object.keys(apiBase).map(key => ({
                 source: `/api/${key}/:path*`,
-                destination: `${apiBase[key]}/api/:path*`
+                destination: `${apiBase[key]}/api/${key}/:path*`
             })),
         }
     } : undefined;

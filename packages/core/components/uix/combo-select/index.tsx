@@ -70,6 +70,8 @@ export const ComboSelect: FC<ComboSelectProps> = forwardRef((props, ref) => {
         }
     }, [value, multiple]);
 
+    const placeholderDom = <span className={"font-normal text-muted-foreground"}>{placeholder}</span>
+
     return <Popover open={open} onOpenChange={setOpen}>
         <PopoverTrigger asChild>
             <Button
@@ -100,11 +102,11 @@ export const ComboSelect: FC<ComboSelectProps> = forwardRef((props, ref) => {
                                         }
                                     </> : <>
                                         <PlusCircledIcon className="mr-2 h-4 w-4" />
-                                        { placeholder }
+                                        { placeholderDom }
                                     </>
                                 }
                             </> : <>
-                                <span>{valueState ? options.find((option) => option.value === valueState)?.label : placeholder}</span>
+                                <span>{valueState ? options.find((option) => option.value === valueState)?.label : placeholderDom}</span>
                                 <CaretSortIcon className="ml-2 h-4 w-4 shrink-0 opacity-50" />
                             </>
                         }

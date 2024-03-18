@@ -12,7 +12,7 @@ export const Space: FC<SpaceProps> = (props) => {
         className,
     } = props;
     return <div className={cn(
-        "flex justify-center items-center",
+        "flex justify-start items-start",
         direction === "vertical" ? "flex-col space-y-2" : null,
         direction === "horizontal" ? "flex-row space-x-2 items-start" : null,
         className,

@@ -9,7 +9,7 @@
         "dev:main": "lerna run dev --scope @clover/main"
     },
     "dependencies": {
-        "@arco-iconbox/react-clover": "0.0.12",
+        "@arco-iconbox/react-clover": "0.0.13",
         "axios": "1.6.2",
         "dayjs": "^1.11.10",
         "localforage": "1.10.0",

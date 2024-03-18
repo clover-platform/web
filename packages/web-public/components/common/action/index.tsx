@@ -14,6 +14,7 @@ export const Action = forwardRef<HTMLButtonElement, ActionProps>((props, ref) =>
     return <button
         {...rest}
         ref={ref}
+        type={"button"}
         className={classNames(
             "p-2 flex justify-center items-center rounded-sm border border-transparent border-solid",
             type === 'light' && "hover:bg-white/20",

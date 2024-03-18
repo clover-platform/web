@@ -133,7 +133,11 @@ const _handleHeaders = (headers: any) => {
 };
 
 const alias = (map: any) => {
-    _aliasMap = map;
+    // 合并 map 到 _aliasMap
+    _aliasMap = {
+        ..._aliasMap,
+        ...(map || {}),
+    };
 };
 
 const config = (config: RestConfig) => {
