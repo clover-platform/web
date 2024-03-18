@@ -1,16 +1,27 @@
 'use client';
 
 import { TitleBar } from "@clover/public/components/common/title-bar";
-import { Button, Space } from "@atom-ui/core";
+import {Button, Space, useMessage} from "@atom-ui/core";
 import BackButton from "@easy-kit/common/components/button/back";
 import ModuleForm from "@/components/pages/module/form";
 import { useState } from "react";
+import {create} from "@/rest/module";
+import {useRouter} from "next/navigation";
 
 export const CreateModulePage = () => {
     const [loading, setLoading] = useState(false);
+    const msg = useMessage();
+    const router = useRouter();
 
     const onSubmit = async (data: any) => {
-        console.log(data);
+        setLoading(true);
+        const { success, message } = await create(data);
+        setLoading(false);
+        if(success) {
+            router.push("/{#LANG#}/i18n/");
+        }else{
+            msg.error(message)
+        }
     }
 
     return <>
