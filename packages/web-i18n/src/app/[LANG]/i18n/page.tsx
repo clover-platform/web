@@ -1,9 +1,9 @@
 import {keywords, title} from "@clover/public/utils/seo";
-import {HomePage} from "@/components/pages/home";
+import {ModulePage} from "@/components/pages/module";
 
 export const metadata = {
     title: title("{#国际化#}"),
     keywords: keywords(),
 }
 
-export default HomePage;
+export default ModulePage;

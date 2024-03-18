@@ -4,15 +4,18 @@ import { TitleBar } from "@clover/public/components/common/title-bar";
 import { Button, DataTable, Space } from "@atom-ui/core";
 import Link from "next/link";
 import { useTableLoader } from "@easy-kit/common/hooks";
-import { COLUMNS, FILTERS, ROW_ACTIONS } from "@/config/pages/home/table";
+import { COLUMNS, FILTERS, ROW_ACTIONS } from "@/config/pages/module/table";
 import { list } from "@/rest/module";
-import { useEffect } from "react";
+import {useEffect, useState} from "react";
+import {TabsTitle} from "@clover/public/components/common/tabs-title";
+import {TABS} from "@/config/pages/module/tabs";
 
 const initialParams = {
     keyword: '',
 }
 
-export const HomePage = () => {
+export const ModulePage = () => {
+    const [active, setActive] = useState('all');
     const [loading, result, query, load] = useTableLoader({
         initialParams,
         action: list,
@@ -30,9 +33,14 @@ export const HomePage = () => {
 
     return <>
         <TitleBar
-            title={"{#模块#}"}
+            title={"{#国际化#}"}
             actions={actions}
             border={false}
+        />
+        <TabsTitle
+            active={active}
+            items={TABS}
+            onChange={setActive}
         />
         <DataTable
             filter={{
