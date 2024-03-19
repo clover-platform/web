@@ -64,6 +64,8 @@ export interface DataTableProps<TData, TValue> {
     pagination?: PaginationProps | boolean;
     cellFormatters?: Function [],
     empty?: string;
+    showHeader?: boolean;
+    onRowClick?: (row: Row<TData>) => void;
 }
 
 export const getSticky = (id: string, leftStickyColumns: StickyColumnProps[], rightStickyColumns: StickyColumnProps[]) => {
@@ -134,6 +136,7 @@ export const DataTable = <TData, TValue>(props: DataTableProps<TData, TValue>) =
         pagination,
         load,
         cellFormatters = [],
+        showHeader = true,
     } = props;
 
     const config = useContext(UIXContext);
@@ -294,7 +297,7 @@ export const DataTable = <TData, TValue>(props: DataTableProps<TData, TValue>) =
         }
         <div className={"relative"}>
             <Table className={"data-table"}>
-                <TableHeader>
+                <TableHeader className={cn(!showHeader && "hidden")}>
                     {table.getHeaderGroups().map((headerGroup) => (
                         <TableRow key={headerGroup.id}>
                             {headerGroup.headers.map((header) => {
@@ -328,6 +331,7 @@ export const DataTable = <TData, TValue>(props: DataTableProps<TData, TValue>) =
                             <TableRow
                                 key={row.id}
                                 data-state={row.getIsSelected() && "selected"}
+                                onClick={() => props.onRowClick?.(row)}
                             >
                                 {row.getVisibleCells().map((cell) => {
                                     const sticky = getSticky(cell.column.id, leftStickyColumns, rightStickyColumns);

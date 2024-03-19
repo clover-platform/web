@@ -9,25 +9,37 @@ import { list } from "@/rest/module";
 import {useEffect, useState} from "react";
 import {TabsTitle} from "@clover/public/components/common/tabs-title";
 import {TABS} from "@/config/pages/module/tabs";
+import { useRouter, useSearchParams } from "next/navigation";
 
 const initialParams = {
     keyword: '',
 }
 
 export const ModulePage = () => {
-    const [active, setActive] = useState('all');
+    const router = useRouter();
+    const search = useSearchParams();
+    const type = search.get('type') || 'all';
+    const [active, setActive] = useState(type);
     const [loading, result, query, load] = useTableLoader({
         initialParams,
         action: list,
+        keys: ['type'],
     });
 
     useEffect(() => {
-        load().then();
+        load({type}).then();
     }, []);
+
+    useEffect(() => {
+        load({
+            type: active,
+            page: 1,
+        }).then();
+    }, [active]);
 
     const actions = <Space>
         <Link href={"/{#LANG#}/i18n/module/create/"}>
-            <Button>{"{#创建模块#}"}</Button>
+            <Button>{"{#新建#}"}</Button>
         </Link>
     </Space>;
 
@@ -43,6 +55,7 @@ export const ModulePage = () => {
             onChange={setActive}
         />
         <DataTable
+            showHeader={false}
             filter={{
                 items: FILTERS,
                 defaultValues: initialParams,
@@ -60,6 +73,10 @@ export const ModulePage = () => {
             loading={loading}
             onRowActionClick={({id: key}, {original}) => {
 
+            }}
+            onRowClick={(row) => {
+                const {id} = row.original;
+                router.push("/{#LANG#}/i18n/module/dashboard/?id=" + id);
             }}
         />
     </>

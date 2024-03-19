@@ -11,6 +11,9 @@ import * as z from "zod";
 import { zodI18nMap } from "zod-i18n-map";
 import zhCNZod from "zod-i18n-map/locales/zh-CN/zod.json";
 import enUSZod from "zod-i18n-map/locales/en/zod.json";
+import enAgo from 'javascript-time-ago/locale/en'
+import zhCNAgo from 'javascript-time-ago/locale/zh'
+import TimeAgo from "javascript-time-ago";
 
 export type RootLayoutProps = PropsWithChildren<{
     routers: any[];
@@ -34,6 +37,8 @@ export const RootLayout: FC<RootLayoutProps> = (props) => {
             <ConfigProvider
                 locale={locales['{#LANG#}']}
                 onLocaleChange={(key) => {
+                    TimeAgo.addLocale(zhCNAgo);
+                    TimeAgo.addLocale(enAgo);
                     i18next.init({
                         lng: key,
                         resources: {
@@ -52,12 +57,12 @@ export const RootLayout: FC<RootLayoutProps> = (props) => {
     }
 
     return <html className={`{#LANG#}`}>
-    <head>
-        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
-        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
-        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
-        <link rel="manifest" href="/site.webmanifest" />
-    </head>
-    <body>{renderBody()}</body>
+        <head>
+            <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+            <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+            <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+            <link rel="manifest" href="/site.webmanifest" />
+        </head>
+        <body>{renderBody()}</body>
     </html>
 };

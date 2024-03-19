@@ -9,15 +9,6 @@ export default [{ path: "/", config:  {
             type: "item",
         }
     ],
-} },{ path: "/i18n/", config:  {
-    name: 'main',
-    active: "i18n",
-    path: [
-        {
-            title: "{#国际化#}",
-            type: "item",
-        }
-    ],
 } },{ path: "/link/error/", config:  {
     name: 'login',
 } },{ path: "/link/github/", config:  {
@@ -26,9 +17,6 @@ export default [{ path: "/", config:  {
     name: 'login',
 } },{ path: "/login/", config:  {
     name: 'login',
-} },{ path: "/member/", config:  {
-    name: 'main',
-    active: "member",
 } },{ path: "/project/", config:  {
     name: 'main',
     active: "project",
@@ -57,18 +45,6 @@ export default [{ path: "/", config:  {
     path: [
         {
             title: "{#任务#}",
-            type: "item",
-        }
-    ],
-} },{ path: "/todo/", config:  {
-    name: 'main',
-    active: "todo",
-} },{ path: "/wiki/", config:  {
-    name: 'main',
-    active: "wiki",
-    path: [
-        {
-            title: "{#文档#}",
             type: "item",
         }
     ],

@@ -6,3 +6,6 @@ export const list = async (params: any): Promise<RestResult<any>> =>
 
 export const create = async (data: any): Promise<RestResult<any>> =>
     post(`@i18n/module/new/`, data);
+
+export const dashboard = async (id: number): Promise<RestResult<any>> =>
+    get(`@i18n/module/${id}/dashboard/`);

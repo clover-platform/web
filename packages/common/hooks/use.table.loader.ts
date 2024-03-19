@@ -12,6 +12,7 @@ export interface TableLoaderOptions {
     action: (data: any) => Promise<RestResult<any>>;
     withURL?: boolean;
     encodeParams?: string[];
+    keys?: string[];
 }
 
 const reqInit = {
@@ -50,12 +51,16 @@ export const useTableLoader = (options: TableLoaderOptions) => {
         withURL = true,
         encodeParams = [],
         action,
+        keys: keysOptions = [],
     } = options;
 
     const msg = useMessage();
     const [loading, setLoading] = useState(true);
     const [result, setResult] = useState(null);
-    const legalKeys = useRef(keys(Object.assign((cloneDeep(initialParams) || {}), reqInit)));
+    const legalKeys = useRef([
+        ...keys(Object.assign((cloneDeep(initialParams) || {}), reqInit)),
+        ...keysOptions
+    ]);
     const router = useRouter();
     let path = usePathname()
     const urlParam = useUrlQuery();
