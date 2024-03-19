@@ -6,7 +6,7 @@
     "author": "",
     "license": "NONE",
     "dependencies": {
-        "@arco-iconbox/react-atom-ui": "0.0.2",
+        "@arco-iconbox/react-atom-ui": "0.0.3",
         "@atlaskit/button": "^16.17.1",
         "@atlaskit/icon": "^22.0.0",
         "@atlaskit/spinner": "^16.0.0",

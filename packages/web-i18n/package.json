@@ -9,8 +9,12 @@
         "start": "next start",
         "lint": "next lint"
     },
-    "dependencies": {},
-    "devDependencies": {},
+    "dependencies": {
+        "react-flag-icon-css": "1.0.25"
+    },
+    "devDependencies": {
+        "@types/react-flag-icon-css": "^1.0.10"
+    },
     "postcss": {
         "plugins": {
             "tailwindcss": {},

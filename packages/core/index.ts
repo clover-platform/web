@@ -121,3 +121,5 @@ export { DatePicker } from "./components/uix/date-picker";
 export type { DatePickerProps } from "./components/uix/date-picker";
 export {Tooltip} from './components/uix/tooltip';
 export type { TooltipProps } from './components/uix/tooltip';
+export {Empty} from './components/uix/empty';
+export type { EmptyProps } from './components/uix/empty';

@@ -1,57 +1,68 @@
 'use client';
 
 import { TitleBar } from "@clover/public/components/common/title-bar";
-import { Button, Space, Table, TableBody, TableRow, TableCell, Separator } from "@atom-ui/core";
+import {
+    Button,
+    Space,
+    Table,
+    TableBody,
+    Separator,
+    ValueFormatter,
+    TableHeader,
+    TableRow,
+    TableHead,
+    Loading, TableCell, Empty
+} from "@atom-ui/core";
 import Link from "next/link";
 import { i18n } from "@easy-kit/i18n/utils";
 import { DetailInfoItem } from "@/components/pages/module/dashboard/detail/info-item";
 import { DetailTitle } from "@/components/pages/module/dashboard/detail/title";
 import { dashboard } from "@/rest/module";
-import { useEffect } from "react";
+import {useEffect, useState} from "react";
+import {useSearchParams} from "next/navigation";
+import {Language, LanguageItem} from "@/components/pages/module/dashboard/language-item";
+import {User, users} from "@clover/public/rest/account";
 
-const invoices = [
-    {
-        invoice: "INV001",
-        paymentStatus: "Paid",
-        totalAmount: "$250.00",
-        paymentMethod: "Credit Card",
-    },
-    {
-        invoice: "INV002",
-        paymentStatus: "Pending",
-        totalAmount: "$150.00",
-        paymentMethod: "PayPal",
-    },
-    {
-        invoice: "INV003",
-        paymentStatus: "Unpaid",
-        totalAmount: "$350.00",
-        paymentMethod: "Bank Transfer",
-    },
-    {
-        invoice: "INV004",
-        paymentStatus: "Paid",
-        totalAmount: "$450.00",
-        paymentMethod: "Credit Card",
-    },
-    {
-        invoice: "INV005",
-        paymentStatus: "Paid",
-        totalAmount: "$550.00",
-        paymentMethod: "PayPal",
-    },
-    {
-        invoice: "INV006",
-        paymentStatus: "Pending",
-        totalAmount: "$200.00",
-        paymentMethod: "Bank Transfer",
-    },
-]
+export type ModuleDetail = {
+    id?: number;
+    source?: string;
+    memberSize?: number;
+    wordSize?: number;
+    createTime?: string;
+    updateTime?: string;
+}
+
+export type Member = User & {
+    type: number;
+}
 
 export const DashboardPage = () => {
+    const search = useSearchParams();
+    const id = search.get("id");
+    const [loading, setLoading] = useState(false);
+    const [languages, setLanguages] = useState<Language[]>([]);
+    const [detail, setDetail] = useState<ModuleDetail>({});
+    const [members, setMembers] = useState<Member[]>([]);
+
     const load = async () => {
-        const data = await dashboard(1);
-        console.log(data);
+        setLoading(true);
+        const { success, data} = await dashboard(Number(id));
+        if(success) {
+            const { detail, languages, members } = data;
+            setDetail(detail);
+            setLanguages(languages);
+            const ids = members.map((item: any) => item.id);
+            const result = await users(ids);
+            if(success) {
+                setMembers(result.data?.map((user) => {
+                    return {
+                        ...user,
+                        type: members.find((item: {id: number, type: number}) => item.id === user.id)?.type || 0
+                    };
+                }) || []);
+            }
+        }
+        setLoading(false);
     }
 
     useEffect(() => {
@@ -70,45 +81,54 @@ export const DashboardPage = () => {
             actions={actions}
             border={false}
         />
-        <div className={"flex justify-start items-start"}>
-            <div className={"flex-1 mr-4"}>
-                <Table>
-                    <TableBody>
-                        {invoices.map((invoice) => (
-                            <TableRow key={invoice.invoice}>
-                                <TableCell className="font-medium">{invoice.invoice}</TableCell>
-                                <TableCell>{invoice.paymentStatus}</TableCell>
-                                <TableCell>{invoice.paymentMethod}</TableCell>
-                                <TableCell className="text-right">{invoice.totalAmount}</TableCell>
+        <Loading loading={loading}>
+            <div className={"flex justify-start items-start"}>
+                <div className={"flex-1 mr-4"}>
+                    <Table>
+                        <TableHeader>
+                            <TableRow>
+                                <TableHead>{"{#语言#}"}</TableHead>
+                                <TableHead className={"w-64"}>{"{#进度#}"}</TableHead>
+                                <TableHead className={"w-24"}></TableHead>
                             </TableRow>
-                        ))}
-                    </TableBody>
-                </Table>
-            </div>
-            <div className={"w-96 bg-muted p-4 rounded-md"}>
-                <DetailTitle title={"{#详情#}"}>
-                    {i18n("{#编号：%id#}", {id: 1})}
-                </DetailTitle>
-                <div className={"space-y-3"}>
-                    <DetailInfoItem label="{#源语言#}">
-                        简体中文
-                    </DetailInfoItem>
-                    <DetailInfoItem label="{#项目成员#}">
-                        12
-                    </DetailInfoItem>
-                    <DetailInfoItem label="{#词条#}">
-                        2048
-                    </DetailInfoItem>
-                    <DetailInfoItem label="{#创建时间#}">
-                        2天前
-                    </DetailInfoItem>
-                    <DetailInfoItem label="{#更新时间#}">
-                        2天前
-                    </DetailInfoItem>
+                        </TableHeader>
+                        <TableBody>
+                            {
+                                languages.length === 0 && <TableRow>
+                                    <TableCell colSpan={3}>
+                                        <Empty />
+                                    </TableCell>
+                                </TableRow>
+                            }
+                            { languages.map((item) => <LanguageItem key={item.id} {...item} />) }
+                        </TableBody>
+                    </Table>
                 </div>
-                <Separator className={"my-4"}/>
-                <DetailTitle title={"{#管理员#}"} />
+                <div className={"w-96 bg-muted p-4 rounded-md"}>
+                    <DetailTitle title={"{#详情#}"}>
+                        {i18n("{#编号：%id#}", {id})}
+                    </DetailTitle>
+                    <div className={"space-y-3"}>
+                        <DetailInfoItem label="{#源语言#}">
+                            {detail.source || '--'}
+                        </DetailInfoItem>
+                        <DetailInfoItem label="{#项目成员#}">
+                            {detail.memberSize || '--'}
+                        </DetailInfoItem>
+                        <DetailInfoItem label="{#词条#}">
+                            {detail.wordSize || '--'}
+                        </DetailInfoItem>
+                        <DetailInfoItem label="{#创建时间#}">
+                            <ValueFormatter value={detail.createTime} formatters={["time"]}/>
+                        </DetailInfoItem>
+                        <DetailInfoItem label="{#更新时间#}">
+                            <ValueFormatter value={detail.updateTime} formatters={["time"]}/>
+                        </DetailInfoItem>
+                    </div>
+                    <Separator className={"my-4"}/>
+                    <DetailTitle title={"{#管理员#}"}/>
+                </div>
             </div>
-        </div>
+        </Loading>
     </>
 }
