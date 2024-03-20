@@ -7,7 +7,7 @@ export type ActionProps = PropsWithChildren<HTMLAttributes<HTMLButtonElement>> &
 
 export const Action = forwardRef<HTMLButtonElement, ActionProps>((props, ref) => {
     const {
-        type = 'light',
+        type = 'dark',
         ...rest
     } = props;
 

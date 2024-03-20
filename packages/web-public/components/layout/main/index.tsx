@@ -5,7 +5,7 @@ import {usePathname, useRouter} from "next/navigation";
 import Logo from "@clover/public/components/common/logo";
 import { AdminLayoutLoading } from "@clover/public/components/layout/main/loading";
 import Sidebar, { SidebarProps } from "@clover/public/components/layout/main/sidebar";
-import { useLayoutState } from "@clover/public/components/layout/hooks/main";
+import {useGoLogin, useLayoutState} from "@clover/public/components/layout/hooks/main";
 import { UNAUTHORIZED } from "@clover/public/events/auth";
 import {useRecoilValue} from "recoil";
 import {teamsState} from "@clover/public/state/public";
@@ -38,28 +38,10 @@ export interface MainLayoutProps extends PropsWithChildren {
 
 export const MainLayout: FC<MainLayoutProps> = (props) => {
     const { path, className } = props;
-    const router = useRouter();
-    const pathname = usePathname();
     const {loading, isLogin} = useLayoutState();
     const teams = useRecoilValue(teamsState);
     const open = useSidebarState();
-
-    const goLogin = useCallback(() => {
-        router.push(`/{#LANG#}/login/?from=${encodeURIComponent(pathname)}`)
-    }, [pathname]);
-
-    useEffect(() => {
-        bus.on(UNAUTHORIZED, goLogin);
-        return () => {
-            bus.off(UNAUTHORIZED, goLogin);
-        }
-    }, []);
-
-    useEffect(() => {
-        if (!loading && !isLogin) {
-            goLogin();
-        }
-    }, [loading, isLogin])
+    useGoLogin();
 
     const showGuide = useMemo(() => {
         return !teams.length;

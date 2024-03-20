@@ -1,12 +1,17 @@
 import {useRecoilState, useRecoilValue, useSetRecoilState} from "recoil";
 import {accountInfoState, isLoginState} from "@clover/public/state/account";
 import {isLoadingState, projectsState, teamsState} from "@clover/public/state/public";
-import {useCallback, useEffect, useMemo} from "react";
+import {useCallback, useEffect} from "react";
 import {profile} from "@clover/public/rest/auth";
 import {accessState} from "@easy-kit/common/state/access";
-import { useInitLayoutState } from "@clover/public/components/layout/main/hooks";
 import { my as myTeams } from "@clover/public/rest/team";
 import { my as myProjects } from "@clover/public/rest/project";
+import {usePathname, useRouter} from "next/navigation";
+import bus from "@easy-kit/common/events";
+import {UNAUTHORIZED} from "@clover/public/events/auth";
+import localforage from "localforage";
+import {SIDEBAR_OPEN_KEY} from "@clover/public/components/layout/main/const";
+import {sidebarOpenState} from "@clover/public/components/layout/main/state";
 
 export const useCurrent = () => {
     const account = useRecoilValue(accountInfoState);
@@ -36,15 +41,17 @@ export const useDataLoader = () => {
 }
 
 export const useLayoutState = () => {
-    const init = useInitLayoutState();
     const loadData = useDataLoader();
     const isLogin = useRecoilValue(isLoginState);
     const account = useRecoilValue(accountInfoState);
-    const [restLoading, setLoading] = useRecoilState(isLoadingState);
+    const [loading, setLoading] = useRecoilState(isLoadingState);
+    const setSidebarOpen = useSetRecoilState(sidebarOpenState);
 
     const initState = async () => {
         setLoading(true);
         await loadData()
+        const sideInit = await localforage.getItem<boolean>(SIDEBAR_OPEN_KEY);
+        setSidebarOpen(sideInit === null ? true: sideInit);
         setLoading(false);
     }
 
@@ -52,9 +59,27 @@ export const useLayoutState = () => {
         initState().then();
     }, [])
 
-    const loading = useMemo(() => {
-        return restLoading || !init;
-    }, [restLoading, init])
-
     return {loading, isLogin, account};
+}
+
+export const useGoLogin = () => {
+    const router = useRouter();
+    const isLogin = useRecoilValue(isLoginState);
+    const loading = useRecoilValue(isLoadingState);
+    const goLogin = () => {
+        router.push(`/{#LANG#}/login/?from=${encodeURIComponent(location.href)}`)
+    }
+
+    useEffect(() => {
+        bus.on(UNAUTHORIZED, goLogin);
+        return () => {
+            bus.off(UNAUTHORIZED, goLogin);
+        }
+    }, []);
+
+    useEffect(() => {
+        if (!loading && !isLogin) {
+            goLogin();
+        }
+    }, [loading, isLogin]);
 }

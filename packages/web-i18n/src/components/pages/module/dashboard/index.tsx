@@ -19,17 +19,19 @@ import { DetailInfoItem } from "@/components/pages/module/dashboard/detail/info-
 import { DetailTitle } from "@/components/pages/module/dashboard/detail/title";
 import { dashboard } from "@/rest/module";
 import {useEffect, useState} from "react";
-import {useSearchParams} from "next/navigation";
+import {useRouter, useSearchParams} from "next/navigation";
 import {LanguageItem} from "@/components/pages/module/dashboard/language-item";
 import {users} from "@clover/public/rest/account";
 import { MemberItem } from "@/components/pages/module/dashboard/member-item";
-import { Language, Member, ModuleDetail } from "@/types/pages/module";
+import { Member, ModuleDetail } from "@/types/pages/module";
 import { useRecoilValue } from "recoil";
 import { languagesState } from "@/state/public";
+import {Language} from "@/types/pages/public";
 
 export const DashboardPage = () => {
     const search = useSearchParams();
     const id = search.get("id");
+    const router = useRouter();
     const [loading, setLoading] = useState(false);
     const [languages, setLanguages] = useState<Language[]>([]);
     const [detail, setDetail] = useState<ModuleDetail>({});
@@ -61,8 +63,12 @@ export const DashboardPage = () => {
         load().then();
     }, []);
 
+    const onRowClick = (item: Language) => {
+        router.push(`/{#LANG#}/i18n/module/worktop/?id=${id}&target=${item.code}`);
+    }
+
     const actions = <Space>
-        <Link href={"/{#LANG#}/i18n/module/worktop/"}>
+        <Link href={"/{#LANG#}/i18n/module/worktop/?id=" + id}>
             <Button>{"{#工作台#}"}</Button>
         </Link>
     </Space>;
@@ -93,7 +99,7 @@ export const DashboardPage = () => {
                                         </TableCell>
                                     </TableRow>
                                 }
-                                { languages.map((item) => <LanguageItem key={item.id} {...item} />) }
+                                { languages.map((item) => <LanguageItem onClick={() => onRowClick(item)} key={item.id} {...item} />) }
                             </TableBody>
                         </Table>
                         <ScrollBar orientation="horizontal" />

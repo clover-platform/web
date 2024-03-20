@@ -77,6 +77,8 @@ export default [{ path: "/i18n/", config:  {
             type: "item",
         }
     ],
+} },{ path: "/i18n/module/worktop/", config:  {
+    name: 'worktop',
 } },{ path: "/login/", config:  {
     name: 'login',
 } }]

@@ -47,6 +47,7 @@
         "react-day-picker": "^8.9.1",
         "react-dropzone": "14.2.3",
         "react-hook-form": "^7.48.2",
+        "react-resizable-panels": "^2.0.13",
         "slate": "^0.101.1",
         "slate-history": "^0.100.0",
         "slate-react": "^0.101.1",

@@ -48,7 +48,12 @@ export {
     HoverCard,
     HoverCardContent,
     HoverCardTrigger,
-} from "./components/ui/hover-card"
+} from "./components/ui/hover-card";
+export {
+    ResizableHandle,
+    ResizablePanel,
+    ResizablePanelGroup,
+} from "./components/ui/resizable"
 
 // extend
 export { Divider } from "./components/uix/divider";
