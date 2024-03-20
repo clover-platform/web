@@ -1,9 +1,9 @@
 export const layoutConfig = {
     name: 'module',
-    active: "translations",
+    active: "download",
     path: [
         {
-            title: "{#翻译#}",
+            title: "{#下载#}",
             type: "item",
         }
     ],

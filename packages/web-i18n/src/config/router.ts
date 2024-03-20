@@ -18,6 +18,15 @@ export default [{ path: "/i18n/", config:  {
             type: "item",
         }
     ],
+} },{ path: "/i18n/module/branch/", config:  {
+    name: 'module',
+    active: "branch",
+    path: [
+        {
+            title: "{#分支#}",
+            type: "item",
+        }
+    ],
 } },{ path: "/i18n/module/create/", config:  {
     name: 'main',
     active: "i18n",
@@ -41,6 +50,15 @@ export default [{ path: "/i18n/", config:  {
             type: "item",
         }
     ],
+} },{ path: "/i18n/module/download/", config:  {
+    name: 'module',
+    active: "download",
+    path: [
+        {
+            title: "{#下载#}",
+            type: "item",
+        }
+    ],
 } },{ path: "/i18n/module/member/", config:  {
     name: 'module',
     active: "member",
@@ -56,24 +74,6 @@ export default [{ path: "/i18n/", config:  {
     path: [
         {
             title: "{#设置#}",
-            type: "item",
-        }
-    ],
-} },{ path: "/i18n/module/source/", config:  {
-    name: 'module',
-    active: "source",
-    path: [
-        {
-            title: "{#词条#}",
-            type: "item",
-        }
-    ],
-} },{ path: "/i18n/module/translation/", config:  {
-    name: 'module',
-    active: "translations",
-    path: [
-        {
-            title: "{#翻译#}",
             type: "item",
         }
     ],

@@ -4,12 +4,12 @@ import { SCHEMA } from "@/config/pages/module/form";
 import { LanguageSelect } from "@/components/common/select/language";
 import { MultiLanguageSelect } from "@/components/common/select/multi-language";
 
-export interface RoleFormProps extends PropsWithChildren {
+export interface ModuleFormProps extends PropsWithChildren {
     onSubmit?: (data: any) => void;
     defaultValues?: any;
 }
 
-const ModuleForm:FC<RoleFormProps> = (props) => {
+const ModuleForm:FC<ModuleFormProps> = (props) => {
     const {
         defaultValues = {}
     } = props;

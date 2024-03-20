@@ -1,6 +1,7 @@
 import { MainLayout as PublicMainLayout, PathProps } from "@clover/public/components/layout/main";
 import {FC, PropsWithChildren} from "react";
 import { NAV_MENUS } from "@clover/public/config/layout/main";
+import { useLanguagesInit } from "@/hooks/use.languages.init";
 
 export type MainLayoutProps = {
     active?: string;
@@ -9,6 +10,7 @@ export type MainLayoutProps = {
 } & PropsWithChildren;
 
 export const MainLayout: FC<MainLayoutProps> = (props) => {
+    useLanguagesInit();
     return <PublicMainLayout
         {...props}
         sidebarProps={{

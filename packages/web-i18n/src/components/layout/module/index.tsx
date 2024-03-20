@@ -3,6 +3,7 @@ import { FC, PropsWithChildren, useMemo } from "react";
 import { NAV_MENUS } from "@/config/layout/module";
 import { useSearchParams } from "next/navigation";
 import { cloneDeep } from "lodash";
+import { useLanguagesInit } from "@/hooks/use.languages.init";
 
 export type ModuleLayoutProps = {
     active?: string;
@@ -13,6 +14,7 @@ export type ModuleLayoutProps = {
 export const ModuleLayout: FC<ModuleLayoutProps> = (props) => {
     const search = useSearchParams();
     const id = search.get("id");
+    useLanguagesInit();
 
     const menus = useMemo(() => {
         return cloneDeep(NAV_MENUS).map((item) => {

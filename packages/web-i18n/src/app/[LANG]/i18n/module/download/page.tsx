@@ -1,10 +1,10 @@
 import {keywords, title} from "@clover/public/utils/seo";
 
 export const metadata = {
-    title: title("{#词条#}"),
+    title: title("{#翻译#}"),
     keywords: keywords(),
 }
 
-const Page = () => <div>source</div>
+const Page = () => <div>download</div>
 
 export default Page;

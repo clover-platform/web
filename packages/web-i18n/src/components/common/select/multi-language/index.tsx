@@ -4,6 +4,8 @@ import { languages } from "@/rest/common";
 import classNames from "classnames";
 import { Action } from "@clover/public/components/common/action";
 import { IconDelete } from "@arco-iconbox/react-clover";
+import { useRecoilValue } from "recoil";
+import { languagesLoadingState, languagesState } from "@/state/public";
 
 export type MultiLanguageSelectProps = {
     className?: string;
@@ -53,28 +55,17 @@ const SelectedLangItem: FC<SelectedLangItemProps> = (props) => {
 }
 
 export const MultiLanguageSelect = forwardRef<HTMLDivElement, MultiLanguageSelectProps>((props, ref) => {
-    const [options, setOptions] = useState<OptionProps[]>([]);
-    const [loading, setLoading] = useState(true);
     const [selected, setSelected] = useState<string[]>(props.value || []);
     const [keyword, setKeyword] = useState<string>("");
+    const languages = useRecoilValue(languagesState);
+    const loading = useRecoilValue(languagesLoadingState);
 
-    const load = async () => {
-        setLoading(true);
-        const { success, data } = await languages();
-        setLoading(false);
-        if(success) {
-            setOptions(data?.map((lang: any) => {
-                return {
-                    label: lang.name,
-                    value: lang.code.toLowerCase(),
-                }
-            }) || []);
+    const options = languages.map((lang) => {
+        return {
+            label: lang.name,
+            value: lang.code,
         }
-    }
-
-    useEffect(() => {
-        load().then();
-    }, []);
+    });
 
     const selectedOptions = options.filter((option) => selected.includes(option.value));
     const filteredOptions = options.filter(

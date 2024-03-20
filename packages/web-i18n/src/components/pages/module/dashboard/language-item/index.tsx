@@ -1,12 +1,7 @@
 import {Progress, TableCell, TableRow, Tooltip} from "@atom-ui/core";
 import {FC, PropsWithChildren} from "react";
 import {LanguageIcon} from "@/components/common/language-icon";
-
-export type Language = {
-    id: number;
-    code: string;
-    name: string;
-}
+import { Language } from "@/types/pages/module";
 
 export type LanguageItemProps = PropsWithChildren<Language>;
 

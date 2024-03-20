@@ -1,9 +1,9 @@
 export const layoutConfig = {
     name: 'module',
-    active: "source",
+    active: "branch",
     path: [
         {
-            title: "{#词条#}",
+            title: "{#分支#}",
             type: "item",
         }
     ],

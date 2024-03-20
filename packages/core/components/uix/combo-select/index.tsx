@@ -125,7 +125,8 @@ export const ComboSelect: FC<ComboSelectProps> = forwardRef((props, ref) => {
                             return <CommandItem
                                 key={option.value}
                                 value={option.value}
-                                onSelect={(currentValue) => {
+                                onSelect={(cv) => {
+                                    const currentValue = option.value;
                                     if(multiple) {
                                         if(isSelected) {
                                             remove(selectedValues, (item) => item === currentValue);

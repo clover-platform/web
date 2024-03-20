@@ -11,7 +11,7 @@ import {
     TableHeader,
     TableRow,
     TableHead,
-    Loading, TableCell, Empty
+    Loading, TableCell, Empty, ScrollArea, ScrollBar
 } from "@atom-ui/core";
 import Link from "next/link";
 import { i18n } from "@easy-kit/i18n/utils";
@@ -20,21 +20,12 @@ import { DetailTitle } from "@/components/pages/module/dashboard/detail/title";
 import { dashboard } from "@/rest/module";
 import {useEffect, useState} from "react";
 import {useSearchParams} from "next/navigation";
-import {Language, LanguageItem} from "@/components/pages/module/dashboard/language-item";
-import {User, users} from "@clover/public/rest/account";
-
-export type ModuleDetail = {
-    id?: number;
-    source?: string;
-    memberSize?: number;
-    wordSize?: number;
-    createTime?: string;
-    updateTime?: string;
-}
-
-export type Member = User & {
-    type: number;
-}
+import {LanguageItem} from "@/components/pages/module/dashboard/language-item";
+import {users} from "@clover/public/rest/account";
+import { MemberItem } from "@/components/pages/module/dashboard/member-item";
+import { Language, Member, ModuleDetail } from "@/types/pages/module";
+import { useRecoilValue } from "recoil";
+import { languagesState } from "@/state/public";
 
 export const DashboardPage = () => {
     const search = useSearchParams();
@@ -43,6 +34,7 @@ export const DashboardPage = () => {
     const [languages, setLanguages] = useState<Language[]>([]);
     const [detail, setDetail] = useState<ModuleDetail>({});
     const [members, setMembers] = useState<Member[]>([]);
+    const all = useRecoilValue(languagesState);
 
     const load = async () => {
         setLoading(true);
@@ -83,26 +75,29 @@ export const DashboardPage = () => {
         />
         <Loading loading={loading}>
             <div className={"flex justify-start items-start"}>
-                <div className={"flex-1 mr-4"}>
-                    <Table>
-                        <TableHeader>
-                            <TableRow>
-                                <TableHead>{"{#语言#}"}</TableHead>
-                                <TableHead className={"w-64"}>{"{#进度#}"}</TableHead>
-                                <TableHead className={"w-24"}></TableHead>
-                            </TableRow>
-                        </TableHeader>
-                        <TableBody>
-                            {
-                                languages.length === 0 && <TableRow>
-                                    <TableCell colSpan={3}>
-                                        <Empty />
-                                    </TableCell>
+                <div className={"flex-1 mr-4 w-0 flex-shrink-0"}>
+                    <ScrollArea className={"w-full pb-2"}>
+                        <Table className={"min-w-[600px]"}>
+                            <TableHeader>
+                                <TableRow>
+                                    <TableHead>{"{#语言#}"}</TableHead>
+                                    <TableHead className={"w-64"}>{"{#进度#}"}</TableHead>
+                                    <TableHead className={"w-24"}></TableHead>
                                 </TableRow>
-                            }
-                            { languages.map((item) => <LanguageItem key={item.id} {...item} />) }
-                        </TableBody>
-                    </Table>
+                            </TableHeader>
+                            <TableBody>
+                                {
+                                    languages.length === 0 && <TableRow>
+                                        <TableCell colSpan={3}>
+                                            <Empty />
+                                        </TableCell>
+                                    </TableRow>
+                                }
+                                { languages.map((item) => <LanguageItem key={item.id} {...item} />) }
+                            </TableBody>
+                        </Table>
+                        <ScrollBar orientation="horizontal" />
+                    </ScrollArea>
                 </div>
                 <div className={"w-96 bg-muted p-4 rounded-md"}>
                     <DetailTitle title={"{#详情#}"}>
@@ -110,7 +105,7 @@ export const DashboardPage = () => {
                     </DetailTitle>
                     <div className={"space-y-3"}>
                         <DetailInfoItem label="{#源语言#}">
-                            {detail.source || '--'}
+                            { all.filter((item) => item.code === detail.source).map((item) => item.name).join("") || '' }
                         </DetailInfoItem>
                         <DetailInfoItem label="{#项目成员#}">
                             {detail.memberSize || '--'}
@@ -127,6 +122,9 @@ export const DashboardPage = () => {
                     </div>
                     <Separator className={"my-4"}/>
                     <DetailTitle title={"{#管理员#}"}/>
+                    <div className={"space-y-3"}>
+                        { members.map((item) => <MemberItem key={item.id} {...item} />) }
+                    </div>
                 </div>
             </div>
         </Loading>

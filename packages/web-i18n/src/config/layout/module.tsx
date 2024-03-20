@@ -1,6 +1,6 @@
 import {
-    IconActivity,
-    IconDashboard,
+    IconActivity, IconBranch,
+    IconDashboard, IconDownload,
     IconI18n, IconMember, IconSetting, IconSource, IconTranslation,
 } from "@arco-iconbox/react-clover";
 import { MenuItemProps } from "@clover/public/components/layout/main/sidebar/menu-item";
@@ -15,16 +15,16 @@ export const NAV_MENUS: MenuItemProps[] = [
         icon: <IconDashboard />,
     },
     {
-        id: "source",
-        title: "{#词条#}",
-        url: `${base}/source/`,
-        icon: <IconSource />,
+        id: "branch",
+        title: "{#分支#}",
+        url: `${base}/branch/`,
+        icon: <IconBranch />,
     },
     {
-        id: "translation",
-        title: "{#翻译#}",
-        url: `${base}/translation/`,
-        icon: <IconTranslation />,
+        id: "download",
+        title: "{#下载#}",
+        url: `${base}/download/`,
+        icon: <IconDownload />,
     },
     {
         id: "member",

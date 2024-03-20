@@ -1,6 +1,8 @@
 import { forwardRef, useEffect, useState } from "react";
 import {cn, ComboSelect, ComboSelectOptionProps, ComboSelectProps} from "@atom-ui/core";
 import { languages } from "@/rest/common";
+import { useRecoilValue } from "recoil";
+import { languagesLoadingState, languagesState } from "@/state/public";
 
 export type LanguageSelectProps = {
     className?: string;
@@ -8,27 +10,16 @@ export type LanguageSelectProps = {
 
 export const LanguageSelect = forwardRef<HTMLSelectElement, LanguageSelectProps>((props, ref) => {
     const {className, ...rest} = props;
-    const [options, setOptions] = useState<ComboSelectOptionProps<any>[]>([]);
-    const [loading, setLoading] = useState(true);
+    const languages = useRecoilValue(languagesState);
+    const loading = useRecoilValue(languagesLoadingState);
 
-    const load = async () => {
-        setLoading(true)
-        const { success, data } = await languages();
-        setLoading(false);
-        if(success) {
-            setOptions(data?.map((lang: any) => {
-                return {
-                    label: lang.name,
-                    value: lang.code.toLowerCase(),
-                    raw: lang,
-                }
-            }) || []);
+    const options = languages.map((lang) => {
+        return {
+            label: lang.name,
+            value: lang.code,
+            aw: lang,
         }
-    }
-
-    useEffect(() => {
-        load().then();
-    }, []);
+    });
 
     return <ComboSelect
         {...rest}
@@ -42,7 +33,7 @@ export const LanguageSelect = forwardRef<HTMLSelectElement, LanguageSelectProps>
         loading={loading}
         clearText={"{#清空选择#}"}
         filter={(value: string, search: string) => {
-            const item = options.find((o) => o.value === value);
+            const item = options.find((o) => o.value.toLowerCase() === value);
             const label = item?.label?.toString();
             const v = item?.value;
             return (

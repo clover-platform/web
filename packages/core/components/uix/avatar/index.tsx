@@ -10,11 +10,12 @@ export interface AvatarProps extends React.PropsWithChildren {
     fallback?: string;
     alt?: string;
     className?: string;
+    fallbackClassName?: string;
 }
 
 export const Avatar: React.FC<AvatarProps> = (props) => {
     return <UIAvatar className={props.className}>
         <AvatarImage src={props.src} alt={props.alt} />
-        <AvatarFallback>{props.fallback}</AvatarFallback>
+        <AvatarFallback className={props.fallbackClassName}>{props.fallback}</AvatarFallback>
     </UIAvatar>
 }
