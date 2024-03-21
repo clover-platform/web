@@ -3,6 +3,9 @@ import { IconBranch, IconHelp, IconMenu, IconProject, IconTranslation } from "@a
 import { Action } from "@clover/public/components/common/action";
 import { FC, ReactNode, useEffect, useState } from "react";
 import { MenuProjectSheet } from "@/components/pages/module/worktop/control-bar/menu-sheet/project";
+import {MenuLanguageSheet} from "@/components/pages/module/worktop/control-bar/menu-sheet/language";
+import {MenuBranchSheet} from "@/components/pages/module/worktop/control-bar/menu-sheet/branch";
+import {MenuHelpSheet} from "@/components/pages/module/worktop/control-bar/menu-sheet/help";
 
 export type MenuItemProps = {
     icon: ReactNode;
@@ -63,6 +66,9 @@ export const MenuSheet: FC<MenuSheetProps> = (props) => {
             </div>
             <div className={"flex-grow p-3"}>
                 { active === "project" && <MenuProjectSheet /> }
+                { active === "language" && <MenuLanguageSheet /> }
+                { active === "branch" && <MenuBranchSheet /> }
+                { active === "help" && <MenuHelpSheet /> }
             </div>
         </SheetContent>
     </Sheet>

@@ -12,3 +12,14 @@ export type ModuleDetail = {
 export type Member = User & {
     type: number;
 }
+
+export type Language = {
+    name: string;
+    code: string;
+    id: number;
+}
+
+export type Branch = {
+    name: string;
+    id: number;
+}

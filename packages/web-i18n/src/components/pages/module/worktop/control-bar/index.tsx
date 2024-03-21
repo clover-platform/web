@@ -38,7 +38,7 @@ export const ControlBar = () => {
         setMenuOpen(true);
     }
 
-    return <div className={"w-full"}>
+    return <div className={"w-full sticky top-0"}>
         <Progress value={80} className={"rounded-none h-1"} />
         <div className={"flex justify-center items-center px-2 py-1 border-b shadow-sm"}>
             <div className={"flex-1 flex justify-start items-center space-x-1"}>

@@ -25,10 +25,10 @@
   resolved "https://registry.yarnpkg.com/@arco-iconbox/react-atom-ui/-/react-atom-ui-0.0.3.tgz#976df15f0d7449f619925856e74dfda5d6397ab9"
   integrity sha512-FOP40uGvgYcWDUaskWyrxSE3ImunfPjnMQRyDYv75JTSMk0N+USwtJR9X9OOi1Z/CnKguVRaJCXtYOuqQpi6qA==
 
-"@arco-iconbox/react-clover@0.0.16":
-  version "0.0.16"
-  resolved "https://registry.yarnpkg.com/@arco-iconbox/react-clover/-/react-clover-0.0.16.tgz#e7f366ab097f195ce769617ab2ccca32fc56fd4e"
-  integrity sha512-YIk//gwFTpip077qtBBIivC9XuOa7mDdLxCQjwEoxIz9LgFoYK4Tq7GxgoV8bbff52hkStdsQ/7SHtkucJGxNQ==
+"@arco-iconbox/react-clover@0.0.17":
+  version "0.0.17"
+  resolved "https://registry.yarnpkg.com/@arco-iconbox/react-clover/-/react-clover-0.0.17.tgz#d1d90cf3eee722f635ae3a81c96cf345a46e0a8d"
+  integrity sha512-/US/zUSAUnZsIeshlGkmYA0KnZGXOjcaPNEw2ckLrO9FRdUHt+tqD0c99r74vxRPVylGVDuD61ajV5d7jr89HA==
 
 "@atlaskit/analytics-next-stable-react-context@1.0.1":
   version "1.0.1"

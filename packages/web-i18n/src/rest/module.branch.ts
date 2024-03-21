@@ -1,5 +1,6 @@
 import { RestResult } from "@easy-kit/common/types/rest";
 import { get, post } from "@easy-kit/common/utils/rest";
+import {Branch} from "@/types/pages/module";
 
 export type ListBranchQuery = {
     id: number;
@@ -8,6 +9,9 @@ export type ListBranchQuery = {
 
 export const list = async (params: ListBranchQuery): Promise<RestResult<any>> =>
     get(`@i18n/module/${params.id}/branch/list/`, params);
+
+export const all = async (id: number): Promise<RestResult<Branch[]>> =>
+    get(`@i18n/module/${id}/branch/all/`);
 
 export type CreateBranchData = {
     moduleId: number;
