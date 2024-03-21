@@ -53,7 +53,17 @@ export {
     ResizableHandle,
     ResizablePanel,
     ResizablePanelGroup,
-} from "./components/ui/resizable"
+} from "./components/ui/resizable";
+export {
+    Sheet,
+    SheetClose,
+    SheetContent,
+    SheetDescription,
+    SheetFooter,
+    SheetHeader,
+    SheetTitle,
+    SheetTrigger,
+} from "./components/ui/sheet"
 
 // extend
 export { Divider } from "./components/uix/divider";
