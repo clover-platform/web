@@ -13,6 +13,8 @@ import { useRecoilState } from "recoil";
 import { useRouter, useSearchParams } from "next/navigation";
 import { MenuSheet } from "@/components/pages/module/worktop/control-bar/menu-sheet";
 import { useState } from "react";
+import { LanguageAction } from "@/components/pages/module/worktop/control-bar/action/language";
+import { BranchAction } from "@/components/pages/module/worktop/control-bar/action/branch";
 
 export const ControlBar = () => {
     const search = useSearchParams();
@@ -49,12 +51,8 @@ export const ControlBar = () => {
                     <IconMenu className={"text-lg"} />
                 </Action>
                 <Separator orientation={"vertical"} className={"h-5"} />
-                <Action className={"!px-1.5 h-8"} onClick={showMenuByLanguage}>
-                    简体中文
-                </Action>
-                <Action className={"!px-1.5 h-8"} onClick={showMenuByBranch}>
-                    <IconBranch className={"mr-1"} /> main
-                </Action>
+                <LanguageAction onClick={showMenuByLanguage} />
+                <BranchAction onClick={showMenuByBranch} />
             </div>
             <div className={"flex-1 flex justify-end items-center space-x-1"}>
                 <Action

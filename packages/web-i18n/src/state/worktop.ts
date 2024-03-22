@@ -20,3 +20,13 @@ export const branchesState = atom<Branch[]>({
     key: 'worktop/branches',
     default: []
 })
+
+export const currentLanguageState = atom<string>({
+    key: 'worktop/languages/current',
+    default: ""
+})
+
+export const currentBranchState = atom<string>({
+    key: 'worktop/branches/current',
+    default: ""
+})
