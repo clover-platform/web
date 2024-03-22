@@ -3,6 +3,7 @@ import { useRecoilValue } from "recoil";
 import { leftSideOpenState, rightSideOpenState } from "@/state/worktop";
 import { useEffect, useRef } from "react";
 import { ImperativePanelHandle } from 'react-resizable-panels';
+import { EntryPanel } from "@/components/pages/module/worktop/main/panel/entry";
 
 export const MainPanel = () => {
     const leftSideOpen = useRecoilValue(leftSideOpenState);
@@ -19,14 +20,12 @@ export const MainPanel = () => {
     }, [rightSideOpen]);
 
     return <div className={"flex-1 w-full"}>
-        <ResizablePanelGroup
-            direction="horizontal" autoSaveId="module.worktop"
-        >
+        <ResizablePanelGroup direction="horizontal" autoSaveId="module.worktop">
             <ResizablePanel collapsible={true} ref={leftRef} defaultSize={30}>
-                left
+                <EntryPanel />
             </ResizablePanel>
             <ResizableHandle />
-            <ResizablePanel defaultSize={40}>center</ResizablePanel>
+            <ResizablePanel className={"shadow-md"} defaultSize={40}>center</ResizablePanel>
             <ResizableHandle />
             <ResizablePanel collapsible={true} ref={rightRef} defaultSize={30}>
                 right
