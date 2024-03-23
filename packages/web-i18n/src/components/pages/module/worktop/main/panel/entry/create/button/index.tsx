@@ -2,6 +2,8 @@ import { PlusIcon } from "@radix-ui/react-icons";
 import { Action } from "@clover/public/components/common/action";
 import { CreateEntryModal } from "@/components/pages/module/worktop/main/panel/entry/create/modal";
 import { useState } from "react";
+import bus from '@easy-kit/common/events';
+import {ENTRY_RELOAD} from "@/events/worktop";
 
 export const CreateEntryButton = () => {
     const [visible, setVisible] = useState(false);
@@ -15,8 +17,9 @@ export const CreateEntryButton = () => {
             onCancel={() => setVisible(false)}
             onSuccess={(close) => {
                 if(close) {
-                    setVisible(true);
+                    setVisible(false);
                 }
+                bus.emit(ENTRY_RELOAD);
             }}
         />
     </>

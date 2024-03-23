@@ -81,4 +81,5 @@ export default [{ path: "/i18n/", config:  {
     name: 'worktop',
 } },{ path: "/login/", config:  {
     name: 'login',
+    showLogo: false,
 } }]

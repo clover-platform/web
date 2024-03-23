@@ -1,5 +1,5 @@
 import { Button, Checkbox, Dialog, DialogProps, Space, useMessage } from "@atom-ui/core";
-import { FC, useState } from "react";
+import {FC, useEffect, useState} from "react";
 import { useSearchParams } from "next/navigation";
 import { EntryForm } from "@/components/pages/module/worktop/main/panel/entry/form";
 import { create, CreateEntryData } from "@/rest/entry";
@@ -14,6 +14,7 @@ export const CreateEntryModal: FC<CreateEntryModalProps> = (props) => {
     const [loading, setLoading] = useState(false);
     const [close, setClose] = useState(true);
     const msg = useMessage();
+    const [formKey, setFormKey] = useState(Date.now());
 
     const onSubmit = async (data: CreateEntryData) => {
         setLoading(true);
@@ -22,17 +23,22 @@ export const CreateEntryModal: FC<CreateEntryModalProps> = (props) => {
         setLoading(false);
         if(success) {
             props.onSuccess?.(close);
+            setFormKey(Date.now());
         }else{
             msg.error(message);
         }
     }
+
+    useEffect(() => {
+        if(props.visible) setFormKey(Date.now());
+    }, [props.visible])
 
     return <Dialog
         {...props}
         title={"{#新增词条#}"}
         maskClosable={false}
     >
-        <EntryForm onSubmit={onSubmit}>
+        <EntryForm key={formKey} onSubmit={onSubmit}>
             <div className={"flex justify-end items-center space-x-2"}>
                 <div className="flex items-center space-x-1">
                     <Checkbox

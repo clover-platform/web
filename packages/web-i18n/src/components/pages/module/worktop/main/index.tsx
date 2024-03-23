@@ -19,7 +19,7 @@ export const MainPanel = () => {
         rightSideOpen ? rightRef.current?.expand() : rightRef.current?.collapse();
     }, [rightSideOpen]);
 
-    return <div className={"flex-1 w-full"}>
+    return <div className={"flex-1 w-full h-0 flex-shrink-0"}>
         <ResizablePanelGroup direction="horizontal" autoSaveId="module.worktop">
             <ResizablePanel collapsible={true} ref={leftRef} defaultSize={30}>
                 <EntryPanel />

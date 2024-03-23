@@ -1,9 +1,17 @@
-import {useEffect, useState} from "react";
+import {useEffect, useRef, useState} from "react";
 import {languages} from "@/rest/module";
 import { useRouter, useSearchParams } from "next/navigation";
 import {all} from "@/rest/module.branch";
-import { useRecoilValue, useSetRecoilState } from "recoil";
-import { branchesState, currentBranchState, currentLanguageState, languagesState } from "@/state/worktop";
+import {useRecoilState, useRecoilValue, useSetRecoilState} from "recoil";
+import {
+    branchesState,
+    currentBranchState,
+    currentLanguageState,
+    entriesLoadingState,
+    entriesState,
+    languagesState
+} from "@/state/worktop";
+import {list} from "@/rest/entry";
 
 export const useWorktopState = () => {
     const search = useSearchParams();
@@ -44,4 +52,32 @@ export const useQuerySync = () => {
     useEffect(() => {
         router.replace(`?${query}`);
     }, [id, currentLanguage, currentBranch]);
+}
+
+export const defaultEntriesParams = {
+    page: 1, size: 50
+};
+
+export const useEntriesLoader = () => {
+    const [loading, setLoading] = useRecoilState(entriesLoadingState);
+    const [entries, setEntries] = useRecoilState(entriesState);
+    const paramsRef = useRef(defaultEntriesParams);
+
+    const load = async (params?: any) => {
+        setLoading(true)
+        const { success, data } = await list({
+            ...paramsRef.current,
+            ...(params || {})
+        });
+        setLoading(false)
+        if(success) {
+            setEntries(data.data)
+        }
+    }
+
+    return {
+        load,
+        loading,
+        entries
+    }
 }

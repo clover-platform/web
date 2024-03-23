@@ -1,5 +1,6 @@
 import { atom } from "recoil";
 import {Branch, Language} from "@/types/pages/module";
+import {Entry} from "@/types/pages/entry";
 
 export const leftSideOpenState = atom({
     key: 'worktop/side/left',
@@ -29,4 +30,19 @@ export const currentLanguageState = atom<string>({
 export const currentBranchState = atom<string>({
     key: 'worktop/branches/current',
     default: ""
+})
+
+export const entriesState = atom<Entry[]>({
+    key: 'worktop/entries',
+    default: []
+})
+
+export const entriesLoadingState = atom<boolean>({
+    key: 'worktop/entries/loading',
+    default: false
+})
+
+export const currentEntryState = atom<number>({
+    key: 'worktop/entries/current',
+    default: 0
 })
