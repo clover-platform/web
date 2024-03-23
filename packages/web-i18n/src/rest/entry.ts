@@ -3,7 +3,7 @@ import {get, post} from "@easy-kit/common/utils/rest";
 
 export type EntryQueryParams = {
     keyword?: string;
-    branch?: string;
+    branchId?: number;
     moduleId?: number;
     page?: number;
     size?: number;

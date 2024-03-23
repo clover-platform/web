@@ -11,6 +11,6 @@ export const Empty: FC<EmptyProps> = (props) => {
         <div>
             { props.icon || <IconEmpty className={"text-6xl text-muted-foreground opacity-60"} /> }
         </div>
-        <div className={"text-gray-400 text-sm"}>{props.text || "{#暂无数据#}"}</div>
+        <div className={"text-xs opacity-60"}>{props.text || "{#暂无数据#}"}</div>
     </div>
 }

@@ -1,8 +1,7 @@
 import { Command, CommandInput, CommandItem, CommandList, SheetClose } from "@atom-ui/core";
 import {CheckIcon} from "@radix-ui/react-icons";
-import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
+import { useRecoilState, useRecoilValue } from "recoil";
 import { branchesState, currentBranchState } from "@/state/worktop";
-import {useSearchParams} from "next/navigation";
 
 export const MenuBranchSheet = () => {
     const branches = useRecoilValue(branchesState);
@@ -14,6 +13,12 @@ export const MenuBranchSheet = () => {
             <CommandInput className={"h-8"} placeholder="{#请输入关键词#}" />
             <SheetClose>
                 <CommandList className={"p-0 mt-2 text-left"}>
+                    <CommandItem key={'all'} onSelect={() => setCurrent('')}>
+                        <div className={"flex justify-center items-center w-full"}>
+                            <span className={"flex-1"}>{"{#所有分支#}"}</span>
+                            { '' === current ? <CheckIcon /> : null }
+                        </div>
+                    </CommandItem>
                     {
                         branches.map((item: any) => {
                             return <CommandItem key={item.id} onSelect={() => setCurrent(item.name)}>

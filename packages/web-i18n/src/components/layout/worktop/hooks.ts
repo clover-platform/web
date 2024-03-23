@@ -1,4 +1,4 @@
-import {useEffect, useRef, useState} from "react";
+import {useEffect, useMemo, useRef, useState} from "react";
 import {languages} from "@/rest/module";
 import { useRouter, useSearchParams } from "next/navigation";
 import {all} from "@/rest/module.branch";
@@ -59,25 +59,45 @@ export const defaultEntriesParams = {
 };
 
 export const useEntriesLoader = () => {
+    const search = useSearchParams();
+    const id = search.get("id");
     const [loading, setLoading] = useRecoilState(entriesLoadingState);
     const [entries, setEntries] = useRecoilState(entriesState);
     const paramsRef = useRef(defaultEntriesParams);
+    const [total, setTotal] = useState(0);
+    const pages = useMemo(() => Math.ceil(total / paramsRef.current.size), [total]);
+    const currentBranch = useRecoilValue(currentBranchState);
+    const branchRef = useRef<number>();
+    const branches = useRecoilValue(branchesState);
 
-    const load = async (params?: any) => {
+    const load = async (_params?: any) => {
         setLoading(true)
-        const { success, data } = await list({
+        const params = {
             ...paramsRef.current,
-            ...(params || {})
-        });
+            ...(_params || {}),
+            branchId: branchRef.current,
+            moduleId: Number(id),
+        }
+        paramsRef.current = params;
+        const { success, data } = await list(params);
         setLoading(false)
         if(success) {
+            setTotal(data.total);
             setEntries(data.data)
         }
     }
 
+    useEffect(() => {
+        const branch = branches.find(b => b.name === currentBranch);
+        branchRef.current = branch?.id;
+        load().then();
+    }, [currentBranch]);
+
     return {
         load,
         loading,
-        entries
+        entries,
+        total,
+        pages
     }
 }
