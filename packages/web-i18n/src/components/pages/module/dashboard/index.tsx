@@ -47,7 +47,7 @@ export const DashboardPage = () => {
             setLanguages(languages);
             const ids = members.map((item: any) => item.id);
             const result = await users(ids);
-            if(success) {
+            if(result.success) {
                 setMembers(result.data?.map((user) => {
                     return {
                         ...user,

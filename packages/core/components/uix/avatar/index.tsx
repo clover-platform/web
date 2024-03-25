@@ -4,6 +4,7 @@ import {
     AvatarFallback,
     AvatarImage,
 } from "@atom-ui/core/components/ui/avatar"
+import { useMemo } from "react";
 
 export interface AvatarProps extends React.PropsWithChildren {
     src: string;
@@ -14,8 +15,12 @@ export interface AvatarProps extends React.PropsWithChildren {
 }
 
 export const Avatar: React.FC<AvatarProps> = (props) => {
+    const { fallback } = props;
+    const fall = useMemo(() => {
+        return fallback?.charAt(0).toUpperCase();
+    } , [fallback])
     return <UIAvatar className={props.className}>
         <AvatarImage src={props.src} alt={props.alt} />
-        <AvatarFallback className={props.fallbackClassName}>{props.fallback}</AvatarFallback>
+        <AvatarFallback className={props.fallbackClassName}>{fall}</AvatarFallback>
     </UIAvatar>
 }

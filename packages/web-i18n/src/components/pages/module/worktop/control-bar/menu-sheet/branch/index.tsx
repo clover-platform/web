@@ -1,11 +1,12 @@
 import { Command, CommandInput, CommandItem, CommandList, SheetClose } from "@atom-ui/core";
 import {CheckIcon} from "@radix-ui/react-icons";
-import { useRecoilState, useRecoilValue } from "recoil";
-import { branchesState, currentBranchState } from "@/state/worktop";
+import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
+import { branchesState, currentBranchState, currentEntryState } from "@/state/worktop";
 
 export const MenuBranchSheet = () => {
     const branches = useRecoilValue(branchesState);
     const [current, setCurrent] = useRecoilState(currentBranchState);
+    const setCurrentEntry = useSetRecoilState(currentEntryState);
 
     return <div className={"space-y-2"}>
         <div className={"text-xl font-bold"}>{"{#分支#}"}</div>
@@ -13,7 +14,10 @@ export const MenuBranchSheet = () => {
             <CommandInput className={"h-8"} placeholder="{#请输入关键词#}" />
             <SheetClose>
                 <CommandList className={"p-0 mt-2 text-left"}>
-                    <CommandItem key={'all'} onSelect={() => setCurrent('')}>
+                    <CommandItem key={'all'} onSelect={() => {
+                        setCurrentEntry(0);
+                        setCurrent('');
+                    }}>
                         <div className={"flex justify-center items-center w-full"}>
                             <span className={"flex-1"}>{"{#所有分支#}"}</span>
                             { '' === current ? <CheckIcon /> : null }
@@ -21,7 +25,10 @@ export const MenuBranchSheet = () => {
                     </CommandItem>
                     {
                         branches.map((item: any) => {
-                            return <CommandItem key={item.id} onSelect={() => setCurrent(item.name)}>
+                            return <CommandItem key={item.id} onSelect={() => {
+                                setCurrentEntry(0);
+                                setCurrent(item.name);
+                            }}>
                                 <div className={"flex justify-center items-center w-full"}>
                                     <span className={"flex-1"}>{item.name}</span>
                                     { item.name === current ? <CheckIcon /> : null }

@@ -69,14 +69,17 @@ export const useEntriesLoader = () => {
     const currentBranch = useRecoilValue(currentBranchState);
     const branchRef = useRef<number>();
     const branches = useRecoilValue(branchesState);
+    const currentLanguage = useRecoilValue(currentLanguageState);
 
     const load = async (_params?: any) => {
         setLoading(true)
+        console.log('load currentLanguage', currentLanguage)
         const params = {
             ...paramsRef.current,
             ...(_params || {}),
             branchId: branchRef.current,
             moduleId: Number(id),
+            language: currentLanguage
         }
         paramsRef.current = params;
         const { success, data } = await list(params);
@@ -91,7 +94,7 @@ export const useEntriesLoader = () => {
         const branch = branches.find(b => b.name === currentBranch);
         branchRef.current = branch?.id;
         load().then();
-    }, [currentBranch]);
+    }, [currentBranch, currentLanguage]);
 
     return {
         load,

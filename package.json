@@ -9,7 +9,7 @@
         "dev:main": "lerna run dev --scope @clover/main"
     },
     "dependencies": {
-        "@arco-iconbox/react-clover": "0.0.17",
+        "@arco-iconbox/react-clover": "0.0.18",
         "@radix-ui/react-icons": "^1.3.0",
         "axios": "1.6.2",
         "bowser": "2.11.0",
@@ -24,6 +24,7 @@
         "react": "^18",
         "react-copy-to-clipboard": "^5.1.0",
         "react-dom": "^18",
+        "react-textarea-autosize": "^8.5.3",
         "recoil": "0.7.7",
         "sass": "1.69.5",
         "tailwindcss": "3.4.1",

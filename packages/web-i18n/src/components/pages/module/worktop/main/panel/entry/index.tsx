@@ -1,20 +1,25 @@
 import {Empty, Input, ScrollArea, Spin} from "@atom-ui/core";
 import { CreateEntryButton } from "@/components/pages/module/worktop/main/panel/entry/create/button";
-import {useEffect, useState} from "react";
-import {useEntriesLoader} from "@/components/layout/worktop/hooks";
+import { FC, useEffect, useState } from "react";
 import classNames from "classnames";
 import {useRecoilState} from "recoil";
 import {currentEntryState} from "@/state/worktop";
-import {
-    CheckIcon,
-} from "@radix-ui/react-icons";
+import { CheckIcon, } from "@radix-ui/react-icons";
 import bus from '@easy-kit/common/events';
 import {ENTRY_RELOAD} from "@/events/worktop";
 import {Pagination} from "@/components/pages/module/worktop/main/panel/entry/pagination";
 
-export const EntryPanel = () => {
+export type EntryPanelProps = {
+    pages: number;
+    total: number;
+    entries: any[];
+    loading: boolean;
+    load: (params: any) => Promise<any>;
+}
+
+export const EntryPanel: FC<EntryPanelProps> = (props) => {
+    const {pages, entries, loading, load} = props;
     const [page, setPage] = useState<number>(1);
-    const {pages, total, entries, loading, load} = useEntriesLoader();
     const [current, setCurrent] = useRecoilState(currentEntryState);
     const [keyword, setKeyword] = useState<string>('');
 
@@ -79,7 +84,7 @@ export const EntryPanel = () => {
                                 {entry.value}
                             </div>
                         </div>
-                    }) : <Empty text={"{#该分支暂无词条#}"}></Empty>
+                    }) : <Empty text={"{#暂无词条#}"} />
                 }
             </ScrollArea>
             <div className={"absolute bottom-2 right-2"}>

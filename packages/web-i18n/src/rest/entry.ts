@@ -5,6 +5,7 @@ export type EntryQueryParams = {
     keyword?: string;
     branchId?: number;
     moduleId?: number;
+    language: string;
     page?: number;
     size?: number;
 }
