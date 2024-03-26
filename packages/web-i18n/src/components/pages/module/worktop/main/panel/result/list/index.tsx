@@ -11,6 +11,7 @@ import compact from "lodash/compact";
 import uniq from "lodash/uniq";
 import { Member } from "@/types/pages/module";
 import { EntryResult } from "@/types/pages/entry";
+import { ResultItemLoading } from "@/components/pages/module/worktop/main/panel/result/list/item/loading";
 
 export const ResultList = () => {
     const language = useRecoilValue(currentLanguageState);
@@ -70,6 +71,7 @@ export const ResultList = () => {
 
     return <div className={"w-full flex-1 h-0 flex-shrink-0"}>
         <ScrollArea className={"w-full h-full"}>
+            <ResultItemLoading />
             {
                 loading ? <div className={"flex justify-center items-center p-6"}>
                     <Spin />
