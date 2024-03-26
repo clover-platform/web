@@ -9,10 +9,10 @@ import { loadingState } from "@clover/public/components/layout/main/state";
 import { useSidebarState } from "@clover/public/components/layout/main/hooks";
 import Logo from "@clover/public//components/common/logo";
 import Switch from "@clover/public//components/layout/main/switch";
-import { Action } from "../../../common/action";
 import { SidebarProfile } from "@clover/public/components/layout/main/sidebar/profile";
 import { ActionButton } from "@clover/public/components/common/action/button";
 import { MenuItem, MenuItemProps } from "@clover/public/components/layout/main/sidebar/menu-item";
+import { Action } from "@clover/public/components/common/action";
 
 export interface SidebarProps extends PropsWithChildren {
     active?: string;
@@ -49,9 +49,9 @@ const Sidebar: FC<SidebarProps> = (props) => {
                     </Tooltip>
                 </Link>
                 <div className={"flex-1 flex justify-end items-center space-x-0.5"}>
-                    <Switch className={"w-8 h-8 !p-0"} />
+                    <Switch theme={"light"} className={"w-8 h-8 !p-0"} />
                     <Tooltip content={"{#创建新的...#}"}>
-                        <Action className={"w-8 h-8 !p-0"}>
+                        <Action theme={"light"} className={"w-8 h-8 !p-0"}>
                             <IconAdd fontSize={20} />
                         </Action>
                     </Tooltip>
@@ -107,14 +107,14 @@ const Sidebar: FC<SidebarProps> = (props) => {
         <div className={"flex p-1 py-0 border-t"}>
             <div className={"flex-1 mx-0.5 my-1"}>
                 <Link href={"/{#LANG#}/help/"}>
-                    <Action type={"dark"} className={"w-full py-1"}>
+                    <Action theme={"dark"} className={"w-full py-1"}>
                         <IconHelp className={"mr-1 text-base"} /> {"{#帮助#}"}
                     </Action>
                 </Link>
             </div>
             <div className={"flex-1 mx-0.5 my-1"}>
                 <a href={"/{#LANG#}/admin/"}>
-                    <Action type={"dark"} className={"w-full py-1"}>
+                    <Action theme={"dark"} className={"w-full py-1"}>
                         <IconSetting className={"mr-1 text-base"} /> {"{#管理中心#}"}
                     </Action>
                 </a>

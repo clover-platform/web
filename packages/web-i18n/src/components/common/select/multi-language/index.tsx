@@ -1,6 +1,5 @@
-import { FC, forwardRef, HTMLAttributes, useEffect, useState } from "react";
+import { FC, forwardRef, HTMLAttributes, useState } from "react";
 import { Checkbox, CheckboxProps, Input, ScrollArea, Spin } from "@atom-ui/core";
-import { languages } from "@/rest/common";
 import classNames from "classnames";
 import { Action } from "@clover/public/components/common/action";
 import { IconDelete } from "@arco-iconbox/react-clover";
@@ -113,7 +112,8 @@ export const MultiLanguageSelect = forwardRef<HTMLDivElement, MultiLanguageSelec
                             setSelected([]);
                             props.onChange?.([]);
                         }}
-                        type={"dark"} className={"h-9 w-9"}
+                        theme={"dark"}
+                        className={"h-9 w-9"}
                     >
                         <IconDelete />
                     </Action>

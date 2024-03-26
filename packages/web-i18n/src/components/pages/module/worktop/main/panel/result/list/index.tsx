@@ -6,7 +6,7 @@ import { list as listRest } from "@/rest/entry.result";
 import { ResultItem } from "@/components/pages/module/worktop/main/panel/result/list/item";
 import bus from '@easy-kit/common/events';
 import { ENTRY_RESULT_RELOAD } from "@/events/worktop";
-import { users as usersRest } from "@clover/public/rest/account";
+import { User, users as usersRest } from "@clover/public/rest/account";
 import compact from "lodash/compact";
 import uniq from "lodash/uniq";
 import { Member } from "@/types/pages/module";
@@ -34,7 +34,7 @@ export const ResultList = () => {
         });
         setLoading(false);
         if(success) {
-            const { total, data: list } = data;
+            const { total, data: list } = data!;
             const translatorIds = list.map((item) => item.translatorId);
             const verifierIds = list.map((item) => item.checkerId);
             const ids = uniq(compact([...translatorIds, ...verifierIds]));
@@ -43,8 +43,8 @@ export const ResultList = () => {
                 setList(list.map((item) => {
                     return {
                         ...item,
-                        translator: result.data.find((user: Member) => user.id === item.translatorId),
-                        verifier: result.data.find((user: Member) => user.id === item.checkerId),
+                        translator: result.data?.find((user: User) => user.id === item.translatorId),
+                        verifier: result.data?.find((user: User) => user.id === item.checkerId),
                     }
                 }));
             }else{

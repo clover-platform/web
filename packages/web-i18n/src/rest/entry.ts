@@ -1,5 +1,6 @@
 import { RestResult } from "@easy-kit/common/types/rest";
-import {get, post} from "@easy-kit/common/utils/rest";
+import {get, post, put, del} from "@easy-kit/common/utils/rest";
+import { Entry } from "@/types/pages/entry";
 
 export type EntryQueryParams = {
     keyword?: string;
@@ -22,3 +23,22 @@ export type CreateEntryData = {
 
 export const create = async (data: CreateEntryData): Promise<RestResult<any>> =>
     post(`@i18n/entry/create/`, data);
+
+export type EntryDetailParams = {
+    id: number,
+    language: string;
+}
+
+export const detail = async (params: EntryDetailParams): Promise<RestResult<Entry>> =>
+    get(`@i18n/entry/${params.id}/detail/`, params);
+
+export type EditEntryData = {
+    id: number;
+    value: string;
+}
+
+export const edit = async (data: EditEntryData): Promise<RestResult<any>> =>
+    put(`@i18n/entry/edit/`, data);
+
+export const remove = async (id: number): Promise<RestResult<any>> =>
+    del(`@i18n/entry/${id}/remove/`);

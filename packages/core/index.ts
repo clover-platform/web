@@ -64,6 +64,7 @@ export {
     SheetTitle,
     SheetTrigger,
 } from "./components/ui/sheet"
+export { Skeleton } from "./components/ui/skeleton";
 
 // extend
 export { Divider } from "./components/uix/divider";

@@ -8,6 +8,7 @@ import { CheckIcon, } from "@radix-ui/react-icons";
 import bus from '@easy-kit/common/events';
 import {ENTRY_RELOAD} from "@/events/worktop";
 import {Pagination} from "@/components/pages/module/worktop/main/panel/entry/pagination";
+import { EntryLoading } from "@/components/pages/module/worktop/main/panel/entry/loading";
 
 export type EntryPanelProps = {
     pages: number;
@@ -62,9 +63,7 @@ export const EntryPanel: FC<EntryPanelProps> = (props) => {
         <div className={"w-full flex-1 h-0 flex-shrink-0 relative"}>
             <ScrollArea className={"h-full w-full p-2 pt-0"}>
                 {
-                    loading ? <div className={"flex justify-center items-center p-6"}>
-                        <Spin/>
-                    </div> : entries.length ? entries.map((entry, index) => {
+                    loading ? <EntryLoading /> : entries.length ? entries.map((entry, index) => {
                         const {verified, translated} = entry;
                         return <div
                             key={entry.id}

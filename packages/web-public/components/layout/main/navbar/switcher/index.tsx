@@ -51,7 +51,7 @@ export const Switcher: FC<SwitcherProps> = (props) => {
                     <span className={"text-sm opacity-60 ml-2"}>{props.description}</span>
                 </div>
                 <Link href={props.listUrl!}>
-                    <Action type={"dark"}>
+                    <Action theme={"dark"}>
                         <GearIcon/>
                     </Action>
                 </Link>

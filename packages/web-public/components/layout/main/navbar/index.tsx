@@ -23,7 +23,7 @@ export const LayoutNavbar: FC<LayoutNavbarProps> = (props) => {
         <div className={"flex-1 flex items-center"}>
             {
                 !open ? <>
-                    <Switch type={"dark"} className={"-ml-2"} />
+                    <Switch theme={"dark"} className={"-ml-2"} />
                     <Separator className={"h-5 mx-2"} orientation={"vertical"} />
                 </> : null
             }

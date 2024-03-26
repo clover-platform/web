@@ -5,16 +5,17 @@ import {all} from "@/rest/module.branch";
 import {useRecoilState, useRecoilValue, useSetRecoilState} from "recoil";
 import {
     branchesState,
-    currentBranchState,
+    currentBranchState, currentEntryState,
     currentLanguageState,
     entriesLoadingState,
     entriesState,
-    languagesState
+    languagesState,
 } from "@/state/worktop";
-import {list} from "@/rest/entry";
+import { detail, list } from "@/rest/entry";
 
 export const useWorktopState = () => {
     const search = useSearchParams();
+    const setCurrentEntry = useSetRecoilState(currentEntryState);
     const id = search.get("id");
     const branch = search.get("branch") || '';
     const target = search.get("target") || '';
@@ -33,6 +34,7 @@ export const useWorktopState = () => {
         if(branchesResult.success) setBranches(branchesResult.data || []);
         setCurrentBranch(branch);
         setCurrentLanguage(target);
+        setCurrentEntry(0);
     }
 
     useEffect(() => {
@@ -73,7 +75,6 @@ export const useEntriesLoader = () => {
 
     const load = async (_params?: any) => {
         setLoading(true)
-        console.log('load currentLanguage', currentLanguage)
         const params = {
             ...paramsRef.current,
             ...(_params || {}),
@@ -102,5 +103,30 @@ export const useEntriesLoader = () => {
         entries,
         total,
         pages
+    }
+}
+
+export const useEntriesUpdater = () => {
+    const [entries, setEntries] = useRecoilState(entriesState);
+    const currentLanguage = useRecoilValue(currentLanguageState);
+
+    const update = async (id: number) => {
+        const result = await detail({
+            id,
+            language: currentLanguage
+        });
+        if(result.success) {
+            setEntries(entries.map(entry => entry.id === id ? result.data! : entry));
+        }
+    }
+
+    const remove = async (id: number) => {
+        setEntries(entries.filter(entry => entry.id !== id));
+    }
+
+    return {
+        update,
+        entries,
+        remove,
     }
 }

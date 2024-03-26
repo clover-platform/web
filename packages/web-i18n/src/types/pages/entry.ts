@@ -1,4 +1,5 @@
 import { Member } from "@/types/pages/module";
+import { User } from "@clover/public/rest/account";
 
 export type Entry = {
     id: number;
@@ -8,6 +9,7 @@ export type Entry = {
     branchId: number;
     verified: boolean;
     translated: boolean;
+    translation?: EntryResult;
 }
 
 export type EntryResult = {
@@ -20,8 +22,9 @@ export type EntryResult = {
     checkerId: number;
     updateTime: Date;
     verified: boolean;
-    translator?: Member;
-    verifier?: Member;
+    translator?: User;
+    verifier?: User;
+    verifiedTime?: Date;
 }
 
 export type EntryResultPage = {

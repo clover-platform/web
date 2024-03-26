@@ -23,6 +23,7 @@ const Switch: FC<SwitchProps> = (props) => {
 
     return <Tooltip content={open ? "{#隐藏侧边栏#}" : "{#显示侧边栏#}"}>
         <Action
+            theme={props.theme}
             type={props.type}
             onClick={onSwitchClick}
             className={props.className}

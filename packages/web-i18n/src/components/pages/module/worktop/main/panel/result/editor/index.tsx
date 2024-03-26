@@ -1,25 +1,35 @@
 import { useRecoilState, useRecoilValue } from "recoil";
-import { branchesState, currentEntryState, currentLanguageState, entriesState } from "@/state/worktop";
+import { currentEntryState, currentLanguageState, entriesState } from "@/state/worktop";
 import { Action } from "@clover/public/components/common/action";
-import { ArrowLeftIcon, ArrowRightIcon, CopyIcon, DotsHorizontalIcon, Pencil1Icon } from "@radix-ui/react-icons";
-import { Badge, Button, Separator, Textarea, Tooltip, useMessage } from "@atom-ui/core";
+import { CopyIcon } from "@radix-ui/react-icons";
+import {
+    Button,
+    Tooltip,
+    useMessage,
+} from "@atom-ui/core";
 import { IconClear } from "@arco-iconbox/react-clover";
 import { useState } from "react";
 import { save } from "@/rest/entry.result";
 import TextareaAutosize from 'react-textarea-autosize';
 import bus from '@easy-kit/common/events';
 import { ENTRY_RESULT_RELOAD } from "@/events/worktop";
+import { useEntriesUpdater } from "@/components/layout/worktop/hooks";
 
 export const Editor = () => {
     const entries = useRecoilValue(entriesState);
     const [current, setCurrent] = useRecoilState(currentEntryState);
-    const branches = useRecoilValue(branchesState);
     const language = useRecoilValue(currentLanguageState);
     const entry = entries[current];
-    const branch = branches.find(b => b.id === entry.branchId);
     const [loading, setLoading] = useState(false);
-    const [content, setContent] = useState('');
+    const [content, setContent] = useState(entry.translation?.content);
     const msg = useMessage();
+    const { update } = useEntriesUpdater();
+
+    const next = () => {
+        if(current < entries.length - 1) {
+            setCurrent(current + 1)
+        }
+    }
 
     const onSave = async () => {
         if(!content) {
@@ -35,43 +45,14 @@ export const Editor = () => {
         setLoading(false);
         if(success) {
             bus.emit(ENTRY_RESULT_RELOAD);
+            await update(entry.id);
+            // next();
         }else{
             msg.error(message);
         }
     }
 
     return <div className={"w-full"}>
-        <div className={"flex justify-center items-center p-2 px-4"}>
-            <div className={"flex-1 text-base text-muted-foreground"}>{"{#原始内容#}"}</div>
-            <div className={"flex"}>
-                <Tooltip content={"{#上一个#}"}>
-                    <Action disabled={current === 0} onClick={() => setCurrent(current - 1)}>
-                        <ArrowLeftIcon />
-                    </Action>
-                </Tooltip>
-                <Tooltip content={"{#下一个#}"}>
-                    <Action disabled={current === entries.length - 1} onClick={() => setCurrent(current + 1)}>
-                        <ArrowRightIcon />
-                    </Action>
-                </Tooltip>
-                <Tooltip content={"{#编辑#}"}>
-                    <Action>
-                        <Pencil1Icon />
-                    </Action>
-                </Tooltip>
-                <Action>
-                    <DotsHorizontalIcon />
-                </Action>
-            </div>
-        </div>
-        <div className={"px-4 mb-4"}>
-            { entry.value }
-        </div>
-        <div className={"px-4 mb-4"}>
-            <Badge className={"mr-2"}>{branch?.name}</Badge>
-            <span className={"text-muted-foreground"}>{ entry.key }</span>
-        </div>
-        <Separator />
         <TextareaAutosize
             minRows={3}
             value={content}
@@ -102,6 +83,5 @@ export const Editor = () => {
                 </Button>
             </div>
         </div>
-        <Separator />
     </div>
 }

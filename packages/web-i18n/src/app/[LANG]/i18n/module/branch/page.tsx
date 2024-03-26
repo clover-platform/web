@@ -6,4 +6,6 @@ export const metadata = {
     keywords: keywords(),
 }
 
-export default ModuleBranchPage;
+export default function Page() {
+    return <ModuleBranchPage />;
+}
