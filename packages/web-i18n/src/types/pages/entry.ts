@@ -31,3 +31,15 @@ export type EntryResultPage = {
     total: number;
     data: EntryResult[];
 }
+
+export type CountEntryQuery = {
+    moduleId: number;
+    language: string;
+    branch?: string;
+}
+
+export type CountEntryData = {
+    total: number;
+    translated: number;
+    verified: number;
+}

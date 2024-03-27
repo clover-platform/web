@@ -8,8 +8,8 @@ import {
     IconRightSidebar,
     IconSetting,
 } from "@arco-iconbox/react-clover";
-import { leftSideOpenState, rightSideOpenState } from "@/state/worktop";
-import { useRecoilState } from "recoil";
+import { countState, leftSideOpenState, rightSideOpenState } from "@/state/worktop";
+import { useRecoilState, useRecoilValue } from "recoil";
 import { useRouter, useSearchParams } from "next/navigation";
 import { MenuSheet } from "@/components/pages/module/worktop/control-bar/menu-sheet";
 import { useState } from "react";
@@ -24,6 +24,7 @@ export const ControlBar = () => {
     const [rightSideOpen, setRightSideOpen] = useRecoilState(rightSideOpenState);
     const [menuOpen, setMenuOpen] = useState(false);
     const [menuActive, setMenuActive] = useState("project");
+    const count = useRecoilValue(countState);
 
     const showMenu = () => {
         setMenuActive("project");
@@ -41,7 +42,13 @@ export const ControlBar = () => {
     }
 
     return <div className={"w-full sticky top-0"}>
-        <Progress value={80} className={"rounded-none h-1"} />
+        <div className={"border-b"}>
+            <Progress
+                style={{width: `${Math.ceil(count.translated / count.total * 100)}%`}}
+                value={Math.ceil(count.verified / count.translated * 100)}
+                className={"rounded-none h-1"}
+            />
+        </div>
         <div className={"flex justify-center items-center px-2 py-1 border-b shadow-sm"}>
             <div className={"flex-1 flex justify-start items-center space-x-1"}>
                 <Action className={"!px-1.5 h-8"} onClick={() => router.push("/{#LANG#}/i18n/module/dashboard/?id=" + id)}>

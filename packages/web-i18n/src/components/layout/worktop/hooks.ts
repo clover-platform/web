@@ -4,14 +4,14 @@ import { useRouter, useSearchParams } from "next/navigation";
 import {all} from "@/rest/module.branch";
 import {useRecoilState, useRecoilValue, useSetRecoilState} from "recoil";
 import {
-    branchesState,
+    branchesState, countState,
     currentBranchState, currentEntryState,
     currentLanguageState,
     entriesLoadingState,
     entriesState,
     languagesState,
 } from "@/state/worktop";
-import { detail, list } from "@/rest/entry";
+import { count, detail, list } from "@/rest/entry";
 
 export const useWorktopState = () => {
     const search = useSearchParams();
@@ -72,6 +72,7 @@ export const useEntriesLoader = () => {
     const branchRef = useRef<number>();
     const branches = useRecoilValue(branchesState);
     const currentLanguage = useRecoilValue(currentLanguageState);
+    const setCount = useSetRecoilState(countState);
 
     const load = async (_params?: any) => {
         setLoading(true)
@@ -84,17 +85,27 @@ export const useEntriesLoader = () => {
         }
         paramsRef.current = params;
         const { success, data } = await list(params);
-        setLoading(false)
         if(success) {
             setTotal(data.total);
             setEntries(data.data)
         }
+        setLoading(false)
+    }
+
+    const loadCount = async () => {
+        const countResult = await count({
+            moduleId: Number(id),
+            language: currentLanguage,
+            branch: currentBranch
+        });
+        if(countResult.success) setCount(countResult.data!);
     }
 
     useEffect(() => {
         const branch = branches.find(b => b.name === currentBranch);
         branchRef.current = branch?.id;
         load().then();
+        loadCount().then();
     }, [currentBranch, currentLanguage]);
 
     return {
@@ -107,8 +118,12 @@ export const useEntriesLoader = () => {
 }
 
 export const useEntriesUpdater = () => {
+    const search = useSearchParams();
+    const id = search.get("id");
     const [entries, setEntries] = useRecoilState(entriesState);
     const currentLanguage = useRecoilValue(currentLanguageState);
+    const currentBranch = useRecoilValue(currentBranchState);
+    const setCount = useSetRecoilState(countState);
 
     const update = async (id: number) => {
         const result = await detail({
@@ -117,11 +132,22 @@ export const useEntriesUpdater = () => {
         });
         if(result.success) {
             setEntries(entries.map(entry => entry.id === id ? result.data! : entry));
+            loadCount().then();
         }
     }
 
     const remove = async (id: number) => {
         setEntries(entries.filter(entry => entry.id !== id));
+        loadCount().then();
+    }
+
+    const loadCount = async () => {
+        const countResult = await count({
+            moduleId: Number(id),
+            language: currentLanguage,
+            branch: currentBranch
+        });
+        if(countResult.success) setCount(countResult.data!);
     }
 
     return {

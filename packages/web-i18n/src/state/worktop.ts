@@ -1,6 +1,6 @@
 import { atom } from "recoil";
 import {Branch, Language} from "@/types/pages/module";
-import {Entry} from "@/types/pages/entry";
+import { CountEntryData, Entry } from "@/types/pages/entry";
 
 export const leftSideOpenState = atom({
     key: 'worktop/side/left',
@@ -45,4 +45,13 @@ export const entriesLoadingState = atom<boolean>({
 export const currentEntryState = atom<number>({
     key: 'worktop/entries/current',
     default: 0
+})
+
+export const countState = atom<CountEntryData>({
+    key: 'worktop/count',
+    default: {
+        total: 0,
+        translated: 0,
+        verified: 0
+    }
 })

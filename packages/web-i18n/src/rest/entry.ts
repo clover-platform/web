@@ -1,6 +1,6 @@
 import { RestResult } from "@easy-kit/common/types/rest";
 import {get, post, put, del} from "@easy-kit/common/utils/rest";
-import { Entry } from "@/types/pages/entry";
+import { CountEntryData, CountEntryQuery, Entry } from "@/types/pages/entry";
 
 export type EntryQueryParams = {
     keyword?: string;
@@ -42,3 +42,6 @@ export const edit = async (data: EditEntryData): Promise<RestResult<any>> =>
 
 export const remove = async (id: number): Promise<RestResult<any>> =>
     del(`@i18n/entry/${id}/remove/`);
+
+export const count = async (query: CountEntryQuery): Promise<RestResult<CountEntryData>> =>
+    get(`@i18n/entry/count/`, query);

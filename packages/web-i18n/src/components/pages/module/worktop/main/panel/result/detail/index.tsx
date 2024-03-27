@@ -55,6 +55,12 @@ export const Detail = () => {
     const msg = useMessage();
     const alert = useAlert();
 
+    const prev = () => {
+        if(current === entries.length - 1) {
+            setCurrent(current - 1);
+        }
+    }
+
     const onItemClick = ({id}: DropdownMenuItemProps) => {
         if(id === "copy.key") {
             copy(entry.key);
@@ -69,6 +75,7 @@ export const Detail = () => {
                 onOk: async () => {
                     const { success, message } = await removeRest(entry.id)
                     if(success) {
+                        prev();
                         await remove(entry.id);
                     }else{
                         msg.error(message);
