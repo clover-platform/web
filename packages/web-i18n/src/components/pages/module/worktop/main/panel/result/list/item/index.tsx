@@ -68,9 +68,9 @@ export const ResultItem: FC<ResultItemProps> = (props) => {
 
     return <div className={classNames(
         "border rounded-md",
-        "hover:shadow-md",
+        "hover:border-primary",
     )}>
-        <div className={"bg-muted px-3 py-2 flex justify-center items-start"}>
+        <div className={"bg-muted px-3 py-2 flex justify-center items-start rounded-t-md"}>
             <div className={"flex-1 mr-2 py-1"}>{item.content}</div>
             <div className={"space-x-1 flex justify-center items-center"}>
                 <Tooltip content={item.verified ? "{#撤销批准#}" : "{#批准#}"}>

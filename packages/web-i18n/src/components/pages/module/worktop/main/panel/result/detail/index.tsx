@@ -88,7 +88,7 @@ export const Detail = () => {
 
     return <div className={"w-full"}>
         <div className={"flex justify-center items-center p-2 px-4"}>
-            <div className={"flex-1 text-base text-muted-foreground"}>{"{#原始内容#}"}</div>
+            <div className={"flex-1 text-base font-medium"}>{"{#原始内容#}"}</div>
             <div className={"flex"}>
                 <Tooltip content={"{#上一个#}"}>
                     <Action disabled={current === 0} onClick={() => setCurrent(current - 1)}>
@@ -110,6 +110,7 @@ export const Detail = () => {
                     items={menus}
                     onItemClick={onItemClick}
                     asChild={true}
+                    align={"end"}
                 >
                     <Action>
                         <DotsHorizontalIcon />

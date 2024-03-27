@@ -9,7 +9,7 @@
         "dev:main": "lerna run dev --scope @clover/main"
     },
     "dependencies": {
-        "@arco-iconbox/react-clover": "0.0.18",
+        "@arco-iconbox/react-clover": "0.0.20",
         "@radix-ui/react-icons": "^1.3.0",
         "axios": "1.6.2",
         "bowser": "2.11.0",

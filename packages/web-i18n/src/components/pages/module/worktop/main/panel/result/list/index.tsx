@@ -26,6 +26,7 @@ export const ResultList = () => {
 
     const load = async (options?: {append?: boolean}) => {
         const { append= false } = options || {};
+        if(!append) setList([]);
         setLoading(true);
         const { success, data } = await listRest({
             entryId: entry.id,
