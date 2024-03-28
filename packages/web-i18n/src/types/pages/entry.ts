@@ -43,3 +43,12 @@ export type CountEntryData = {
     translated: number;
     verified: number;
 }
+
+export type EntryComment = {
+    id: number;
+    entryId: number;
+    content: string;
+    createTime: Date;
+    createUserId: number;
+    createUser?: User;
+}

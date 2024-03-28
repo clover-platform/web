@@ -5,19 +5,18 @@ import { CheckIcon } from "@radix-ui/react-icons";
 import { IconDelete } from "@arco-iconbox/react-clover";
 import { EntryResult } from "@/types/pages/entry";
 import { FC } from "react";
-import TimeAgo from "javascript-time-ago";
 import { approve as approveRest, deleteResult, removeApproval as removeApprovalRest } from "@/rest/entry.result";
 import bus from "@easy-kit/common/events";
 import { ENTRY_RESULT_EDITOR_RESET, ENTRY_RESULT_RELOAD } from "@/events/worktop";
 import { useEntriesUpdater } from "@/components/layout/worktop/hooks";
 import { RestResult } from "@easy-kit/common/types/rest";
+import { TimeAgo } from "@easy-kit/common/components/time-ago";
 
 export type ResultItemProps = {
     item: EntryResult;
 }
 
 export const ResultItem: FC<ResultItemProps> = (props) => {
-    const timeAgo = new TimeAgo('{#LANG#}')
     const { item } = props;
     const { translator, verifier } = item;
     const alert = useAlert();
@@ -95,7 +94,9 @@ export const ResultItem: FC<ResultItemProps> = (props) => {
                     />
                     <span className={"text-muted-foreground"}>{translator?.username}</span>
                 </div>
-                <div className={"text-muted-foreground"}>{timeAgo.format(new Date(item.updateTime))}</div>
+                <div className={"text-muted-foreground"}>
+                    <TimeAgo time={item.updateTime}/>
+                </div>
             </div>
             {
                 item.verified ? <div className={"flex justify-start items-center space-x-2"}>
@@ -112,7 +113,9 @@ export const ResultItem: FC<ResultItemProps> = (props) => {
                         />
                         <span className={"text-muted-foreground"}>{verifier?.username}</span>
                     </div>
-                    <div className={"text-muted-foreground"}>{timeAgo.format(new Date(item.verifiedTime!))}</div>
+                    <div className={"text-muted-foreground"}>
+                        <TimeAgo time={item.verifiedTime!}/>
+                    </div>
                 </div> : null
             }
         </div>

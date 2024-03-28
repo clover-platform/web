@@ -45,7 +45,7 @@ export const PluginPanel = () => {
             <div className={"w-full text-base font-medium px-3 py-3"}>
                 { plugin?.name }
             </div>
-            <div className={"flex-1 w-full"}>
+            <div className={"flex-1 w-full h-0 flex-shrink-0"}>
                 { plugin?.panel }
             </div>
         </div>
