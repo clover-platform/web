@@ -1,5 +1,5 @@
 import { RestResult } from "@easy-kit/common/types/rest";
-import { get, post } from "@easy-kit/common/utils/rest";
+import {del, get, post} from "@easy-kit/common/utils/rest";
 import { EntryComment, EntryResult, EntryResultPage } from "@/types/pages/entry";
 
 export type AddCommentData = {
@@ -25,3 +25,6 @@ export type EntryCommentPage = {
 
 export const list = async (data: EntryCommentQuery): Promise<RestResult<EntryCommentPage>> =>
     get(`@i18n/entry/comment/list/`, data);
+
+export const deleteComment = async (id: number): Promise<RestResult<EntryCommentPage>> =>
+    del(`@i18n/entry/comment/${id}`);
