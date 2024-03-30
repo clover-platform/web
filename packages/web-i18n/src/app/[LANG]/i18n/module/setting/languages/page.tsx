@@ -1,11 +1,11 @@
 import {keywords, title} from "@clover/public/utils/seo";
-import {ModuleSettingPage} from "@/components/pages/module/setting";
+import {ModuleSettingLanguagesPage} from "@/components/pages/module/setting/languages";
 
 export const metadata = {
     title: title("{#设置#}"),
     keywords: keywords(),
 }
 
-const Page = () => <ModuleSettingPage />
+const Page = () => <ModuleSettingLanguagesPage />
 
 export default Page;

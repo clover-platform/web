@@ -9,7 +9,7 @@ export const layoutConfig = {
             withQuery: true,
         },
         {
-            title: "{#常规#}",
+            title: "{#API#}",
             type: "item",
         }
     ],

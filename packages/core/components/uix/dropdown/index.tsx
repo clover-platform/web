@@ -28,6 +28,7 @@ export interface DropdownMenuItemProps {
     children?: DropdownMenuItemProps[];
     onItemClick?: onDropdownMenuClick;
     onCheckedChange?: onCheckedChange;
+    hidden?: boolean;
 }
 
 export interface DropdownProps extends PropsWithChildren {
@@ -100,7 +101,7 @@ export const Dropdown: FC<DropdownProps> = (props) => {
                 props.className
             )}
         >
-            { items.map((child) => renderItem(child, {onItemClick, onCheckedChange})) }
+            { items.filter((item) => !item.hidden).map((child) => renderItem(child, {onItemClick, onCheckedChange})) }
         </DropdownMenuContent>
     </DropdownMenu>;
 }

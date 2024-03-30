@@ -9,7 +9,7 @@ export const layoutConfig = {
             withQuery: true,
         },
         {
-            title: "{#常规#}",
+            title: "{#语言#}",
             type: "item",
         }
     ],

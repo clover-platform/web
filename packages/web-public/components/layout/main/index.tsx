@@ -1,7 +1,7 @@
 import "./style.css";
 import { FC, PropsWithChildren, ReactNode, useCallback, useEffect, useMemo } from "react";
 import bus from '@easy-kit/common/events';
-import {usePathname, useRouter} from "next/navigation";
+import {usePathname, useRouter, useSearchParams} from "next/navigation";
 import Logo from "@clover/public/components/common/logo";
 import { AdminLayoutLoading } from "@clover/public/components/layout/main/loading";
 import Sidebar, { SidebarProps } from "@clover/public/components/layout/main/sidebar";
@@ -23,11 +23,13 @@ import {
 } from "@atom-ui/core";
 import Link from "next/link";
 import { IconHome } from "@arco-iconbox/react-clover";
+import {withQuery} from "@easy-kit/common/utils/path";
 
 export type PathProps = {
     type: "item" | "link";
     title: string;
     href?: string;
+    withQuery?: boolean;
 }
 
 export interface MainLayoutProps extends PropsWithChildren {
@@ -41,6 +43,7 @@ export const MainLayout: FC<MainLayoutProps> = (props) => {
     const {loading, isLogin} = useLayoutState();
     const teams = useRecoilValue(teamsState);
     const open = useSidebarState();
+    const searchParams = useSearchParams();
     useGoLogin();
 
     const showGuide = useMemo(() => {
@@ -52,13 +55,14 @@ export const MainLayout: FC<MainLayoutProps> = (props) => {
     }, [loading, isLogin]);
 
     const items = useMemo(() => {
+        const query = searchParams.toString();
         const nodes: ReactNode[] = [];
         path?.forEach((item, index) => {
             let node = null;
             if(item.type === "link") {
                 node = <BreadcrumbItem key={'item' + index}>
                     <BreadcrumbLink asChild={true}>
-                        <Link href={item.href!} className={"flex items-center"}>
+                        <Link href={withQuery(item.href!, query)} className={"flex items-center"}>
                             {item.title}
                         </Link>
                     </BreadcrumbLink>
@@ -76,7 +80,7 @@ export const MainLayout: FC<MainLayoutProps> = (props) => {
             }
         });
         return nodes;
-    }, [path])
+    }, [path, searchParams])
 
     return showLoading ? <div className={"min-h-[100vh] flex justify-center items-center"}>
         <Logo type={"light"} className={"bg-transparent animate-spin"}/>

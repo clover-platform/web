@@ -68,12 +68,63 @@ export default [{ path: "/i18n/", config:  {
             type: "item",
         }
     ],
+} },{ path: "/i18n/module/setting/ai/", config:  {
+    name: 'module',
+    active: "setting",
+    path: [
+        {
+            title: "{#设置#}",
+            type: "link",
+            href: "/{#LANG#}/i18n/module/setting/",
+            withQuery: true,
+        },
+        {
+            title: "{#AI#}",
+            type: "item",
+        }
+    ],
+} },{ path: "/i18n/module/setting/api/", config:  {
+    name: 'module',
+    active: "setting",
+    path: [
+        {
+            title: "{#设置#}",
+            type: "link",
+            href: "/{#LANG#}/i18n/module/setting/",
+            withQuery: true,
+        },
+        {
+            title: "{#API#}",
+            type: "item",
+        }
+    ],
 } },{ path: "/i18n/module/setting/", config:  {
     name: 'module',
     active: "setting",
     path: [
         {
             title: "{#设置#}",
+            type: "link",
+            href: "/{#LANG#}/i18n/module/setting/",
+            withQuery: true,
+        },
+        {
+            title: "{#常规#}",
+            type: "item",
+        }
+    ],
+} },{ path: "/i18n/module/setting/languages/", config:  {
+    name: 'module',
+    active: "setting",
+    path: [
+        {
+            title: "{#设置#}",
+            type: "link",
+            href: "/{#LANG#}/i18n/module/setting/",
+            withQuery: true,
+        },
+        {
+            title: "{#语言#}",
             type: "item",
         }
     ],

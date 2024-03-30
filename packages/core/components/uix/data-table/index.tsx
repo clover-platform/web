@@ -15,7 +15,7 @@ import {
     TableHeader,
     TableRow,
 } from "../../ui/table";
-import {ReactNode, useContext, useMemo, useState} from 'react';
+import {useContext, useMemo, useState} from 'react';
 import {
     Action,
     Checkbox, cn,
@@ -23,9 +23,9 @@ import {
     DropdownMenuItemProps,
     FilterItemProps,
     Filters,
-    FiltersProps, Pagination, PaginationProps,
-    Separator,
-    Space, Spin
+    FiltersProps,
+    Pagination, PaginationProps,
+    Spin
 } from "@atom-ui/core";
 import {IconColumns} from "@arco-iconbox/react-clover";
 import isFunction from "lodash/isFunction";
@@ -42,14 +42,13 @@ export interface StickyColumnProps {
     size: number;
 }
 
-export type onRowActionClick = <TData>(item: DropdownMenuItemProps, row: Row<TData>) => void;
-
 export type DataTableColumn<TData> = ColumnDef<TData, unknown> & {
     className?: string;
     formatters?: string[];
 }
 
-export interface DataTableProps<TData, TValue> {
+export interface DataTableProps<TData> {
+    autoHidePagination?: boolean;
     columns: DataTableColumn<TData>[];
     data: TData[];
     filters?: FilterItemProps[];
@@ -57,7 +56,7 @@ export interface DataTableProps<TData, TValue> {
     stickyColumns?: StickyColumnProps[];
     checkbox?: boolean;
     rowActions?: DropdownMenuItemProps[] | ((cell: TData) => DropdownMenuItemProps[]);
-    onRowActionClick?: onRowActionClick;
+    onRowActionClick?: (item: DropdownMenuItemProps, row: Row<TData>) => void;
     loading?: boolean;
     load?: (params?: any) => Promise<any>;
     filter?: FiltersProps;
@@ -122,7 +121,7 @@ const hasActions = (rowActions: DropdownMenuItemProps[] | ((cell: any) => Dropdo
     return false;
 }
 
-export const DataTable = <TData, TValue>(props: DataTableProps<TData, TValue>) => {
+export function DataTable <TData> (props: DataTableProps<TData>) {
     const {
         data,
         columns,
@@ -137,6 +136,7 @@ export const DataTable = <TData, TValue>(props: DataTableProps<TData, TValue>) =
         load,
         cellFormatters = [],
         showHeader = true,
+        autoHidePagination = true,
     } = props;
 
     const config = useContext(UIXContext);
@@ -185,7 +185,7 @@ export const DataTable = <TData, TValue>(props: DataTableProps<TData, TValue>) =
                     if(isFunction(rowActions)) {
                         items = rowActions(row.original);
                     }
-                    return <div className="flex justify-end w-full">
+                    return <div className="flex justify-end w-full" onClick={(e) => e.stopPropagation()}>
                         <Dropdown
                             items={items as DropdownMenuItemProps[]}
                             onItemClick={(item) => onRowActionClick(item, row)}
@@ -272,6 +272,13 @@ export const DataTable = <TData, TValue>(props: DataTableProps<TData, TValue>) =
     const showVisibilityControl = useMemo(() => showColumnVisibility && columnSettings.length, [showColumnVisibility, columnSettings])
 
     const showToolbar = useMemo(() => filter || showVisibilityControl, [filter, showVisibilityControl])
+
+    const showPagination = useMemo(() => {
+        if(autoHidePagination) {
+            return pagination && (pagination as PaginationProps).total > (pagination as PaginationProps).size;
+        }
+        return pagination;
+    }, [pagination, autoHidePagination]);
 
     return <>
         {
@@ -368,7 +375,7 @@ export const DataTable = <TData, TValue>(props: DataTableProps<TData, TValue>) =
             </Table>
             <div className="py-4">
                 {
-                    pagination && <Pagination
+                    showPagination && <Pagination
                         {...(pagination as PaginationProps)}
                         onChange={(page: number) => {
                             load && load({page}).then();

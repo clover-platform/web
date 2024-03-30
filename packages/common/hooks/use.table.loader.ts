@@ -45,7 +45,7 @@ const standardRestParams = (params = {}) =>
         return prev;
     }, {});
 
-export const useTableLoader = (options: TableLoaderOptions) => {
+export const useTableLoader = <D> (options: TableLoaderOptions) => {
     const {
         initialParams = {},
         withURL = true,
@@ -56,7 +56,10 @@ export const useTableLoader = (options: TableLoaderOptions) => {
 
     const msg = useMessage();
     const [loading, setLoading] = useState(true);
-    const [result, setResult] = useState(null);
+    const [result, setResult] = useState<RestResult<{
+        total: number;
+        data: D[];
+    }> | null>(null);
     const legalKeys = useRef([
         ...keys(Object.assign((cloneDeep(initialParams) || {}), reqInit)),
         ...keysOptions

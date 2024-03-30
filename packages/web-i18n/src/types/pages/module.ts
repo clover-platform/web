@@ -1,5 +1,20 @@
 import { User } from "@clover/public/rest/account";
 
+export type Module = {
+    id: number;
+    name: string;
+    owner: number;
+    projectId: number;
+    createTime: string;
+    updateTime?: string;
+    description?: string;
+    identifier?: string;
+    memberSize?: number;
+    targetSize?: number;
+    source: string;
+    sourceSize?: number;
+}
+
 export type ModuleDetail = {
     id?: number;
     source?: string;

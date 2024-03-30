@@ -2,8 +2,10 @@ import { DataTableColumn } from "@atom-ui/core/components/uix/data-table";
 import { DropdownMenuItemProps, FilterItemProps, Input } from "@atom-ui/core";
 import TimeAgo from "javascript-time-ago";
 import { i18n } from "@easy-kit/i18n/utils";
+import {Module} from "@/types/pages/module";
+import {Account} from "@clover/public/types/account";
 
-export const COLUMNS: DataTableColumn<any>[] = [
+export const COLUMNS: DataTableColumn<Module>[] = [
     {
         accessorKey: "name",
         header: "{#名称#}",
@@ -14,7 +16,7 @@ export const COLUMNS: DataTableColumn<any>[] = [
             const data = cell.row.original;
             const { name, updateTime, memberSize } = data;
             const time = i18n("{#更新于%time#}", {
-                time: timeAgo.format(new Date(updateTime))
+                time: timeAgo.format(new Date(updateTime!))
             });
             const member = i18n("{#成员%size#}", {
                 size: memberSize
@@ -62,24 +64,28 @@ export const FILTERS: FilterItemProps[] = [
     },
 ]
 
-export const ROW_ACTIONS: DropdownMenuItemProps[] = [
-    {
-        id: "detail",
-        type: "item",
-        label: "{#详情#}"
-    },
-    {
-        id: "edit",
-        type: "item",
-        label: "{#动态#}"
-    },
-    {
-        type: "separator",
-        id: 'separator.1'
-    },
-    {
-        id: "delete",
-        type: "item",
-        label: "{#删除#}"
-    },
-];
+export const ROW_ACTIONS = (profile: Account, row: Module): DropdownMenuItemProps[] => {
+    return [
+        {
+            id: "detail",
+            type: "item",
+            label: "{#详情#}"
+        },
+        {
+            id: "activity",
+            type: "item",
+            label: "{#动态#}"
+        },
+        {
+            type: "separator",
+            id: 'separator.1',
+            hidden: row.owner !== profile.id,
+        },
+        {
+            id: "delete",
+            type: "item",
+            label: "{#删除#}",
+            hidden: row.owner !== profile.id,
+        },
+    ];
+};
