@@ -1,15 +1,6 @@
 //文件自动生成，请勿编辑
 
-export default [{ path: "/i18n/", config:  {
-    name: 'main',
-    active: "i18n",
-    path: [
-        {
-            title: "{#国际化#}",
-            type: "item",
-        }
-    ],
-} },{ path: "/i18n/module/activity/", config:  {
+export default [{ path: "/i18n/activity/", config:  {
     name: 'module',
     active: "activity",
     path: [
@@ -18,12 +9,48 @@ export default [{ path: "/i18n/", config:  {
             type: "item",
         }
     ],
-} },{ path: "/i18n/module/branch/", config:  {
+} },{ path: "/i18n/branch/", config:  {
     name: 'module',
     active: "branch",
     path: [
         {
             title: "{#分支#}",
+            type: "item",
+        }
+    ],
+} },{ path: "/i18n/", config:  {
+    name: 'main',
+    active: "i18n",
+    path: [
+        {
+            title: "{#国际化#}",
+            type: "item",
+        }
+    ],
+} },{ path: "/i18n/dashboard/", config:  {
+    name: 'module',
+    active: "dashboard",
+    path: [
+        {
+            title: "{#概览#}",
+            type: "item",
+        }
+    ],
+} },{ path: "/i18n/download/", config:  {
+    name: 'module',
+    active: "download",
+    path: [
+        {
+            title: "{#下载#}",
+            type: "item",
+        }
+    ],
+} },{ path: "/i18n/member/", config:  {
+    name: 'module',
+    active: "member",
+    path: [
+        {
+            title: "{#成员#}",
             type: "item",
         }
     ],
@@ -41,41 +68,14 @@ export default [{ path: "/i18n/", config:  {
             type: "item",
         }
     ],
-} },{ path: "/i18n/module/dashboard/", config:  {
-    name: 'module',
-    active: "dashboard",
-    path: [
-        {
-            title: "{#概览#}",
-            type: "item",
-        }
-    ],
-} },{ path: "/i18n/module/download/", config:  {
-    name: 'module',
-    active: "download",
-    path: [
-        {
-            title: "{#下载#}",
-            type: "item",
-        }
-    ],
-} },{ path: "/i18n/module/member/", config:  {
-    name: 'module',
-    active: "member",
-    path: [
-        {
-            title: "{#成员#}",
-            type: "item",
-        }
-    ],
-} },{ path: "/i18n/module/setting/ai/", config:  {
+} },{ path: "/i18n/setting/ai/", config:  {
     name: 'module',
     active: "setting",
     path: [
         {
             title: "{#设置#}",
             type: "link",
-            href: "/{#LANG#}/i18n/module/setting/",
+            href: "/{#LANG#}/i18n/setting/",
             withQuery: true,
         },
         {
@@ -83,14 +83,14 @@ export default [{ path: "/i18n/", config:  {
             type: "item",
         }
     ],
-} },{ path: "/i18n/module/setting/api/", config:  {
+} },{ path: "/i18n/setting/api/", config:  {
     name: 'module',
     active: "setting",
     path: [
         {
             title: "{#设置#}",
             type: "link",
-            href: "/{#LANG#}/i18n/module/setting/",
+            href: "/{#LANG#}/i18n/setting/",
             withQuery: true,
         },
         {
@@ -98,14 +98,14 @@ export default [{ path: "/i18n/", config:  {
             type: "item",
         }
     ],
-} },{ path: "/i18n/module/setting/", config:  {
+} },{ path: "/i18n/setting/", config:  {
     name: 'module',
     active: "setting",
     path: [
         {
             title: "{#设置#}",
             type: "link",
-            href: "/{#LANG#}/i18n/module/setting/",
+            href: "/{#LANG#}/i18n/setting/",
             withQuery: true,
         },
         {
@@ -113,14 +113,14 @@ export default [{ path: "/i18n/", config:  {
             type: "item",
         }
     ],
-} },{ path: "/i18n/module/setting/languages/", config:  {
+} },{ path: "/i18n/setting/languages/", config:  {
     name: 'module',
     active: "setting",
     path: [
         {
             title: "{#设置#}",
             type: "link",
-            href: "/{#LANG#}/i18n/module/setting/",
+            href: "/{#LANG#}/i18n/setting/",
             withQuery: true,
         },
         {
@@ -128,7 +128,7 @@ export default [{ path: "/i18n/", config:  {
             type: "item",
         }
     ],
-} },{ path: "/i18n/module/worktop/", config:  {
+} },{ path: "/i18n/worktop/", config:  {
     name: 'worktop',
 } },{ path: "/login/", config:  {
     name: 'login',

@@ -71,7 +71,7 @@ export const MenuItem: FC<MenuItemProps> = (props) => {
         <HoverCard>
             <HoverCardTrigger asChild>{button}</HoverCardTrigger>
             {
-                open ? null : <HoverCardContent align={"start"} className="w-[calc(var(--sidebar-width)-50px)] ml-[calc(var(--sidebar-width)-5px)] -mt-[36px] p-1">
+                open ? null : <HoverCardContent align={"start"} className="w-[calc(var(--sidebar-width)-50px)] ml-[calc(var(--sidebar-width)-5px)] -mt-[36px] p-1 bg-white">
                     {children?.map((menu) => <MenuItem key={menu.id} showIcon={false} {...menu} active={active}/>)}
                 </HoverCardContent>
             }

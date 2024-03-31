@@ -1,12 +1,10 @@
 import "./style.css";
-import { FC, PropsWithChildren, ReactNode, useCallback, useEffect, useMemo } from "react";
-import bus from '@easy-kit/common/events';
-import {usePathname, useRouter, useSearchParams} from "next/navigation";
+import { FC, PropsWithChildren, ReactNode, useMemo } from "react";
+import { useSearchParams } from "next/navigation";
 import Logo from "@clover/public/components/common/logo";
 import { AdminLayoutLoading } from "@clover/public/components/layout/main/loading";
 import Sidebar, { SidebarProps } from "@clover/public/components/layout/main/sidebar";
 import {useGoLogin, useLayoutState} from "@clover/public/components/layout/hooks/main";
-import { UNAUTHORIZED } from "@clover/public/events/auth";
 import {useRecoilValue} from "recoil";
 import {teamsState} from "@clover/public/state/public";
 import {Guide} from "@clover/public/components/layout/main/guide";

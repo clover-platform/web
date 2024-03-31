@@ -79,9 +79,9 @@ export const ModulePage = () => {
             onRowActionClick={({id: key}, {original}) => {
                 const {id} = original;
                 if(key === "detail") {
-                    router.push("/{#LANG#}/i18n/module/dashboard/?id=" + id);
+                    router.push("/{#LANG#}/i18n/dashboard/?id=" + id);
                 }else if(key === "activity") {
-                    router.push("/{#LANG#}/i18n/module/activity/?id=" + id);
+                    router.push("/{#LANG#}/i18n/activity/?id=" + id);
                 }else if(key === "delete") {
                     alert.confirm({
                         title: "{#删除#}",
@@ -100,7 +100,7 @@ export const ModulePage = () => {
             }}
             onRowClick={(row) => {
                 const {id} = row.original;
-                router.push("/{#LANG#}/i18n/module/dashboard/?id=" + id);
+                router.push("/{#LANG#}/i18n/dashboard/?id=" + id);
             }}
         />
     </>

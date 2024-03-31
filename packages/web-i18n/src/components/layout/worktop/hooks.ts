@@ -1,7 +1,7 @@
 import {useEffect, useMemo, useRef, useState} from "react";
 import {languages} from "@/rest/module";
 import { useRouter, useSearchParams } from "next/navigation";
-import {all} from "@/rest/module.branch";
+import {all} from "@/rest/branch";
 import {useRecoilState, useRecoilValue, useSetRecoilState} from "recoil";
 import {
     branchesState, countState,

@@ -5,7 +5,7 @@ import {
 } from "@arco-iconbox/react-clover";
 import { MenuItemProps } from "@clover/public/components/layout/main/sidebar/menu-item";
 
-const base = "/{#LANG#}/i18n/module"
+const base = "/{#LANG#}/i18n"
 
 export const NAV_MENUS: MenuItemProps[] = [
     {
