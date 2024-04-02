@@ -19,3 +19,13 @@ export const list = async (params: InviteGenerateParams): Promise<RestResult<Mem
 
 export const revoke = async (params: {id: number}): Promise<RestResult<any>> =>
     del(`@i18n/member/invite/revoke/`, params);
+
+export type MemberInviteData = {
+    moduleId: number;
+    roles: string[];
+    emails: string;
+    content: string;
+}
+
+export const send = async (data: MemberInviteData): Promise<RestResult<any>> =>
+    post(`@i18n/member/invite/send/`, data);
