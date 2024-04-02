@@ -1,7 +1,8 @@
 import * as z from "zod";
 
 export const SCHEMA = z.object({
-    roles: z.array(z.string()),
+    roles: z.array(z.string())
+        .min(1, "{#请选择角色#}"),
     emails: z.string()
         .min(1, "{#请选择创建方式#}")
         .max(1024, "{#最多 1024 个字符#}"),

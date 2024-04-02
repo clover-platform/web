@@ -25,7 +25,7 @@ type RoleOption = {
 const ROLE_OPTIONS: RoleOption[] = [
     {
         label: "{#管理员#}",
-        value: "2",
+        value: "1",
         description: "{#对整个项目拥有无限的控制权#}",
     },
     {
