@@ -45,6 +45,9 @@ export default [{ path: "/i18n/activity/", config:  {
             type: "item",
         }
     ],
+} },{ path: "/i18n/invite/", config:  {
+    name: 'login',
+    showLogo: false,
 } },{ path: "/i18n/member/", config:  {
     name: 'module',
     active: "member",
