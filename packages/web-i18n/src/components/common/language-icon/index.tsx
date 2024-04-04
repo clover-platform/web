@@ -17,6 +17,6 @@ export const LanguageIcon: FC<LanguageIconProps> = (props) => {
         "w-8 h-6 bg-muted",
         props.className,
     )}>
-        { inCountries ? <FlagIcon code={area} className={"!w-8 !h-6"} /> : <span className={"leading-none font-bold text-muted-foreground"}>{code}</span> }
+        { inCountries ? <FlagIcon code={area} className={"!w-full !h-full"} /> : <span className={"leading-none font-bold text-muted-foreground"}>{code}</span> }
     </div>
 }

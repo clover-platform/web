@@ -249,7 +249,7 @@ export function DataTable <TData> (props: DataTableProps<TData>) {
             .map((column) => {
                 const item = columns.find((col: any) => {
                     const key = col.id || col['accessorKey'];
-                    return key === column.id;
+                    return key.replace(/\./g, "_") === column.id;
                 });
                 let label = column.id;
                 if(item) {

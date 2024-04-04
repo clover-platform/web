@@ -3,6 +3,7 @@ import {useForm, Controller, SubmitHandler} from "react-hook-form"
 import type {Control} from "react-hook-form";
 import {Button} from "@atom-ui/core/components/uix/button";
 import {UIXContext} from "@atom-ui/core/components/uix/config-provider";
+import pick from "lodash/pick";
 
 export interface FilterItemProps {
     field: string;
@@ -43,13 +44,13 @@ export const Filters: FC<FiltersProps> = (props) => {
         load,
         query,
     } = props;
-
+    const fields = items.map((item) => item.field);
     const {
         reset,
         control,
         handleSubmit
     } = useForm({
-        defaultValues: query,
+        defaultValues: pick(query, fields),
     })
 
     const config = useContext(UIXContext);

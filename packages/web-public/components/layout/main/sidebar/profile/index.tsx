@@ -4,6 +4,7 @@ import classNames from 'classnames';
 import { logout } from "@clover/public/rest/auth";
 import { UNAUTHORIZED } from "@clover/public/events/auth";
 import bus from '@easy-kit/common/events';
+import {clearToken} from "@clover/public/utils/token";
 
 const menus: DropdownMenuItemProps[] = [
     {
@@ -36,6 +37,7 @@ export const SidebarProfile = () => {
                         const { success, message } = await logout();
                         if(success) {
                             bus.emit(UNAUTHORIZED);
+                            clearToken();
                         }else{
                             msg.error(message);
                         }

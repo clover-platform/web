@@ -1,5 +1,6 @@
 import {get, post} from "@easy-kit/common/utils/rest";
 import { RestResult } from "@easy-kit/common/types/rest";
+import {Account} from "@clover/public/types/account";
 
 export const login = async (data: {
     account: string;
@@ -7,13 +8,7 @@ export const login = async (data: {
     code: string;
 }): Promise<RestResult<any>> => post(`@main/account/login/`, data);
 
-export type ProfileResult = RestResult<{
-    authorities: string[];
-    id: number;
-    otpStatus: number;
-    status: number;
-    username: string;
-}>
+export type ProfileResult = RestResult<Account>
 
 // 获取个人信息
 export const profile = async (): Promise<ProfileResult> => get(`@main/account/profile/`);

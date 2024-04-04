@@ -6,7 +6,7 @@ import {profile} from "@clover/public/rest/auth";
 import {accessState} from "@easy-kit/common/state/access";
 import { my as myTeams } from "@clover/public/rest/team";
 import { my as myProjects } from "@clover/public/rest/project";
-import {usePathname, useRouter} from "next/navigation";
+import {useRouter} from "next/navigation";
 import bus from "@easy-kit/common/events";
 import {UNAUTHORIZED} from "@clover/public/events/auth";
 import localforage from "localforage";
@@ -30,7 +30,7 @@ export const useDataLoader = () => {
 
     return useCallback(async () => {
         const { success, data } = await profile();
-        success && setAccount(data);
+        success && setAccount(data!);
         success && setAccess(data?.authorities || []);
         setIsLogin(success);
         const teamsResult = await myTeams();

@@ -38,3 +38,12 @@ export type Branch = {
     name: string;
     id: number;
 }
+
+export type InviteDetail = {
+    identifier: string;
+    name: string;
+    description?: string;
+    source: string;
+    roles: string[];
+    targets: Language[];
+}

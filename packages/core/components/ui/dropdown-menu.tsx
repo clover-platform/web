@@ -110,11 +110,11 @@ const DropdownMenuCheckboxItem = React.forwardRef<
         checked={checked}
         {...props}
     >
-    <span className="absolute left-2 flex h-3.5 w-3.5 items-center justify-center">
-      <DropdownMenuPrimitive.ItemIndicator>
-        <CheckIcon className="h-4 w-4"/>
-      </DropdownMenuPrimitive.ItemIndicator>
-    </span>
+        <span className="absolute left-2 flex h-3.5 w-3.5 items-center justify-center">
+            <DropdownMenuPrimitive.ItemIndicator>
+                <CheckIcon className="h-4 w-4"/>
+            </DropdownMenuPrimitive.ItemIndicator>
+        </span>
         {children}
     </DropdownMenuPrimitive.CheckboxItem>
 ))
@@ -133,11 +133,11 @@ const DropdownMenuRadioItem = React.forwardRef<
         )}
         {...props}
     >
-    <span className="absolute left-2 flex h-3.5 w-3.5 items-center justify-center">
-      <DropdownMenuPrimitive.ItemIndicator>
-        <DotFilledIcon className="h-4 w-4 fill-current"/>
-      </DropdownMenuPrimitive.ItemIndicator>
-    </span>
+        <span className="absolute left-2 flex h-3.5 w-3.5 items-center justify-center">
+            <DropdownMenuPrimitive.ItemIndicator>
+                <DotFilledIcon className="h-4 w-4 fill-current"/>
+            </DropdownMenuPrimitive.ItemIndicator>
+        </span>
         {children}
     </DropdownMenuPrimitive.RadioItem>
 ))
@@ -174,9 +174,9 @@ const DropdownMenuSeparator = React.forwardRef<
 DropdownMenuSeparator.displayName = DropdownMenuPrimitive.Separator.displayName
 
 const DropdownMenuShortcut = ({
-                                  className,
-                                  ...props
-                              }: React.HTMLAttributes<HTMLSpanElement>) => {
+    className,
+    ...props
+}: React.HTMLAttributes<HTMLSpanElement>) => {
     return (
         <span
             className={cn("ml-auto text-xs tracking-widest opacity-60", className)}

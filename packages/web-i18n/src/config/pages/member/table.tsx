@@ -30,7 +30,9 @@ export const COLUMNS: DataTableColumn<Member>[] = [
         className: "w-[200px] min-w-[200px]",
         cell: (cell) => {
             const data = cell.row.original;
-            return <MemberRole value={data.type} />
+            return <div className={"space-x-2"}>
+                {data.roles?.map((role) => <MemberRole key={role} value={role} />)}
+            </div>
         }
     },
 ];

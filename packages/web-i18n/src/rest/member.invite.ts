@@ -29,3 +29,10 @@ export type MemberInviteData = {
 
 export const send = async (data: MemberInviteData): Promise<RestResult<any>> =>
     post(`@i18n/member/invite/send/`, data);
+
+export type AcceptInviteData = {
+    token: string;
+}
+
+export const accept = async (data: AcceptInviteData): Promise<RestResult<any>> =>
+    post(`@i18n/member/invite/accept/`, data);
