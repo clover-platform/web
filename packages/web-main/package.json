@@ -5,9 +5,11 @@
     "type": "module",
     "scripts": {
         "dev": "next dev -p 3700",
-        "build": "next build",
+        "build:next": "next build",
         "start": "next start",
-        "lint": "next lint"
+        "lint": "next lint",
+        "i18n": "tsx ./src/utils/i18n-static.ts",
+        "build": "yarn build:next && yarn i18n"
     },
     "dependencies": {},
     "devDependencies": {},

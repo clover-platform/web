@@ -11,16 +11,16 @@
         "test": "plasmo test"
     },
     "dependencies": {
-        "plasmo": "0.84.1",
+        "plasmo": "0.85.2",
         "react": "18.2.0",
         "react-dom": "18.2.0"
     },
     "devDependencies": {
-        "@types/chrome": "0.0.256",
-        "@types/node": "20.11.0",
-        "@types/react": "18.2.47",
-        "@types/react-dom": "18.2.18",
-        "typescript": "5.3.3"
+        "@types/chrome": "0.0.263",
+        "@types/node": "20.12.4",
+        "@types/react": "18.2.74",
+        "@types/react-dom": "18.2.24",
+        "typescript": "5.4.3"
     },
     "manifest": {
         "name": "__MSG_extensionName__",
