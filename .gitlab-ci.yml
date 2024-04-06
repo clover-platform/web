@@ -35,6 +35,7 @@ deploy:
         - cd /opt/clover/test/web-$SERVICE
         - docker-compose down
         - docker-compose up -d
+    dependencies:
+        - package
     needs:
-        - job: package
-          artifacts: true
+        - package
