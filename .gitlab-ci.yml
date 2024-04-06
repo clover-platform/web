@@ -10,7 +10,11 @@ cache:
 
 package:
     stage: package
-    when: manual
+    only:
+        variables:
+            - $SERVICE == "main"
+            - $SERVICE == "admin"
+            - $SERVICE == "i18n"
     tags:
         - dev
     cache:
