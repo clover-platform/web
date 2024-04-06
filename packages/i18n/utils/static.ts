@@ -48,7 +48,7 @@ function buildFileHandler() {
                 .on('end', () => {
                     if (lang === base) {
                         jet.copy(targetDir, dirVars.i18nDir, {
-                            matching: ['**/*.html'],
+                            matching: ['**/*.html', '**/*.txt'],
                             overwrite: true
                         });
                     }
@@ -59,8 +59,7 @@ function buildFileHandler() {
             const assetsDir = path.resolve(dirVars.i18nDir, staticDir + '/' + lang);
             langKeyHandler(gulp.src(['**/*'], {
                 cwd: nextStaticDir
-            }), lang)
-                .pipe(gulp.dest(assetsDir))
+            }), lang).pipe(gulp.dest(assetsDir))
         });
     });
     return Promise.all(jobs);
@@ -68,9 +67,10 @@ function buildFileHandler() {
 
 function staticFileHandler() {
     jet.copy(dirVars.buildDir, dirVars.i18nDir, {
-        matching: ['*.ico', "*.png", "*.html", "*.txt", "site.webmanifest", 'assets/**/*',],
+        matching: ['*.ico', "*.png", "site.webmanifest", 'assets/**/*',],
         overwrite: true
     });
+    jet.remove(path.resolve(dirVars.i18nDir, '_next'));
 }
 
 export type BuildConfig = {
@@ -94,8 +94,8 @@ const init = (config: BuildConfig) => {
 const build = async (config: BuildConfig) => {
     init(config);
     jet.remove(dirVars.i18nDir);
-    await buildFileHandler();
     staticFileHandler();
+    await buildFileHandler();
     console.log(chalk.yellow('all done'));
 }
 
