@@ -1,0 +1,25 @@
+stages:
+  - package
+
+cache:
+  paths:
+    - node_modules/
+  policy: pull
+
+package:
+  stage: package
+  when: manual
+  tags:
+    - dev
+  cache:
+    paths:
+      - node_modules/
+    policy: pull-push
+  artifacts:
+    paths:
+      - dist/
+  script:
+    - yarn
+    - yarn build:$SERVICE
+    - docker build -t clover-web-$SERVICE:$CI_PIPELINE_IID -f ./docker/$SERVICE.Dockerfile .
+    - docker tag clover-web-$SERVICE:$CI_PIPELINE_IID clover-web-$SERVICE:latest
