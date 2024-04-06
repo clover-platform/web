@@ -13,15 +13,15 @@ export interface OtpInfoProps extends PropsWithChildren{
 const apps = [
     {
         name: "{#腾讯身份验证器#}",
-        icon: "/assets/image/2fa/tencent.webp"
+        icon: "/assets/main/image/2fa/tencent.webp"
     },
     {
         name: "{#谷歌身份验证器#}",
-        icon: "/assets/image/2fa/google.webp"
+        icon: "/assets/main/image/2fa/google.webp"
     },
     {
         name: "{#微软身份验证器#}",
-        icon: "/assets/image/2fa/microsoft.webp"
+        icon: "/assets/main/image/2fa/microsoft.webp"
     }
 ]
 

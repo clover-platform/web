@@ -5,7 +5,7 @@ import langData from '@easy-kit/i18n/utils/data'
 const config = {
     supports: LangList.map(({code}) => code),
     base: 'en-us',
-    staticDir: 'assets',
+    staticDir: 'assets/admin',
     data: langData
 };
 

@@ -68,7 +68,7 @@ function buildFileHandler() {
 
 function staticFileHandler() {
     jet.copy(dirVars.buildDir, dirVars.i18nDir, {
-        matching: ['*.ico', 'assets/**/*', "*.png"],
+        matching: ['*.ico', "*.png", "*.html", "*.txt", "site.webmanifest", 'assets/**/*',],
         overwrite: true
     });
 }
