@@ -4,6 +4,7 @@ stages:
 cache:
   paths:
     - node_modules/
+    - packages/web-$SERVICE/.next/cache/
   policy: pull
 
 package:
@@ -14,10 +15,11 @@ package:
   cache:
     paths:
       - node_modules/
+      - packages/web-$SERVICE/.next/cache/
     policy: pull-push
   artifacts:
     paths:
-      - dist/
+      - packages/web-$SERVICE/i18n/
   script:
     - yarn
     - yarn build:$SERVICE
