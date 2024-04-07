@@ -2,12 +2,6 @@ stages:
     - package
     - deploy
 
-cache:
-    paths:
-        - node_modules/
-        - packages/web-$SERVICE/.next/cache/
-    policy: pull
-
 package:
     stage: package
     only:
