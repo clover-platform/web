@@ -10,18 +10,19 @@ const TYPE_MAP: Record<number, string> = {
 }
 
 export const MemberItem: FC<MemberItemProps> = (props) => {
+    const { user, roles } = props;
     return <div className={"flex justify-start items-center"}>
         <Avatar
             className={"w-11 h-11"}
-            src={props.avatar}
-            fallback={props.username}
-            alt={props.username}
+            src={user.avatar}
+            fallback={user.username}
+            alt={user.username}
             fallbackClassName={"bg-[rgba(0,0,0,0.1)] uppercase font-bold"}
         />
         <div className={"flex-1 mx-3"}>
-            <div className={"text-lg text-black leading-none"}>{props.username}</div>
-            <div className={"text-muted-foreground"}>{props.email}</div>
+            <div className={"text-lg text-black leading-none"}>{user.username}</div>
+            <div className={"text-muted-foreground"}>{user.email}</div>
         </div>
-        <Badge className={"bg-white"} variant="outline">{TYPE_MAP[props.type]}</Badge>
+        { roles.map((role) => <Badge key={role} className={"mr-2"}>{TYPE_MAP[role]}</Badge>) }
     </div>
 }

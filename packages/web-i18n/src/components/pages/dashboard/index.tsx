@@ -21,7 +21,6 @@ import { dashboard } from "@/rest/module";
 import {useEffect, useState} from "react";
 import {useRouter, useSearchParams} from "next/navigation";
 import {LanguageItem} from "@/components/pages/dashboard/language-item";
-import {users} from "@clover/public/rest/account";
 import { MemberItem } from "@/components/pages/dashboard/member-item";
 import { Member, ModuleDetail } from "@/types/pages/module";
 import { useRecoilValue } from "recoil";
@@ -45,16 +44,7 @@ export const DashboardPage = () => {
             const { detail, languages, members } = data;
             setDetail(detail);
             setLanguages(languages);
-            const ids = members.map((item: any) => item.id);
-            const result = await users(ids);
-            if(result.success) {
-                setMembers(result.data?.map((user) => {
-                    return {
-                        ...user,
-                        type: members.find((item: {id: number, type: number}) => item.id === user.id)?.type || 0
-                    };
-                }) || []);
-            }
+            setMembers(members);
         }
         setLoading(false);
     }

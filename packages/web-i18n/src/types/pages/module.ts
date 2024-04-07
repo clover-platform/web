@@ -1,4 +1,4 @@
-import { User } from "@clover/public/rest/account";
+import { User } from "@clover/public/types/account";
 
 export type Module = {
     id: number;
@@ -24,8 +24,10 @@ export type ModuleDetail = {
     updateTime?: string;
 }
 
-export type Member = User & {
-    type: number;
+export type Member = {
+    id: number;
+    roles: number[];
+    user: User
 }
 
 export type Language = {

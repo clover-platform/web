@@ -1,14 +1,16 @@
 import { FC } from "react";
-import { IconSpin } from "@atom-ui/core/icon";
-import {cn} from "@atom-ui/core/lib/utils";
+import { cn } from "@atom-ui/core/lib/utils";
+import { IconSpin } from "@arco-iconbox/react-clover";
 
 export type SpinProps = {
     className?: string;
 };
 
 export const Spin: FC<SpinProps> = (props) => {
-    return <IconSpin className={cn(
-        "animate-spin mr-1",
-        props.className,
-    )} />;
+    return <IconSpin
+        className={cn(
+            "animate-spin mr-1",
+            props.className,
+        )}
+    />;
 }

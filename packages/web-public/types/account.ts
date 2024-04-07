@@ -6,3 +6,10 @@ export type Account = {
     teamId: number;
     username: string;
 }
+
+export type User = {
+    id: number;
+    email: string;
+    username: string;
+    avatar: string;
+}

@@ -6,7 +6,6 @@ import { list as listRest } from "@/rest/entry.result";
 import { ResultItem } from "@/components/pages/worktop/main/panel/result/list/item";
 import bus from '@easy-kit/common/events';
 import { ENTRY_RESULT_RELOAD } from "@/events/worktop";
-import { User, users as usersRest } from "@clover/public/rest/account";
 import compact from "lodash/compact";
 import uniq from "lodash/uniq";
 import { EntryResult } from "@/types/pages/entry";
@@ -39,24 +38,10 @@ export const ResultList = () => {
             const translatorIds = newList.map((item) => item.translatorId);
             const verifierIds = newList.map((item) => item.checkerId);
             const ids = uniq(compact([...translatorIds, ...verifierIds]));
-            const result = await usersRest(ids);
-            if(result.success) {
-                setList([
-                    ...(append ? list : []),
-                    ...newList.map((item) => {
-                        return {
-                            ...item,
-                            translator: result.data?.find((user: User) => user.id === item.translatorId),
-                            verifier: result.data?.find((user: User) => user.id === item.checkerId),
-                        }
-                    })
-                ]);
-            }else{
-                setList([
-                    ...(append ? list : []),
-                    ...newList
-                ]);
-            }
+            setList([
+                ...(append ? list : []),
+                ...newList
+            ]);
             setTotal(total);
         }
         setLoading(false);

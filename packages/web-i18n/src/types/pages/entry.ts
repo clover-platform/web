@@ -1,5 +1,4 @@
-import { Member } from "@/types/pages/module";
-import { User } from "@clover/public/rest/account";
+import { User } from "@clover/public/types/account";
 
 export type Entry = {
     id: number;
@@ -50,5 +49,5 @@ export type EntryComment = {
     content: string;
     createTime: Date;
     createUserId: number;
-    createUser?: User;
+    user?: User;
 }
