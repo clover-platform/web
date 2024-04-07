@@ -20,9 +20,6 @@ package:
         paths:
             - packages/web-$SERVICE/i18n/
     script:
-        - rm -rf yarn.lock
-        - rm -rf node_modules/
-        - yarn cache clean
         - yarn
         - yarn build:$SERVICE
         - docker build -t clover-web-$SERVICE:$CI_PIPELINE_IID -f ./docker/$SERVICE.Dockerfile .
