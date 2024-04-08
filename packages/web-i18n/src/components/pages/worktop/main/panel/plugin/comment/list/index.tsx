@@ -45,7 +45,7 @@ export const CommentList = () => {
     useEffect(() => {
         pageRef.current = 1;
         load().then();
-    }, [current, language]);
+    }, [entry, language]);
 
     useEffect(() => {
         const handler = () => {

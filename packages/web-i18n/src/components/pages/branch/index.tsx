@@ -29,7 +29,7 @@ export const ModuleBranchPage = () => {
     }, []);
 
     const actions = <Space>
-        <NewBranchButton />
+        <NewBranchButton onSuccess={load} />
     </Space>;
 
     return <>

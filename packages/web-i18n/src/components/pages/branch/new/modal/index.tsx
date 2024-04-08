@@ -1,22 +1,29 @@
-import { Button, Dialog, DialogProps, Space } from "@atom-ui/core";
+import { Button, Dialog, DialogProps, Space, useMessage } from "@atom-ui/core";
 import { FC, useState } from "react";
 import { ModuleBranchForm } from "@/components/pages/branch/form";
 import { create, CreateBranchData } from "@/rest/branch";
 import { useSearchParams } from "next/navigation";
 
-export type NewBranchModalProps = {} & DialogProps;
+export type NewBranchModalProps = {
+    onSuccess?: () => void;
+} & DialogProps;
 
 export const NewBranchModal: FC<NewBranchModalProps> = (props) => {
     const search = useSearchParams();
     const id = search.get('id');
     const [loading, setLoading] = useState(false);
+    const msg = useMessage();
 
     const onSubmit = async (data: CreateBranchData) => {
         setLoading(true);
         data.moduleId = Number(id);
         const { success, message } = await create(data);
         setLoading(false);
-        console.log(success, message);
+        if(success) {
+            props.onSuccess?.();
+        }else{
+            msg.error(message);
+        }
     }
 
     return <Dialog

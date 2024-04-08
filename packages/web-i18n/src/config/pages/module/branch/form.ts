@@ -20,7 +20,7 @@ export const SCHEMA = z.object({
 export const TYPE_OPTIONS: RadioGroupOptionProps[] = [
     {
         label: "{#从主分支克隆#}",
-        value: "main"
+        value: "clone"
     },
     {
         label: "{#空分支#}",
