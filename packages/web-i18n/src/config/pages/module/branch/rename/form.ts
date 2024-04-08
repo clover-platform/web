@@ -2,8 +2,6 @@ import * as z from "zod";
 import { RadioGroupOptionProps } from "@atom-ui/core";
 
 export const SCHEMA = z.object({
-    type: z.string()
-        .min(1, "{#请选择创建方式#}"),
     name: z.string()
         .min(1, "{#名称不能为空#}")
         .max(255, "{#最多 255 个字符#}"),
@@ -16,14 +14,3 @@ export const SCHEMA = z.object({
         })
     }
 })
-
-export const TYPE_OPTIONS: RadioGroupOptionProps[] = [
-    {
-        label: "{#从主分支克隆#}",
-        value: "clone"
-    },
-    {
-        label: "{#空分支#}",
-        value: "empty"
-    }
-]

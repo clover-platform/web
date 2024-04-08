@@ -1,13 +1,15 @@
 'use client';
 
 import { TitleBar } from "@clover/public/components/common/title-bar";
-import { DataTable, Space } from "@atom-ui/core";
+import { DataTable, Space, useAlert, useMessage } from "@atom-ui/core";
 import { COLUMNS, FILTERS, ROW_ACTIONS } from "@/config/pages/module/branch/table";
 import { useTableLoader } from "@easy-kit/common/hooks";
-import { list } from "@/rest/branch";
-import { useEffect } from "react";
+import { deleteBranch, list } from "@/rest/branch";
+import { useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import { NewBranchButton } from "@/components/pages/branch/new/button";
+import { Branch } from "@/types/pages/branch";
+import { RenameBranchModal } from "@/components/pages/branch/rename/modal";
 
 const initialParams = {
     keyword: '',
@@ -23,6 +25,10 @@ export const ModuleBranchPage = () => {
         },
         action: list,
     });
+    const alert = useAlert();
+    const msg = useMessage();
+    const [renameVisible, setRenameVisible] = useState(false);
+    const [renameItem, setRenameItem] = useState<Branch | null>(null);
 
     useEffect(() => {
         load().then();
@@ -38,7 +44,7 @@ export const ModuleBranchPage = () => {
             actions={actions}
             border={false}
         />
-        <DataTable
+        <DataTable<Branch>
             filter={{
                 items: FILTERS,
                 defaultValues: initialParams,
@@ -55,7 +61,40 @@ export const ModuleBranchPage = () => {
             data={result?.data || []}
             loading={loading}
             onRowActionClick={({id: key}, {original}) => {
-
+                if(key === "delete") {
+                    alert.confirm({
+                        title: "{#删除分支#}",
+                        description: "{#确认删除分支#}",
+                        onOk: async () => {
+                            const { success, message } = await deleteBranch({
+                                id: original.id,
+                                moduleId: original.moduleId,
+                            });
+                            if(success) {
+                                load().then();
+                            }else{
+                                msg.error(message);
+                            }
+                            return success;
+                        }
+                    });
+                }else if(key === "rename") {
+                    setRenameItem(original);
+                    setRenameVisible(true);
+                }
+            }}
+        />
+        <RenameBranchModal
+            visible={renameVisible}
+            branch={renameItem}
+            onCancel={() => {
+                setRenameVisible(false);
+                setRenameItem(null);
+            }}
+            onSuccess={() => {
+                setRenameVisible(false);
+                setRenameItem(null);
+                load().then();
             }}
         />
     </>

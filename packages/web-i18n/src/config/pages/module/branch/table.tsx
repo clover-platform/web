@@ -1,12 +1,23 @@
 import { DataTableColumn } from "@atom-ui/core/components/uix/data-table";
-import { DropdownMenuItemProps, FilterItemProps, Input } from "@atom-ui/core";
+import { Badge, DropdownMenuItemProps, FilterItemProps, Input } from "@atom-ui/core";
+import { Branch } from "@/types/pages/branch";
 
-export const COLUMNS: DataTableColumn<any>[] = [
+export const COLUMNS: DataTableColumn<Branch>[] = [
     {
         accessorKey: "name",
         header: "{#名称#}",
         enableHiding: false,
         className: "min-w-[200px]",
+    },
+    {
+        accessorKey: "isDefault",
+        header: "{#默认分支#}",
+        enableHiding: false,
+        className: "!w-[200px]",
+        cell: (cell) => {
+            const branch = cell.row.original;
+            return branch.isDefault ? <Badge>{"{#是#}"}</Badge> : null;
+        }
     },
     {
         accessorKey: "updateTime",
@@ -24,7 +35,7 @@ export const FILTERS: FilterItemProps[] = [
     },
 ]
 
-export const ROW_ACTIONS = (cell: any): DropdownMenuItemProps[] => {
+export const ROW_ACTIONS = (cell: Branch): DropdownMenuItemProps[] => {
     const { isDefault  = false} = cell;
     const items: DropdownMenuItemProps[] = [
         {
@@ -40,16 +51,16 @@ export const ROW_ACTIONS = (cell: any): DropdownMenuItemProps[] => {
             label: "{#合并至默认分支#}"
         })
     }
-    return [
-        ...items,
-        {
+    if(!isDefault) {
+        items.push({
             type: "separator",
             id: 'separator.1'
-        },
-        {
+        });
+        items.push({
             id: "delete",
             type: "item",
             label: "{#删除#}"
-        },
-    ];
+        })
+    }
+    return items;
 }
