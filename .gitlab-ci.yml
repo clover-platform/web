@@ -20,8 +20,8 @@ package:
         paths:
             - packages/web-$SERVICE/i18n/
     script:
-        - yarn
-        - yarn build:$SERVICE
+        - pnpm i
+        - pnpm build:$SERVICE
         - docker build -t clover-web-$SERVICE:$CI_PIPELINE_IID -f ./docker/$SERVICE.Dockerfile .
         - docker tag clover-web-$SERVICE:$CI_PIPELINE_IID clover-web-$SERVICE:latest
 

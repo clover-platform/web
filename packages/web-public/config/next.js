@@ -1,5 +1,4 @@
 // 语言默认值
-import findWorkspaceRoot from "find-yarn-workspace-root";
 import { webpackConfig } from "@easy-kit/i18n/utils/config.js";
 
 process.env.UI_LANG = process.env.UI_LANG || 'zh-cn';
@@ -39,7 +38,7 @@ export default {
     webpack: (config, ctx) => {
         config.resolve = {
             ...config.resolve,
-            modules: [...config.resolve.modules, findWorkspaceRoot()],
+            modules: [...config.resolve.modules],
         }
         if (ctx.dev) {
             config.module.rules.push(webpackConfig);

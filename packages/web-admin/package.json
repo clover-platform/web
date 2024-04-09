@@ -9,7 +9,7 @@
         "start": "next start",
         "lint": "next lint",
         "i18n": "tsx ./src/utils/i18n-static.ts",
-        "build": "yarn build:next && yarn i18n"
+        "build": "pnpm build:next && pnpm i18n"
     },
     "dependencies": {},
     "devDependencies": {},
