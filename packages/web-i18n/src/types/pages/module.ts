@@ -15,11 +15,16 @@ export type Module = {
     sourceSize?: number;
 }
 
+export type ModuleCount = {
+    wordCount: number;
+    branchCount: number;
+    memberCount: number;
+    targetCount: number;
+}
+
 export type ModuleDetail = {
     id?: number;
     source?: string;
-    memberSize?: number;
-    wordSize?: number;
     createTime?: string;
     updateTime?: string;
 }

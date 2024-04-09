@@ -22,29 +22,31 @@ import {useEffect, useState} from "react";
 import {useRouter, useSearchParams} from "next/navigation";
 import {LanguageItem} from "@/components/pages/dashboard/language-item";
 import { MemberItem } from "@/components/pages/dashboard/member-item";
-import { Member, ModuleDetail } from "@/types/pages/module";
+import {Member, ModuleCount, ModuleDetail} from "@/types/pages/module";
 import { useRecoilValue } from "recoil";
 import { languagesState } from "@/state/public";
-import {Language} from "@/types/pages/public";
+import {Language, LanguageWithCount} from "@/types/pages/public";
 
 export const DashboardPage = () => {
     const search = useSearchParams();
     const id = search.get("id");
     const router = useRouter();
     const [loading, setLoading] = useState(false);
-    const [languages, setLanguages] = useState<Language[]>([]);
+    const [languages, setLanguages] = useState<LanguageWithCount[]>([]);
     const [detail, setDetail] = useState<ModuleDetail>({});
     const [members, setMembers] = useState<Member[]>([]);
+    const [count, setCount] = useState<ModuleCount>();
     const all = useRecoilValue(languagesState);
 
     const load = async () => {
         setLoading(true);
         const { success, data} = await dashboard(Number(id));
         if(success) {
-            const { detail, languages, members } = data;
+            const { detail, languages, members, count } = data;
             setDetail(detail);
             setLanguages(languages);
             setMembers(members);
+            setCount(count);
         }
         setLoading(false);
     }
@@ -104,10 +106,10 @@ export const DashboardPage = () => {
                             { all.filter((item) => item.code === detail.source).map((item) => item.name).join("") || '' }
                         </DetailInfoItem>
                         <DetailInfoItem label="{#项目成员#}">
-                            {detail.memberSize || '--'}
+                            {count?.memberCount || '--'}
                         </DetailInfoItem>
                         <DetailInfoItem label="{#词条#}">
-                            {detail.wordSize || '--'}
+                            {count?.wordCount || '--'}
                         </DetailInfoItem>
                         <DetailInfoItem label="{#创建时间#}">
                             <ValueFormatter value={detail.createTime} formatters={["time"]}/>

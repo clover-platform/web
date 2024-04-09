@@ -3,3 +3,9 @@ export type Language = {
     code: string;
     name: string;
 }
+
+export type LanguageWithCount = {
+    total: number;
+    translated: number;
+    verified: number;
+} & Language;

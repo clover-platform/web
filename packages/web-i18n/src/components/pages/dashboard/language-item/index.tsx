@@ -1,13 +1,18 @@
 import {Progress, TableCell, TableRow, Tooltip} from "@atom-ui/core";
 import {FC, PropsWithChildren} from "react";
 import {LanguageIcon} from "@/components/common/language-icon";
-import {Language} from "@/types/pages/public";
+import {LanguageWithCount} from "@/types/pages/public";
 
 export type LanguageItemProps = {
     onClick?: () => void;
-} & PropsWithChildren<Language>;
+} & PropsWithChildren<LanguageWithCount>;
 
 export const LanguageItem: FC<LanguageItemProps> = (props) => {
+    const { total, translated, verified } = props;
+
+    const translatedPercent = total ? Math.ceil(translated/total*100) : 0;
+    const verifiedPercent = translated ? Math.ceil(verified/translated*100) : 0;
+
     return <TableRow onClick={props.onClick}>
         <TableCell>
             <div className={"flex justify-start items-center"}>
@@ -15,12 +20,14 @@ export const LanguageItem: FC<LanguageItemProps> = (props) => {
             </div>
         </TableCell>
         <TableCell>
-            <Progress value={80} />
+            <div className={"w-full border rounded-full"}>
+                <Progress value={verifiedPercent} style={{width: `${translatedPercent}%`}} />
+            </div>
         </TableCell>
         <TableCell className={"text-right"}>
             <Tooltip content={"{#翻译·校验#}"}>
                 <div className={"bg-muted inline-flex px-2 py-0.5 rounded-sm text-muted-foreground text-xs"}>
-                    <span>80%</span> · <span>0%</span>
+                    <span>{translatedPercent}%</span> · <span>{verifiedPercent}%</span>
                 </div>
             </Tooltip>
         </TableCell>
