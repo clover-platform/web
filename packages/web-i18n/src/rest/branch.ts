@@ -1,6 +1,7 @@
 import { RestResult } from "@easy-kit/common/types/rest";
 import { get, post, del, put } from "@easy-kit/common/utils/rest";
 import {Branch} from "@/types/pages/module";
+import {BranchMergeOverview} from "@/types/pages/branch";
 
 export type ListBranchQuery = {
     id: number;
@@ -36,3 +37,6 @@ export type RenameBranchData = {
 
 export const rename = async (data: RenameBranchData): Promise<RestResult<any>> =>
     put(`@i18n/${data.moduleId}/branch/${data.id}/rename/`, data);
+
+export const mergeOverview = async (id: number): Promise<RestResult<BranchMergeOverview>> =>
+    get(`@i18n/branch/${id}/merge/overview/`);

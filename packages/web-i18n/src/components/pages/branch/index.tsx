@@ -10,6 +10,7 @@ import { useSearchParams } from "next/navigation";
 import { NewBranchButton } from "@/components/pages/branch/new/button";
 import { Branch } from "@/types/pages/branch";
 import { RenameBranchModal } from "@/components/pages/branch/rename/modal";
+import {MergeBranchModal} from "@/components/pages/branch/merge/modal";
 
 const initialParams = {
     keyword: '',
@@ -28,7 +29,8 @@ export const ModuleBranchPage = () => {
     const alert = useAlert();
     const msg = useMessage();
     const [renameVisible, setRenameVisible] = useState(false);
-    const [renameItem, setRenameItem] = useState<Branch | null>(null);
+    const [branch, setBranch] = useState<Branch | null>(null);
+    const [mergeVisible, setMergeVisible] = useState(false);
 
     useEffect(() => {
         load().then();
@@ -79,21 +81,37 @@ export const ModuleBranchPage = () => {
                         }
                     });
                 }else if(key === "rename") {
-                    setRenameItem(original);
+                    setBranch(original);
                     setRenameVisible(true);
+                }else if(key === "merge") {
+                    setBranch(original);
+                    setMergeVisible(true);
                 }
             }}
         />
         <RenameBranchModal
             visible={renameVisible}
-            branch={renameItem}
+            branch={branch!}
             onCancel={() => {
                 setRenameVisible(false);
-                setRenameItem(null);
+                setBranch(null);
             }}
             onSuccess={() => {
                 setRenameVisible(false);
-                setRenameItem(null);
+                setBranch(null);
+                load().then();
+            }}
+        />
+        <MergeBranchModal
+            visible={mergeVisible}
+            branch={branch!}
+            onCancel={() => {
+                setMergeVisible(false);
+                setBranch(null);
+            }}
+            onSuccess={() => {
+                setMergeVisible(false);
+                setBranch(null);
                 load().then();
             }}
         />

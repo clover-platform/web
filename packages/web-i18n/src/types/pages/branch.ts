@@ -6,3 +6,9 @@ export type Branch = {
     updateTime: Date;
     createTime: Date;
 }
+
+export type BranchMergeOverview = {
+    deleted: number;
+    added: number;
+    changed: number;
+}

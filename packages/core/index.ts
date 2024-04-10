@@ -68,6 +68,11 @@ export {
     SheetTrigger,
 } from "./components/ui/sheet"
 export { Skeleton } from "./components/ui/skeleton";
+export {
+    Alert,
+    AlertDescription,
+    AlertTitle,
+} from "./components/ui/alert";
 
 // extend
 export { Divider } from "./components/uix/divider";
