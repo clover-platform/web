@@ -83,19 +83,7 @@ export const ModulePage = () => {
                 }else if(key === "activity") {
                     router.push("/{#LANG#}/i18n/activity/?id=" + id);
                 }else if(key === "delete") {
-                    alert.confirm({
-                        title: "{#删除#}",
-                        description: "{#删除该翻译项目，所以的翻译数据将无法使用，是否继续？#}",
-                        onOk: async () => {
-                            const { success, message } = await deleteModule(id);
-                            if(success) {
-                                load().then();
-                            }else{
-                                msg.error(message);
-                            }
-                            return success;
-                        }
-                    })
+
                 }
             }}
             onRowClick={(row) => {

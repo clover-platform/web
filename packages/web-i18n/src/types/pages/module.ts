@@ -54,3 +54,8 @@ export type InviteDetail = {
     roles: string[];
     targets: Language[];
 }
+
+export type BaseInfo = {
+    name: string;
+    description: string;
+}

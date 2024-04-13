@@ -20,3 +20,11 @@ export const SCHEMA = z.object({
         })
     }
 })
+
+export const INFO_SCHEMA = z.object({
+    name: z.string()
+        .min(1, "{#名称不能为空#}")
+        .max(255, "{#最多 255 个字符#}"),
+    description: z.any(),
+});
+

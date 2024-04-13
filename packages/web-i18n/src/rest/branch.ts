@@ -40,3 +40,11 @@ export const rename = async (data: RenameBranchData): Promise<RestResult<any>> =
 
 export const mergeOverview = async (id: number): Promise<RestResult<BranchMergeOverview>> =>
     get(`@i18n/branch/${id}/merge/overview/`);
+
+export type MergeBranchData = {
+    id: number;
+    deleteAfterMerge: boolean;
+}
+
+export const merge = async (data: MergeBranchData): Promise<RestResult<any>> =>
+    put(`@i18n/branch/${data.id}/merge/`, data);

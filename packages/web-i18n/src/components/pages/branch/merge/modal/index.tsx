@@ -1,10 +1,22 @@
-import {FC, useEffect, useState} from "react";
+import {FC, useCallback, useEffect, useState} from "react";
 import {Branch, BranchMergeOverview} from "@/types/pages/branch";
-import {Alert, AlertDescription, Button, Checkbox, Dialog, DialogProps, Loading, Separator, Space} from "@atom-ui/core";
+import {
+    Alert,
+    AlertDescription,
+    Button,
+    Checkbox,
+    Dialog,
+    DialogProps,
+    Loading,
+    Separator,
+    Space,
+    useMessage
+} from "@atom-ui/core";
 import {IconBranch} from "@arco-iconbox/react-clover";
 import classNames from "classnames";
 import {i18n} from "@easy-kit/i18n/utils";
-import {mergeOverview} from "@/rest/branch";
+import {mergeOverview, merge as mergeRest} from "@/rest/branch";
+import {CheckedState} from "@radix-ui/react-checkbox";
 
 export type MergeBranchModalProps = {
     onSuccess?: () => void;
@@ -12,11 +24,13 @@ export type MergeBranchModalProps = {
 } & DialogProps;
 
 export const MergeBranchModal: FC<MergeBranchModalProps> = (props) => {
-    const { branch } = props;
+    const { branch, onSuccess } = props;
     const [loading, setLoading] = useState(true);
     const [submitting, setSubmitting] = useState(false);
     const itemClassName = "flex-1 flex justify-center items-center";
     const [overview, setOverview] = useState<BranchMergeOverview|null>();
+    const msg = useMessage();
+    const [deleteAfterMerge, setDeleteAfterMerge] = useState<CheckedState>(false);
 
     const loadOverview = async () => {
         setLoading(true);
@@ -32,6 +46,20 @@ export const MergeBranchModal: FC<MergeBranchModalProps> = (props) => {
             setOverview(null);
         }
     }, [props])
+
+    const merge = useCallback(async () => {
+        setSubmitting(true);
+        const { success, message } = await mergeRest({
+            id: branch.id,
+            deleteAfterMerge: !!deleteAfterMerge
+        })
+        setSubmitting(false);
+        if(success) {
+            onSuccess?.();
+        }else{
+            msg.error(message);
+        }
+    }, [deleteAfterMerge, branch])
 
     return <Dialog
         {...props}
@@ -63,7 +91,10 @@ export const MergeBranchModal: FC<MergeBranchModalProps> = (props) => {
                 </div>
             </div>
             <div className="flex items-center space-x-2">
-                <Checkbox id="terms"/>
+                <Checkbox
+                    checked={deleteAfterMerge}
+                    onCheckedChange={setDeleteAfterMerge}
+                    id="terms"/>
                 <label
                     htmlFor="terms"
                     className="text-sm leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
@@ -72,7 +103,13 @@ export const MergeBranchModal: FC<MergeBranchModalProps> = (props) => {
                 </label>
             </div>
             <Space className={"justify-end"}>
-                <Button loading={submitting} type={"button"}>{"{#合并#}"}</Button>
+                <Button
+                    onClick={merge}
+                    loading={submitting}
+                    type={"button"}
+                >
+                    {"{#合并#}"}
+                </Button>
                 <Button
                     variant={"outline"}
                     type={"button"}
