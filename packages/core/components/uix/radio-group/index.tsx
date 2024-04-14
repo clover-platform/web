@@ -2,18 +2,18 @@ import {RadioGroup as UIRadioGroup, RadioGroupItem} from "@atom-ui/core/componen
 import {Label} from "@atom-ui/core/components/ui/label";
 import {FC, forwardRef, PropsWithChildren, useState} from "react";
 
-export interface RadioGroupOptionProps {
+export interface SimpleRadioGroupOptionProps {
     label: string;
     value: string;
 }
 
-export interface RadioGroupProps extends PropsWithChildren {
+export interface SimpleRadioGroupProps extends PropsWithChildren {
     value?: string;
     onChange?: (value: string) => void;
-    options?: RadioGroupOptionProps[];
+    options?: SimpleRadioGroupOptionProps[];
 }
 
-export const RadioGroup: FC<RadioGroupProps> = forwardRef((props, ref) => {
+export const SimpleRadioGroup: FC<SimpleRadioGroupProps> = forwardRef((props, ref) => {
     const {
         options = [],
         value,

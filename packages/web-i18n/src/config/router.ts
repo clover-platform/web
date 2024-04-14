@@ -18,6 +18,21 @@ export default [{ path: "/i18n/activity/", config:  {
             type: "item",
         }
     ],
+} },{ path: "/i18n/bundle/add/", config:  {
+    name: 'module',
+    active: "download",
+    path: [
+        {
+            title: "{#下载#}",
+            type: "link",
+            href: "/{#LANG#}/i18n/bundle/",
+            withQuery: true,
+        },
+        {
+            title: "{#添加文件#}",
+            type: "item",
+        }
+    ],
 } },{ path: "/i18n/bundle/", config:  {
     name: 'module',
     active: "download",

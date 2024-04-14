@@ -1,5 +1,4 @@
 import * as z from "zod";
-import { RadioGroupOptionProps } from "@atom-ui/core";
 
 export const SCHEMA = z.object({
     name: z.string()

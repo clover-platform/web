@@ -1,5 +1,5 @@
 import * as z from "zod";
-import { RadioGroupOptionProps } from "@atom-ui/core";
+import { SimpleRadioGroupOptionProps } from "@atom-ui/core";
 
 export const SCHEMA = z.object({
     type: z.string()
@@ -17,7 +17,7 @@ export const SCHEMA = z.object({
     }
 })
 
-export const TYPE_OPTIONS: RadioGroupOptionProps[] = [
+export const TYPE_OPTIONS: SimpleRadioGroupOptionProps[] = [
     {
         label: "{#从主分支克隆#}",
         value: "clone"

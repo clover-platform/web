@@ -2,13 +2,14 @@
 
 import {TitleBar} from "@clover/public/components/common/title-bar";
 import {Button, DataTable} from "@atom-ui/core";
-import {IconAdd} from "@arco-iconbox/react-clover";
 import {COLUMNS, ROW_ACTIONS} from "@/config/pages/bundle/table";
 import {list} from "@/rest/bundle";
 import {Bundle} from "@/types/pages/bundle";
 import {useTableLoader} from "@easy-kit/common/hooks";
 import {useSearchParams} from "next/navigation";
 import {useEffect} from "react";
+import {IconAdd} from "@arco-iconbox/react-clover";
+import Link from "next/link";
 
 const initialParams = {};
 
@@ -29,10 +30,13 @@ export const BundlePage = () => {
 
 
     const actions = <div>
-        <Button>
-            <IconAdd />
-            <span>{"{#添加文件#}"}</span>
-        </Button>
+        <Link href={"/{#LANG#}/i18n/bundle/add/?id=" + id}>
+            <Button type={"button"}>
+                <IconAdd />
+                <span>{"{#添加文件#}"}</span>
+            </Button>
+        </Link>
+
     </div>;
 
     return <>

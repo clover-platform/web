@@ -9,8 +9,16 @@ import {
 } from "@atom-ui/core/components/ui/form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import {ControllerRenderProps, SubmitHandler, useForm} from "react-hook-form"
-import * as z from "zod"
-import { FC, PropsWithChildren, ReactElement, ReactNode, cloneElement, FormHTMLAttributes } from "react";
+import {
+    FC,
+    PropsWithChildren,
+    ReactElement,
+    ReactNode,
+    cloneElement,
+    FormHTMLAttributes,
+    forwardRef,
+    useImperativeHandle, PropsWithRef, Ref, ForwardRefExoticComponent
+} from "react";
 import { ZodObject } from "zod";
 import type { Control, FieldValues, DeepPartial, WatchObserver } from "react-hook-form";
 import { useMemo, Children } from "react";
@@ -32,12 +40,12 @@ export interface FieldItem extends PropsWithChildren {
 
 export type FormValues = DeepPartial<FieldValues>;
 
-export interface FormProps extends FormHTMLAttributes<HTMLFormElement> {
+export type FormProps = FormHTMLAttributes<HTMLFormElement> & {
     schema?: ZodObject<any> | ZodEffects<any, any>;
     defaultValues?: object
     onSubmit?: SubmitHandler<FormValues>;
     className?: string;
-    onValuesChange?: WatchObserver<FieldValues>
+    onValuesChange?: WatchObserver<FieldValues>,
 }
 
 export const FormItem: FC<FieldItem> = (props) => {
@@ -72,7 +80,7 @@ export const FormItem: FC<FieldItem> = (props) => {
     />;
 }
 
-export const Form: FC<FormProps> = (props) => {
+export const Form = forwardRef<any, FormProps>((props, ref) => {
     const {
         schema = null,
         defaultValues = null,
@@ -101,7 +109,16 @@ export const Form: FC<FormProps> = (props) => {
             }
             return child;
         })
-    }, [props.children])
+    }, [props.children]);
+
+    useImperativeHandle(ref, () => ({
+        submit: async () => {
+            await form.trigger();
+            if(form.formState.isValid) {
+                onSubmit(form.getValues());
+            }
+        }
+    }), [form, onSubmit]);
 
     return <UIForm {...form}>
         <form
@@ -112,4 +129,4 @@ export const Form: FC<FormProps> = (props) => {
             { children }
         </form>
     </UIForm>
-};
+});

@@ -73,6 +73,10 @@ export {
     AlertDescription,
     AlertTitle,
 } from "./components/ui/alert";
+export {
+    RadioGroup,
+    RadioGroupItem,
+} from "./components/ui/radio-group";
 
 // extend
 export { Divider } from "./components/uix/divider";
@@ -119,8 +123,8 @@ export { Checkbox } from "./components/uix/checkbox";
 export type { CheckboxProps } from "./components/uix/checkbox";
 export { TreeSelect } from "./components/uix/tree-select";
 export type { TreeSelectProps } from "./components/uix/tree-select";
-export { RadioGroup } from "./components/uix/radio-group";
-export type { RadioGroupProps, RadioGroupOptionProps } from "./components/uix/radio-group";
+export { SimpleRadioGroup } from "./components/uix/radio-group";
+export type { SimpleRadioGroupProps, SimpleRadioGroupOptionProps } from "./components/uix/radio-group";
 export { Switch } from "./components/uix/switch";
 export type { SwitchProps } from "./components/uix/switch";
 export { Loading } from "./components/uix/loading";
