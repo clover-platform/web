@@ -3,9 +3,8 @@
 import {TitleBar} from "@clover/public/components/common/title-bar";
 import {Button, DataTable} from "@atom-ui/core";
 import {IconAdd} from "@arco-iconbox/react-clover";
-import {FIX_ICON_PROPS} from "@easy-kit/common/utils/icon";
 import {COLUMNS, ROW_ACTIONS} from "@/config/pages/bundle/table";
-import {list} from "@/rest/branch";
+import {list} from "@/rest/bundle";
 import {Bundle} from "@/types/pages/bundle";
 import {useTableLoader} from "@easy-kit/common/hooks";
 import {useSearchParams} from "next/navigation";
@@ -31,7 +30,7 @@ export const BundlePage = () => {
 
     const actions = <div>
         <Button>
-            <IconAdd {...FIX_ICON_PROPS}/>
+            <IconAdd />
             <span>{"{#添加文件#}"}</span>
         </Button>
     </div>;

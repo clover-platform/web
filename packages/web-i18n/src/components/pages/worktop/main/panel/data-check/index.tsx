@@ -8,7 +8,6 @@ import {IconAdd} from "@arco-iconbox/react-clover";
 import bus from "@easy-kit/common/events";
 import {ENTRY_RELOAD} from "@/events/worktop";
 import {CreateEntryModal} from "@/components/pages/worktop/main/panel/entry/create/modal";
-import {FIX_ICON_PROPS} from "@easy-kit/common/utils/icon";
 
 export const TargetTip = () => {
     return <div className={"h-full flex justify-center items-center bg-muted flex-col space-y-2"}>
@@ -25,7 +24,7 @@ export const DataCheckPanel: FC<DataCheckPanelProps> = (props) => {
     const [visible, setVisible] = useState(false);
     const emptyText = <div className={"flex justify-center items-center space-x-1"}>
         <div>{"{#暂无词条#}"}</div>
-        <Action onClick={() => setVisible(true)} className={"!p-1"}><IconAdd {...FIX_ICON_PROPS} />{"{#添加#}"}</Action>
+        <Action onClick={() => setVisible(true)} className={"!p-1"}><IconAdd />{"{#添加#}"}</Action>
     </div>
     const currentLanguage = useRecoilValue(currentLanguageState);
     const entries = useRecoilValue(entriesState);

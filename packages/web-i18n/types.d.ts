@@ -1,1 +1,1 @@
-declare module '@easy-kit/i18n/utils/data';
+import "@clover/public/types/common";

@@ -9,7 +9,6 @@ import { currentEntryState, currentLanguageState, entriesState } from "@/state/w
 import classNames from "classnames";
 import bus from '@easy-kit/common/events';
 import { ENTRY_COMMENT_RELOAD } from "@/events/worktop";
-import {FIX_ICON_PROPS} from "@easy-kit/common/utils/icon";
 
 export const CommentEditor = () => {
     const [value, setValue] = useState<string>("");
@@ -50,7 +49,7 @@ export const CommentEditor = () => {
         />
         <div className={"p-2 flex justify-end items-center"}>
             <Action disabled={loading} onClick={send}>
-                <IconSend {...FIX_ICON_PROPS} className={"text-lg"} />
+                <IconSend className={"text-lg"} />
             </Action>
         </div>
         {

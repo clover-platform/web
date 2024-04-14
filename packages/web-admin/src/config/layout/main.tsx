@@ -1,12 +1,11 @@
 import {MenuItemProps} from "@clover/public/components/layout/main/sidebar/menu-item";
 import {IconAccess, IconSetting, IconUser} from "@arco-iconbox/react-clover";
-import {FIX_ICON_PROPS} from "@easy-kit/common/utils/icon";
 
 export const NAV_MENUS: MenuItemProps[] = [
     {
         id: "overview",
         title: "{#概览#}",
-        icon: <IconUser {...FIX_ICON_PROPS} />,
+        icon: <IconUser />,
         children: [
             {
                 id: "overview.dashboard",
@@ -33,7 +32,7 @@ export const NAV_MENUS: MenuItemProps[] = [
     {
         id: "access",
         title: "{#权限#}",
-        icon: <IconAccess {...FIX_ICON_PROPS} />,
+        icon: <IconAccess />,
         children: [
             {
                 id: "access.role",
@@ -51,6 +50,6 @@ export const NAV_MENUS: MenuItemProps[] = [
         id: "setting",
         title: "{#设置#}",
         url: "/{#LANG#}/setting/",
-        icon: <IconSetting {...FIX_ICON_PROPS} />,
+        icon: <IconSetting />,
     }
 ];

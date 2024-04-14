@@ -1,0 +1,51 @@
+declare module '@easy-kit/i18n/utils/data' {
+    export const getPath: (path: string) => string;
+    export const dataLoader: (config: any) => Promise<any>;
+    const langData: any;
+    export default langData;
+}
+declare module '@arco-iconbox/react-clover' {
+    export const IconProject: any;
+    export const IconWechat: any;
+    export const IconGithub: any;
+    export const IconSpin: any;
+    export const IconInfo: any;
+    export const IconWarning: any;
+    export const IconSetting: any;
+    export const IconAccess: any;
+    export const IconTodo: any;
+    export const IconGantt: any;
+    export const IconHome: any;
+    export const IconUser: any;
+    export const IconAdd: any;
+    export const IconI18n: any;
+    export const IconNew: any;
+    export const IconSearch: any;
+    export const IconHelp: any;
+    export const IconColumns: any;
+    export const IconWiki: any;
+    export const IconAudit: any;
+    export const IconFile: any;
+    export const IconSidebar: any;
+    export const IconCreateTeam: any;
+    export const IconJoinTeam: any;
+    export const IconDelete: any;
+    export const IconTranslation: any;
+    export const IconMember: any;
+    export const IconSource: any;
+    export const IconActivity: any;
+    export const IconDashboard: any;
+    export const IconDownload: any;
+    export const IconBranch: any;
+    export const IconMenu: any;
+    export const IconRightSidebar: any;
+    export const IconBack: any;
+    export const IconLeftSidebar: any;
+    export const IconShare: any;
+    export const IconClear: any;
+    export const IconChatGPT: any;
+    export const IconComment: any;
+    export const IconGoogleTranslate: any;
+    export const IconComingSoon: any;
+    export const IconSend: any;
+}

@@ -4,7 +4,6 @@ import {useSearchParams} from "next/navigation";
 import {useEffect, useState} from "react";
 import {all} from "@/rest/module";
 import { CheckIcon } from '@radix-ui/react-icons';
-import {FIX_ICON_PROPS} from "@easy-kit/common/utils/icon";
 
 export const MenuProjectSheet = () => {
     const search = useSearchParams();
@@ -38,19 +37,19 @@ export const MenuProjectSheet = () => {
                 <CommandItem onSelect={() => open('dashboard')}>
                     <div className={"flex justify-center items-center w-full"}>
                         <span className={"flex-1"}>{"{#概览#}"}</span>
-                        <IconShare {...FIX_ICON_PROPS} />
+                        <IconShare />
                     </div>
                 </CommandItem>
                 <CommandItem onSelect={() => open('activity')}>
                     <div className={"flex justify-center items-center w-full"}>
                         <span className={"flex-1"}>{"{#动态#}"}</span>
-                        <IconShare {...FIX_ICON_PROPS}/>
+                        <IconShare />
                     </div>
                 </CommandItem>
                 <CommandItem onSelect={() => open('setting')}>
                     <div className={"flex justify-center items-center w-full"}>
                         <span className={"flex-1"}>{"{#设置#}"}</span>
-                        <IconShare {...FIX_ICON_PROPS}/>
+                        <IconShare />
                     </div>
                 </CommandItem>
             </CommandList>

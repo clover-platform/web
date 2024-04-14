@@ -9,7 +9,6 @@ import {deleteComment} from "@/rest/entry.comment";
 import bus from "@easy-kit/common/events";
 import {ENTRY_COMMENT_RELOAD} from "@/events/worktop";
 import { IconDelete } from "@arco-iconbox/react-clover";
-import {FIX_ICON_PROPS} from "@easy-kit/common/utils/icon";
 
 export type CommentListItemProps = {
     item: EntryComment;
@@ -58,7 +57,7 @@ export const CommentListItem: FC<CommentListItemProps> = (props) => {
                 "hidden group-hover:flex",
             )}>
                 <Action onClick={del} className={"!p-1"}>
-                    <IconDelete {...FIX_ICON_PROPS} />
+                    <IconDelete />
                 </Action>
             </div> : null
         }

@@ -5,7 +5,6 @@ import { Action } from "@clover/public/components/common/action";
 import { IconDelete } from "@arco-iconbox/react-clover";
 import { useRecoilValue } from "recoil";
 import { languagesLoadingState, languagesState } from "@/state/public";
-import {FIX_ICON_PROPS} from "@easy-kit/common/utils/icon";
 
 export type MultiLanguageSelectProps = {
     className?: string;
@@ -116,7 +115,7 @@ export const MultiLanguageSelect = forwardRef<HTMLDivElement, MultiLanguageSelec
                         theme={"dark"}
                         className={"h-9 w-9"}
                     >
-                        <IconDelete {...FIX_ICON_PROPS} />
+                        <IconDelete />
                     </Action>
                 </div>
                 <div className={"w-full flex-1 h-0 flex-shrink-0"}>

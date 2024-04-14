@@ -7,7 +7,6 @@ import { Action } from "@clover/public/components/common/action";
 import { IconDelete } from "@arco-iconbox/react-clover";
 import copy from 'copy-to-clipboard';
 import { revoke } from "@/rest/member.invite";
-import {FIX_ICON_PROPS} from "@easy-kit/common/utils/icon";
 
 export type InviteLinkItemProps = {
     item: MemberInvite;
@@ -64,7 +63,7 @@ export const InviteLinkItem: FC<InviteLinkItemProps> = (props) => {
                         onClick={doRevoke}
                         className={"w-8 h-8 !p-0"}
                     >
-                        <IconDelete {...FIX_ICON_PROPS} />
+                        <IconDelete />
                     </Action>
                 </Tooltip>
             </div>

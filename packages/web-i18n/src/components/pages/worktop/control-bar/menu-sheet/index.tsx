@@ -6,7 +6,6 @@ import { MenuProjectSheet } from "@/components/pages/worktop/control-bar/menu-sh
 import {MenuLanguageSheet} from "@/components/pages/worktop/control-bar/menu-sheet/language";
 import {MenuBranchSheet} from "@/components/pages/worktop/control-bar/menu-sheet/branch";
 import {MenuHelpSheet} from "@/components/pages/worktop/control-bar/menu-sheet/help";
-import {FIX_ICON_PROPS} from "@easy-kit/common/utils/icon";
 
 export type MenuItemProps = {
     icon: ReactNode;
@@ -42,26 +41,26 @@ export const MenuSheet: FC<MenuSheetProps> = (props) => {
                 <MenuItem
                     active={active === "project"}
                     onClick={() => setActive("project")}
-                    icon={<IconProject {...FIX_ICON_PROPS} className={"text-lg"} />}
+                    icon={<IconProject className={"text-lg"} />}
                     label={"{#项目#}"}
                 />
                 <MenuItem
                     active={active === "language"}
                     onClick={() => setActive("language")}
-                    icon={<IconTranslation {...FIX_ICON_PROPS} className={"text-lg"} />}
+                    icon={<IconTranslation className={"text-lg"} />}
                     label={"{#语言#}"}
                 />
                 <MenuItem
                     active={active === "branch"}
                     onClick={() => setActive("branch")}
-                    icon={<IconBranch {...FIX_ICON_PROPS} className={"text-lg"} />}
+                    icon={<IconBranch className={"text-lg"} />}
                     label={"{#分支#}"}
                 />
                 <Separator className={"my-1"} />
                 <MenuItem
                     active={active === "help"}
                     onClick={() => setActive("help")}
-                    icon={<IconHelp {...FIX_ICON_PROPS} className={"text-lg"} />}
+                    icon={<IconHelp className={"text-lg"} />}
                     label={"{#帮助#}"}
                 />
             </div>

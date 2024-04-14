@@ -3,7 +3,6 @@ import { Checkbox, ScrollArea } from "@atom-ui/core";
 import { useRecoilValue } from "recoil";
 import { branchesState } from "@/state/worktop";
 import { IconBranch } from "@arco-iconbox/react-clover";
-import {FIX_ICON_PROPS} from "@easy-kit/common/utils/icon";
 
 export type MultiBranchSelectProps = {
     value?: string[];
@@ -35,7 +34,7 @@ export const MultiBranchSelect = forwardRef<HTMLSelectElement, MultiBranchSelect
                         htmlFor={id}
                         className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 flex-1 h-6 flex justify-start items-center"
                     >
-                        <IconBranch {...FIX_ICON_PROPS} /> {branch.name}
+                        <IconBranch /> {branch.name}
                     </label>
                 </div>
             })
