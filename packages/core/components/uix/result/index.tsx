@@ -1,7 +1,7 @@
 import { Cross2Icon, CheckIcon } from "@radix-ui/react-icons";
-import { IconInfo,  IconWarning } from "@arco-iconbox/react-clover";
 import {PropsWithChildren, FC, ReactNode} from "react";
 import {cn} from "@atom-ui/core/lib/utils";
+import { InfoCircledIcon, ExclamationTriangleIcon } from "@radix-ui/react-icons";
 
 export interface ResultProps extends PropsWithChildren {
     status: 'success' | 'error' | 'info' | 'warning';
@@ -13,8 +13,8 @@ export interface ResultProps extends PropsWithChildren {
 const ICON_MAP = {
     success: CheckIcon,
     error: Cross2Icon,
-    info: IconInfo,
-    warning: IconWarning,
+    info: InfoCircledIcon,
+    warning: ExclamationTriangleIcon,
 };
 
 export const Result: FC<ResultProps> = (props) => {

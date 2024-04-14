@@ -18,6 +18,15 @@ export default [{ path: "/i18n/activity/", config:  {
             type: "item",
         }
     ],
+} },{ path: "/i18n/bundle/", config:  {
+    name: 'module',
+    active: "download",
+    path: [
+        {
+            title: "{#下载#}",
+            type: "item",
+        }
+    ],
 } },{ path: "/i18n/", config:  {
     name: 'main',
     active: "i18n",
@@ -33,15 +42,6 @@ export default [{ path: "/i18n/activity/", config:  {
     path: [
         {
             title: "{#概览#}",
-            type: "item",
-        }
-    ],
-} },{ path: "/i18n/download/", config:  {
-    name: 'module',
-    active: "download",
-    path: [
-        {
-            title: "{#下载#}",
             type: "item",
         }
     ],

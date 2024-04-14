@@ -9,8 +9,8 @@ importers:
   .:
     dependencies:
       '@arco-iconbox/react-clover':
-        specifier: 0.0.22
-        version: 0.0.22
+        specifier: 0.0.23
+        version: 0.0.23
       '@radix-ui/react-icons':
         specifier: 1.3.0
         version: 1.3.0(react@18.2.0)
@@ -171,7 +171,7 @@ importers:
     dependencies:
       '@arco-iconbox/react-atom-ui':
         specifier: 0.0.3
-        version: 0.0.3
+        version: 0.0.3(react@18.2.0)
       '@atlaskit/button':
         specifier: ^16.17.1
         version: 16.18.1(@types/react@18.2.74)(react@18.2.0)
@@ -477,12 +477,16 @@ packages:
       '@jridgewell/trace-mapping': 0.3.25
     dev: false
 
-  /@arco-iconbox/react-atom-ui@0.0.3:
+  /@arco-iconbox/react-atom-ui@0.0.3(react@18.2.0):
     resolution: {integrity: sha512-FOP40uGvgYcWDUaskWyrxSE3ImunfPjnMQRyDYv75JTSMk0N+USwtJR9X9OOi1Z/CnKguVRaJCXtYOuqQpi6qA==, tarball: https://registry.npmjs.org/@arco-iconbox/react-atom-ui/-/react-atom-ui-0.0.3.tgz}
+    peerDependencies:
+      react: '>=16.9.0'
+    dependencies:
+      react: 18.2.0
     dev: false
 
-  /@arco-iconbox/react-clover@0.0.22:
-    resolution: {integrity: sha512-MM14KRY8UN/7UJT80BmebXpagrORmo1MYE+KPG5/73zKk3SB3YXojVJdWFcbstr6xmwyNReG7O+/o9OoWTtJxg==, tarball: https://registry.npmjs.org/@arco-iconbox/react-clover/-/react-clover-0.0.22.tgz}
+  /@arco-iconbox/react-clover@0.0.23:
+    resolution: {integrity: sha512-8ykyAP45QXmVX4Pa/yjFGIOquWVhDlcMss0GyuiJTWVDG+kWRGQ5h7o7IGsPEACmFYd9dRYahMiuawJm4alPoA==, tarball: https://registry.npmjs.org/@arco-iconbox/react-clover/-/react-clover-0.0.23.tgz}
     dev: false
 
   /@atlaskit/analytics-next-stable-react-context@1.0.1(react@18.2.0):

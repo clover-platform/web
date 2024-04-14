@@ -15,6 +15,7 @@ import { MenuSheet } from "@/components/pages/worktop/control-bar/menu-sheet";
 import { useState } from "react";
 import { LanguageAction } from "@/components/pages/worktop/control-bar/action/language";
 import { BranchAction } from "@/components/pages/worktop/control-bar/action/branch";
+import {FIX_ICON_PROPS} from "@easy-kit/common/utils/icon";
 
 export const ControlBar = () => {
     const search = useSearchParams();
@@ -52,10 +53,10 @@ export const ControlBar = () => {
         <div className={"flex justify-center items-center px-2 py-1 border-b shadow-sm"}>
             <div className={"flex-1 flex justify-start items-center space-x-1"}>
                 <Action className={"!px-1.5 h-8"} onClick={() => router.push("/{#LANG#}/i18n/dashboard/?id=" + id)}>
-                    <IconBack className={"text-lg"} />
+                    <IconBack {...FIX_ICON_PROPS} className={"text-lg"} />
                 </Action>
                 <Action className={"!px-1.5 h-8"} onClick={showMenu}>
-                    <IconMenu className={"text-lg"} />
+                    <IconMenu {...FIX_ICON_PROPS} className={"text-lg"} />
                 </Action>
                 <Separator orientation={"vertical"} className={"h-5"} />
                 <LanguageAction onClick={showMenuByLanguage} />
@@ -66,17 +67,17 @@ export const ControlBar = () => {
                     onClick={() => setLeftSideOpen(!leftSideOpen)}
                     active={leftSideOpen} className={"!px-1.5 h-8"}
                 >
-                    <IconLeftSidebar className={"text-lg"} />
+                    <IconLeftSidebar {...FIX_ICON_PROPS} className={"text-lg"} />
                 </Action>
                 <Action
                     onClick={() => setRightSideOpen(!rightSideOpen)}
                     active={rightSideOpen} className={"!px-1.5 h-8"}
                 >
-                    <IconRightSidebar className={"text-lg"} />
+                    <IconRightSidebar {...FIX_ICON_PROPS} className={"text-lg"} />
                 </Action>
                 <Separator orientation={"vertical"} className={"h-5"} />
                 <Action className={"!px-1.5 h-8"}>
-                    <IconSetting className={"text-lg"} />
+                    <IconSetting {...FIX_ICON_PROPS} className={"text-lg"} />
                 </Action>
             </div>
         </div>

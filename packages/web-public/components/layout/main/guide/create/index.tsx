@@ -5,6 +5,7 @@ import * as z from "zod";
 import { useState } from "react";
 import {init, TeamInitData} from "@clover/public/rest/team";
 import {useDataLoader} from "@clover/public/components/layout/hooks/main";
+import {FIX_ICON_PROPS} from "@easy-kit/common/utils/icon";
 
 const SCHEMA = z.object({
     name: z.string()
@@ -36,13 +37,13 @@ export const GuideCreate = () => {
     </>;
     return <div className={"w-full max-w-[900px]"}>
         <IconTitle
-            icon={<IconCreateTeam fontSize={40} className={"text-primary"} />}
+            icon={<IconCreateTeam {...FIX_ICON_PROPS} fontSize={40} className={"text-primary"} />}
             title={"{#创建团队#}"}
             description={description}
         />
         <Form
             schema={SCHEMA}
-            onSubmit={onSubmit}
+            onSubmit={(data) => onSubmit(data as TeamInitData)}
             className={"mt-10"}
         >
             <FormItem name="name" label="{#团队名称#}">

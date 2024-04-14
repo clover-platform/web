@@ -17,6 +17,7 @@ import classNames from "classnames";
 import {i18n} from "@easy-kit/i18n/utils";
 import {mergeOverview, merge as mergeRest} from "@/rest/branch";
 import {CheckedState} from "@radix-ui/react-checkbox";
+import {FIX_ICON_PROPS} from "@easy-kit/common/utils/icon";
 
 export type MergeBranchModalProps = {
     onSuccess?: () => void;
@@ -68,7 +69,7 @@ export const MergeBranchModal: FC<MergeBranchModalProps> = (props) => {
     >
         <Loading loading={loading} className={"space-y-4"}>
             <Alert>
-                <IconBranch/>
+                <IconBranch {...FIX_ICON_PROPS}/>
                 <AlertDescription>
                     <ul className={"list-disc ml-4 text-muted-foreground leading-relaxed"}>
                         <li>{"{#如果源字符串或标识符（key）被修改（匹配重复的标准），则会认为该字符串已被删除/添加（旧的删除，新的添加）。#}"}</li>

@@ -1,11 +1,12 @@
-import { Separator, Sheet, SheetContent, SheetTrigger } from "@atom-ui/core";
-import { IconBranch, IconHelp, IconMenu, IconProject, IconTranslation } from "@arco-iconbox/react-clover";
+import { Separator, Sheet, SheetContent } from "@atom-ui/core";
+import { IconBranch, IconHelp, IconProject, IconTranslation } from "@arco-iconbox/react-clover";
 import { Action } from "@clover/public/components/common/action";
 import { FC, ReactNode, useEffect, useState } from "react";
 import { MenuProjectSheet } from "@/components/pages/worktop/control-bar/menu-sheet/project";
 import {MenuLanguageSheet} from "@/components/pages/worktop/control-bar/menu-sheet/language";
 import {MenuBranchSheet} from "@/components/pages/worktop/control-bar/menu-sheet/branch";
 import {MenuHelpSheet} from "@/components/pages/worktop/control-bar/menu-sheet/help";
+import {FIX_ICON_PROPS} from "@easy-kit/common/utils/icon";
 
 export type MenuItemProps = {
     icon: ReactNode;
@@ -41,26 +42,26 @@ export const MenuSheet: FC<MenuSheetProps> = (props) => {
                 <MenuItem
                     active={active === "project"}
                     onClick={() => setActive("project")}
-                    icon={<IconProject className={"text-lg"} />}
+                    icon={<IconProject {...FIX_ICON_PROPS} className={"text-lg"} />}
                     label={"{#项目#}"}
                 />
                 <MenuItem
                     active={active === "language"}
                     onClick={() => setActive("language")}
-                    icon={<IconTranslation className={"text-lg"} />}
+                    icon={<IconTranslation {...FIX_ICON_PROPS} className={"text-lg"} />}
                     label={"{#语言#}"}
                 />
                 <MenuItem
                     active={active === "branch"}
                     onClick={() => setActive("branch")}
-                    icon={<IconBranch className={"text-lg"} />}
+                    icon={<IconBranch {...FIX_ICON_PROPS} className={"text-lg"} />}
                     label={"{#分支#}"}
                 />
                 <Separator className={"my-1"} />
                 <MenuItem
                     active={active === "help"}
                     onClick={() => setActive("help")}
-                    icon={<IconHelp className={"text-lg"} />}
+                    icon={<IconHelp {...FIX_ICON_PROPS} className={"text-lg"} />}
                     label={"{#帮助#}"}
                 />
             </div>

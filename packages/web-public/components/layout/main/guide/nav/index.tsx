@@ -2,6 +2,7 @@ import { CardButton } from "@clover/public/components/layout/main/guide/card-but
 import { IconCreateTeam, IconJoinTeam } from "@arco-iconbox/react-clover";
 import { useAlert } from "@atom-ui/core";
 import { FC } from "react";
+import {FIX_ICON_PROPS} from "@easy-kit/common/utils/icon";
 
 export type GuideNavProps = {
     onCreate?: () => void;
@@ -23,14 +24,14 @@ export const GuideNav: FC<GuideNavProps> = (props) => {
             <CardButton
                 onClick={props.onCreate}
                 className={"rounded-md flex-1 m-2"}
-                icon={<IconCreateTeam fontSize={40} className={"text-primary"} />}
+                icon={<IconCreateTeam {...FIX_ICON_PROPS} fontSize={40} className={"text-primary"} />}
                 title={"{#创建团队#}"}
                 description={"{#创建一个新的团队#}"}
             />
             <CardButton
                 onClick={showJoin}
                 className={"rounded-md flex-1 m-2"}
-                icon={<IconJoinTeam fontSize={40} className={"text-primary"} />}
+                icon={<IconJoinTeam {...FIX_ICON_PROPS} fontSize={40} className={"text-primary"} />}
                 title={"{#加入团队#}"}
                 description={"{#加入一个已有的团队#}"}
             />

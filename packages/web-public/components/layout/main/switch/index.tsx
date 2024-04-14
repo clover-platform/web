@@ -6,6 +6,7 @@ import {SIDEBAR_OPEN_KEY} from "@clover/public/components/layout/main/const";
 import { IconSidebar } from "@arco-iconbox/react-clover";
 import {Action, ActionProps} from "../../../common/action";
 import {Tooltip} from "@atom-ui/core";
+import {FIX_ICON_PROPS} from "@easy-kit/common/utils/icon";
 
 export type SwitchProps = HTMLAttributes<HTMLButtonElement> & ActionProps;
 
@@ -24,11 +25,10 @@ const Switch: FC<SwitchProps> = (props) => {
     return <Tooltip content={open ? "{#隐藏侧边栏#}" : "{#显示侧边栏#}"}>
         <Action
             theme={props.theme}
-            type={props.type}
             onClick={onSwitchClick}
             className={props.className}
         >
-            <IconSidebar fontSize={16} />
+            <IconSidebar {...FIX_ICON_PROPS} fontSize={16} />
         </Action>
     </Tooltip>
 }

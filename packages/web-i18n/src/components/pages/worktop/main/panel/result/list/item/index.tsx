@@ -11,6 +11,7 @@ import { ENTRY_RESULT_EDITOR_RESET, ENTRY_RESULT_RELOAD } from "@/events/worktop
 import { useEntriesUpdater } from "@/components/layout/worktop/hooks";
 import { RestResult } from "@easy-kit/common/types/rest";
 import { TimeAgo } from "@easy-kit/common/components/time-ago";
+import {FIX_ICON_PROPS} from "@easy-kit/common/utils/icon";
 
 export type ResultItemProps = {
     item: EntryResult;
@@ -79,7 +80,7 @@ export const ResultItem: FC<ResultItemProps> = (props) => {
                 </Tooltip>
                 <Tooltip content={"{#删除#}"}>
                     <Action onClick={deleteItem}>
-                        <IconDelete className={"text-base"} />
+                        <IconDelete {...FIX_ICON_PROPS} className={"text-base"} />
                     </Action>
                 </Tooltip>
             </div>

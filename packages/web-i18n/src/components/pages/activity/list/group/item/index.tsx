@@ -5,11 +5,12 @@ import dayjs from "dayjs";
 import {IconAdd, IconDelete} from "@arco-iconbox/react-clover";
 import {CheckIcon, Cross2Icon, Pencil1Icon} from "@radix-ui/react-icons";
 import {i18n} from "@easy-kit/i18n/utils";
+import {FIX_ICON_PROPS} from "@easy-kit/common/utils/icon";
 
 const ICONS: Record<number, ReactNode> = {
-    1: <IconAdd />,
+    1: <IconAdd {...FIX_ICON_PROPS} />,
     2: <Pencil1Icon />,
-    3: <IconDelete />,
+    3: <IconDelete {...FIX_ICON_PROPS} />,
     4: <CheckIcon />,
     5: <Cross2Icon />
 }

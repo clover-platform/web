@@ -27,7 +27,6 @@ import {
     Pagination, PaginationProps,
     Spin
 } from "@atom-ui/core";
-import {IconColumns} from "@arco-iconbox/react-clover";
 import isFunction from "lodash/isFunction";
 import isArray from "lodash/isArray";
 import {isString} from "lodash";
@@ -35,6 +34,7 @@ import {DotsHorizontalIcon} from "@radix-ui/react-icons";
 import "./style.css";
 import { formatValue } from "@atom-ui/core/components/uix/value-formatter";
 import {UIXContext} from "@atom-ui/core/components/uix/config-provider";
+import { LayoutIcon } from "@radix-ui/react-icons";
 
 export interface StickyColumnProps {
     key: string;
@@ -297,7 +297,7 @@ export function DataTable <TData> (props: DataTableProps<TData>) {
                 {
                     showVisibilityControl ? <Dropdown align={"end"} items={columnSettings}>
                         <Action className={"w-9 h-9"}>
-                            <IconColumns fontSize={18}/>
+                            <LayoutIcon className={"w-[18px] h-[18px]"}/>
                         </Action>
                     </Dropdown> : null
                 }

@@ -22,6 +22,7 @@ import {
 import Link from "next/link";
 import { IconHome } from "@arco-iconbox/react-clover";
 import {withQuery} from "@easy-kit/common/utils/path";
+import {FIX_ICON_PROPS} from "@easy-kit/common/utils/icon";
 
 export type PathProps = {
     type: "item" | "link";
@@ -95,7 +96,7 @@ export const MainLayout: FC<MainLayoutProps> = (props) => {
                             <BreadcrumbItem>
                                 <BreadcrumbLink asChild={true}>
                                     <Link href={"/{#LANG#}/"} className={"flex items-center"}>
-                                        <IconHome />
+                                        <IconHome {...FIX_ICON_PROPS} />
                                     </Link>
                                 </BreadcrumbLink>
                             </BreadcrumbItem>

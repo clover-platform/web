@@ -14,6 +14,7 @@ import TextareaAutosize from 'react-textarea-autosize';
 import bus from '@easy-kit/common/events';
 import { ENTRY_RESULT_RELOAD } from "@/events/worktop";
 import { useEntriesUpdater } from "@/components/layout/worktop/hooks";
+import {FIX_ICON_PROPS} from "@easy-kit/common/utils/icon";
 
 export const Editor = () => {
     const entries = useRecoilValue(entriesState);
@@ -69,7 +70,7 @@ export const Editor = () => {
                 </Tooltip>
                 <Tooltip content={"{#清空#}"}>
                     <Action onClick={() => setContent('')}>
-                        <IconClear className={"text-base"} />
+                        <IconClear {...FIX_ICON_PROPS} className={"text-base"} />
                     </Action>
                 </Tooltip>
             </div>

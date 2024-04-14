@@ -1,6 +1,7 @@
 import {forwardRef} from "react";
 import {cn, Input, InputProps} from "@atom-ui/core";
 import {IconSearch} from "@arco-iconbox/react-clover";
+import {FIX_ICON_PROPS} from "@easy-kit/common/utils/icon";
 
 const SearchInput = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
     const {
@@ -13,7 +14,7 @@ const SearchInput = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
         className
     )}>
         <div className={"absolute top-0 left-0 bottom-0 px-3 flex justify-center items-center"}>
-            <IconSearch />
+            <IconSearch {...FIX_ICON_PROPS}/>
         </div>
         <Input
             {...rest}

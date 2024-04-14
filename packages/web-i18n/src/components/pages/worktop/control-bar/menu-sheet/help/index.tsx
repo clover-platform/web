@@ -1,5 +1,6 @@
 import {Command, CommandItem, CommandList} from "@atom-ui/core";
 import {IconShare} from "@arco-iconbox/react-clover";
+import {FIX_ICON_PROPS} from "@easy-kit/common/utils/icon";
 
 export const MenuHelpSheet = () => {
     return <div className={"space-y-2"}>
@@ -9,7 +10,7 @@ export const MenuHelpSheet = () => {
                 <CommandItem>
                     <div className={"flex justify-center items-center w-full"}>
                         <span className={"flex-1"}>{"{#快速上手#}"}</span>
-                        <IconShare />
+                        <IconShare {...FIX_ICON_PROPS} />
                     </div>
                 </CommandItem>
                 <CommandItem>

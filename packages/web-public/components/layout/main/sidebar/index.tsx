@@ -1,5 +1,4 @@
-import { FC, PropsWithChildren, ReactNode, ReactElement, useEffect } from "react";
-import { cloneElement } from 'react';
+import { FC, PropsWithChildren } from "react";
 import { cn, ScrollArea, Tooltip } from "@atom-ui/core";
 import Link from "next/link";
 import { useRecoilValue } from "recoil";
@@ -13,6 +12,7 @@ import { SidebarProfile } from "@clover/public/components/layout/main/sidebar/pr
 import { ActionButton } from "@clover/public/components/common/action/button";
 import { MenuItem, MenuItemProps } from "@clover/public/components/layout/main/sidebar/menu-item";
 import { Action } from "@clover/public/components/common/action";
+import {FIX_ICON_PROPS} from "@easy-kit/common/utils/icon";
 
 export interface SidebarProps extends PropsWithChildren {
     active?: string;
@@ -52,7 +52,7 @@ const Sidebar: FC<SidebarProps> = (props) => {
                     <Switch theme={"light"} className={"w-8 h-8 !p-0"} />
                     <Tooltip content={"{#创建新的...#}"}>
                         <Action theme={"light"} className={"w-8 h-8 !p-0"}>
-                            <IconAdd fontSize={20} />
+                            <IconAdd {...FIX_ICON_PROPS} fontSize={20} />
                         </Action>
                     </Tooltip>
                     <SidebarProfile />
@@ -63,7 +63,7 @@ const Sidebar: FC<SidebarProps> = (props) => {
                     <Tooltip side={"bottom"} content={"{#项目#}"}>
                         <Link href={"/{#LANG#}/project/"}>
                             <ActionButton className={"w-full"}>
-                                <IconProject className={iconClassName} />
+                                <IconProject {...FIX_ICON_PROPS} className={iconClassName} />
                             </ActionButton>
                         </Link>
                     </Tooltip>
@@ -72,7 +72,7 @@ const Sidebar: FC<SidebarProps> = (props) => {
                     <Tooltip side={"bottom"} content={"{#任务#}"}>
                         <Link href={"/{#LANG#}/task/"}>
                             <ActionButton className={"w-full"}>
-                                <IconGantt className={iconClassName} />
+                                <IconGantt {...FIX_ICON_PROPS} className={iconClassName} />
                             </ActionButton>
                         </Link>
                     </Tooltip>
@@ -81,7 +81,7 @@ const Sidebar: FC<SidebarProps> = (props) => {
                     <Tooltip side={"bottom"} content={"{#Wiki#}"}>
                         <Link href={"/{#LANG#}/wiki/"}>
                             <ActionButton className={"w-full"}>
-                                <IconWiki className={iconClassName} />
+                                <IconWiki {...FIX_ICON_PROPS} className={iconClassName} />
                             </ActionButton>
                         </Link>
                     </Tooltip>
@@ -90,7 +90,7 @@ const Sidebar: FC<SidebarProps> = (props) => {
             <div className={groupClassName}>
                 <div className={"m-1 flex-1"}>
                     <ActionButton className={"w-full"}>
-                        <IconSearch className={classNames(iconClassName, "mr-1")} />
+                        <IconSearch {...FIX_ICON_PROPS} className={classNames(iconClassName, "mr-1")} />
                         {"{#搜索或跳转到...#}"}
                     </ActionButton>
                 </div>
@@ -108,14 +108,14 @@ const Sidebar: FC<SidebarProps> = (props) => {
             <div className={"flex-1 mx-0.5 my-1"}>
                 <Link href={"/{#LANG#}/help/"}>
                     <Action theme={"dark"} className={"w-full py-1"}>
-                        <IconHelp className={"mr-1 text-base"} /> {"{#帮助#}"}
+                        <IconHelp {...FIX_ICON_PROPS} className={"mr-1 text-base"} /> {"{#帮助#}"}
                     </Action>
                 </Link>
             </div>
             <div className={"flex-1 mx-0.5 my-1"}>
                 <a href={"/{#LANG#}/admin/"}>
                     <Action theme={"dark"} className={"w-full py-1"}>
-                        <IconSetting className={"mr-1 text-base"} /> {"{#管理中心#}"}
+                        <IconSetting {...FIX_ICON_PROPS} className={"mr-1 text-base"} /> {"{#管理中心#}"}
                     </Action>
                 </a>
             </div>

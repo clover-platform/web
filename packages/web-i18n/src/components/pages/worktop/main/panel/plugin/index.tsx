@@ -4,6 +4,7 @@ import {Tooltip} from "@atom-ui/core";
 import {ReactNode, useMemo, useState} from "react";
 import {ComingSoon} from "@/components/pages/worktop/main/panel/plugin/coming-soon";
 import {Comment} from "@/components/pages/worktop/main/panel/plugin/comment";
+import {FIX_ICON_PROPS} from "@easy-kit/common/utils/icon";
 
 export type Plugin = {
     id: string;
@@ -16,19 +17,19 @@ export const plugins: Plugin[] = [
     {
         id: "comment",
         name: "{#评论#}",
-        icon: <IconComment className={"text-lg"} />,
+        icon: <IconComment {...FIX_ICON_PROPS} className={"text-lg"} />,
         panel: <Comment />
     },
     {
         id: "google",
         name: "{#谷歌翻译#}",
-        icon: <IconGoogleTranslate className={"text-lg"} />,
+        icon: <IconGoogleTranslate {...FIX_ICON_PROPS} className={"text-lg"} />,
         panel: <ComingSoon />
     },
     {
         id: "ai",
         name: "{#AI建议#}",
-        icon: <IconChatGPT className={"text-lg"} />,
+        icon: <IconChatGPT {...FIX_ICON_PROPS} className={"text-lg"} />,
         panel: <ComingSoon />
     }
 ]
