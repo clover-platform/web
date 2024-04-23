@@ -5,18 +5,19 @@ import * as z from "zod";
 export type JSONConfigFormProps = {
     onCancel?: () => void;
     onConfirm?: (data: any) => void;
+    defaultValues?: any;
 }
 
 const SCHEMA = z.object({
-    convert: z.boolean(),
+    convert: z.boolean().optional(),
 });
 
 
 export const JSONConfigForm: FC<JSONConfigFormProps> = (props) => {
-    const { onCancel, onConfirm } = props;
+    const { onCancel, onConfirm, defaultValues } = props;
     const form = useRef<any>();
     const onSubmit = (data: any) => {
-        console.log(data)
+        onConfirm?.(data);
     }
 
     return <div className={"space-y-4"}>
@@ -24,6 +25,7 @@ export const JSONConfigForm: FC<JSONConfigFormProps> = (props) => {
             schema={SCHEMA}
             onSubmit={onSubmit}
             ref={form}
+            defaultValues={defaultValues}
         >
             <FormItem name="convert" label="">
                 <Checkbox field={"true"} label={"{#以 . 作为分隔符转换为对象#}"} />

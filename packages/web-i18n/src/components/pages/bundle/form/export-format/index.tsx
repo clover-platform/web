@@ -1,4 +1,4 @@
-import {forwardRef, ReactElement, ReactNode} from "react";
+import {forwardRef, ReactElement, ReactNode, useState} from "react";
 import {IconAndroid, IconFlutter, IconIOS, IconJSON} from "@arco-iconbox/react-clover";
 import {RadioGroup, RadioGroupItem} from "@atom-ui/core";
 import classNames from "classnames";
@@ -11,6 +11,8 @@ export type ExportFormatConfig = {
     name: string;
     icon: ReactNode;
     configComponent?: ReactElement;
+    configDefault?: any;
+    config?: any;
 }
 
 export const supportedFormats: ExportFormatConfig[] = [
@@ -28,37 +30,55 @@ export const supportedFormats: ExportFormatConfig[] = [
         id: "flutter",
         name: "{#Flutter .ARB 文件#}",
         icon: <IconFlutter className={"w-8 h-8"}/>,
-        configComponent: <ARBConfigForm />
+        configComponent: <ARBConfigForm />,
+        configDefault: {
+            convert: false
+        }
     },
     {
         id: "json",
         name: "{#JSON 文件#}",
         icon: <IconJSON className={"w-8 h-8"}/>,
-        configComponent: <JSONConfigForm />
+        configComponent: <JSONConfigForm />,
+        configDefault: {
+            convert: false
+        }
     }
 ]
 
+export type ExportFormatValue = {
+    format: string;
+    config?: any;
+}
+
 export type ExportFormatProps = {
-    value?: string;
-    onChange?: (value: string) => void;
+    value?: ExportFormatValue;
+    onChange?: (value: ExportFormatValue) => void;
 };
 
 export const ExportFormat = forwardRef<HTMLInputElement, ExportFormatProps>((props, ref) => {
-    const { value } = props;
+    const { value: v } = props;
+    const [value, setValue] = useState<ExportFormatValue>(v!);
+    const [formats, setFormats] = useState<ExportFormatConfig[]>(supportedFormats.map(f => ({ ...f, config: f.configDefault})));
 
     return <div className={"bg-white rounded-md border"}>
         <RadioGroup
             ref={ref}
-            value={value}
-            onValueChange={props.onChange}
+            value={value?.format}
+            onValueChange={(v) => {
+                const format = formats.find(f => f.id === v);
+                const newValue = { ...value, config: format?.config, format: v };
+                setValue(newValue);
+                props.onChange?.(newValue);
+            }}
             className={"gap-0"}
         >
             {
-                supportedFormats.map(format => {
+                formats.map(format => {
                     return <label key={format.id} className={classNames(
                         "flex items-center border-b p-2",
                         "border-b last:border-b-0 first:rounded-t-md last:rounded-b-md",
-                        value === format.id ? "bg-muted" : null,
+                        value?.format === format.id ? "bg-muted" : null,
                     )}>
                         <div className={"w-8 h-8 flex items-center justify-center"}>
                             <RadioGroupItem value={format.id}/>
@@ -72,6 +92,18 @@ export const ExportFormat = forwardRef<HTMLInputElement, ExportFormatProps>((pro
                         </div>
                         {
                             format.configComponent ? <FormatConfigButton
+                                onChange={(config) => {
+                                    const newFormats = formats.map(f => {
+                                        if (f.id === format.id) {
+                                            f.config = config;
+                                        }
+                                        return f;
+                                    });
+                                    setFormats(newFormats);
+                                    const newValue = { ...value, config };
+                                    setValue(newValue);
+                                    props.onChange?.(newValue);
+                                }}
                                 config={format}
                             /> : null
                         }

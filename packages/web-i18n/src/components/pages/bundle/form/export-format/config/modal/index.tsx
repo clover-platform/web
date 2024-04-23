@@ -4,6 +4,8 @@ import {cloneElement, FC, ReactElement} from "react";
 export type FormatConfigModalProps = {
     content: ReactElement;
     onConfirm: (data: any) => void;
+    configDefault?: any;
+    config?: any;
 } & DialogProps
 
 export const FormatConfigModal: FC<FormatConfigModalProps> = (props) => {
@@ -14,7 +16,8 @@ export const FormatConfigModal: FC<FormatConfigModalProps> = (props) => {
         {
             cloneElement(props.content, {
                 onCancel: props.onCancel,
-                onConfirm: props.onConfirm
+                onConfirm: props.onConfirm,
+                defaultValues: props.config || props.configDefault,
             })
         }
     </Dialog>

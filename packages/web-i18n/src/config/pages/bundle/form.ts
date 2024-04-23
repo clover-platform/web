@@ -1,11 +1,17 @@
 import * as z from "zod";
+import {ExportFormatValue} from "@/components/pages/bundle/form/export-format";
 
 export const SCHEMA = z.object({
     name: z.string()
         .min(1, "{#名称不能为空#}")
         .max(255, "{#最多 255 个字符#}"),
     sources: z.array(z.string()),
-    export: z.string(),
+    export: z.any().refine((value) => {
+        if(!value) return false;
+        const format = value as ExportFormatValue;
+        return !!format.format;
+
+    }),
     includeSource: z.boolean().optional(),
 }).superRefine(({name, sources}, ctx) => {
     if (!/^[a-z0-9][0-9a-z.-]*$/.test(name)) {

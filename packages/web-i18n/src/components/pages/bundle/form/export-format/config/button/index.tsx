@@ -6,6 +6,7 @@ import {ExportFormatConfig} from "@/components/pages/bundle/form/export-format";
 
 export type FormatConfigButtonProps = {
     config: ExportFormatConfig;
+    onChange?: (config: any) => void;
 }
 
 export const FormatConfigButton: FC<FormatConfigButtonProps> = (props) => {
@@ -19,8 +20,13 @@ export const FormatConfigButton: FC<FormatConfigButtonProps> = (props) => {
             visible={visible}
             title={config.name}
             onCancel={() => setVisible(false)}
-            onConfirm={() => setVisible(false)}
+            onConfirm={(values: any) => {
+                setVisible(false);
+                props.onChange?.(values);
+            }}
             content={config.configComponent!}
+            configDefault={config.configDefault}
+            config={config.config}
         />
     </>
 }
