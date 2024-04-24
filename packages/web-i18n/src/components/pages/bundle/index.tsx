@@ -19,7 +19,7 @@ export const BundlePage = () => {
     const [loading, result, query, load] = useTableLoader({
         initialParams: {
             ...initialParams,
-            id,
+            moduleId: id,
         },
         action: list,
     });
@@ -57,7 +57,7 @@ export const BundlePage = () => {
             data={result?.data || []}
             loading={loading}
             onRowActionClick={({id: key}, {original}) => {
-
+                console.log(key, original);
             }}
         />
     </>

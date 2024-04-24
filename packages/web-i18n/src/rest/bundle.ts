@@ -8,7 +8,10 @@ export type BundleQuery = {
     keyword?: string;
 }
 
-export const list = async (query: BundleQuery): Promise<RestResult<Bundle>> =>
+export const list = async (query: BundleQuery): Promise<RestResult<{
+    total: number;
+    data: Bundle[];
+}>> =>
     get(`@i18n/bundle/list/`, query);
 
 export type AddBundleDataExport = {

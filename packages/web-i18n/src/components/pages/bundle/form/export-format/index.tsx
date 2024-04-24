@@ -1,50 +1,8 @@
-import {forwardRef, ReactElement, ReactNode, useState} from "react";
-import {IconAndroid, IconFlutter, IconIOS, IconJSON} from "@arco-iconbox/react-clover";
+import {forwardRef, useState} from "react";
 import {RadioGroup, RadioGroupItem} from "@atom-ui/core";
 import classNames from "classnames";
 import {FormatConfigButton} from "@/components/pages/bundle/form/export-format/config/button";
-import {JSONConfigForm} from "@/components/pages/bundle/form/export-format/config/form/json";
-import {ARBConfigForm} from "@/components/pages/bundle/form/export-format/config/form/arb";
-
-export type ExportFormatConfig = {
-    id: string;
-    name: string;
-    icon: ReactNode;
-    configComponent?: ReactElement;
-    configDefault?: any;
-    config?: any;
-}
-
-export const supportedFormats: ExportFormatConfig[] = [
-    {
-        id: "android",
-        name: "{#安卓资源文件#}",
-        icon: <IconAndroid className={"w-8 h-8"}/>,
-    },
-    {
-        id: "ios",
-        name: "{#iOS 资源文件#}",
-        icon: <IconIOS className={"w-8 h-8"}/>,
-    },
-    {
-        id: "flutter",
-        name: "{#Flutter .ARB 文件#}",
-        icon: <IconFlutter className={"w-8 h-8"}/>,
-        configComponent: <ARBConfigForm />,
-        configDefault: {
-            convert: false
-        }
-    },
-    {
-        id: "json",
-        name: "{#JSON 文件#}",
-        icon: <IconJSON className={"w-8 h-8"}/>,
-        configComponent: <JSONConfigForm />,
-        configDefault: {
-            convert: false
-        }
-    }
-]
+import { ExportFormatConfig, SUPPORTED_FORMATS } from "@/config/pages/bundle/config";
 
 export type ExportFormatValue = {
     format: string;
@@ -59,7 +17,7 @@ export type ExportFormatProps = {
 export const ExportFormat = forwardRef<HTMLInputElement, ExportFormatProps>((props, ref) => {
     const { value: v } = props;
     const [value, setValue] = useState<ExportFormatValue>(v!);
-    const [formats, setFormats] = useState<ExportFormatConfig[]>(supportedFormats.map(f => ({ ...f, config: f.configDefault})));
+    const [formats, setFormats] = useState<ExportFormatConfig[]>(SUPPORTED_FORMATS.map(f => ({ ...f, config: f.configDefault})));
 
     return <div className={"bg-white rounded-md border"}>
         <RadioGroup

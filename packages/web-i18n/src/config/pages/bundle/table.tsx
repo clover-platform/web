@@ -1,23 +1,34 @@
 import {DataTableColumn} from "@atom-ui/core/components/uix/data-table";
 import {DropdownMenuItemProps} from "@atom-ui/core";
 import {Bundle} from "@/types/pages/bundle";
+import { BundleFormat } from "@/components/pages/bundle/format";
 
 export const COLUMNS: DataTableColumn<Bundle>[] = [
     {
         accessorKey: "name",
-        header: "{#名称#}",
+        header: "{#文件名#}",
         enableHiding: false,
         className: "min-w-[200px]",
     },
     {
-        accessorKey: "isDefault",
-        header: "{#默认分支#}",
+        accessorKey: "sources",
+        header: "{#分支#}",
         enableHiding: false,
         className: "!w-[200px]",
     },
     {
-        accessorKey: "updateTime",
-        header: "{#最后更新#}",
+        accessorKey: "export",
+        header: "{#导出格式#}",
+        enableHiding: false,
+        className: "!w-[200px]",
+        cell: (cell) => {
+            const { format } = cell.row.original;
+            return <BundleFormat value={format} />;
+        }
+    },
+    {
+        accessorKey: "createTime",
+        header: "{#创建时间#}",
         enableHiding: false,
         formatters: ["time"],
         className: "!w-[200px]",
@@ -26,8 +37,13 @@ export const COLUMNS: DataTableColumn<Bundle>[] = [
 
 export const ROW_ACTIONS: DropdownMenuItemProps[] = [
     {
-        id: "rename",
+        id: "download",
         type: "item",
-        label: "{#重命名#}"
+        label: "{#下载#}"
+    },
+    {
+        id: "delete",
+        type: "item",
+        label: "{#删除#}"
     },
 ];
