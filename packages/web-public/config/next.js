@@ -8,10 +8,10 @@ export const apiRewrites = (apiConfig) => {
     const apiBase = apiConfig[process.env.API || 'dev'];
     return isDev ? async () => {
         return {
-            fallback: Object.keys(apiBase).map(key => ({
-                source: `/api/${key}/:path*`,
-                destination: `${apiBase[key]}/api/${key}/:path*`
-            })),
+            fallback: [{
+                source: `/api/:path*`,
+                destination: `${apiBase}/api/:path*`
+            }]
         }
     } : undefined;
 }

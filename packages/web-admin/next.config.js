@@ -6,10 +6,6 @@ const config = withConfig();
 export default config({
     ...publicConfig,
     rewrites: apiRewrites( {
-        dev: { // 开发
-            'main': 'http://localhost:3000',
-            'admin/main': 'http://localhost:3000',
-            'admin/account': 'http://localhost:3001',
-        },
+        dev: "http://localhost:3000",
     }),
 });
