@@ -11,6 +11,24 @@ importers:
       '@arco-iconbox/react-clover':
         specifier: 0.0.24
         version: 0.0.24(react@18.2.0)
+      '@atom-ui/core':
+        specifier: workspace:*
+        version: link:packages/core
+      '@clover/public':
+        specifier: workspace:*
+        version: link:packages/web-public
+      '@easy-kit/common':
+        specifier: workspace:*
+        version: link:packages/common
+      '@easy-kit/eslint-config':
+        specifier: workspace:*
+        version: link:packages/eslint-config
+      '@easy-kit/i18n':
+        specifier: workspace:*
+        version: link:packages/i18n
+      '@next/router-config':
+        specifier: workspace:*
+        version: link:packages/next-router-config
       '@radix-ui/react-icons':
         specifier: 1.3.0
         version: 1.3.0(react@18.2.0)
@@ -102,6 +120,9 @@ importers:
       autoprefixer:
         specifier: 10.4.19
         version: 10.4.19(postcss@8.4.38)
+      chalk:
+        specifier: 5.3.0
+        version: 5.3.0
       cross-env:
         specifier: 7.0.3
         version: 7.0.3
@@ -114,6 +135,12 @@ importers:
       fs-jetpack:
         specifier: 5.1.0
         version: 5.1.0
+      gulp:
+        specifier: 4.0.2
+        version: 4.0.2
+      gulp-replace:
+        specifier: 1.1.4
+        version: 1.1.4
       postcss:
         specifier: 8.4.38
         version: 8.4.38
@@ -126,24 +153,18 @@ importers:
       typescript:
         specifier: 5.4.3
         version: 5.4.3
+      unescape-js:
+        specifier: 1.1.4
+        version: 1.1.4
 
   packages/common:
     dependencies:
-      chalk:
-        specifier: 5.3.0
-        version: 5.3.0
       decimal.js-light:
         specifier: 2.5.1
         version: 2.5.1
       fetch-intercept:
         specifier: ^2.4.0
         version: 2.4.0
-      gulp:
-        specifier: 4.0.2
-        version: 4.0.2(supports-color@9.4.0)
-      gulp-replace:
-        specifier: 1.1.4
-        version: 1.1.4
       markdown-it:
         specifier: 14.1.0
         version: 14.1.0
@@ -153,9 +174,6 @@ importers:
       supports-color:
         specifier: 9.4.0
         version: 9.4.0
-      unescape-js:
-        specifier: 1.1.4
-        version: 1.1.4
       whatwg-fetch:
         specifier: ^3.6.20
         version: 3.6.20
@@ -10117,9 +10135,9 @@ snapshots:
 
   any-promise@1.3.0: {}
 
-  anymatch@2.0.0(supports-color@9.4.0):
+  anymatch@2.0.0:
     dependencies:
-      micromatch: 3.1.10(supports-color@9.4.0)
+      micromatch: 3.1.10
       normalize-path: 2.1.1
     transitivePeerDependencies:
       - supports-color
@@ -10412,7 +10430,7 @@ snapshots:
     dependencies:
       balanced-match: 1.0.2
 
-  braces@2.3.2(supports-color@9.4.0):
+  braces@2.3.2:
     dependencies:
       arr-flatten: 1.1.0
       array-unique: 0.3.2
@@ -10420,7 +10438,7 @@ snapshots:
       fill-range: 4.0.0
       isobject: 3.0.1
       repeat-element: 1.1.4
-      snapdragon: 0.8.2(supports-color@9.4.0)
+      snapdragon: 0.8.2
       snapdragon-node: 2.1.1
       split-string: 3.1.0
       to-regex: 3.0.2
@@ -10531,18 +10549,18 @@ snapshots:
 
   chardet@0.7.0: {}
 
-  chokidar@2.1.8(supports-color@9.4.0):
+  chokidar@2.1.8:
     dependencies:
-      anymatch: 2.0.0(supports-color@9.4.0)
+      anymatch: 2.0.0
       async-each: 1.0.6
-      braces: 2.3.2(supports-color@9.4.0)
+      braces: 2.3.2
       glob-parent: 3.1.0
       inherits: 2.0.4
       is-binary-path: 1.0.1
       is-glob: 4.0.3
       normalize-path: 3.0.0
       path-is-absolute: 1.0.1
-      readdirp: 2.2.1(supports-color@9.4.0)
+      readdirp: 2.2.1
       upath: 1.2.0
     optionalDependencies:
       fsevents: 1.2.13
@@ -10812,11 +10830,9 @@ snapshots:
 
   dayjs@1.11.10: {}
 
-  debug@2.6.9(supports-color@9.4.0):
+  debug@2.6.9:
     dependencies:
       ms: 2.0.0
-    optionalDependencies:
-      supports-color: 9.4.0
 
   debug@3.2.7:
     dependencies:
@@ -11419,14 +11435,14 @@ snapshots:
       signal-exit: 3.0.7
       strip-final-newline: 2.0.0
 
-  expand-brackets@2.1.4(supports-color@9.4.0):
+  expand-brackets@2.1.4:
     dependencies:
-      debug: 2.6.9(supports-color@9.4.0)
+      debug: 2.6.9
       define-property: 0.2.5
       extend-shallow: 2.0.1
       posix-character-classes: 0.1.1
       regex-not: 1.0.2
-      snapdragon: 0.8.2(supports-color@9.4.0)
+      snapdragon: 0.8.2
       to-regex: 3.0.2
     transitivePeerDependencies:
       - supports-color
@@ -11458,15 +11474,15 @@ snapshots:
       iconv-lite: 0.4.24
       tmp: 0.0.33
 
-  extglob@2.0.4(supports-color@9.4.0):
+  extglob@2.0.4:
     dependencies:
       array-unique: 0.3.2
       define-property: 1.0.0
-      expand-brackets: 2.1.4(supports-color@9.4.0)
+      expand-brackets: 2.1.4
       extend-shallow: 2.0.1
       fragment-cache: 0.2.1
       regex-not: 1.0.2
-      snapdragon: 0.8.2(supports-color@9.4.0)
+      snapdragon: 0.8.2
       to-regex: 3.0.2
     transitivePeerDependencies:
       - supports-color
@@ -11557,20 +11573,20 @@ snapshots:
     dependencies:
       micromatch: 4.0.5
 
-  findup-sync@2.0.0(supports-color@9.4.0):
+  findup-sync@2.0.0:
     dependencies:
       detect-file: 1.0.0
       is-glob: 3.1.0
-      micromatch: 3.1.10(supports-color@9.4.0)
+      micromatch: 3.1.10
       resolve-dir: 1.0.1
     transitivePeerDependencies:
       - supports-color
 
-  findup-sync@3.0.0(supports-color@9.4.0):
+  findup-sync@3.0.0:
     dependencies:
       detect-file: 1.0.0
       is-glob: 4.0.3
-      micromatch: 3.1.10(supports-color@9.4.0)
+      micromatch: 3.1.10
       resolve-dir: 1.0.1
     transitivePeerDependencies:
       - supports-color
@@ -11732,11 +11748,11 @@ snapshots:
       to-absolute-glob: 2.0.2
       unique-stream: 2.3.1
 
-  glob-watcher@5.0.5(supports-color@9.4.0):
+  glob-watcher@5.0.5:
     dependencies:
-      anymatch: 2.0.0(supports-color@9.4.0)
+      anymatch: 2.0.0
       async-done: 1.3.2
-      chokidar: 2.1.8(supports-color@9.4.0)
+      chokidar: 2.1.8
       is-negated-glob: 1.0.0
       just-debounce: 1.1.0
       normalize-path: 3.0.0
@@ -11850,7 +11866,7 @@ snapshots:
 
   graphql@15.8.0: {}
 
-  gulp-cli@2.3.0(supports-color@9.4.0):
+  gulp-cli@2.3.0:
     dependencies:
       ansi-colors: 1.1.0
       archy: 1.0.0
@@ -11862,8 +11878,8 @@ snapshots:
       gulplog: 1.0.0
       interpret: 1.4.0
       isobject: 3.0.1
-      liftoff: 3.1.0(supports-color@9.4.0)
-      matchdep: 2.0.0(supports-color@9.4.0)
+      liftoff: 3.1.0
+      matchdep: 2.0.0
       mute-stdout: 1.0.1
       pretty-hrtime: 1.0.3
       replace-homedir: 1.0.0
@@ -11881,10 +11897,10 @@ snapshots:
       replacestream: 4.0.3
       yargs-parser: 21.1.1
 
-  gulp@4.0.2(supports-color@9.4.0):
+  gulp@4.0.2:
     dependencies:
-      glob-watcher: 5.0.5(supports-color@9.4.0)
-      gulp-cli: 2.3.0(supports-color@9.4.0)
+      glob-watcher: 5.0.5
+      gulp-cli: 2.3.0
       undertaker: 1.3.0
       vinyl-fs: 3.0.3
     transitivePeerDependencies:
@@ -12410,10 +12426,10 @@ snapshots:
     dependencies:
       immediate: 3.0.6
 
-  liftoff@3.1.0(supports-color@9.4.0):
+  liftoff@3.1.0:
     dependencies:
       extend: 3.0.2
-      findup-sync: 3.0.0(supports-color@9.4.0)
+      findup-sync: 3.0.0
       fined: 1.2.0
       flagged-respawn: 1.0.1
       is-plain-object: 2.0.4
@@ -12629,10 +12645,10 @@ snapshots:
       punycode.js: 2.3.1
       uc.micro: 2.1.0
 
-  matchdep@2.0.0(supports-color@9.4.0):
+  matchdep@2.0.0:
     dependencies:
-      findup-sync: 2.0.0(supports-color@9.4.0)
-      micromatch: 3.1.10(supports-color@9.4.0)
+      findup-sync: 2.0.0
+      micromatch: 3.1.10
       resolve: 1.22.8
       stack-trace: 0.0.10
     transitivePeerDependencies:
@@ -12648,20 +12664,20 @@ snapshots:
 
   merge2@1.4.1: {}
 
-  micromatch@3.1.10(supports-color@9.4.0):
+  micromatch@3.1.10:
     dependencies:
       arr-diff: 4.0.0
       array-unique: 0.3.2
-      braces: 2.3.2(supports-color@9.4.0)
+      braces: 2.3.2
       define-property: 2.0.2
       extend-shallow: 3.0.2
-      extglob: 2.0.4(supports-color@9.4.0)
+      extglob: 2.0.4
       fragment-cache: 0.2.1
       kind-of: 6.0.3
-      nanomatch: 1.2.13(supports-color@9.4.0)
+      nanomatch: 1.2.13
       object.pick: 1.3.0
       regex-not: 1.0.2
-      snapdragon: 0.8.2(supports-color@9.4.0)
+      snapdragon: 0.8.2
       to-regex: 3.0.2
     transitivePeerDependencies:
       - supports-color
@@ -12758,7 +12774,7 @@ snapshots:
 
   nanoid@3.3.7: {}
 
-  nanomatch@1.2.13(supports-color@9.4.0):
+  nanomatch@1.2.13:
     dependencies:
       arr-diff: 4.0.0
       array-unique: 0.3.2
@@ -12769,7 +12785,7 @@ snapshots:
       kind-of: 6.0.3
       object.pick: 1.3.0
       regex-not: 1.0.2
-      snapdragon: 0.8.2(supports-color@9.4.0)
+      snapdragon: 0.8.2
       to-regex: 3.0.2
     transitivePeerDependencies:
       - supports-color
@@ -13468,10 +13484,10 @@ snapshots:
       string_decoder: 1.3.0
       util-deprecate: 1.0.2
 
-  readdirp@2.2.1(supports-color@9.4.0):
+  readdirp@2.2.1:
     dependencies:
       graceful-fs: 4.2.11
-      micromatch: 3.1.10(supports-color@9.4.0)
+      micromatch: 3.1.10
       readable-stream: 2.3.8
     transitivePeerDependencies:
       - supports-color
@@ -13806,10 +13822,10 @@ snapshots:
     dependencies:
       kind-of: 3.2.2
 
-  snapdragon@0.8.2(supports-color@9.4.0):
+  snapdragon@0.8.2:
     dependencies:
       base: 0.11.2
-      debug: 2.6.9(supports-color@9.4.0)
+      debug: 2.6.9
       define-property: 0.2.5
       extend-shallow: 2.0.1
       map-cache: 0.2.2
