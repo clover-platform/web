@@ -9,5 +9,6 @@ export const PUB_KEY = "-----BEGIN PUBLIC KEY-----\n" +
 
 export const encrypt = (text: string): string => {
     const key = new NodeRSA(PUB_KEY);
+    key.setOptions({encryptionScheme: 'pkcs1'});
     return key.encrypt(text, 'base64').toString();
 }

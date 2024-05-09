@@ -22,7 +22,7 @@ export const FORM_STEP2_SCHEMA = z.object({
     password2:z.string()
         .min(1, "{#请输入密码#}")
         .regex(PASSWORD, "{#密码格式不正确#}"),
-    otpCode: z.string()
+    code: z.string()
         .min(1, code)
         .regex(CODE, code),
 }).superRefine(({password, password2}, ctx) => {

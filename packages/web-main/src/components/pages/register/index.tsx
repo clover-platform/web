@@ -98,7 +98,7 @@ const RegisterPage = () => {
                     <Input type={"password"} placeholder={"{#请再次输入密码#}"} />
                 </FormItem>
                 { step === 1 ? <SecretItem /> : null }
-                <FormItem name="otpCode" label={"{#验证码#}"}>
+                <FormItem name="code" label={"{#验证码#}"}>
                     <CodeInput placeholder={"{#请输入身份验证 App 验证码#}"} />
                 </FormItem>
                 <div className={"flex mx-[-10px]"}>
