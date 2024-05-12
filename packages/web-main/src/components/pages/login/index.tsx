@@ -28,7 +28,7 @@ const LoginPage = () => {
                 schema={SCHEMA}
                 onSubmit={submit}
             >
-                <FormItem name="account" label="{#邮箱或用户名#}">
+                <FormItem name="username" label="{#邮箱或用户名#}">
                     <Input placeholder={"{#请输入邮箱或用户名#}"} />
                 </FormItem>
                 <FormItem name="password" label={passwordLabel}>

@@ -16,8 +16,8 @@ import {sidebarOpenState} from "@clover/public/components/layout/main/state";
 export const useCurrent = () => {
     const account = useRecoilValue(accountInfoState);
     return {
-        teamId: account?.teamId,
-        projectId: account?.projectId
+        teamId: account?.currentTeamId,
+        projectId: account?.currentProjectId
     }
 }
 

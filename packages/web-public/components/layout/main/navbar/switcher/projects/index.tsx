@@ -6,6 +6,7 @@ import {useCurrent} from "@clover/public/components/layout/hooks/main";
 export const ProjectsSwitcher = () => {
     const projects = useRecoilValue(projectsState);
     const { projectId } = useCurrent();
+
     return <Switcher
         value={projectId}
         title={"{#项目#}"}

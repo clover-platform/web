@@ -13,7 +13,7 @@ export const accountInfoState = atom<Account>({
         username: '',
         authorities: [],
         otpStatus: 0,
-        projectId: 0,
-        teamId: 0,
+        currentProjectId: 0,
+        currentTeamId: 0,
     }
 })
