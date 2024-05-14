@@ -5,7 +5,7 @@ export type Language = {
 }
 
 export type LanguageWithCount = {
-    total: number;
-    translated: number;
-    verified: number;
+    totalEntry: number;
+    translatedEntry: number;
+    verifiedEntry: number;
 } & Language;

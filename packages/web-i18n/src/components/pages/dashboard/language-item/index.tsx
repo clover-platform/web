@@ -8,10 +8,10 @@ export type LanguageItemProps = {
 } & PropsWithChildren<LanguageWithCount>;
 
 export const LanguageItem: FC<LanguageItemProps> = (props) => {
-    const { total, translated, verified } = props;
+    const { totalEntry, translatedEntry, verifiedEntry } = props;
 
-    const translatedPercent = total ? Math.ceil(translated/total*100) : 0;
-    const verifiedPercent = translated ? Math.ceil(verified/translated*100) : 0;
+    const translatedPercent = totalEntry ? Math.ceil(translatedEntry/totalEntry*100) : 0;
+    const verifiedPercent = translatedEntry ? Math.ceil(verifiedEntry/translatedEntry*100) : 0;
 
     return <TableRow onClick={props.onClick}>
         <TableCell>
