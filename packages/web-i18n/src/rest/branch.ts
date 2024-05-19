@@ -12,7 +12,9 @@ export const list = async (params: ListBranchQuery): Promise<RestResult<any>> =>
     get(`@i18n/${params.id}/branch/list/`, params);
 
 export const all = async (id: number): Promise<RestResult<Branch[]>> =>
-    get(`@i18n/${id}/branch/all/`);
+    get(`@i18n/branch/all/`, {
+        moduleId: id,
+    });
 
 export type CreateBranchData = {
     moduleId: number;
