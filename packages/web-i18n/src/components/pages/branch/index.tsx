@@ -22,7 +22,7 @@ export const ModuleBranchPage = () => {
     const [loading, result, query, load] = useTableLoader({
         initialParams: {
             ...initialParams,
-            id,
+            moduleId: id,
         },
         action: list,
     });

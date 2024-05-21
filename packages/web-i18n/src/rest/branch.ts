@@ -4,12 +4,12 @@ import {Branch} from "@/types/pages/module";
 import {BranchMergeOverview} from "@/types/pages/branch";
 
 export type ListBranchQuery = {
-    id: number;
+    moduleId: number;
     keyword?: string;
 }
 
 export const list = async (params: ListBranchQuery): Promise<RestResult<any>> =>
-    get(`@i18n/${params.id}/branch/list/`, params);
+    get(`@i18n/branch/list/`, params);
 
 export const all = async (id: number): Promise<RestResult<Branch[]>> =>
     get(`@i18n/branch/all/`, {
@@ -23,7 +23,7 @@ export type CreateBranchData = {
 }
 
 export const create = async (data: CreateBranchData): Promise<RestResult<any>> =>
-    post(`@i18n/${data.moduleId}/branch/create/`, data);
+    post(`@i18n/branch/create/`, data);
 
 export const deleteBranch = async (params: {
     id: number;
