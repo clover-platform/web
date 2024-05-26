@@ -8,17 +8,17 @@ export type InviteGenerateData = {
 }
 
 export const generate = async (data: InviteGenerateData): Promise<RestResult<string>> =>
-    post(`@i18n/member/invite/generate/`, data);
+    post(`@i18n/member/invite/generate`, data);
 
 export type InviteGenerateParams = {
     moduleId: number;
 }
 
 export const list = async (params: InviteGenerateParams): Promise<RestResult<MemberInvite[]>> =>
-    get(`@i18n/member/invite/list/`, params);
+    get(`@i18n/member/invite/list`, params);
 
 export const revoke = async (params: {id: number}): Promise<RestResult<any>> =>
-    del(`@i18n/member/invite/revoke/`, params);
+    del(`@i18n/member/invite/revoke`, params);
 
 export type MemberInviteData = {
     moduleId: number;
@@ -28,11 +28,11 @@ export type MemberInviteData = {
 }
 
 export const send = async (data: MemberInviteData): Promise<RestResult<any>> =>
-    post(`@i18n/member/invite/send/`, data);
+    post(`@i18n/member/invite/send`, data);
 
 export type AcceptInviteData = {
     token: string;
 }
 
 export const accept = async (data: AcceptInviteData): Promise<RestResult<any>> =>
-    post(`@i18n/member/invite/accept/`, data);
+    post(`@i18n/member/invite/accept`, data);

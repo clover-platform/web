@@ -3,22 +3,22 @@ import {del, get, post} from "@easy-kit/common/utils/rest";
 import {InviteDetail, Language} from "@/types/pages/module";
 
 export const list = async (params: any): Promise<RestResult<any>> =>
-    get(`@i18n/module/list/`, params);
+    get(`@i18n/module/list`, params);
 
 export const all = async (params: any): Promise<RestResult<any>> =>
-    get(`@i18n/module/all/`, params);
+    get(`@i18n/module/all`, params);
 
 export const create = async (data: any): Promise<RestResult<any>> =>
-    post(`@i18n/module/new/`, data);
+    post(`@i18n/module/new`, data);
 
 export const dashboard = async (id: number): Promise<RestResult<any>> =>
-    get(`@i18n/module/${id}/dashboard/`);
+    get(`@i18n/module/${id}/dashboard`);
 
 export const languages = async (id: number): Promise<RestResult<Language[]>> =>
-    get(`@i18n/module/${id}/languages/`);
+    get(`@i18n/module/${id}/languages`);
 
 export const deleteModule = async (id: number): Promise<any> =>
-    del(`@i18n/module/${id}/`);
+    del(`@i18n/module/${id}`);
 
 export const inviteDetail = async (token: string): Promise<RestResult<InviteDetail|number>> =>
-    get(`@i18n/module/invite/detail/${token}/`);
+    get(`@i18n/module/invite/detail/${token}`);

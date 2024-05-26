@@ -1,6 +1,6 @@
 import Axios, {AxiosRequestConfig} from 'axios';
 const CancelToken = Axios.CancelToken;
-
+const isDev = process.env.NODE_ENV !== 'production';
 const ERROR_MESSAGE = "{#网络错误#}";
 const ERROR_CODE = -999;
 
@@ -83,6 +83,9 @@ rest.interceptors.response.use(
 // 请求拦截器
 rest.interceptors.request.use(
     (config) => {
+        if(!isDev) {
+            return config;
+        }
         // next.js trailingSlash 开启以后，会要求url以 / 结尾
         const { url } = config;
         if(url?.includes('?')) {

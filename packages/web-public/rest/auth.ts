@@ -6,11 +6,11 @@ export const login = async (data: {
     account: string;
     password: string;
     code: string;
-}): Promise<RestResult<any>> => post(`@main/account/login/`, data);
+}): Promise<RestResult<any>> => post(`@main/account/login`, data);
 
 export type ProfileResult = RestResult<Account>
 
 // 获取个人信息
-export const profile = async (): Promise<ProfileResult> => get(`@main/account/profile/`);
+export const profile = async (): Promise<ProfileResult> => get(`@main/account/profile`);
 
-export const logout = async (): Promise<RestResult<any>> => post(`@main/account/logout/`);
+export const logout = async (): Promise<RestResult<any>> => post(`@main/account/logout`);

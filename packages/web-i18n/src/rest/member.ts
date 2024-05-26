@@ -8,4 +8,4 @@ export type MemberQuery = {
 }
 
 export const list = async (params: MemberQuery): Promise<RestResult<any>> =>
-    get(`@i18n/member/list/`, params);
+    get(`@i18n/member/list`, params);

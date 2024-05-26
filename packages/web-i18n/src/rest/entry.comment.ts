@@ -9,7 +9,7 @@ export type AddCommentData = {
 }
 
 export const add = async (data: AddCommentData): Promise<RestResult<any>> =>
-    post(`@i18n/entry/comment/add/`, data);
+    post(`@i18n/entry/comment/add`, data);
 
 export type EntryCommentQuery = {
     entryId: number;
@@ -24,7 +24,7 @@ export type EntryCommentPage = {
 }
 
 export const list = async (data: EntryCommentQuery): Promise<RestResult<EntryCommentPage>> =>
-    get(`@i18n/entry/comment/list/`, data);
+    get(`@i18n/entry/comment/list`, data);
 
 export const deleteComment = async (id: number): Promise<RestResult<EntryCommentPage>> =>
     del(`@i18n/entry/comment/${id}`);

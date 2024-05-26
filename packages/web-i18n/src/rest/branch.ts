@@ -9,10 +9,10 @@ export type ListBranchQuery = {
 }
 
 export const list = async (params: ListBranchQuery): Promise<RestResult<any>> =>
-    get(`@i18n/branch/list/`, params);
+    get(`@i18n/branch/list`, params);
 
 export const all = async (id: number): Promise<RestResult<Branch[]>> =>
-    get(`@i18n/branch/all/`, {
+    get(`@i18n/branch/all`, {
         moduleId: id,
     });
 
@@ -23,13 +23,13 @@ export type CreateBranchData = {
 }
 
 export const create = async (data: CreateBranchData): Promise<RestResult<any>> =>
-    post(`@i18n/branch/create/`, data);
+    post(`@i18n/branch/create`, data);
 
 export const deleteBranch = async (params: {
     id: number;
     moduleId: number;
 }): Promise<RestResult<Branch[]>> =>
-    del(`@i18n/${params.moduleId}/branch/${params.id}/delete/`);
+    del(`@i18n/${params.moduleId}/branch/${params.id}/delete`);
 
 export type RenameBranchData = {
     moduleId: number;
@@ -38,10 +38,10 @@ export type RenameBranchData = {
 }
 
 export const rename = async (data: RenameBranchData): Promise<RestResult<any>> =>
-    put(`@i18n/${data.moduleId}/branch/${data.id}/rename/`, data);
+    put(`@i18n/${data.moduleId}/branch/${data.id}/rename`, data);
 
 export const mergeOverview = async (id: number): Promise<RestResult<BranchMergeOverview>> =>
-    get(`@i18n/branch/${id}/merge/overview/`);
+    get(`@i18n/branch/${id}/merge/overview`);
 
 export type MergeBranchData = {
     id: number;
@@ -49,4 +49,4 @@ export type MergeBranchData = {
 }
 
 export const merge = async (data: MergeBranchData): Promise<RestResult<any>> =>
-    put(`@i18n/branch/${data.id}/merge/`, data);
+    put(`@i18n/branch/${data.id}/merge`, data);

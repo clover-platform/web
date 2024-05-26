@@ -12,7 +12,7 @@ export const list = async (query: BundleQuery): Promise<RestResult<{
     total: number;
     data: Bundle[];
 }>> =>
-    get(`@i18n/bundle/list/`, query);
+    get(`@i18n/bundle/list`, query);
 
 export type AddBundleDataExport = {
     config: any;
@@ -28,4 +28,4 @@ export type AddBundleData = {
 }
 
 export const create = async (data: AddBundleData): Promise<RestResult<any>> =>
-    post(`@i18n/bundle/create/`, data);
+    post(`@i18n/bundle/create`, data);

@@ -10,7 +10,7 @@ export type SaveEntryResultData = {
 }
 
 export const save = async (data: SaveEntryResultData): Promise<RestResult<any>> =>
-    post(`@i18n/entry/result/save/`, data);
+    post(`@i18n/entry/result/save`, data);
 
 export type EntryResultQuery = {
     entryId: number;
@@ -20,13 +20,13 @@ export type EntryResultQuery = {
 }
 
 export const list = async (data: EntryResultQuery): Promise<RestResult<EntryResultPage>> =>
-    get(`@i18n/entry/result/list/`, data);
+    get(`@i18n/entry/result/list`, data);
 
 export const deleteResult = async (data: {id: number}): Promise<RestResult<any>> =>
-    del(`@i18n/entry/result/delete/`, data);
+    del(`@i18n/entry/result/delete`, data);
 
 export const approve = async (data: {id: number}): Promise<RestResult<any>> =>
-    put(`@i18n/entry/result/approve/`, data);
+    put(`@i18n/entry/result/approve`, data);
 
 export const removeApproval = async (data: {id: number}): Promise<RestResult<any>> =>
-    put(`@i18n/entry/result/remove/approval/`, data);
+    put(`@i18n/entry/result/remove/approval`, data);
