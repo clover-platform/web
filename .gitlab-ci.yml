@@ -1,8 +1,9 @@
 stages:
     - build
     - package
+    - deploy
 
-build_main:
+build-main:
     stage: build
     only:
         - main
@@ -19,7 +20,7 @@ build_main:
     script:
         - pnpm i
         - pnpm build:main
-build_i18n:
+build-i18n:
     stage: build
     only:
         - main
@@ -36,7 +37,7 @@ build_i18n:
     script:
         - pnpm i
         - pnpm build:i18n
-build_admin:
+build-admin:
     stage: build
     only:
         - main
@@ -54,7 +55,7 @@ build_admin:
         - pnpm i
         - pnpm build:admin
 
-package_main:
+package-main:
     stage: package
     only:
         - main
@@ -71,7 +72,7 @@ package_main:
         - docker push $CI_REGISTRY/clover/web/main:latest
         - docker rmi $CI_REGISTRY/clover/web/main:$CI_PIPELINE_ID
         - docker rmi $CI_REGISTRY/clover/web/main:latest
-package_i18n:
+package-i18n:
     stage: package
     only:
         - main
@@ -88,7 +89,7 @@ package_i18n:
         - docker push $CI_REGISTRY/clover/web/i18n:latest
         - docker rmi $CI_REGISTRY/clover/web/i18n:$CI_PIPELINE_ID
         - docker rmi $CI_REGISTRY/clover/web/i18n:latest
-package_admin:
+package-admin:
     stage: package
     only:
         - main
@@ -105,3 +106,34 @@ package_admin:
         - docker push $CI_REGISTRY/clover/web/admin:latest
         - docker rmi $CI_REGISTRY/clover/web/admin:$CI_PIPELINE_ID
         - docker rmi $CI_REGISTRY/clover/web/admin:latest
+
+deploy-main:
+    stage: deploy
+    only:
+        - main
+    tags:
+        - dev
+    script:
+        - cd /opt/server/clover/web-main
+        - docker-compose down
+        - docker-compose up -d
+deploy-i18n:
+    stage: deploy
+    only:
+        - main
+    tags:
+        - dev
+    script:
+        - cd /opt/server/clover/web-i18n
+        - docker-compose down
+        - docker-compose up -d
+deploy-admin:
+    stage: deploy
+    only:
+        - main
+    tags:
+        - dev
+    script:
+        - cd /opt/server/clover/web-admin
+        - docker-compose down
+        - docker-compose up -d
