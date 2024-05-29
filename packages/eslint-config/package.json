@@ -16,9 +16,9 @@
         "access": "public"
     },
     "dependencies": {
-        "@typescript-eslint/eslint-plugin": "7.5.0",
-        "@typescript-eslint/parser": "7.5.0",
-        "typescript": "5.4.3",
-        "eslint-config-next": "14.1.4"
+        "@typescript-eslint/eslint-plugin": "7.11.0",
+        "@typescript-eslint/parser": "7.11.0",
+        "typescript": "5.4.5",
+        "eslint-config-next": "14.2.3"
     }
 }
