@@ -40,7 +40,7 @@ export const ResultItem: FC<ResultItemProps> = (props) => {
             title: "{#删除#}",
             description: "{#是否删除此翻译#}",
             onOk: async () => {
-                return resultWrapper(await deleteResult({ id: item.id }));
+                return resultWrapper(await deleteResult(item.id));
             }
         })
     }
@@ -50,7 +50,7 @@ export const ResultItem: FC<ResultItemProps> = (props) => {
             title: "{#批准#}",
             description: "{#是否批准改翻译作为有效结果#}",
             onOk: async () => {
-                return resultWrapper(await approveRest({ id: item.id }));
+                return resultWrapper(await approveRest(item.id));
             }
         })
     }

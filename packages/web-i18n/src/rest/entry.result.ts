@@ -22,11 +22,11 @@ export type EntryResultQuery = {
 export const list = async (data: EntryResultQuery): Promise<RestResult<EntryResultPage>> =>
     get(`@i18n/entry/result/list`, data);
 
-export const deleteResult = async (data: {id: number}): Promise<RestResult<any>> =>
-    del(`@i18n/entry/result/delete`, data);
+export const deleteResult = async (id: number): Promise<RestResult<any>> =>
+    del(`@i18n/entry/result/${id}`);
 
-export const approve = async (data: {id: number}): Promise<RestResult<any>> =>
-    put(`@i18n/entry/result/approve`, data);
+export const approve = async (id: number): Promise<RestResult<any>> =>
+    put(`@i18n/entry/result/${id}/approve`);
 
 export const removeApproval = async (data: {id: number}): Promise<RestResult<any>> =>
     put(`@i18n/entry/result/remove/approval`, data);
