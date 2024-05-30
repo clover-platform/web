@@ -11,7 +11,6 @@ build-main:
         - dev
     cache:
         paths:
-            - node_modules/
             - packages/web-main/.next/cache/
         policy: pull-push
     artifacts:
@@ -28,7 +27,6 @@ build-i18n:
         - dev
     cache:
         paths:
-            - node_modules/
             - packages/web-i18n/.next/cache/
         policy: pull-push
     artifacts:
@@ -45,7 +43,6 @@ build-admin:
         - dev
     cache:
         paths:
-            - node_modules/
             - packages/web-admin/.next/cache/
         policy: pull-push
     artifacts:
