@@ -104,8 +104,8 @@ export const useEntriesLoader = () => {
     useEffect(() => {
         const branch = branches.find(b => b.name === currentBranch);
         branchRef.current = branch?.id;
-        load().then();
-        loadCount().then();
+        currentLanguage && load().then();
+        currentLanguage && loadCount().then();
     }, [currentBranch, currentLanguage]);
 
     return {

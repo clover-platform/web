@@ -4,6 +4,7 @@ import {Tooltip} from "@atom-ui/core";
 import {ReactNode, useMemo, useState} from "react";
 import {ComingSoon} from "@/components/pages/worktop/main/panel/plugin/coming-soon";
 import {Comment} from "@/components/pages/worktop/main/panel/plugin/comment";
+import {EntryCheck} from "../../check/entry";
 
 export type Plugin = {
     id: string;
@@ -40,25 +41,28 @@ export const PluginPanel = () => {
         return plugins.find(plugin => plugin.id === activePlugin);
     }, [activePlugin])
 
-    return <div className={"w-full h-full flex justify-center items-stretch"}>
-        <div className={"flex-1 flex justify-center items-center flex-col"}>
-            <div className={"w-full text-base font-medium px-3 py-3"}>
-                { plugin?.name }
+    return <EntryCheck className={"bg-muted"}>
+        <div className={"w-full h-full flex justify-center items-stretch"}>
+            <div className={"flex-1 flex justify-center items-center flex-col"}>
+                <div className={"w-full text-base font-medium px-3 py-3"}>
+                    {plugin?.name}
+                </div>
+                <div className={"flex-1 w-full h-0 flex-shrink-0"}>
+                    {plugin?.panel}
+                </div>
             </div>
-            <div className={"flex-1 w-full h-0 flex-shrink-0"}>
-                { plugin?.panel }
+            <div className={"bg-muted border-l p-2"}>
+                {
+                    plugins.map((plugin, index) => {
+                        return <Tooltip content={plugin.name} side={"left"} key={plugin.name}>
+                            <Action onClick={() => setActivePlugin(plugin.id)} active={activePlugin === plugin.id}
+                                    className={index < plugins.length - 1 ? "mb-2" : ""}>
+                                {plugin.icon}
+                            </Action>
+                        </Tooltip>
+                    })
+                }
             </div>
         </div>
-        <div className={"bg-muted border-l p-2"}>
-            {
-                plugins.map((plugin, index) => {
-                    return <Tooltip content={plugin.name} side={"left"} key={plugin.name}>
-                        <Action onClick={() => setActivePlugin(plugin.id)} active={activePlugin === plugin.id} className={index < plugins.length - 1 ? "mb-2" : ""}>
-                            {plugin.icon}
-                        </Action>
-                    </Tooltip>
-                })
-            }
-        </div>
-    </div>
+    </EntryCheck>
 }

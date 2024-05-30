@@ -6,7 +6,6 @@ import { ImperativePanelHandle } from 'react-resizable-panels';
 import { EntryPanel } from "@/components/pages/worktop/main/panel/entry";
 import { ResultPanel } from "@/components/pages/worktop/main/panel/result";
 import { PluginPanel } from "@/components/pages/worktop/main/panel/plugin";
-import { DataCheckPanel } from "@/components/pages/worktop/main/panel/data-check";
 import { useEntriesLoader } from "@/components/layout/worktop/hooks";
 import classNames from "classnames";
 import bus from "@easy-kit/common/events";
@@ -33,7 +32,6 @@ export const MainPanel = () => {
             setCurrent(0);
             load({page: 1}).then();
         }
-        handler();
         bus.on(ENTRY_RELOAD, handler);
         return () => {
             bus.off(ENTRY_RELOAD, handler);
@@ -41,42 +39,40 @@ export const MainPanel = () => {
     }, [])
 
     return <div className={"flex-1 w-full h-0 flex-shrink-0"}>
-        <DataCheckPanel>
-            <ResizablePanelGroup direction="horizontal" autoSaveId="module.worktop">
-                <ResizablePanel
-                    className={classNames(
-                        leftSideOpen ? "shadow-md" : "hidden"
-                    )}
-                    collapsible={true} ref={leftRef} defaultSize={30}
-                    onCollapse={() => setLeftSideOpen(false)}
-                    onExpand={() => setLeftSideOpen(true)}
-                >
-                    <EntryPanel
-                        pages={pages}
-                        total={total}
-                        entries={entries}
-                        loading={loading}
-                        load={load}
-                    />
-                </ResizablePanel>
-                <ResizableHandle className={leftSideOpen ? "" : "hidden"}/>
-                <ResizablePanel defaultSize={40}>
-                    <ResultPanel />
-                </ResizablePanel>
-                <ResizableHandle className={rightSideOpen ? "" : "hidden"} />
-                <ResizablePanel
-                    className={classNames(
-                        rightSideOpen ? "shadow-md" : "hidden"
-                    )}
-                    collapsible={true}
-                    ref={rightRef}
-                    defaultSize={30}
-                    onCollapse={() => setRightSideOpen(false)}
-                    onExpand={() => setRightSideOpen(true)}
-                >
-                    <PluginPanel />
-                </ResizablePanel>
-            </ResizablePanelGroup>
-        </DataCheckPanel>
+        <ResizablePanelGroup direction="horizontal" autoSaveId="module.worktop">
+            <ResizablePanel
+                className={classNames(
+                    leftSideOpen ? "shadow-md" : "hidden"
+                )}
+                collapsible={true} ref={leftRef} defaultSize={30}
+                onCollapse={() => setLeftSideOpen(false)}
+                onExpand={() => setLeftSideOpen(true)}
+            >
+                <EntryPanel
+                    pages={pages}
+                    total={total}
+                    entries={entries}
+                    loading={loading}
+                    load={load}
+                />
+            </ResizablePanel>
+            <ResizableHandle className={leftSideOpen ? "" : "hidden"}/>
+            <ResizablePanel defaultSize={40}>
+                <ResultPanel />
+            </ResizablePanel>
+            <ResizableHandle className={rightSideOpen ? "" : "hidden"} />
+            <ResizablePanel
+                className={classNames(
+                    rightSideOpen ? "shadow-md" : "hidden"
+                )}
+                collapsible={true}
+                ref={rightRef}
+                defaultSize={30}
+                onCollapse={() => setRightSideOpen(false)}
+                onExpand={() => setRightSideOpen(true)}
+            >
+                <PluginPanel />
+            </ResizablePanel>
+        </ResizablePanelGroup>
     </div>;
 }
