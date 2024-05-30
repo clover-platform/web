@@ -55,8 +55,11 @@ export const PluginPanel = () => {
                 {
                     plugins.map((plugin, index) => {
                         return <Tooltip content={plugin.name} side={"left"} key={plugin.name}>
-                            <Action onClick={() => setActivePlugin(plugin.id)} active={activePlugin === plugin.id}
-                                    className={index < plugins.length - 1 ? "mb-2" : ""}>
+                            <Action
+                                onClick={() => setActivePlugin(plugin.id)}
+                                active={activePlugin === plugin.id}
+                                className={index < plugins.length - 1 ? "mb-2" : ""}
+                            >
                                 {plugin.icon}
                             </Action>
                         </Tooltip>
