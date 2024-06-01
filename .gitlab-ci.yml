@@ -111,9 +111,9 @@ deploy-main:
     tags:
         - dev
     script:
-        - cd /opt/server/clover/web-main
-        - docker-compose down
-        - docker-compose up -d
+        - cd ~/server/clover/web-main
+        - docker compose down
+        - docker compose up -d
 deploy-i18n:
     stage: deploy
     only:
@@ -121,9 +121,9 @@ deploy-i18n:
     tags:
         - dev
     script:
-        - cd /opt/server/clover/web-i18n
-        - docker-compose down
-        - docker-compose up -d
+        - cd ~/server/clover/web-i18n
+        - docker compose down
+        - docker compose up -d
 deploy-admin:
     stage: deploy
     only:
@@ -131,6 +131,6 @@ deploy-admin:
     tags:
         - dev
     script:
-        - cd /opt/server/clover/web-admin
-        - docker-compose down
-        - docker-compose up -d
+        - cd ~/server/clover/web-admin
+        - docker compose down
+        - docker compose up -d
