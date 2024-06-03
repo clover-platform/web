@@ -5,6 +5,7 @@ import {ReactNode, useMemo, useState} from "react";
 import {ComingSoon} from "@/components/pages/worktop/main/panel/plugin/coming-soon";
 import {Comment} from "@/components/pages/worktop/main/panel/plugin/comment";
 import {EntryCheck} from "../../check/entry";
+import {AIPlugin} from "@/components/pages/worktop/main/panel/plugin/ai";
 
 export type Plugin = {
     id: string;
@@ -21,15 +22,15 @@ export const plugins: Plugin[] = [
         panel: <Comment />
     },
     {
-        id: "google",
-        name: "{#谷歌翻译#}",
-        icon: <IconGoogleTranslate className={"text-lg"} />,
-        panel: <ComingSoon />
-    },
-    {
         id: "ai",
         name: "{#AI建议#}",
         icon: <IconChatGPT className={"text-lg"} />,
+        panel: <AIPlugin />
+    },
+    {
+        id: "google",
+        name: "{#谷歌翻译#}",
+        icon: <IconGoogleTranslate className={"text-lg"} />,
         panel: <ComingSoon />
     }
 ]

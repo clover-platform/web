@@ -30,3 +30,11 @@ export const approve = async (id: number): Promise<RestResult<any>> =>
 
 export const removeApproval = async (data: {id: number}): Promise<RestResult<any>> =>
     put(`@i18n/entry/result/remove/approval`, data);
+
+export type AIData = {
+    entryId: number;
+    language: string;
+}
+
+export const ai = async (data: AIData): Promise<RestResult<any>> =>
+    post(`@i18n/entry/result/ai`, data);
