@@ -1,56 +1,26 @@
 import { useRecoilState, useRecoilValue } from "recoil";
-import { currentEntryState, currentLanguageState, entriesState } from "@/state/worktop";
+import { currentEntryState, entriesState } from "@/state/worktop";
 import { Action } from "@clover/public/components/common/action";
 import { CopyIcon } from "@radix-ui/react-icons";
 import {
     Button,
     Tooltip,
-    useMessage,
 } from "@atom-ui/core";
 import { IconClear } from "@arco-iconbox/react-clover";
-import { useState } from "react";
-import { save } from "@/rest/entry.result";
+import {useCallback, useState} from "react";
 import TextareaAutosize from 'react-textarea-autosize';
-import bus from '@easy-kit/common/events';
-import { ENTRY_RESULT_RELOAD } from "@/events/worktop";
-import { useEntriesUpdater } from "@/components/layout/worktop/hooks";
+import {useResultSubmit} from "@/components/pages/worktop/main/panel/result/hooks/use.result.submit";
 
 export const Editor = () => {
     const entries = useRecoilValue(entriesState);
     const [current, setCurrent] = useRecoilState(currentEntryState);
-    const language = useRecoilValue(currentLanguageState);
     const entry = entries[current];
-    const [loading, setLoading] = useState(false);
     const [content, setContent] = useState(entry?.translation?.content);
-    const msg = useMessage();
-    const { update } = useEntriesUpdater();
+    const [submit, loading] = useResultSubmit();
 
-    const next = () => {
-        if(current < entries.length - 1) {
-            setCurrent(current + 1)
-        }
-    }
-
-    const onSave = async () => {
-        if(!content) {
-            return msg.error("{#请输入翻译结果#}")
-        }
-        setLoading(true);
-        const { success, message } = await save({
-            moduleId: entry.moduleId,
-            entryId: entry.id,
-            content,
-            language,
-        });
-        setLoading(false);
-        if(success) {
-            bus.emit(ENTRY_RESULT_RELOAD);
-            await update(entry.id);
-            // next();
-        }else{
-            msg.error(message);
-        }
-    }
+    const onSave = useCallback(async () => {
+        await submit(content);
+    }, [content])
 
     return <div className={"w-full"}>
         <TextareaAutosize
