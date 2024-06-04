@@ -30,12 +30,12 @@ const LinkPage = (props: LinkPageProps) => {
 
     const load = async () => {
         setLoading(true);
-        const { success, data, code: resultCode } = await linkCode({
+        const { success, data } = await linkCode({
             code, type
         })
         setError(!success);
         if(success) {
-            if(resultCode === 100) {
+            if(data?.isBind) {
                 setToken(data);
                 router.push("/{#LANG#}/");
             }else{

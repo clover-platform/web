@@ -41,4 +41,4 @@ export const loginAndLink = async (data: {
     account: string;
     password: string;
     token: string;
-}): Promise<RestResult<any>> => post(`@account/auth/bind`, data);
+}): Promise<RestResult<any>> => post(`@account/auth/link/bind`, data);
