@@ -1,0 +1,25 @@
+{
+    "extends": "../../tsconfig.json",
+    "compilerOptions": {
+        "strictNullChecks": true,
+        "jsx": "preserve",
+        "paths": {
+            "@/*": [
+                "./src/*"
+            ],
+            "@clover/public/*": [
+                "../web-public/*"
+            ],
+            "@easy-kit/common/*": [
+                "../common/*"
+            ]
+        }
+    },
+    "include": [
+        "next-env.d.ts",
+        "**/*.ts",
+        "**/*.tsx",
+        ".next/types/**/*.ts",
+        "types.d.ts"
+    ]
+}

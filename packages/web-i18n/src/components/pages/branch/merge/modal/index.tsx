@@ -51,6 +51,7 @@ export const MergeBranchModal: FC<MergeBranchModalProps> = (props) => {
         setSubmitting(true);
         const { success, message } = await mergeRest({
             id: branch.id,
+            moduleId: branch.moduleId,
             deleteAfterMerge: !!deleteAfterMerge
         })
         setSubmitting(false);

@@ -29,7 +29,7 @@ export const deleteBranch = async (params: {
     id: number;
     moduleId: number;
 }): Promise<RestResult<Branch[]>> =>
-    del(`@i18n/${params.moduleId}/branch/${params.id}/delete`);
+    del(`@i18n/branch/${params.id}`);
 
 export type RenameBranchData = {
     moduleId: number;
@@ -38,13 +38,14 @@ export type RenameBranchData = {
 }
 
 export const rename = async (data: RenameBranchData): Promise<RestResult<any>> =>
-    put(`@i18n/${data.moduleId}/branch/${data.id}/rename`, data);
+    put(`@i18n/branch/${data.id}/rename`, data);
 
 export const mergeOverview = async (id: number): Promise<RestResult<BranchMergeOverview>> =>
     get(`@i18n/branch/${id}/merge/overview`);
 
 export type MergeBranchData = {
     id: number;
+    moduleId: number;
     deleteAfterMerge: boolean;
 }
 

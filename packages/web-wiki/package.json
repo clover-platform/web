@@ -1,0 +1,22 @@
+{
+    "name": "@clover/wiki",
+    "version": "0.0.1",
+    "private": true,
+    "type": "module",
+    "scripts": {
+        "dev": "next dev -p 3703",
+        "build:next": "next build",
+        "start": "next start",
+        "lint": "next lint",
+        "i18n": "tsx ./src/utils/i18n-static.ts",
+        "build": "pnpm build:next && pnpm i18n"
+    },
+    "dependencies": {},
+    "devDependencies": {},
+    "postcss": {
+        "plugins": {
+            "tailwindcss": {},
+            "autoprefixer": {}
+        }
+    }
+}
