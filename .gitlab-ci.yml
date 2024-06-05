@@ -1,10 +1,9 @@
 stages:
-    - build
     - package
     - deploy
 
-build-main:
-    stage: build
+package-main:
+    stage: package
     only:
         - main
     tags:
@@ -19,8 +18,15 @@ build-main:
     script:
         - pnpm i
         - pnpm build:main
-build-i18n:
-    stage: build
+        - docker login -u $DOCKER_USER --password $DOCKER_TOKEN $CI_REGISTRY
+        - docker build -t $CI_REGISTRY/clover/web/main:$CI_PIPELINE_ID -f ./docker/main.Dockerfile .
+        - docker tag $CI_REGISTRY/clover/web/main:$CI_PIPELINE_ID $CI_REGISTRY/clover/web/main:latest
+        - docker push $CI_REGISTRY/clover/web/main:$CI_PIPELINE_ID
+        - docker push $CI_REGISTRY/clover/web/main:latest
+        - docker rmi $CI_REGISTRY/clover/web/main:$CI_PIPELINE_ID
+        - docker rmi $CI_REGISTRY/clover/web/main:latest
+package-i18n:
+    stage: package
     only:
         - main
     tags:
@@ -35,8 +41,15 @@ build-i18n:
     script:
         - pnpm i
         - pnpm build:i18n
-build-admin:
-    stage: build
+        - docker login -u $DOCKER_USER --password $DOCKER_TOKEN $CI_REGISTRY
+        - docker build -t $CI_REGISTRY/clover/web/i18n:$CI_PIPELINE_ID -f ./docker/i18n.Dockerfile .
+        - docker tag $CI_REGISTRY/clover/web/i18n:$CI_PIPELINE_ID $CI_REGISTRY/clover/web/i18n:latest
+        - docker push $CI_REGISTRY/clover/web/i18n:$CI_PIPELINE_ID
+        - docker push $CI_REGISTRY/clover/web/i18n:latest
+        - docker rmi $CI_REGISTRY/clover/web/i18n:$CI_PIPELINE_ID
+        - docker rmi $CI_REGISTRY/clover/web/i18n:latest
+package-admin:
+    stage: package
     only:
         - main
     tags:
@@ -51,51 +64,6 @@ build-admin:
     script:
         - pnpm i
         - pnpm build:admin
-
-package-main:
-    stage: package
-    only:
-        - main
-    tags:
-        - dev
-    artifacts:
-        paths:
-            - packages/web-main/i18n/
-    script:
-        - docker login -u $DOCKER_USER --password $DOCKER_TOKEN $CI_REGISTRY
-        - docker build -t $CI_REGISTRY/clover/web/main:$CI_PIPELINE_ID -f ./docker/main.Dockerfile .
-        - docker tag $CI_REGISTRY/clover/web/main:$CI_PIPELINE_ID $CI_REGISTRY/clover/web/main:latest
-        - docker push $CI_REGISTRY/clover/web/main:$CI_PIPELINE_ID
-        - docker push $CI_REGISTRY/clover/web/main:latest
-        - docker rmi $CI_REGISTRY/clover/web/main:$CI_PIPELINE_ID
-        - docker rmi $CI_REGISTRY/clover/web/main:latest
-package-i18n:
-    stage: package
-    only:
-        - main
-    tags:
-        - dev
-    artifacts:
-        paths:
-            - packages/web-i18n/i18n/
-    script:
-        - docker login -u $DOCKER_USER --password $DOCKER_TOKEN $CI_REGISTRY
-        - docker build -t $CI_REGISTRY/clover/web/i18n:$CI_PIPELINE_ID -f ./docker/i18n.Dockerfile .
-        - docker tag $CI_REGISTRY/clover/web/i18n:$CI_PIPELINE_ID $CI_REGISTRY/clover/web/i18n:latest
-        - docker push $CI_REGISTRY/clover/web/i18n:$CI_PIPELINE_ID
-        - docker push $CI_REGISTRY/clover/web/i18n:latest
-        - docker rmi $CI_REGISTRY/clover/web/i18n:$CI_PIPELINE_ID
-        - docker rmi $CI_REGISTRY/clover/web/i18n:latest
-package-admin:
-    stage: package
-    only:
-        - main
-    tags:
-        - dev
-    artifacts:
-        paths:
-            - packages/web-admin/i18n/
-    script:
         - docker login -u $DOCKER_USER --password $DOCKER_TOKEN $CI_REGISTRY
         - docker build -t $CI_REGISTRY/clover/web/admin:$CI_PIPELINE_ID -f ./docker/admin.Dockerfile .
         - docker tag $CI_REGISTRY/clover/web/admin:$CI_PIPELINE_ID $CI_REGISTRY/clover/web/admin:latest
