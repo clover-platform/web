@@ -7,7 +7,7 @@ import {useMessage} from "@atom-ui/core";
 import {useEntriesUpdater} from "@/components/layout/worktop/hooks";
 import {save} from "@/rest/entry.result";
 
-export const useResultSubmit = () => {
+export const useResultSubmit = (): [(content: string) => Promise<any>, boolean] => {
     const entries = useRecoilValue(entriesState);
     const [current, setCurrent] = useRecoilState(currentEntryState);
     const language = useRecoilValue(currentLanguageState);

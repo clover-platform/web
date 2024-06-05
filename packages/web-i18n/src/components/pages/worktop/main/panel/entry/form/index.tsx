@@ -1,4 +1,4 @@
-import {Form, FormItem, Input} from "@atom-ui/core";
+import {Form, FormItem, Input, Textarea} from "@atom-ui/core";
 import {FC, PropsWithChildren} from "react";
 import { SCHEMA } from "@/config/pages/entry/form";
 import { MultiBranchSelect } from "@/components/pages/worktop/select/multi-branch";

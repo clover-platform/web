@@ -41,7 +41,7 @@ export interface FieldItem extends PropsWithChildren {
 export type FormValues = DeepPartial<FieldValues>;
 
 export type FormProps = FormHTMLAttributes<HTMLFormElement> & {
-    schema?: ZodObject<any> | ZodEffects<any, any>;
+    schema?: any;
     defaultValues?: object
     onSubmit?: SubmitHandler<FormValues>;
     className?: string;

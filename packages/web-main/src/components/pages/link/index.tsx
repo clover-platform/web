@@ -112,7 +112,7 @@ const LinkPage = (props: LinkPageProps) => {
                         <FormItem name={"account"} label={"{#邮箱或用户名#}"}>
                             <Input placeholder={"{#请输入邮箱或用户名#}"} />
                         </FormItem>
-                        <FormItem name={"password"} label={"{#密码#}"}>
+                        <FormItem name={"password1"} label={"{#密码#}"}>
                             <Input type={"password"} placeholder={"{#请输入密码#}"} />
                         </FormItem>
                         <Button loading={submitting} long type={"submit"}>{"{#登录并绑定#}"}</Button>

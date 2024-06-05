@@ -63,7 +63,7 @@ export const Detail = () => {
 
     const onItemClick = ({id}: DropdownMenuItemProps) => {
         if(id === "copy.key") {
-            copy(entry.key);
+            copy(entry.identifier);
             msg.success("{#复制成功#}")
         }else if(id === "copy.value") {
             copy(entry.value);
@@ -124,7 +124,7 @@ export const Detail = () => {
         </div>
         <div className={"px-4 mb-4"}>
             <Badge className={"mr-2"}>{branch?.name}</Badge>
-            <span className={"text-muted-foreground"}>{entry?.key}</span>
+            <span className={"text-muted-foreground"}>{entry?.identifier}</span>
         </div>
     </div>
 }

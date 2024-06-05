@@ -40,6 +40,7 @@ export const Dialog: FC<DialogProps> = (props) => {
 
     return <UIDialog open={visible}>
         <DialogContent
+            autoFocus={false}
             showClose={closable}
             onCloseClick={onCancel}
             onOverlayClick={maskClosable ? onCancel : () => {}}

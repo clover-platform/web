@@ -2,7 +2,7 @@ import { User } from "@clover/public/types/account";
 
 export type Entry = {
     id: number;
-    key: string;
+    identifier: string;
     value: string;
     moduleId: number;
     branchId: number;

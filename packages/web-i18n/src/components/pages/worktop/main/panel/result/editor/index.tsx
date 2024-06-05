@@ -19,7 +19,7 @@ export const Editor = () => {
     const [submit, loading] = useResultSubmit();
 
     const onSave = useCallback(async () => {
-        await submit(content);
+        await submit(content!);
     }, [content])
 
     return <div className={"w-full"}>
