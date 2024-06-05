@@ -57,9 +57,13 @@ function buildFileHandler() {
                 });
             // 处理静态资源
             const assetsDir = path.resolve(dirVars.i18nDir, staticDir + '/' + lang);
-            langKeyHandler(gulp.src(['**/*'], {
+            langKeyHandler(gulp.src(['**/*.js','**/*.css'], {
                 cwd: nextStaticDir
             }), lang).pipe(gulp.dest(assetsDir))
+            jet.copy(nextStaticDir, assetsDir, {
+                matching: ['**/media/**/*',],
+                overwrite: true
+            });
         });
     });
     return Promise.all(jobs);
