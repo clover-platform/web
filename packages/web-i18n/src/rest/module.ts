@@ -1,6 +1,6 @@
 import { RestResult } from "@easy-kit/common/types/rest";
-import {del, get, post} from "@easy-kit/common/utils/rest";
-import {InviteDetail, Language} from "@/types/pages/module";
+import {del, get, post, put} from "@easy-kit/common/utils/rest";
+import {BaseInfo, InviteDetail, Language, UpdateInfo} from "@/types/pages/module";
 
 export const list = async (params: any): Promise<RestResult<any>> =>
     get(`@i18n/module/list`, params);
@@ -19,6 +19,12 @@ export const languages = async (id: number): Promise<RestResult<Language[]>> =>
 
 export const deleteModule = async (id: number): Promise<any> =>
     del(`@i18n/module/${id}`);
+
+export const detail = async (id: number): Promise<RestResult<BaseInfo>> =>
+    get(`@i18n/module/${id}`);
+
+export const update = async (data: UpdateInfo): Promise<RestResult<BaseInfo>> =>
+    put(`@i18n/module/${data.id}`, data);
 
 export const inviteDetail = async (token: string): Promise<RestResult<InviteDetail|number>> =>
     get(`@i18n/module/invite/detail/${token}`);

@@ -8,7 +8,7 @@ import {
     FormMessage,
 } from "@atom-ui/core/components/ui/form"
 import { zodResolver } from "@hookform/resolvers/zod"
-import {ControllerRenderProps, SubmitHandler, useForm} from "react-hook-form"
+import {ControllerRenderProps, DefaultValues, SubmitHandler, useForm, UseFormReturn} from "react-hook-form"
 import {
     FC,
     PropsWithChildren,
@@ -16,14 +16,11 @@ import {
     ReactNode,
     cloneElement,
     FormHTMLAttributes,
-    forwardRef,
-    useImperativeHandle, PropsWithRef, Ref, ForwardRefExoticComponent
 } from "react";
-import { ZodObject } from "zod";
-import type { Control, FieldValues, DeepPartial, WatchObserver } from "react-hook-form";
+import type { Control, FieldValues, WatchObserver } from "react-hook-form";
 import { useMemo, Children } from "react";
 import isObject from "lodash/isObject";
-import type { ZodEffects } from "zod";
+import {ZodType} from "zod";
 import {cn} from "@atom-ui/core/lib/utils";
 
 export interface RenderProps extends ControllerRenderProps {
@@ -38,14 +35,14 @@ export interface FieldItem extends PropsWithChildren {
     className?: string;
 }
 
-export type FormValues = DeepPartial<FieldValues>;
-
-export type FormProps = FormHTMLAttributes<HTMLFormElement> & {
-    schema?: any;
-    defaultValues?: object
-    onSubmit?: SubmitHandler<FormValues>;
+export type FormProps<T> = FormHTMLAttributes<HTMLFormElement> & {
+    schema?: ZodType<T>;
+    defaultValues?: DefaultValues<T>
+    onSubmit?: SubmitHandler<T>;
     className?: string;
-    onValuesChange?: WatchObserver<FieldValues>,
+    onValuesChange?: WatchObserver<T>,
+    formRef?: UseFormReturn<T>;
+    stopPropagation?: boolean;
 }
 
 export const FormItem: FC<FieldItem> = (props) => {
@@ -80,21 +77,22 @@ export const FormItem: FC<FieldItem> = (props) => {
     />;
 }
 
-export const Form = forwardRef<any, FormProps>((props, ref) => {
+export const Form = function <T> (props: FormProps<T>) {
     const {
         schema = null,
         defaultValues = null,
         onSubmit = () => {},
         className,
         onValuesChange,
+        stopPropagation = true,
         ...rest
     } = props;
 
     const form = useForm({
         resolver: zodResolver(schema!),
-        defaultValues: defaultValues as any,
+        defaultValues: defaultValues,
     })
-    form.watch(onValuesChange as any);
+    form.watch(onValuesChange);
 
     const children = useMemo<ReactNode>(() => {
         return Children.map(props.children, (child, index) => {
@@ -111,22 +109,16 @@ export const Form = forwardRef<any, FormProps>((props, ref) => {
         })
     }, [props.children]);
 
-    useImperativeHandle(ref, () => ({
-        submit: async () => {
-            await form.trigger();
-            if(form.formState.isValid) {
-                onSubmit(form.getValues());
-            }
-        }
-    }), [form, onSubmit]);
-
     return <UIForm {...form}>
         <form
             {...rest}
-            onSubmit={form.handleSubmit(onSubmit)}
+            onSubmit={(e) => {
+                stopPropagation && e.stopPropagation();
+                form.handleSubmit(onSubmit)(e);
+            }}
             className={cn("space-y-6", className)}
         >
             { children }
         </form>
     </UIForm>
-});
+}

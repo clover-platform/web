@@ -12,7 +12,7 @@ export type Module = {
     memberSize?: number;
     targetSize?: number;
     source: string;
-    sourceSize?: number;
+    wordSize?: number;
 }
 
 export type ModuleCount = {
@@ -56,6 +56,13 @@ export type InviteDetail = {
 }
 
 export type BaseInfo = {
+    id?: number;
+    name?: string;
+    description?: string;
+}
+
+export type UpdateInfo = {
+    id: number;
     name: string;
     description: string;
 }

@@ -9,20 +9,15 @@ import {
     Button,
     Form,
     FormItem,
-    Input,
+    Input, Loading,
     Separator,
     Textarea, useAlert, useMessage
 } from "@atom-ui/core";
 import {INFO_SCHEMA} from "@/config/pages/module/form";
-import {deleteModule} from "@/rest/module";
+import {deleteModule, detail, update} from "@/rest/module";
 import {useRouter, useSearchParams} from "next/navigation";
-import {useMemo, useState} from "react";
+import {useEffect, useMemo, useRef, useState} from "react";
 import {BaseInfo} from "@/types/pages/module";
-
-const defaultValues = {
-    name: "",
-    description: ""
-};
 
 export const ModuleSettingPage = () => {
     const search = useSearchParams();
@@ -30,16 +25,42 @@ export const ModuleSettingPage = () => {
     const alert = useAlert();
     const msg = useMessage();
     const router = useRouter();
-    const [info, setInfo] = useState<BaseInfo>(defaultValues);
-    const [values, setValues] = useState<BaseInfo>(defaultValues);
-    const onSubmit = async (data: any) => {
+    const [loading, setLoading] = useState(false);
+    const [info, setInfo] = useState<BaseInfo>();
+    const [values, setValues] = useState<BaseInfo>();
+    const [formKey, setFormKey] = useState(Date.now());
+    const [submitting, setSubmitting] = useState(false);
 
+    const load = async () => {
+        setLoading(true);
+        const { success, data } = await detail(Number(id));
+        if(success) {
+            setInfo(data!);
+            setValues(data!);
+            setFormKey(Date.now());
+        }
+        setLoading(false);
     }
 
+    useEffect(() => {
+        load().then();
+    }, []);
+
     const changed = useMemo(() => {
-        // 比较两个对象的属性值一致
         return JSON.stringify(info) !== JSON.stringify(values);
     }, [info, values])
+
+    const onSubmit = async (data: BaseInfo) => {
+        data.id = info.id;
+        setSubmitting(true);
+        const { success, message } = await update(data);
+        setSubmitting(false);
+        if(success) {
+            load().then();
+        }else{
+            msg.error(message);
+        }
+    }
 
     const remove = () => {
         alert.confirm({
@@ -63,25 +84,26 @@ export const ModuleSettingPage = () => {
             border={false}
         />
         <SettingTabsTitle active={"general"} />
-        <div className={"space-y-4"}>
+        <Loading loading={loading} className={"space-y-4"}>
             <div className={"text-lg font-medium"}>{"{#基本信息#}"}</div>
-            <Form
+            <Form<BaseInfo>
+                key={formKey}
                 schema={INFO_SCHEMA}
                 onSubmit={onSubmit}
                 defaultValues={info}
-                onValuesChange={(vs) => setValues(vs as BaseInfo)}
+                onValuesChange={(vs) => setValues(vs)}
             >
                 <FormItem name="name" label="{#名称#}" description={"{#唯一标识只能是小写字母和-，小写字母开头#}"}>
-                    <Input placeholder={"{#请输入模块名称#}"} className={"max-w-96"} />
+                    <Input placeholder={"{#请输入模块名称#}"} className={"max-w-96"}/>
                 </FormItem>
                 <FormItem name="description" label="{#描述#}">
-                    <Textarea placeholder="{#请输入模块描述#}" className={"max-w-6xl"} />
+                    <Textarea placeholder="{#请输入模块描述#}" className={"max-w-6xl"}/>
                 </FormItem>
+                <div>
+                    <Button loading={submitting} disabled={!changed} variant={"default"}>{"{#保存#}"}</Button>
+                </div>
             </Form>
-            <div>
-                <Button disabled={!changed} variant={"default"}>{"{#保存#}"}</Button>
-            </div>
-            <Separator className={"!my-6"} />
+            <Separator className={"!my-6"}/>
             <div className={"text-lg font-medium"}>{"{#删除项目#}"}</div>
             <Alert variant={"destructive"}>
                 <AlertDescription className={"space-x-2"}>
@@ -92,6 +114,6 @@ export const ModuleSettingPage = () => {
             <div>
                 <Button onClick={remove} variant={"destructive"}>{"{#删除项目#}"}</Button>
             </div>
-        </div>
+        </Loading>
     </>
 }

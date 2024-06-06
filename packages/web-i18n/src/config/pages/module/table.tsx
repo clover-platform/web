@@ -34,9 +34,9 @@ export const COLUMNS: DataTableColumn<Module>[] = [
         className: "min-w-[150px]",
         cell: (cell) => {
             const data = cell.row.original;
-            const { sourceSize = 0 } = data;
+            const { wordSize = 0 } = data;
             return <div>
-                <div className={"text-base font-medium"}>{sourceSize}</div>
+                <div className={"text-base font-medium"}>{wordSize}</div>
                 <div className={"text-muted-foreground text-xs"}>{"{#词条数#}"}</div>
             </div>
         }
