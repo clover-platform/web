@@ -19,7 +19,7 @@ export const passwordSet = async (data: {
 }): Promise<RestResult<any>> => post(`@main/account/register/password/set`, data);
 
 export const sendResetEmailCode = async (email: string) =>
-    post(`@main/account/reset/email/send/`, {email});
+    post(`@main/account/reset/email/send`, {email});
 
 export const resetEmailCheck = async (data: {
     email: string;
