@@ -25,6 +25,3 @@ export const detail = async (id: number): Promise<RestResult<BaseInfo>> =>
 
 export const update = async (data: UpdateInfo): Promise<RestResult<BaseInfo>> =>
     put(`@i18n/module/${data.id}`, data);
-
-export const inviteDetail = async (token: string): Promise<RestResult<InviteDetail|number>> =>
-    get(`@i18n/module/invite/detail/${token}`);

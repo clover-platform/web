@@ -4,11 +4,11 @@ import {useLayoutState} from "@clover/public/components/layout/hooks/main";
 import {InvitePageLoading} from "@/components/pages/invite/loading";
 import {InvitePageBody} from "@/components/pages/invite/page";
 import {useEffect, useState} from "react";
-import {inviteDetail} from "@/rest/module";
 import {useSearchParams} from "next/navigation";
 import {InviteDetail} from "@/types/pages/module";
 import {InvitePageExpired} from "@/components/pages/invite/expired";
 import {InvitePageJoined} from "@/components/pages/invite/joined";
+import {detail as detailRest} from "@/rest/member.invite";
 
 export const InvitePage = () => {
     const search = useSearchParams();
@@ -22,7 +22,7 @@ export const InvitePage = () => {
 
     const load = async () => {
         setLoadingDetail(true);
-        const { success, data, code } = await inviteDetail(token!);
+        const { success, data, code } = await detailRest(token!);
         if(success) {
             setDetail(data as InviteDetail);
         }else{

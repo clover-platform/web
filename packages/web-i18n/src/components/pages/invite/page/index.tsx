@@ -46,7 +46,7 @@ export const InvitePageBody: FC<InvitePageBodyProps> = (props) => {
         <div className={"space-y-2"}>
             <div className={"space-x-2 text-muted-foreground"}>
                 <span>作为</span>
-                { detail?.roles.map((role) => <MemberRole key={role} value={Number(role)} />) }
+                { detail?.roles?.map((role) => <MemberRole key={role} value={Number(role)} />) }
                 <span>加入</span>
             </div>
             <div className={"flex justify-center items-start border shadow rounded-md p-3"}>
