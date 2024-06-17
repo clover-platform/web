@@ -84,7 +84,7 @@ export type { DividerProps } from './components/uix/divider';
 export { Button } from './components/uix/button';
 export type { ButtonProps } from './components/uix/button';
 export { Form, FormItem } from './components/uix/form';
-export type { RenderProps, FormValues, FieldItem, FormProps } from './components/uix/form';
+export type { RenderProps, FieldItem, FormProps } from './components/uix/form';
 export { useMessage } from './components/uix/message';
 export { Steps, StepsItem } from './components/uix/steps';
 export type {  StepsProps, StepsItemProps  } from './components/uix/steps';

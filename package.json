@@ -8,12 +8,15 @@
         "dev:main": "pnpm --filter @clover/main run dev",
         "dev:i18n": "pnpm --filter @clover/i18n run dev",
         "dev:admin": "pnpm --filter @clover/admin run dev",
+        "dev:wiki": "pnpm --filter @clover/wiki run dev",
         "lint:main": "pnpm --filter @clover/main run lint",
         "lint:i18n": "pnpm --filter @clover/i18n run lint",
         "lint:admin": "pnpm --filter @clover/admin run lint",
+        "lint:wiki": "pnpm --filter @clover/wiki run lint",
         "build:main": "pnpm --filter @clover/main run build",
         "build:i18n": "pnpm --filter @clover/i18n run build",
-        "build:admin": "pnpm --filter @clover/admin run build"
+        "build:admin": "pnpm --filter @clover/admin run build",
+        "build:wiki": "pnpm --filter @clover/wiki run build"
     },
     "dependencies": {
         "@arco-iconbox/react-clover": "0.0.24",
@@ -47,7 +50,9 @@
         "tailwindcss": "3.4.4",
         "tailwindcss-animate": "1.0.7",
         "tributejs": "5.1.3",
-        "zod": "3.23.8"
+        "zod": "3.23.8",
+        "zod-i18n-map": "2.27.0",
+        "i18next": "23.11.5"
     },
     "devDependencies": {
         "@types/gulp": "4.0.17",

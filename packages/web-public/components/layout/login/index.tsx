@@ -3,17 +3,20 @@ import Logo from "@clover/public/components/common/logo";
 import classNames from "classnames";
 import Link from "@easy-kit/common/components/link";
 import { LangSelect } from "@clover/public/components/common/select/lang";
+import {useLayoutProps} from "@clover/public/components/layout/hooks/use.layout.props";
 
 export type LoginLayoutProps = PropsWithChildren<{
     title?: string;
     showLogo?: boolean;
 }>;
 
-export const LoginLayout: FC<LoginLayoutProps> = (props) => {
+export const LoginLayout: FC<LoginLayoutProps> = (originProps) => {
+    const props = useLayoutProps<LoginLayoutProps>(originProps);
     const {
         title= "{#幸运草#}",
         showLogo= true
     } = props;
+
     return <div className={"flex justify-center w-full min-h-[100vh] flex-col"}>
         <div className={"flex-1 flex justify-center items-center flex-col p-4 mb-[--login-footer-height]"}>
             {

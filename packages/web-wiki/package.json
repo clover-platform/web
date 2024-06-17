@@ -11,8 +11,18 @@
         "i18n": "tsx ./src/utils/i18n-static.ts",
         "build": "pnpm build:next && pnpm i18n"
     },
-    "dependencies": {},
-    "devDependencies": {},
+    "dependencies": {
+        "@tiptap/extension-bubble-menu": "^2.4.0",
+        "@tiptap/extension-character-count": "^2.4.0",
+        "@tiptap/extension-document": "^2.4.0",
+        "@tiptap/extension-paragraph": "^2.4.0",
+        "@tiptap/extension-placeholder": "^2.4.0",
+        "@tiptap/extension-text": "^2.4.0",
+        "@tiptap/extension-typography": "^2.4.0",
+        "@tiptap/pm": "^2.4.0",
+        "@tiptap/react": "^2.4.0",
+        "@tiptap/starter-kit": "^2.4.0"
+    },
     "postcss": {
         "plugins": {
             "tailwindcss": {},
