@@ -7,8 +7,24 @@ import ModuleForm from "@/components/pages/module/form";
 import { useState } from "react";
 import {create} from "@/rest/module";
 import {useRouter} from "next/navigation";
+import {useLayoutConfig} from "@clover/public/components/layout/hooks/use.layout.config";
+import {MainLayoutProps} from "@/components/layout/main";
 
 export const CreateModulePage = () => {
+    useLayoutConfig<MainLayoutProps>({
+        active: "i18n",
+        path: [
+            {
+                title: "{#国际化#}",
+                type: "link",
+                href: "/{#LANG#}/i18n/"
+            },
+            {
+                title: "{#创建模块#}",
+                type: "item",
+            }
+        ],
+    })
     const [loading, setLoading] = useState(false);
     const msg = useMessage();
     const router = useRouter();

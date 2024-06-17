@@ -7,8 +7,25 @@ import {useState} from "react";
 import {BundleForm} from "@/components/pages/bundle/form";
 import { create, AddBundleData } from "@/rest/bundle";
 import { useRouter, useSearchParams } from "next/navigation";
+import {useLayoutConfig} from "@clover/public/components/layout/hooks/use.layout.config";
+import {ModuleLayoutProps} from "@/components/layout/module";
 
 export const AddBundlePage = () => {
+    useLayoutConfig<ModuleLayoutProps>({
+        active: "download",
+        path: [
+            {
+                title: "{#下载#}",
+                type: "link",
+                href: "/{#LANG#}/i18n/bundle/",
+                withQuery: true,
+            },
+            {
+                title: "{#添加文件#}",
+                type: "item",
+            }
+        ],
+    })
     const search = useSearchParams();
     const id = search.get("id");
     const [loading, setLoading] = useState(false);

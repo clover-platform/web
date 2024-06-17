@@ -8,8 +8,20 @@ import dayjs from 'dayjs';
 import {ActivityList} from "@/components/pages/activity/list";
 import {Button} from "@atom-ui/core";
 import {useSearchParams} from "next/navigation";
+import {useLayoutConfig} from "@clover/public/components/layout/hooks/use.layout.config";
+import {MainLayoutProps} from "@/components/layout/main";
+import {ModuleLayoutProps} from "@/components/layout/module";
 
 export const ActivityPage = () => {
+    useLayoutConfig<ModuleLayoutProps>({
+        active: "activity",
+        path: [
+            {
+                title: "{#动态#}",
+                type: "item",
+            }
+        ],
+    })
     const search = useSearchParams();
     const id = search.get('id');
     const [loading, setLoading] = useState(false);

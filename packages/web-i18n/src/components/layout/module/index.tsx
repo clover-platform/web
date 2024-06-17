@@ -4,6 +4,7 @@ import { NAV_MENUS } from "@/config/layout/module";
 import { useSearchParams } from "next/navigation";
 import { cloneDeep } from "lodash";
 import { useLanguagesInit } from "@/hooks/use.languages.init";
+import {useLayoutProps} from "@clover/public/components/layout/hooks/use.layout.props";
 
 export type ModuleLayoutProps = {
     active?: string;
@@ -11,7 +12,8 @@ export type ModuleLayoutProps = {
     className?: string;
 } & PropsWithChildren;
 
-export const ModuleLayout: FC<ModuleLayoutProps> = (props) => {
+export const ModuleLayout: FC<ModuleLayoutProps> = (origin) => {
+    const props = useLayoutProps<ModuleLayoutProps>(origin);
     const search = useSearchParams();
     const id = search.get("id");
     useLanguagesInit();

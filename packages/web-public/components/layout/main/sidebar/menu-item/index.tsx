@@ -1,4 +1,4 @@
-import {cloneElement, FC, ReactElement, useState} from "react";
+import {cloneElement, FC, ReactElement, useEffect, useState} from "react";
 import {cn, HoverCard, HoverCardContent, HoverCardTrigger} from "@atom-ui/core";
 import Link from "next/link";
 import { ChevronRightIcon } from '@radix-ui/react-icons';
@@ -34,6 +34,9 @@ export const MenuItem: FC<MenuItemProps> = (props) => {
 
     const hasActive = hasActiveChild(children, active);
     const [open, setOpen] = useState(hasActive);
+    useEffect(() => {
+        setOpen(hasActiveChild(children, active));
+    }, [children, active])
 
     const iconClassName = "flex justify-center items-center w-4 h-4 transform-all duration-200 ease";
 

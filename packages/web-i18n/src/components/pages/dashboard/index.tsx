@@ -26,8 +26,19 @@ import {Member, ModuleCount, ModuleDetail} from "@/types/pages/module";
 import { useRecoilValue } from "recoil";
 import { languagesState } from "@/state/public";
 import {Language, LanguageWithCount} from "@/types/pages/public";
+import {useLayoutConfig} from "@clover/public/components/layout/hooks/use.layout.config";
+import {ModuleLayoutProps} from "@/components/layout/module";
 
 export const DashboardPage = () => {
+    useLayoutConfig<ModuleLayoutProps>({
+        active: "dashboard",
+        path: [
+            {
+                title: "{#概览#}",
+                type: "item",
+            }
+        ],
+    })
     const search = useSearchParams();
     const id = search.get("id");
     const router = useRouter();

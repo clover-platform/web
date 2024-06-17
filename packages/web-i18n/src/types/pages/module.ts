@@ -62,7 +62,7 @@ export type BaseInfo = {
 }
 
 export type UpdateInfo = {
-    id: number;
-    name: string;
-    description: string;
+    id?: number;
+    name?: string;
+    description?: string;
 }

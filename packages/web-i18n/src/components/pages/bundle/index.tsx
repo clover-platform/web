@@ -10,10 +10,21 @@ import {useSearchParams} from "next/navigation";
 import {useEffect} from "react";
 import {IconAdd} from "@arco-iconbox/react-clover";
 import Link from "next/link";
+import {useLayoutConfig} from "@clover/public/components/layout/hooks/use.layout.config";
+import {ModuleLayoutProps} from "@/components/layout/module";
 
 const initialParams = {};
 
 export const BundlePage = () => {
+    useLayoutConfig<ModuleLayoutProps>({
+        active: "download",
+        path: [
+            {
+                title: "{#下载#}",
+                type: "item",
+            }
+        ],
+    })
     const search = useSearchParams();
     const id = search.get('id');
     const [loading, result, query, load] = useTableLoader({

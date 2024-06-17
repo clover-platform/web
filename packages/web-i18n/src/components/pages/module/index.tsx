@@ -5,19 +5,30 @@ import {Button, DataTable, Space, useAlert, useMessage} from "@atom-ui/core";
 import Link from "next/link";
 import { useTableLoader } from "@easy-kit/common/hooks";
 import { COLUMNS, FILTERS, ROW_ACTIONS } from "@/config/pages/module/table";
-import {deleteModule, list} from "@/rest/module";
+import {list} from "@/rest/module";
 import {useEffect, useState} from "react";
 import {TabsTitle} from "@clover/public/components/common/tabs-title";
 import {TABS} from "@/config/pages/module/tabs";
 import { useRouter, useSearchParams } from "next/navigation";
 import {Module} from "@/types/pages/module";
 import {useProfile} from "@clover/public/hooks/account";
+import {useLayoutConfig} from "@clover/public/components/layout/hooks/use.layout.config";
+import {MainLayoutProps} from "@/components/layout/main";
 
 const initialParams = {
     keyword: '',
 }
 
 export const ModulePage = () => {
+    useLayoutConfig<MainLayoutProps>({
+        active: "i18n",
+        path: [
+            {
+                title: "{#国际化#}",
+                type: "item",
+            }
+        ],
+    })
     const profile = useProfile();
     const router = useRouter();
     const search = useSearchParams();

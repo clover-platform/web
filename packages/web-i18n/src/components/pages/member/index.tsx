@@ -11,12 +11,23 @@ import { TABS } from "@/config/pages/member/tabs";
 import { COLUMNS, FILTERS, ROW_ACTIONS } from "@/config/pages/member/table";
 import { Member } from "@/types/pages/member";
 import { InviteButton } from "@/components/pages/member/invite/button";
+import {useLayoutConfig} from "@clover/public/components/layout/hooks/use.layout.config";
+import {ModuleLayoutProps} from "@/components/layout/module";
 
 const initialParams = {
     keyword: '',
 }
 
 export const MemberPage = () => {
+    useLayoutConfig<ModuleLayoutProps>({
+        active: "member",
+        path: [
+            {
+                title: "{#成员#}",
+                type: "item",
+            }
+        ],
+    })
     const search = useSearchParams();
     const id = search.get('id');
     const type = search.get('type') || 'all';

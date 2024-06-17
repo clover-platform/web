@@ -11,12 +11,23 @@ import { NewBranchButton } from "@/components/pages/branch/new/button";
 import { Branch } from "@/types/pages/branch";
 import { RenameBranchModal } from "@/components/pages/branch/rename/modal";
 import {MergeBranchModal} from "@/components/pages/branch/merge/modal";
+import {useLayoutConfig} from "@clover/public/components/layout/hooks/use.layout.config";
+import {ModuleLayoutProps} from "@/components/layout/module";
 
 const initialParams = {
     keyword: '',
 }
 
 export const ModuleBranchPage = () => {
+    useLayoutConfig<ModuleLayoutProps>({
+        active: "branch",
+        path: [
+            {
+                title: "{#分支#}",
+                type: "item",
+            }
+        ],
+    })
     const search = useSearchParams();
     const id = search.get('id');
     const [loading, result, query, load] = useTableLoader({

@@ -17,9 +17,26 @@ import {INFO_SCHEMA} from "@/config/pages/module/form";
 import {deleteModule, detail, update} from "@/rest/module";
 import {useRouter, useSearchParams} from "next/navigation";
 import {useEffect, useMemo, useRef, useState} from "react";
-import {BaseInfo} from "@/types/pages/module";
+import {BaseInfo, UpdateInfo} from "@/types/pages/module";
+import {useLayoutConfig} from "@clover/public/components/layout/hooks/use.layout.config";
+import {ModuleLayoutProps} from "@/components/layout/module";
 
 export const ModuleSettingPage = () => {
+    useLayoutConfig<ModuleLayoutProps>({
+        active: "setting",
+        path: [
+            {
+                title: "{#设置#}",
+                type: "link",
+                href: "/{#LANG#}/i18n/setting/",
+                withQuery: true,
+            },
+            {
+                title: "{#常规#}",
+                type: "item",
+            }
+        ],
+    })
     const search = useSearchParams();
     const id = search.get("id");
     const alert = useAlert();
@@ -50,8 +67,8 @@ export const ModuleSettingPage = () => {
         return JSON.stringify(info) !== JSON.stringify(values);
     }, [info, values])
 
-    const onSubmit = async (data: BaseInfo) => {
-        data.id = info.id;
+    const onSubmit = async (data: UpdateInfo) => {
+        data.id = info?.id!;
         setSubmitting(true);
         const { success, message } = await update(data);
         setSubmitting(false);
@@ -86,7 +103,7 @@ export const ModuleSettingPage = () => {
         <SettingTabsTitle active={"general"} />
         <Loading loading={loading} className={"space-y-4"}>
             <div className={"text-lg font-medium"}>{"{#基本信息#}"}</div>
-            <Form<BaseInfo>
+            <Form<UpdateInfo>
                 key={formKey}
                 schema={INFO_SCHEMA}
                 onSubmit={onSubmit}
