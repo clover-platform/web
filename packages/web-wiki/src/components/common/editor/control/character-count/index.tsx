@@ -1,8 +1,8 @@
-import {BubbleMenuPluginProps} from "@tiptap/extension-bubble-menu";
 import {FC} from "react";
+import {Editor} from '@tiptap/core'
 
 export type CharacterCountControlProps = {
-    editor: BubbleMenuPluginProps['editor'] | null;
+    editor: Editor | null;
     limit: number;
 }
 

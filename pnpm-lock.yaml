@@ -481,6 +481,9 @@ importers:
 
   packages/web-wiki:
     dependencies:
+      '@tiptap/core':
+        specifier: ^2.4.0
+        version: 2.4.0(@tiptap/pm@2.4.0)
       '@tiptap/extension-bubble-menu':
         specifier: ^2.4.0
         version: 2.4.0(@tiptap/core@2.4.0(@tiptap/pm@2.4.0))(@tiptap/pm@2.4.0)
@@ -511,6 +514,9 @@ importers:
       '@tiptap/starter-kit':
         specifier: ^2.4.0
         version: 2.4.0(@tiptap/pm@2.4.0)
+      tippy.js:
+        specifier: ^6.3.7
+        version: 6.3.7
 
 packages:
 

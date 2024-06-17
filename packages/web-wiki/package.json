@@ -12,6 +12,7 @@
         "build": "pnpm build:next && pnpm i18n"
     },
     "dependencies": {
+        "@tiptap/core": "^2.4.0",
         "@tiptap/extension-bubble-menu": "^2.4.0",
         "@tiptap/extension-character-count": "^2.4.0",
         "@tiptap/extension-document": "^2.4.0",
@@ -21,7 +22,8 @@
         "@tiptap/extension-typography": "^2.4.0",
         "@tiptap/pm": "^2.4.0",
         "@tiptap/react": "^2.4.0",
-        "@tiptap/starter-kit": "^2.4.0"
+        "@tiptap/starter-kit": "^2.4.0",
+        "tippy.js": "^6.3.7"
     },
     "postcss": {
         "plugins": {
