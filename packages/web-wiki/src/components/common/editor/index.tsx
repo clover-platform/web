@@ -1,27 +1,21 @@
 import { useEditor, EditorContent } from '@tiptap/react'
 import StarterKit from '@tiptap/starter-kit'
 import CharacterCount from '@tiptap/extension-character-count'
-import Document from '@tiptap/extension-document'
-import Paragraph from '@tiptap/extension-paragraph'
-import Text from '@tiptap/extension-text'
 import { BubbleMenuControl } from './control/bubble-menu'
-import {CharacterCountControl} from "@/components/common/editor/control/character-count";
+import { CharacterCountControl } from "@/components/common/editor/control/character-count";
 import Placeholder from '@tiptap/extension-placeholder'
 import Typography from '@tiptap/extension-typography'
-import {useRef} from "react";
-import {initParagraphHandler} from "@/components/common/editor/utils";
+import styles from './style.module.scss';
+import "./style.scss";
+import GlobalDragHandle from 'tiptap-extension-global-drag-handle'
+import AutoJoiner from 'tiptap-extension-auto-joiner'
 
 export const limit = 500;
 
 export const Editor = () => {
-    const containerRef = useRef<HTMLDivElement>(null);
-
     const editor = useEditor({
         extensions: [
             StarterKit,
-            Document,
-            Paragraph,
-            Text,
             CharacterCount.configure({
                 limit,
             }),
@@ -29,16 +23,19 @@ export const Editor = () => {
                 placeholder: 'Write something …',
             }),
             Typography,
+            GlobalDragHandle,
+            AutoJoiner,
         ],
-        content: '<p>Hello World! 🌎️</p>',
-        onUpdate: ({ editor }) => {
-            initParagraphHandler(containerRef, editor);
-        }
+        content: '<p>Hello World! 🌎️</p>' +
+            '<ul>' +
+            '   <li>asas</li>' +
+            '   <li>asssssss</li>' +
+            '</ul>'
     })
 
-    return <div ref={containerRef}>
+    return <div className={styles.editorContainer}>
         <BubbleMenuControl editor={editor} />
-        <EditorContent className={"editor"} editor={editor} />
+        <EditorContent className={styles.editor} editor={editor} />
         <CharacterCountControl editor={editor} limit={limit} />
     </div>
 }

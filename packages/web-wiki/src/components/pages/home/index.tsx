@@ -8,7 +8,7 @@ export const IndexPage = () => {
     useLayoutConfig<MainLayoutProps>({
         active: "wiki"
     })
-    return <div>
+    return <div className={"flex justify-center"}>
         <Editor />
     </div>
 }
