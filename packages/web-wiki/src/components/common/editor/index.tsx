@@ -10,6 +10,7 @@ import GlobalDragHandle from "@/components/common/editor/extension/global-drag-h
 import {Action} from "@clover/public/components/common/action";
 import {HamburgerMenuIcon, PlusIcon} from "@radix-ui/react-icons";
 import "./editor.css";
+import SlashCommand from "@/components/common/editor/extension/slash-command";
 
 export const limit = 500;
 
@@ -28,6 +29,7 @@ export const Editor = () => {
                 dragHandleSelector: '#drag-handle',
                 offsetTop: -48-16
             }),
+            SlashCommand,
         ],
         content: '<p>Hello World! 🌎️</p>' +
             '<ul>' +
