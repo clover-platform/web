@@ -1,3 +1,5 @@
+import styles from './style.module.scss';
+import "./editor.css";
 import { useEditor, EditorContent } from '@tiptap/react'
 import StarterKit from '@tiptap/starter-kit'
 import CharacterCount from '@tiptap/extension-character-count'
@@ -5,16 +7,19 @@ import { BubbleMenuControl } from './control/bubble-menu'
 import { CharacterCountControl } from "@/components/common/editor/control/character-count";
 import Placeholder from '@tiptap/extension-placeholder'
 import Typography from '@tiptap/extension-typography'
-import styles from './style.module.scss';
 import GlobalDragHandle from "@/components/common/editor/extension/global-drag-handle";
-import {Action} from "@clover/public/components/common/action";
-import {HamburgerMenuIcon, PlusIcon} from "@radix-ui/react-icons";
-import "./editor.css";
 import SlashCommand from "@/components/common/editor/extension/slash-command";
+import {DragHandleControl} from "@/components/common/editor/control/drag-handle";
+import {useHandleId} from "@/components/common/editor/control/drag-handle/use.handle.id";
+import {Node} from "@tiptap/pm/model";
+import {useData} from "@/components/common/editor/control/drag-handle/use.data";
 
 export const limit = 500;
 
 export const Editor = () => {
+    const handleId = useHandleId();
+    const data = useData();
+
     const editor = useEditor({
         extensions: [
             StarterKit,
@@ -22,12 +27,15 @@ export const Editor = () => {
                 limit,
             }),
             Placeholder.configure({
-                placeholder: 'Write something …',
+                placeholder: "{#输入 / 快速插入#}",
             }),
             Typography,
             GlobalDragHandle.configure({
-                dragHandleSelector: '#drag-handle',
-                offsetTop: -48-16
+                dragHandleSelector: `#${handleId}`,
+                offsetTop: -48-16,
+                onNodeChange: (node: Node, pos: number) => {
+                    data.handleNodeChange({node, pos, editor: editor!});
+                }
             }),
             SlashCommand,
         ],
@@ -39,18 +47,9 @@ export const Editor = () => {
     })
 
     return <div className={styles.editorContainer}>
-        <BubbleMenuControl editor={editor} />
+        <BubbleMenuControl editor={editor!} />
         <EditorContent className={styles.editor} editor={editor} />
-        <CharacterCountControl editor={editor} limit={limit} />
-        <div id={"drag-handle"} className={"absolute bg-black !left-0"}>
-            <div className={"absolute right-2 top-0 space-x-2 flex"}>
-                <Action className={"w-6 h-6 !p-0"}>
-                    <PlusIcon />
-                </Action>
-                <Action className={"w-6 h-6 !p-0"}>
-                    <HamburgerMenuIcon />
-                </Action>
-            </div>
-        </div>
+        <CharacterCountControl editor={editor!} limit={limit} />
+        <DragHandleControl data={data} editor={editor!} id={handleId} />
     </div>
 }

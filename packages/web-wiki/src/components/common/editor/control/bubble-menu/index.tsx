@@ -1,9 +1,9 @@
 import {BubbleMenu} from "@tiptap/react";
-import {Editor} from '@tiptap/core'
+import { Editor } from '@tiptap/react'
 import {FC} from "react";
 
 export type BubbleMenuControlProps = {
-    editor: Editor | null;
+    editor: Editor;
 }
 
 export const BubbleMenuControl: FC<BubbleMenuControlProps> = (props) => {

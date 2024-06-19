@@ -23,6 +23,7 @@ export interface GlobalDragHandleOptions {
     dragHandleSelector?: string;
 
     offsetTop: number;
+    onNodeChange?: (node: Node | null, pos: number) => void;
 }
 function absoluteRect(node: Element) {
     const data = node.getBoundingClientRect();
@@ -77,7 +78,14 @@ function nodePosAtDOM(
 
 function calcNodePos(pos: number, view: EditorView) {
     const $pos = view.state.doc.resolve(pos);
+    console.log(pos, $pos, $pos.before($pos.depth));
     if ($pos.depth > 1) return $pos.before($pos.depth);
+    return pos;
+}
+
+function calcTopLevelNodePos(pos: number, view: EditorView) {
+    const $pos = view.state.doc.resolve(pos);
+    if ($pos.depth > 1) return $pos.before($pos.depth - 1);
     return pos;
 }
 
@@ -166,13 +174,13 @@ export function DragHandlePlugin(options: GlobalDragHandleOptions & {pluginKey: 
 
     function hideDragHandle() {
         if (dragHandleElement) {
-            dragHandleElement.classList.add('hide');
+            dragHandleElement.classList.add('hidden');
         }
     }
 
     function showDragHandle() {
         if (dragHandleElement) {
-            dragHandleElement.classList.remove('hide');
+            dragHandleElement.classList.remove('hidden');
         }
     }
 
@@ -266,6 +274,12 @@ export function DragHandlePlugin(options: GlobalDragHandleOptions & {pluginKey: 
                     dragHandleElement.style.left = `${rect.left - rect.width}px`;
                     dragHandleElement.style.top = `${rect.top + options.offsetTop}px`;
                     showDragHandle();
+
+                    let draggedNodePos = nodePosAtDOM(node, view, options);
+                    if (draggedNodePos == null) return;
+                    draggedNodePos = calcTopLevelNodePos(draggedNodePos, view);
+                    const nodePos = view.state.doc.resolve(draggedNodePos);
+                    options.onNodeChange?.(nodePos.node(), draggedNodePos);
                 },
                 keydown: () => {
                     hideDragHandle();
@@ -351,6 +365,7 @@ const GlobalDragHandle = Extension.create({
                 scrollTreshold: this.options.scrollTreshold,
                 dragHandleSelector: this.options.dragHandleSelector,
                 offsetTop: this.options.offsetTop,
+                onNodeChange: this.options.onNodeChange,
             }),
         ];
     },

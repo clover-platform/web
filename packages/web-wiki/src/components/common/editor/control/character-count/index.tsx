@@ -1,8 +1,8 @@
 import {FC} from "react";
-import {Editor} from '@tiptap/core'
+import { Editor } from '@tiptap/react'
 
 export type CharacterCountControlProps = {
-    editor: Editor | null;
+    editor: Editor;
     limit: number;
 }
 
