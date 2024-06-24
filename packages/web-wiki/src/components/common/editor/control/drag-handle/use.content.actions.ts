@@ -1,9 +1,12 @@
-import { Node } from '@tiptap/pm/model'
+import { ResolvedPos } from '@tiptap/pm/model'
 import { NodeSelection } from '@tiptap/pm/state'
 import { Editor } from '@tiptap/react'
 import { useCallback } from 'react'
 
-export const useContentActions = (editor: Editor, currentNode: Node | null, currentNodePos: number) => {
+export const useContentActions = (editor: Editor, currentResolvedPos: ResolvedPos) => {
+    const currentNode = currentResolvedPos?.node();
+    const currentNodePos = currentResolvedPos?.depth == 0 ? currentResolvedPos?.pos : currentResolvedPos?.before();
+
     const resetTextFormatting = useCallback(() => {
         const chain = editor.chain()
 
@@ -40,26 +43,23 @@ export const useContentActions = (editor: Editor, currentNode: Node | null, curr
     }, [editor, currentNodePos])
 
     const handleAdd = useCallback(() => {
-        if (currentNodePos !== -1) {
-            const currentNodeSize = currentNode?.nodeSize || 0
-            console.log(currentNode?.nodeSize);
-            const insertPos = currentNodePos + currentNodeSize
+        const nodePos = currentResolvedPos?.depth == 0 ? currentResolvedPos.pos + 1 : currentResolvedPos.after(1);
+        if (nodePos !== -1) {
+            const insertPos = nodePos;
             const currentNodeIsEmptyParagraph = currentNode?.type.name === 'paragraph' && currentNode?.content?.size === 0
-            const focusPos = currentNodeIsEmptyParagraph ? currentNodePos + 2 : insertPos + 2
+            const focusPos = currentNodeIsEmptyParagraph ? nodePos : nodePos + 2;
 
             editor
                 .chain()
                 .command(({ dispatch, tr, state }) => {
                     if (dispatch) {
                         if (currentNodeIsEmptyParagraph) {
-                            tr.insertText('/', currentNodePos, currentNodePos + 1)
+                            tr.insertText('/', currentResolvedPos.pos, currentResolvedPos.pos + 1)
                         } else {
                             tr.insert(insertPos, state.schema.nodes.paragraph.create(null, [state.schema.text('/')]))
                         }
-
                         return dispatch(tr)
                     }
-
                     return true
                 })
                 .focus(focusPos)

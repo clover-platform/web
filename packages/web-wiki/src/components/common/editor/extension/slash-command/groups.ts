@@ -3,21 +3,21 @@ import { Group } from './types'
 export const GROUPS: Group[] = [
     {
         name: 'ai',
-        title: 'AI',
+        title: '{#AI#}',
         commands: [
             {
                 name: 'aiWriter',
-                label: 'AI Writer',
+                label: "{#内容生成#}",
                 iconName: 'Sparkles',
-                description: 'Let AI finish your thoughts',
+                description: "{#让AI完成你的想法#}",
                 shouldBeHidden: editor => editor.isActive('columns'),
                 action: editor => editor.chain().focus()//.setAiWriter().run(),
             },
             {
                 name: 'aiImage',
-                label: 'AI Image',
+                label: "{#图片生成#}",
                 iconName: 'Sparkles',
-                description: 'Generate an image from text',
+                description: "{#从文本生成图像#}",
                 shouldBeHidden: editor => editor.isActive('columns'),
                 action: editor => editor.chain().focus()//.setAiImage().run(),
             },
@@ -25,13 +25,13 @@ export const GROUPS: Group[] = [
     },
     {
         name: 'format',
-        title: 'Format',
+        title: '{#格式#}',
         commands: [
             {
                 name: 'heading1',
-                label: 'Heading 1',
+                label: "{#标题一#}",
                 iconName: 'Heading1',
-                description: 'High priority section title',
+                description: "{#高优先级部分标题#}",
                 aliases: ['h1'],
                 action: editor => {
                     editor.chain().focus().setHeading({ level: 1 }).run()
@@ -39,9 +39,9 @@ export const GROUPS: Group[] = [
             },
             {
                 name: 'heading2',
-                label: 'Heading 2',
+                label: "{#标题二#}",
                 iconName: 'Heading2',
-                description: 'Medium priority section title',
+                description: "{#中等优先级部分标题#}",
                 aliases: ['h2'],
                 action: editor => {
                     editor.chain().focus().setHeading({ level: 2 }).run()
@@ -49,9 +49,9 @@ export const GROUPS: Group[] = [
             },
             {
                 name: 'heading3',
-                label: 'Heading 3',
+                label: "{#标题三#}",
                 iconName: 'Heading3',
-                description: 'Low priority section title',
+                description: "{#低优先级部分标题#}",
                 aliases: ['h3'],
                 action: editor => {
                     editor.chain().focus().setHeading({ level: 3 }).run()
@@ -59,9 +59,9 @@ export const GROUPS: Group[] = [
             },
             {
                 name: 'bulletList',
-                label: 'Bullet List',
+                label: "{#符号列表#}",
                 iconName: 'List',
-                description: 'Unordered list of items',
+                description: "{#无序列表#}",
                 aliases: ['ul'],
                 action: editor => {
                     editor.chain().focus().toggleBulletList().run()
@@ -69,9 +69,9 @@ export const GROUPS: Group[] = [
             },
             {
                 name: 'numberedList',
-                label: 'Numbered List',
+                label: "{#编号列表#}",
                 iconName: 'ListOrdered',
-                description: 'Ordered list of items',
+                description: "{#有序列表#}",
                 aliases: ['ol'],
                 action: editor => {
                     editor.chain().focus().toggleOrderedList().run()
@@ -79,28 +79,28 @@ export const GROUPS: Group[] = [
             },
             {
                 name: 'taskList',
-                label: 'Task List',
+                label: "{#代办列表#}",
                 iconName: 'ListTodo',
-                description: 'Task list with todo items',
+                description: "{#包含待办事项的任务列表#}",
                 aliases: ['todo'],
                 action: editor => {
-                    editor.chain().focus()//.toggleTaskList().run()
+                    editor.chain().focus().toggleTaskList().run()
                 },
             },
             {
                 name: 'blockquote',
-                label: 'Blockquote',
+                label: "{#引用#}",
                 iconName: 'Quote',
-                description: 'Element for quoting',
+                description: "{#引用元素#}",
                 action: editor => {
                     editor.chain().focus().setBlockquote().run()
                 },
             },
             {
                 name: 'codeBlock',
-                label: 'Code Block',
+                label: "{#代码块#}",
                 iconName: 'SquareCode',
-                description: 'Code block with syntax highlighting',
+                description: "{#带语法高亮的代码块#}",
                 shouldBeHidden: editor => editor.isActive('columns'),
                 action: editor => {
                     editor.chain().focus().setCodeBlock().run()
@@ -110,65 +110,65 @@ export const GROUPS: Group[] = [
     },
     {
         name: 'insert',
-        title: 'Insert',
+        title: '{#插入#}',
         commands: [
             {
                 name: 'table',
-                label: 'Table',
+                label: "{#表格#}",
                 iconName: 'Table',
-                description: 'Insert a table',
+                description: "{#插入表格#}",
                 shouldBeHidden: editor => editor.isActive('columns'),
                 action: editor => {
-                    editor.chain().focus()//.insertTable({ rows: 3, cols: 3, withHeaderRow: false }).run()
+                    editor.chain().focus().insertTable({ rows: 3, cols: 3, withHeaderRow: false }).run()
                 },
             },
             {
                 name: 'image',
-                label: 'Image',
+                label: "{#图片#}",
                 iconName: 'Image',
-                description: 'Insert an image',
+                description: "{#插入图片#}",
                 aliases: ['img'],
                 action: editor => {
                     editor.chain().focus()//.setImageUpload().run()
                 },
             },
-            {
-                name: 'columns',
-                label: 'Columns',
-                iconName: 'Columns2',
-                description: 'Add two column content',
-                aliases: ['cols'],
-                shouldBeHidden: editor => editor.isActive('columns'),
-                action: editor => {
-                    editor
-                        .chain()
-                        .focus()
-                        //.setColumns()
-                        .focus(editor.state.selection.head - 1)
-                        .run()
-                },
-            },
+            // {
+            //     name: 'columns',
+            //     label: "{#列#}",
+            //     iconName: 'Columns2',
+            //     description: "{#添加两列内容#}",
+            //     aliases: ['cols'],
+            //     shouldBeHidden: editor => editor.isActive('columns'),
+            //     action: editor => {
+            //         editor
+            //             .chain()
+            //             .focus()
+            //             //.setColumns()
+            //             .focus(editor.state.selection.head - 1)
+            //             .run()
+            //     },
+            // },
             {
                 name: 'horizontalRule',
-                label: 'Horizontal Rule',
+                label: "{#水平线#}",
                 iconName: 'Minus',
-                description: 'Insert a horizontal divider',
+                description: "{#插入一条水平分割线#}",
                 aliases: ['hr'],
                 action: editor => {
                     editor.chain().focus().setHorizontalRule().run()
                 },
             },
-            {
-                name: 'toc',
-                label: 'Table of Contents',
-                iconName: 'Book',
-                aliases: ['outline'],
-                description: 'Insert a table of contents',
-                shouldBeHidden: editor => editor.isActive('columns'),
-                action: editor => {
-                    editor.chain().focus()//.insertTableOfContents().run()
-                },
-            },
+            // {
+            //     name: 'toc',
+            //     label: "{#表格内容#}",
+            //     iconName: 'Book',
+            //     aliases: ['outline'],
+            //     description: "{#插入表格内容#}",
+            //     shouldBeHidden: editor => editor.isActive('columns'),
+            //     action: editor => {
+            //         editor.chain().focus()//.insertTableOfContents().run()
+            //     },
+            // },
         ],
     },
 ]

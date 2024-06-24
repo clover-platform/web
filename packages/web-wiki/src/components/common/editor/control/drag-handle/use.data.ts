@@ -1,33 +1,25 @@
-import { Node } from '@tiptap/pm/model'
-import { Editor } from '@tiptap/core'
+import {ResolvedPos} from '@tiptap/pm/model'
 import { useCallback, useState } from 'react'
 
-export type NodeChangeData = {
-    node: Node | null; editor: Editor; pos: number
-}
-
 export type NodeData = {
-    currentNode: Node | null;
-    currentNodePos: number;
-    handleNodeChange: (data: NodeChangeData) => void;
+    currentNode?: ResolvedPos;
+    handleNodeChange: (node: ResolvedPos) => void;
+    setHidden: (hidden: boolean) => void;
+    hidden: boolean;
 }
 
 export const useData = (): NodeData => {
-    const [currentNode, setCurrentNode] = useState<Node | null>(null)
-    const [currentNodePos, setCurrentNodePos] = useState<number>(-1)
+    const [currentNode, setCurrentNode] = useState<ResolvedPos>();
+    const [hidden, setHidden] = useState(false);
 
-    const handleNodeChange = useCallback((data: NodeChangeData) => {
-            if (data.node) {
-                setCurrentNode(data.node)
-            }
-            setCurrentNodePos(data.pos)
-        },
-        [setCurrentNodePos, setCurrentNode],
-    )
+    const handleNodeChange = useCallback((node: ResolvedPos) => {
+        setCurrentNode(node)
+    }, [setCurrentNode],)
 
     return {
         currentNode,
-        currentNodePos,
         handleNodeChange,
+        setHidden,
+        hidden
     }
 }

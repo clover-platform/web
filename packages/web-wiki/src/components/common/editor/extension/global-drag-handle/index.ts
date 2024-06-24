@@ -1,6 +1,6 @@
 import { Extension } from '@tiptap/core';
 import { NodeSelection, Plugin, PluginKey, TextSelection } from '@tiptap/pm/state';
-import { Fragment, Slice, Node } from '@tiptap/pm/model';
+import { Fragment, Slice, Node, ResolvedPos } from '@tiptap/pm/model';
 
 // @ts-ignore
 import { __serializeForClipboard, EditorView } from '@tiptap/pm/view';
@@ -23,7 +23,9 @@ export interface GlobalDragHandleOptions {
     dragHandleSelector?: string;
 
     offsetTop: number;
-    onNodeChange?: (node: Node | null, pos: number) => void;
+    onNodeChange?: (node: ResolvedPos) => void;
+    onShow?: () => void;
+    onHide?: () => void;
 }
 function absoluteRect(node: Element) {
     const data = node.getBoundingClientRect();
@@ -78,14 +80,7 @@ function nodePosAtDOM(
 
 function calcNodePos(pos: number, view: EditorView) {
     const $pos = view.state.doc.resolve(pos);
-    console.log(pos, $pos, $pos.before($pos.depth));
     if ($pos.depth > 1) return $pos.before($pos.depth);
-    return pos;
-}
-
-function calcTopLevelNodePos(pos: number, view: EditorView) {
-    const $pos = view.state.doc.resolve(pos);
-    if ($pos.depth > 1) return $pos.before($pos.depth - 1);
     return pos;
 }
 
@@ -175,12 +170,14 @@ export function DragHandlePlugin(options: GlobalDragHandleOptions & {pluginKey: 
     function hideDragHandle() {
         if (dragHandleElement) {
             dragHandleElement.classList.add('hidden');
+            options.onHide?.();
         }
     }
 
     function showDragHandle() {
         if (dragHandleElement) {
             dragHandleElement.classList.remove('hidden');
+            options.onShow?.();
         }
     }
 
@@ -195,10 +192,16 @@ export function DragHandlePlugin(options: GlobalDragHandleOptions & {pluginKey: 
 
 
             function onDragHandleDragStart(e: DragEvent) {
+                view.dom.classList.add('dragging');
                 handleDragStart(e, view);
             }
 
             dragHandleElement.addEventListener('dragstart', onDragHandleDragStart);
+
+            function onDragHandleDragEnd() {
+                view.dom.classList.remove('dragging');
+            }
+            dragHandleElement.addEventListener('dragend', onDragHandleDragEnd);
 
             function onDragHandleDrag(e: DragEvent) {
                 hideDragHandle();
@@ -275,21 +278,21 @@ export function DragHandlePlugin(options: GlobalDragHandleOptions & {pluginKey: 
                     dragHandleElement.style.top = `${rect.top + options.offsetTop}px`;
                     showDragHandle();
 
-                    let draggedNodePos = nodePosAtDOM(node, view, options);
+                    const boundingRect = node.getBoundingClientRect();
+                    let draggedNodePos = view.posAtCoords({
+                        left: boundingRect.left,
+                        top: boundingRect.top,
+                    });
                     if (draggedNodePos == null) return;
-                    draggedNodePos = calcTopLevelNodePos(draggedNodePos, view);
-                    const nodePos = view.state.doc.resolve(draggedNodePos);
-                    options.onNodeChange?.(nodePos.node(), draggedNodePos);
+                    const nodePos = view.state.doc.resolve(draggedNodePos.pos);
+                    // console.log(nodePos.depth, nodePos.node().type.name, nodePos.before());
+                    options.onNodeChange?.(nodePos);
                 },
                 keydown: () => {
                     hideDragHandle();
                 },
                 mousewheel: () => {
                     hideDragHandle();
-                },
-                // dragging class is used for CSS
-                dragstart: (view) => {
-                    view.dom.classList.add('dragging');
                 },
                 drop: (view, event) => {
                     view.dom.classList.remove('dragging');
@@ -338,9 +341,6 @@ export function DragHandlePlugin(options: GlobalDragHandleOptions & {pluginKey: 
                         view.dragging = { slice, move: event.ctrlKey };
                     }
                 },
-                dragend: (view) => {
-                    view.dom.classList.remove('dragging');
-                },
             },
         },
     });
@@ -366,6 +366,8 @@ const GlobalDragHandle = Extension.create({
                 dragHandleSelector: this.options.dragHandleSelector,
                 offsetTop: this.options.offsetTop,
                 onNodeChange: this.options.onNodeChange,
+                onShow: this.options.onShow,
+                onHide: this.options.onHide,
             }),
         ];
     },

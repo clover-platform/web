@@ -1,0 +1,31 @@
+import {CharacterCountControl} from "@/components/common/editor/control/character-count";
+import {DragHandleControl} from "@/components/common/editor/control/drag-handle";
+import LinkMenu from "../../../menus/LinkMenu/LinkMenu";
+import ColumnsMenu from "../extension/multi-column/menus/ColumnsMenu";
+import {TableColumnMenu, TableRowMenu} from "@/components/common/editor/extension/table/menus";
+import {limit} from "@/components/common/editor";
+import {Editor} from "@tiptap/react";
+import {FC, RefObject} from "react";
+import {NodeData} from "@/components/common/editor/control/drag-handle/use.data";
+import {TextMenu} from "@/components/menus/TextMenu";
+
+export type EditorControllerProps = {
+    limit: number;
+    editor: Editor | null;
+    handleId: string;
+    appendTo: RefObject<HTMLElement>;
+    data: NodeData;
+}
+
+export const EditorController: FC<EditorControllerProps> = (props) => {
+    const { data, editor, handleId, appendTo } = props;
+    return editor ? <>
+        <CharacterCountControl editor={editor} limit={limit} />
+        <DragHandleControl data={data} editor={editor} id={handleId} />
+        <LinkMenu editor={editor} appendTo={appendTo} />
+        <TextMenu editor={editor} />
+        <ColumnsMenu editor={editor} appendTo={appendTo} />
+        <TableRowMenu editor={editor} appendTo={appendTo} />
+        <TableColumnMenu editor={editor} appendTo={appendTo} />
+    </> : null;
+}

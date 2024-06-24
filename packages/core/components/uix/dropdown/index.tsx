@@ -13,7 +13,8 @@ import {
     DropdownMenuTrigger,
 } from "@atom-ui/core/components/ui/dropdown-menu"
 import {cn} from "@atom-ui/core/lib/utils";
-import {Align} from "@radix-ui/react-popper";
+
+type Align = "start" | "center" | "end";
 
 export type onDropdownMenuClick = (item: DropdownMenuItemProps) => void;
 export type onCheckedChange = (item: DropdownMenuItemProps, checked: boolean) => void;
@@ -39,6 +40,9 @@ export interface DropdownProps extends PropsWithChildren {
     align?: Align;
     asChild?: boolean;
     hideOnEmpty?: boolean;
+    modal?: boolean;
+    open?: boolean;
+    onOpenChange?: (open: boolean) => void;
 }
 
 type Callback = {
@@ -89,9 +93,15 @@ export const Dropdown: FC<DropdownProps> = (props) => {
         align,
         asChild,
         hideOnEmpty = true,
+        open = false,
+        modal = false,
     } = props;
     if(!(items && items.length) && hideOnEmpty) return null;
-    return <DropdownMenu>
+    return <DropdownMenu
+        modal={modal}
+        open={open}
+        onOpenChange={props.onOpenChange}
+    >
         <DropdownMenuTrigger asChild={asChild}>
             { props.children }
         </DropdownMenuTrigger>
