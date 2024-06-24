@@ -336,11 +336,10 @@
 .ProseMirror blockquote+figcaption.is-empty:not(.is-editor-empty):before {
     content: "Author"
 }
- */
-
 .ProseMirror [data-placeholder][data-suggestion] :before,.ProseMirror [data-placeholder][data-suggestion]:before {
     content: none!important
 }
+ */
 
 .ProseMirror .tableWrapper {
     margin-top: 3rem;
@@ -677,16 +676,20 @@
 }
 
 .ProseMirror [data-type=horizontalRule] {
-    margin-top: 2rem;
-    margin-bottom: 2rem;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
     cursor: pointer;
-    padding-top: 1rem;
-    padding-bottom: 1rem;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
     transition-property: all;
     transition-duration: .1s;
     transition-timing-function: cubic-bezier(.4,0,.2,1);
     animation-duration: .1s;
     animation-timing-function: cubic-bezier(.4,0,.2,1)
+}
+
+.ProseMirror [data-type=horizontalRule]:first-child {
+    margin-top: 0;
 }
 
 .ProseMirror [data-type=horizontalRule].ProseMirror-selectednode {

@@ -35,12 +35,20 @@ import {
     Dropcursor
 } from './extension';
 import { lowlight } from 'lowlight';
-import {useRef} from "react";
+import {FC, useRef} from "react";
 import {EditorController} from "@/components/common/editor/control";
 
-export const limit = 500;
+export type EditorProps = {
+    limit?: number;
+    value?: string;
+    onChange?: (value: string) => void;
+}
 
-export const Editor = () => {
+export const Editor: FC<EditorProps> = (props) => {
+    const {
+        limit = 500,
+        value, onChange
+    } = props;
     const handleId = useHandleId();
     const data = useData();
     const menuContainerRef = useRef(null);
@@ -120,11 +128,10 @@ export const Editor = () => {
                 class: 'ProseMirror-dropcursor border-black',
             }),
         ],
-        content: '<p>Hello World! 🌎️</p>' +
-            '<ul>' +
-            '   <li>asas</li>' +
-            '   <li>asssssss</li>' +
-            '</ul>'
+        content: value,
+        onUpdate: ({ editor }) => {
+            onChange?.(editor.getHTML());
+        }
     })
 
     return <div className={styles.editorContainer} ref={menuContainerRef}>

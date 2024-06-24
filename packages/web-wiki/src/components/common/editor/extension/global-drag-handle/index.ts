@@ -271,6 +271,9 @@ export function DragHandlePlugin(options: GlobalDragHandleOptions & {pluginKey: 
                         rect.left -= options.dragHandleWidth;
                     }
                     rect.width = options.dragHandleWidth;
+                    if(node.matches("div[data-type=horizontalRule]")) {
+                        rect.top -= lineHeight/2;
+                    }
 
                     if (!dragHandleElement) return;
 

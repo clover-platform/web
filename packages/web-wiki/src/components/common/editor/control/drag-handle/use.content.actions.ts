@@ -5,7 +5,7 @@ import { useCallback } from 'react'
 
 export const useContentActions = (editor: Editor, currentResolvedPos: ResolvedPos) => {
     const currentNode = currentResolvedPos?.node();
-    const currentNodePos = currentResolvedPos?.depth == 0 ? currentResolvedPos?.pos : currentResolvedPos?.before();
+    const currentNodePos = currentResolvedPos?.depth === 0 ? currentResolvedPos?.pos : currentResolvedPos?.before();
 
     const resetTextFormatting = useCallback(() => {
         const chain = editor.chain()
@@ -44,27 +44,25 @@ export const useContentActions = (editor: Editor, currentResolvedPos: ResolvedPo
 
     const handleAdd = useCallback(() => {
         const nodePos = currentResolvedPos?.depth == 0 ? currentResolvedPos.pos + 1 : currentResolvedPos.after(1);
-        if (nodePos !== -1) {
-            const insertPos = nodePos;
-            const currentNodeIsEmptyParagraph = currentNode?.type.name === 'paragraph' && currentNode?.content?.size === 0
-            const focusPos = currentNodeIsEmptyParagraph ? nodePos : nodePos + 2;
+        const insertPos = nodePos;
+        const currentNodeIsEmptyParagraph = currentResolvedPos?.depth === 1 && currentNode?.type.name === 'paragraph' && currentNode?.content?.size === 0
+        const focusPos = currentNodeIsEmptyParagraph ? nodePos : nodePos + 2;
 
-            editor
-                .chain()
-                .command(({ dispatch, tr, state }) => {
-                    if (dispatch) {
-                        if (currentNodeIsEmptyParagraph) {
-                            tr.insertText('/', currentResolvedPos.pos, currentResolvedPos.pos + 1)
-                        } else {
-                            tr.insert(insertPos, state.schema.nodes.paragraph.create(null, [state.schema.text('/')]))
-                        }
-                        return dispatch(tr)
+        editor
+            .chain()
+            .command(({ dispatch, tr, state }) => {
+                if (dispatch) {
+                    if (currentNodeIsEmptyParagraph) {
+                        tr.insertText('/', currentResolvedPos.pos, currentResolvedPos.pos + 1)
+                    } else {
+                        tr.insert(insertPos, state.schema.nodes.paragraph.create(null, [state.schema.text('/')]))
                     }
-                    return true
-                })
-                .focus(focusPos)
-                .run()
-        }
+                    return dispatch(tr)
+                }
+                return true
+            })
+            .focus(focusPos)
+            .run()
     }, [currentNode, currentNodePos, editor])
 
     return {

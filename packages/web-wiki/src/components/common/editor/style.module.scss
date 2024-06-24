@@ -11,6 +11,11 @@
                     height: 0;
                     pointer-events: none;
                 }
+                td, li{
+                    p.is-empty::before {
+                        content: none;
+                    }
+                }
             }
         }
     }
