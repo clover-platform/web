@@ -110,7 +110,11 @@ export function DragHandlePlugin(options: GlobalDragHandleOptions & {pluginKey: 
 
         let draggedNodePos = nodePosAtDOM(node, view, options);
         if (draggedNodePos == null || draggedNodePos < 0) return;
-        if(node.matches("div.tableWrapper, li")) {
+        const dragNode = view.state.doc.resolve(draggedNodePos);
+        if(
+            ["tableCell", "tableRow"].includes(dragNode.node().type.name) ||
+            node.matches("div.tableWrapper, li")
+        ) {
             draggedNodePos = rootNodePos(draggedNodePos, view) - 1;
         }else{
             draggedNodePos = calcNodePos(draggedNodePos, view);
@@ -301,6 +305,9 @@ export function DragHandlePlugin(options: GlobalDragHandleOptions & {pluginKey: 
                     if(node.matches("div[data-type=horizontalRule]")) {
                         rect.top -= lineHeight/2;
                     }
+                    if(root.node().type.name === 'codeBlock') {
+                        rect.top -= 30;
+                    }
                     if (!dragHandleElement) return;
 
                     dragHandleElement.style.left = `${rect.left - rect.width}px`;
@@ -351,7 +358,6 @@ export function DragHandlePlugin(options: GlobalDragHandleOptions & {pluginKey: 
                             {},
                             paragraph,
                         );
-
                         const newList = view.state.schema.nodes.orderedList?.createAndFill(
                             null,
                             listItem,
