@@ -83,6 +83,16 @@ function calcNodePos(pos: number, view: EditorView) {
     if ($pos.depth > 1) return $pos.before($pos.depth);
     return pos;
 }
+function rootNodePos(pos: number, view: EditorView) {
+    const $pos = view.state.doc.resolve(pos);
+    if($pos.depth < 1) return pos;
+    return $pos.before(1) + 1;
+}
+
+function getScrollTop(): number {
+    // 获取 scrollTop
+    return document.documentElement.scrollTop || window.pageYOffset || document.body.scrollTop;
+}
 
 export function DragHandlePlugin(options: GlobalDragHandleOptions & {pluginKey: string}) {
     let listType = '';
@@ -100,7 +110,11 @@ export function DragHandlePlugin(options: GlobalDragHandleOptions & {pluginKey: 
 
         let draggedNodePos = nodePosAtDOM(node, view, options);
         if (draggedNodePos == null || draggedNodePos < 0) return;
-        draggedNodePos = calcNodePos(draggedNodePos, view);
+        if(node.matches("div.tableWrapper, li")) {
+            draggedNodePos = rootNodePos(draggedNodePos, view) - 1;
+        }else{
+            draggedNodePos = calcNodePos(draggedNodePos, view);
+        }
 
         const { from, to } = view.state.selection;
         const diff = from - to;
@@ -262,34 +276,36 @@ export function DragHandlePlugin(options: GlobalDragHandleOptions & {pluginKey: 
                         : parsedLineHeight;
                     const paddingTop = parseInt(compStyle.paddingTop, 10);
 
-                    const rect = absoluteRect(node);
-
-                    rect.top += (lineHeight - 24) / 2;
-                    rect.top += paddingTop;
-                    // Li markers
-                    if (node.matches('ul:not([data-type=taskList]) li, ol li')) {
-                        rect.left -= options.dragHandleWidth;
-                    }
-                    rect.width = options.dragHandleWidth;
-                    if(node.matches("div[data-type=horizontalRule]")) {
-                        rect.top -= lineHeight/2;
-                    }
-
-                    if (!dragHandleElement) return;
-
-                    dragHandleElement.style.left = `${rect.left - rect.width}px`;
-                    dragHandleElement.style.top = `${rect.top + options.offsetTop}px`;
-                    showDragHandle();
-
                     const boundingRect = node.getBoundingClientRect();
                     let draggedNodePos = view.posAtCoords({
                         left: boundingRect.left,
                         top: boundingRect.top,
                     });
                     if (draggedNodePos == null) return;
-                    const nodePos = view.state.doc.resolve(draggedNodePos.pos);
-                    // console.log(nodePos.depth, nodePos.node().type.name, nodePos.before());
-                    options.onNodeChange?.(nodePos);
+                    const rootPos = rootNodePos(draggedNodePos.pos, view);
+                    const root = view.state.doc.resolve(rootPos);
+                    options.onNodeChange?.(root);
+
+                    const rootNode = view.domAtPos(root.pos).node as Element;
+                    let rect = absoluteRect(rootNode);
+                    if(node.matches("div[data-type=horizontalRule]")) {
+                        rect = absoluteRect(node);
+                    }
+                    rect.top += (lineHeight - 24) / 2;
+                    rect.top += paddingTop;
+                    rect.width = options.dragHandleWidth;
+                    // Li markers
+                    if (node.matches('ul:not([data-type=taskList]) li, ol li')) {
+                        rect.left -= options.dragHandleWidth;
+                    }
+                    if(node.matches("div[data-type=horizontalRule]")) {
+                        rect.top -= lineHeight/2;
+                    }
+                    if (!dragHandleElement) return;
+
+                    dragHandleElement.style.left = `${rect.left - rect.width}px`;
+                    dragHandleElement.style.top = `${rect.top + getScrollTop() + options.offsetTop}px`;
+                    showDragHandle();
                 },
                 keydown: () => {
                     hideDragHandle();
