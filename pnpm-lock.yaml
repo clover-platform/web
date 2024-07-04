@@ -9,8 +9,8 @@ importers:
   .:
     dependencies:
       '@arco-iconbox/react-clover':
-        specifier: 0.0.24
-        version: 0.0.24(react@18.3.1)
+        specifier: 0.0.25
+        version: 0.0.25
       '@atom-ui/core':
         specifier: workspace:*
         version: link:packages/core
@@ -638,10 +638,8 @@ packages:
     peerDependencies:
       react: '>=16.9.0'
 
-  '@arco-iconbox/react-clover@0.0.24':
-    resolution: {integrity: sha512-dGSwz68rMv9aLl37eY4lmrTg+wE9mZSmCJJLYRwbofN7tvLcmO2wh+mtG9/1laJT2ya+woxjrhm0D6qHqV01ig==, tarball: https://registry.npmjs.org/@arco-iconbox/react-clover/-/react-clover-0.0.24.tgz}
-    peerDependencies:
-      react: '>=16.9.0'
+  '@arco-iconbox/react-clover@0.0.25':
+    resolution: {integrity: sha512-SSU6srQi99vp+2pmhYqO4WLRxFmpJlglqpNNzOo3N1Cs/8/KqTF3lx9+nDkwkh4qyu/zt6na5aTp1thxaQA0jw==, tarball: https://registry.npmjs.org/@arco-iconbox/react-clover/-/react-clover-0.0.25.tgz}
 
   '@atlaskit/analytics-next-stable-react-context@1.0.1':
     resolution: {integrity: sha512-iO6+hIp09dF4iAZQarVz3vKY1kM5Ij5CExYcK9jgc2q+OH8nv8n+BPFeJTdzGOGopmbUZn5Opj9pYQvge1Gr4Q==, tarball: https://registry.npmjs.org/@atlaskit/analytics-next-stable-react-context/-/analytics-next-stable-react-context-1.0.1.tgz}
@@ -7082,9 +7080,7 @@ snapshots:
     dependencies:
       react: 18.3.1
 
-  '@arco-iconbox/react-clover@0.0.24(react@18.3.1)':
-    dependencies:
-      react: 18.3.1
+  '@arco-iconbox/react-clover@0.0.25': {}
 
   '@atlaskit/analytics-next-stable-react-context@1.0.1(react@18.3.1)':
     dependencies:

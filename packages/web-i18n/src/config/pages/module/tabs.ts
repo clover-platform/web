@@ -7,10 +7,10 @@ export const TABS: TabsTitleItem[] = [
     },
     {
         id: "create",
-        title: "{#由你创建#}",
+        title: "{#由我创建#}",
     },
     {
         id: "join",
-        title: "{#你加入的#}",
+        title: "{#我加入的#}",
     }
 ]

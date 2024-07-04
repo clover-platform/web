@@ -58,4 +58,6 @@ declare module '@arco-iconbox/react-clover' {
     export const IconIOS: IconProps;
     export const IconFlutter: IconProps;
     export const IconJSON: IconProps;
+    export const IconAddFile: IconProps;
+    export const IconBook: IconProps;
 }
