@@ -7,11 +7,13 @@
         "decimal.js-light": "2.5.1",
         "fetch-intercept": "2.4.0",
         "markdown-it": "14.1.0",
-        "path-to-regexp": "6.2.2",
+        "path-to-regexp": "7.0.0",
+        "react-cropper": "2.3.3",
+        "react-dropzone": "14.2.3",
         "supports-color": "9.4.0",
         "whatwg-fetch": "3.6.20"
     },
     "devDependencies": {
-        "next": "14.2.3"
+        "next": "14.2.4"
     }
 }
