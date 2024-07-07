@@ -93,7 +93,7 @@ export const Dropdown: FC<DropdownProps> = (props) => {
         align,
         asChild,
         hideOnEmpty = true,
-        open = false,
+        open,
         modal = false,
     } = props;
     if(!(items && items.length) && hideOnEmpty) return null;

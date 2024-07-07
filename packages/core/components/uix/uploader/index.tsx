@@ -1,5 +1,5 @@
 import {DropzoneOptions, useDropzone} from 'react-dropzone';
-import {forwardRef, useContext, useState} from "react";
+import {forwardRef, PropsWithChildren, useContext, useState} from "react";
 import {cn} from "@atom-ui/core/lib/utils";
 import {UIXContext} from "@atom-ui/core/components/uix/config-provider";
 import { v4 as uuidv4 } from 'uuid';
@@ -7,8 +7,9 @@ import {CheckCircledIcon, Cross2Icon, CrossCircledIcon, FileIcon} from "@radix-u
 import {Button, Progress} from "@atom-ui/core";
 import remove from 'lodash/remove';
 import axios from "axios";
+import classNames from "classnames";
 
-export type UploaderProps = {
+export type UploaderProps = PropsWithChildren<{
     showFileList?: boolean;
     className?: string;
     placeholder?: string;
@@ -19,7 +20,8 @@ export type UploaderProps = {
     onChange?: (value: (File & any)[]) => void;
     headers?: any;
     data?: any;
-} & DropzoneOptions;
+    showButton?: boolean;
+}> & DropzoneOptions;
 
 const initFile = (file: File & any) => {
     !file.uid && (file.uid = uuidv4());
@@ -36,6 +38,9 @@ export const Uploader = forwardRef<HTMLDivElement, UploaderProps>((props, ref) =
         value,
         headers,
         data,
+        showButton = true,
+        showFileList = true,
+        children,
         ...rest
     } = props;
 
@@ -44,7 +49,7 @@ export const Uploader = forwardRef<HTMLDivElement, UploaderProps>((props, ref) =
     const {getRootProps, getInputProps} = useDropzone({
         ...rest,
         onDropAccepted: (list: (File & any)[], event) => {
-            onDropAccepted && onDropAccepted(files, event);
+            onDropAccepted?.(list, event);
             const newFiles = [
                 ...files,
                 ...list.map((file) => {
@@ -133,27 +138,31 @@ export const Uploader = forwardRef<HTMLDivElement, UploaderProps>((props, ref) =
     }
 
     return <div ref={ref} className={"space-y-2"}>
-        <div {...getRootProps()} className={cn(
-            "flex justify-center items-center p-6 text-[#bdbdbd]",
-            "bg-[#fafafa] border-2 border-[#eeeeee] border-dashed rounded-md",
-            "cursor-default",
-            "focus:border-[#2196f3]",
-            className
-        )}>
+        <div {...getRootProps()} className={classNames(children ? "w-auto inline-block" : "")}>
             <input {...getInputProps()} />
-            <p>{ placeholder }</p>
+            {
+                children ? children : <div className={cn(
+                    "flex justify-center items-center p-6 text-[#bdbdbd]",
+                    "bg-[#fafafa] border-2 border-[#eeeeee] border-dashed rounded-md",
+                    "cursor-default",
+                    "focus:border-[#2196f3]",
+                    className
+                )}>
+                    <p>{placeholder}</p>
+                </div>
+            }
         </div>
         {
-            files.length ? <>
+            showFileList && files.length ? <>
                 <div className={"border rounded-sm"}>
-                    { files.map(renderFile) }
+                    {files.map(renderFile)}
                 </div>
-                {
-                    !!files.filter(({status}: any) => (status === 'init')).length ? <div>
-                        <Button loading={!!files.filter(({status}: any) => (status === 'uploading')).length} onClick={onUpload} type={"button"} variant={"outline"}>{uploadText}</Button>
-                    </div> : null
-                }
             </> : null
+        }
+        {
+            (!!files.filter(({status}: any) => (status === 'init')).length) && showButton ? <div>
+            <Button loading={!!files.filter(({status}: any) => (status === 'uploading')).length} onClick={onUpload} type={"button"} variant={"outline"}>{uploadText}</Button>
+            </div> : null
         }
     </div>;
 });
