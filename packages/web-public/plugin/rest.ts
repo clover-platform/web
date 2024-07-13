@@ -21,6 +21,10 @@ alias({
         url: '/api/main',
         headers: get
     },
+    '@assets': {
+        url: '/api/assets',
+        headers: get
+    },
     '@account': {
         url: '/api/account',
         headers: get

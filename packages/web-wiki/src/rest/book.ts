@@ -1,3 +1,9 @@
 import {post} from "@easy-kit/common/utils/rest";
+import {RestResult} from "@easy-kit/common/types/rest";
 
-export const create = () => post("@wiki/book/create");
+export type CreateBookData = {
+    logo: string;
+
+}
+export const create = (data: CreateBookData): Promise<RestResult<any>> =>
+    post("@wiki/book/create", data);

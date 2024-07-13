@@ -2,9 +2,11 @@ import Cropper, {ReactCropperElement, ReactCropperProps} from "react-cropper";
 import "cropperjs/dist/cropper.css";
 import {FC, useRef, useState} from "react";
 import classNames from "classnames";
-import {Button, Dialog, Uploader} from "@atom-ui/core";
+import {Button, Dialog, Spin, Uploader, useMessage} from "@atom-ui/core";
 import {PlusIcon} from "@radix-ui/react-icons";
 import {IconDelete} from "@arco-iconbox/react-clover";
+import {dataURLToFile, fileToDataURL} from "@easy-kit/common/utils/file";
+import {upload} from "@clover/public/utils/file";
 
 export type ImageCropperProps = {
     className?: string;
@@ -13,40 +15,57 @@ export type ImageCropperProps = {
     onChange?: (value: string) => void;
 } & ReactCropperProps;
 
-function getBase64(file: File) {
-    return new Promise((resolve, reject) => {
-        const reader = new FileReader();
-        reader.readAsDataURL(file);
-        reader.onload = function () {
-            resolve(reader.result);
-        };
-        reader.onerror = function (error) {
-            reject(error);
-        };
-    })
-}
-
 export const ImageCropper: FC<ImageCropperProps> = (props) => {
     const {
         className,
         ...rest
     } = props;
 
+    const msg = useMessage();
     const [visible, setVisible] = useState(false);
     const [src, setSrc] = useState<string>();
     const cropperRef = useRef<ReactCropperElement>(null);
     const [result, setResult] = useState<string>();
+    const [uploading, setUploading] = useState(false);
+
     const onCrop = () => {
         const cropper = cropperRef.current?.cropper;
-        setResult(cropper?.getCroppedCanvas().toDataURL());
+        const dataURL = cropper?.getCroppedCanvas().toDataURL();
+        const file = dataURLToFile(dataURL!, "cropped.png");
+        setResult(dataURL);
         setVisible(false);
+        preSignFile(file).then();
     };
 
+    const reset = () => {
+        props.onChange?.("");
+        setSrc("");
+        setResult("");
+    }
+
+    const preSignFile = async (file: File) => {
+        setUploading(true);
+        const { success, data, error } = await upload({
+            file,
+            name: file.name,
+            contentType: file.type,
+            type: 0,
+        });
+        setUploading(false);
+        if(success) {
+            setResult(data!);
+            props.onChange?.(data!);
+        }else{
+            reset();
+            msg.error(error);
+        }
+    }
+
     const onDropAccepted = (files: File[]) => {
-         getBase64(files[0]).then((src) => {
-             setSrc(src as string);
-             setVisible(true);
-         });
+        fileToDataURL(files[0]).then((src) => {
+            setSrc(src as string);
+            setVisible(true);
+        });
     }
 
     return <div>
@@ -62,17 +81,24 @@ export const ImageCropper: FC<ImageCropperProps> = (props) => {
                     src={result}
                     alt={"Result"}
                 />
-                <div
-                    onClick={() => setResult("")}
-                    className={"absolute hidden group-hover:flex top-0 left-0 bottom-0 right-0 bg-black/30 justify-center items-center"}
-                >
-                    <IconDelete className={"w-4 h-4 text-white cursor-pointer"} />
-                </div>
+                {
+                    uploading ? <div className={"absolute top-0 left-0 bottom-0 right-0 bg-black/30 justify-center items-center flex"}>
+                        <Spin className={"w-4 h-4 text-white"} />
+                    </div> : <div
+                        onClick={() => reset()}
+                        className={"absolute hidden group-hover:flex top-0 left-0 bottom-0 right-0 bg-black/30 justify-center items-center"}
+                    >
+                        <IconDelete className={"w-4 h-4 text-white cursor-pointer"}/>
+                    </div>
+                }
             </div> : <Uploader
                 onDropAccepted={onDropAccepted}
                 showFileList={false}
                 showButton={false}
                 maxFiles={1}
+                accept={{
+                    "image/*": [".png", ".jpg", ".jpeg", ".gif", ".webp"],
+                }}
             >
                 <div
                     className={classNames(
@@ -93,7 +119,7 @@ export const ImageCropper: FC<ImageCropperProps> = (props) => {
             <div className={"pt-4 -mb-2 flex items-center flex-col space-y-4"}>
                 <Cropper
                     src={src}
-                    className={classNames("w-full", props.cropperClassName)}
+                    className={classNames("w-full max-h-[80vh]", props.cropperClassName)}
                     ref={cropperRef}
                     {...rest}
                 />

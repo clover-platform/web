@@ -1,7 +1,8 @@
-import {Button, Dialog} from "@atom-ui/core";
+import {Button, Dialog, useMessage} from "@atom-ui/core";
 import {DialogProps} from "@atom-ui/core";
 import {FC, useState} from "react";
 import {CreateBookForm} from "@/components/pages/home/create/form";
+import {create, CreateBookData} from "@/rest/book";
 
 export type CreateBookModalProps = {
     onSuccess?: () => void;
@@ -9,9 +10,17 @@ export type CreateBookModalProps = {
 
 export const CreateBookModal: FC<CreateBookModalProps> = (props) => {
     const [loading, setLoading] = useState(false);
+    const msg = useMessage();
 
-    const onSubmit = (values: any) => {
-        console.log(values);
+    const onSubmit = async (values: CreateBookData) => {
+        setLoading(true);
+        const { success, message } = await create(values);
+        setLoading(false);
+        if(success) {
+            props.onSuccess?.();
+        }else{
+            msg.error(message);
+        }
     }
 
     return <Dialog

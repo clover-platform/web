@@ -1,6 +1,6 @@
-import {Form, FormItem, Input} from "@atom-ui/core";
+import {Form, FormItem, Input, Select, Textarea} from "@atom-ui/core";
 import {FC, PropsWithChildren} from "react";
-import {SCHEMA} from "@/config/pages/book";
+import {PRIVACY_LIST, SCHEMA} from "@/config/pages/book";
 import {ImageCropper} from "@easy-kit/common/components/cropper";
 
 export type CreateBookFormProps = PropsWithChildren<{
@@ -26,8 +26,17 @@ export const CreateBookForm: FC<CreateBookFormProps> = (props) => {
                 aspectRatio={1}
             />
         </FormItem>
-        <FormItem name="name" label="{#分支名#}" description={"{#使用分支控制，可以在不影响主分支的情况下，推进翻译的改进。#}"}>
-            <Input placeholder={"{#请输入分支名#}"} />
+        <FormItem name="name" label="{#知识库名称#}">
+            <Input placeholder={"{#请输入#}"} />
+        </FormItem>
+        <FormItem name="path" label="{#访问路径#}" description={"{#小写字母和-，小写字母开头#}"}>
+            <Input placeholder={"{#请输入#}"} />
+        </FormItem>
+        <FormItem name="description" label="{#描述#}">
+            <Textarea placeholder={"{#请输入#}"} />
+        </FormItem>
+        <FormItem name="privacy" label="{#可见性#}">
+            <Select options={PRIVACY_LIST} placeholder={"{#请选择#}"} />
         </FormItem>
         { props.children }
     </Form>
