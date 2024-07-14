@@ -39,8 +39,6 @@ export const ModulePage = () => {
         action: list,
         keys: ['type'],
     });
-    const alert = useAlert();
-    const msg = useMessage();
 
     useEffect(() => {
         load({type}).then();

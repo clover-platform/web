@@ -4,3 +4,8 @@ export type RestResult<T> = {
     message?: string;
     data?: T;
 }
+
+export type PageRequest<T> = RestResult<{
+    total: number;
+    list: T[];
+}>

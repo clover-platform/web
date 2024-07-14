@@ -1,6 +1,6 @@
 import {Form, FormItem, Input, Select, Textarea} from "@atom-ui/core";
 import {FC, PropsWithChildren} from "react";
-import {PRIVACY_LIST, SCHEMA} from "@/config/pages/book";
+import {PRIVACY_LIST, SCHEMA} from "@/config/pages/book/form";
 import {ImageCropper} from "@easy-kit/common/components/cropper";
 
 export type CreateBookFormProps = PropsWithChildren<{

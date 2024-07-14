@@ -2,11 +2,16 @@
 
 import {useLayoutConfig} from "@clover/public/components/layout/hooks/use.layout.config";
 import {MainLayoutProps} from "@/components/layout/main";
-import {FC, PropsWithChildren, useState} from "react";
+import {FC, PropsWithChildren, useEffect, useState} from "react";
 import {TabsTitle, TabsTitleItem} from "@clover/public/components/common/tabs-title";
-import {useSearchParams} from "next/navigation";
+import {useRouter, useSearchParams} from "next/navigation";
 import {HomeStart, StartItem} from "@/components/pages/home/start";
 import {CreateBookModal} from "@/components/pages/home/create/modal";
+import {Module} from "@clover/i18n/src/types/pages/module";
+import {COLUMNS, FILTERS, ROW_ACTIONS} from "@/config/pages/book";
+import {DataTable} from "@atom-ui/core";
+import {useTableLoader} from "@easy-kit/common/hooks";
+import {list} from "@/rest/book";
 
 export const SectionTitle: FC<PropsWithChildren> = (props) => {
     return <div className={"text-lg font-medium"}>
@@ -29,6 +34,10 @@ export const TABS: TabsTitleItem[] = [
     }
 ]
 
+const initialParams = {
+    keyword: '',
+}
+
 export const IndexPage = () => {
     useLayoutConfig<MainLayoutProps>({
         active: "wiki",
@@ -39,10 +48,16 @@ export const IndexPage = () => {
             }
         ],
     })
+    const router = useRouter();
     const search = useSearchParams();
     const type = search.get('type') || 'all';
     const [active, setActive] = useState(type);
     const [createVisible, setCreateVisible] = useState(false);
+    const [loading, result, query, load] = useTableLoader<Module>({
+        initialParams,
+        action: list,
+        keys: ['type'],
+    });
 
     const onStartClick = ({id}: StartItem) => {
         if(id === "new.book") {
@@ -50,20 +65,66 @@ export const IndexPage = () => {
         }
     }
 
+    useEffect(() => {
+        load({type}).then();
+    }, []);
+
+    useEffect(() => {
+        load({
+            type: active,
+            page: 1,
+        }).then();
+    }, [active]);
+
     return <div className={"flex justify-center"}>
         <div className={"container space-y-4"}>
             <SectionTitle>{"{#开始#}"}</SectionTitle>
             <HomeStart onClick={onStartClick} />
             <SectionTitle>{"{#知识库#}"}</SectionTitle>
-            <TabsTitle
-                active={active}
-                items={TABS}
-                onChange={setActive}
-            />
+            <div>
+                <TabsTitle
+                    active={active}
+                    items={TABS}
+                    onChange={setActive}
+                />
+                <DataTable<Module>
+                    showHeader={false}
+                    filter={{
+                        items: FILTERS,
+                        defaultValues: initialParams,
+                        query: query,
+                    }}
+                    load={load}
+                    pagination={{
+                        total: result?.total || 0,
+                        page: query.page,
+                        size: query.size,
+                    }}
+                    columns={COLUMNS}
+                    rowActions={ROW_ACTIONS}
+                    data={result?.data || []}
+                    loading={loading}
+                    onRowActionClick={({id: key}, {original}) => {
+                        const {id} = original;
+                        if(key === "detail") {
+                            router.push("/{#LANG#}/i18n/dashboard/?id=" + id);
+                        }else if(key === "activity") {
+                            router.push("/{#LANG#}/i18n/activity/?id=" + id);
+                        }else if(key === "delete") {
+
+                        }
+                    }}
+                    onRowClick={(row) => {
+                        const {id} = row.original;
+                        router.push("/{#LANG#}/i18n/dashboard/?id=" + id);
+                    }}
+                />
+            </div>
         </div>
         <CreateBookModal
             visible={createVisible}
             onCancel={() => setCreateVisible(false)}
+            onSuccess={() => setCreateVisible(false)}
         />
     </div>
 }
