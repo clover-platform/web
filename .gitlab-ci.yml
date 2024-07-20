@@ -5,7 +5,7 @@ stages:
 package-main:
     stage: package
     only:
-        - main
+        - /^main-.*$/
     tags:
         - dev
     cache:
@@ -29,7 +29,7 @@ package-main:
 package-i18n:
     stage: package
     only:
-        - main
+        - /^i18n-.*$/
     tags:
         - dev
     cache:
@@ -53,7 +53,7 @@ package-i18n:
 package-admin:
     stage: package
     only:
-        - main
+        - /^admin-.*$/
     tags:
         - dev
     cache:
@@ -77,7 +77,7 @@ package-admin:
 package-wiki:
     stage: package
     only:
-        - main
+        - /^wiki-.*$/
     tags:
         - dev
     cache:
@@ -101,7 +101,7 @@ package-wiki:
 deploy-main:
     stage: deploy
     only:
-        - main
+        - /^main-.*$/
     tags:
         - dev
     script:
@@ -112,7 +112,7 @@ deploy-main:
 deploy-i18n:
     stage: deploy
     only:
-        - main
+        - /^i18n-.*$/
     tags:
         - dev
     script:
@@ -123,7 +123,7 @@ deploy-i18n:
 deploy-admin:
     stage: deploy
     only:
-        - main
+        - /^admin-.*$/
     tags:
         - dev
     script:
@@ -134,7 +134,7 @@ deploy-admin:
 deploy-wiki:
     stage: deploy
     only:
-        - main
+        - /^wiki-.*$/
     tags:
         - dev
     script:
