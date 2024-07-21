@@ -60,7 +60,7 @@ export const MainLayout: FC<MainLayoutProps> = (props) => {
             if(item.type === "link") {
                 node = <BreadcrumbItem key={'item' + index}>
                     <BreadcrumbLink asChild={true}>
-                        <Link href={withQuery(item.href!, query)} className={"flex items-center"}>
+                        <Link href={item.withQuery?withQuery(item.href!, query): item.href!} className={"flex items-center"}>
                             {item.title}
                         </Link>
                     </BreadcrumbLink>

@@ -19,7 +19,7 @@
         "build:wiki": "pnpm --filter @clover/wiki run build"
     },
     "dependencies": {
-        "@arco-iconbox/react-clover": "0.0.25",
+        "@arco-iconbox/react-clover": "0.0.26",
         "@atom-ui/core": "workspace:*",
         "@clover/public": "workspace:*",
         "@easy-kit/common": "workspace:*",

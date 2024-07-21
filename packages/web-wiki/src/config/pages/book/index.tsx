@@ -1,58 +1,36 @@
 import {DataTableColumn} from "@atom-ui/core/components/uix/data-table";
-import {Module} from "@clover/i18n/src/types/pages/module";
-import TimeAgo from "javascript-time-ago";
-import {i18n} from "@easy-kit/i18n/utils";
 import {DropdownMenuItemProps, FilterItemProps, Input} from "@atom-ui/core";
+import {Book} from "@/types/pages/book";
 
-export const COLUMNS: DataTableColumn<Module>[] = [
+export const COLUMNS: DataTableColumn<Book>[] = [
     {
         accessorKey: "name",
         header: "{#名称#}",
         enableHiding: false,
         className: "w-[300px] min-w-[200px]",
         cell: (cell) => {
-            const timeAgo = new TimeAgo('{#LANG#}')
             const data = cell.row.original;
-            const { name, updateTime, memberSize } = data;
-            const time = i18n("{#更新于%time#}", {
-                time: timeAgo.format(new Date(updateTime!))
-            });
-            const member = i18n("{#成员%size#}", {
-                size: memberSize
-            });
-            return <div>
-                <div className={"text-base font-medium"}>{name}</div>
-                <div className={"text-muted-foreground text-xs"}>{time} · {member}</div>
+            const { name, logo } = data;
+            return <div className={"flex space-x-2 justify-start items-center"}>
+                <div className={"w-8 h-8 rounded-md bg-secondary overflow-hidden"}>
+                    {logo ? <img src={logo} alt={name} className={"w-full h-full"}/> : null }
+                </div>
+                <div>{name}</div>
             </div>
         }
     },
     {
-        accessorKey: "sourceSize",
-        header: "{#词条数#}",
+        accessorKey: "description",
+        header: "{#简介#}",
         enableHiding: false,
         className: "min-w-[150px]",
-        cell: (cell) => {
-            const data = cell.row.original;
-            const { wordSize = 0 } = data;
-            return <div>
-                <div className={"text-base font-medium"}>{wordSize}</div>
-                <div className={"text-muted-foreground text-xs"}>{"{#词条数#}"}</div>
-            </div>
-        }
     },
     {
-        accessorKey: "targetSize",
-        header: "{#语言#}",
+        accessorKey: "updateTime",
+        header: "{#最后更新#}",
         enableHiding: false,
-        className: "min-w-[150px]",
-        cell: (cell) => {
-            const data = cell.row.original;
-            const { targetSize } = data;
-            return <div>
-                <div className={"text-base font-medium"}>{targetSize}</div>
-                <div className={"text-muted-foreground text-xs"}>{"{#目标语言#}"}</div>
-            </div>
-        }
+        className: "w-[200px] min-w-[200px]",
+        formatters: ["time"],
     },
 ];
 

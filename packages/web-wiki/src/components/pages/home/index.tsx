@@ -7,11 +7,11 @@ import {TabsTitle, TabsTitleItem} from "@clover/public/components/common/tabs-ti
 import {useRouter, useSearchParams} from "next/navigation";
 import {HomeStart, StartItem} from "@/components/pages/home/start";
 import {CreateBookModal} from "@/components/pages/home/create/modal";
-import {Module} from "@clover/i18n/src/types/pages/module";
 import {COLUMNS, FILTERS, ROW_ACTIONS} from "@/config/pages/book";
 import {DataTable} from "@atom-ui/core";
 import {useTableLoader} from "@easy-kit/common/hooks";
 import {list} from "@/rest/book";
+import {Book} from "@/types/pages/book";
 
 export const SectionTitle: FC<PropsWithChildren> = (props) => {
     return <div className={"text-lg font-medium"}>
@@ -53,7 +53,7 @@ export const IndexPage = () => {
     const type = search.get('type') || 'all';
     const [active, setActive] = useState(type);
     const [createVisible, setCreateVisible] = useState(false);
-    const [loading, result, query, load] = useTableLoader<Module>({
+    const [loading, result, query, load] = useTableLoader<Book>({
         initialParams,
         action: list,
         keys: ['type'],
@@ -87,8 +87,7 @@ export const IndexPage = () => {
                     items={TABS}
                     onChange={setActive}
                 />
-                <DataTable<Module>
-                    showHeader={false}
+                <DataTable<Book>
                     filter={{
                         items: FILTERS,
                         defaultValues: initialParams,
@@ -116,7 +115,7 @@ export const IndexPage = () => {
                     }}
                     onRowClick={(row) => {
                         const {id} = row.original;
-                        router.push("/{#LANG#}/i18n/dashboard/?id=" + id);
+                        router.push("/{#LANG#}/wiki/book/?id=" + id);
                     }}
                 />
             </div>
@@ -124,7 +123,10 @@ export const IndexPage = () => {
         <CreateBookModal
             visible={createVisible}
             onCancel={() => setCreateVisible(false)}
-            onSuccess={() => setCreateVisible(false)}
+            onSuccess={() => {
+                setCreateVisible(false);
+                load({type: 'create'}).then();
+            }}
         />
     </div>
 }

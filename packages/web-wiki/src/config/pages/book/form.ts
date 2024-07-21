@@ -1,18 +1,17 @@
 import * as z from "zod";
 
 export const SCHEMA = z.object({
-    logo: z.string()
-        .min(1, "{#LOGO不能为空#}"),
     path: z.string()
         .min(1, "{#路径不能为空#}")
         .max(255, "{#最多 255 个字符#}"),
     name: z.string()
         .min(1, "{#名称不能为空#}")
         .max(255, "{#最多 255 个字符#}"),
-    description: z.string().optional(),
     privacy: z.string(),
+    logo: z.string().optional(),
+    description: z.string().optional(),
 }).superRefine(({path}, ctx) => {
-    if (!/^[a-z][a-z-]*$/.test(path)) {
+    if (!/[0-9a-z-]*$/.test(path)) {
         ctx.addIssue({
             code: 'custom',
             path: ['path'],

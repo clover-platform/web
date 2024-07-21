@@ -1,4 +1,4 @@
-import {cloneElement, FC, ReactElement, useEffect, useState} from "react";
+import {cloneElement, FC, ReactElement, ReactNode, useEffect, useState} from "react";
 import {cn, HoverCard, HoverCardContent, HoverCardTrigger} from "@atom-ui/core";
 import Link from "next/link";
 import { ChevronRightIcon } from '@radix-ui/react-icons';
@@ -8,7 +8,7 @@ export const ITEM_HEIGHT = 36;
 
 export type MenuItemProps = {
     id: string;
-    title: string;
+    title: ReactNode;
     url?: string;
     icon?: ReactElement;
     showIcon?: boolean;
@@ -40,7 +40,7 @@ export const MenuItem: FC<MenuItemProps> = (props) => {
 
     const iconClassName = "flex justify-center items-center w-4 h-4 transform-all duration-200 ease";
 
-    const button = <button
+    const button = <div
         onClick={() => children?.length && setOpen(!open)}
         className={cn(
             "w-full px-4 py-1.5 my-0.5 flex justify-start items-center rounded-sm cursor-pointer relative pr-2 text-left",
@@ -68,7 +68,7 @@ export const MenuItem: FC<MenuItemProps> = (props) => {
                 <ChevronRightIcon/>
             </span> : null
         }
-    </button>;
+    </div>;
 
     const body = children?.length ? <>
         <HoverCard>

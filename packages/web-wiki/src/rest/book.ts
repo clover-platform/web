@@ -1,5 +1,6 @@
 import {post, get} from "@easy-kit/common/utils/rest";
 import {PageRequest, RestResult} from "@easy-kit/common/types/rest";
+import {Book} from "@/types/pages/book";
 
 export type CreateBookData = {
     logo: string;
@@ -15,5 +16,5 @@ export type BookListQuery = {
     type: "all" | "create" | "join";
 }
 
-export const list = (query: BookListQuery): Promise<PageRequest<any>> =>
+export const list = (query: BookListQuery): Promise<PageRequest<Book>> =>
     get("@wiki/book/list", query);

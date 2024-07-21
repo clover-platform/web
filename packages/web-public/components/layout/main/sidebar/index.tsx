@@ -1,4 +1,4 @@
-import { FC, PropsWithChildren } from "react";
+import {FC, PropsWithChildren, ReactNode} from "react";
 import { cn, ScrollArea, Tooltip } from "@atom-ui/core";
 import Link from "next/link";
 import { useRecoilValue } from "recoil";
@@ -17,6 +17,7 @@ export interface SidebarProps extends PropsWithChildren {
     active?: string;
     title?: string;
     menus?: MenuItemProps[];
+    extra?: ReactNode;
 }
 
 const Sidebar: FC<SidebarProps> = (props) => {
@@ -101,6 +102,7 @@ const Sidebar: FC<SidebarProps> = (props) => {
                 <div className={"mx-2"}>
                     {menus.map((menu) => <MenuItem key={menu.id} {...menu} active={active} />)}
                 </div>
+                { props.extra }
             </ScrollArea>
         </div>
         <div className={"flex p-1 py-0 border-t"}>
