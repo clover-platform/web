@@ -1,0 +1,3 @@
+.list-group-item {
+    @apply p-2 border m-2 bg-white;
+}

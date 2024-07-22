@@ -5,8 +5,7 @@ import {IconAdd, IconCatalog, IconExpand, IconHome} from "@arco-iconbox/react-cl
 import {MenuItemProps} from "@clover/public/components/layout/main/sidebar/menu-item";
 import {useSearchParams} from "next/navigation";
 import {Action} from "@clover/public/components/common/action";
-import SortableTree from 'react-sortable-tree';
-import 'react-sortable-tree/style.css';
+import {Catalog} from "@/components/layout/book/catalog";
 
 export type BookLayoutProps = {
     active?: string;
@@ -46,11 +45,7 @@ export const BookLayout: FC<BookLayoutProps> = (origin) => {
         return list;
     }, [id]);
 
-    const extra = <SortableTree
-        treeData={treeData}
-        onChange={setTreeData}
-        isVirtualized={false}
-    />
+    const extra = <Catalog />
 
     return <PublicMainLayout
         {...props}
