@@ -43,13 +43,12 @@ export const MenuItem: FC<MenuItemProps> = (props) => {
     const button = <div
         onClick={() => children?.length && setOpen(!open)}
         className={cn(
-            "w-full px-4 py-1.5 my-0.5 flex justify-start items-center rounded-sm cursor-pointer relative pr-2 text-left",
+            "w-full px-2 py-1.5 my-0.5 flex justify-start items-center rounded-sm cursor-pointer relative text-left",
             "hover:bg-[var(--action-hover)] hover:text-primary",
             "focus:bg-[rgba(31,30,36,0.08)] focus:border-[#bfbfc3] focus:shadow-[0_0_0_1px_#fff,0_0_0_3px_rgba(var(--primary))]",
             "active:bg-[rgba(31,30,36,0.08)] active:border-[#bfbfc3] active:shadow-[0_0_0_1px_#fff,0_0_0_3px_rgba(var(--primary))]",
             (hasActive && !open) || active === id ? "before:absolute before:w-[3px] before:top-1 before:bottom-1 before:left-1 before:bg-primary before:rounded-md" : null,
             (hasActive && !open) || active === id ? "text-primary !bg-[rgba(31,30,36,0.08)] font-bold" : null,
-            showIcon ? "pl-4" : "pl-2",
         )}
     >
         {
