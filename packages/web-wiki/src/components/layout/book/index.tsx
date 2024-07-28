@@ -6,6 +6,7 @@ import {MenuItemProps} from "@clover/public/components/layout/main/sidebar/menu-
 import {useSearchParams} from "next/navigation";
 import {Action} from "@clover/public/components/common/action";
 import {Catalog} from "@/components/layout/book/catalog";
+import {AddPageAction} from "@/components/layout/book/add-page-action";
 
 export type BookLayoutProps = {
     active?: string;
@@ -35,11 +36,12 @@ export const BookLayout: FC<BookLayoutProps> = (origin) => {
                 title: <div className={"flex justify-center items-center"}>
                     <div className={"flex-1"}>{"{#目录#}"}</div>
                     <div className={"-mr-3 flex space-x-1"}>
-                        <Action className={"w-6 h-6 !p-0"}><IconAdd/></Action>
+                        <AddPageAction className={"w-6 h-6 !p-0"} />
                         <Action className={"w-6 h-6 !p-0"}><IconExpand/></Action>
                     </div>
                 </div>,
                 icon: <IconCatalog />,
+                activeEnable: false,
             },
         ];
         return list;

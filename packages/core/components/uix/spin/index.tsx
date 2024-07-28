@@ -7,10 +7,5 @@ export type SpinProps = {
 };
 
 export const Spin: FC<SpinProps> = (props) => {
-    return <IconSpin
-        className={cn(
-            "animate-spin mr-1",
-            props.className,
-        )}
-    />;
+    return <IconSpin className={cn("animate-spin", props.className)} />;
 }

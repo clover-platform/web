@@ -1,6 +1,23 @@
 import {Tree} from "@/components/common/tree";
+import {useCallback, useEffect} from "react";
+import {catalog} from "@/rest/page";
+import {useSearchParams} from "next/navigation";
 
 export const Catalog = () => {
+    const search = useSearchParams();
+    const id = search.get("id");
+
+    const load = useCallback(async () => {
+        const { success, data } = await catalog({
+            bookId: Number(id)
+        });
+        console.log(success, data);
+    }, []);
+
+    useEffect(() => {
+        load().then();
+    }, [load]);
+
     return <Tree
         className={"mx-2 my-1"}
         data={[
