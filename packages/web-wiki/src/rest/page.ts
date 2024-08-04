@@ -1,5 +1,6 @@
 import {RestResult} from "@easy-kit/common/types/rest";
 import {post, get} from "@easy-kit/common/utils/rest";
+import {Catalog} from "@/types/pages/book";
 
 export type CreatePageData = {
     parent: number;
@@ -12,5 +13,5 @@ export type CatalogQuery = {
     bookId: number;
 }
 
-export const catalog = (params: CatalogQuery): Promise<RestResult<any>> =>
+export const catalog = (params: CatalogQuery): Promise<RestResult<Catalog[]>> =>
     get("@wiki/page/catalog", params);
