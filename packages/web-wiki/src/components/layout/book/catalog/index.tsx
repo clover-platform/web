@@ -1,58 +1,61 @@
-import {Tree} from "@/components/common/tree";
-import {useCallback, useEffect} from "react";
+import {Tree, TreeItemProps} from "@/components/common/tree";
+import {FC, useCallback, useEffect, useMemo, useState} from "react";
 import {catalog} from "@/rest/page";
 import {useSearchParams} from "next/navigation";
+import {Catalog} from "@/types/pages/book";
+import {AddPageAction} from "@/components/layout/book/add-page-action";
 
-export const Catalog = () => {
+type TreeTitleProps = {
+    id: number;
+    title: string;
+}
+
+const TreeTitle: FC<TreeTitleProps> = (props) => {
+    return <div className={"flex group justify-center items-center space-x-1"}>
+        <div className={"w-0 flex-1 leading-6"}>{props.title}</div>
+        <div className={"hidden group-hover:block"}><AddPageAction parent={Number(props.id)} className={"w-6 h-6 !p-0"} /></div>
+    </div>
+}
+
+const toTreeItemProps = (data: Catalog[]): TreeItemProps<any>[] => {
+    return data.map(item => {
+        return {
+            id: `${item.id}`,
+            title: <TreeTitle title={item.title} id={item.id} />,
+            children: toTreeItemProps(item.children)
+        }
+    });
+}
+
+export const CatalogTree = () => {
     const search = useSearchParams();
     const id = search.get("id");
+    const [data, setData] = useState<Catalog[]>([]);
 
     const load = useCallback(async () => {
         const { success, data } = await catalog({
             bookId: Number(id)
         });
-        console.log(success, data);
+        if(success) {
+            setData(data!);
+        }else{
+            setData([]);
+        }
     }, []);
 
     useEffect(() => {
         load().then();
     }, [load]);
 
+    const treeData = useMemo<TreeItemProps<any>[]>(() => {
+        return toTreeItemProps(data);
+    }, [data])
+
     return <Tree
         className={"mx-2 my-1"}
-        data={[
-            {
-                id: "1.1",
-                title: "Item 1.1",
-            },
-            {
-                id: "1.2",
-                title: "Item 1.2",
-                children: [
-                    {
-                        id: "2.1",
-                        title: "Item 2.1",
-                    },
-                    {
-                        id: "2.2",
-                        title: "Item 2.2",
-                        children: [
-                            {
-                                id: "3.1",
-                                title: "Item 3.1",
-                            },
-                            {
-                                id: "3.2",
-                                title: "Item 3.2",
-                            },
-                        ]
-                    },
-                ]
-            },
-            {
-                id: "1.3",
-                title: "Item 1.3",
-            }
-        ]}
+        data={treeData}
+        onChange={(nodes) => {
+            console.log('onChange', nodes);
+        }}
     />
 }

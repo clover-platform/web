@@ -1,11 +1,11 @@
 import {MainLayout as PublicMainLayout, MainLayoutProps, PathProps} from "@clover/public/components/layout/main";
 import {FC, useMemo, useState} from "react";
 import {useLayoutProps} from "@clover/public/components/layout/hooks/use.layout.props";
-import {IconAdd, IconCatalog, IconExpand, IconHome} from "@arco-iconbox/react-clover";
+import {IconCatalog, IconExpand, IconHome} from "@arco-iconbox/react-clover";
 import {MenuItemProps} from "@clover/public/components/layout/main/sidebar/menu-item";
 import {useSearchParams} from "next/navigation";
 import {Action} from "@clover/public/components/common/action";
-import {Catalog} from "@/components/layout/book/catalog";
+import {CatalogTree} from "@/components/layout/book/catalog";
 import {AddPageAction} from "@/components/layout/book/add-page-action";
 
 export type BookLayoutProps = {
@@ -47,7 +47,7 @@ export const BookLayout: FC<BookLayoutProps> = (origin) => {
         return list;
     }, [id]);
 
-    const extra = <Catalog />
+    const extra = <CatalogTree />
 
     return <PublicMainLayout
         {...props}

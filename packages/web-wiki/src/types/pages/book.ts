@@ -10,3 +10,14 @@ export type Book = {
     privacy: number;
     path: string;
 }
+
+export type Catalog = {
+    id: number;
+    bookId: number;
+    parentId: number;
+    title: string;
+    owner: number;
+    ownerInfo: string;
+    createTime: Date;
+    children: Catalog[];
+}
