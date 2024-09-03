@@ -41,7 +41,7 @@ export const Pagination: FC<PaginationProps> = (props) => {
         setPageValue(page);
     }, [page]);
 
-    const handleChange = (e) => {
+    const handleChange = (e: any) => {
         let v = e.target.value.replace(/[^\d]/g, '');
         if(v === '') {
             setPageValue(v);
@@ -62,7 +62,7 @@ export const Pagination: FC<PaginationProps> = (props) => {
                 {totalPageText.replace("%total", `${total}`)}
             </span>
             <span>
-                 {totalText.replace("%page", `${totalPage}`)}
+                {totalText.replace("%page", `${totalPage}`)}
             </span>
         </span>
         <Button

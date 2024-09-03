@@ -42,6 +42,7 @@
         "next": "14.2.4",
         "node-rsa": "1.1.1",
         "qrcode": "1.5.3",
+        "rc-tree": "5.9.0",
         "react": "18.3.1",
         "react-copy-to-clipboard": "5.1.0",
         "react-dom": "18.3.1",

@@ -1,5 +1,5 @@
 import {MainLayout as PublicMainLayout, MainLayoutProps, PathProps} from "@clover/public/components/layout/main";
-import {FC, useMemo, useState} from "react";
+import {FC, useMemo} from "react";
 import {useLayoutProps} from "@clover/public/components/layout/hooks/use.layout.props";
 import {IconCatalog, IconExpand, IconHome} from "@arco-iconbox/react-clover";
 import {MenuItemProps} from "@clover/public/components/layout/main/sidebar/menu-item";
@@ -18,10 +18,6 @@ export const BookLayout: FC<BookLayoutProps> = (origin) => {
     const props = useLayoutProps<BookLayoutProps>(origin);
     const search = useSearchParams();
     const id = search.get("id");
-    const [treeData, setTreeData] = useState<any[]>([
-        { title: 'Chicken', children: [{ title: 'Egg' }] },
-        { title: 'Fish', children: [{ title: 'fingerline' }] },
-    ]);
 
     const menus: MenuItemProps[] = useMemo(() => {
         const list: MenuItemProps[] = [

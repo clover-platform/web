@@ -1,27 +1,15 @@
-import {Tree, TreeItemProps} from "@/components/common/tree";
-import {FC, useCallback, useEffect, useMemo, useState} from "react";
+import {FC, ReactNode, useCallback, useEffect, useMemo, useState} from "react";
 import {catalog} from "@/rest/page";
 import {useSearchParams} from "next/navigation";
 import {Catalog} from "@/types/pages/book";
 import {AddPageAction} from "@/components/layout/book/add-page-action";
+import {TreeData, Tree} from "@/components/common/tree";
 
-type TreeTitleProps = {
-    id: number;
-    title: string;
-}
-
-const TreeTitle: FC<TreeTitleProps> = (props) => {
-    return <div className={"flex group justify-center items-center space-x-1"}>
-        <div className={"w-0 flex-1 leading-6"}>{props.title}</div>
-        <div className={"hidden group-hover:block"}><AddPageAction parent={Number(props.id)} className={"w-6 h-6 !p-0"} /></div>
-    </div>
-}
-
-const toTreeItemProps = (data: Catalog[]): TreeItemProps<any>[] => {
+const toTreeItemProps = (data: Catalog[]): TreeData[] => {
     return data.map(item => {
         return {
-            id: `${item.id}`,
-            title: <TreeTitle title={item.title} id={item.id} />,
+            key: `${item.id}`,
+            title: item.title,
             children: toTreeItemProps(item.children)
         }
     });
@@ -47,15 +35,17 @@ export const CatalogTree = () => {
         load().then();
     }, [load]);
 
-    const treeData = useMemo<TreeItemProps<any>[]>(() => {
+    const treeData = useMemo<TreeData[]>(() => {
         return toTreeItemProps(data);
     }, [data])
 
     return <Tree
-        className={"mx-2 my-1"}
-        data={treeData}
-        onChange={(nodes) => {
-            console.log('onChange', nodes);
+        prefixCls={"rc-tree"}
+        treeData={treeData}
+        draggable={true}
+        selectable={false}
+        onDrop={(info) => {
+            console.log(info);
         }}
     />
 }
