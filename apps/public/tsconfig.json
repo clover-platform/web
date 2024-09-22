@@ -4,7 +4,7 @@
         "jsx": "react-jsx",
         "paths": {
             "@clover/public/*": [ "./*"],
-            "@easy-kit/i18n/*": [ "../i18n/*"]
+            "@easy-kit/i18n/*": [ "../../packages/i18n/*"]
         }
     },
     "include": [

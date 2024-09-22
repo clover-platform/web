@@ -4,15 +4,10 @@
         "strictNullChecks": true,
         "jsx": "preserve",
         "paths": {
-            "@/*": [
-                "./src/*"
-            ],
-            "@clover/public/*": [
-                "../web-public/*"
-            ],
-            "@easy-kit/common/*": [
-                "../common/*"
-            ]
+            "@/*": [ "./src/*" ],
+            "@clover/public/*": [ "../public/*" ],
+            "@easy-kit/common/*": [ "../../packages/common/*" ],
+            "@easy-kit/i18n/*": [ "../../packages/i18n/*"]
         }
     },
     "include": [

@@ -1,5 +1,5 @@
 import type { Config } from 'tailwindcss';
-import plugin from '../common/plugin/tailwind';
+import plugin from "@easy-kit/common/plugin/tailwind";
 import ta from 'tailwindcss-animate';
 import coreConfig from '@atom-ui/core/lib/tailwind';
 

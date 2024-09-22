@@ -36,8 +36,8 @@ const dataLoader = (config) => {
     return maps;
 }
 const langData = dataLoader({
-    langDir: getPath('../i18n-data/lang'),
-    variablePath: getPath('../i18n-data/lang/variable.json')
+    langDir: getPath('../../packages/i18n-data/lang'),
+    variablePath: getPath('../../packages/i18n-data/lang/variable.json')
 });
 
 export default langData;
