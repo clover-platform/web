@@ -3,7 +3,7 @@ import {post, get} from "@easy-kit/common/utils/rest";
 import {Catalog} from "@/types/pages/book";
 
 export type CreatePageData = {
-    parent: number;
+    parent?: number;
     bookId: number;
 }
 export const create = (data: CreatePageData): Promise<RestResult<number>> =>

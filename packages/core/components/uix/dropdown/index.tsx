@@ -1,4 +1,4 @@
-import {PropsWithChildren, FC, ReactNode} from "react";
+import {PropsWithChildren, FC, ReactNode, MouseEvent} from "react";
 import {
     DropdownMenu, DropdownMenuCheckboxItem,
     DropdownMenuContent,
@@ -16,7 +16,7 @@ import {cn} from "@atom-ui/core/lib/utils";
 
 type Align = "start" | "center" | "end";
 
-export type onDropdownMenuClick = (item: DropdownMenuItemProps) => void;
+export type onDropdownMenuClick = (item: DropdownMenuItemProps, e: MouseEvent) => void;
 export type onCheckedChange = (item: DropdownMenuItemProps, checked: boolean) => void;
 
 export interface DropdownMenuItemProps {
@@ -77,7 +77,7 @@ const renderItem = (item: DropdownMenuItemProps, call: Callback) => {
                 </DropdownMenuPortal>
             </DropdownMenuSub>
         }else {
-            return <DropdownMenuItem onClick={() => clickCall?.(item)} key={item.id} disabled={item.disabled}>
+            return <DropdownMenuItem onClick={(e) => clickCall?.(item, e)} key={item.id} disabled={item.disabled}>
                 { item.label }
                 { item.shortcut && <DropdownMenuShortcut>{ item.shortcut }</DropdownMenuShortcut> }
             </DropdownMenuItem>

@@ -6,7 +6,8 @@ import {MenuItemProps} from "@clover/public/components/layout/main/sidebar/menu-
 import {useSearchParams} from "next/navigation";
 import {Action} from "@clover/public/components/common/action";
 import {CatalogTree} from "@/components/layout/book/catalog";
-import {AddPageAction} from "@/components/layout/book/add-page-action";
+import {AddPageAction} from "@/components/layout/book/page-actions/add";
+import {Tooltip} from "@atom-ui/core";
 
 export type BookLayoutProps = {
     active?: string;
@@ -33,7 +34,9 @@ export const BookLayout: FC<BookLayoutProps> = (origin) => {
                     <div className={"flex-1"}>{"{#目录#}"}</div>
                     <div className={"-mr-3 flex space-x-1"}>
                         <AddPageAction className={"w-6 h-6 !p-0"} />
-                        <Action className={"w-6 h-6 !p-0"}><IconExpand/></Action>
+                        <Tooltip content={"{#展开全部#}"}>
+                            <Action className={"w-6 h-6 !p-0"}><IconExpand/></Action>
+                        </Tooltip>
                     </div>
                 </div>,
                 icon: <IconCatalog />,
