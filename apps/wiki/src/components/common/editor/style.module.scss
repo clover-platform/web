@@ -1,8 +1,11 @@
 .editorContainer {
-    @apply max-w-[800px] w-full relative;
+    @apply w-full relative;
     .editor {
         :global {
             .tiptap {
+                > *:first-child {
+                    @apply mt-0;
+                }
                 @apply outline-none;
                 p.is-empty::before {
                     color: #adb5bd;

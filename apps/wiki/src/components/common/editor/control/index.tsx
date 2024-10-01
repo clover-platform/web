@@ -19,7 +19,7 @@ export type EditorControllerProps = {
 export const EditorController: FC<EditorControllerProps> = (props) => {
     const { limit, data, editor, handleId, appendTo } = props;
     return editor ? <>
-        <CharacterCountControl editor={editor} limit={limit} />
+        {limit ? <CharacterCountControl editor={editor} limit={limit} /> : null}
         <DragHandleControl data={data} editor={editor} id={handleId} />
         <LinkMenu editor={editor} appendTo={appendTo} />
         <TextMenu editor={editor} />

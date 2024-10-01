@@ -27,7 +27,7 @@ export type PathProps = {
     type: "item" | "link";
     title: string;
     href?: string;
-    withQuery?: boolean;
+    withQuery?: boolean|string[];
 }
 
 export interface MainLayoutProps extends PropsWithChildren {
@@ -53,14 +53,13 @@ export const MainLayout: FC<MainLayoutProps> = (props) => {
     }, [loading, isLogin]);
 
     const items = useMemo(() => {
-        const query = searchParams.toString();
         const nodes: ReactNode[] = [];
         path?.forEach((item, index) => {
             let node = null;
             if(item.type === "link") {
                 node = <BreadcrumbItem key={'item' + index}>
                     <BreadcrumbLink asChild={true}>
-                        <Link href={item.withQuery?withQuery(item.href!, query): item.href!} className={"flex items-center"}>
+                        <Link href={withQuery(item.href!, item.withQuery, searchParams)} className={"flex items-center"}>
                             {item.title}
                         </Link>
                     </BreadcrumbLink>

@@ -2,6 +2,7 @@ import {FC, useEffect, useState} from "react";
 import {DotsHorizontalIcon} from "@radix-ui/react-icons";
 import {Action} from "@clover/public/components/common/action";
 import {Dropdown, Tooltip} from "@atom-ui/core";
+import {useRouter, useSearchParams} from "next/navigation";
 
 export type MorePageActionProps = {
     id: number;
@@ -11,10 +12,14 @@ export type MorePageActionProps = {
 
 export const MorePageAction: FC<MorePageActionProps> = (props) => {
     const {
+        id,
         className,
         onOpenChange,
     } = props;
     const [open, setOpen] = useState(false);
+    const search = useSearchParams();
+    const bookId = search.get("id");
+    const router = useRouter();
 
     useEffect(() => {
         onOpenChange?.(open);
@@ -30,7 +35,7 @@ export const MorePageAction: FC<MorePageActionProps> = (props) => {
                 label: "{#编辑#}",
                 type: "item",
                 onItemClick: (item, e) => {
-                    console.log("edit", item);
+                    router.push(`/{#LANG#}/wiki/book/page/edit/?id=${bookId}&page=${id}`)
                     e.stopPropagation();
                 }
             },
@@ -80,6 +85,7 @@ export const MorePageAction: FC<MorePageActionProps> = (props) => {
     >
         <Tooltip content={"{#更多操作#}"}>
             <Action
+                elType={"span"}
                 onClick={(e) => {
                     e.stopPropagation();
                 }}

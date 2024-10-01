@@ -5,6 +5,7 @@ export type ActionProps = PropsWithChildren<HTMLAttributes<HTMLButtonElement>> &
     theme?: 'dark' | 'light';
     active?: boolean;
     disabled?: boolean;
+    elType?: 'button' | 'span';
 };
 
 export const Action = forwardRef<HTMLButtonElement, ActionProps>((props, ref) => {
@@ -12,15 +13,15 @@ export const Action = forwardRef<HTMLButtonElement, ActionProps>((props, ref) =>
         theme = 'dark',
         active = false,
         disabled = false,
+        elType = "button",
         ...rest
     } = props;
 
-    return <button
-        {...rest}
-        ref={ref}
-        disabled={disabled}
-        type={"button"}
-        className={classNames(
+    const elProps = {
+        ...rest,
+        ref,
+        disabled,
+        className: classNames(
             "p-2 flex justify-center items-center rounded-sm border border-transparent border-solid",
             theme === 'light' && "hover:bg-white/20",
             theme === 'light' && "focus:bg-white/30 focus:border-white/30",
@@ -32,8 +33,17 @@ export const Action = forwardRef<HTMLButtonElement, ActionProps>((props, ref) =>
             (active && theme === 'dark') && "bg-black/10",
             disabled && "opacity-50 cursor-not-allowed hover:bg-transparent focus:bg-transparent active:bg-transparent focus:shadow-none active:shadow-none focus:border-transparent active:border-transparent",
             props.className
-        )}
+        )
+    }
+
+    return elType === "button" ? <button
+        {...elProps}
+        type={"button"}
     >
         { props.children }
-    </button>
+    </button> : <span
+        {...elProps}
+    >
+        {props.children}
+    </span>
 })

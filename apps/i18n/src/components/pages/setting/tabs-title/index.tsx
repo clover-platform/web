@@ -21,8 +21,7 @@ export const SettingTabsTitle: FC<SettingTabsTitleProps> = (props) => {
     const router = useRouter();
     const searchParams = useSearchParams();
     const onChange = useCallback((id: string) => {
-        const query = searchParams.toString();
-        router.push(withQuery(PATH_MAP[id], query));
+        router.push(withQuery(PATH_MAP[id], true, searchParams));
     }, [searchParams])
     return <TabsTitle
         active={props.active}

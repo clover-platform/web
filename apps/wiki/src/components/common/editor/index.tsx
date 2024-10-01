@@ -34,19 +34,21 @@ import {
     BlockquoteFigure,
     Dropcursor
 } from './extension';
-import { lowlight } from 'lowlight';
+import { common, createLowlight } from 'lowlight';
 import {FC, useRef} from "react";
 import {EditorController} from "@/components/common/editor/control";
 
 export type EditorProps = {
     limit?: number;
+    offsetTop?: number;
     value?: string;
     onChange?: (value: string) => void;
 }
 
 export const Editor: FC<EditorProps> = (props) => {
     const {
-        limit = 500,
+        limit,
+        offsetTop = 0,
         value, onChange
     } = props;
     const handleId = useHandleId();
@@ -81,13 +83,13 @@ export const Editor: FC<EditorProps> = (props) => {
             }),
             GlobalDragHandle.configure({
                 dragHandleSelector: `#${handleId}`,
-                offsetTop: -48-16,
+                offsetTop,
                 onNodeChange: data.handleNodeChange,
                 onShow: () => data.setHidden(false),
                 onHide: () => data.setHidden(true),
             }),
             CodeBlockLowlight.configure({
-                lowlight,
+                lowlight: createLowlight(common),
                 defaultLanguage: null,
             }),
             TextStyle,
