@@ -10,11 +10,11 @@ package-main:
         - dev
     cache:
         paths:
-            - packages/web-main/.next/cache/
+            - apps/main/.next/cache/
         policy: pull-push
     artifacts:
         paths:
-            - packages/web-main/i18n/
+            - apps/main/i18n/
     script:
         - pnpm i
         - pnpm build:main
@@ -34,11 +34,11 @@ package-i18n:
         - dev
     cache:
         paths:
-            - packages/web-i18n/.next/cache/
+            - apps/i18n/.next/cache/
         policy: pull-push
     artifacts:
         paths:
-            - packages/web-i18n/i18n/
+            - apps/i18n/i18n/
     script:
         - pnpm i
         - pnpm build:i18n
@@ -58,11 +58,11 @@ package-admin:
         - dev
     cache:
         paths:
-            - packages/web-admin/.next/cache/
+            - apps/admin/.next/cache/
         policy: pull-push
     artifacts:
         paths:
-            - packages/web-admin/i18n/
+            - apps/admin/i18n/
     script:
         - pnpm i
         - pnpm build:admin
@@ -82,11 +82,11 @@ package-wiki:
         - dev
     cache:
         paths:
-            - packages/web-wiki/.next/cache/
+            - apps/wiki/.next/cache/
         policy: pull-push
     artifacts:
         paths:
-            - packages/web-wiki/i18n/
+            - apps/wiki/i18n/
     script:
         - pnpm i
         - pnpm build:wiki
