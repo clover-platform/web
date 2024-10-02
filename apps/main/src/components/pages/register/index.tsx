@@ -1,6 +1,6 @@
 'use client';
 
-import { Form, Steps, StepsItem, Button, Input, useMessage, FormItem, FormValues } from "@atom-ui/core";
+import { Form, Steps, StepsItem, Button, Input, useMessage, FormItem } from "@atom-ui/core";
 import { useState } from "react";
 import SecretItem from "@/components/pages/register/secret";
 import EmailCodeInput from "@easy-kit/common/components/input/email-code";
@@ -18,7 +18,7 @@ const RegisterPage = () => {
     const params = useSearchParams();
     const from = params.get("from");
     const [step, setStep] = useState(0);
-    const [formData1, setFormData1] = useState<FormValues>({});
+    const [formData1, setFormData1] = useState<any>({});
     const [step1Submitting, setStep1Submitting] = useState(false);
     const [formKey, setFormKey] = useState(Date.now());
     const [step2Submitting, setStep2Submitting] = useState(false);

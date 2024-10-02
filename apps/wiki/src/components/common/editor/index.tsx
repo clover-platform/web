@@ -35,8 +35,9 @@ import {
     Dropcursor
 } from './extension';
 import { common, createLowlight } from 'lowlight';
-import {FC, useRef} from "react";
+import {forwardRef, useEffect, useRef, useImperativeHandle} from "react";
 import {EditorController} from "@/components/common/editor/control";
+import {Editor as EditorInstance} from '@tiptap/core';
 
 export type EditorProps = {
     limit?: number;
@@ -45,11 +46,15 @@ export type EditorProps = {
     onChange?: (value: string) => void;
 }
 
-export const Editor: FC<EditorProps> = (props) => {
+export type EditorRef = {
+    editor: EditorInstance | null;
+}
+
+export const Editor = forwardRef<EditorRef, EditorProps>((props, ref) => {
     const {
         limit,
         offsetTop = 0,
-        value, onChange
+        value, onChange,
     } = props;
     const handleId = useHandleId();
     const data = useData();
@@ -136,6 +141,10 @@ export const Editor: FC<EditorProps> = (props) => {
         }
     })
 
+    useImperativeHandle(ref, () => ({
+        editor,
+    }), [editor]);
+
     return <div className={styles.editorContainer} ref={menuContainerRef}>
         <EditorContent
             className={styles.editor}
@@ -149,4 +158,4 @@ export const Editor: FC<EditorProps> = (props) => {
             data={data}
         />
     </div>
-}
+});

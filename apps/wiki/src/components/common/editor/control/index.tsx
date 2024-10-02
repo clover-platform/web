@@ -9,7 +9,7 @@ import {NodeData} from "@/components/common/editor/control/drag-handle/use.data"
 import {TextMenu} from "@/components/menus/TextMenu";
 
 export type EditorControllerProps = {
-    limit: number;
+    limit?: number;
     editor: Editor | null;
     handleId: string;
     appendTo: RefObject<HTMLElement>;

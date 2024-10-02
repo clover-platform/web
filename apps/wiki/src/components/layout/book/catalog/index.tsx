@@ -1,6 +1,6 @@
 import {useCallback, useEffect, useMemo, useState} from "react";
-import {catalog} from "@/rest/page";
-import {useRouter, useSearchParams} from "next/navigation";
+import {catalog, changeCatalogParent} from "@/rest/page";
+import {useSearchParams} from "next/navigation";
 import {Catalog} from "@/types/pages/book";
 import {TreeData, Tree} from "@/components/common/tree";
 import {cloneDeep} from "lodash";
@@ -11,7 +11,6 @@ export const CatalogTree = () => {
     const id = search.get("id");
     const [data, setData] = useState<Catalog[]>([]);
     const [selectedKeys, setSelectedKeys] = useState<string[]>([]);
-    const router = useRouter();
 
     const load = useCallback(async () => {
         const { success, data } = await catalog({
@@ -32,8 +31,9 @@ export const CatalogTree = () => {
         return toTreeItemProps(data);
     }, [data])
 
-    const saveChange = useCallback((id: number, parentId: number|undefined) => {
-        console.log(id, parentId);
+    const saveChange = useCallback(async (id: number, parentId: number|undefined) => {
+        const {success, message} = await changeCatalogParent({id, parentId});
+        console.log(success, message);
     }, [])
 
     return <div className={"mx-2"}>
@@ -54,7 +54,7 @@ export const CatalogTree = () => {
                     parentId = moveToChild(cloneData, dragKey, key);
                 }
                 setData(cloneData);
-                saveChange(Number(dragKey), parentId)
+                saveChange(Number(dragKey), parentId).then();
             }}
             selectedKeys={selectedKeys}
             onSelect={(selectedKeys, {selected}) => {
