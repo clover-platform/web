@@ -5,12 +5,14 @@ import {Catalog} from "@/types/pages/book";
 import {TreeData, Tree} from "@/components/common/tree";
 import {cloneDeep} from "lodash";
 import {moveToAfter, moveToChild, toTreeItemProps} from "@/components/layout/book/catalog/utils";
+import {useMessage} from "@atom-ui/core";
 
 export const CatalogTree = () => {
     const search = useSearchParams();
     const id = search.get("id");
     const [data, setData] = useState<Catalog[]>([]);
     const [selectedKeys, setSelectedKeys] = useState<string[]>([]);
+    const msg = useMessage();
 
     const load = useCallback(async () => {
         const { success, data } = await catalog({
@@ -33,7 +35,10 @@ export const CatalogTree = () => {
 
     const saveChange = useCallback(async (id: number, parentId: number|undefined) => {
         const {success, message} = await changeCatalogParent({id, parentId});
-        console.log(success, message);
+        if(!success) {
+            msg.error(message);
+            load().then();
+        }
     }, [])
 
     return <div className={"mx-2"}>

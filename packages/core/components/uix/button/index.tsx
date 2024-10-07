@@ -22,10 +22,10 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>((props, ref) =>
     return <UIButton
         {...rest}
         ref={ref}
-        className={cn(className, long ? 'w-full' : null)}
+        className={cn("space-x-1", className, long ? 'w-full' : null)}
         disabled={loading || disabled}
     >
         { loading ? <Spin /> : null }
-        { props.children }
+        <span>{ props.children }</span>
     </UIButton>
 });

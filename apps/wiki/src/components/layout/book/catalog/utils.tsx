@@ -1,22 +1,43 @@
 import {Catalog} from "@/types/pages/book";
 import {TreeData} from "@/components/common/tree";
-import {FC, useState} from "react";
+import {FC, useCallback, useEffect, useState} from "react";
 import classNames from "classnames";
 import {AddPageAction} from "@/components/layout/book/page-actions/add";
 import {MorePageAction} from "@/components/layout/book/page-actions/more";
 import {useRouter, useSearchParams} from "next/navigation";
+import bus from "@easy-kit/common/events";
+import {UPDATE_TITLE} from "@/events/book";
 
 type MenuTitleProps = {
     title: string;
     id: number;
 }
 
+type UpdateData = {
+    id: number;
+    title: string;
+}
+
 const MenuTitle: FC<MenuTitleProps> = (props) => {
-    const {title, id} = props;
+    const {id} = props;
+    const [title, setTitle] = useState<string>(props.title);
     const search = useSearchParams();
     const [moreOpen, setMoreOpen] = useState(false);
     const router = useRouter();
     const bookId = search.get("id");
+
+    const onUpdate = useCallback((data: UpdateData) => {
+        if(id === data.id) {
+            setTitle(data.title);
+        }
+    }, [id])
+
+    useEffect(() => {
+        bus.on(UPDATE_TITLE, onUpdate);
+        return () => {
+            bus.off(UPDATE_TITLE, onUpdate);
+        }
+    }, [onUpdate])
 
     return <div
         onClick={() => router.push(`/{#LANG#}/wiki/book/page/?id=${bookId}&page=${id}`)}
