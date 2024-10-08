@@ -23,3 +23,6 @@ export { TrailingNode } from './trailing-node';
 export { Link } from './link';
 export { Figcaption } from './figcaption';
 export { BlockquoteFigure } from './block-quote-figure';
+export { Image } from './image';
+export { ImageBlock } from './image-block';
+export { ImageUpload } from './image-upload';

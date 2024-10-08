@@ -129,7 +129,7 @@ export const GROUPS: Group[] = [
                 description: "{#插入图片#}",
                 aliases: ['img'],
                 action: editor => {
-                    editor.chain().focus()//.setImageUpload().run()
+                    editor.chain().focus().setImageUpload().run()
                 },
             },
             // {

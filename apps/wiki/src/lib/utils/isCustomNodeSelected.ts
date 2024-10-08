@@ -3,10 +3,11 @@ import { Editor } from '@tiptap/react'
 import {
     // AiWriter, AiImage,
     Figcaption, HorizontalRule,
-    // ImageBlock, ImageUpload,
+    ImageBlock,
+    ImageUpload,
     Link,
-    // CodeBlock
 } from '@/components/common/editor/extension';
+import CodeBlock from '@tiptap/extension-code-block';
 // import { TableOfContentsNode } from '@/extensions/TableOfContentsNode'
 
 export const isTableGripSelected = (node: HTMLElement) => {
@@ -29,10 +30,9 @@ export const isTableGripSelected = (node: HTMLElement) => {
 export const isCustomNodeSelected = (editor: Editor, node: HTMLElement) => {
     const customNodes = [
         HorizontalRule.name,
-        // ImageBlock.name,
-        // ImageUpload.name,
-        // CodeBlock.name,
-        // ImageBlock.name,
+        ImageBlock.name,
+        ImageUpload.name,
+        CodeBlock.name,
         Link.name,
         // AiWriter.name,
         // AiImage.name,

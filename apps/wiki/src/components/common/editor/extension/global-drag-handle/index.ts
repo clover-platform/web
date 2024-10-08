@@ -292,7 +292,7 @@ export function DragHandlePlugin(options: GlobalDragHandleOptions & {pluginKey: 
 
                     const rootNode = view.domAtPos(root.pos).node as Element;
                     let rect = absoluteRect(rootNode);
-                    if(node.matches("div[data-type=horizontalRule]")) {
+                    if(node.matches("div[data-type=horizontalRule], div.node-imageBlock")) {
                         rect = absoluteRect(node);
                     }
                     rect.top += (lineHeight - 24) / 2;

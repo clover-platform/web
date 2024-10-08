@@ -320,13 +320,13 @@
     color: hsla(0,0%,100%,.4)
 }
 
-.ProseMirror.ProseMirror-focused>[data-type=columns]>[data-type=column]>p.is-empty.has-focus:before,.ProseMirror.ProseMirror-focused>p.has-focus.is-empty:before {
-    content: "Type  /  to browse options"
-}
+/*.ProseMirror.ProseMirror-focused>[data-type=columns]>[data-type=column]>p.is-empty.has-focus:before,.ProseMirror.ProseMirror-focused>p.has-focus.is-empty:before {*/
+/*    content: "Type  /  to browse options"*/
+/*}*/
 
-.ProseMirror>.is-editor-empty:before {
-    content: "Click here to start writing …"
-}
+/*.ProseMirror>.is-editor-empty:before {*/
+/*    content: "Click here to start writing …"*/
+/*}*/
 
 .ProseMirror blockquote .is-empty:not(.is-editor-empty):first-child:last-child:before {
     content: "Enter a quote"
@@ -618,14 +618,7 @@
 /**  标题 end  **/
 
 .ProseMirror a.link {
-    font-weight: 800;
-    --tw-text-opacity: 1;
-    color: rgb(59 130 246/var(--tw-text-opacity))
-}
-
-:is(.dark .ProseMirror a.link) {
-    --tw-text-opacity: 1;
-    color: rgb(96 165 250/var(--tw-text-opacity))
+    @apply text-primary font-bold;
 }
 
 .ProseMirror mark {

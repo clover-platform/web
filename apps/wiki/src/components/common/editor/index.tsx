@@ -32,7 +32,7 @@ import {
     Focus,
     Figcaption,
     BlockquoteFigure,
-    Dropcursor
+    Dropcursor, ImageBlock, ImageUpload
 } from './extension';
 import { common, createLowlight } from 'lowlight';
 import {forwardRef, useEffect, useRef, useImperativeHandle} from "react";
@@ -134,7 +134,12 @@ export const Editor = forwardRef<EditorRef, EditorProps>((props, ref) => {
                 width: 2,
                 class: '!bg-primary',
             }),
+            ImageBlock,
+            ImageUpload.configure({
+                clientId: "test",
+            }),
         ],
+        immediatelyRender: true,
         content: value,
         onUpdate: ({ editor }) => {
             onChange?.(editor.getHTML());

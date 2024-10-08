@@ -7,6 +7,7 @@ import {Editor} from "@tiptap/react";
 import {FC, RefObject} from "react";
 import {NodeData} from "@/components/common/editor/control/drag-handle/use.data";
 import {TextMenu} from "@/components/menus/TextMenu";
+import ImageBlockMenu from "@/components/common/editor/extension/image-block/components/ImageBlockMenu";
 
 export type EditorControllerProps = {
     limit?: number;
@@ -26,5 +27,6 @@ export const EditorController: FC<EditorControllerProps> = (props) => {
         <ColumnsMenu editor={editor} appendTo={appendTo} />
         <TableRowMenu editor={editor} appendTo={appendTo} />
         <TableColumnMenu editor={editor} appendTo={appendTo} />
+        <ImageBlockMenu editor={editor} appendTo={appendTo} />
     </> : null;
 }
