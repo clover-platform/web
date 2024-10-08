@@ -1,6 +1,5 @@
 import {FC, PropsWithChildren, ReactNode} from "react";
 import { cn, ScrollArea, Tooltip } from "@atom-ui/core";
-import Link from "next/link";
 import { useRecoilValue } from "recoil";
 import classNames from 'classnames';
 import {IconAdd, IconGantt, IconHelp, IconProject, IconSearch, IconSetting, IconWiki} from "@arco-iconbox/react-clover";
@@ -41,13 +40,13 @@ const Sidebar: FC<SidebarProps> = (props) => {
     )}>
         <div className={"bg-[var(--sidebar-user-bg)] text-white p-2"}>
             <div className={"flex justify-center items-center"}>
-                <Link href={"/{#LANG#}/"}>
+                <a href={"/{#LANG#}/"}>
                     <Tooltip content={"{#首页#}"}>
                         <div className={classNames(loading ? "animate-spin" : "")}>
                             <Logo type={"dark"} size={28} className={"bg-transparent cursor-pointer"}/>
                         </div>
                     </Tooltip>
-                </Link>
+                </a>
                 <div className={"flex-1 flex justify-end items-center space-x-0.5"}>
                     <Switch theme={"light"} className={"w-8 h-8 !p-0"} />
                     <Tooltip content={"{#创建新的...#}"}>
@@ -61,29 +60,29 @@ const Sidebar: FC<SidebarProps> = (props) => {
             <div className={groupClassName}>
                 <div className={"m-1 flex-1"}>
                     <Tooltip side={"bottom"} content={"{#项目#}"}>
-                        <Link href={"/{#LANG#}/project/"}>
+                        <a href={"/{#LANG#}/project/"}>
                             <ActionButton className={"w-full"}>
                                 <IconProject className={iconClassName} />
                             </ActionButton>
-                        </Link>
+                        </a>
                     </Tooltip>
                 </div>
                 <div className={"m-1 flex-1"}>
                     <Tooltip side={"bottom"} content={"{#任务#}"}>
-                        <Link href={"/{#LANG#}/task/"}>
+                        <a href={"/{#LANG#}/task/"}>
                             <ActionButton className={"w-full"}>
                                 <IconGantt className={iconClassName} />
                             </ActionButton>
-                        </Link>
+                        </a>
                     </Tooltip>
                 </div>
                 <div className={"m-1 flex-1"}>
                     <Tooltip side={"bottom"} content={"{#Wiki#}"}>
-                        <Link href={"/{#LANG#}/wiki/"}>
+                        <a href={"/{#LANG#}/wiki/"}>
                             <ActionButton className={"w-full"}>
                                 <IconWiki className={iconClassName} />
                             </ActionButton>
-                        </Link>
+                        </a>
                     </Tooltip>
                 </div>
             </div>
