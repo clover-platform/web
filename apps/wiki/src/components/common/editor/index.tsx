@@ -132,7 +132,7 @@ export const Editor = forwardRef<EditorRef, EditorProps>((props, ref) => {
             BlockquoteFigure,
             Dropcursor.configure({
                 width: 2,
-                class: 'ProseMirror-dropcursor border-black',
+                class: '!bg-primary',
             }),
         ],
         content: value,

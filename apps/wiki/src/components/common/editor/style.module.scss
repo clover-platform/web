@@ -1,11 +1,9 @@
 .editorContainer {
     @apply w-full relative;
     .editor {
+        @apply pt-1 -mt-1;
         :global {
             .tiptap {
-                > *:first-child {
-                    @apply mt-0;
-                }
                 @apply outline-none;
                 p.is-empty::before {
                     color: #adb5bd;

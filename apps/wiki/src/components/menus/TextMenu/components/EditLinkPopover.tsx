@@ -11,7 +11,7 @@ export const EditLinkPopover = ({ onSetLink }: EditLinkPopoverProps) => {
     return (
         <Popover.Root>
             <Popover.Trigger asChild>
-                <Toolbar.Button tooltip="Set Link">
+                <Toolbar.Button tooltip="{#设置链接#}">
                     <Icon name="Link" />
                 </Toolbar.Button>
             </Popover.Trigger>

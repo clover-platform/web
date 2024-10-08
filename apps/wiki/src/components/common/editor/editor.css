@@ -320,7 +320,6 @@
     color: hsla(0,0%,100%,.4)
 }
 
-/**
 .ProseMirror.ProseMirror-focused>[data-type=columns]>[data-type=column]>p.is-empty.has-focus:before,.ProseMirror.ProseMirror-focused>p.has-focus.is-empty:before {
     content: "Type  /  to browse options"
 }
@@ -339,14 +338,13 @@
 .ProseMirror [data-placeholder][data-suggestion] :before,.ProseMirror [data-placeholder][data-suggestion]:before {
     content: none!important
 }
- */
 
-.ProseMirror .tableWrapper {
-    margin-top: 3rem;
-    margin-bottom: 3rem
-}
+/**  表格 start  **/
+.ProseMirror .tableWrapper {}
 
 .ProseMirror table {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
     box-sizing: border-box;
     width: 100%;
     border-collapse: collapse;
@@ -565,83 +563,59 @@
     border-left-width: 2px;
     border-style: dotted
 }
+/**  表格 end  **/
 
+/**  普通段落 start  **/
 .ProseMirror p {
     margin-top: .75rem;
     margin-bottom: .75rem;
     line-height: 1.625
 }
-
 .ProseMirror p:first-child {
     margin-top: 0
 }
-
 .ProseMirror p:last-child {
     margin-bottom: 0
 }
+/**  普通段落 end  **/
 
-.ProseMirror>p {
-    margin-top: 1rem;
-    margin-bottom: 1rem
-}
-
-.ProseMirror>p:first-child {
-    margin-top: 0
-}
-
-.ProseMirror>p:last-child {
-    margin-bottom: 0
-}
-
+/**  标题 start  **/
 .ProseMirror h1 {
     font-size: 1.875rem;
     line-height: 2.25rem
 }
-
 .ProseMirror h2 {
     font-size: 1.5rem;
     line-height: 2rem
 }
-
 .ProseMirror h3 {
     font-size: 1.25rem;
     line-height: 1.75rem
 }
-
 .ProseMirror h4 {
     font-size: 1.125rem;
     line-height: 1.75rem
 }
-
 .ProseMirror h5 {
     font-size: 1rem;
     line-height: 1.5rem
 }
-
 .ProseMirror h6 {
     font-size: .875rem;
     line-height: 1.25rem
 }
-
 .ProseMirror h1,.ProseMirror h2,.ProseMirror h3,.ProseMirror h4,.ProseMirror h5,.ProseMirror h6 {
     font-weight: 700
 }
-
-.ProseMirror h1:first-child,.ProseMirror h2:first-child,.ProseMirror h3:first-child,.ProseMirror h4:first-child,.ProseMirror h5:first-child,.ProseMirror h6:first-child {
-    margin-top: 0
-}
-
-.ProseMirror h1:last-child,.ProseMirror h2:last-child,.ProseMirror h3:last-child,.ProseMirror h4:last-child,.ProseMirror h5:last-child,.ProseMirror h6:last-child {
-    margin-bottom: 0
-}
-
 .ProseMirror h1,.ProseMirror h2,.ProseMirror h3 {
-    margin-top: 3rem
+    margin-top: 1.5rem;
+    margin-bottom: 1.5rem;
 }
-
 .ProseMirror h4,.ProseMirror h5,.ProseMirror h6 {
-    margin-top: 2rem
+    margin-top: 1rem;
+    margin-bottom: 1rem;
 }
+/**  标题 end  **/
 
 .ProseMirror a.link {
     font-weight: 800;

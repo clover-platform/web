@@ -33,7 +33,7 @@ export const TextMenu = ({ editor }: TextMenuProps) => {
 
     return (
         <BubbleMenu
-            tippyOptions={{ popperOptions: { placement: 'top-start' } }}
+            // tippyOptions={{ popperOptions: { placement: 'top-start' } }}
             editor={editor}
             pluginKey="textMenu"
             shouldShow={states.shouldShow}
@@ -51,16 +51,16 @@ export const TextMenu = ({ editor }: TextMenuProps) => {
                 {/*    onTone={commands.onTone}*/}
                 {/*    onTranslate={commands.onTranslate}*/}
                 {/*/>*/}
-                <Toolbar.Divider />
+                {/*<Toolbar.Divider />*/}
                 <MemoContentTypePicker options={blockOptions} />
                 <MemoFontFamilyPicker onChange={commands.onSetFont} value={states.currentFont || ''} />
                 <MemoFontSizePicker onChange={commands.onSetFontSize} value={states.currentSize || ''} />
                 <Toolbar.Divider />
-                <MemoButton tooltip="Bold" tooltipShortcut={['Mod', 'B']} onClick={commands.onBold} active={states.isBold}>
+                <MemoButton tooltip="{#加粗#}" tooltipShortcut={['Mod', 'B']} onClick={commands.onBold} active={states.isBold}>
                     <Icon name="Bold" />
                 </MemoButton>
                 <MemoButton
-                    tooltip="Italic"
+                    tooltip="{#斜体#}"
                     tooltipShortcut={['Mod', 'I']}
                     onClick={commands.onItalic}
                     active={states.isItalic}
@@ -68,7 +68,7 @@ export const TextMenu = ({ editor }: TextMenuProps) => {
                     <Icon name="Italic" />
                 </MemoButton>
                 <MemoButton
-                    tooltip="Underline"
+                    tooltip="{#下划线#}"
                     tooltipShortcut={['Mod', 'U']}
                     onClick={commands.onUnderline}
                     active={states.isUnderline}
@@ -76,23 +76,23 @@ export const TextMenu = ({ editor }: TextMenuProps) => {
                     <Icon name="Underline" />
                 </MemoButton>
                 <MemoButton
-                    tooltip="Strikehrough"
+                    tooltip="{#删除线#}"
                     tooltipShortcut={['Mod', 'Shift', 'S']}
                     onClick={commands.onStrike}
                     active={states.isStrike}
                 >
                     <Icon name="Strikethrough" />
                 </MemoButton>
-                <MemoButton tooltip="Code" tooltipShortcut={['Mod', 'E']} onClick={commands.onCode} active={states.isCode}>
+                <MemoButton tooltip="{#代码块#}" tooltipShortcut={['Mod', 'E']} onClick={commands.onCode} active={states.isCode}>
                     <Icon name="Code" />
                 </MemoButton>
-                <MemoButton tooltip="Code block" onClick={commands.onCodeBlock}>
+                <MemoButton tooltip="{#代码片段#}" onClick={commands.onCodeBlock}>
                     <Icon name="Code" />
                 </MemoButton>
                 <EditLinkPopover onSetLink={commands.onLink} />
                 <Popover.Root>
                     <Popover.Trigger asChild>
-                        <MemoButton active={!!states.currentHighlight} tooltip="Highlight text">
+                        <MemoButton active={!!states.currentHighlight} tooltip="{#背景色#}">
                             <Icon name="Highlighter" />
                         </MemoButton>
                     </Popover.Trigger>
@@ -108,7 +108,7 @@ export const TextMenu = ({ editor }: TextMenuProps) => {
                 </Popover.Root>
                 <Popover.Root>
                     <Popover.Trigger asChild>
-                        <MemoButton active={!!states.currentColor} tooltip="Text color">
+                        <MemoButton active={!!states.currentColor} tooltip="{#文字颜色#}">
                             <Icon name="Palette" />
                         </MemoButton>
                     </Popover.Trigger>
@@ -124,14 +124,14 @@ export const TextMenu = ({ editor }: TextMenuProps) => {
                 </Popover.Root>
                 <Popover.Root>
                     <Popover.Trigger asChild>
-                        <MemoButton tooltip="More options">
+                        <MemoButton tooltip="{#更多设置#}">
                             <Icon name="MoveVertical" />
                         </MemoButton>
                     </Popover.Trigger>
                     <Popover.Content side="top" asChild>
                         <Toolbar.Wrapper>
                             <MemoButton
-                                tooltip="Subscript"
+                                tooltip="{#下标#}"
                                 tooltipShortcut={['Mod', '.']}
                                 onClick={commands.onSubscript}
                                 active={states.isSubscript}
@@ -139,7 +139,7 @@ export const TextMenu = ({ editor }: TextMenuProps) => {
                                 <Icon name="Subscript" />
                             </MemoButton>
                             <MemoButton
-                                tooltip="Superscript"
+                                tooltip="{#上标#}"
                                 tooltipShortcut={['Mod', ',']}
                                 onClick={commands.onSuperscript}
                                 active={states.isSuperscript}
@@ -148,7 +148,7 @@ export const TextMenu = ({ editor }: TextMenuProps) => {
                             </MemoButton>
                             <Toolbar.Divider />
                             <MemoButton
-                                tooltip="Align left"
+                                tooltip="{#左对齐#}"
                                 tooltipShortcut={['Shift', 'Mod', 'L']}
                                 onClick={commands.onAlignLeft}
                                 active={states.isAlignLeft}
@@ -156,7 +156,7 @@ export const TextMenu = ({ editor }: TextMenuProps) => {
                                 <Icon name="AlignLeft" />
                             </MemoButton>
                             <MemoButton
-                                tooltip="Align center"
+                                tooltip="{#居中对齐#}"
                                 tooltipShortcut={['Shift', 'Mod', 'E']}
                                 onClick={commands.onAlignCenter}
                                 active={states.isAlignCenter}
@@ -164,7 +164,7 @@ export const TextMenu = ({ editor }: TextMenuProps) => {
                                 <Icon name="AlignCenter" />
                             </MemoButton>
                             <MemoButton
-                                tooltip="Align right"
+                                tooltip="{#右对齐#}"
                                 tooltipShortcut={['Shift', 'Mod', 'R']}
                                 onClick={commands.onAlignRight}
                                 active={states.isAlignRight}
@@ -172,7 +172,7 @@ export const TextMenu = ({ editor }: TextMenuProps) => {
                                 <Icon name="AlignRight" />
                             </MemoButton>
                             <MemoButton
-                                tooltip="Justify"
+                                tooltip="{#两端对齐#}"
                                 tooltipShortcut={['Shift', 'Mod', 'J']}
                                 onClick={commands.onAlignJustify}
                                 active={states.isAlignJustify}
