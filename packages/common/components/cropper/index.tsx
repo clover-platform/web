@@ -1,6 +1,6 @@
 import Cropper, {ReactCropperElement, ReactCropperProps} from "react-cropper";
 import "cropperjs/dist/cropper.css";
-import {FC, useRef, useState} from "react";
+import {FC, useRef, useState, forwardRef} from "react";
 import classNames from "classnames";
 import {Button, Dialog, Spin, Uploader, useMessage} from "@atom-ui/core";
 import {PlusIcon} from "@radix-ui/react-icons";
@@ -15,7 +15,7 @@ export type ImageCropperProps = {
     onChange?: (value: string) => void;
 } & ReactCropperProps;
 
-export const ImageCropper: FC<ImageCropperProps> = (props) => {
+export const ImageCropper = forwardRef<any, ImageCropperProps>((props, ref) => {
     const {
         className,
         ...rest
@@ -130,4 +130,4 @@ export const ImageCropper: FC<ImageCropperProps> = (props) => {
             </div>
         </Dialog>
     </div>
-}
+});

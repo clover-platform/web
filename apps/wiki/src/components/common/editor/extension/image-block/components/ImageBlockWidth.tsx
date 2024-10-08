@@ -28,7 +28,7 @@ export const ImageBlockWidth = memo(({ onChange, value }: ImageBlockWidthProps) 
                 type="range"
                 min="25"
                 max="100"
-                step="1"
+                step="25"
                 onChange={handleChange}
                 value={currentValue}
             />

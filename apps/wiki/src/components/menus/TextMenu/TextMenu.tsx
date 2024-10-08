@@ -1,7 +1,7 @@
 import { Icon } from '@/components/ui/Icon'
 import { Toolbar } from '@/components/ui/Toolbar'
 import { useTextmenuCommands } from './hooks/useTextmenuCommands'
-import { useTextmenuStates } from './hooks/useTextmenuStates'
+import { useTextMenuStates } from './hooks/useTextmenuStates'
 import { BubbleMenu, Editor } from '@tiptap/react'
 import { memo } from 'react'
 import * as Popover from '@radix-ui/react-popover'
@@ -28,7 +28,7 @@ export type TextMenuProps = {
 
 export const TextMenu = ({ editor }: TextMenuProps) => {
     const commands = useTextmenuCommands(editor)
-    const states = useTextmenuStates(editor)
+    const states = useTextMenuStates(editor)
     const blockOptions = useTextmenuContentTypes(editor)
 
     return (

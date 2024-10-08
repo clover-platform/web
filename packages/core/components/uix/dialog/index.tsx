@@ -45,6 +45,7 @@ export const Dialog: FC<DialogProps> = (props) => {
             onCloseClick={onCancel}
             onOverlayClick={maskClosable ? onCancel : () => {}}
             className={cn(className)}
+            aria-describedby={undefined}
         >
             {
                 title || description ? <DialogHeader>

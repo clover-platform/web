@@ -3,7 +3,7 @@ import { Node } from '@tiptap/core'
 export const Quote = Node.create({
     name: 'quote',
 
-    content: 'paragraph+',
+    content: 'text*',
 
     defining: true,
 

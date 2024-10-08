@@ -3,11 +3,16 @@ import { useCallback, useMemo } from 'react'
 import { ShouldShowProps } from '../../types'
 import { isCustomNodeSelected, isTextSelected } from '@/lib/utils'
 
-export const useTextmenuStates = (editor: Editor) => {
+export const useTextMenuStates = (editor: Editor) => {
     const shouldShow = useCallback(
         ({ view, from }: ShouldShowProps) => {
             if (!view) {
                 return false
+            }
+
+            const dragging = view.dom.classList.contains("dragging");
+            if(dragging) {
+                return false;
             }
 
             const domAtPos = view.domAtPos(from || 0).node as HTMLElement

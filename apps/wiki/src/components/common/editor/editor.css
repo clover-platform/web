@@ -54,9 +54,10 @@
     border-radius: .25rem
 }
 
+/* 引用 start */
 .ProseMirror figure[data-type=blockquoteFigure] {
-    margin-top: 3.5rem;
-    margin-bottom: 3.5rem;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
     --tw-text-opacity: 1;
     color: rgb(0 0 0/var(--tw-text-opacity))
 }
@@ -77,6 +78,51 @@
 .ProseMirror [data-type=blockquoteFigure] blockquote>:last-child,.ProseMirror>blockquote blockquote>:last-child {
     margin-bottom: 0
 }
+.ProseMirror [data-type=blockquoteFigure]>div {
+    border-radius: .5rem;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    border-left-width: 4px;
+    --tw-border-opacity: 1;
+    border-left-color: rgb(64 64 64/var(--tw-border-opacity));
+    --tw-bg-opacity: 0.8;
+    padding: .5rem 1rem
+}
+
+:is(.dark .ProseMirror [data-type=blockquoteFigure]>div) {
+    --tw-border-opacity: 1;
+    border-left-color: rgb(212 212 212/var(--tw-border-opacity))
+}
+
+.ProseMirror [data-type=blockquoteFigure]>blockquote {
+    font-size: 1.125rem;
+    line-height: 1.75rem;
+    --tw-text-opacity: 1;
+    color: rgb(0 0 0/var(--tw-text-opacity))
+}
+
+:is(.dark .ProseMirror [data-type=blockquoteFigure]>blockquote) {
+    --tw-text-opacity: 1;
+    color: rgb(255 255 255/var(--tw-text-opacity))
+}
+
+.ProseMirror [data-type=blockquoteFigure] figcaption {
+    margin-top: 1rem;
+    overflow: hidden;
+    font-size: .875rem;
+    line-height: 1.25rem;
+    --tw-text-opacity: 1;
+    color: rgb(115 115 115/var(--tw-text-opacity));
+    transition-property: all;
+    transition-timing-function: cubic-bezier(.4,0,.2,1);
+    transition-duration: .15s
+}
+
+:is(.dark .ProseMirror [data-type=blockquoteFigure] figcaption) {
+    --tw-text-opacity: 1;
+    color: rgb(163 163 163/var(--tw-text-opacity))
+}
+/* 引用 end */
 
 .ProseMirror [data-type=columns] {
     margin-top: 3.5rem;
@@ -123,8 +169,8 @@
 }
 
 .ProseMirror pre {
-    margin-top: 3rem;
-    margin-bottom: 3rem;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
     border-radius: .25rem;
     border-width: 1px;
     --tw-border-opacity: 1;
@@ -318,25 +364,6 @@
 
 :is(.dark .ProseMirror .is-empty):before {
     color: hsla(0,0%,100%,.4)
-}
-
-/*.ProseMirror.ProseMirror-focused>[data-type=columns]>[data-type=column]>p.is-empty.has-focus:before,.ProseMirror.ProseMirror-focused>p.has-focus.is-empty:before {*/
-/*    content: "Type  /  to browse options"*/
-/*}*/
-
-/*.ProseMirror>.is-editor-empty:before {*/
-/*    content: "Click here to start writing …"*/
-/*}*/
-
-.ProseMirror blockquote .is-empty:not(.is-editor-empty):first-child:last-child:before {
-    content: "Enter a quote"
-}
-
-.ProseMirror blockquote+figcaption.is-empty:not(.is-editor-empty):before {
-    content: "Author"
-}
-.ProseMirror [data-placeholder][data-suggestion] :before,.ProseMirror [data-placeholder][data-suggestion]:before {
-    content: none!important
 }
 
 /**  表格 start  **/
@@ -730,8 +757,8 @@
 }
 
 .ProseMirror>.react-renderer {
-    margin-top: 3rem;
-    margin-bottom: 3rem
+    margin-top: 1rem;
+    margin-bottom: 1rem
 }
 
 .ProseMirror>.react-renderer:first-child {

@@ -97,7 +97,7 @@ function getScrollTop(): number {
 export function DragHandlePlugin(options: GlobalDragHandleOptions & {pluginKey: string}) {
     let listType = '';
     function handleDragStart(event: DragEvent, view: EditorView) {
-        view.focus();
+        // view.focus();
 
         if (!event.dataTransfer) return;
 

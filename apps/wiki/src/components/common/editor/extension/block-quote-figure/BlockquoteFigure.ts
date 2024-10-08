@@ -60,7 +60,7 @@ export const BlockquoteFigure = Figure.extend({
                                     {
                                         type: 'paragraph',
                                         attrs: {
-                                            textAlign: 'left',
+                                            textAlign: 'left'
                                         },
                                     },
                                 ],
