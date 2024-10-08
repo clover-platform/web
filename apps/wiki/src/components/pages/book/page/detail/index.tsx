@@ -1,6 +1,6 @@
 import {FC, useCallback, useEffect, useState} from "react";
 import classNames from "classnames";
-import {Skeleton} from "@atom-ui/core";
+import {Skeleton, useMessage} from "@atom-ui/core";
 import {Action} from "@clover/public/components/common/action";
 import {Pencil1Icon, StarIcon} from "@radix-ui/react-icons";
 import {detail} from "@/rest/page";
@@ -19,6 +19,7 @@ export const Detail: FC<DetailProps> = (props) => {
     const {pageId} = props;
     const [data, setData] = useState<PageDetail>();
     const [loading, setLoading] = useState<boolean>(false);
+    const msg = useMessage();
 
     const load = useCallback(async () => {
         setLoading(true);

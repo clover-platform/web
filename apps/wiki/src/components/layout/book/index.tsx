@@ -62,6 +62,7 @@ export const BookLayout: FC<BookLayoutProps> = (origin) => {
                 type: "link",
                 href: "/{#LANG#}/wiki/",
                 withQuery: false,
+                external: true,
             },
             ...(props.path || [])
         ]}

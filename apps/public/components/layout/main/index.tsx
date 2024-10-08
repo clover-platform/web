@@ -28,6 +28,8 @@ export type PathProps = {
     title: string;
     href?: string;
     withQuery?: boolean|string[];
+    external?: boolean;
+    target?: string;
 }
 
 export interface MainLayoutProps extends PropsWithChildren {
@@ -59,9 +61,13 @@ export const MainLayout: FC<MainLayoutProps> = (props) => {
             if(item.type === "link") {
                 node = <BreadcrumbItem key={'item' + index}>
                     <BreadcrumbLink asChild={true}>
-                        <Link href={withQuery(item.href!, item.withQuery, searchParams)} className={"flex items-center"}>
-                            {item.title}
-                        </Link>
+                        {
+                            item.external ? <a target={item.target} href={withQuery(item.href!, item.withQuery, searchParams)} className={"flex items-center"}>
+                                {item.title}
+                            </a> : <Link href={withQuery(item.href!, item.withQuery, searchParams)} className={"flex items-center"}>
+                                {item.title}
+                            </Link>
+                        }
                     </BreadcrumbLink>
                 </BreadcrumbItem>
             }else if(item.type === "item") {
@@ -93,9 +99,9 @@ export const MainLayout: FC<MainLayoutProps> = (props) => {
                         <BreadcrumbList>
                             <BreadcrumbItem>
                                 <BreadcrumbLink asChild={true}>
-                                    <Link href={"/{#LANG#}/"} className={"flex items-center"}>
+                                    <a href={"/{#LANG#}/"} className={"flex items-center"}>
                                         <IconHome />
-                                    </Link>
+                                    </a>
                                 </BreadcrumbLink>
                             </BreadcrumbItem>
                             <BreadcrumbSeparator className={"flex items-center"} />

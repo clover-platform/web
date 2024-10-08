@@ -107,11 +107,11 @@ const Sidebar: FC<SidebarProps> = (props) => {
         </div>
         <div className={"flex p-1 py-0 border-t"}>
             <div className={"flex-1 mx-0.5 my-1"}>
-                <Link href={"/{#LANG#}/help/"}>
+                <a href={"/{#LANG#}/help/"}>
                     <Action theme={"dark"} className={"w-full py-1"}>
                         <IconHelp className={"mr-1 text-base"} /> {"{#帮助#}"}
                     </Action>
-                </Link>
+                </a>
             </div>
             <div className={"flex-1 mx-0.5 my-1"}>
                 <a href={"/{#LANG#}/admin/"}>
