@@ -3,7 +3,7 @@
 import {useLayoutConfig} from "@clover/public/components/layout/hooks/use.layout.config";
 import {BookLayoutProps} from "@/components/layout/book";
 import {useSearchParams} from "next/navigation";
-import {PageEditForm} from "@/components/pages/book/page/edit/form";
+import {EditForm} from "@/components/pages/book/page/edit/form";
 
 export const EditPage = () => {
     const search = useSearchParams();
@@ -24,5 +24,5 @@ export const EditPage = () => {
         ],
     });
 
-    return <PageEditForm pageId={pageId!} />
+    return <EditForm pageId={pageId!} />
 }

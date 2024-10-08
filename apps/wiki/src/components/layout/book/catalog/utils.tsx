@@ -1,43 +1,27 @@
 import {Catalog} from "@/types/pages/book";
 import {TreeData} from "@/components/common/tree";
-import {FC, useCallback, useEffect, useState} from "react";
+import {FC, useState} from "react";
 import classNames from "classnames";
 import {AddPageAction} from "@/components/layout/book/page-actions/add";
 import {MorePageAction} from "@/components/layout/book/page-actions/more";
 import {useRouter, useSearchParams} from "next/navigation";
-import bus from "@easy-kit/common/events";
-import {UPDATE_TITLE} from "@/events/book";
 
 type MenuTitleProps = {
     title: string;
     id: number;
 }
 
-type UpdateData = {
+export type UpdateData = {
     id: number;
     title: string;
 }
 
 const MenuTitle: FC<MenuTitleProps> = (props) => {
-    const {id} = props;
-    const [title, setTitle] = useState<string>(props.title);
+    const {title, id} = props;
     const search = useSearchParams();
     const [moreOpen, setMoreOpen] = useState(false);
     const router = useRouter();
     const bookId = search.get("id");
-
-    const onUpdate = useCallback((data: UpdateData) => {
-        if(id === data.id) {
-            setTitle(data.title);
-        }
-    }, [id])
-
-    useEffect(() => {
-        bus.on(UPDATE_TITLE, onUpdate);
-        return () => {
-            bus.off(UPDATE_TITLE, onUpdate);
-        }
-    }, [onUpdate])
 
     return <div
         onClick={() => router.push(`/{#LANG#}/wiki/book/page/?id=${bookId}&page=${id}`)}
@@ -55,7 +39,7 @@ const MenuTitle: FC<MenuTitleProps> = (props) => {
 }
 
 export const toTreeItemProps = (data: Catalog[]): TreeData[] => {
-    return data.map(item => {
+    return data?.map(item => {
         return {
             key: `${item.id}`,
             title: <MenuTitle title={item.title} id={item.id} />,
@@ -107,4 +91,34 @@ export const moveToChild = (data: Catalog[], dragKey: string, key: string): numb
     target.children.push(item);
     item.parentId = target.id;
     return item.parentId;
+}
+
+export const addChild = (data: Catalog[], item: Catalog) => {
+    if(!item.parentId) {
+        data.push(item);
+        return;
+    }
+    const target = findByKey(data, `${item.parentId}`, false);
+    if(!target.children) {
+        target.children = [];
+    }
+    target.children.push(item);
+}
+
+export const allParent = (data: Catalog[], id: number): string[] => {
+    const result: string[] = [];
+    const find = (id: number) => {
+        const item = findByKey(data, `${id}`, false);
+        if(item?.parentId) {
+            result.push(`${item.parentId}`);
+            find(item.parentId);
+        }
+    }
+    find(id);
+    return result;
+}
+
+export const updateItem = (data: Catalog[], ud: UpdateData) => {
+    const item = findByKey(data, `${ud.id}`, false);
+    item.title = ud.title;
 }

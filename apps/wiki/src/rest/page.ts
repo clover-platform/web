@@ -7,7 +7,7 @@ export type CreatePageData = {
     parent?: number;
     bookId: number;
 }
-export const create = (data: CreatePageData): Promise<RestResult<number>> =>
+export const create = (data: CreatePageData): Promise<RestResult<Catalog>> =>
     post("@wiki/page/create", data);
 
 export type CatalogQuery = {

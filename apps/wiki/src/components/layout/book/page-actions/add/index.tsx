@@ -4,6 +4,8 @@ import {FC, useCallback, useState} from "react";
 import {useRouter, useSearchParams} from "next/navigation";
 import {Spin, Tooltip, useMessage} from "@atom-ui/core";
 import {create} from "@/rest/page";
+import bus from "@easy-kit/common/events";
+import {ADD_PAGE} from "@/events/book";
 
 export type AddPageActionProps = {
     className?: string;
@@ -29,7 +31,8 @@ export const AddPageAction: FC<AddPageActionProps> = (props) => {
         })
         setSubmitting(false);
         if(success) {
-            router.push(`/{#LANG#}/book/page/edit/?id=${id}&page=${data}`);
+            bus.emit(ADD_PAGE, data);
+            router.push(`/{#LANG#}/wiki/book/page/edit/?id=${id}&page=${data?.id}`);
         }else{
             msg.error(message);
         }

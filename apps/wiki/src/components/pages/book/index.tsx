@@ -11,6 +11,7 @@ export const BookPage = () => {
                 type: "item",
             }
         ],
+        active: "home",
     })
     return <div>
         book

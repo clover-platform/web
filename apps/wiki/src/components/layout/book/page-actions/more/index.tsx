@@ -40,32 +40,13 @@ export const MorePageAction: FC<MorePageActionProps> = (props) => {
                 }
             },
             {
-                id: "rename",
-                label: "{#重命名#}",
-                type: "item",
-            },
-            {
                 id: "star",
                 label: "{#收藏#}",
                 type: "item",
             },
             {
-                id: "copy.link",
-                label: "{#复制链接#}",
-                type: "item",
-            },
-            {
-                id: "separator.1",
-                type: "separator",
-            },
-            {
                 id: "copy",
                 label: "{#复制#}",
-                type: "item",
-            },
-            {
-                id: "move",
-                label: "{#移动#}",
                 type: "item",
             },
             {

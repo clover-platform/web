@@ -9,13 +9,16 @@ import {detail, save} from "@/rest/page";
 import {uuid} from "@easy-kit/common/utils";
 import bus from "@easy-kit/common/events";
 import {UPDATE_TITLE} from "@/events/book";
+import {useRouter, useSearchParams} from "next/navigation";
 
 export type PageEditFormProps = {
     pageId: string;
 }
 
-export const PageEditForm: FC<PageEditFormProps> = (props) => {
+export const EditForm: FC<PageEditFormProps> = (props) => {
     const {pageId} = props;
+    const search = useSearchParams();
+    const id = search.get("id");
     const editorRef = useRef<EditorRef>(null);
     const [value, setValue] = useState<string>("");
     const [title, setTitle] = useState<string>("");
@@ -23,6 +26,7 @@ export const PageEditForm: FC<PageEditFormProps> = (props) => {
     const [loading, setLoading] = useState<boolean>(false);
     const [pending, setPending] = useState<boolean>(false);
     const [editorKey, setEditorKey] = useState<string>(uuid());
+    const router = useRouter();
 
     const load = useCallback(async () => {
         setLoading(true);
@@ -58,10 +62,11 @@ export const PageEditForm: FC<PageEditFormProps> = (props) => {
                 id: Number(pageId),
                 title
             });
+            router.push(`/{#LANG#}/wiki/book/page/?id=${id}&page=${pageId}`);
         }else{
             msg.error(message);
         }
-    }, [title, value]);
+    }, [title, value, id, pageId]);
 
     return <div className={"space-y-4"}>
         <div className={"flex justify-center items-center sticky top-[48px] -m-4 px-4 py-2 border-b bg-white"}>

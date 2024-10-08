@@ -22,4 +22,11 @@
             }
         }
     }
+    .readonly {
+        :global {
+            .ProseMirror [data-type=horizontalRule]:hover:not(.ProseMirror [data-type=horizontalRule].ProseMirror-selectednode) {
+                @apply bg-transparent cursor-default;
+            }
+        }
+    }
 }
