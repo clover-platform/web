@@ -1,249 +1,114 @@
-.spinner-animation {
-    animation: spinner 1.6s linear infinite;
-    animation-delay: -1.6s
+.ProseMirror {
+    --margin-y: 1rem;
 }
-
-.spinner-animation-secondary {
-    animation-delay: -1s
+/** 图片上传 start **/
+.ProseMirror .node-imageUpload {
+    transition: border .16s cubic-bezier(.45,.05,.55,.95);
+    @apply rounded-lg border-2 border-dotted p-2 border-primary/30;
+    @apply hover:border-primary/50;
 }
-
-@keyframes spinner {
-    12.5 % {
-        x: 13px;
-        y: 1px
-    }
-
-    25% {
-        x: 13px;
-        y: 1px
-    }
-
-    37.5% {
-        x: 13px;
-        y: 13px
-    }
-
-    50% {
-        x: 13px;
-        y: 13px
-    }
-
-    62.5% {
-        x: 1px;
-        y: 13px
-    }
-
-    75% {
-        x: 1px;
-        y: 13px
-    }
-
-    87.5% {
-        x: 1px;
-        y: 1px
-    }
+.ProseMirror .node-imageUpload.has-focus,
+.ProseMirror .node-imageUpload:has(.is-active) {
+    @apply border-primary/50;
 }
-
-.ProseMirror figure[data-type=imageBlock] {
-    margin: 0
-}
-
-.ProseMirror figure[data-type=imageBlock] img {
-    display: block;
-    width: 100%;
-    border-radius: .25rem
-}
+/** 图片上传 end **/
 
 /* 引用 start */
 .ProseMirror figure[data-type=blockquoteFigure] {
-    margin-top: 1rem;
-    margin-bottom: 1rem;
-    --tw-text-opacity: 1;
-    color: rgb(0 0 0/var(--tw-text-opacity))
+    @apply my-[var(--margin-y)] text-secondary-foreground;
 }
-
-:is(.dark .ProseMirror figure[data-type=blockquoteFigure]) {
-    --tw-text-opacity: 1;
-    color: rgb(255 255 255/var(--tw-text-opacity))
+.ProseMirror [data-type=blockquoteFigure] blockquote,
+.ProseMirror>blockquote blockquote {
+    @apply m-0;
 }
-
-.ProseMirror [data-type=blockquoteFigure] blockquote,.ProseMirror>blockquote blockquote {
-    margin: 0
+.ProseMirror [data-type=blockquoteFigure] blockquote>:first-child,
+.ProseMirror>blockquote blockquote>:first-child {
+    @apply mt-0;
 }
-
-.ProseMirror [data-type=blockquoteFigure] blockquote>:first-child,.ProseMirror>blockquote blockquote>:first-child {
-    margin-top: 0
-}
-
-.ProseMirror [data-type=blockquoteFigure] blockquote>:last-child,.ProseMirror>blockquote blockquote>:last-child {
-    margin-bottom: 0
+.ProseMirror [data-type=blockquoteFigure] blockquote>:last-child,
+.ProseMirror>blockquote blockquote>:last-child {
+    @apply mb-0;
 }
 .ProseMirror [data-type=blockquoteFigure]>div {
-    border-radius: .5rem;
-    border-top-left-radius: 0;
-    border-bottom-left-radius: 0;
-    border-left-width: 4px;
-    --tw-border-opacity: 1;
-    border-left-color: rgb(64 64 64/var(--tw-border-opacity));
-    --tw-bg-opacity: 0.8;
-    padding: .5rem 1rem
+    @apply border-0 border-l-4 border-primary px-4 py-2;
 }
-
-:is(.dark .ProseMirror [data-type=blockquoteFigure]>div) {
-    --tw-border-opacity: 1;
-    border-left-color: rgb(212 212 212/var(--tw-border-opacity))
-}
-
 .ProseMirror [data-type=blockquoteFigure]>blockquote {
-    font-size: 1.125rem;
-    line-height: 1.75rem;
-    --tw-text-opacity: 1;
-    color: rgb(0 0 0/var(--tw-text-opacity))
+    @apply text-lg leading-7;
 }
-
-:is(.dark .ProseMirror [data-type=blockquoteFigure]>blockquote) {
-    --tw-text-opacity: 1;
-    color: rgb(255 255 255/var(--tw-text-opacity))
-}
-
 .ProseMirror [data-type=blockquoteFigure] figcaption {
-    margin-top: 1rem;
-    overflow: hidden;
-    font-size: .875rem;
-    line-height: 1.25rem;
-    --tw-text-opacity: 1;
-    color: rgb(115 115 115/var(--tw-text-opacity));
-    transition-property: all;
-    transition-timing-function: cubic-bezier(.4,0,.2,1);
-    transition-duration: .15s
-}
-
-:is(.dark .ProseMirror [data-type=blockquoteFigure] figcaption) {
-    --tw-text-opacity: 1;
-    color: rgb(163 163 163/var(--tw-text-opacity))
+    @apply mt-2 overflow-hidden text-xs text-right text-secondary-foreground/50;
 }
 /* 引用 end */
 
+/* columns start */
 .ProseMirror [data-type=columns] {
     margin-top: 3.5rem;
     margin-bottom: 3rem;
     display: grid;
     gap: 1rem
 }
-
 .ProseMirror [data-type=columns].layout-sidebar-left {
     grid-template-columns: 40fr 60fr
 }
-
 .ProseMirror [data-type=columns].layout-sidebar-right {
     grid-template-columns: 60fr 40fr
 }
-
 .ProseMirror [data-type=columns].layout-two-column {
     grid-template-columns: 1fr 1fr
 }
-
 .ProseMirror [data-type=column] {
     overflow: auto
 }
+/* columns end */
 
+/* 代码块，代码段 start */
 .ProseMirror code {
-    border-radius: .125rem;
-    --tw-bg-opacity: 1;
-    background-color: rgb(23 23 23/var(--tw-bg-opacity));
+    @apply rounded-sm caret-white bg-black/80 text-white shadow-sm;
     font-family: ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,Liberation Mono,Courier New,monospace;
-    --tw-text-opacity: 1;
-    color: rgb(255 255 255/var(--tw-text-opacity));
-    caret-color: #fff;
-    --tw-shadow: 0 10px 15px -3px rgba(0,0,0,.1),0 4px 6px -4px rgba(0,0,0,.1);
-    --tw-shadow-colored: 0 10px 15px -3px var(--tw-shadow-color),0 4px 6px -4px var(--tw-shadow-color);
-    box-shadow: var(--tw-ring-offset-shadow,0 0 #0000),var(--tw-ring-shadow,0 0 #0000),var(--tw-shadow)
 }
-
 .ProseMirror code::-moz-selection {
     background-color: hsla(0,0%,100%,.3)
 }
-
 .ProseMirror code::selection {
     background-color: hsla(0,0%,100%,.3)
 }
-
 .ProseMirror pre {
-    margin-top: 1rem;
-    margin-bottom: 1rem;
-    border-radius: .25rem;
-    border-width: 1px;
-    --tw-border-opacity: 1;
-    border-color: rgb(0 0 0/var(--tw-border-opacity));
-    --tw-bg-opacity: 1;
-    background-color: rgb(64 64 64/var(--tw-bg-opacity));
-    padding: 1rem;
-    --tw-text-opacity: 1;
-    color: rgb(255 255 255/var(--tw-text-opacity));
-    caret-color: #fff
+    @apply my-[var(--margin-y)] rounded-lg border border-black/10 bg-black/80 p-4 text-white caret-white;
 }
-
-:is(.dark .ProseMirror pre) {
-    --tw-border-opacity: 1;
-    border-color: rgb(38 38 38/var(--tw-border-opacity));
-    --tw-bg-opacity: 1;
-    background-color: rgb(23 23 23/var(--tw-bg-opacity))
-}
-
 .ProseMirror pre ::-moz-selection {
     background-color: hsla(0,0%,100%,.2)
 }
-
 .ProseMirror pre ::selection {
     background-color: hsla(0,0%,100%,.2)
 }
-
 .ProseMirror pre code {
-    background-color: inherit;
-    padding: 0;
-    color: inherit;
-    --tw-shadow: 0 0 #0000;
-    --tw-shadow-colored: 0 0 #0000;
-    box-shadow: var(--tw-ring-offset-shadow,0 0 #0000),var(--tw-ring-shadow,0 0 #0000),var(--tw-shadow)
+    @apply bg-transparent p-0 text-inherit shadow-none;
 }
-
 .ProseMirror pre .hljs-comment,.ProseMirror pre .hljs-quote {
-    --tw-text-opacity: 1;
-    color: rgb(163 163 163/var(--tw-text-opacity))
+    @apply text-[rgb(163,163,163)];
 }
-
 .ProseMirror pre .hljs-attribute,.ProseMirror pre .hljs-link,.ProseMirror pre .hljs-name,.ProseMirror pre .hljs-regexp,.ProseMirror pre .hljs-selector-class,.ProseMirror pre .hljs-selector-id,.ProseMirror pre .hljs-tag,.ProseMirror pre .hljs-template-variable,.ProseMirror pre .hljs-variable {
-    --tw-text-opacity: 1;
-    color: rgb(252 165 165/var(--tw-text-opacity))
+    @apply text-[rgb(252,165,165)];
 }
-
 .ProseMirror pre .hljs-built_in,.ProseMirror pre .hljs-builtin-name,.ProseMirror pre .hljs-literal,.ProseMirror pre .hljs-meta,.ProseMirror pre .hljs-number,.ProseMirror pre .hljs-params,.ProseMirror pre .hljs-type {
-    --tw-text-opacity: 1;
-    color: rgb(253 186 116/var(--tw-text-opacity))
+    @apply text-[rgb(253,186,116)];
 }
-
 .ProseMirror pre .hljs-bullet,.ProseMirror pre .hljs-string,.ProseMirror pre .hljs-symbol {
-    --tw-text-opacity: 1;
-    color: rgb(190 242 100/var(--tw-text-opacity))
+    @apply text-[rgb(190,242,100)];
 }
-
 .ProseMirror pre .hljs-section,.ProseMirror pre .hljs-title {
-    --tw-text-opacity: 1;
-    color: rgb(253 224 71/var(--tw-text-opacity))
+    @apply text-[rgb(253,224,71)];
 }
-
 .ProseMirror pre .hljs-keyword,.ProseMirror pre .hljs-selector-tag {
-    --tw-text-opacity: 1;
-    color: rgb(94 234 212/var(--tw-text-opacity))
+    @apply text-[rgb(94,234,212)];
 }
-
 .ProseMirror pre .hljs-emphasis {
     font-style: italic
 }
-
 .ProseMirror pre .hljs-strong {
     font-weight: 700
 }
+/* 代码块，代码段 end */
 
 .ProseMirror .collaboration-cursor__caret {
     pointer-events: none;
@@ -257,7 +122,6 @@
     --tw-border-opacity: 1;
     border-color: rgb(0 0 0/var(--tw-border-opacity))
 }
-
 .ProseMirror .collaboration-cursor__label {
     position: absolute;
     left: -1px;
@@ -266,75 +130,55 @@
     -moz-user-select: none;
     user-select: none;
     white-space: nowrap;
-    border-radius: .25rem;
-    border-top-left-radius: 0;
-    padding: .125rem .375rem;
-    font-size: .75rem;
-    line-height: 1rem;
-    font-weight: 600;
-    line-height: 1;
-    --tw-text-opacity: 1;
-    color: rgb(0 0 0/var(--tw-text-opacity))
+    @apply rounded-md rounded-tl-none leading-4 font-semibold text-black;
 }
 
+/* 列表 start */
 .ProseMirror ol {
     list-style-type: decimal
 }
-
 .ProseMirror ul {
     list-style-type: disc
 }
-
 .ProseMirror ol,.ProseMirror ul {
     margin-top: 1.5rem;
     margin-bottom: 1.5rem;
     padding: 0 2rem
 }
-
 .ProseMirror ol:first-child,.ProseMirror ul:first-child {
     margin-top: 0
 }
-
 .ProseMirror ol:last-child,.ProseMirror ul:last-child {
     margin-bottom: 0
 }
-
 .ProseMirror ol li,.ProseMirror ol ol,.ProseMirror ol ul,.ProseMirror ul li,.ProseMirror ul ol,.ProseMirror ul ul {
     margin-top: .25rem;
     margin-bottom: .25rem
 }
-
 .ProseMirror ol p,.ProseMirror ul p {
     margin-top: 0;
     margin-bottom: .25rem
 }
-
 .ProseMirror>ol,.ProseMirror>ul {
     margin-top: 1rem;
     margin-bottom: 1rem
 }
-
 .ProseMirror>ol:first-child,.ProseMirror>ul:first-child {
     margin-top: 0
 }
-
 .ProseMirror>ol:last-child,.ProseMirror>ul:last-child {
     margin-bottom: 0
 }
-
 .ProseMirror ul[data-type=taskList] {
     list-style-type: none;
     padding: 0
 }
-
 .ProseMirror ul[data-type=taskList] p {
     margin: 0
 }
-
 .ProseMirror ul[data-type=taskList] li {
     display: flex
 }
-
 .ProseMirror ul[data-type=taskList] li>label {
     margin-top: .25rem;
     margin-right: .5rem;
@@ -345,15 +189,15 @@
     -moz-user-select: none;
     user-select: none
 }
-
 .ProseMirror ul[data-type=taskList] li>div {
     flex: 1 1 auto
 }
-
 .ProseMirror ul[data-type=taskList] li[data-checked=true] {
     text-decoration-line: line-through
 }
+/* 列表 end */
 
+/* 空 start */
 .ProseMirror .is-empty:before {
     pointer-events: none;
     float: left;
@@ -361,14 +205,10 @@
     width: 100%;
     color: rgba(0,0,0,.4)
 }
-
-:is(.dark .ProseMirror .is-empty):before {
-    color: hsla(0,0%,100%,.4)
-}
+/* 空 end */
 
 /**  表格 start  **/
 .ProseMirror .tableWrapper {}
-
 .ProseMirror table {
     margin-top: 1rem;
     margin-bottom: 1rem;
@@ -378,11 +218,6 @@
     border-radius: .25rem;
     border-color: rgba(0,0,0,.1)
 }
-
-:is(.dark .ProseMirror table) {
-    border-color: hsla(0,0%,100%,.2)
-}
-
 .ProseMirror table td,.ProseMirror table th {
     position: relative;
     min-width: 100px;
@@ -392,27 +227,18 @@
     text-align: left;
     vertical-align: top
 }
-
-:is(.dark .ProseMirror table td),:is(.dark .ProseMirror table th) {
-    border-color: hsla(0,0%,100%,.2)
-}
-
 .ProseMirror table td:first-of-type:not(a),.ProseMirror table th:first-of-type:not(a) {
     margin-top: 0
 }
-
 .ProseMirror table td p,.ProseMirror table th p {
     margin: 0
 }
-
 .ProseMirror table td p+p,.ProseMirror table th p+p {
     margin-top: .75rem
 }
-
 .ProseMirror table th {
     font-weight: 700
 }
-
 .ProseMirror table .column-resize-handle {
     pointer-events: none;
     position: absolute;
@@ -422,33 +248,20 @@
     display: flex;
     width: .5rem
 }
-
 .ProseMirror table .column-resize-handle:before {
     margin-left: .5rem;
     height: 100%;
     width: 1px;
     background-color: rgba(0,0,0,.2)
 }
-
-:is(.dark .ProseMirror table .column-resize-handle):before {
-    background-color: hsla(0,0%,100%,.2)
-}
-
 .ProseMirror table .column-resize-handle:before {
     content: ""
 }
-
 .ProseMirror table .selectedCell {
     border-style: double;
     border-color: rgba(0,0,0,.2);
     background-color: rgba(0,0,0,.05)
 }
-
-:is(.dark .ProseMirror table .selectedCell) {
-    border-color: hsla(0,0%,100%,.2);
-    background-color: hsla(0,0%,100%,.1)
-}
-
 .ProseMirror table .grip-column,.ProseMirror table .grip-row {
     position: absolute;
     z-index: 10;
@@ -458,11 +271,6 @@
     justify-content: center;
     background-color: rgba(0,0,0,.05)
 }
-
-:is(.dark .ProseMirror table .grip-column),:is(.dark .ProseMirror table .grip-row) {
-    background-color: hsla(0,0%,100%,.1)
-}
-
 .ProseMirror table .grip-column {
     left: 0;
     top: -.75rem;
@@ -472,61 +280,32 @@
     border-left-width: 1px;
     border-color: rgba(0,0,0,.2)
 }
-
-:is(.dark .ProseMirror table .grip-column) {
-    border-color: hsla(0,0%,100%,.2)
-}
-
 .ProseMirror table .grip-column.selected:before,.ProseMirror table .grip-column:hover:before {
     content: "";
     width: .625rem
 }
-
 .ProseMirror table .grip-column:hover {
     background-color: rgba(0,0,0,.1)
 }
-
-:is(.dark .ProseMirror table .grip-column:hover) {
-    background-color: hsla(0,0%,100%,.2)
-}
-
 .ProseMirror table .grip-column:hover:before {
     border-bottom: 2px;
     border-color: rgba(0,0,0,.6);
     border-style: dotted
 }
-
-:is(.dark .ProseMirror table .grip-column:hover):before {
-    border-color: hsla(0,0%,100%,.6)
-}
-
 .ProseMirror table .grip-column.first {
     border-top-left-radius: .125rem;
     border-color: transparent
 }
-
 .ProseMirror table .grip-column.last {
     border-top-right-radius: .125rem
 }
-
 .ProseMirror table .grip-column.selected {
-    border-color: rgba(0,0,0,.3);
-    background-color: rgba(0,0,0,.3);
-    --tw-shadow: 0 1px 2px 0 rgba(0,0,0,.05);
-    --tw-shadow-colored: 0 1px 2px 0 var(--tw-shadow-color);
-    box-shadow: var(--tw-ring-offset-shadow,0 0 #0000),var(--tw-ring-shadow,0 0 #0000),var(--tw-shadow)
+    @apply shadow border-black/30;
 }
-
-:is(.dark .ProseMirror table .grip-column.selected) {
-    border-color: hsla(0,0%,100%,.3);
-    background-color: hsla(0,0%,100%,.3)
-}
-
 .ProseMirror table .grip-column.selected:before {
     border-bottom-width: 2px;
     border-style: dotted
 }
-
 .ProseMirror table .grip-row {
     left: -.75rem;
     top: 0;
@@ -536,56 +315,28 @@
     border-top-width: 1px;
     border-color: rgba(0,0,0,.2)
 }
-
-:is(.dark .ProseMirror table .grip-row) {
-    border-color: hsla(0,0%,100%,.2)
-}
-
 .ProseMirror table .grip-row.selected:before,.ProseMirror table .grip-row:hover:before {
     height: .625rem;
     content: ""
 }
-
 .ProseMirror table .grip-row:hover {
     background-color: rgba(0,0,0,.1)
 }
-
-:is(.dark .ProseMirror table .grip-row:hover) {
-    background-color: hsla(0,0%,100%,.2)
-}
-
 .ProseMirror table .grip-row:hover:before {
     border-left: 2px;
     border-color: rgba(0,0,0,.6);
     border-style: dotted
 }
-
-:is(.dark .ProseMirror table .grip-row:hover):before {
-    border-color: hsla(0,0%,100%,.6)
-}
-
 .ProseMirror table .grip-row.first {
     border-top-left-radius: .125rem;
     border-color: transparent
 }
-
 .ProseMirror table .grip-row.last {
     border-bottom-left-radius: .125rem
 }
-
 .ProseMirror table .grip-row.selected {
-    border-color: rgba(0,0,0,.3);
-    background-color: rgba(0,0,0,.3);
-    --tw-shadow: 0 1px 2px 0 rgba(0,0,0,.05);
-    --tw-shadow-colored: 0 1px 2px 0 var(--tw-shadow-color);
-    box-shadow: var(--tw-ring-offset-shadow,0 0 #0000),var(--tw-ring-shadow,0 0 #0000),var(--tw-shadow)
+    @apply shadow border-black/30;
 }
-
-:is(.dark .ProseMirror table .grip-row.selected) {
-    border-color: hsla(0,0%,100%,.3);
-    background-color: hsla(0,0%,100%,.3)
-}
-
 .ProseMirror table .grip-row.selected:before {
     border-left-width: 2px;
     border-style: dotted
@@ -658,11 +409,6 @@
     color: inherit
 }
 
-:is(.dark .ProseMirror mark) {
-    --tw-bg-opacity: 1;
-    background-color: rgb(248 113 113/var(--tw-bg-opacity))
-}
-
 .ProseMirror img {
     height: auto;
     width: 100%;
@@ -681,54 +427,28 @@
     animation-duration: .1s;
     animation-timing-function: cubic-bezier(.4,0,.2,1)
 }
-
 .ProseMirror [data-type=horizontalRule]:first-child {
     margin-top: 0;
 }
-
 .ProseMirror [data-type=horizontalRule].ProseMirror-selectednode {
     background-color: rgba(0,0,0,.05)
 }
-
-:is(.dark .ProseMirror [data-type=horizontalRule].ProseMirror-selectednode) {
-    background-color: hsla(0,0%,100%,.1)
-}
-
 .ProseMirror [data-type=horizontalRule].ProseMirror-selectednode hr {
     border-top-color: rgba(0,0,0,.3)
 }
-
-:is(.dark .ProseMirror [data-type=horizontalRule].ProseMirror-selectednode hr) {
-    border-top-color: hsla(0,0%,100%,.3)
-}
-
 .ProseMirror [data-type=horizontalRule]:hover:not(.ProseMirror [data-type=horizontalRule].ProseMirror-selectednode) {
     background-color: rgba(0,0,0,.05)
 }
-
-:is(.dark .ProseMirror [data-type=horizontalRule]:hover:not(.ProseMirror [data-type=horizontalRule].ProseMirror-selectednode)) {
-    background-color: hsla(0,0%,100%,.1)
-}
-
 .ProseMirror [data-type=horizontalRule] hr {
     border-width: 1px 0 0;
     border-color: rgba(0,0,0,.2);
     background-color: rgba(0,0,0,.8)
 }
 
-:is(.dark .ProseMirror [data-type=horizontalRule] hr) {
-    border-color: hsla(0,0%,100%,.2);
-    background-color: hsla(0,0%,100%,.8)
-}
-
 .ProseMirror {
     z-index: 0;
     caret-color: #000;
     outline-width: 0
-}
-
-:is(.dark .ProseMirror) {
-    caret-color: #fff
 }
 
 .ProseMirror>* {
@@ -748,23 +468,13 @@
     background-color: rgba(0,0,0,.1)
 }
 
-:is(.dark .ProseMirror *)::-moz-selection {
-    background-color: hsla(0,0%,100%,.2)
-}
-
-:is(.dark .ProseMirror *)::selection,:is(.dark .ProseMirror .selection) {
-    background-color: hsla(0,0%,100%,.2)
-}
-
 .ProseMirror>.react-renderer {
     margin-top: 1rem;
     margin-bottom: 1rem
 }
-
 .ProseMirror>.react-renderer:first-child {
     margin-top: 0
 }
-
 .ProseMirror>.react-renderer:last-child {
     margin-bottom: 0
 }
@@ -780,7 +490,6 @@
     width: 100%;
     max-width: 42rem
 }
-
 .ProseMirror .ProseMirror-gapcursor:after {
     top: -1.5em;
     left: 0;
@@ -791,11 +500,6 @@
     max-width: 42rem;
     border-top-color: rgba(0,0,0,.4)
 }
-
-:is(.dark .ProseMirror .ProseMirror-gapcursor):after {
-    border-top-color: hsla(0,0%,100%,.4)
-}
-
 [data-theme=slash-command] {
     width: 1000vw
 }

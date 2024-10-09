@@ -1,7 +1,7 @@
 import styles from './style.module.scss';
 import "./editor.css";
 import { EditorContent } from '@tiptap/react'
-import {forwardRef, useRef, useImperativeHandle, useEffect, useState} from "react";
+import {forwardRef, useRef, useImperativeHandle} from "react";
 import {EditorController} from "@/components/common/editor/control";
 import {Editor as EditorInstance} from '@tiptap/core';
 import {useEditor} from "@/components/common/editor/hooks";
@@ -22,19 +22,13 @@ export const Editor = forwardRef<EditorRef, EditorProps>((props, ref) => {
         value, onChange,
     } = props;
     const menuContainerRef = useRef<HTMLDivElement>(null);
-    const [offsetTop, setOffsetTop] = useState<number|undefined>();
     const [editor, data, handleId] = useEditor({
-        offsetTop, limit, value, onChange,
+        limit, value, onChange,
     });
 
     useImperativeHandle(ref, () => ({
         editor,
     }), [editor]);
-
-    useEffect(() => {
-        const rect = menuContainerRef.current?.getBoundingClientRect();
-        setOffsetTop(0-(rect?.top||0));
-    }, []);
 
     return <div className={styles.editorContainer} ref={menuContainerRef}>
         <EditorContent

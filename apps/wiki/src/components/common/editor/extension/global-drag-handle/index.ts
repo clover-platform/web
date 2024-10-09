@@ -22,7 +22,6 @@ export interface GlobalDragHandleOptions {
      */
     dragHandleSelector?: string;
 
-    offsetTop: number;
     onNodeChange?: (node: ResolvedPos) => void;
     onShow?: () => void;
     onHide?: () => void;
@@ -60,6 +59,7 @@ function nodeDOMAtCoords(coords: { x: number; y: number }) {
                         'pre',
                         'blockquote',
                         'h1, h2, h3, h4, h5, h6',
+                        'div.react-renderer',
                     ].join(', '),
                 ),
         );
@@ -87,11 +87,6 @@ function rootNodePos(pos: number, view: EditorView) {
     const $pos = view.state.doc.resolve(pos);
     if($pos.depth < 1) return pos;
     return $pos.before(1) + 1;
-}
-
-function getScrollTop(): number {
-    // 获取 scrollTop
-    return document.documentElement.scrollTop || window.pageYOffset || document.body.scrollTop;
 }
 
 export function DragHandlePlugin(options: GlobalDragHandleOptions & {pluginKey: string}) {
@@ -187,8 +182,8 @@ export function DragHandlePlugin(options: GlobalDragHandleOptions & {pluginKey: 
 
     function hideDragHandle() {
         if (dragHandleElement) {
-            dragHandleElement.classList.add('hidden');
-            options.onHide?.();
+            // dragHandleElement.classList.add('hidden');
+            // options.onHide?.();
         }
     }
 
@@ -292,26 +287,25 @@ export function DragHandlePlugin(options: GlobalDragHandleOptions & {pluginKey: 
 
                     const rootNode = view.domAtPos(root.pos).node as Element;
                     let rect = absoluteRect(rootNode);
-                    if(node.matches("div[data-type=horizontalRule], div.node-imageBlock")) {
+                    if(node.matches("div.react-renderer")) {
                         rect = absoluteRect(node);
                     }
-                    rect.top += (lineHeight - 24) / 2;
+
+                    // margin-top: 1rem;
+                    rect.top += (lineHeight - parseInt(compStyle.fontSize)) / 2;
                     rect.top += paddingTop;
                     rect.width = options.dragHandleWidth;
-                    // Li markers
-                    if (node.matches('ul:not([data-type=taskList]) li, ol li')) {
-                        rect.left -= options.dragHandleWidth;
-                    }
                     if(node.matches("div[data-type=horizontalRule]")) {
-                        rect.top -= lineHeight/2;
+                        rect.top -= ((boundingRect.height)/2 + parseInt(compStyle.fontSize)/2);
                     }
                     if(root.node().type.name === 'codeBlock') {
-                        rect.top -= 30;
+                        rect.top -= (lineHeight + parseInt(compStyle.fontSize));
                     }
                     if (!dragHandleElement) return;
 
+                    const editorRect = view.dom.getBoundingClientRect();
                     dragHandleElement.style.left = `${rect.left - rect.width}px`;
-                    dragHandleElement.style.top = `${rect.top + getScrollTop() + options.offsetTop}px`;
+                    dragHandleElement.style.top = `${rect.top - editorRect.top}px`;
                     showDragHandle();
                 },
                 keydown: () => {
@@ -378,7 +372,6 @@ const GlobalDragHandle = Extension.create({
         return {
             dragHandleWidth: 20,
             scrollTreshold: 100,
-            offsetTop: 0,
         };
     },
 
@@ -389,7 +382,6 @@ const GlobalDragHandle = Extension.create({
                 dragHandleWidth: this.options.dragHandleWidth,
                 scrollTreshold: this.options.scrollTreshold,
                 dragHandleSelector: this.options.dragHandleSelector,
-                offsetTop: this.options.offsetTop,
                 onNodeChange: this.options.onNodeChange,
                 onShow: this.options.onShow,
                 onHide: this.options.onHide,

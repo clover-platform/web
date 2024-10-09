@@ -24,14 +24,13 @@ import {Editor as EditorInstance} from '@tiptap/core';
 
 export type UseEditorProps = {
     limit?: number;
-    offsetTop?: number;
     value?: string;
     onChange?: (value: string) => void;
     editable?: boolean;
 }
 
 export const useEditor = (props: UseEditorProps): [EditorInstance, NodeData, string] => {
-    const {value, onChange, offsetTop, limit, editable = true} = props;
+    const {value, onChange, limit, editable = true} = props;
     const handleId = useHandleId();
     const data = useData();
     const editor = useBaseEditor({
@@ -63,7 +62,6 @@ export const useEditor = (props: UseEditorProps): [EditorInstance, NodeData, str
             }),
             GlobalDragHandle.configure({
                 dragHandleSelector: `#${handleId}`,
-                offsetTop,
                 onNodeChange: data.handleNodeChange,
                 onShow: () => data.setHidden(false),
                 onHide: () => data.setHidden(true),
@@ -127,6 +125,6 @@ export const useEditor = (props: UseEditorProps): [EditorInstance, NodeData, str
         onUpdate: ({ editor }) => {
             onChange?.(editor.getHTML());
         },
-    }, [offsetTop, onChange]);
+    }, [onChange]);
     return [editor, data, handleId];
 }

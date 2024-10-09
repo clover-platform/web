@@ -51,16 +51,16 @@ export const TableColumnMenu = React.memo(({ editor, appendTo }: MenuProps): JSX
                 <PopoverMenu.Item
                     iconComponent={<Icon name="ArrowLeftToLine" />}
                     close={false}
-                    label="Add column before"
+                    label="{#左边插入#}"
                     onClick={onAddColumnBefore}
                 />
                 <PopoverMenu.Item
                     iconComponent={<Icon name="ArrowRightToLine" />}
                     close={false}
-                    label="Add column after"
+                    label="{#右边插入#}"
                     onClick={onAddColumnAfter}
                 />
-                <PopoverMenu.Item icon="Trash" close={false} label="Delete column" onClick={onDeleteColumn} />
+                <PopoverMenu.Item icon="Trash" close={false} label="{#删除#}" onClick={onDeleteColumn} />
             </Toolbar.Wrapper>
         </BaseBubbleMenu>
     )

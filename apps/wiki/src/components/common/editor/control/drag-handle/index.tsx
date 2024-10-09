@@ -26,7 +26,7 @@ export const DragHandleControl:FC<DragHandleControlProps> = (props) => {
 
     const actionClassName = "w-7 h-7 !p-0";
     return <div ref={handleRef} id={props.id} className={"absolute bg-black !left-0"} style={{top: -1000}}>
-        <div className={"absolute -top-0.5 -right-1 pr-3 space-x-1 flex"}>
+        <div className={"absolute -right-1 pr-3 space-x-1 flex"}>
             <Action className={actionClassName} onClick={actions.handleAdd}>
                 <PlusIcon />
             </Action>
