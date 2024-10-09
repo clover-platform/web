@@ -31,7 +31,7 @@ export const EditForm: FC<PageEditFormProps> = (props) => {
 
     const load = useCallback(async () => {
         setLoading(true);
-        const {success, message, data} = await detail(pageId);
+        const {success, message, data} = await detail(id!, pageId);
         setLoading(false)
         if(success) {
             setValue(data?.content!);
@@ -40,7 +40,7 @@ export const EditForm: FC<PageEditFormProps> = (props) => {
         }else{
             msg.error(message);
         }
-    }, [pageId])
+    }, [id, pageId])
 
     useEffect(() => {
         setSize(editorRef.current?.editor?.storage.characterCount.characters() || 0);
@@ -53,6 +53,7 @@ export const EditForm: FC<PageEditFormProps> = (props) => {
     const submit = useCallback(async () => {
         setPending(true);
         const {success, message} = await save({
+            bookId: Number(id),
             id: Number(pageId),
             title,
             content: value

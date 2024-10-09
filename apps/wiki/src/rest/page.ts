@@ -8,31 +8,30 @@ export type CreatePageData = {
     bookId: number;
 }
 export const create = (data: CreatePageData): Promise<RestResult<Catalog>> =>
-    post("@wiki/page/create", data);
+    post(`@wiki/book/${data.bookId}/page/create`, data);
 
 export type CatalogQuery = {
     bookId: number;
 }
-
 export const catalog = (params: CatalogQuery): Promise<RestResult<Catalog[]>> =>
-    get("@wiki/page/catalog", params);
+    get(`@wiki/book/${params.bookId}/page/catalog`, params);
 
 export type ChangeCatalogParentData = {
+    bookId: number;
     id: number;
     parentId?: number;
 }
-
 export const changeCatalogParent = (params: ChangeCatalogParentData): Promise<RestResult<any>> =>
-    put("@wiki/page/catalog/parent", params);
+    put(`@wiki/book/${params.bookId}/page/parent`, params);
 
-export const detail = (id: number|string): Promise<RestResult<PageDetail>> =>
-    get(`@wiki/page/${id}/detail`);
+export const detail = (bookId:number|string, id: number|string): Promise<RestResult<PageDetail>> =>
+    get(`@wiki/book/${bookId}/page/${id}`);
 
 export type SavePageData = {
+    bookId: number;
     id: number;
     title: string;
     content: string;
 }
-
 export const save = (data: SavePageData): Promise<RestResult<any>> =>
-    put(`@wiki/page/${data.id}/save`, data);
+    put(`@wiki/book/${data.bookId}/page/${data.id}`, data);

@@ -23,14 +23,14 @@ export const Detail: FC<DetailProps> = (props) => {
 
     const load = useCallback(async () => {
         setLoading(true);
-        const {success, message, data} = await detail(pageId);
+        const {success, message, data} = await detail(id!, pageId);
         setLoading(false)
         if(success) {
             setData(data);
         }else{
             msg.error(message);
         }
-    }, [pageId])
+    }, [pageId, id])
 
     useEffect(() => {
         pageId && load();

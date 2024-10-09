@@ -48,13 +48,15 @@ export const CatalogTree = () => {
         return toTreeItemProps(data);
     }, [data])
 
-    const saveChange = useCallback(async (id: number, parentId: number|undefined) => {
-        const {success, message} = await changeCatalogParent({id, parentId});
+    const saveChange = useCallback(async (pageId: number, parentId: number|undefined) => {
+        const {success, message} = await changeCatalogParent({
+            bookId: Number(id),
+            id: pageId, parentId});
         if(!success) {
             msg.error(message);
             load().then();
         }
-    }, []);
+    }, [id]);
 
     const onAdd = useCallback((item: Catalog) => {
         const cloneData = cloneDeep(data);
