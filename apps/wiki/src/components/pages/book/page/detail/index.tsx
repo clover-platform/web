@@ -1,6 +1,6 @@
 import {FC, useCallback, useEffect, useState} from "react";
 import classNames from "classnames";
-import {Skeleton, useMessage} from "@atom-ui/core";
+import {Skeleton, useMessage, Button} from "@atom-ui/core";
 import {Action} from "@clover/public/components/common/action";
 import {Pencil1Icon, StarIcon} from "@radix-ui/react-icons";
 import {detail} from "@/rest/page";
@@ -52,14 +52,14 @@ export const Detail: FC<DetailProps> = (props) => {
                 </div>
             </div>
             <div className={"flex space-x-2"}>
+                <Action>
+                    <StarIcon/>
+                </Action>
                 <Link href={`/{#LANG#}/wiki/book/page/edit/?id=${id}&page=${pageId}`}>
                     <Action>
                         <Pencil1Icon />
                     </Action>
                 </Link>
-                <Action>
-                    <StarIcon/>
-                </Action>
             </div>
         </div>
         <div className={"px-16 max-w-[860px] mx-auto"}>

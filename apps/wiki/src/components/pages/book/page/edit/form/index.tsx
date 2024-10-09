@@ -4,7 +4,7 @@ import {i18n} from "@easy-kit/i18n/utils";
 import {Action} from "@clover/public/components/common/action";
 import {StarIcon} from "@radix-ui/react-icons";
 import {Editor, EditorRef} from "@/components/common/editor";
-import {FC, useCallback, useEffect, useMemo, useRef, useState} from "react";
+import {FC, useCallback, useEffect, useRef, useState} from "react";
 import {detail, save} from "@/rest/page";
 import {uuid} from "@easy-kit/common/utils";
 import bus from "@easy-kit/common/events";
@@ -27,6 +27,7 @@ export const EditForm: FC<PageEditFormProps> = (props) => {
     const [pending, setPending] = useState<boolean>(false);
     const [editorKey, setEditorKey] = useState<string>(uuid());
     const router = useRouter();
+    const [size, setSize] = useState<number>(0);
 
     const load = useCallback(async () => {
         setLoading(true);
@@ -41,9 +42,9 @@ export const EditForm: FC<PageEditFormProps> = (props) => {
         }
     }, [pageId])
 
-    const size = useMemo(() => {
-        return editorRef.current?.editor?.storage.characterCount.characters() || 0;
-    }, [editorRef, value])
+    useEffect(() => {
+        setSize(editorRef.current?.editor?.storage.characterCount.characters() || 0);
+    }, [editorRef, value]);
 
     useEffect(() => {
         pageId && load();
@@ -81,7 +82,7 @@ export const EditForm: FC<PageEditFormProps> = (props) => {
                     <span>{"{#已连接#}"}</span>
                 </div>
                 <Separator orientation={"vertical"} className={"h-6"}/>
-                <span>{i18n("{#%size 字#}", {size})}</span>
+                <span>{i18n("{#%size 字#}", {size: loading ? "--" : size})}</span>
             </div>
             <div className={"flex space-x-2"}>
                 <Action>
@@ -92,7 +93,7 @@ export const EditForm: FC<PageEditFormProps> = (props) => {
                     onClick={submit}
                     loading={pending}
                 >
-                    {"{#保存#}"}
+                    {"{#更新#}"}
                 </Button>
             </div>
         </div>
@@ -126,7 +127,6 @@ export const EditForm: FC<PageEditFormProps> = (props) => {
                     <Editor
                         key={editorKey}
                         ref={editorRef}
-                        offsetTop={-48 - 53 - 68}
                         value={value}
                         onChange={setValue}
                     />

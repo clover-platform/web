@@ -99,17 +99,13 @@ export const useEditor = (props: UseEditorProps): [EditorInstance, NodeData, str
             Placeholder.configure({
                 includeChildren: true,
                 showOnlyCurrent: false,
-                placeholder: ({editor, node}) => {
-                    if (node.type.name === 'blockquoteFigure') {
-                        return "blockquoteFigure";
-                    }
+                placeholder: ({node}) => {
                     if(node.type.name === 'quoteCaption') {
                         return "{#请输入引用作者#}";
                     }
                     if(node.type.name === 'quote') {
                         return "{#请输入引用内容#}";
                     }
-                    // node parent is quote return "quote"
                     return "{#输入 / 快速插入#}";
                 },
             }),
@@ -131,6 +127,6 @@ export const useEditor = (props: UseEditorProps): [EditorInstance, NodeData, str
         onUpdate: ({ editor }) => {
             onChange?.(editor.getHTML());
         },
-    });
+    }, [offsetTop, onChange]);
     return [editor, data, handleId];
 }
