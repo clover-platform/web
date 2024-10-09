@@ -41,6 +41,7 @@ export const ColumnsMenu = ({editor, appendTo}: MenuProps) => {
             shouldShow={shouldShow}
             updateDelay={0}
             tippyOptions={{
+                zIndex: 40,
                 offset: [0, 8],
                 popperOptions: {
                     modifiers: [{name: 'flip', enabled: false}],

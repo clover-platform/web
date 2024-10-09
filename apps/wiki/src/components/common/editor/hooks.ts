@@ -1,4 +1,4 @@
-import {Editor, useEditor as useBaseEditor} from '@tiptap/react'
+import {useEditor as useBaseEditor} from '@tiptap/react'
 import {
     BlockquoteFigure,
     CodeBlockLowlight, Color,
@@ -21,16 +21,18 @@ import SlashCommand from "@/components/common/editor/extension/slash-command";
 import {useHandleId} from "@/components/common/editor/control/drag-handle/use.handle.id";
 import {NodeData, useData} from "@/components/common/editor/control/drag-handle/use.data";
 import {Editor as EditorInstance} from '@tiptap/core';
+import { Node as ProseMirrorNode } from '@tiptap/pm/model'
 
 export type UseEditorProps = {
     limit?: number;
     value?: string;
     onChange?: (value: string) => void;
     editable?: boolean;
+    onReadOnlyChecked?: (node: ProseMirrorNode, checked: boolean, html: string) => void;
 }
 
 export const useEditor = (props: UseEditorProps): [EditorInstance, NodeData, string] => {
-    const {value, onChange, limit, editable = true} = props;
+    const {onReadOnlyChecked, value, onChange, limit, editable = true} = props;
     const handleId = useHandleId();
     const data = useData();
     const editor = useBaseEditor({
@@ -41,6 +43,22 @@ export const useEditor = (props: UseEditorProps): [EditorInstance, NodeData, str
             TaskList,
             TaskItem.configure({
                 nested: true,
+                onReadOnlyChecked: (node, checked) => {
+                    // get the dom from the editor and then find the node by block id
+                    // let editorDom = editor.view.dom;
+                    // console.log(node.attrs.blockId, editorDom);
+                    // let nodeDom = editorDom.querySelector(`[data-blockid="${node.attrs.blockId}"]`);
+                    // // change the data-checked attribute on the node to checked value
+                    // nodeDom.setAttribute('data-checked', checked)
+                    // // change the input checked value
+                    // nodeDom.querySelector('input').setAttribute('checked', checked)
+                    // // update the currentValueJSON by finding the node in the json string and replacing it with the new checked value
+                    // const newValue = value.replace(`"blockId":"${node.attrs.blockId}","checked":${!checked}`, `"blockId":"${node.attrs.blockId}","checked":${checked}`)
+                    // // update the editor value based off the updated array
+                    // editor.value.commands.setContent(JSON.parse(newValue), false)
+                    console.log(editor.getJSON());
+                    return false;
+                }
             }),
             Column,
             Selection,
@@ -121,9 +139,9 @@ export const useEditor = (props: UseEditorProps): [EditorInstance, NodeData, str
             }),
         ],
         immediatelyRender: true,
-        content: value,
+        content: value ? JSON.parse(value) : value,
         onUpdate: ({ editor }) => {
-            onChange?.(editor.getHTML());
+            onChange?.(JSON.stringify(editor.getJSON()));
         },
     }, [onChange]);
     return [editor, data, handleId];

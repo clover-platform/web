@@ -1,5 +1,5 @@
 import {RestResult} from "@easy-kit/common/types/rest";
-import {post, get, put} from "@easy-kit/common/utils/rest";
+import {post, get, put, AbortPromise} from "@easy-kit/common/utils/rest";
 import {Catalog} from "@/types/pages/book";
 import {PageDetail} from "@/types/pages/page";
 
@@ -32,6 +32,7 @@ export type SavePageData = {
     id: number;
     title: string;
     content: string;
+    newVersion?: boolean;
 }
-export const save = (data: SavePageData): Promise<RestResult<any>> =>
+export const save = (data: SavePageData): AbortPromise<RestResult<any>> =>
     put(`@wiki/book/${data.bookId}/page/${data.id}`, data);

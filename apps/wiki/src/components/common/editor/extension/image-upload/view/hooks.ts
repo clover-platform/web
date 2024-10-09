@@ -1,9 +1,10 @@
 import { DragEvent, useCallback, useEffect, useRef, useState } from 'react'
-import toast from 'react-hot-toast'
 import { API } from '@/lib/api'
+import {useMessage} from "@atom-ui/core";
 
 export const useUploader = ({ onUpload }: { onUpload: (url: string) => void }) => {
     const [loading, setLoading] = useState(false)
+    const msg = useMessage();
 
     const uploadFile = useCallback(
         async (file: File) => {
@@ -14,7 +15,7 @@ export const useUploader = ({ onUpload }: { onUpload: (url: string) => void }) =
                 onUpload(url)
             } catch (errPayload: any) {
                 const error = errPayload?.response?.data?.error || 'Something went wrong'
-                toast.error(error)
+                msg.error(error)
             }
             setLoading(false)
         },

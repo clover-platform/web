@@ -64,6 +64,7 @@ export const ImageBlockMenu = ({ editor, appendTo }: MenuProps): JSX.Element => 
             updateDelay={0}
             tippyOptions={{
                 offset: [0, 8],
+                zIndex: 40,
                 popperOptions: {
                     modifiers: [{ name: 'flip', enabled: false }],
                 },

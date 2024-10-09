@@ -7,12 +7,14 @@ import {useEditor} from "@/components/common/editor/hooks";
 
 export type ContentViewerProps = {
     value?: string;
+    onChange?: (value: string) => void;
 }
 
 export const ContentViewer: FC<ContentViewerProps> = (props) => {
-    const {value} = props;
+    const {value, onChange} = props;
     const [editor] = useEditor({
         value, editable: false,
+        onReadOnlyChecked: (node, checked, html) => onChange?.(html),
     });
 
     return <div className={styles.editorContainer}>

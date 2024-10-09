@@ -4,7 +4,7 @@
 /** 图片上传 start **/
 .ProseMirror .node-imageUpload {
     transition: border .16s cubic-bezier(.45,.05,.55,.95);
-    @apply rounded-lg border-2 border-dotted p-2 border-primary/30;
+    @apply rounded-lg border-2 border-dotted border-primary/30;
     @apply hover:border-primary/50;
 }
 .ProseMirror .node-imageUpload.has-focus,
@@ -345,9 +345,9 @@
 
 /**  普通段落 start  **/
 .ProseMirror p {
-    margin-top: .75rem;
-    margin-bottom: .75rem;
-    line-height: 1.625
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    line-height: 1.625;
 }
 .ProseMirror p:first-child {
     margin-top: 0

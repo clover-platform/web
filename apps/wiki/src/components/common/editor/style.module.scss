@@ -1,10 +1,9 @@
 .editorContainer {
     @apply w-full relative;
     .editor {
-        @apply pt-1 -mt-1;
         :global {
             .tiptap {
-                @apply outline-none;
+                @apply outline-none pt-[1px] -mt-[1px];
                 p.is-empty::before {
                     color: #adb5bd;
                     content: attr(data-placeholder);

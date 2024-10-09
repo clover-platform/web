@@ -14,10 +14,15 @@ export type RestRequestConfig = AxiosRequestConfig & {
     needLogin?: boolean;
 }
 
+export type AbortPromise<T> = Promise<T> & {
+    _url: string;
+    abort: () => void;
+}
+
 let _aliasMap: any = {};
 let _config: RestConfig = {};
 let _currentQueueId = `${Date.now()}`;
-const _requestQueue: any = {};
+const _requestQueue: Record<string, AbortPromise<any>[]> = {};
 
 _requestQueue[_currentQueueId] = [];
 
@@ -66,9 +71,9 @@ rest.interceptors.response.use(
     (error) => {
         const { onResponse } = _config;
         const result = {
-            code: error.code,
+            code: 500,
             success: false,
-            message: ERROR_MESSAGE,
+            message: error.code,
         };
         if (error.response && error.response.status) {
             result.code = error.response.status;
@@ -151,7 +156,7 @@ const pushQueue = (requestPromise: any) => {
     _requestQueue[_currentQueueId].push(requestPromise);
 }
 
-function request<T> (config: RestRequestConfig): Promise<T> {
+function request<T> (config: RestRequestConfig): AbortPromise<T> {
     const { url, headers } = config;
     const source = CancelToken.source();
     const p = new Promise<T>((resolve) => {
@@ -174,16 +179,14 @@ function request<T> (config: RestRequestConfig): Promise<T> {
             };
             resolve(result as any);
         }
-    }) as any;
-    p['_url'] = url;
-    p['abort'] = () => {
-        source.cancel('Operation canceled by the user.');
-    };
+    }) as AbortPromise<T>;
+    p._url = url!;
+    p.abort = source.cancel;
     pushQueue(p);
     return p;
 }
 
-function get<T> (url: string, params?: any, config?: RestRequestConfig): Promise<T> {
+function get<T> (url: string, params?: any, config?: RestRequestConfig): AbortPromise<T> {
     return request<T>({
         ...config,
         url,
@@ -192,7 +195,7 @@ function get<T> (url: string, params?: any, config?: RestRequestConfig): Promise
     });
 }
 
-function post<T> (url: string, params?: any, config?: RestRequestConfig): Promise<T> {
+function post<T> (url: string, params?: any, config?: RestRequestConfig): AbortPromise<T> {
     return request<T>({
         ...config,
         url,
@@ -201,7 +204,7 @@ function post<T> (url: string, params?: any, config?: RestRequestConfig): Promis
     });
 }
 
-function put<T> (url: string, params?: any, config?: RestRequestConfig): Promise<T> {
+function put<T> (url: string, params?: any, config?: RestRequestConfig): AbortPromise<T> {
     return request<T>({
         ...config,
         url,
@@ -210,7 +213,7 @@ function put<T> (url: string, params?: any, config?: RestRequestConfig): Promise
     });
 };
 
-function del<T> (url: string, params?: any, config?: RestRequestConfig): Promise<T> {
+function del<T> (url: string, params?: any, config?: RestRequestConfig): AbortPromise<T> {
     return request<T>({
         ...config,
         url,
@@ -218,6 +221,10 @@ function del<T> (url: string, params?: any, config?: RestRequestConfig): Promise
         data: params || {}
     });
 };
+const download = (url: string, params?: any, fileName?: string) => {
+    return get(url, params, { responseType: 'blob', fileName, trailingSlash: false, timeout: 0 })
+}
+
 const setCurrentQueueId = (id: string) => {
     _currentQueueId = id;
     _requestQueue[id] = [];
@@ -227,9 +234,7 @@ const abortByQueueId = (id: string) => {
         p.abort();
     })
 }
-const download = (url: string, params?: any, fileName?: string) => {
-    return get(url, params, { responseType: 'blob', fileName, trailingSlash: false, timeout: 0 })
-}
+
 export {
     get,
     config,
@@ -238,7 +243,7 @@ export {
     put,
     del,
     request,
+    download,
     setCurrentQueueId,
-    abortByQueueId,
-    download
+    abortByQueueId
 };

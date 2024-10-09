@@ -53,6 +53,7 @@ export const LinkMenu = ({ editor, appendTo }: MenuProps): JSX.Element => {
             shouldShow={shouldShow}
             updateDelay={0}
             tippyOptions={{
+                zIndex: 40,
                 popperOptions: {
                     modifiers: [{ name: 'flip', enabled: false }],
                 },

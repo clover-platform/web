@@ -56,7 +56,8 @@ export const EditForm: FC<PageEditFormProps> = (props) => {
             bookId: Number(id),
             id: Number(pageId),
             title,
-            content: value
+            content: value,
+            newVersion: true,
         });
         setPending(false);
         if(success) {
@@ -70,7 +71,7 @@ export const EditForm: FC<PageEditFormProps> = (props) => {
         }
     }, [title, value, id, pageId]);
 
-    return <div className={"space-y-4 pb-16"}>
+    return <div className={"space-y-4"}>
         <div className={"flex justify-center items-center sticky top-[48px] -m-4 px-4 py-2 border-b bg-white z-50"}>
             <div className={"flex-1 flex justify-start items-center space-x-2"}>
                 <div className={"flex justify-center items-center space-x-1"}>
@@ -98,7 +99,7 @@ export const EditForm: FC<PageEditFormProps> = (props) => {
                 </Button>
             </div>
         </div>
-        <div className={"px-16 max-w-[860px] mx-auto"}>
+        <div className={"p-16 pt-4 max-w-[860px] mx-auto"}>
             {
                 loading ? <>
                     <div className={"py-4 pb-6"}>
@@ -122,7 +123,7 @@ export const EditForm: FC<PageEditFormProps> = (props) => {
                             value={title}
                             onChange={(e) => setTitle(e.target.value)}
                             placeholder={"{#请输入标题#}"}
-                            className={"border-none p-0 m-0 h-auto rounded-none shadow-none focus-visible:ring-0 text-2xl"}
+                            className={"border-none p-0 m-0 h-auto rounded-none shadow-none focus-visible:ring-0 text-2xl font-medium"}
                         />
                     </div>
                     <Editor

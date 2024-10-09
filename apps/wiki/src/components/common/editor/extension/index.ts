@@ -1,5 +1,3 @@
-export { TaskItem } from '@tiptap/extension-task-item';
-export { TaskList } from '@tiptap/extension-task-list';
 export { TextStyle } from '@tiptap/extension-text-style'
 export { CodeBlockLowlight } from '@tiptap/extension-code-block-lowlight';
 export { FontFamily } from '@tiptap/extension-font-family';
@@ -13,6 +11,8 @@ export { Table, TableCell, TableHeader, TableRow } from './table';
 export { FocusClasses as Focus } from '@tiptap/extension-focus'
 export { Dropcursor } from '@tiptap/extension-dropcursor';
 
+export { TaskItem } from './task-item';
+export { TaskList } from './task-list';
 export { Selection } from './selection'
 export { Columns, Column } from './multi-column';
 export { Document } from './document';

@@ -37,6 +37,7 @@ export const TableRowMenu = React.memo(({ editor, appendTo }: MenuProps): JSX.El
             pluginKey="tableRowMenu"
             updateDelay={0}
             tippyOptions={{
+                zIndex: 40,
                 appendTo: () => {
                     return appendTo?.current
                 },

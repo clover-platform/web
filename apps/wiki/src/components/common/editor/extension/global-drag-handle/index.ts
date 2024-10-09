@@ -182,8 +182,8 @@ export function DragHandlePlugin(options: GlobalDragHandleOptions & {pluginKey: 
 
     function hideDragHandle() {
         if (dragHandleElement) {
-            // dragHandleElement.classList.add('hidden');
-            // options.onHide?.();
+            dragHandleElement.classList.add('hidden');
+            options.onHide?.();
         }
     }
 
@@ -287,16 +287,14 @@ export function DragHandlePlugin(options: GlobalDragHandleOptions & {pluginKey: 
 
                     const rootNode = view.domAtPos(root.pos).node as Element;
                     let rect = absoluteRect(rootNode);
-                    if(node.matches("div.react-renderer")) {
+                    if(node.matches("div.react-renderer, div[data-type=horizontalRule]")) {
                         rect = absoluteRect(node);
                     }
 
-                    // margin-top: 1rem;
-                    rect.top += (lineHeight - parseInt(compStyle.fontSize)) / 2;
                     rect.top += paddingTop;
                     rect.width = options.dragHandleWidth;
                     if(node.matches("div[data-type=horizontalRule]")) {
-                        rect.top -= ((boundingRect.height)/2 + parseInt(compStyle.fontSize)/2);
+                        rect.top -= (boundingRect.height + 8)/2;
                     }
                     if(root.node().type.name === 'codeBlock') {
                         rect.top -= (lineHeight + parseInt(compStyle.fontSize));
