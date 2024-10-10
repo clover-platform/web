@@ -1,4 +1,4 @@
-import {useCallback, useEffect, useMemo, useRef, useState} from "react";
+import {useCallback, useEffect, useMemo, useRef, useState, forwardRef, useImperativeHandle} from "react";
 import {catalog, changeCatalogParent} from "@/rest/page";
 import {useSearchParams} from "next/navigation";
 import {Catalog} from "@/types/pages/book";
@@ -11,7 +11,8 @@ import {
     moveToChild,
     toTreeItemProps,
     allParent,
-    UpdateData
+    UpdateData,
+    getAllExpandedKeys
 } from "@/components/layout/book/catalog/utils";
 import {useMessage} from "@atom-ui/core";
 import bus from "@easy-kit/common/events";
@@ -19,7 +20,17 @@ import {ADD_PAGE, UPDATE_TITLE} from "@/events/book";
 import uniq from 'lodash/uniq';
 import concat from 'lodash/concat';
 
-export const CatalogTree = () => {
+export type CatalogTreeProps = {
+    onExpand?: (expandedKeys: string[], allKeys: string[]) => void;
+}
+
+export type CatalogTreeRef = {
+    expand: () => void;
+    collapse: () => void;
+}
+
+export const CatalogTree = forwardRef<CatalogTreeRef, CatalogTreeProps>((props, ref) => {
+    const { onExpand } = props;
     const search = useSearchParams();
     const id = search.get("id");
     const [data, setData] = useState<Catalog[]>([]);
@@ -47,6 +58,10 @@ export const CatalogTree = () => {
     const treeData = useMemo<TreeData[]>(() => {
         return toTreeItemProps(data);
     }, [data])
+
+    const allExpandedKeys = useMemo(() => {
+        return getAllExpandedKeys(treeData);
+    }, [treeData]);
 
     const saveChange = useCallback(async (pageId: number, parentId: number|undefined) => {
         const {success, message} = await changeCatalogParent({
@@ -84,6 +99,10 @@ export const CatalogTree = () => {
     }, [expandedKeys]);
 
     useEffect(() => {
+        onExpand?.(expandedKeys, allExpandedKeys);
+    }, [expandedKeys, allExpandedKeys, onExpand]);
+
+    useEffect(() => {
         if(pageId) {
             setExpandedKeys(uniq(concat(expandedKeysRef.current, allParent(data, Number(pageId)))))
             setSelectedKeys([pageId]);
@@ -91,6 +110,15 @@ export const CatalogTree = () => {
             setSelectedKeys([]);
         }
     }, [pageId, data, expandedKeysRef]);
+
+    useImperativeHandle(ref, () => ({
+        expand: () => {
+            setExpandedKeys(allExpandedKeys);
+        },
+        collapse: () => {
+            setExpandedKeys([]);
+        }
+    }), [allExpandedKeys]);
 
     return <div className={"mx-2"}>
         <Tree
@@ -122,4 +150,4 @@ export const CatalogTree = () => {
             }}
         />
     </div>
-}
+})

@@ -1,7 +1,7 @@
 import RCTree, { TreeProps as RCTreeProps, BasicDataNode, TreeNodeProps } from "rc-tree";
 import "rc-tree/assets/index.css";
 import "./style.scss";
-import {FC, ReactNode} from "react";
+import {forwardRef, ReactNode} from "react";
 import {TriangleDownIcon, TriangleRightIcon} from "@radix-ui/react-icons";
 
 export type TreeData = {
@@ -14,8 +14,9 @@ export type TreeProps = RCTreeProps<TreeData> & {
     prefixCls?: string;
 };
 
-export const Tree: FC<TreeProps> = (props) => {
+export const Tree = forwardRef<RCTree<TreeData>, TreeProps>((props, ref) => {
     return <RCTree<TreeData>
+        ref={ref}
         className={"clover-tree"}
         showIcon={false}
         dropIndicatorRender={({ dropPosition, dropLevelOffset, indent }) => {
@@ -31,4 +32,4 @@ export const Tree: FC<TreeProps> = (props) => {
         }}
         {...props}
     />
-}
+})

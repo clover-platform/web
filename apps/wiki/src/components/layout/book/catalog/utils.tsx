@@ -122,3 +122,17 @@ export const updateItem = (data: Catalog[], ud: UpdateData) => {
     const item = findByKey(data, `${ud.id}`, false);
     item.title = ud.title;
 }
+
+export const getAllExpandedKeys = (data: TreeData[]): string[] => {
+    const result: string[] = [];
+    const find = (data: TreeData[]) => {
+        data.forEach(item => {
+            if(!!(item.children?.length||0)) {
+                result.push(item.key);
+                find(item.children);
+            }
+        })
+    }
+    find(data);
+    return result;
+}

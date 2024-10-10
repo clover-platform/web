@@ -1,13 +1,12 @@
 import {MainLayout as PublicMainLayout, MainLayoutProps, PathProps} from "@clover/public/components/layout/main";
-import {FC, useMemo} from "react";
+import {FC, useMemo, useCallback, useState, useRef} from "react";
 import {useLayoutProps} from "@clover/public/components/layout/hooks/use.layout.props";
-import {IconCatalog, IconExpand, IconHome} from "@arco-iconbox/react-clover";
+import {IconCatalog, IconHome} from "@arco-iconbox/react-clover";
 import {MenuItemProps} from "@clover/public/components/layout/main/sidebar/menu-item";
 import {useSearchParams} from "next/navigation";
-import {Action} from "@clover/public/components/common/action";
-import {CatalogTree} from "@/components/layout/book/catalog";
+import {CatalogTree, CatalogTreeRef} from "@/components/layout/book/catalog";
 import {AddPageAction} from "@/components/layout/book/page-actions/add";
-import {Tooltip} from "@atom-ui/core";
+import {ExpandAction} from "@/components/layout/book/page-actions/expand";
 
 export type BookLayoutProps = {
     active?: string;
@@ -19,6 +18,9 @@ export const BookLayout: FC<BookLayoutProps> = (origin) => {
     const props = useLayoutProps<BookLayoutProps>(origin);
     const search = useSearchParams();
     const id = search.get("id");
+    const [expandAll, setExpandAll] = useState<boolean>(false);
+    const [expandAble, setExpandAble] = useState<boolean>(false);
+    const treeRef = useRef<CatalogTreeRef>(null);
 
     const menus: MenuItemProps[] = useMemo(() => {
         const list: MenuItemProps[] = [
@@ -34,9 +36,18 @@ export const BookLayout: FC<BookLayoutProps> = (origin) => {
                     <div className={"flex-1"}>{"{#目录#}"}</div>
                     <div className={"-mr-3 flex space-x-1"}>
                         <AddPageAction className={"w-6 h-6 !p-0"} />
-                        <Tooltip content={"{#展开全部#}"}>
-                            <Action className={"w-6 h-6 !p-0"}><IconExpand/></Action>
-                        </Tooltip>
+                        <ExpandAction
+                            className={"w-6 h-6 !p-0"}
+                            all={expandAll}
+                            enable={expandAble}
+                            onClick={(all) => {
+                                if(all) {
+                                    treeRef.current?.expand();
+                                }else{
+                                    treeRef.current?.collapse();
+                                }
+                            }}
+                        />
                     </div>
                 </div>,
                 icon: <IconCatalog />,
@@ -44,9 +55,14 @@ export const BookLayout: FC<BookLayoutProps> = (origin) => {
             },
         ];
         return list;
-    }, [id]);
+    }, [id, expandAll, expandAble, treeRef]);
 
-    const extra = <CatalogTree />
+    const onTreeExpand = useCallback((expandedKeys: string[], allKeys: string[]) => {
+        setExpandAll(expandedKeys.length === allKeys.length);
+        setExpandAble(allKeys.length > 0);
+    }, []);
+
+    const extra = <CatalogTree ref={treeRef} onExpand={onTreeExpand} />
 
     return <PublicMainLayout
         {...props}
