@@ -39,21 +39,20 @@ export const Detail: FC<DetailProps> = (props) => {
         pageId && load();
     }, [pageId, load])
 
-    const onChange = useCallback(async (html: string) => {
-        console.log(html);
-        // saveHandler.current?.abort();
-        // saveHandler.current = save({
-        //     bookId: Number(id),
-        //     id: Number(pageId),
-        //     title: data?.title!,
-        //     content: html,
-        //     newVersion: false,
-        // });
-        // const res = await saveHandler.current;
-        // const {success, message} = res;
-        // if(!success && message !== "ERR_CANCELED") {
-        //     msg.error(message);
-        // }
+    const onChange = useCallback(async (json: string) => {
+        saveHandler.current?.abort();
+        saveHandler.current = save({
+            bookId: Number(id),
+            id: Number(pageId),
+            title: data?.title!,
+            content: json,
+            newVersion: false,
+        });
+        const res = await saveHandler.current;
+        const {success, message} = res;
+        if(!success && message !== "ERR_CANCELED") {
+            msg.error(message);
+        }
     }, [id, pageId, data, saveHandler])
 
     return <div className={"space-y-4"}>

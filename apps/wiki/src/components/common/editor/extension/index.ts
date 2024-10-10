@@ -26,3 +26,4 @@ export { BlockquoteFigure } from './block-quote-figure';
 export { Image } from './image';
 export { ImageBlock } from './image-block';
 export { ImageUpload } from './image-upload';
+export { UniqueId } from './unique-id';

@@ -13,8 +13,9 @@ export type ContentViewerProps = {
 export const ContentViewer: FC<ContentViewerProps> = (props) => {
     const {value, onChange} = props;
     const [editor] = useEditor({
-        value, editable: false,
-        onReadOnlyChecked: (node, checked, html) => onChange?.(html),
+        value,
+        editable: false,
+        onReadOnlyChange: onChange,
     });
 
     return <div className={styles.editorContainer}>

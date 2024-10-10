@@ -10,7 +10,7 @@ importers:
     dependencies:
       '@arco-iconbox/react-clover':
         specifier: 0.0.26
-        version: 0.0.26(react@18.3.1)
+        version: 0.0.26
       '@atom-ui/core':
         specifier: workspace:*
         version: link:packages/core
@@ -366,6 +366,9 @@ importers:
       lucide-react:
         specifier: 0.400.0
         version: 0.400.0(react@18.3.1)
+      nanoid:
+        specifier: ^5.0.7
+        version: 5.0.7
       react-colorful:
         specifier: 5.6.1
         version: 5.6.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -414,7 +417,7 @@ importers:
     dependencies:
       '@arco-iconbox/react-atom-ui':
         specifier: 0.0.3
-        version: 0.0.3(react@18.3.1)
+        version: 0.0.3
       '@atlaskit/button':
         specifier: 18.1.0
         version: 18.1.0(@types/react@18.3.3)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -646,13 +649,9 @@ packages:
 
   '@arco-iconbox/react-atom-ui@0.0.3':
     resolution: {integrity: sha512-FOP40uGvgYcWDUaskWyrxSE3ImunfPjnMQRyDYv75JTSMk0N+USwtJR9X9OOi1Z/CnKguVRaJCXtYOuqQpi6qA==}
-    peerDependencies:
-      react: '>=16.9.0'
 
   '@arco-iconbox/react-clover@0.0.26':
     resolution: {integrity: sha512-ugLOFWCdjYz6OBnt7nNUfa7/dsJbq3sRmp/3aAVkS8NIEIXqArKPk35lte4RGpiZjEq3UHXY+lYDePHCYInsjw==}
-    peerDependencies:
-      react: '>=16.9.0'
 
   '@atlaskit/analytics-next-stable-react-context@1.0.1':
     resolution: {integrity: sha512-iO6+hIp09dF4iAZQarVz3vKY1kM5Ij5CExYcK9jgc2q+OH8nv8n+BPFeJTdzGOGopmbUZn5Opj9pYQvge1Gr4Q==}
@@ -5648,6 +5647,11 @@ packages:
     engines: {node: ^10 || ^12 || ^13.7 || ^14 || >=15.0.1}
     hasBin: true
 
+  nanoid@5.0.7:
+    resolution: {integrity: sha512-oLxFY2gd2IqnjcYyOXD8XGCftpGtZP2AbHbOkthDkvRywH5ayNtPVy9YlOPcHckXzbLTCHpkb7FB+yuxKV13pQ==}
+    engines: {node: ^18 || >=20}
+    hasBin: true
+
   napi-build-utils@1.0.2:
     resolution: {integrity: sha512-ONmRUqK7zj7DWX0D9ADe03wbwOBZxNAfF20PlGfCWQcD3+/MakShIHrMqx9YwPTfxDdF1zLeL+RGZiR9kGMLdg==}
 
@@ -7276,13 +7280,9 @@ snapshots:
       '@jridgewell/gen-mapping': 0.3.5
       '@jridgewell/trace-mapping': 0.3.25
 
-  '@arco-iconbox/react-atom-ui@0.0.3(react@18.3.1)':
-    dependencies:
-      react: 18.3.1
+  '@arco-iconbox/react-atom-ui@0.0.3': {}
 
-  '@arco-iconbox/react-clover@0.0.26(react@18.3.1)':
-    dependencies:
-      react: 18.3.1
+  '@arco-iconbox/react-clover@0.0.26': {}
 
   '@atlaskit/analytics-next-stable-react-context@1.0.1(react@18.3.1)':
     dependencies:
@@ -12875,6 +12875,8 @@ snapshots:
       thenify-all: 1.6.0
 
   nanoid@3.3.7: {}
+
+  nanoid@5.0.7: {}
 
   napi-build-utils@1.0.2: {}
 

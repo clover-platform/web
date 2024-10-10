@@ -9,7 +9,8 @@ import {
     HorizontalRule, ImageBlock, ImageUpload, Link,
     Selection, Subscript, Superscript, Table, TableCell, TableHeader, TableRow,
     TaskItem,
-    TaskList, TextAlign, TextStyle, TrailingNode, Underline
+    TaskList, TextAlign, TextStyle, TrailingNode, Underline,
+    UniqueId
 } from "@/components/common/editor/extension";
 import StarterKit from "@tiptap/starter-kit";
 import CharacterCount from "@tiptap/extension-character-count";
@@ -20,21 +21,42 @@ import Placeholder from "@tiptap/extension-placeholder";
 import SlashCommand from "@/components/common/editor/extension/slash-command";
 import {useHandleId} from "@/components/common/editor/control/drag-handle/use.handle.id";
 import {NodeData, useData} from "@/components/common/editor/control/drag-handle/use.data";
-import {Editor as EditorInstance} from '@tiptap/core';
+import {Editor as EditorInstance, JSONContent} from '@tiptap/core';
+import { useCallback } from 'react';
 import { Node as ProseMirrorNode } from '@tiptap/pm/model'
 
 export type UseEditorProps = {
     limit?: number;
     value?: string;
     onChange?: (value: string) => void;
+    onReadOnlyChange?: (value: string) => void;
     editable?: boolean;
-    onReadOnlyChecked?: (node: ProseMirrorNode, checked: boolean, html: string) => void;
+}
+
+const updateAttrById = (json: JSONContent, id: string, attr: string, value: any) => {
+    json.content?.forEach((node: any) => {
+        if(node.attrs?.id === id) {
+            node.attrs[attr] = value;
+        }
+        if(node.content) {
+            updateAttrById(node, id, attr, value);
+        }
+    });
 }
 
 export const useEditor = (props: UseEditorProps): [EditorInstance, NodeData, string] => {
-    const {onReadOnlyChecked, value, onChange, limit, editable = true} = props;
+    const {onReadOnlyChange, value, onChange, limit, editable = true} = props;
     const handleId = useHandleId();
     const data = useData();
+
+    const onReadOnlyChecked = useCallback((node: ProseMirrorNode, checked: boolean) => {
+        const jsonValue: JSONContent = value ? JSON.parse(value) : value;
+        updateAttrById(jsonValue, node.attrs.id, "checked", checked);
+        editor.commands.setContent(jsonValue, false);
+        onReadOnlyChange?.(JSON.stringify(jsonValue));
+        return true;
+    }, [value, onReadOnlyChange]);
+
     const editor = useBaseEditor({
         editable,
         extensions: [
@@ -43,22 +65,7 @@ export const useEditor = (props: UseEditorProps): [EditorInstance, NodeData, str
             TaskList,
             TaskItem.configure({
                 nested: true,
-                onReadOnlyChecked: (node, checked) => {
-                    // get the dom from the editor and then find the node by block id
-                    // let editorDom = editor.view.dom;
-                    // console.log(node.attrs.blockId, editorDom);
-                    // let nodeDom = editorDom.querySelector(`[data-blockid="${node.attrs.blockId}"]`);
-                    // // change the data-checked attribute on the node to checked value
-                    // nodeDom.setAttribute('data-checked', checked)
-                    // // change the input checked value
-                    // nodeDom.querySelector('input').setAttribute('checked', checked)
-                    // // update the currentValueJSON by finding the node in the json string and replacing it with the new checked value
-                    // const newValue = value.replace(`"blockId":"${node.attrs.blockId}","checked":${!checked}`, `"blockId":"${node.attrs.blockId}","checked":${checked}`)
-                    // // update the editor value based off the updated array
-                    // editor.value.commands.setContent(JSON.parse(newValue), false)
-                    console.log(editor.getJSON());
-                    return false;
-                }
+                onReadOnlyChecked,
             }),
             Column,
             Selection,
@@ -137,12 +144,21 @@ export const useEditor = (props: UseEditorProps): [EditorInstance, NodeData, str
             ImageUpload.configure({
                 clientId: "test",
             }),
+            UniqueId.configure({
+                types: [
+                    'paragraph', 'heading', "blockquoteFigure", "codeBlock",
+                    "bulletList", "listItem", "orderedList", "taskList", "taskItem",
+                    "imageBlock", "table", "horizontalRule"
+                ],
+                injectNodeName: false,
+            }),
         ],
         immediatelyRender: true,
         content: value ? JSON.parse(value) : value,
         onUpdate: ({ editor }) => {
             onChange?.(JSON.stringify(editor.getJSON()));
         },
-    }, [onChange]);
+    }, [onChange, onReadOnlyChecked]);
+
     return [editor, data, handleId];
 }
