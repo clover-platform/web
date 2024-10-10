@@ -10,7 +10,7 @@ importers:
     dependencies:
       '@arco-iconbox/react-clover':
         specifier: 0.0.26
-        version: 0.0.26(react@18.3.1)
+        version: 0.0.26
       '@atom-ui/core':
         specifier: workspace:*
         version: link:packages/core
@@ -39,8 +39,8 @@ importers:
         specifier: ^1.15.8
         version: 1.15.8
       axios:
-        specifier: 1.7.2
-        version: 1.7.2
+        specifier: 1.7.4
+        version: 1.7.4
       bowser:
         specifier: 2.11.0
         version: 2.11.0
@@ -417,7 +417,7 @@ importers:
     dependencies:
       '@arco-iconbox/react-atom-ui':
         specifier: 0.0.3
-        version: 0.0.3(react@18.3.1)
+        version: 0.0.3
       '@atlaskit/button':
         specifier: 18.1.0
         version: 18.1.0(@types/react@18.3.3)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -649,13 +649,9 @@ packages:
 
   '@arco-iconbox/react-atom-ui@0.0.3':
     resolution: {integrity: sha512-FOP40uGvgYcWDUaskWyrxSE3ImunfPjnMQRyDYv75JTSMk0N+USwtJR9X9OOi1Z/CnKguVRaJCXtYOuqQpi6qA==}
-    peerDependencies:
-      react: '>=16.9.0'
 
   '@arco-iconbox/react-clover@0.0.26':
     resolution: {integrity: sha512-ugLOFWCdjYz6OBnt7nNUfa7/dsJbq3sRmp/3aAVkS8NIEIXqArKPk35lte4RGpiZjEq3UHXY+lYDePHCYInsjw==}
-    peerDependencies:
-      react: '>=16.9.0'
 
   '@atlaskit/analytics-next-stable-react-context@1.0.1':
     resolution: {integrity: sha512-iO6+hIp09dF4iAZQarVz3vKY1kM5Ij5CExYcK9jgc2q+OH8nv8n+BPFeJTdzGOGopmbUZn5Opj9pYQvge1Gr4Q==}
@@ -3741,9 +3737,6 @@ packages:
   axe-core@4.9.1:
     resolution: {integrity: sha512-QbUdXJVTpvUTHU7871ppZkdOLBeGUKBQWHkHrvN2V9IQWGMt61zf3B45BtzjxEJzYuj0JBjBZP/hmYS/R9pmAw==}
     engines: {node: '>=4'}
-
-  axios@1.7.2:
-    resolution: {integrity: sha512-2A8QhOMrbomlDuiLeK9XibIBzuHeRcqqNOHp0Cyp5EoJ1IFDh+XZH3A6BkXtv0K4gFGCI0Y4BM7B1wOEi0Rmgw==}
 
   axios@1.7.4:
     resolution: {integrity: sha512-DukmaFRnY6AzAALSH4J2M3k6PkaC+MfaAGdEERRWcC9q3/TWQwLpHR8ZRLKTdQ3aBDL64EdluRDjJqKw+BPZEw==}
@@ -7205,13 +7198,9 @@ snapshots:
       '@jridgewell/gen-mapping': 0.3.5
       '@jridgewell/trace-mapping': 0.3.25
 
-  '@arco-iconbox/react-atom-ui@0.0.3(react@18.3.1)':
-    dependencies:
-      react: 18.3.1
+  '@arco-iconbox/react-atom-ui@0.0.3': {}
 
-  '@arco-iconbox/react-clover@0.0.26(react@18.3.1)':
-    dependencies:
-      react: 18.3.1
+  '@arco-iconbox/react-clover@0.0.26': {}
 
   '@atlaskit/analytics-next-stable-react-context@1.0.1(react@18.3.1)':
     dependencies:
@@ -10736,14 +10725,6 @@ snapshots:
 
   axe-core@4.9.1: {}
 
-  axios@1.7.2:
-    dependencies:
-      follow-redirects: 1.15.6
-      form-data: 4.0.0
-      proxy-from-env: 1.1.0
-    transitivePeerDependencies:
-      - debug
-
   axios@1.7.4:
     dependencies:
       follow-redirects: 1.15.6
@@ -11504,7 +11485,7 @@ snapshots:
       debug: 4.3.5
       enhanced-resolve: 5.17.0
       eslint: 8.57.0
-      eslint-module-utils: 2.8.1(@typescript-eslint/parser@7.2.0(eslint@8.57.0)(typescript@5.5.3))(eslint-import-resolver-node@0.3.9)(eslint-import-resolver-typescript@3.6.1)(eslint@8.57.0)
+      eslint-module-utils: 2.8.1(@typescript-eslint/parser@7.2.0(eslint@8.57.0)(typescript@5.5.3))(eslint-import-resolver-node@0.3.9)(eslint-import-resolver-typescript@3.6.1(@typescript-eslint/parser@7.2.0(eslint@8.57.0)(typescript@5.5.3))(eslint-import-resolver-node@0.3.9)(eslint-plugin-import@2.29.1)(eslint@8.57.0))(eslint@8.57.0)
       eslint-plugin-import: 2.29.1(@typescript-eslint/parser@7.15.0(eslint@8.57.0)(typescript@5.5.3))(eslint@8.57.0)
       fast-glob: 3.3.2
       get-tsconfig: 4.7.5
@@ -11526,7 +11507,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  eslint-module-utils@2.8.1(@typescript-eslint/parser@7.2.0(eslint@8.57.0)(typescript@5.5.3))(eslint-import-resolver-node@0.3.9)(eslint-import-resolver-typescript@3.6.1)(eslint@8.57.0):
+  eslint-module-utils@2.8.1(@typescript-eslint/parser@7.2.0(eslint@8.57.0)(typescript@5.5.3))(eslint-import-resolver-node@0.3.9)(eslint-import-resolver-typescript@3.6.1(@typescript-eslint/parser@7.2.0(eslint@8.57.0)(typescript@5.5.3))(eslint-import-resolver-node@0.3.9)(eslint-plugin-import@2.29.1)(eslint@8.57.0))(eslint@8.57.0):
     dependencies:
       debug: 3.2.7
     optionalDependencies:
