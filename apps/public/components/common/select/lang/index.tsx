@@ -1,4 +1,4 @@
-import { Select, SelectOptionProps } from "@atom-ui/core";
+import { Select, SelectOptionProps } from "@easykit/design";
 
 const options: SelectOptionProps[] = [
     {

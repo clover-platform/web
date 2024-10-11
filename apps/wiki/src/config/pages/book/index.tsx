@@ -1,5 +1,5 @@
-import {DataTableColumn} from "@atom-ui/core/components/uix/data-table";
-import {DropdownMenuItemProps, FilterItemProps, Input} from "@atom-ui/core";
+import {DataTableColumn} from "@easykit/design/components/uix/data-table";
+import {DropdownMenuItemProps, FilterItemProps, Input} from "@easykit/design";
 import {Book} from "@/types/pages/book";
 
 export const COLUMNS: DataTableColumn<Book>[] = [

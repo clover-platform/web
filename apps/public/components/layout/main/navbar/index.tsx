@@ -4,7 +4,7 @@ import classNames from "classnames";
 import {LangSelect} from "@clover/public/components/common/select/lang";
 import { useRecoilValue } from "recoil";
 import { sidebarOpenState } from "@clover/public/components/layout/main/state";
-import { Separator, } from "@atom-ui/core";
+import { Separator, } from "@easykit/design";
 import {TeamsSwitcher} from "@clover/public/components/layout/main/navbar/switcher/teams";
 import {ProjectsSwitcher} from "@clover/public/components/layout/main/navbar/switcher/projects";
 

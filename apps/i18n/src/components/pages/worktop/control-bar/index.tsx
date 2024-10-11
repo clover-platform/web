@@ -1,4 +1,4 @@
-import { Progress, Separator } from "@atom-ui/core";
+import { Progress, Separator } from "@easykit/design";
 import { Action } from "@clover/public/components/common/action";
 import {
     IconBack,

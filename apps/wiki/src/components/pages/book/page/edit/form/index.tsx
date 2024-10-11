@@ -1,5 +1,5 @@
 import classNames from "classnames";
-import {Button, Input, Separator, Skeleton, useMessage} from "@atom-ui/core";
+import {Button, Input, Separator, Skeleton, useMessage} from "@easykit/design";
 import {i18n} from "@easy-kit/i18n/utils";
 import {Action} from "@clover/public/components/common/action";
 import {StarIcon} from "@radix-ui/react-icons";

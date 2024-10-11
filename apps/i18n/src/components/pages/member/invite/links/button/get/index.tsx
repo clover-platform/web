@@ -1,4 +1,4 @@
-import { Button, useMessage } from "@atom-ui/core";
+import { Button, useMessage } from "@easykit/design";
 import { FC, useState } from "react";
 import { generate } from "@/rest/member.invite";
 import { useSearchParams } from "next/navigation";

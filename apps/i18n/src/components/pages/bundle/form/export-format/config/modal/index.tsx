@@ -1,4 +1,4 @@
-import {Dialog, DialogProps} from "@atom-ui/core";
+import {Dialog, DialogProps} from "@easykit/design";
 import {cloneElement, FC, ReactElement} from "react";
 
 export type FormatConfigModalProps = {

@@ -1,4 +1,4 @@
-import {Button} from "@atom-ui/core";
+import {Button} from "@easykit/design";
 import {FC, PropsWithChildren} from "react";
 import { useRouter } from "next/navigation";
 

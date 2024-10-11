@@ -1,4 +1,4 @@
-import { Button, Dialog, DialogProps, Space, useMessage } from "@atom-ui/core";
+import { Button, Dialog, DialogProps, Space, useMessage } from "@easykit/design";
 import { FC, useState } from "react";
 import { ModuleBranchForm } from "@/components/pages/branch/form";
 import { create, CreateBranchData } from "@/rest/branch";

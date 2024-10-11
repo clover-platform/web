@@ -1,4 +1,4 @@
-import {Command, CommandItem, CommandList} from "@atom-ui/core";
+import {Command, CommandItem, CommandList} from "@easykit/design";
 import {IconShare} from "@arco-iconbox/react-clover";
 
 export const MenuHelpSheet = () => {

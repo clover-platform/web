@@ -6,7 +6,7 @@ import {
     DropdownMenuSeparator,
     DropdownMenuTrigger,
     Button, Checkbox,
-} from "@atom-ui/core";
+} from "@easykit/design";
 import { forwardRef, useRef, useState } from "react";
 import { ChevronDownIcon } from "@radix-ui/react-icons";
 import { useDocumentClick } from "@easy-kit/common/hooks";

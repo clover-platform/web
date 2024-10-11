@@ -3,7 +3,7 @@ import {ENTRY_RESULT_RELOAD} from "@/events/worktop";
 import {useRecoilState, useRecoilValue} from "recoil";
 import {currentEntryState, currentLanguageState, entriesState} from "@/state/worktop";
 import {useState} from "react";
-import {useMessage} from "@atom-ui/core";
+import {useMessage} from "@easykit/design";
 import {useEntriesUpdater} from "@/components/layout/worktop/hooks";
 import {save} from "@/rest/entry.result";
 

@@ -2,7 +2,7 @@ import {IconAdd} from "@arco-iconbox/react-clover";
 import {Action} from "@clover/public/components/common/action";
 import {FC, useCallback, useState} from "react";
 import {useRouter, useSearchParams} from "next/navigation";
-import {Spin, Tooltip, useMessage} from "@atom-ui/core";
+import {Spin, Tooltip, useMessage} from "@easykit/design";
 import {create} from "@/rest/page";
 import bus from "@easy-kit/common/events";
 import {ADD_PAGE} from "@/events/book";

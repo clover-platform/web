@@ -1,7 +1,7 @@
 'use client';
 
 import { TitleBar } from "@clover/public/components/common/title-bar";
-import {Button, Space, useMessage} from "@atom-ui/core";
+import {Button, Space, useMessage} from "@easykit/design";
 import BackButton from "@easy-kit/common/components/button/back";
 import ModuleForm from "@/components/pages/module/form";
 import { useState } from "react";

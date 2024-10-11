@@ -12,7 +12,7 @@ import {
     TableRow,
     TableHead,
     Loading, TableCell, Empty, ScrollArea, ScrollBar
-} from "@atom-ui/core";
+} from "@easykit/design";
 import Link from "next/link";
 import { i18n } from "@easy-kit/i18n/utils";
 import { DetailInfoItem } from "@/components/pages/dashboard/detail/info-item";

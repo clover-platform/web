@@ -1,4 +1,4 @@
-import {Button, Dialog, DialogProps, useMessage} from "@atom-ui/core";
+import {Button, Dialog, DialogProps, useMessage} from "@easykit/design";
 import { FC, useState } from "react";
 import { MemberInviteForm } from "@/components/pages/member/invite/form";
 import { MemberInviteRequest } from "@/types/pages/member";

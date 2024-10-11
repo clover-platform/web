@@ -1,6 +1,6 @@
 import {Action} from "@clover/public/components/common/action";
 import {IconExpand} from "@arco-iconbox/react-clover";
-import {Tooltip} from "@atom-ui/core";
+import {Tooltip} from "@easykit/design";
 import {FC} from "react";
 
 export type ExpandActionProps = {

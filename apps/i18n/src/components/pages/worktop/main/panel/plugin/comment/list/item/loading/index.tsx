@@ -1,4 +1,4 @@
-import { Skeleton } from "@atom-ui/core";
+import { Skeleton } from "@easykit/design";
 
 export const CommentListItemLoading = () => {
     return <div className={"mx-3 flex justify-center items-start"}>

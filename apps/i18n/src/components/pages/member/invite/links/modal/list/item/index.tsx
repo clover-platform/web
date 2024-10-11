@@ -1,6 +1,6 @@
 import { MemberInvite } from "@/types/pages/member";
 import { FC } from "react";
-import { Tooltip, useAlert, useMessage, ValueFormatter } from "@atom-ui/core";
+import { Tooltip, useAlert, useMessage, ValueFormatter } from "@easykit/design";
 import { MemberRole } from "@/components/pages/member/role";
 import { CopyIcon } from "@radix-ui/react-icons";
 import { Action } from "@clover/public/components/common/action";

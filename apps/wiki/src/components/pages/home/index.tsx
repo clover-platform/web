@@ -8,7 +8,7 @@ import {useRouter, useSearchParams} from "next/navigation";
 import {HomeStart, StartItem} from "@/components/pages/home/start";
 import {CreateBookModal} from "@/components/pages/home/create/modal";
 import {COLUMNS, FILTERS, ROW_ACTIONS} from "@/config/pages/book";
-import {DataTable} from "@atom-ui/core";
+import {DataTable} from "@easykit/design";
 import {useTableLoader} from "@easy-kit/common/hooks";
 import {list} from "@/rest/book";
 import {Book} from "@/types/pages/book";

@@ -3,7 +3,7 @@ import { Action } from "@clover/public/components/common/action";
 import { EditEntryModal } from "@/components/pages/worktop/main/panel/entry/edit/modal";
 import { FC, useState } from "react";
 import { Entry } from "@/types/pages/entry";
-import { Tooltip } from "@atom-ui/core";
+import { Tooltip } from "@easykit/design";
 
 export type EditEntryButtonProps = {
     entry: Entry;

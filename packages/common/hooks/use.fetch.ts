@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useMessage } from "@atom-ui/core";
+import { useMessage } from "@easykit/design";
 
 export const useFetch = (api: (params: any) => Promise<any>, options?: {
     showMessage: boolean

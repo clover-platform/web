@@ -1,5 +1,5 @@
 import { Action } from "../../../../common/action";
-import { Dropdown, DropdownMenuItemProps, useAlert, useMessage } from "@atom-ui/core";
+import { Dropdown, DropdownMenuItemProps, useAlert, useMessage } from "@easykit/design";
 import classNames from 'classnames';
 import { logout } from "@clover/public/rest/auth";
 import { UNAUTHORIZED } from "@clover/public/events/auth";

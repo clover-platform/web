@@ -1,5 +1,5 @@
 import {FC, ReactNode} from "react";
-import { Separator } from "@atom-ui/core";
+import { Separator } from "@easykit/design";
 import classNames from "classnames";
 
 export type TitleBarProps = {

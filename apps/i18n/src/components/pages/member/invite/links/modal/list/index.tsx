@@ -1,4 +1,4 @@
-import { Dialog, DialogProps, Empty, ScrollArea } from "@atom-ui/core";
+import { Dialog, DialogProps, Empty, ScrollArea } from "@easykit/design";
 import { FC, useEffect, useState } from "react";
 import { list } from "@/rest/member.invite";
 import { useSearchParams } from "next/navigation";

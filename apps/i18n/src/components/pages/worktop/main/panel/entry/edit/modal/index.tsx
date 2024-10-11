@@ -1,4 +1,4 @@
-import { Button, Dialog, DialogProps, useMessage } from "@atom-ui/core";
+import { Button, Dialog, DialogProps, useMessage } from "@easykit/design";
 import {FC, useEffect, useState} from "react";
 import { edit, EditEntryData } from "@/rest/entry";
 import { EntryEditForm } from "@/components/pages/worktop/main/panel/entry/form/edit";

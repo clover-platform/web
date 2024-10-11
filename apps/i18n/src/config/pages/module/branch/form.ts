@@ -1,5 +1,5 @@
 import * as z from "zod";
-import { SimpleRadioGroupOptionProps } from "@atom-ui/core";
+import { SimpleRadioGroupOptionProps } from "@easykit/design";
 
 export const SCHEMA = z.object({
     type: z.string()

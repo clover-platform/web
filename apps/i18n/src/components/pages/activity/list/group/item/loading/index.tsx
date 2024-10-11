@@ -1,4 +1,4 @@
-import {Skeleton} from "@atom-ui/core";
+import {Skeleton} from "@easykit/design";
 
 export const ActivityListGroupItemLoading = () => {
     return <div className={"flex justify-center items-start"}>

@@ -1,6 +1,6 @@
 'use client';
 
-import { Button, Form, FormItem, FormValues, Input, Steps, StepsItem, useMessage } from "@atom-ui/core";
+import { Button, Form, FormItem, FormValues, Input, Steps, StepsItem, useMessage } from "@easykit/design";
 import { useState } from "react";
 import EmailCodeInput from "@easy-kit/common/components/input/email-code";
 import {passwordReset, resetEmailCheck, sendResetEmailCode} from "@/rest/auth";

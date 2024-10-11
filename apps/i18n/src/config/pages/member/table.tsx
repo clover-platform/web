@@ -1,5 +1,5 @@
-import { DropdownMenuItemProps, FilterItemProps, Input } from "@atom-ui/core";
-import { DataTableColumn } from "@atom-ui/core/components/uix/data-table";
+import { DropdownMenuItemProps, FilterItemProps, Input } from "@easykit/design";
+import { DataTableColumn } from "@easykit/design/components/uix/data-table";
 import { Module } from "@/types/pages/module";
 import { Member } from "@/types/pages/member";
 import { MemberRole } from "@/components/pages/member/role";

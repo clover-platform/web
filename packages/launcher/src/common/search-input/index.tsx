@@ -1,5 +1,5 @@
 import { Icon } from "@/common/icon";
-import { Input } from "@atom-ui/core";
+import { Input } from "@easykit/design";
 
 export const SearchInput = () => {
     return <div className={"flex justify-center items-center bg-white/60 focus-within:!bg-white/90 rounded-md px-2 py-1 shadow-md w-full max-w-[460px]"}>

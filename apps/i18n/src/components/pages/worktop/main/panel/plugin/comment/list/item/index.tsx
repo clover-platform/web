@@ -1,6 +1,6 @@
 import { EntryComment } from "@/types/pages/entry";
 import { FC } from "react";
-import {Avatar, useAlert, useMessage} from "@atom-ui/core";
+import {Avatar, useAlert, useMessage} from "@easykit/design";
 import { TimeAgo } from "@easy-kit/common/components/time-ago";
 import {Action} from "@clover/public/components/common/action";
 import classNames from "classnames";

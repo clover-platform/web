@@ -5,7 +5,7 @@ import { useTableLoader } from "@easy-kit/common/hooks";
 import { list } from "@/rest/member";
 import { useEffect, useState } from "react";
 import { TitleBar } from "@clover/public/components/common/title-bar";
-import { DataTable } from "@atom-ui/core";
+import { DataTable } from "@easykit/design";
 import { TabsTitle } from "@clover/public/components/common/tabs-title";
 import { TABS } from "@/config/pages/member/tabs";
 import { COLUMNS, FILTERS, ROW_ACTIONS } from "@/config/pages/member/table";

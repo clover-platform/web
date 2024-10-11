@@ -1,6 +1,6 @@
 'use client';
 
-import { Form, Steps, StepsItem, Button, Input, useMessage, FormItem } from "@atom-ui/core";
+import { Form, Steps, StepsItem, Button, Input, useMessage, FormItem } from "@easykit/design";
 import { useState } from "react";
 import SecretItem from "@/components/pages/register/secret";
 import EmailCodeInput from "@easy-kit/common/components/input/email-code";

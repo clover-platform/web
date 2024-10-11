@@ -1,5 +1,5 @@
 import { IconAdd } from "@arco-iconbox/react-clover";
-import { Button } from "@atom-ui/core";
+import { Button } from "@easykit/design";
 import { useState } from "react";
 import { InviteModal } from "@/components/pages/member/invite/modal";
 

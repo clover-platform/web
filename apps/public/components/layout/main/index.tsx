@@ -18,7 +18,7 @@ import {
     BreadcrumbList,
     BreadcrumbPage,
     BreadcrumbSeparator,
-} from "@atom-ui/core";
+} from "@easykit/design";
 import Link from "next/link";
 import { IconHome } from "@arco-iconbox/react-clover";
 import {withQuery} from "@easy-kit/common/utils/path";

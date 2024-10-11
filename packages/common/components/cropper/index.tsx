@@ -2,7 +2,7 @@ import Cropper, {ReactCropperElement, ReactCropperProps} from "react-cropper";
 import "cropperjs/dist/cropper.css";
 import {FC, useRef, useState, forwardRef} from "react";
 import classNames from "classnames";
-import {Button, Dialog, Spin, Uploader, useMessage} from "@atom-ui/core";
+import {Button, Dialog, Spin, Uploader, useMessage} from "@easykit/design";
 import {PlusIcon} from "@radix-ui/react-icons";
 import {IconDelete} from "@arco-iconbox/react-clover";
 import {dataURLToFile, fileToDataURL} from "@easy-kit/common/utils/file";

@@ -1,6 +1,6 @@
-import { cn, ComboSelect } from "@atom-ui/core";
+import { cn, ComboSelect } from "@easykit/design";
 import { forwardRef, useEffect, useState } from "react";
-import { ComboSelectOptionProps } from "@atom-ui/core/components/uix/combo-select";
+import { ComboSelectOptionProps } from "@easykit/design/components/uix/combo-select";
 import { AccessApi, apiList } from "@/rest/access";
 
 type COLOR_MAP_TYPE = {

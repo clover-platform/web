@@ -4,7 +4,7 @@ import { Editor } from '@tiptap/react'
 import {FC, useEffect, useRef, useState} from "react";
 import {NodeData} from "@/components/common/editor/control/drag-handle/use.data";
 import {useContentActions} from "@/components/common/editor/control/drag-handle/use.content.actions";
-import {Dropdown} from "@atom-ui/core";
+import {Dropdown} from "@easykit/design";
 import classNames from "classnames";
 
 export type DragHandleControlProps = {

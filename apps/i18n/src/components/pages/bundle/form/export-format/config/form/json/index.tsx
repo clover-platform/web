@@ -1,4 +1,4 @@
-import {Button, Checkbox, Form, FormItem, Space} from "@atom-ui/core";
+import {Button, Checkbox, Form, FormItem, Space} from "@easykit/design";
 import {FC} from "react";
 import * as z from "zod";
 

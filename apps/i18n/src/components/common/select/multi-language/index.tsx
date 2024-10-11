@@ -1,5 +1,5 @@
 import { FC, forwardRef, HTMLAttributes, useState } from "react";
-import { Checkbox, CheckboxProps, Input, ScrollArea, Spin } from "@atom-ui/core";
+import { Checkbox, CheckboxProps, Input, ScrollArea, Spin } from "@easykit/design";
 import classNames from "classnames";
 import { Action } from "@clover/public/components/common/action";
 import { IconDelete } from "@arco-iconbox/react-clover";

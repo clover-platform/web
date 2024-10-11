@@ -1,5 +1,5 @@
 import { forwardRef, useState } from "react";
-import { Checkbox, ScrollArea } from "@atom-ui/core";
+import { Checkbox, ScrollArea } from "@easykit/design";
 import { useRecoilValue } from "recoil";
 import { branchesState } from "@/state/worktop";
 import { IconBranch } from "@arco-iconbox/react-clover";

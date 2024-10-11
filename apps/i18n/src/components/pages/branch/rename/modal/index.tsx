@@ -1,4 +1,4 @@
-import { Button, Dialog, DialogProps, Form, FormItem, Input, Space, useMessage } from "@atom-ui/core";
+import { Button, Dialog, DialogProps, Form, FormItem, Input, Space, useMessage } from "@easykit/design";
 import { FC, useState } from "react";
 import { rename } from "@/rest/branch";
 import { useSearchParams } from "next/navigation";

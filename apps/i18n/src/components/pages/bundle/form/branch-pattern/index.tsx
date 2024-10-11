@@ -1,5 +1,5 @@
 import {forwardRef, useState} from "react";
-import {Input} from "@atom-ui/core";
+import {Input} from "@easykit/design";
 import {IconAdd} from "@arco-iconbox/react-clover";
 import {Action} from "@clover/public/components/common/action";
 import {MinusIcon} from "@radix-ui/react-icons";

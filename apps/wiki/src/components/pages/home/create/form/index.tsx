@@ -1,4 +1,4 @@
-import {Form, FormItem, Input, Select, Textarea} from "@atom-ui/core";
+import {Form, FormItem, Input, Select, Textarea} from "@easykit/design";
 import {FC, PropsWithChildren} from "react";
 import {PRIVACY_LIST, SCHEMA} from "@/config/pages/book/form";
 import {ImageCropper} from "@easy-kit/common/components/cropper";

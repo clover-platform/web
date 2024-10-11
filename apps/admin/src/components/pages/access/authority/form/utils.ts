@@ -1,6 +1,6 @@
 import {AuthorityTree} from "@/rest/access";
-import {TreeItemProps} from "@atom-ui/core";
-import {handleItem} from "@atom-ui/core/components/uix/tree/utils";
+import {TreeItemProps} from "@easykit/design";
+import {handleItem} from "@easykit/design/components/uix/tree/utils";
 
 export const toItems = (data: AuthorityTree[]): TreeItemProps[] => {
     return data.map<TreeItemProps>(item => {

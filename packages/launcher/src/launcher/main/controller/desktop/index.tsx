@@ -1,4 +1,4 @@
-import { Avatar } from "@atom-ui/core";
+import { Avatar } from "@easykit/design";
 import { AddDesktop } from "@/launcher/main/controller/desktop/add";
 import { useConfig } from "@/state";
 import { DesktopGroup } from "@/interface.ts";

@@ -1,6 +1,6 @@
 import { IconCreateTeam } from "@arco-iconbox/react-clover";
 import { IconTitle } from "@clover/public/components/common/icon-title";
-import {Button, Form, FormItem, Input, Space, useMessage} from "@atom-ui/core";
+import {Button, Form, FormItem, Input, Space, useMessage} from "@easykit/design";
 import * as z from "zod";
 import { useState } from "react";
 import {init, TeamInitData} from "@clover/public/rest/team";

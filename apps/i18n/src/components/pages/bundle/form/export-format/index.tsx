@@ -1,5 +1,5 @@
 import {forwardRef, useState} from "react";
-import {RadioGroup, RadioGroupItem} from "@atom-ui/core";
+import {RadioGroup, RadioGroupItem} from "@easykit/design";
 import classNames from "classnames";
 import {FormatConfigButton} from "@/components/pages/bundle/form/export-format/config/button";
 import { ExportFormatConfig, SUPPORTED_FORMATS } from "@/config/pages/bundle/config";

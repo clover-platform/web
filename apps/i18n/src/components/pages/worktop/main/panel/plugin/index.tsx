@@ -1,6 +1,6 @@
 import {Action} from "@clover/public/components/common/action";
 import {IconChatGPT, IconComment, IconGoogleTranslate} from "@arco-iconbox/react-clover";
-import {Tooltip} from "@atom-ui/core";
+import {Tooltip} from "@easykit/design";
 import {ReactNode, useMemo, useState} from "react";
 import {ComingSoon} from "@/components/pages/worktop/main/panel/plugin/coming-soon";
 import {Comment} from "@/components/pages/worktop/main/panel/plugin/comment";

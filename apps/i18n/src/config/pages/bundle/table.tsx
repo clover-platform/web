@@ -1,5 +1,5 @@
-import {DataTableColumn} from "@atom-ui/core/components/uix/data-table";
-import {DropdownMenuItemProps} from "@atom-ui/core";
+import {DataTableColumn} from "@easykit/design/components/uix/data-table";
+import {DropdownMenuItemProps} from "@easykit/design";
 import {Bundle} from "@/types/pages/bundle";
 import { BundleFormat } from "@/components/pages/bundle/format";
 

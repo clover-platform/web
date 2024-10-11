@@ -1,6 +1,6 @@
 'use client';
 
-import {Button, Form, FormItem, Input} from "@atom-ui/core";
+import {Button, Form, FormItem, Input} from "@easykit/design";
 import {SCHEMA} from "@clover/public/config/pages/login/form";
 import {useLoginSubmit} from "@clover/public/components/pages/login/hooks";
 

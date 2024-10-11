@@ -1,4 +1,4 @@
-import { Skeleton } from "@atom-ui/core";
+import { Skeleton } from "@easykit/design";
 
 export const InviteLinkItemLoading = () => {
     return <div className={"space-y-2"}>

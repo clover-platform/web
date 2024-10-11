@@ -1,4 +1,4 @@
-import { Separator, Sheet, SheetContent } from "@atom-ui/core";
+import { Separator, Sheet, SheetContent } from "@easykit/design";
 import { IconBranch, IconHelp, IconProject, IconTranslation } from "@arco-iconbox/react-clover";
 import { Action } from "@clover/public/components/common/action";
 import { FC, ReactNode, useEffect, useState } from "react";

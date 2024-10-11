@@ -1,4 +1,4 @@
-import {Button, useMessage} from "@atom-ui/core";
+import {Button, useMessage} from "@easykit/design";
 import {LanguageIcon} from "@/components/common/language-icon";
 import {FC, useState} from "react";
 import {InviteDetail} from "@/types/pages/module";

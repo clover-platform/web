@@ -1,4 +1,4 @@
-import { ColumnsProps, DropdownMenuItemProps } from "@atom-ui/core";
+import { ColumnsProps, DropdownMenuItemProps } from "@easykit/design";
 
 export const COLUMNS: ColumnsProps[] = [
     {

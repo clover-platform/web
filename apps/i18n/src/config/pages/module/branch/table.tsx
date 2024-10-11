@@ -1,5 +1,5 @@
-import { DataTableColumn } from "@atom-ui/core/components/uix/data-table";
-import { Badge, DropdownMenuItemProps, FilterItemProps, Input } from "@atom-ui/core";
+import { DataTableColumn } from "@easykit/design/components/uix/data-table";
+import { Badge, DropdownMenuItemProps, FilterItemProps, Input } from "@easykit/design";
 import { Branch } from "@/types/pages/branch";
 
 export const COLUMNS: DataTableColumn<Branch>[] = [

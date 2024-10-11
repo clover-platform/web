@@ -1,5 +1,5 @@
 import {cloneElement, FC, ReactElement, ReactNode, useEffect, useState} from "react";
-import {cn, HoverCard, HoverCardContent, HoverCardTrigger} from "@atom-ui/core";
+import {cn, HoverCard, HoverCardContent, HoverCardTrigger} from "@easykit/design";
 import Link from "next/link";
 import { ChevronRightIcon } from '@radix-ui/react-icons';
 import classNames from "classnames";

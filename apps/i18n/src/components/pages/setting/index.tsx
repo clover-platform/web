@@ -12,7 +12,7 @@ import {
     Input, Loading,
     Separator,
     Textarea, useAlert, useMessage
-} from "@atom-ui/core";
+} from "@easykit/design";
 import {INFO_SCHEMA} from "@/config/pages/module/form";
 import {deleteModule, detail, update} from "@/rest/module";
 import {useRouter, useSearchParams} from "next/navigation";

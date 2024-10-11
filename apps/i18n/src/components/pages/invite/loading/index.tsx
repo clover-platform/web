@@ -1,4 +1,4 @@
-import {Skeleton} from "@atom-ui/core";
+import {Skeleton} from "@easykit/design";
 
 export const InvitePageLoading = () => {
     return <div className={"w-[360px] space-y-4 mt-8"}>

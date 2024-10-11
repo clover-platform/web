@@ -1,4 +1,4 @@
-import { Skeleton } from "@atom-ui/core";
+import { Skeleton } from "@easykit/design";
 
 const LOADING_ITEM = [0,1,2,3,4,5,6,7,8]
 

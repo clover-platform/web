@@ -1,4 +1,4 @@
-import {Input, InputProps} from "@atom-ui/core";
+import {Input, InputProps} from "@easykit/design";
 import {ChangeEvent, forwardRef} from "react";
 
 const CodeInput = forwardRef<HTMLInputElement, InputProps>((props, ref) => {

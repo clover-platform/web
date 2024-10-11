@@ -1,5 +1,5 @@
 import {CheckCircledIcon} from "@radix-ui/react-icons";
-import {Button} from "@atom-ui/core";
+import {Button} from "@easykit/design";
 import {FC} from "react";
 import {useRouter} from "next/navigation";
 

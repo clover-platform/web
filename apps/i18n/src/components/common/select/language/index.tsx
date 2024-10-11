@@ -1,5 +1,5 @@
 import { forwardRef, useEffect, useState } from "react";
-import {cn, ComboSelect, ComboSelectOptionProps, ComboSelectProps} from "@atom-ui/core";
+import {cn, ComboSelect, ComboSelectOptionProps, ComboSelectProps} from "@easykit/design";
 import { languages } from "@/rest/common";
 import { useRecoilValue } from "recoil";
 import { languagesLoadingState, languagesState } from "@/state/public";

@@ -1,6 +1,6 @@
 import {Activity} from "@/types/pages/activity";
 import {FC, ReactNode, useMemo} from "react";
-import {Avatar} from "@atom-ui/core";
+import {Avatar} from "@easykit/design";
 import dayjs from "dayjs";
 import {IconAdd, IconDelete} from "@arco-iconbox/react-clover";
 import {CheckIcon, Cross2Icon, Pencil1Icon} from "@radix-ui/react-icons";

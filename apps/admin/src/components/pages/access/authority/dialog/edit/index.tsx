@@ -1,4 +1,4 @@
-import { Dialog, DialogProps } from "@atom-ui/core";
+import { Dialog, DialogProps } from "@easykit/design";
 import { FC, PropsWithChildren, useEffect, useState } from "react";
 import AuthorityForm from "@/components/pages/access/authority/form";
 import { authorityDetail } from "@/rest/access";

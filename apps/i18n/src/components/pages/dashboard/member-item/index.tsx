@@ -1,6 +1,6 @@
 import { FC } from "react";
 import { Member } from "@/types/pages/module";
-import { Avatar, Badge } from "@atom-ui/core";
+import { Avatar, Badge } from "@easykit/design";
 
 export type MemberItemProps = {} & Member;
 

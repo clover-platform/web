@@ -1,7 +1,7 @@
 'use client';
 
 import {TitleBar} from "@clover/public/components/common/title-bar";
-import {Button, DataTable} from "@atom-ui/core";
+import {Button, DataTable} from "@easykit/design";
 import {COLUMNS, ROW_ACTIONS} from "@/config/pages/bundle/table";
 import {list} from "@/rest/bundle";
 import {Bundle} from "@/types/pages/bundle";

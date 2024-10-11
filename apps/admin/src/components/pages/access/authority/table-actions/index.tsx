@@ -1,9 +1,9 @@
 import { ACTIONS } from "@/config/pages/access/authority/table";
-import {Action, Dropdown, useMessage} from "@atom-ui/core";
+import {Action, Dropdown, useMessage} from "@easykit/design";
 import { DotsHorizontalIcon } from "@radix-ui/react-icons";
 import { FC, useState } from "react";
 import EditAuthorityDialog from "@/components/pages/access/authority/dialog/edit";
-import {useAlert} from "@atom-ui/core/components/uix/alert";
+import {useAlert} from "@easykit/design/components/uix/alert";
 import {deleteAuthority} from "@/rest/access";
 
 export interface TableActionsProps {

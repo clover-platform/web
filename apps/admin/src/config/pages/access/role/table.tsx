@@ -1,6 +1,6 @@
-import {DropdownMenuItemProps, FilterItemProps, Input} from "@atom-ui/core"
+import {DropdownMenuItemProps, FilterItemProps, Input} from "@easykit/design"
 import EnableSelector from "@/components/pages/access/role/form/enable-selector";
-import { DataTableColumn } from "@atom-ui/core/components/uix/data-table";
+import { DataTableColumn } from "@easykit/design/components/uix/data-table";
 import {RoleStatus} from "@/components/pages/access/role/status";
 
 export const FILTERS: FilterItemProps[] = [

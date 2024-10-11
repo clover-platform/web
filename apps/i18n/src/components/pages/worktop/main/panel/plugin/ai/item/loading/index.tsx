@@ -1,4 +1,4 @@
-import {Skeleton} from "@atom-ui/core";
+import {Skeleton} from "@easykit/design";
 
 export const AIItemLoading = () => {
     return <div className={"flex bg-muted p-3 rounded-lg justify-center items-center space-x-1"}>

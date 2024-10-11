@@ -1,4 +1,4 @@
-import { FormItem, useMessage } from "@atom-ui/core";
+import { FormItem, useMessage } from "@easykit/design";
 import { FC, PropsWithChildren, useEffect, useState } from "react";
 import {otpSecret} from "@/rest/auth";
 import OtpInfo from "@/components/common/account/otp-info";

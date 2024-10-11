@@ -2,7 +2,7 @@ import {ActivityGroup} from "@/types/pages/activity";
 import {FC} from "react";
 import {ActivityListGroup} from "@/components/pages/activity/list/group";
 import {ActivityListGroupLoading} from "@/components/pages/activity/list/group/loading";
-import {Empty} from "@atom-ui/core";
+import {Empty} from "@easykit/design";
 
 export type ActivityListProps = {
     items: ActivityGroup[];

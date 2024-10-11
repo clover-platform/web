@@ -1,4 +1,4 @@
-import { ResizableHandle, ResizablePanel, ResizablePanelGroup } from "@atom-ui/core";
+import { ResizableHandle, ResizablePanel, ResizablePanelGroup } from "@easykit/design";
 import {useRecoilState, useSetRecoilState} from "recoil";
 import {currentEntryState, leftSideOpenState, rightSideOpenState} from "@/state/worktop";
 import { useEffect, useRef } from "react";

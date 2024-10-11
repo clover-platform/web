@@ -1,6 +1,6 @@
 import {Activity} from "@/types/pages/activity";
 import {FC} from "react";
-import {Separator} from "@atom-ui/core";
+import {Separator} from "@easykit/design";
 import {ActivityListGroupItem} from "@/components/pages/activity/list/group/item";
 
 export type ActivityListGroupProps = {

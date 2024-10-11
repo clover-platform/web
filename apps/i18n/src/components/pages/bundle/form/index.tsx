@@ -1,4 +1,4 @@
-import {Checkbox, Form, FormItem, Input} from "@atom-ui/core";
+import {Checkbox, Form, FormItem, Input} from "@easykit/design";
 import {FC, PropsWithChildren} from "react";
 import { SCHEMA } from "@/config/pages/bundle/form";
 import {BranchPattern} from "@/components/pages/bundle/form/branch-pattern";

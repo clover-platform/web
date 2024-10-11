@@ -1,4 +1,4 @@
-import {Empty, Input, ScrollArea} from "@atom-ui/core";
+import {Empty, Input, ScrollArea} from "@easykit/design";
 import { CreateEntryButton } from "@/components/pages/worktop/main/panel/entry/create/button";
 import { FC, useState } from "react";
 import classNames from "classnames";

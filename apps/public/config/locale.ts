@@ -1,5 +1,5 @@
-import zhCN from "@atom-ui/core/locales/zh-CN";
-import enUS from "@atom-ui/core/locales/en-US";
+import zhCN from "@easykit/design/locales/zh-CN";
+import enUS from "@easykit/design/locales/en-US";
 
 export default {
     'zh-cn': zhCN,

@@ -11,7 +11,7 @@ import {
     Separator,
     Space,
     useMessage
-} from "@atom-ui/core";
+} from "@easykit/design";
 import {IconBranch} from "@arco-iconbox/react-clover";
 import classNames from "classnames";
 import {i18n} from "@easy-kit/i18n/utils";

@@ -1,4 +1,4 @@
-import {Command, CommandInput, CommandItem, CommandList, Input, Separator, Spin} from "@atom-ui/core";
+import {Command, CommandInput, CommandItem, CommandList, Input, Separator, Spin} from "@easykit/design";
 import {IconShare} from "@arco-iconbox/react-clover";
 import {useSearchParams} from "next/navigation";
 import {useEffect, useState} from "react";

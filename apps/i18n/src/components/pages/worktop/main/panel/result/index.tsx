@@ -6,7 +6,7 @@ import {useEffect, useMemo, useState} from "react";
 import { ENTRY_RESULT_EDITOR_RESET } from "@/events/worktop";
 import bus from "@easy-kit/common/events";
 import { Detail } from "@/components/pages/worktop/main/panel/result/detail";
-import { Separator } from "@atom-ui/core";
+import { Separator } from "@easykit/design";
 import {EntryCheck} from "../../check/entry";
 
 export const ResultPanel = () => {

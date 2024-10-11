@@ -1,5 +1,5 @@
 import {FC, PropsWithChildren, ReactNode} from "react";
-import { cn, ScrollArea, Tooltip } from "@atom-ui/core";
+import { cn, ScrollArea, Tooltip } from "@easykit/design";
 import { useRecoilValue } from "recoil";
 import classNames from 'classnames';
 import {IconAdd, IconGantt, IconHelp, IconProject, IconSearch, IconSetting, IconWiki} from "@arco-iconbox/react-clover";

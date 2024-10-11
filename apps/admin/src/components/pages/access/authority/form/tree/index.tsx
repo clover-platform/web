@@ -1,4 +1,4 @@
-import {Tree, TreeItemProps} from "@atom-ui/core";
+import {Tree, TreeItemProps} from "@easykit/design";
 import {FC, forwardRef, useEffect, useState} from "react";
 import {authorityTree} from "@/rest/access";
 import {toItems} from "@/components/pages/access/authority/form/utils";

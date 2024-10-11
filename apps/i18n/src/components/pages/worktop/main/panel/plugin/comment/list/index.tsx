@@ -6,7 +6,7 @@ import { ENTRY_COMMENT_RELOAD } from "@/events/worktop";
 import bus from '@easy-kit/common/events';
 import { CommentListItem } from "@/components/pages/worktop/main/panel/plugin/comment/list/item";
 import { EntryComment } from "@/types/pages/entry";
-import {Button, Empty, ScrollArea} from "@atom-ui/core";
+import {Button, Empty, ScrollArea} from "@easykit/design";
 import { CommentListItemLoading } from "@/components/pages/worktop/main/panel/plugin/comment/list/item/loading";
 import {handler} from "tailwindcss-animate";
 

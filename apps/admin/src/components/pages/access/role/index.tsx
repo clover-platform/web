@@ -1,6 +1,6 @@
 'use client';
 
-import {Button, DataTable, Space, useMessage, useAlert} from "@atom-ui/core";
+import {Button, DataTable, Space, useMessage, useAlert} from "@easykit/design";
 import {COLUMNS, FILTERS, ROW_ACTIONS} from "@/config/pages/access/role/table";
 import Link from "next/link";
 import {useTableLoader} from "@easy-kit/common/hooks";

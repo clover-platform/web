@@ -1,4 +1,4 @@
-import {Badge} from "@atom-ui/core";
+import {Badge} from "@easykit/design";
 import {FC, forwardRef} from "react";
 
 export interface RoleStatusProps {

@@ -1,5 +1,5 @@
 import classNames from "classnames";
-import { Skeleton } from "@atom-ui/core";
+import { Skeleton } from "@easykit/design";
 
 export const ResultItemLoading = () => {
     return <div className={classNames(

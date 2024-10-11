@@ -1,6 +1,6 @@
 'use client';
 
-import { Button, Divider, Input, Form, FormItem } from "@atom-ui/core";
+import { Button, Divider, Input, Form, FormItem } from "@easykit/design";
 import Quick from "@/components/pages/login/quick";
 import LoginLink from "@/components/common/login/link";
 import {SCHEMA} from "@clover/public/config/pages/login/form";

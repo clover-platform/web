@@ -1,6 +1,6 @@
 import {FC, useCallback, useEffect, useRef, useState} from "react";
 import classNames from "classnames";
-import {Skeleton, useMessage, Button} from "@atom-ui/core";
+import {Skeleton, useMessage, Button} from "@easykit/design";
 import {Action} from "@clover/public/components/common/action";
 import {Pencil1Icon, StarIcon} from "@radix-ui/react-icons";
 import {detail, save} from "@/rest/page";

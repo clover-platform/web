@@ -1,4 +1,4 @@
-import {Form, FormItem, Input, SimpleRadioGroup} from "@atom-ui/core";
+import {Form, FormItem, Input, SimpleRadioGroup} from "@easykit/design";
 import {FC, PropsWithChildren} from "react";
 import { SCHEMA, TYPE_OPTIONS } from "@/config/pages/module/branch/form";
 

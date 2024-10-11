@@ -1,6 +1,6 @@
 'use client';
 
-import {Button, Result, Space} from "@atom-ui/core";
+import {Button, Result, Space} from "@easykit/design";
 import React from "react";
 import Link from "next/link";
 

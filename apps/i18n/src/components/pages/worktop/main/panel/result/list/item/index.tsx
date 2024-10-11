@@ -1,5 +1,5 @@
 import classNames from "classnames";
-import { Avatar, Badge, Tooltip, useAlert, useMessage } from "@atom-ui/core";
+import { Avatar, Badge, Tooltip, useAlert, useMessage } from "@easykit/design";
 import { Action } from "@clover/public/components/common/action";
 import { CheckIcon } from "@radix-ui/react-icons";
 import { IconDelete } from "@arco-iconbox/react-clover";

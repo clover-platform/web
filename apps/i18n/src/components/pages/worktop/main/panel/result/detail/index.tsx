@@ -1,4 +1,4 @@
-import { Badge, Dropdown, DropdownMenuItemProps, Tooltip, useAlert, useMessage } from "@atom-ui/core";
+import { Badge, Dropdown, DropdownMenuItemProps, Tooltip, useAlert, useMessage } from "@easykit/design";
 import { Action } from "@clover/public/components/common/action";
 import { ArrowLeftIcon, ArrowRightIcon, CopyIcon, DotsHorizontalIcon } from "@radix-ui/react-icons";
 import { EditEntryButton } from "@/components/pages/worktop/main/panel/entry/edit/button";

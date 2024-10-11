@@ -1,5 +1,5 @@
 import { FC } from "react";
-import { Badge } from "@atom-ui/core";
+import { Badge } from "@easykit/design";
 
 export type MemberRoleProps = {
     value: number;

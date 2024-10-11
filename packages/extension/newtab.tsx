@@ -1,4 +1,4 @@
-import "@atom-ui/core/style/globals.css";
+import "@easykit/design/style/globals.css";
 import { TabLauncher } from "@clover/launcher";
 import { defaultConfig } from "~config";
 

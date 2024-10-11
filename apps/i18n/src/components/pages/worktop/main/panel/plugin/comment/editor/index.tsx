@@ -2,7 +2,7 @@ import { MentionsEditor } from "@clover/public/components/common/editor/mentions
 import { Action } from "@clover/public/components/common/action";
 import { IconSend } from "@arco-iconbox/react-clover";
 import { useRef, useState } from "react";
-import { Spin, useMessage } from "@atom-ui/core";
+import { Spin, useMessage } from "@easykit/design";
 import { add } from "@/rest/entry.comment";
 import { useRecoilValue } from "recoil";
 import { currentEntryState, currentLanguageState, entriesState } from "@/state/worktop";

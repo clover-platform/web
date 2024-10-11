@@ -1,5 +1,5 @@
-import {Button, Dialog, useMessage} from "@atom-ui/core";
-import {DialogProps} from "@atom-ui/core";
+import {Button, Dialog, useMessage} from "@easykit/design";
+import {DialogProps} from "@easykit/design";
 import {FC, useState} from "react";
 import {CreateBookForm} from "@/components/pages/home/create/form";
 import {create, CreateBookData} from "@/rest/book";

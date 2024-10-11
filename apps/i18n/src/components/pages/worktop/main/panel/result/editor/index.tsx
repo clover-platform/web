@@ -5,7 +5,7 @@ import { CopyIcon } from "@radix-ui/react-icons";
 import {
     Button,
     Tooltip,
-} from "@atom-ui/core";
+} from "@easykit/design";
 import { IconClear } from "@arco-iconbox/react-clover";
 import {useCallback, useState} from "react";
 import TextareaAutosize from 'react-textarea-autosize';

@@ -1,4 +1,4 @@
-import {Select} from "@atom-ui/core";
+import {Select} from "@easykit/design";
 import {forwardRef} from "react";
 
 const EnableSelector = forwardRef((props, ref) => {

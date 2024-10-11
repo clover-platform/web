@@ -3,7 +3,7 @@ import langList from "@clover/public/config/lang.list";
 import {detectLang} from "@easy-kit/common/utils/layout";
 import "@clover/public/plugin/rest";
 import { StateRoot } from "@easy-kit/common/state/root";
-import { ConfigProvider } from "@atom-ui/core";
+import { ConfigProvider } from "@easykit/design";
 import locales from "@clover/public/config/locale";
 import i18next from "i18next";
 import * as z from "zod";

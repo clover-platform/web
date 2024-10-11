@@ -1,4 +1,4 @@
-import { Command, CommandInput, CommandItem, CommandList, SheetClose } from "@atom-ui/core";
+import { Command, CommandInput, CommandItem, CommandList, SheetClose } from "@easykit/design";
 import {CheckIcon} from "@radix-ui/react-icons";
 import { useRecoilState, useRecoilValue } from "recoil";
 import { currentLanguageState, languagesState } from "@/state/worktop";

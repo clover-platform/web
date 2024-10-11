@@ -1,5 +1,5 @@
 import classNames from "classnames";
-import { Card } from "@atom-ui/core";
+import { Card } from "@easykit/design";
 import { FC } from "react";
 import { IconTitle, IconTitleProps } from "@clover/public/components/common/icon-title";
 

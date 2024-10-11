@@ -1,6 +1,6 @@
 import { DragEvent, useCallback, useEffect, useRef, useState } from 'react'
 import { API } from '@/lib/api'
-import {useMessage} from "@atom-ui/core";
+import {useMessage} from "@easykit/design";
 
 export const useUploader = ({ onUpload }: { onUpload: (url: string) => void }) => {
     const [loading, setLoading] = useState(false)

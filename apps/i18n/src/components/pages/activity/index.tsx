@@ -6,7 +6,7 @@ import {list as listRest} from "@/rest/activity";
 import {Activity, ActivityGroup} from "@/types/pages/activity";
 import dayjs from 'dayjs';
 import {ActivityList} from "@/components/pages/activity/list";
-import {Button} from "@atom-ui/core";
+import {Button} from "@easykit/design";
 import {useSearchParams} from "next/navigation";
 import {useLayoutConfig} from "@clover/public/components/layout/hooks/use.layout.config";
 import {MainLayoutProps} from "@/components/layout/main";

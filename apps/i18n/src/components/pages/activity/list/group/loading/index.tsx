@@ -1,4 +1,4 @@
-import {Separator, Skeleton} from "@atom-ui/core";
+import {Separator, Skeleton} from "@easykit/design";
 import {ActivityListGroupItemLoading} from "@/components/pages/activity/list/group/item/loading";
 
 export const ActivityListGroupLoading = () => {

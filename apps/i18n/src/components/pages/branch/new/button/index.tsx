@@ -1,4 +1,4 @@
-import { Button } from "@atom-ui/core";
+import { Button } from "@easykit/design";
 import { FC, useState } from "react";
 import { NewBranchModal } from "@/components/pages/branch/new/modal";
 

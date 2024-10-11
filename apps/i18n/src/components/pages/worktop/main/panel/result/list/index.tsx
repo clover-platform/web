@@ -1,6 +1,6 @@
 import { useRecoilValue } from "recoil";
 import { currentEntryState, currentLanguageState, entriesState } from "@/state/worktop";
-import { Button, Empty, ScrollArea, Spin } from "@atom-ui/core";
+import { Button, Empty, ScrollArea, Spin } from "@easykit/design";
 import { useEffect, useRef, useState } from "react";
 import { list as listRest } from "@/rest/entry.result";
 import { ResultItem } from "@/components/pages/worktop/main/panel/result/list/item";

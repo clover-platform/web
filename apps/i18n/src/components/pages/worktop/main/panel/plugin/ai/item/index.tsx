@@ -1,4 +1,4 @@
-import {Spin, Tooltip} from "@atom-ui/core";
+import {Spin, Tooltip} from "@easykit/design";
 import {Action} from "@clover/public/components/common/action";
 import {CheckIcon} from "@radix-ui/react-icons";
 import {FC} from "react";

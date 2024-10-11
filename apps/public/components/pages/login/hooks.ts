@@ -3,7 +3,7 @@ import {login} from "@clover/public/rest/auth";
 import {setToken} from "@clover/public/utils/token";
 import {useSearchParams} from "next/navigation";
 import {useState} from "react";
-import {useMessage} from "@atom-ui/core";
+import {useMessage} from "@easykit/design";
 
 export const useLoginSubmit = () => {
     const params = useSearchParams();

@@ -2,7 +2,7 @@ import {ai} from "@/rest/entry.result";
 import {useCallback, useEffect, useState} from "react";
 import {useRecoilValue} from "recoil";
 import {currentEntryState, currentLanguageState, entriesState} from "@/state/worktop";
-import {ScrollArea} from "@atom-ui/core";
+import {ScrollArea} from "@easykit/design";
 import {AIItem} from "@/components/pages/worktop/main/panel/plugin/ai/item";
 import {AIItemLoading} from "@/components/pages/worktop/main/panel/plugin/ai/item/loading";
 

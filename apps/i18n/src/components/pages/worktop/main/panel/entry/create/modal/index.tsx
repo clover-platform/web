@@ -1,4 +1,4 @@
-import { Button, Checkbox, Dialog, DialogProps, Space, useMessage } from "@atom-ui/core";
+import { Button, Checkbox, Dialog, DialogProps, Space, useMessage } from "@easykit/design";
 import {FC, useEffect, useState} from "react";
 import { useSearchParams } from "next/navigation";
 import { EntryForm } from "@/components/pages/worktop/main/panel/entry/form";

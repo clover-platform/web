@@ -1,8 +1,8 @@
 import {FC, forwardRef, PropsWithChildren, useEffect, useState} from "react";
-import { Image, PopoverContent, PopoverTrigger, useMessage } from "@atom-ui/core";
+import { Image, PopoverContent, PopoverTrigger, useMessage } from "@easykit/design";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import {CopyIcon, InfoCircledIcon} from "@radix-ui/react-icons";
-import { Popover } from "@atom-ui/core";
+import { Popover } from "@easykit/design";
 
 export interface OtpInfoProps extends PropsWithChildren{
     secret: string;

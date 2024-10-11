@@ -1,5 +1,5 @@
 import {forwardRef} from "react";
-import {cn, Input, InputProps} from "@atom-ui/core";
+import {cn, Input, InputProps} from "@easykit/design";
 import {IconSearch} from "@arco-iconbox/react-clover";
 
 const SearchInput = forwardRef<HTMLInputElement, InputProps>((props, ref) => {

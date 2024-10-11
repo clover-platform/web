@@ -7,7 +7,7 @@ import {
     PopoverContent,
     PopoverTrigger,
     Separator
-} from "@atom-ui/core";
+} from "@easykit/design";
 import {ChevronDownIcon, GearIcon} from "@radix-ui/react-icons";
 import {Action} from "@clover/public/components/common/action";
 import {FC} from "react";

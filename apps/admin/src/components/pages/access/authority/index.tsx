@@ -1,6 +1,6 @@
 'use client';
 
-import { TreeTable } from "@atom-ui/core";
+import { TreeTable } from "@easykit/design";
 import {useEffect, useState} from "react";
 import { COLUMNS } from "@/config/pages/access/authority/table";
 import {authorityTree} from "@/rest/access";

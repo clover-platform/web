@@ -1,7 +1,7 @@
 import {FC, useEffect, useState} from "react";
 import {DotsHorizontalIcon} from "@radix-ui/react-icons";
 import {Action} from "@clover/public/components/common/action";
-import {Dropdown, Tooltip} from "@atom-ui/core";
+import {Dropdown, Tooltip} from "@easykit/design";
 import {useRouter, useSearchParams} from "next/navigation";
 
 export type MorePageActionProps = {

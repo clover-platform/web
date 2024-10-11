@@ -1,4 +1,4 @@
-import { Popover, PopoverTrigger, useOutside } from "@atom-ui/core";
+import { Popover, PopoverTrigger, useOutside } from "@easykit/design";
 import { Icon } from "@/common/icon";
 import { useRef, useState } from "react";
 import classNames from "classnames";

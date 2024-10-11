@@ -1,4 +1,4 @@
-import { Button } from "@atom-ui/core";
+import { Button } from "@easykit/design";
 import { InviteLinkListModal } from "@/components/pages/member/invite/links/modal/list";
 import { useState } from "react";
 

@@ -1,4 +1,4 @@
-import {Progress, TableCell, TableRow, Tooltip} from "@atom-ui/core";
+import {Progress, TableCell, TableRow, Tooltip} from "@easykit/design";
 import {FC, PropsWithChildren} from "react";
 import {LanguageIcon} from "@/components/common/language-icon";
 import {LanguageWithCount} from "@/types/pages/public";
