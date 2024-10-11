@@ -22,7 +22,7 @@ import SlashCommand from "@/components/common/editor/extension/slash-command";
 import {useHandleId} from "@/components/common/editor/control/drag-handle/use.handle.id";
 import {NodeData, useData} from "@/components/common/editor/control/drag-handle/use.data";
 import {Editor as EditorInstance, JSONContent} from '@tiptap/core';
-import { useCallback } from 'react';
+import { useCallback, useRef } from 'react';
 import { Node as ProseMirrorNode } from '@tiptap/pm/model'
 
 export type UseEditorProps = {
@@ -48,14 +48,15 @@ export const useEditor = (props: UseEditorProps): [EditorInstance, NodeData, str
     const {onReadOnlyChange, value, onChange, limit, editable = true} = props;
     const handleId = useHandleId();
     const data = useData();
+    const initValue = useRef<string|undefined>(value);
 
     const onReadOnlyChecked = useCallback((node: ProseMirrorNode, checked: boolean) => {
-        const jsonValue: JSONContent = value ? JSON.parse(value) : value;
+        const jsonValue: JSONContent = initValue.current ? JSON.parse(initValue.current) : value;
         updateAttrById(jsonValue, node.attrs.id, "checked", checked);
         editor.commands.setContent(jsonValue, false);
         onReadOnlyChange?.(JSON.stringify(jsonValue));
         return true;
-    }, [value, onReadOnlyChange]);
+    }, [initValue, onReadOnlyChange]);
 
     const editor = useBaseEditor({
         editable,
@@ -156,7 +157,7 @@ export const useEditor = (props: UseEditorProps): [EditorInstance, NodeData, str
         immediatelyRender: true,
         content: value ? JSON.parse(value) : value,
         onUpdate: ({ editor }) => {
-            onChange?.(JSON.stringify(editor.getJSON()));
+            editor.isInitialized && onChange?.(JSON.stringify(editor.getJSON()));
         },
     }, [onChange, onReadOnlyChecked]);
 

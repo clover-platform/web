@@ -22,6 +22,9 @@
                         content: none;
                     }
                 }
+                p {
+                    @apply leading-7;
+                }
             }
         }
     }

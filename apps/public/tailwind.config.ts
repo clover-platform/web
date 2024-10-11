@@ -1,10 +1,10 @@
 import type { Config } from 'tailwindcss';
 import plugin from "@easy-kit/common/plugin/tailwind";
 import ta from 'tailwindcss-animate';
-import coreConfig from '@easykit/design/lib/tailwind';
+import {tailwindConfig} from '@easykit/design/lib';
 
 const config: Config = {
-    ...coreConfig,
+    ...tailwindConfig,
     content: [
         "./**/*.{js,ts,jsx,tsx,mdx}",
     ],
