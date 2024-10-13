@@ -96,7 +96,7 @@ export const ImageBlock = Image.extend({
     },
 
     addNodeView() {
-        return ReactNodeViewRenderer(ImageBlockView)
+        return ReactNodeViewRenderer(ImageBlockView);
     },
 })
 

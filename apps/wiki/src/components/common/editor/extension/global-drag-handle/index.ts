@@ -283,6 +283,7 @@ export function DragHandlePlugin(options: GlobalDragHandleOptions & {pluginKey: 
                     if (draggedNodePos == null) return;
                     const rootPos = rootNodePos(draggedNodePos.pos, view);
                     const root = view.state.doc.resolve(rootPos);
+                    console.log(root.node().type.name);
                     options.onNodeChange?.(root);
 
                     const rootNode = view.domAtPos(root.pos).node as Element;

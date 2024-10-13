@@ -149,7 +149,7 @@ export const useEditor = (props: UseEditorProps): [EditorInstance, NodeData, str
                 types: [
                     'paragraph', 'heading', "blockquoteFigure", "codeBlock",
                     "bulletList", "listItem", "orderedList", "taskList", "taskItem",
-                    "imageBlock", "table", "horizontalRule"
+                    "imageBlock", "table", "horizontalRule", "imageUpload",
                 ],
                 injectNodeName: false,
             }),

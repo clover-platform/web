@@ -1,8 +1,18 @@
+import {upload} from "@clover/public/utils/file";
+
 export class API {
-    public static uploadImage = async (_file: File) => {
-        console.log('Image upload is disabled in the demo... Please implement the API.uploadImage method in your project.')
-        await new Promise(r => setTimeout(r, 500))
-        return '/android-chrome-192x192.png';
+    public static uploadImage = async (file: File) => {
+        const { success, data, error } = await upload({
+            file,
+            name: file.name,
+            contentType: file.type,
+            type: 0,
+        });
+        if(success) {
+            return data;
+        }else{
+            throw new Error(error);
+        }
     }
 }
 

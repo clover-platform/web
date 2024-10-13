@@ -11,7 +11,6 @@ export const useUploader = ({ onUpload }: { onUpload: (url: string) => void }) =
             setLoading(true)
             try {
                 const url = await API.uploadImage(file)
-
                 onUpload(url)
             } catch (errPayload: any) {
                 const error = errPayload?.response?.data?.error || 'Something went wrong'
