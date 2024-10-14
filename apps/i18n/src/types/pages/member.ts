@@ -1,4 +1,4 @@
-import { User } from "@clover/public/rest/account";
+import { User } from "@clover/public/types/account";
 
 export type Member = {
     id: number;

@@ -10,6 +10,8 @@ import {uuid} from "@easy-kit/common/utils";
 import bus from "@easy-kit/common/events";
 import {UPDATE_TITLE} from "@/events/book";
 import {useRouter, useSearchParams} from "next/navigation";
+import {CollectAction} from "@/components/pages/book/page/actions/collect";
+import {PageDetail} from "@/types/pages/page";
 
 export type PageEditFormProps = {
     pageId: string;
@@ -28,12 +30,14 @@ export const EditForm: FC<PageEditFormProps> = (props) => {
     const [editorKey, setEditorKey] = useState<string>(uuid());
     const router = useRouter();
     const [size, setSize] = useState<number>(0);
+    const [data, setData] = useState<PageDetail>();
 
     const load = useCallback(async () => {
         setLoading(true);
         const {success, message, data} = await detail(id!, pageId);
         setLoading(false)
         if(success) {
+            setData(data);
             setValue(data?.content!);
             setTitle(data?.title!);
             setEditorKey(uuid());
@@ -84,16 +88,20 @@ export const EditForm: FC<PageEditFormProps> = (props) => {
                     <span>{"{#已连接#}"}</span>
                 </div>
                 <Separator orientation={"vertical"} className={"h-6"}/>
-                <span>{i18n("{#%size 字#}", {size: loading ? "--" : size})}</span>
+                {
+                    loading ? <Skeleton className={"w-20 h-5"}/> : <span>{i18n("{#%size 字#}", {size: loading ? "--" : size})}</span>
+                }
             </div>
             <div className={"flex space-x-2"}>
-                <Action>
-                    <StarIcon/>
-                </Action>
+                <CollectAction
+                    collected={data?.collected}
+                    id={Number(pageId)}
+                />
                 <Button
                     disabled={loading || pending}
                     onClick={submit}
                     loading={pending}
+                    className={"h-8"}
                 >
                     {"{#更新#}"}
                 </Button>

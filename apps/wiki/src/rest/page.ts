@@ -36,3 +36,11 @@ export type SavePageData = {
 }
 export const save = (data: SavePageData): AbortPromise<RestResult<any>> =>
     put(`@wiki/book/${data.bookId}/page/${data.id}`, data);
+
+export type CollectData = {
+    bookId: number;
+    id: number;
+    collect: boolean;
+}
+export const collect = (data: CollectData): AbortPromise<RestResult<any>> =>
+    post(`@wiki/book/${data.bookId}/page/${data.id}/collect`, data);

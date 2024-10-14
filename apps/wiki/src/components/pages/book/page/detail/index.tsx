@@ -1,4 +1,4 @@
-import {FC, useCallback, useEffect, useRef, useState} from "react";
+import {FC, useCallback, useEffect, useMemo, useRef, useState} from "react";
 import classNames from "classnames";
 import {Skeleton, useMessage, Button} from "@easykit/design";
 import {Action} from "@clover/public/components/common/action";
@@ -10,6 +10,9 @@ import Link from "next/link";
 import {useSearchParams} from "next/navigation";
 import {AbortPromise} from "@easy-kit/common/utils/rest";
 import {RestResult} from "@easy-kit/common/types/rest";
+import {i18n} from "@easy-kit/i18n/utils";
+import TimeAgo from "javascript-time-ago";
+import {CollectAction} from "@/components/pages/book/page/actions/collect";
 
 export type DetailProps = {
     pageId: string;
@@ -23,6 +26,7 @@ export const Detail: FC<DetailProps> = (props) => {
     const [loading, setLoading] = useState<boolean>(false);
     const msg = useMessage();
     const saveHandler = useRef<AbortPromise<RestResult<any>>>();
+    const timeAgo = new TimeAgo('{#LANG#}')
 
     const load = useCallback(async () => {
         setLoading(true);
@@ -55,6 +59,12 @@ export const Detail: FC<DetailProps> = (props) => {
         }
     }, [id, pageId, data, saveHandler])
 
+    const lastAuthor = useMemo(() => {
+        const { userList, updateUser } = data || {};
+        const user = userList?.find(({userId}) => userId === updateUser);
+        return user?.account;
+    }, [data])
+
     return <div className={"space-y-4"}>
         <div className={"flex justify-center items-center sticky top-[48px] -m-4 px-4 py-2 border-b bg-white z-50"}>
             <div className={"flex-1 flex justify-start items-center space-x-2"}>
@@ -64,19 +74,25 @@ export const Detail: FC<DetailProps> = (props) => {
                             "w-6 h-6 rounded-full bg-[url(~@clover/public/assets/image/default/avatar.png)] bg-contain bg-center",
                         )}
                     />
-                    <div className={"text-xs text-secondary-foreground/70"}>
-                        <div>负责人：某某某</div>
-                        <div>由 赖嘉铖 最后更新于 大约2小时以前</div>
+                    <div className={"text-secondary-foreground/70"}>
+                        {
+                            loading ? <Skeleton className={"w-36 h-5"}/> : <div>
+                                {
+                                    i18n("{#由 %author 最后更新于 %time#}", {
+                                        author: lastAuthor?.username,
+                                        time: data?.updateTime ? timeAgo.format(new Date(data?.updateTime!)) : "--"
+                                    })
+                                }
+                            </div>
+                        }
                     </div>
                 </div>
             </div>
             <div className={"flex space-x-2"}>
-                <Action>
-                    <StarIcon/>
-                </Action>
+                { loading ? <Skeleton className={"w-8 h-8"}/> : <CollectAction id={Number(pageId)} collected={data?.collected}/>}
                 <Link href={`/{#LANG#}/wiki/book/page/edit/?id=${id}&page=${pageId}`}>
                     <Action>
-                        <Pencil1Icon />
+                        <Pencil1Icon/>
                     </Action>
                 </Link>
             </div>

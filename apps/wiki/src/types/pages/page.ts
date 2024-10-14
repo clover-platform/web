@@ -1,3 +1,5 @@
+import {User} from "@clover/public/types/account";
+
 export type PageDetail = {
     id: number;
     title: string;
@@ -9,4 +11,10 @@ export type PageDetail = {
     versionNumber: number;
     updateTime: Date;
     updateUser: number;
+    collected: boolean;
+    userList: {
+        owner: boolean;
+        userId: number;
+        account: User;
+    }[]
 }

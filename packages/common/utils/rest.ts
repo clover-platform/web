@@ -70,13 +70,16 @@ rest.interceptors.response.use(
     },
     (error) => {
         const { onResponse } = _config;
-        const result = {
+        let result = {
             code: 500,
             success: false,
             message: error.code,
         };
         if (error.response && error.response.status) {
             result.code = error.response.status;
+            if(error.response.data) {
+                result = error.response.data;
+            }
         }
         if (typeof onResponse === 'function') {
             onResponse(result, error.response);
