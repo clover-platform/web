@@ -19,20 +19,24 @@ export const useContentActions = (editor: Editor, resolvedPos: ResolvedPos, node
     }, [editor, currentNodePos, currentNode?.type.name])
 
     const duplicateNode = useCallback(() => {
-        let currentPost = currentNodePos;
+        let currentPos = currentNodePos;
         if(["imageBlock", "imageUpload", "horizontalRule"].includes(currentNode?.type.name)) {
-            currentPost = nodePos;
+            currentPos = nodePos;
         }
 
         editor
             .chain()
             .setMeta('hideDragHandle', true)
-            .insertContentAt(currentPost + (currentNode?.nodeSize || 0), currentNode.toJSON())
+            .insertContentAt(currentPos + (currentNode?.nodeSize || 0), currentNode.toJSON())
             .run()
     }, [editor, currentNodePos, currentNode, nodePos])
 
     const deleteNode = useCallback(() => {
-        editor.chain().setMeta('hideDragHandle', true).setNodeSelection(currentNodePos).deleteSelection().run()
+        let currentPos = currentNodePos;
+        if(["imageBlock", "imageUpload", "horizontalRule"].includes(currentNode?.type.name)) {
+            currentPos = nodePos;
+        }
+        editor.chain().setMeta('hideDragHandle', true).setNodeSelection(currentPos).deleteSelection().run()
     }, [editor, currentNodePos])
 
     const handleAdd = useCallback(() => {
