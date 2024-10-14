@@ -17,7 +17,7 @@ export type DragHandleControlProps = {
 export const DragHandleControl:FC<DragHandleControlProps> = (props) => {
     const { editor, data } = props;
     const handleRef = useRef<HTMLDivElement>(null);
-    const actions = useContentActions(editor!, data.currentNode!)
+    const actions = useContentActions(editor!, data.currentNode!, data.currentPos!)
     const [menuOpen, setMenuOpen] = useState(false);
 
     useEffect(() => {
@@ -49,11 +49,6 @@ export const DragHandleControl:FC<DragHandleControlProps> = (props) => {
                             id: "clear-formatting",
                         },
                         {
-                            label: "{#复制到剪切板#}",
-                            type: "item",
-                            id: "copy-to-clipboard",
-                        },
-                        {
                             label: "{#复制#}",
                             type: "item",
                             id: "duplicate",
@@ -73,8 +68,6 @@ export const DragHandleControl:FC<DragHandleControlProps> = (props) => {
                     onItemClick={(item) => {
                         if(item.id === 'clear-formatting') {
                             actions.resetTextFormatting();
-                        }else if(item.id === 'copy-to-clipboard') {
-                            actions.copyNodeToClipboard();
                         }else if(item.id === 'duplicate') {
                             actions.duplicateNode();
                         }else if(item.id === 'delete') {

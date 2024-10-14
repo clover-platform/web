@@ -22,7 +22,7 @@ import SlashCommand from "@/components/common/editor/extension/slash-command";
 import {useHandleId} from "@/components/common/editor/control/drag-handle/use.handle.id";
 import {NodeData, useData} from "@/components/common/editor/control/drag-handle/use.data";
 import {Editor as EditorInstance, JSONContent} from '@tiptap/core';
-import { useCallback, useRef } from 'react';
+import { useCallback, useState } from 'react';
 import { Node as ProseMirrorNode } from '@tiptap/pm/model'
 
 export type UseEditorProps = {
@@ -44,19 +44,28 @@ const updateAttrById = (json: JSONContent, id: string, attr: string, value: any)
     });
 }
 
+const JSON_EXCLUDE = ["imageUpload"];
+
+export const getJSONString = (editor: EditorInstance): string => {
+    const json = editor.getJSON();
+    json.content = json.content?.filter((node: any) => !JSON_EXCLUDE.includes(node.type));
+    return JSON.stringify(json);
+}
+
+const UNIQUE_ATTRIBUTE_NAME = "id";
+
 export const useEditor = (props: UseEditorProps): [EditorInstance, NodeData, string] => {
     const {onReadOnlyChange, value, onChange, limit, editable = true} = props;
     const handleId = useHandleId();
     const data = useData();
-    const initValue = useRef<string|undefined>(value);
 
     const onReadOnlyChecked = useCallback((node: ProseMirrorNode, checked: boolean) => {
-        const jsonValue: JSONContent = initValue.current ? JSON.parse(initValue.current) : value;
+        const jsonValue = editor.getJSON();
         updateAttrById(jsonValue, node.attrs.id, "checked", checked);
         editor.commands.setContent(jsonValue, false);
         onReadOnlyChange?.(JSON.stringify(jsonValue));
         return true;
-    }, [initValue, onReadOnlyChange]);
+    }, [onReadOnlyChange]);
 
     const editor = useBaseEditor({
         editable,
@@ -91,6 +100,7 @@ export const useEditor = (props: UseEditorProps): [EditorInstance, NodeData, str
                 onNodeChange: data.handleNodeChange,
                 onShow: () => data.setHidden(false),
                 onHide: () => data.setHidden(true),
+                uniqueId: UNIQUE_ATTRIBUTE_NAME
             }),
             CodeBlockLowlight.configure({
                 lowlight: createLowlight(common),
@@ -146,6 +156,7 @@ export const useEditor = (props: UseEditorProps): [EditorInstance, NodeData, str
                 clientId: "test",
             }),
             UniqueId.configure({
+                attributeName: UNIQUE_ATTRIBUTE_NAME,
                 types: [
                     'paragraph', 'heading', "blockquoteFigure", "codeBlock",
                     "bulletList", "listItem", "orderedList", "taskList", "taskItem",
@@ -157,7 +168,9 @@ export const useEditor = (props: UseEditorProps): [EditorInstance, NodeData, str
         immediatelyRender: true,
         content: value ? JSON.parse(value) : value,
         onUpdate: ({ editor }) => {
-            editor.isInitialized && onChange?.(JSON.stringify(editor.getJSON()));
+            if(editor.isInitialized) {
+                onChange?.(getJSONString(editor));
+            }
         },
     }, [onChange, onReadOnlyChecked]);
 

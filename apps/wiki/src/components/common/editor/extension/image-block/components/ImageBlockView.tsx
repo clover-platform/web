@@ -8,6 +8,7 @@ interface ImageBlockViewProps {
     getPos: () => number
     node: Node
     updateAttributes: (attrs: Record<string, string>) => void
+    HTMLAttributes: Record<string, any>
 }
 
 export const ImageBlockView = (props: ImageBlockViewProps) => {
@@ -31,10 +32,8 @@ export const ImageBlockView = (props: ImageBlockViewProps) => {
         editor.commands.setNodeSelection(getPos())
     }, [getPos, editor.commands])
 
-    console.log(props);
-
     return (
-        <NodeViewWrapper>
+        <NodeViewWrapper {...props.HTMLAttributes}>
             <div className={wrapperClassName} style={{ width: node.attrs.width }}>
                 <div contentEditable={false} ref={imageWrapperRef}>
                     <img className="block" src={src} alt="" onClick={onClick} />

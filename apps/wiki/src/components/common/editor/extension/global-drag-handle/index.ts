@@ -22,9 +22,10 @@ export interface GlobalDragHandleOptions {
      */
     dragHandleSelector?: string;
 
-    onNodeChange?: (node: ResolvedPos) => void;
+    onNodeChange?: (node: ResolvedPos, nodePos: number) => void;
     onShow?: () => void;
     onHide?: () => void;
+    uniqueId?: string;
 }
 function absoluteRect(node: Element) {
     const data = node.getBoundingClientRect();
@@ -87,6 +88,28 @@ function rootNodePos(pos: number, view: EditorView) {
     const $pos = view.state.doc.resolve(pos);
     if($pos.depth < 1) return pos;
     return $pos.before(1) + 1;
+}
+
+const getRootNode = (pos: number, view: EditorView, node: Element, uniqueId: string) => {
+    const root = view.state.doc.resolve(pos);
+    if (root.node().type.name === 'doc') {
+        let id = (node as HTMLElement).dataset[uniqueId];
+        if(node.classList.contains("react-renderer")) {
+            const item = node.firstElementChild as HTMLElement;
+            id = item?.dataset[uniqueId];
+        }
+        if(id) {
+            let node: Node | null = null;
+            root.node().content.descendants((n) => {
+                if(n.attrs[uniqueId] === id) {
+                    node = n;
+                }
+            })
+            const resolvedPos = node ? (node as Node).resolve(0) : root;
+            return resolvedPos;
+        }
+    }
+    return root;
 }
 
 export function DragHandlePlugin(options: GlobalDragHandleOptions & {pluginKey: string}) {
@@ -282,9 +305,8 @@ export function DragHandlePlugin(options: GlobalDragHandleOptions & {pluginKey: 
                     });
                     if (draggedNodePos == null) return;
                     const rootPos = rootNodePos(draggedNodePos.pos, view);
-                    const root = view.state.doc.resolve(rootPos);
-                    console.log(root.node().type.name);
-                    options.onNodeChange?.(root);
+                    const root = getRootNode(rootPos, view, node, options.uniqueId!);
+                    options.onNodeChange?.(root, rootPos);
 
                     const rootNode = view.domAtPos(root.pos).node as Element;
                     let rect = absoluteRect(rootNode);
@@ -371,6 +393,7 @@ const GlobalDragHandle = Extension.create({
         return {
             dragHandleWidth: 20,
             scrollTreshold: 100,
+            uniqueId: "id",
         };
     },
 
@@ -384,6 +407,7 @@ const GlobalDragHandle = Extension.create({
                 onNodeChange: this.options.onNodeChange,
                 onShow: this.options.onShow,
                 onHide: this.options.onHide,
+                uniqueId: this.options.uniqueId,
             }),
         ];
     },

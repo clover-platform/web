@@ -3,7 +3,14 @@ import { useCallback } from 'react'
 
 import { ImageUploader } from './ImageUploader'
 
-export const ImageUpload = ({ getPos, editor }: { getPos: () => number; editor: Editor }) => {
+interface ImageUploadProps {
+    editor: Editor
+    getPos: () => number
+    HTMLAttributes: Record<string, any>
+}
+
+export const ImageUpload = (props: ImageUploadProps) => {
+    const { getPos, editor } = props;
     const onUpload = useCallback(
         (url: string) => {
             if (url) {
@@ -14,7 +21,7 @@ export const ImageUpload = ({ getPos, editor }: { getPos: () => number; editor: 
     )
 
     return (
-        <NodeViewWrapper>
+        <NodeViewWrapper {...props.HTMLAttributes}>
             <div className="p-0 m-0" data-drag-handle>
                 <ImageUploader onUpload={onUpload} />
             </div>
