@@ -3,7 +3,6 @@ import { FC, PropsWithChildren, ReactNode, useMemo } from "react";
 import { useSearchParams } from "next/navigation";
 import { AdminLayoutLoading } from "@clover/public/components/layout/main/loading";
 import Sidebar, { SidebarProps } from "@clover/public/components/layout/main/sidebar";
-import {useGoLogin} from "@clover/public/components/layout/hooks/main";
 import {useRecoilValue} from "recoil";
 import {teamsState} from "@clover/public/state/public";
 import {Guide} from "@clover/public/components/layout/main/guide";
@@ -42,7 +41,6 @@ export const MainLayout: FC<MainLayoutProps> = (props) => {
     const teams = useRecoilValue(teamsState);
     const open = useSidebarState();
     const searchParams = useSearchParams();
-    useGoLogin();
 
     const showGuide = useMemo(() => {
         return !teams.length;

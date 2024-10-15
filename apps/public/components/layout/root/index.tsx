@@ -18,6 +18,7 @@ import {accountInfoState, isLoginState} from "@clover/public/state/account";
 import {Account} from "@clover/public/types/account";
 import {projectsState, teamsState} from "@clover/public/state/public";
 import {accessState} from "@easy-kit/common/state/access";
+import {sidebarOpenState} from "@clover/public/components/layout/main/state";
 TimeAgo.addLocale(zhCNAgo);
 TimeAgo.addLocale(enAgo);
 
@@ -26,6 +27,7 @@ export type RootLayoutProps = PropsWithChildren<{
     accountInfo?: Account;
     teams: any[];
     projects: any[];
+    sideOpen: boolean;
 }>;
 
 export const RootLayout: FC<RootLayoutProps> = (props) => {
@@ -35,6 +37,7 @@ export const RootLayout: FC<RootLayoutProps> = (props) => {
         accountInfo,
         teams,
         projects,
+        sideOpen,
     } = props;
 
     return <html className={`{#LANG#}`}>
@@ -58,6 +61,7 @@ export const RootLayout: FC<RootLayoutProps> = (props) => {
                 currentTeamId: 0,
             });
             snapshot.set(accessState, accountInfo?.authorities || []);
+            snapshot.set(sidebarOpenState, sideOpen);
         }}>
             <ConfigProvider
                 locale={locales['{#LANG#}']}

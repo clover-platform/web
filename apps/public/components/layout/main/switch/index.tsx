@@ -1,20 +1,19 @@
 import {FC, HTMLAttributes, useEffect} from "react";
 import {useRecoilState} from "recoil";
 import {sidebarOpenState} from "@clover/public/components/layout/main/state";
-import localforage from "localforage";
 import {SIDEBAR_OPEN_KEY} from "@clover/public/components/layout/main/const";
 import { IconSidebar } from "@arco-iconbox/react-clover";
 import {Action, ActionProps} from "../../../common/action";
 import {Tooltip} from "@easykit/design";
+import { setCookie } from "cookies-next";
 
 export type SwitchProps = HTMLAttributes<HTMLButtonElement> & ActionProps;
 
 const Switch: FC<SwitchProps> = (props) => {
-
     const [open, setOpen] = useRecoilState(sidebarOpenState);
 
     useEffect(() => {
-        localforage.setItem<boolean>(SIDEBAR_OPEN_KEY, open).then();
+        setCookie(SIDEBAR_OPEN_KEY, open);
     }, [open]);
 
     const onSwitchClick = () => {
