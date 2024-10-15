@@ -24,7 +24,7 @@ export type ChangeCatalogParentData = {
 export const changeCatalogParent = (params: ChangeCatalogParentData): Promise<RestResult<any>> =>
     put(`@wiki/book/${params.bookId}/page/parent`, params);
 
-export const detail = (bookId:number|string, id: number|string): Promise<RestResult<PageDetail>> =>
+export const detail = (bookId:number|string, id: number|string): AbortPromise<RestResult<PageDetail>> =>
     get(`@wiki/book/${bookId}/page/${id}`);
 
 export type SavePageData = {

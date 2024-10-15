@@ -4,7 +4,7 @@ import {Avatar, useAlert, useMessage} from "@easykit/design";
 import { TimeAgo } from "@easy-kit/common/components/time-ago";
 import {Action} from "@clover/public/components/common/action";
 import classNames from "classnames";
-import {useProfile} from "@clover/public/hooks/account";
+import {useProfile} from "@clover/public/hooks/use.profile";
 import {deleteComment} from "@/rest/entry.comment";
 import bus from "@easy-kit/common/events";
 import {ENTRY_COMMENT_RELOAD} from "@/events/worktop";

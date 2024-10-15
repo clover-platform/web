@@ -60,9 +60,9 @@ export const useEditor = (props: UseEditorProps): [EditorInstance, NodeData, str
     const data = useData();
 
     const onReadOnlyChecked = useCallback((node: ProseMirrorNode, checked: boolean) => {
-        const jsonValue = editor.getJSON();
-        updateAttrById(jsonValue, node.attrs.id, "checked", checked);
-        editor.commands.setContent(jsonValue, false);
+        const jsonValue = editor?.getJSON();
+        updateAttrById(jsonValue!, node.attrs.id, "checked", checked);
+        editor?.commands.setContent(jsonValue!, false);
         onReadOnlyChange?.(JSON.stringify(jsonValue));
         return true;
     }, [onReadOnlyChange]);
@@ -165,7 +165,7 @@ export const useEditor = (props: UseEditorProps): [EditorInstance, NodeData, str
                 injectNodeName: false,
             }),
         ],
-        immediatelyRender: true,
+        immediatelyRender: false,
         content: value ? JSON.parse(value) : value,
         onUpdate: ({ editor }) => {
             if(editor.isInitialized) {
@@ -174,5 +174,5 @@ export const useEditor = (props: UseEditorProps): [EditorInstance, NodeData, str
         },
     }, [onChange, onReadOnlyChecked]);
 
-    return [editor, data, handleId];
+    return [editor!, data, handleId];
 }

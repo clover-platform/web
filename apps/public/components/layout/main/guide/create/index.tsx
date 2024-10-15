@@ -4,7 +4,6 @@ import {Button, Form, FormItem, Input, Space, useMessage} from "@easykit/design"
 import * as z from "zod";
 import { useState } from "react";
 import {init, TeamInitData} from "@clover/public/rest/team";
-import {useDataLoader} from "@clover/public/components/layout/hooks/main";
 
 const SCHEMA = z.object({
     name: z.string()
@@ -17,13 +16,13 @@ const SCHEMA = z.object({
 
 export const GuideCreate = () => {
     const [loading, setLoading] = useState(false);
-    const loadData = useDataLoader();
     const msg = useMessage();
     const onSubmit = async (data: TeamInitData) => {
         setLoading(true);
         const { success, message } = await init(data);
         if(success) {
-            await loadData();
+            // TODO 更新数据
+            // await loadData();
         }else{
             msg.error(message);
         }

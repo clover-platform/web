@@ -1,10 +1,9 @@
 import "./style.css";
 import { FC, PropsWithChildren, ReactNode, useMemo } from "react";
 import { useSearchParams } from "next/navigation";
-import Logo from "@clover/public/components/common/logo";
 import { AdminLayoutLoading } from "@clover/public/components/layout/main/loading";
 import Sidebar, { SidebarProps } from "@clover/public/components/layout/main/sidebar";
-import {useGoLogin, useLayoutState} from "@clover/public/components/layout/hooks/main";
+import {useGoLogin} from "@clover/public/components/layout/hooks/main";
 import {useRecoilValue} from "recoil";
 import {teamsState} from "@clover/public/state/public";
 import {Guide} from "@clover/public/components/layout/main/guide";
@@ -40,7 +39,6 @@ export interface MainLayoutProps extends PropsWithChildren {
 
 export const MainLayout: FC<MainLayoutProps> = (props) => {
     const { path, className } = props;
-    const {loading, isLogin} = useLayoutState();
     const teams = useRecoilValue(teamsState);
     const open = useSidebarState();
     const searchParams = useSearchParams();
@@ -49,10 +47,6 @@ export const MainLayout: FC<MainLayoutProps> = (props) => {
     const showGuide = useMemo(() => {
         return !teams.length;
     }, [teams])
-
-    const showLoading = useMemo(() => {
-        return loading || !isLogin;
-    }, [loading, isLogin]);
 
     const items = useMemo(() => {
         const nodes: ReactNode[] = [];
@@ -85,9 +79,7 @@ export const MainLayout: FC<MainLayoutProps> = (props) => {
         return nodes;
     }, [path, searchParams])
 
-    return showLoading ? <div className={"min-h-[100vh] flex justify-center items-center"}>
-        <Logo type={"light"} className={"bg-transparent animate-spin"}/>
-    </div> : showGuide ? <Guide /> : <div className={"layout-admin flex justify-start w-full items-stretch min-h-[100vh]"}>
+    return showGuide ? <Guide /> : <div className={"layout-admin flex justify-start w-full items-stretch min-h-[100vh]"}>
         <Sidebar {...props.sidebarProps!}/>
         <div className={classNames(
             "flex-1 w-0",

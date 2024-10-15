@@ -1,18 +1,21 @@
+import { setCookie, deleteCookie, getCookie } from 'cookies-next';
+
 export interface Token {
     token: string,
     expiresIn: number,
 }
 
 export const setToken = (data: Token) => {
-    localStorage.setItem("token", JSON.stringify(data));
+    setCookie("token", JSON.stringify(data))
 }
 
 export const clearToken = () => {
-    localStorage.removeItem("token");
+    deleteCookie("token");
 }
 
-export const getToken = (): Token | null => {
-    const token = localStorage.getItem("token");
+export const getToken = (cookies): Token | null => {
+
+    const token = getCookie('token', {cookies});
     if(token) {
         return JSON.parse(token);
     }

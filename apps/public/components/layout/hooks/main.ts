@@ -21,45 +21,21 @@ export const useCurrent = () => {
     }
 }
 
-export const useDataLoader = () => {
-    const setAccount = useSetRecoilState(accountInfoState);
-    const setIsLogin = useSetRecoilState(isLoginState);
-    const setTeams = useSetRecoilState(teamsState);
-    const setProjects = useSetRecoilState(projectsState);
-    const setAccess = useSetRecoilState(accessState);
-
-    return useCallback(async () => {
-        const { success, data } = await profile();
-        success && setAccount(data!);
-        success && setAccess(data?.authorities || []);
-        setIsLogin(success);
-        const teamsResult = await myTeams();
-        setTeams(teamsResult.success ? teamsResult.data : []);
-        const projectsResult = await myProjects();
-        setProjects(projectsResult.success ? projectsResult.data : []);
-    }, []);
-}
-
 export const useLayoutState = () => {
-    const loadData = useDataLoader();
     const isLogin = useRecoilValue(isLoginState);
     const account = useRecoilValue(accountInfoState);
-    const [loading, setLoading] = useRecoilState(isLoadingState);
     const setSidebarOpen = useSetRecoilState(sidebarOpenState);
 
     const initState = async () => {
-        setLoading(true);
-        await loadData()
         const sideInit = await localforage.getItem<boolean>(SIDEBAR_OPEN_KEY);
         setSidebarOpen(sideInit === null ? true: sideInit);
-        setLoading(false);
     }
 
     useEffect(() => {
         initState().then();
     }, [])
 
-    return {loading, isLogin, account};
+    return {isLogin, account};
 }
 
 export const useGoLogin = () => {

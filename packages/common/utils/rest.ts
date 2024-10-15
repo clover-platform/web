@@ -3,6 +3,7 @@ const CancelToken = Axios.CancelToken;
 const isDev = process.env.NODE_ENV !== 'production';
 const ERROR_MESSAGE = "{#网络错误#}";
 const ERROR_CODE = -999;
+const isServer = typeof window === 'undefined';
 
 export type RestConfig = {
     useTransId?: boolean;
@@ -19,7 +20,12 @@ export type AbortPromise<T> = Promise<T> & {
     abort: () => void;
 }
 
-let _aliasMap: any = {};
+export type AliasConfig = {
+    url: string;
+    headers?: () => any;
+}
+
+let _aliasMap: Record<string, AliasConfig> = {};
 let _config: RestConfig = {};
 let _currentQueueId = `${Date.now()}`;
 const _requestQueue: Record<string, AbortPromise<any>[]> = {};
@@ -34,6 +40,7 @@ const rest = Axios.create({
         },
     },
     withCredentials: true,
+    baseURL: isServer ? "http://localhost:3000" : ""
 });
 
 rest.interceptors.response.use(
@@ -91,6 +98,9 @@ rest.interceptors.response.use(
 // 请求拦截器
 rest.interceptors.request.use(
     (config) => {
+        if(isServer) {
+            return config;
+        }
         if(!isDev) {
             return config;
         }
@@ -238,6 +248,8 @@ const abortByQueueId = (id: string) => {
     })
 }
 
+const instance = rest;
+
 export {
     get,
     config,
@@ -248,5 +260,6 @@ export {
     request,
     download,
     setCurrentQueueId,
-    abortByQueueId
+    abortByQueueId,
+    instance
 };

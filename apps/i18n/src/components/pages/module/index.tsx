@@ -11,7 +11,7 @@ import {TabsTitle} from "@clover/public/components/common/tabs-title";
 import {TABS} from "@/config/pages/module/tabs";
 import { useRouter, useSearchParams } from "next/navigation";
 import {Module} from "@/types/pages/module";
-import {useProfile} from "@clover/public/hooks/account";
+import {useProfile} from "@clover/public/hooks/use.profile";
 import {useLayoutConfig} from "@clover/public/components/layout/hooks/use.layout.config";
 import {MainLayoutProps} from "@/components/layout/main";
 

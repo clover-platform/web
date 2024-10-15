@@ -1,5 +1,13 @@
 import {User} from "@clover/public/types/account";
 
+export type PageProps = {
+    params: {
+        LANG: string;
+        bookId: number;
+        pageId: number;
+    }
+}
+
 export type PageDetail = {
     id: number;
     title: string;

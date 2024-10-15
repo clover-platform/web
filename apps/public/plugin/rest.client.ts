@@ -1,8 +1,8 @@
 // Rest 配置
 import { config, alias } from '@easy-kit/common/utils/rest';
-import { get } from "@clover/public/utils/headers";
 import bus from '@easy-kit/common/events';
 import { UNAUTHORIZED } from "@clover/public/events/auth";
+import { get } from "@clover/public/utils/headers.client";
 
 config({
     useTransId: true,

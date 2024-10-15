@@ -20,7 +20,7 @@ export const apiRewrites = (apiConfig) => {
 export default {
     reactStrictMode: false,
     trailingSlash: true,
-    output: isDev ? 'standalone' : "export",
+    // output: isDev ? 'standalone' : "export",
     transpilePackages: ['@easy-kit/common'],
     devIndicators: {
         buildActivity: false
