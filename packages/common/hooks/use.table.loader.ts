@@ -107,7 +107,7 @@ export const useTableLoader = <D> (options: TableLoaderOptions) => {
         } finally {
             setLoading(false);
         }
-    }, [action, withURL, scroll, urlParam]);
+    }, [action, withURL, urlParam]);
 
     const reset = useCallback(() => {
         setLoading(true);

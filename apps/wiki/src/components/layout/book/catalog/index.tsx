@@ -1,6 +1,6 @@
 import {useCallback, useEffect, useMemo, useRef, useState, forwardRef, useImperativeHandle} from "react";
 import {catalog, changeCatalogParent} from "@/rest/page";
-import {useSearchParams} from "next/navigation";
+import {useParams} from "next/navigation";
 import {Catalog} from "@/types/pages/book";
 import {TreeData, Tree} from "@/components/common/tree";
 import {cloneDeep} from "lodash";
@@ -31,25 +31,24 @@ export type CatalogTreeRef = {
 
 export const CatalogTree = forwardRef<CatalogTreeRef, CatalogTreeProps>((props, ref) => {
     const { onExpand } = props;
-    const search = useSearchParams();
-    const id = search.get("id");
+    const params = useParams();
+    const {bookId, pageId} = params;
     const [data, setData] = useState<Catalog[]>([]);
     const [selectedKeys, setSelectedKeys] = useState<string[]>([]);
     const msg = useMessage();
-    const pageId = search.get("page");
     const [expandedKeys, setExpandedKeys] = useState<string[]>([]);
     const expandedKeysRef = useRef<string[]>([]);
 
     const load = useCallback(async () => {
         const { success, data } = await catalog({
-            bookId: Number(id)
+            bookId
         });
         if(success) {
             setData(data!);
         }else{
             setData([]);
         }
-    }, []);
+    }, [bookId]);
 
     useEffect(() => {
         load().then();
@@ -65,13 +64,15 @@ export const CatalogTree = forwardRef<CatalogTreeRef, CatalogTreeProps>((props, 
 
     const saveChange = useCallback(async (pageId: number, parentId: number|undefined) => {
         const {success, message} = await changeCatalogParent({
-            bookId: Number(id),
-            id: pageId, parentId});
+            bookId,
+            id: pageId,
+            parentId
+        });
         if(!success) {
             msg.error(message);
             load().then();
         }
-    }, [id]);
+    }, [bookId]);
 
     const onAdd = useCallback((item: Catalog) => {
         const cloneData = cloneDeep(data);

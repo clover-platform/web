@@ -115,7 +115,7 @@ export const IndexPage = () => {
                     }}
                     onRowClick={(row) => {
                         const {id} = row.original;
-                        router.push("/{#LANG#}/wiki/book/?id=" + id);
+                        router.push("/{#LANG#}/wiki/book/" + id + "/");
                     }}
                 />
             </div>

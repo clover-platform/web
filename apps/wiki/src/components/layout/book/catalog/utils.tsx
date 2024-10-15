@@ -4,7 +4,7 @@ import {FC, useState} from "react";
 import classNames from "classnames";
 import {AddPageAction} from "@/components/layout/book/page-actions/add";
 import {MorePageAction} from "@/components/layout/book/page-actions/more";
-import {useRouter, useSearchParams} from "next/navigation";
+import {useParams, useRouter, useSearchParams} from "next/navigation";
 
 type MenuTitleProps = {
     title: string;
@@ -18,13 +18,13 @@ export type UpdateData = {
 
 const MenuTitle: FC<MenuTitleProps> = (props) => {
     const {title, id} = props;
-    const search = useSearchParams();
+    const params = useParams();
+    const {bookId} = params;
     const [moreOpen, setMoreOpen] = useState(false);
     const router = useRouter();
-    const bookId = search.get("id");
 
     return <div
-        onClick={() => router.push(`/{#LANG#}/wiki/book/page/?id=${bookId}&page=${id}`)}
+        onClick={() => router.push(`/{#LANG#}/wiki/book/${bookId}/page/${id}/`)}
         className={"flex justify-start items-center pr-1 group w-full"}
     >
         <div className={"flex-1 w-0 flex-shrink-0 truncate"}>{title}</div>

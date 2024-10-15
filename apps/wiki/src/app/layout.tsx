@@ -12,12 +12,19 @@ import {SIDEBAR_OPEN_KEY} from "@clover/public/components/layout/main/const";
 
 const RootLayout = async ({children}: PropsWithChildren) => {
     const { success, data } = await profile();
-    const teamsResult = await myTeams();
-    const projectsResult = await myProjects();
-    const open = getCookie(SIDEBAR_OPEN_KEY, {cookies})
+    let teams = [];
+    let projects = [];
+    if(success) {
+        const teamsResult = await myTeams();
+        teams = teamsResult.success ? teamsResult.data : [];
+        const projectsResult = await myProjects();
+        projects = projectsResult.success ? projectsResult.data : [];
+    }
+    const open = getCookie(SIDEBAR_OPEN_KEY, {cookies});
+
     return <PublicRootLayout
-        teams={teamsResult.success ? teamsResult.data : []}
-        projects={projectsResult.success ? projectsResult.data : []}
+        teams={teams}
+        projects={projects}
         accountInfo={data}
         isLogin={success}
         sideOpen={!(open === 'false')}

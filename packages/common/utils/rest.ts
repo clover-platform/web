@@ -40,7 +40,7 @@ const rest = Axios.create({
         },
     },
     withCredentials: true,
-    baseURL: isServer ? "http://localhost:3000" : ""
+    baseURL: process.env.NEXT_PUBLIC_API_URL || ""
 });
 
 rest.interceptors.response.use(
@@ -92,37 +92,6 @@ rest.interceptors.response.use(
             onResponse(result, error.response);
         }
         return Promise.reject(result);
-    },
-);
-
-// 请求拦截器
-rest.interceptors.request.use(
-    (config) => {
-        if(isServer) {
-            return config;
-        }
-        if(!isDev) {
-            return config;
-        }
-        // next.js trailingSlash 开启以后，会要求url以 / 结尾
-        const { url } = config;
-        if(url?.includes('?')) {
-            const urls = url.split('?');
-            let base = urls[0];
-            const query = urls[1];
-            if(base.lastIndexOf('/') !== base.length - 1) {
-                base = base + '/';
-            }
-            config.url = base + '?' + query;
-        }else {
-            if(url?.lastIndexOf('/') !== (url ||'').length - 1) {
-                config.url = url + '/';
-            }
-        }
-        return config;
-    },
-    (error) => {
-        return Promise.reject(error);
     },
 );
 
