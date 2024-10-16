@@ -11,6 +11,7 @@ import { ENTRY_RESULT_EDITOR_RESET, ENTRY_RESULT_RELOAD } from "@/events/worktop
 import { useEntriesUpdater } from "@/components/layout/worktop/hooks";
 import { RestResult } from "@easykit/common/types/rest";
 import { TimeAgo } from "@easykit/common/components/time-ago";
+import { t } from '@easykit/common/utils/locale';
 
 export type ResultItemProps = {
     item: EntryResult;

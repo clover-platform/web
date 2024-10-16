@@ -10,7 +10,7 @@ import {my as myProjects} from "@clover/public/rest/project";
 import { getCookie } from "cookies-next";
 import { cookies } from 'next/headers';
 import {SIDEBAR_OPEN_KEY} from "@clover/public/components/layout/main/const";
-import {changeLanguage} from "@clover/public/utils/locale";
+import {changeLanguage} from "@easykit/common/utils/locale";
 
 export type RootLayoutProps = PropsWithChildren<{
     params: {

@@ -1,4 +1,5 @@
 //文件自动生成，请勿编辑
+import { t } from '@easykit/common/utils/locale';
 
 export default [{ path: "/i18n/activity/", config:  {
     name: 'module',

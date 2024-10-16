@@ -1,7 +1,7 @@
 import {keywords, title} from "@clover/public/utils/seo";
 import {IndexPage} from "@/components/pages/home";
 import {Metadata} from "next";
-import {t} from "@clover/public/utils/locale";
+import { t } from '@easykit/common/utils/locale';
 
 export async function generateMetadata(): Promise<Metadata> {
     return {

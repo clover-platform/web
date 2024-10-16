@@ -13,6 +13,7 @@ import { Member } from "@/types/pages/member";
 import { InviteButton } from "@/components/pages/member/invite/button";
 import {useLayoutConfig} from "@clover/public/components/layout/hooks/use.layout.config";
 import {ModuleLayoutProps} from "@/components/layout/module";
+import { t } from '@easykit/common/utils/locale';
 
 const initialParams = {
     keyword: '',

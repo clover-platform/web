@@ -1,10 +1,10 @@
 import {keywords, title} from "@clover/public/utils/seo";
 import { Metadata } from "next";
-import {st} from "@clover/public/utils/locale";
+import {t} from "@easykit/common/utils/locale";
 
 export async function generateMetadata(): Promise<Metadata> {
     return {
-        title: title(st("首页")),
+        title: title(t("首页")),
         keywords: keywords(),
     }
 }

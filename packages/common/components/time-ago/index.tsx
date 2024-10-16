@@ -1,5 +1,6 @@
 import { FC } from "react";
 import JTimeAgo from "javascript-time-ago";
+import { t } from '@easykit/common/utils/locale';
 
 export type TimeAgoProps = {
     time: number | string | Date;

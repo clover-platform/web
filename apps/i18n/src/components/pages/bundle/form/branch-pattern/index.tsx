@@ -3,6 +3,7 @@ import {Input} from "@easykit/design";
 import {IconAdd} from "@arco-iconbox/react-clover";
 import {Action} from "@clover/public/components/common/action";
 import {MinusIcon} from "@radix-ui/react-icons";
+import { t } from '@easykit/common/utils/locale';
 
 export type BranchPatternProps = {
     value?: string[];

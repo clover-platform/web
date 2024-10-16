@@ -28,6 +28,7 @@ import { languagesState } from "@/state/public";
 import {Language, LanguageWithCount} from "@/types/pages/public";
 import {useLayoutConfig} from "@clover/public/components/layout/hooks/use.layout.config";
 import {ModuleLayoutProps} from "@/components/layout/module";
+import { t } from '@easykit/common/utils/locale';
 
 export const DashboardPage = () => {
     useLayoutConfig<ModuleLayoutProps>({
@@ -113,19 +114,19 @@ export const DashboardPage = () => {
                         {i18n(t("编号：%id"), {id})}
                     </DetailTitle>
                     <div className={"space-y-3"}>
-                        <DetailInfoItem label=t("源语言")>
+                        <DetailInfoItem label={t("源语言")}>
                             { all.filter((item) => item.code === detail.source).map((item) => item.name).join("") || '' }
                         </DetailInfoItem>
-                        <DetailInfoItem label=t("项目成员")>
+                        <DetailInfoItem label={t("项目成员")}>
                             {count?.memberCount || '--'}
                         </DetailInfoItem>
-                        <DetailInfoItem label=t("词条")>
+                        <DetailInfoItem label={t("词条")}>
                             {count?.wordCount || '--'}
                         </DetailInfoItem>
-                        <DetailInfoItem label=t("创建时间")>
+                        <DetailInfoItem label={t("创建时间")}>
                             <ValueFormatter value={detail.createTime} formatters={["time"]}/>
                         </DetailInfoItem>
-                        <DetailInfoItem label=t("更新时间")>
+                        <DetailInfoItem label={t("更新时间")}>
                             <ValueFormatter value={detail.updateTime} formatters={["time"]}/>
                         </DetailInfoItem>
                     </div>

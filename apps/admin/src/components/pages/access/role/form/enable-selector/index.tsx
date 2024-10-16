@@ -1,5 +1,6 @@
 import {Select} from "@easykit/design";
 import {forwardRef} from "react";
+import { t } from '@easykit/common/utils/locale';
 
 const EnableSelector = forwardRef((props, ref) => {
     return <Select

@@ -4,6 +4,7 @@ import { Surface } from '@/components/ui/Surface'
 import { Toolbar } from '@/components/ui/Toolbar'
 import * as Dropdown from '@radix-ui/react-dropdown-menu'
 import { useCallback } from 'react'
+import { t } from '@easykit/common/utils/locale';
 
 const FONT_FAMILY_GROUPS = [
     {

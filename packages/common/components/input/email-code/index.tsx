@@ -2,6 +2,7 @@ import { Button, Input, useMessage, InputProps } from "@easykit/design";
 import { useMemo, useState, useCallback, useRef, useEffect, ChangeEvent, forwardRef } from "react";
 import { isEmail } from "@easykit/common/utils";
 import { i18n } from '@easy-kit/i18n/utils';
+import { t } from '@easykit/common/utils/locale';
 
 interface EmailCodeInputProps extends InputProps {
     api: Function;

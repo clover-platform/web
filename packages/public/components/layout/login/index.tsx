@@ -4,6 +4,7 @@ import classNames from "classnames";
 import Link from "@easykit/common/components/link";
 import { LangSelect } from "@clover/public/components/common/select/lang";
 import {useLayoutProps} from "@clover/public/components/layout/hooks/use.layout.props";
+import { t } from '@easykit/common/utils/locale';
 
 export type LoginLayoutProps = PropsWithChildren<{
     title?: string;

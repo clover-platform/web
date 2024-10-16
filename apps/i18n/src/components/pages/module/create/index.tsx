@@ -9,6 +9,7 @@ import {create} from "@/rest/module";
 import {useRouter} from "next/navigation";
 import {useLayoutConfig} from "@clover/public/components/layout/hooks/use.layout.config";
 import {MainLayoutProps} from "@/components/layout/main";
+import { t } from '@easykit/common/utils/locale';
 
 export const CreateModulePage = () => {
     useLayoutConfig<MainLayoutProps>({

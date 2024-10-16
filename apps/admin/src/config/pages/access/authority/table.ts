@@ -1,4 +1,5 @@
 import { ColumnsProps, DropdownMenuItemProps } from "@easykit/design";
+import { t } from '@easykit/common/utils/locale';
 
 export const COLUMNS: ColumnsProps[] = [
     {

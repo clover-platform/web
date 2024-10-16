@@ -3,6 +3,7 @@ import { FC, useState } from "react";
 import { ModuleBranchForm } from "@/components/pages/branch/form";
 import { create, CreateBranchData } from "@/rest/branch";
 import { useSearchParams } from "next/navigation";
+import { t } from '@easykit/common/utils/locale';
 
 export type NewBranchModalProps = {
     onSuccess?: () => void;

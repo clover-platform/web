@@ -3,6 +3,7 @@ import {DialogProps} from "@easykit/design";
 import {FC, useState} from "react";
 import {CreateBookForm} from "@/components/pages/home/create/form";
 import {create, CreateBookData} from "@/rest/book";
+import { t } from '@easykit/common/utils/locale';
 
 export type CreateBookModalProps = {
     onSuccess?: () => void;

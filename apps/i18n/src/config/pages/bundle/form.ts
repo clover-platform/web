@@ -1,5 +1,6 @@
 import * as z from "zod";
 import {ExportFormatValue} from "@/components/pages/bundle/form/export-format";
+import { t } from '@easykit/common/utils/locale';
 
 export const SCHEMA = z.object({
     name: z.string()

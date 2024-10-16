@@ -6,6 +6,7 @@ import { Toolbar } from '@/components/ui/Toolbar'
 import { isRowGripSelected } from './utils'
 import { Icon } from '@/components/ui/Icon'
 import { MenuProps, ShouldShowProps } from '@/components/menus/types'
+import { t } from '@easykit/common/utils/locale';
 
 export const TableRowMenu = React.memo(({ editor, appendTo }: MenuProps): JSX.Element => {
     const shouldShow = useCallback(
@@ -53,16 +54,16 @@ export const TableRowMenu = React.memo(({ editor, appendTo }: MenuProps): JSX.El
                 <PopoverMenu.Item
                     iconComponent={<Icon name="ArrowUpToLine" />}
                     close={false}
-                    label=t("上方插入")
+                    label={t("上方插入")}
                     onClick={onAddRowBefore}
                 />
                 <PopoverMenu.Item
                     iconComponent={<Icon name="ArrowDownToLine" />}
                     close={false}
-                    label=t("下方插入")
+                    label={t("下方插入")}
                     onClick={onAddRowAfter}
                 />
-                <PopoverMenu.Item icon="Trash" close={false} label=t("删除") onClick={onDeleteRow} />
+                <PopoverMenu.Item icon="Trash" close={false} label={t("删除")} onClick={onDeleteRow} />
             </Toolbar.Wrapper>
         </BaseBubbleMenu>
     )

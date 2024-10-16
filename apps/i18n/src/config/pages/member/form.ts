@@ -1,5 +1,6 @@
 import * as z from "zod";
 import {isEmail} from "@easykit/common/utils";
+import { t } from '@easykit/common/utils/locale';
 
 export const SCHEMA = z.object({
     roles: z.array(z.string())

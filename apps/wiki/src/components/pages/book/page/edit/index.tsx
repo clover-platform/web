@@ -4,6 +4,7 @@ import {useLayoutConfig} from "@clover/public/components/layout/hooks/use.layout
 import {BookLayoutProps} from "@/components/layout/book";
 import {useSearchParams} from "next/navigation";
 import {EditForm} from "@/components/pages/book/page/edit/form";
+import { t } from '@easykit/common/utils/locale';
 
 export const EditPage = () => {
     const search = useSearchParams();

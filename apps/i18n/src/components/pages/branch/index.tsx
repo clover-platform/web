@@ -13,6 +13,7 @@ import { RenameBranchModal } from "@/components/pages/branch/rename/modal";
 import {MergeBranchModal} from "@/components/pages/branch/merge/modal";
 import {useLayoutConfig} from "@clover/public/components/layout/hooks/use.layout.config";
 import {ModuleLayoutProps} from "@/components/layout/module";
+import { t } from '@easykit/common/utils/locale';
 
 const initialParams = {
     keyword: '',

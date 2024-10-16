@@ -8,6 +8,7 @@ import { CheckIcon, } from "@radix-ui/react-icons";
 import {Pagination} from "@/components/pages/worktop/main/panel/entry/pagination";
 import { EntryLoading } from "@/components/pages/worktop/main/panel/entry/loading";
 import {LanguageCheck} from "@/components/pages/worktop/main/check/language";
+import { t } from '@easykit/common/utils/locale';
 
 export type EntryPanelProps = {
     pages: number;

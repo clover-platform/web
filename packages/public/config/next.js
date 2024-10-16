@@ -3,6 +3,7 @@ const isDev = process.env.NODE_ENV !== 'production';
 /** @type {import('next').NextConfig} */
 export default {
     reactStrictMode: false,
+    trailingSlash: true,
     transpilePackages: ['@easykit/common'],
     devIndicators: {
         buildActivity: false

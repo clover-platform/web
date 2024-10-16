@@ -9,6 +9,7 @@ import { currentEntryState, currentLanguageState, entriesState } from "@/state/w
 import classNames from "classnames";
 import bus from '@easykit/common/events';
 import { ENTRY_COMMENT_RELOAD } from "@/events/worktop";
+import { t } from '@easykit/common/utils/locale';
 
 export const CommentEditor = () => {
     const [value, setValue] = useState<string>("");

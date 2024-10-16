@@ -17,6 +17,7 @@ import classNames from "classnames";
 import {i18n} from "@easy-kit/i18n/utils";
 import {mergeOverview, merge as mergeRest} from "@/rest/branch";
 import {CheckedState} from "@radix-ui/react-checkbox";
+import { t } from '@easykit/common/utils/locale';
 
 export type MergeBranchModalProps = {
     onSuccess?: () => void;

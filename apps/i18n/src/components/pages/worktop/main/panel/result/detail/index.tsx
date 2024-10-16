@@ -8,6 +8,7 @@ import { useEntriesUpdater } from "@/components/layout/worktop/hooks";
 import { FC, ReactNode } from "react";
 import copy from 'copy-to-clipboard';
 import { remove as removeRest } from "@/rest/entry";
+import { t } from '@easykit/common/utils/locale';
 
 type IconMenuItemProps = {
     icon?: ReactNode;

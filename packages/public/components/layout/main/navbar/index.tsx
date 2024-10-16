@@ -7,6 +7,7 @@ import { sidebarOpenState } from "@clover/public/components/layout/main/state";
 import { Separator, } from "@easykit/design";
 import {TeamsSwitcher} from "@clover/public/components/layout/main/navbar/switcher/teams";
 import {ProjectsSwitcher} from "@clover/public/components/layout/main/navbar/switcher/projects";
+import {useLocale} from "@clover/public/hooks/use.locale";
 
 export type LayoutNavbarProps = {
     className?: string;

@@ -12,6 +12,7 @@ import {DataTable} from "@easykit/design";
 import {useTableLoader} from "@easykit/common/hooks";
 import {list} from "@/rest/book";
 import {Book} from "@/types/pages/book";
+import { t } from '@easykit/common/utils/locale';
 
 export const SectionTitle: FC<PropsWithChildren> = (props) => {
     return <div className={"text-lg font-medium"}>

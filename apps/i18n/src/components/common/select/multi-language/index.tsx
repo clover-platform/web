@@ -5,6 +5,7 @@ import { Action } from "@clover/public/components/common/action";
 import { IconDelete } from "@arco-iconbox/react-clover";
 import { useRecoilValue } from "recoil";
 import { languagesLoadingState, languagesState } from "@/state/public";
+import { t } from '@easykit/common/utils/locale';
 
 export type MultiLanguageSelectProps = {
     className?: string;

@@ -8,6 +8,7 @@ import {useRouter, useSearchParams} from "next/navigation";
 import {setToken} from "@clover/public/utils/token";
 import {encrypt} from "@clover/public/utils/crypto";
 import { EMAIL_FORM_SCHEMA, PASSWORD_FORM_SCHEMA } from "@/config/pages/reset-password/form";
+import { t } from '@easykit/common/utils/locale';
 
 const ResetPasswordPage = () => {
     const msg = useMessage();
@@ -58,8 +59,8 @@ const ResetPasswordPage = () => {
         </div>
         <div className={"mt-[30px]"}>
             <Steps current={step} className={"mb-[30px]"}>
-                <StepsItem title=t("邮箱验证") />
-                <StepsItem title=t("设置密码") />
+                <StepsItem title={t("邮箱验证")} />
+                <StepsItem title={t("设置密码")} />
             </Steps>
             <Form
                 onValuesChange={setFormData1}

@@ -4,6 +4,7 @@ import { Surface } from '@/components/ui/Surface'
 import { Toolbar } from '@/components/ui/Toolbar'
 import * as Dropdown from '@radix-ui/react-dropdown-menu'
 import { useCallback } from 'react'
+import { t } from '@easykit/common/utils/locale';
 
 const FONT_SIZES = [
     { label: t("极小"), value: '12px' },

@@ -1,6 +1,7 @@
 import { Button } from "@easykit/design";
 import { InviteLinkListModal } from "@/components/pages/member/invite/links/modal/list";
 import { useState } from "react";
+import { t } from '@easykit/common/utils/locale';
 
 export const InviteLinkListButton = () => {
     const [visible, setVisible] = useState(false);

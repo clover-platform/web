@@ -6,6 +6,7 @@ import {NodeData} from "@/components/common/editor/control/drag-handle/use.data"
 import {useContentActions} from "@/components/common/editor/control/drag-handle/use.content.actions";
 import {Dropdown} from "@easykit/design";
 import classNames from "classnames";
+import { t } from '@easykit/common/utils/locale';
 
 export type DragHandleControlProps = {
     className?: string;

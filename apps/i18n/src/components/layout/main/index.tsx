@@ -3,6 +3,7 @@ import {FC, PropsWithChildren} from "react";
 import { NAV_MENUS } from "@clover/public/config/layout/main";
 import { useLanguagesInit } from "@/hooks/use.languages.init";
 import {useLayoutProps} from "@clover/public/components/layout/hooks/use.layout.props";
+import { t } from '@easykit/common/utils/locale';
 
 export type MainLayoutProps = {
     active?: string;

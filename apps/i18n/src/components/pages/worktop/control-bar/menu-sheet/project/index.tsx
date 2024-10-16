@@ -4,6 +4,7 @@ import {useSearchParams} from "next/navigation";
 import {useEffect, useState} from "react";
 import {all} from "@/rest/module";
 import { CheckIcon } from '@radix-ui/react-icons';
+import { t } from '@easykit/common/utils/locale';
 
 export const MenuProjectSheet = () => {
     const search = useSearchParams();
@@ -57,7 +58,7 @@ export const MenuProjectSheet = () => {
         <Separator/>
         <div className={"text-muted-foreground text-xs"}>{t("打开项目")}</div>
         <Command className={"h-auto"}>
-            <CommandInput className={"h-8"} placeholder=t("请输入关键词") />
+            <CommandInput className={"h-8"} placeholder={t("请输入关键词")} />
             {
                 loading ? <div className={"flex justify-center items-center p-6"}>
                     <Spin/>

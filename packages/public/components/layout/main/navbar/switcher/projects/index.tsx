@@ -2,6 +2,7 @@ import {Switcher} from "@clover/public/components/layout/main/navbar/switcher";
 import {useRecoilValue} from "recoil";
 import {projectsState} from "@clover/public/state/public";
 import {useCurrent} from "@clover/public/components/layout/hooks/main";
+import { t } from '@easykit/common/utils/locale';
 
 export const ProjectsSwitcher = () => {
     const projects = useRecoilValue(projectsState);

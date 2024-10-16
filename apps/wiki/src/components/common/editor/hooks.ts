@@ -24,6 +24,7 @@ import {NodeData, useData} from "@/components/common/editor/control/drag-handle/
 import {Editor as EditorInstance, JSONContent} from '@tiptap/core';
 import { useCallback, useState } from 'react';
 import { Node as ProseMirrorNode } from '@tiptap/pm/model'
+import { t } from '@easykit/common/utils/locale';
 
 export type UseEditorProps = {
     limit?: number;

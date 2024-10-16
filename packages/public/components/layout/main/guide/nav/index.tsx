@@ -2,6 +2,7 @@ import { CardButton } from "@clover/public/components/layout/main/guide/card-but
 import { IconCreateTeam, IconJoinTeam } from "@arco-iconbox/react-clover";
 import { useAlert } from "@easykit/design";
 import { FC } from "react";
+import { t } from '@easykit/common/utils/locale';
 
 export type GuideNavProps = {
     onCreate?: () => void;

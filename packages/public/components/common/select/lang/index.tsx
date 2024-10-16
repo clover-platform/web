@@ -1,4 +1,5 @@
 import { Select, SelectOptionProps } from "@easykit/design";
+import {useLocale} from "@clover/public/hooks/use.locale";
 
 const options: SelectOptionProps[] = [
     {
@@ -16,17 +17,17 @@ const options: SelectOptionProps[] = [
 ]
 
 export const LangSelect = () => {
-    const current = t("LANG");
+    const locale = useLocale().toLowerCase();
 
     return <Select
-        value={current}
+        value={locale}
         options={options}
         className={"w-auto px-2 py-1 h-auto"}
         align={"end"}
         onChange={(value) => {
-            if(current !== value) {
+            if(locale !== value) {
                 localStorage.setItem('lang', value);
-                location.href = location.href.replaceAll(current, value);
+                location.href = location.href.replaceAll(locale, value);
             }
         }}
     />

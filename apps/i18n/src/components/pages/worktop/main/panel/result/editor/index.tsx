@@ -10,6 +10,7 @@ import { IconClear } from "@arco-iconbox/react-clover";
 import {useCallback, useState} from "react";
 import TextareaAutosize from 'react-textarea-autosize';
 import {useResultSubmit} from "@/components/pages/worktop/main/panel/result/hooks/use.result.submit";
+import { t } from '@easykit/common/utils/locale';
 
 export const Editor = () => {
     const entries = useRecoilValue(entriesState);

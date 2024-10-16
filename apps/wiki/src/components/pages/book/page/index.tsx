@@ -16,6 +16,7 @@ import Link from "next/link";
 import {Action} from "@clover/public/components/common/action";
 import {Pencil1Icon} from "@radix-ui/react-icons";
 import {ContentViewer} from "@/components/common/editor/viewer";
+import { t } from '@easykit/common/utils/locale';
 
 export type DetailPageProps = {
     detail: PageDetail

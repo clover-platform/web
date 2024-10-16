@@ -7,6 +7,7 @@ import {PlusIcon} from "@radix-ui/react-icons";
 import {IconDelete} from "@arco-iconbox/react-clover";
 import {dataURLToFile, fileToDataURL} from "@easykit/common/utils/file";
 import {upload} from "@clover/public/utils/file";
+import { t } from '@easykit/common/utils/locale';
 
 export type ImageCropperProps = {
     className?: string;

@@ -3,6 +3,7 @@ import { Image, PopoverContent, PopoverTrigger, useMessage } from "@easykit/desi
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import {CopyIcon, InfoCircledIcon} from "@radix-ui/react-icons";
 import { Popover } from "@easykit/design";
+import { t } from '@easykit/common/utils/locale';
 
 export interface OtpInfoProps extends PropsWithChildren{
     secret: string;

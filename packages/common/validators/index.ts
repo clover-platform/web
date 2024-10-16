@@ -1,5 +1,6 @@
 import { EMAIL, USERNAME } from "../utils/regular";
 import { isPassword } from "../utils/account";
+import { t } from '@easykit/common/utils/locale';
 
 export const email = (value: any, callback: Function) => {
     if(!value) return callback();

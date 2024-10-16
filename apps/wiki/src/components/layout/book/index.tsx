@@ -7,6 +7,7 @@ import {useSearchParams} from "next/navigation";
 import {CatalogTree, CatalogTreeRef} from "@/components/layout/book/catalog";
 import {AddPageAction} from "@/components/layout/book/page-actions/add";
 import {ExpandAction} from "@/components/layout/book/page-actions/expand";
+import { t } from '@easykit/common/utils/locale';
 
 export type BookLayoutProps = {
     active?: string;

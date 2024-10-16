@@ -3,6 +3,7 @@ import {cn, ComboSelect, ComboSelectOptionProps, ComboSelectProps} from "@easyki
 import { languages } from "@/rest/common";
 import { useRecoilValue } from "recoil";
 import { languagesLoadingState, languagesState } from "@/state/public";
+import { t } from '@easykit/common/utils/locale';
 
 export type LanguageSelectProps = {
     className?: string;

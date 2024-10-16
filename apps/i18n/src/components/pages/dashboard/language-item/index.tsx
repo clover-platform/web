@@ -2,6 +2,7 @@ import {Progress, TableCell, TableRow, Tooltip} from "@easykit/design";
 import {FC, PropsWithChildren} from "react";
 import {LanguageIcon} from "@/components/common/language-icon";
 import {LanguageWithCount} from "@/types/pages/public";
+import { t } from '@easykit/common/utils/locale';
 
 export type LanguageItemProps = {
     onClick?: () => void;

@@ -2,6 +2,7 @@ import { Command, CommandInput, CommandItem, CommandList, SheetClose } from "@ea
 import {CheckIcon} from "@radix-ui/react-icons";
 import { useRecoilState, useRecoilValue } from "recoil";
 import { currentLanguageState, languagesState } from "@/state/worktop";
+import { t } from '@easykit/common/utils/locale';
 
 export const MenuLanguageSheet = () => {
     const languages = useRecoilValue(languagesState);
@@ -10,7 +11,7 @@ export const MenuLanguageSheet = () => {
     return <div className={"space-y-2"}>
         <div className={"text-xl font-bold"}>{t("语言")}</div>
         <Command className={"h-auto"}>
-            <CommandInput className={"h-8"} placeholder=t("请输入关键词") />
+            <CommandInput className={"h-8"} placeholder={t("请输入关键词")} />
             <SheetClose>
                 <CommandList className={"p-0 mt-2 text-left"}>
                     {

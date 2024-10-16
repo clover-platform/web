@@ -10,6 +10,7 @@ import {
 import { forwardRef, useRef, useState } from "react";
 import { ChevronDownIcon } from "@radix-ui/react-icons";
 import { useDocumentClick } from "@easykit/common/hooks";
+import { t } from '@easykit/common/utils/locale';
 
 export type RoleSelectProps = {
     value?: string[];

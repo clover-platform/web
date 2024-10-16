@@ -1,5 +1,6 @@
 import { FC } from "react";
 import { Badge } from "@easykit/design";
+import { t } from '@easykit/common/utils/locale';
 
 export type MemberRoleProps = {
     value: number;

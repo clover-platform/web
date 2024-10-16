@@ -4,6 +4,7 @@ import {
     IconMember, IconSetting,
 } from "@arco-iconbox/react-clover";
 import { MenuItemProps } from "@clover/public/components/layout/main/sidebar/menu-item";
+import { t } from '@easykit/common/utils/locale';
 
 const base = "/{#LANG#}/i18n"
 

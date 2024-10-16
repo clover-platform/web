@@ -3,6 +3,7 @@ import {DotsHorizontalIcon} from "@radix-ui/react-icons";
 import {Action} from "@clover/public/components/common/action";
 import {Dropdown, Tooltip} from "@easykit/design";
 import {useRouter, useSearchParams} from "next/navigation";
+import { t } from '@easykit/common/utils/locale';
 
 export type MorePageActionProps = {
     id: number;

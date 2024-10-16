@@ -12,6 +12,7 @@ import {UPDATE_TITLE} from "@/events/book";
 import {useRouter, useSearchParams} from "next/navigation";
 import {CollectAction} from "@/components/pages/book/page/actions/collect";
 import {PageDetail} from "@/types/pages/page";
+import { t } from '@easykit/common/utils/locale';
 
 export type PageEditFormProps = {
     pageId: string;
@@ -94,7 +95,7 @@ export const EditForm: FC<PageEditFormProps> = (props) => {
             </div>
             <div className={"flex space-x-2"}>
                 <CollectAction
-                    collected={data?.collected}
+                    collected={data?.collected!}
                     id={Number(pageId)}
                 />
                 <Button

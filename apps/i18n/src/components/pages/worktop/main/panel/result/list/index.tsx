@@ -10,6 +10,7 @@ import compact from "lodash/compact";
 import uniq from "lodash/uniq";
 import { EntryResult } from "@/types/pages/entry";
 import { ResultListLoading } from "@/components/pages/worktop/main/panel/result/list/loading";
+import { t } from '@easykit/common/utils/locale';
 
 export const ResultList = () => {
     const language = useRecoilValue(currentLanguageState);

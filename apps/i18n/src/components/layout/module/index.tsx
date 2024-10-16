@@ -5,6 +5,7 @@ import { useSearchParams } from "next/navigation";
 import { cloneDeep } from "lodash";
 import { useLanguagesInit } from "@/hooks/use.languages.init";
 import {useLayoutProps} from "@clover/public/components/layout/hooks/use.layout.props";
+import { t } from '@easykit/common/utils/locale';
 
 export type ModuleLayoutProps = {
     active?: string;

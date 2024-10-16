@@ -3,6 +3,7 @@ import {Action} from "@clover/public/components/common/action";
 import {CheckIcon} from "@radix-ui/react-icons";
 import {FC} from "react";
 import {useResultSubmit} from "@/components/pages/worktop/main/panel/result/hooks/use.result.submit";
+import { t } from '@easykit/common/utils/locale';
 
 export type AIItemProps = {
     value: string;

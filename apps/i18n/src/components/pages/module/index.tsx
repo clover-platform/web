@@ -14,6 +14,7 @@ import {Module} from "@/types/pages/module";
 import {useProfile} from "@clover/public/hooks/use.profile";
 import {useLayoutConfig} from "@clover/public/components/layout/hooks/use.layout.config";
 import {MainLayoutProps} from "@/components/layout/main";
+import { t } from '@easykit/common/utils/locale';
 
 const initialParams = {
     keyword: '',

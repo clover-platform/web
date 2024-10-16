@@ -3,6 +3,7 @@ import { Icon } from '@/components/ui/Icon'
 import { Surface } from '@/components/ui/Surface'
 import { Toggle } from '@/components/ui/Toggle'
 import { useState, useCallback, useMemo } from 'react'
+import { t } from '@easykit/common/utils/locale';
 
 export type LinkEditorPanelProps = {
   initialUrl?: string
@@ -52,7 +53,7 @@ export const LinkEditorPanel = ({ onSetLink, initialOpenInNewTab, initialUrl }: 
                     <input
                         type="url"
                         className="flex-1 bg-transparent outline-none min-w-[12rem] text-black text-sm dark:text-white"
-                        placeholder=t("请输入链接地址")
+                        placeholder={t("请输入链接地址")}
                         value={state.url}
                         onChange={state.onChange}
                     />

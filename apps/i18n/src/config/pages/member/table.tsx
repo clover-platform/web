@@ -3,6 +3,7 @@ import { DataTableColumn } from "@easykit/design/components/uix/data-table";
 import { Module } from "@/types/pages/module";
 import { Member } from "@/types/pages/member";
 import { MemberRole } from "@/components/pages/member/role";
+import { t } from '@easykit/common/utils/locale';
 
 export const FILTERS: FilterItemProps[] = [
     {

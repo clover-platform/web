@@ -8,6 +8,7 @@ import { Icon } from '@/components/ui/Icon'
 import { ImageBlockWidth } from './ImageBlockWidth'
 import { MenuProps } from '@/components/menus/types'
 import { getRenderContainer } from '@/lib/utils'
+import { t } from '@easykit/common/utils/locale';
 
 export const ImageBlockMenu = ({ editor, appendTo }: MenuProps): JSX.Element => {
     const menuRef = useRef<HTMLDivElement>(null)
@@ -80,13 +81,13 @@ export const ImageBlockMenu = ({ editor, appendTo }: MenuProps): JSX.Element => 
             }}
         >
             <Toolbar.Wrapper shouldShowContent={shouldShow()} ref={menuRef}>
-                <Toolbar.Button tooltip=t("左对齐") active={isImageLeft} onClick={onAlignImageLeft}>
+                <Toolbar.Button tooltip={t("左对齐")} active={isImageLeft} onClick={onAlignImageLeft}>
                     <Icon name="AlignHorizontalDistributeStart" />
                 </Toolbar.Button>
-                <Toolbar.Button tooltip=t("居中") active={isImageCenter} onClick={onAlignImageCenter}>
+                <Toolbar.Button tooltip={t("居中")} active={isImageCenter} onClick={onAlignImageCenter}>
                     <Icon name="AlignHorizontalDistributeCenter" />
                 </Toolbar.Button>
-                <Toolbar.Button tooltip=t("右对齐") active={isImageRight} onClick={onAlignImageRight}>
+                <Toolbar.Button tooltip={t("右对齐")} active={isImageRight} onClick={onAlignImageRight}>
                     <Icon name="AlignHorizontalDistributeEnd" />
                 </Toolbar.Button>
                 <Toolbar.Divider />

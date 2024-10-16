@@ -20,6 +20,7 @@ import {useEffect, useMemo, useRef, useState} from "react";
 import {BaseInfo, UpdateInfo} from "@/types/pages/module";
 import {useLayoutConfig} from "@clover/public/components/layout/hooks/use.layout.config";
 import {ModuleLayoutProps} from "@/components/layout/module";
+import { t } from '@easykit/common/utils/locale';
 
 export const ModuleSettingPage = () => {
     useLayoutConfig<ModuleLayoutProps>({
@@ -110,11 +111,11 @@ export const ModuleSettingPage = () => {
                 defaultValues={info}
                 onValuesChange={(vs) => setValues(vs)}
             >
-                <FormItem name="name" label=t("名称") description={t("唯一标识只能是小写字母和-，小写字母开头")}>
+                <FormItem name="name" label={t("名称")} description={t("唯一标识只能是小写字母和-，小写字母开头")}>
                     <Input placeholder={t("请输入模块名称")} className={"max-w-96"}/>
                 </FormItem>
-                <FormItem name="description" label=t("描述")>
-                    <Textarea placeholder=t("请输入模块描述") className={"max-w-6xl"}/>
+                <FormItem name="description" label={t("描述")}>
+                    <Textarea placeholder={t("请输入模块描述")} className={"max-w-6xl"}/>
                 </FormItem>
                 <div>
                     <Button loading={submitting} disabled={!changed} variant={"default"}>{t("保存")}</Button>

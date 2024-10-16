@@ -1,5 +1,6 @@
 import {Badge} from "@easykit/design";
 import {FC, forwardRef} from "react";
+import { t } from '@easykit/common/utils/locale';
 
 export interface RoleStatusProps {
     value?: boolean;

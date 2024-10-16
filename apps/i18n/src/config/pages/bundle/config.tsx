@@ -2,6 +2,7 @@ import { ReactElement, ReactNode } from "react";
 import { IconAndroid, IconFlutter, IconIOS, IconJSON } from "@arco-iconbox/react-clover";
 import { ARBConfigForm } from "@/components/pages/bundle/form/export-format/config/form/arb";
 import { JSONConfigForm } from "@/components/pages/bundle/form/export-format/config/form/json";
+import { t } from '@easykit/common/utils/locale';
 
 export type ExportFormatConfig = {
     id: string;

@@ -4,6 +4,7 @@ import { rename } from "@/rest/branch";
 import { useSearchParams } from "next/navigation";
 import { Branch } from "@/types/pages/branch";
 import { SCHEMA } from "@/config/pages/module/branch/rename/form";
+import { t } from '@easykit/common/utils/locale';
 
 export type RenameBranchModalProps = {
     onSuccess?: () => void;
@@ -40,7 +41,7 @@ export const RenameBranchModal: FC<RenameBranchModalProps> = (props) => {
             onSubmit={onSubmit}
             defaultValues={branch}
         >
-            <FormItem name="name" label=t("分支名") description={t("使用分支控制，可以在不影响主分支的情况下，推进翻译的改进。")}>
+            <FormItem name="name" label={t("分支名") } description={t("使用分支控制，可以在不影响主分支的情况下，推进翻译的改进。")}>
                 <Input placeholder={t("请输入分支名")} />
             </FormItem>
             <Space className={"justify-end"}>

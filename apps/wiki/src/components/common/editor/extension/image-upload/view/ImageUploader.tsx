@@ -4,6 +4,7 @@ import { Button } from '@/components/ui/Button'
 import { Icon } from '@/components/ui/Icon'
 import { cn } from '@/lib/utils'
 import { ChangeEvent, useCallback } from 'react'
+import { t } from '@easykit/common/utils/locale';
 
 export const ImageUploader = ({ onUpload }: { onUpload: (url: string) => void }) => {
     const { loading, uploadFile } = useUploader({ onUpload })

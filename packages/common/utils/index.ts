@@ -3,6 +3,7 @@ import omit from 'lodash/omit';
 import QRCode from 'qrcode';
 import { isValidElement } from 'react';
 import { EMAIL, URL as URL_REG } from "./regular";
+import { t } from '@easykit/common/utils/locale';
 
 const langList = [
     {

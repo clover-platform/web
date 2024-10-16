@@ -6,6 +6,7 @@ import pick from 'lodash/pick';
 import {usePathname, useRouter, useSearchParams} from "next/navigation";
 import {useMessage} from "@easykit/design";
 import { RestResult } from "@easykit/common/types/rest";
+import { t } from '@easykit/common/utils/locale';
 
 export interface TableLoaderOptions {
     initialParams: any;

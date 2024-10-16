@@ -13,7 +13,7 @@ import {localeState, projectsState, teamsState} from "@clover/public/state/publi
 import {accessState} from "@easykit/common/state/access";
 import {sidebarOpenState} from "@clover/public/components/layout/main/state";
 import i18next from "i18next";
-import {getLocale} from "@clover/public/utils/locale";
+import {getLocale} from "@easykit/common/utils/locale";
 
 export type RootLayoutProps = PropsWithChildren<{
     isLogin: boolean;

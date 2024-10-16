@@ -1,6 +1,7 @@
 import {useRecoilValue} from "recoil";
 import {currentLanguageState} from "@/state/worktop";
 import {FC, PropsWithChildren} from "react";
+import { t } from '@easykit/common/utils/locale';
 
 export type LanguageCheckProps = PropsWithChildren;
 

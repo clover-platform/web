@@ -1,5 +1,6 @@
 import * as z from "zod";
 import { CODE, EMAIL, PASSWORD, USERNAME } from "@easykit/common/utils/regular";
+import { t } from '@easykit/common/utils/locale';
 
 const code = t("请输入6位数字验证码");
 

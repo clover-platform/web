@@ -1,5 +1,6 @@
 import {MenuItemProps} from "@clover/public/components/layout/main/sidebar/menu-item";
 import {IconAccess, IconSetting, IconUser} from "@arco-iconbox/react-clover";
+import { t } from '@easykit/common/utils/locale';
 
 export const NAV_MENUS: MenuItemProps[] = [
     {

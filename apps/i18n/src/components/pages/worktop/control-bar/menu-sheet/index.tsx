@@ -6,6 +6,7 @@ import { MenuProjectSheet } from "@/components/pages/worktop/control-bar/menu-sh
 import {MenuLanguageSheet} from "@/components/pages/worktop/control-bar/menu-sheet/language";
 import {MenuBranchSheet} from "@/components/pages/worktop/control-bar/menu-sheet/branch";
 import {MenuHelpSheet} from "@/components/pages/worktop/control-bar/menu-sheet/help";
+import { t } from '@easykit/common/utils/locale';
 
 export type MenuItemProps = {
     icon: ReactNode;

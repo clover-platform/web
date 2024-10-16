@@ -6,6 +6,7 @@ import {Spin, Tooltip, useMessage} from "@easykit/design";
 import {create} from "@/rest/page";
 import bus from "@easykit/common/events";
 import {ADD_PAGE} from "@/events/book";
+import { t } from '@easykit/common/utils/locale';
 
 export type AddPageActionProps = {
     className?: string;

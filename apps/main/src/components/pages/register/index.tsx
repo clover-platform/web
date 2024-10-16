@@ -11,6 +11,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 import LoginLink from "@/components/common/login/link";
 import { FORM_STEP1_SCHEMA, FORM_STEP2_SCHEMA } from "@/config/pages/register/form";
 import CodeInput from "@easykit/common/components/input/code";
+import { t } from '@easykit/common/utils/locale';
 
 const RegisterPage = () => {
     const msg = useMessage();
@@ -65,8 +66,8 @@ const RegisterPage = () => {
         </div>
         <div className={"mt-[30px]"}>
             <Steps current={step} className={"mb-[30px]"}>
-                <StepsItem title=t("邮箱验证") />
-                <StepsItem title=t("安全设置") />
+                <StepsItem title={t("邮箱验证")} />
+                <StepsItem title={t("安全设置")} />
             </Steps>
             <Form
                 onValuesChange={setFormData1}

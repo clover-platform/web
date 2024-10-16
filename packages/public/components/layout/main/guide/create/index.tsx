@@ -4,6 +4,7 @@ import {Button, Form, FormItem, Input, Space, useMessage} from "@easykit/design"
 import * as z from "zod";
 import { useState } from "react";
 import {init, TeamInitData} from "@clover/public/rest/team";
+import { t } from '@easykit/common/utils/locale';
 
 const SCHEMA = z.object({
     name: z.string()
@@ -44,11 +45,11 @@ export const GuideCreate = () => {
             onSubmit={(data) => onSubmit(data as TeamInitData)}
             className={"mt-10"}
         >
-            <FormItem name="name" label=t("团队名称")>
+            <FormItem name="name" label={t("团队名称")}>
                 <Input placeholder={t("请输入团队名称")} />
             </FormItem>
             <FormItem
-                name="projectName" label=t("初始项目")
+                name="projectName" label={t("初始项目")}
                 description={t("你需要为团队创建一个初始项目")}
             >
                 <Input placeholder={t("请输入项目名称")} />

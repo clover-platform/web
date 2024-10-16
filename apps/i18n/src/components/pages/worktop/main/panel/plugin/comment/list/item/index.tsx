@@ -9,6 +9,7 @@ import {deleteComment} from "@/rest/entry.comment";
 import bus from "@easykit/common/events";
 import {ENTRY_COMMENT_RELOAD} from "@/events/worktop";
 import { IconDelete } from "@arco-iconbox/react-clover";
+import { t } from '@easykit/common/utils/locale';
 
 export type CommentListItemProps = {
     item: EntryComment;

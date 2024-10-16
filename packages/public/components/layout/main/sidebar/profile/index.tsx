@@ -5,6 +5,7 @@ import { logout } from "@clover/public/rest/auth";
 import { UNAUTHORIZED } from "@clover/public/events/auth";
 import bus from '@easykit/common/events';
 import {clearToken} from "@clover/public/utils/token";
+import { t } from '@easykit/common/utils/locale';
 
 const menus: DropdownMenuItemProps[] = [
     {

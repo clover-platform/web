@@ -1,4 +1,5 @@
 import { IconGithub, IconWechat } from "@arco-iconbox/react-clover";
+import { t } from '@easykit/common/utils/locale';
 
 export const ICON_PROPS = {
     color: "white",

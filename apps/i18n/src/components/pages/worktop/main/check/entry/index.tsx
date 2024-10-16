@@ -2,6 +2,7 @@ import {useRecoilValue} from "recoil";
 import {currentEntryState, entriesState} from "@/state/worktop";
 import {FC, PropsWithChildren, useMemo} from "react";
 import classNames from "classnames";
+import { t } from '@easykit/common/utils/locale';
 
 export type ResultCheckProps = PropsWithChildren<{
     className?: string;

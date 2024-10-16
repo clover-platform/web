@@ -1,3 +1,4 @@
+import { t } from '@easykit/common/utils/locale';
 import Axios, {AxiosRequestConfig} from 'axios';
 const CancelToken = Axios.CancelToken;
 const isDev = process.env.NODE_ENV !== 'production';

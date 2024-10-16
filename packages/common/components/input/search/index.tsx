@@ -1,6 +1,7 @@
 import {forwardRef} from "react";
 import {cn, Input, InputProps} from "@easykit/design";
 import {IconSearch} from "@arco-iconbox/react-clover";
+import { t } from '@easykit/common/utils/locale';
 
 const SearchInput = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
     const {

@@ -2,6 +2,7 @@ import { Icon } from '@/components/ui/Icon'
 import { Surface } from '@/components/ui/Surface'
 import { Toolbar } from '@/components/ui/Toolbar'
 import Tooltip from '@/components/ui/Tooltip'
+import { t } from '@easykit/common/utils/locale';
 
 export type LinkPreviewPanelProps = {
   url: string
@@ -16,12 +17,12 @@ export const LinkPreviewPanel = ({ onClear, onEdit, url }: LinkPreviewPanelProps
                 {url}
             </a>
             <Toolbar.Divider />
-            <Tooltip title=t("编辑链接")>
+            <Tooltip title={t("编辑链接")}>
                 <Toolbar.Button onClick={onEdit}>
                     <Icon name="Pen" />
                 </Toolbar.Button>
             </Tooltip>
-            <Tooltip title=t("删除链接")>
+            <Tooltip title={t("删除链接")}>
                 <Toolbar.Button onClick={onClear}>
                     <Icon name="Trash2" />
                 </Toolbar.Button>

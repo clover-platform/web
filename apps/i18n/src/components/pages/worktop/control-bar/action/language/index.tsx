@@ -2,6 +2,7 @@ import { Action } from "@clover/public/components/common/action";
 import { FC } from "react";
 import { useRecoilValue } from "recoil";
 import { currentLanguageState, languagesState } from "@/state/worktop";
+import { t } from '@easykit/common/utils/locale';
 
 export type LanguageActionProps = {
     onClick: () => void;

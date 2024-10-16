@@ -3,6 +3,7 @@
 import {Button, Result, Space} from "@easykit/design";
 import React from "react";
 import Link from "next/link";
+import { t } from '@easykit/common/utils/locale';
 
 const LinkErrorPage = () => {
     const buttons = <Space>
@@ -16,7 +17,7 @@ const LinkErrorPage = () => {
 
     return <Result
         status='error'
-        subTitle=t("快捷登录出现问题，请稍后重试")
+        subTitle={t("快捷登录出现问题，请稍后重试")}
         extra={buttons}
     />
 };

@@ -9,6 +9,7 @@ import {encrypt} from "@clover/public/utils/crypto";
 import {setToken} from "@clover/public/utils/token";
 import {SUPPORT_WAY} from "@/config/pages/login/quick";
 import {SCHEMA} from "@/config/pages/link/form";
+import { t } from '@easykit/common/utils/locale';
 
 export interface LinkPageProps extends PropsWithChildren {
     type: string
@@ -78,7 +79,7 @@ const LinkPage = (props: LinkPageProps) => {
         {
             error ? <Result
                 status='error'
-                subTitle=t("第三方平台接口错误或链接已超时")
+                subTitle={t("第三方平台接口错误或链接已超时")}
                 extra={buttons}
             ></Result> : <div className={"w-[360px]"}>
                 <div className={"flex justify-start items-center"}>

@@ -9,6 +9,7 @@ import { EntryComment } from "@/types/pages/entry";
 import {Button, Empty, ScrollArea} from "@easykit/design";
 import { CommentListItemLoading } from "@/components/pages/worktop/main/panel/plugin/comment/list/item/loading";
 import {handler} from "tailwindcss-animate";
+import { t } from '@easykit/common/utils/locale';
 
 const CommentListLoading = () => {
     return [0,1,2].map((index) => <CommentListItemLoading key={index} />);

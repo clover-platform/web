@@ -6,6 +6,7 @@ import {useState} from "react";
 import {useMessage} from "@easykit/design";
 import {useEntriesUpdater} from "@/components/layout/worktop/hooks";
 import {save} from "@/rest/entry.result";
+import { t } from '@easykit/common/utils/locale';
 
 export const useResultSubmit = (): [(content: string) => Promise<any>, boolean] => {
     const entries = useRecoilValue(entriesState);

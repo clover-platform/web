@@ -4,6 +4,7 @@ import TimeAgo from "javascript-time-ago";
 import { i18n } from "@easy-kit/i18n/utils";
 import {Module} from "@/types/pages/module";
 import {Account} from "@clover/public/types/account";
+import { t } from '@easykit/common/utils/locale';
 
 export const COLUMNS: DataTableColumn<Module>[] = [
     {

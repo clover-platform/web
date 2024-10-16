@@ -4,6 +4,7 @@ import { ColorButton } from './ColorButton'
 import { Toolbar } from '../../ui/Toolbar'
 import { Icon } from '../../ui/Icon'
 import { themeColors } from '@/lib/constants'
+import { t } from '@easykit/common/utils/locale';
 
 export type ColorPickerProps = {
   color?: string
@@ -54,7 +55,7 @@ export const ColorPicker = ({ color, onChange, onClear }: ColorPickerProps) => {
                         onColorChange={onChange}
                     />
                 ))}
-                <Toolbar.Button tooltip=t("还原默认颜色") onClick={onClear}>
+                <Toolbar.Button tooltip={t("还原默认颜色")} onClick={onClear}>
                     <Icon name="Undo" />
                 </Toolbar.Button>
             </div>

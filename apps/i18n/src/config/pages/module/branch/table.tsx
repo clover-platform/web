@@ -1,6 +1,7 @@
 import { DataTableColumn } from "@easykit/design/components/uix/data-table";
 import { Badge, DropdownMenuItemProps, FilterItemProps, Input } from "@easykit/design";
 import { Branch } from "@/types/pages/branch";
+import { t } from '@easykit/common/utils/locale';
 
 export const COLUMNS: DataTableColumn<Branch>[] = [
     {
