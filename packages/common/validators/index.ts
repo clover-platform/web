@@ -4,7 +4,7 @@ import { isPassword } from "../utils/account";
 export const email = (value: any, callback: Function) => {
     if(!value) return callback();
     if (!EMAIL.test(value)) {
-        return callback("{#邮箱格式不正确#}");
+        return callback(t("邮箱格式不正确"));
     }
     callback();
 };
@@ -12,7 +12,7 @@ export const email = (value: any, callback: Function) => {
 export const username = (value: any, callback: Function) => {
     if(!value) return callback();
     if (!USERNAME.test(value)) {
-        return callback("{#字母数字或下划线，字母开头#}");
+        return callback(t("字母数字或下划线，字母开头"));
     }
     callback();
 };
@@ -20,7 +20,7 @@ export const username = (value: any, callback: Function) => {
 export const samePassword = (value: any, callback: Function, target: any) => {
     if(!value) return callback();
     if (value !== target) {
-        return callback("{#两次密码输入不一致#}");
+        return callback(t("两次密码输入不一致"));
     }
     callback();
 };
@@ -28,7 +28,7 @@ export const samePassword = (value: any, callback: Function, target: any) => {
 export const setPassword = (value: any, callback: Function) => {
     if(!value) return callback();
     if (!isPassword(value)) {
-        return callback("{#6-18位密码，包含大小写、特殊符号、数字#}");
+        return callback(t("6-18位密码，包含大小写、特殊符号、数字"));
     }
     callback();
 };

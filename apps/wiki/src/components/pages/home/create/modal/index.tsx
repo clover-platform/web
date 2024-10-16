@@ -25,18 +25,18 @@ export const CreateBookModal: FC<CreateBookModalProps> = (props) => {
 
     return <Dialog
         {...props}
-        title={"{#新建知识库#}"}
+        title={t("新建知识库")}
         maskClosable={false}
     >
         <CreateBookForm onSubmit={onSubmit}>
             <div className={"space-x-2 flex justify-end"}>
-                <Button loading={loading} type={"submit"}>{"{#提交#}"}</Button>
+                <Button loading={loading} type={"submit"}>{t("提交")}</Button>
                 <Button
                     variant={"outline"}
                     type={"button"}
                     onClick={() => props.onCancel?.()}
                 >
-                    {"{#取消#}"}
+                    {t("取消")}
                 </Button>
             </div>
         </CreateBookForm>

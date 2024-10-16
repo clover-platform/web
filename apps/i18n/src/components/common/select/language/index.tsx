@@ -28,10 +28,10 @@ export const LanguageSelect = forwardRef<HTMLSelectElement, LanguageSelectProps>
             "w-full max-h-[150px] overflow-auto",
             className,
         )}
-        searchPlaceholder={"{#关键词#}"}
+        searchPlaceholder={t("关键词")}
         options={options}
         loading={loading}
-        clearText={"{#清空选择#}"}
+        clearText={t("清空选择")}
         filter={(value: string, search: string) => {
             const item = options.find((o) => o.value.toLowerCase() === value);
             const label = item?.label?.toString();

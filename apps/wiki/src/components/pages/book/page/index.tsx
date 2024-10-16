@@ -5,8 +5,8 @@ import {useLayoutConfig} from "@clover/public/components/layout/hooks/use.layout
 import {BookLayoutProps} from "@/components/layout/book";
 import {PageDetail, PageProps} from "@/types/pages/page";
 import {useMessage} from "@easykit/design";
-import {AbortPromise} from "@easy-kit/common/utils/rest";
-import {RestResult} from "@easy-kit/common/types/rest";
+import {AbortPromise} from "@easykit/common/utils/rest";
+import {RestResult} from "@easykit/common/types/rest";
 import TimeAgo from "javascript-time-ago";
 import {save} from "@/rest/page";
 import classNames from "classnames";
@@ -25,13 +25,13 @@ export const DetailPage: FC<DetailPageProps> = (props) => {
     useLayoutConfig<BookLayoutProps>({
         path: [
             {
-                title: "{#知识库#}",
+                title: t("知识库"),
                 type: "link",
                 href: "/{#LANG#}/wiki/book/",
                 withQuery: ["id"],
             },
             {
-                title: "{#详情#}",
+                title: t("详情"),
                 type: "item",
             }
         ],
@@ -40,7 +40,7 @@ export const DetailPage: FC<DetailPageProps> = (props) => {
     const { bookId, pageId } = props.params;
     const msg = useMessage();
     const saveHandler = useRef<AbortPromise<RestResult<any>>>();
-    const timeAgo = new TimeAgo('{#LANG#}')
+    const timeAgo = new TimeAgo(t("LANG"))
 
     const onChange = useCallback(async (json: string) => {
         saveHandler.current?.abort();
@@ -76,7 +76,7 @@ export const DetailPage: FC<DetailPageProps> = (props) => {
                     <div className={"text-secondary-foreground/70"}>
                         <div>
                             {
-                                i18n("{#由 %author 最后更新于 %time#}", {
+                                i18n(t("由 %author 最后更新于 %time"), {
                                     author: lastAuthor?.username,
                                     time: detail?.updateTime ? timeAgo.format(new Date(detail?.updateTime!)) : "--"
                                 })

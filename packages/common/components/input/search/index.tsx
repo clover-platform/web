@@ -5,7 +5,7 @@ import {IconSearch} from "@arco-iconbox/react-clover";
 const SearchInput = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
     const {
         className,
-        placeholder = "{#请输入关键词#}",
+        placeholder = t("请输入关键词"),
         ...rest
     } = props;
     return <div className={cn(

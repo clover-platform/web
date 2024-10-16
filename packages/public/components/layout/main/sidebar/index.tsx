@@ -23,7 +23,7 @@ export interface SidebarProps extends PropsWithChildren {
 const Sidebar: FC<SidebarProps> = (props) => {
     const {
         menus = [],
-        title = "{#导航#}",
+        title = t("导航"),
         active,
     } = props;
 
@@ -42,7 +42,7 @@ const Sidebar: FC<SidebarProps> = (props) => {
         <div className={"bg-[var(--sidebar-user-bg)] text-white p-2"}>
             <div className={"flex justify-center items-center"}>
                 <a href={"/{#LANG#}/"}>
-                    <Tooltip content={"{#首页#}"}>
+                    <Tooltip content={t("首页")}>
                         <div className={classNames(loading ? "animate-spin" : "")}>
                             <Logo type={"dark"} size={28} className={"bg-transparent cursor-pointer"}/>
                         </div>
@@ -50,7 +50,7 @@ const Sidebar: FC<SidebarProps> = (props) => {
                 </a>
                 <div className={"flex-1 flex justify-end items-center space-x-0.5"}>
                     <Switch theme={"light"} className={"w-8 h-8 !p-0"} />
-                    <Tooltip content={"{#创建新的...#}"}>
+                    <Tooltip content={t("创建新的...")}>
                         <Action theme={"light"} className={"w-8 h-8 !p-0"}>
                             <IconAdd fontSize={20} />
                         </Action>
@@ -60,7 +60,7 @@ const Sidebar: FC<SidebarProps> = (props) => {
             </div>
             <div className={groupClassName}>
                 <div className={"m-1 flex-1"}>
-                    <Tooltip side={"bottom"} content={"{#项目#}"}>
+                    <Tooltip side={"bottom"} content={t("项目")}>
                         <a href={"/{#LANG#}/project/"}>
                             <ActionButton className={"w-full"}>
                                 <IconProject className={iconClassName} />
@@ -69,7 +69,7 @@ const Sidebar: FC<SidebarProps> = (props) => {
                     </Tooltip>
                 </div>
                 <div className={"m-1 flex-1"}>
-                    <Tooltip side={"bottom"} content={"{#任务#}"}>
+                    <Tooltip side={"bottom"} content={t("任务")}>
                         <a href={"/{#LANG#}/task/"}>
                             <ActionButton className={"w-full"}>
                                 <IconGantt className={iconClassName} />
@@ -78,7 +78,7 @@ const Sidebar: FC<SidebarProps> = (props) => {
                     </Tooltip>
                 </div>
                 <div className={"m-1 flex-1"}>
-                    <Tooltip side={"bottom"} content={"{#Wiki#}"}>
+                    <Tooltip side={"bottom"} content={t("Wiki")}>
                         <a href={"/{#LANG#}/wiki/"}>
                             <ActionButton className={"w-full"}>
                                 <IconWiki className={iconClassName} />
@@ -91,7 +91,7 @@ const Sidebar: FC<SidebarProps> = (props) => {
                 <div className={"m-1 flex-1"}>
                     <ActionButton className={"w-full"}>
                         <IconSearch className={classNames(iconClassName, "mr-1")} />
-                        {"{#搜索或跳转到...#}"}
+                        {t("搜索或跳转到...")}
                     </ActionButton>
                 </div>
             </div>
@@ -109,7 +109,7 @@ const Sidebar: FC<SidebarProps> = (props) => {
             <div className={"flex-1 mx-0.5 my-1"}>
                 <a href={"/{#LANG#}/help/"}>
                     <Action theme={"dark"} className={"w-full py-1"}>
-                        <IconHelp className={"mr-1 text-base"} /> {"{#帮助#}"}
+                        <IconHelp className={"mr-1 text-base"} /> {t("帮助")}
                     </Action>
                 </a>
             </div>

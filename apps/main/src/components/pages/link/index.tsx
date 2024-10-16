@@ -66,9 +66,9 @@ const LinkPage = (props: LinkPageProps) => {
     }, [user])
 
     const buttons = <Space>
-        <Button onClick={() => load()} variant={"secondary"}>{"{#重试#}"}</Button>
+        <Button onClick={() => load()} variant={"secondary"}>{t("重试")}</Button>
         <Link href={"/{#LANG#}/login/"}>
-            <Button>{"{#返回登录#}"}</Button>
+            <Button>{t("返回登录")}</Button>
         </Link>
     </Space>
 
@@ -78,7 +78,7 @@ const LinkPage = (props: LinkPageProps) => {
         {
             error ? <Result
                 status='error'
-                subTitle='{#第三方平台接口错误或链接已超时#}'
+                subTitle=t("第三方平台接口错误或链接已超时")
                 extra={buttons}
             ></Result> : <div className={"w-[360px]"}>
                 <div className={"flex justify-start items-center"}>
@@ -86,7 +86,7 @@ const LinkPage = (props: LinkPageProps) => {
                         { icon }
                     </div>
                     <div className={"text-[24px] font-bold mx-[10px]"}>
-                        {"{#账号绑定#}"}
+                        {t("账号绑定")}
                     </div>
                     {
                         user ? <>
@@ -95,7 +95,7 @@ const LinkPage = (props: LinkPageProps) => {
                                     width={28}
                                     height={28}
                                     src={(user as any).avatar}
-                                    alt={"{#头像#}"}
+                                    alt={t("头像")}
                                 />
                             </div>
                             <div className={"ml-[5px]"}>
@@ -109,13 +109,13 @@ const LinkPage = (props: LinkPageProps) => {
                         schema={SCHEMA}
                         onSubmit={onSubmit}
                     >
-                        <FormItem name={"account"} label={"{#邮箱或用户名#}"}>
-                            <Input placeholder={"{#请输入邮箱或用户名#}"} />
+                        <FormItem name={"account"} label={t("邮箱或用户名")}>
+                            <Input placeholder={t("请输入邮箱或用户名")} />
                         </FormItem>
-                        <FormItem name={"password1"} label={"{#密码#}"}>
-                            <Input type={"password"} placeholder={"{#请输入密码#}"} />
+                        <FormItem name={"password1"} label={t("密码")}>
+                            <Input type={"password"} placeholder={t("请输入密码")} />
                         </FormItem>
-                        <Button loading={submitting} long type={"submit"}>{"{#登录并绑定#}"}</Button>
+                        <Button loading={submitting} long type={"submit"}>{t("登录并绑定")}</Button>
                     </Form>
                 </div>
             </div>

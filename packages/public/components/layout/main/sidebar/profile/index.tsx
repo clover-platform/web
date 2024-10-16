@@ -3,13 +3,13 @@ import { Dropdown, DropdownMenuItemProps, useAlert, useMessage } from "@easykit/
 import classNames from 'classnames';
 import { logout } from "@clover/public/rest/auth";
 import { UNAUTHORIZED } from "@clover/public/events/auth";
-import bus from '@easy-kit/common/events';
+import bus from '@easykit/common/events';
 import {clearToken} from "@clover/public/utils/token";
 
 const menus: DropdownMenuItemProps[] = [
     {
         id: 'profile',
-        label: '{#个人资料#}',
+        label: t("个人资料"),
         type: 'item',
     },
     {
@@ -18,7 +18,7 @@ const menus: DropdownMenuItemProps[] = [
     },
     {
         id: 'exit',
-        label: '{#退出#}',
+        label: t("退出"),
         type: 'item',
     },
 ]
@@ -30,9 +30,9 @@ export const SidebarProfile = () => {
         onItemClick={({id}) => {
             if(id === 'exit') {
                 alert.confirm({
-                    title: '{#确认#}',
-                    description: '{#是否要退出当前账号？#}',
-                    okText: '{#退出#}',
+                    title: t("确认"),
+                    description: t("是否要退出当前账号？"),
+                    okText: t("退出"),
                     onOk: async () => {
                         const { success, message } = await logout();
                         if(success) {

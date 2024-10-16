@@ -1,5 +1,5 @@
-import {post, get} from "@easy-kit/common/utils/rest";
-import {PageRequest, RestResult} from "@easy-kit/common/types/rest";
+import {post, get} from "@easykit/common/utils/rest";
+import {PageRequest, RestResult} from "@easykit/common/types/rest";
 import {Book} from "@/types/pages/book";
 
 export type CreateBookData = {

@@ -9,7 +9,7 @@ const FONT_FAMILY_GROUPS = [
     {
         label: 'Sans Serif',
         options: [
-            { label: '{#默认#}', value: '' },
+            { label: t("默认"), value: '' },
             { label: 'Arial', value: 'Arial' },
             { label: 'Helvetica', value: 'Helvetica' },
         ],
@@ -40,7 +40,7 @@ export type FontFamilyPickerProps = {
 
 export const FontFamilyPicker = ({ onChange, value }: FontFamilyPickerProps) => {
     const currentValue = FONT_FAMILIES.find(size => size.value === value)
-    const currentFontLabel = currentValue?.label.split(' ')[0] || '{#默认#}'
+    const currentFontLabel = currentValue?.label.split(' ')[0] || t("默认")
 
     const selectFont = useCallback((font: string) => () => onChange(font), [onChange])
 

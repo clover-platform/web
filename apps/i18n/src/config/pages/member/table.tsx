@@ -7,25 +7,25 @@ import { MemberRole } from "@/components/pages/member/role";
 export const FILTERS: FilterItemProps[] = [
     {
         field: 'keyword',
-        render: () => <Input placeholder={"{#请输入关键词#}"}/>,
+        render: () => <Input placeholder={t("请输入关键词")}/>,
     },
 ]
 
 export const COLUMNS: DataTableColumn<Member>[] = [
     {
         accessorKey: "user.username",
-        header: "{#名称#}",
+        header: t("名称"),
         enableHiding: false,
         className: "w-[200px] min-w-[200px]",
     },
     {
         accessorKey: "user.email",
-        header: "{#邮箱#}",
+        header: t("邮箱"),
         className: "min-w-[200px]",
     },
     {
         accessorKey: "type",
-        header: "{#角色#}",
+        header: t("角色"),
         enableHiding: false,
         className: "w-[200px] min-w-[200px]",
         cell: (cell) => {
@@ -42,6 +42,6 @@ export const ROW_ACTIONS: DropdownMenuItemProps[] = [
     {
         id: "detail",
         type: "item",
-        label: "{#详情#}"
+        label: t("详情")
     },
 ];

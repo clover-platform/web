@@ -8,7 +8,7 @@ const ProjectPage = () => {
         active: "project",
         path: [
             {
-                title: "{#项目#}",
+                title: t("项目"),
                 type: "item",
             }
         ],

@@ -8,7 +8,7 @@ const TaskPage = () => {
         active: "task.list",
         path: [
             {
-                title: "{#任务#}",
+                title: t("任务"),
                 type: "item",
             }
         ],

@@ -1,12 +1,12 @@
 import { EntryComment } from "@/types/pages/entry";
 import { FC } from "react";
 import {Avatar, useAlert, useMessage} from "@easykit/design";
-import { TimeAgo } from "@easy-kit/common/components/time-ago";
+import { TimeAgo } from "@easykit/common/components/time-ago";
 import {Action} from "@clover/public/components/common/action";
 import classNames from "classnames";
 import {useProfile} from "@clover/public/hooks/use.profile";
 import {deleteComment} from "@/rest/entry.comment";
-import bus from "@easy-kit/common/events";
+import bus from "@easykit/common/events";
 import {ENTRY_COMMENT_RELOAD} from "@/events/worktop";
 import { IconDelete } from "@arco-iconbox/react-clover";
 
@@ -22,8 +22,8 @@ export const CommentListItem: FC<CommentListItemProps> = (props) => {
 
     const del = () => {
         alert.confirm({
-            title: "{#撤销批准#}",
-            description: "{#是否撤销此翻译的有效结果#}",
+            title: t("撤销批准"),
+            description: t("是否撤销此翻译的有效结果"),
             onOk: async () => {
                 const { success, message } = await deleteComment(item.id)
                 if(success) {

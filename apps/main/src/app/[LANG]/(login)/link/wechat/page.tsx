@@ -2,7 +2,7 @@ import {keywords, title} from "@clover/public/utils/seo";
 import LinkPage from "@/components/pages/link";
 
 export const metadata = {
-    title: title("{#快捷登录 - 微信#}"),
+    title: title(t("快捷登录 - 微信")),
     keywords: keywords(),
 }
 

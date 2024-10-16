@@ -24,7 +24,7 @@ importers:
       '@clover/public':
         specifier: workspace:*
         version: link:packages/public
-      '@easy-kit/common':
+      '@easykit/common':
         specifier: workspace:*
         version: link:packages/common
       '@easykit/design':
@@ -422,8 +422,6 @@ importers:
       typescript:
         specifier: 5.5.3
         version: 5.5.3
-
-  packages/i18n: {}
 
   packages/launcher:
     dependencies:

@@ -16,7 +16,7 @@ export const ActivityList: FC<ActivityListProps> = (props) => {
     } = props;
 
     return <div className={"space-y-4"}>
-        { !loading && items.length === 0 ? <Empty text={"{#暂无动态#}"} /> : null  }
+        { !loading && items.length === 0 ? <Empty text={t("暂无动态")} /> : null  }
         { items.map((item) => <ActivityListGroup key={item.time} title={item.time} items={item.list}/>) }
         { loading && [1, 2].map((item) => <ActivityListGroupLoading key={item}/>) }
     </div>

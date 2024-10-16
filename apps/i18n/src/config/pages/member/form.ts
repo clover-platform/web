@@ -1,12 +1,12 @@
 import * as z from "zod";
-import {isEmail} from "@easy-kit/common/utils";
+import {isEmail} from "@easykit/common/utils";
 
 export const SCHEMA = z.object({
     roles: z.array(z.string())
-        .min(1, "{#请选择角色#}"),
+        .min(1, t("请选择角色")),
     emails: z.string()
-        .min(1, "{#请选择创建方式#}")
-        .max(1024, "{#最多 1024 个字符#}"),
+        .min(1, t("请选择创建方式"))
+        .max(1024, t("最多 1024 个字符")),
     content: z.string().optional(),
 }).superRefine(({emails}, ctx) => {
     if (!emails) return;
@@ -16,7 +16,7 @@ export const SCHEMA = z.object({
         ctx.addIssue({
             code: 'custom',
             path: ['emails'],
-            message: '{#请检查邮箱格式是否正常#}'
+            message: t("请检查邮箱格式是否正常")
         })
     }
 });

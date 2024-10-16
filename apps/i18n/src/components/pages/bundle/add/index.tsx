@@ -2,7 +2,7 @@
 
 import {TitleBar} from "@clover/public/components/common/title-bar";
 import { Button, Space, useMessage } from "@easykit/design";
-import BackButton from "@easy-kit/common/components/button/back";
+import BackButton from "@easykit/common/components/button/back";
 import {useState} from "react";
 import {BundleForm} from "@/components/pages/bundle/form";
 import { create, AddBundleData } from "@/rest/bundle";
@@ -15,13 +15,13 @@ export const AddBundlePage = () => {
         active: "download",
         path: [
             {
-                title: "{#下载#}",
+                title: t("下载"),
                 type: "link",
                 href: "/{#LANG#}/i18n/bundle/",
                 withQuery: true,
             },
             {
-                title: "{#添加文件#}",
+                title: t("添加文件"),
                 type: "item",
             }
         ],
@@ -45,10 +45,10 @@ export const AddBundlePage = () => {
     }
 
     return <>
-        <TitleBar title={"{#添加文件#}"} />
+        <TitleBar title={t("添加文件")} />
         <BundleForm onSubmit={onSubmit}>
             <Space>
-                <Button loading={loading} type={"submit"}>{"{#提交#}"}</Button>
+                <Button loading={loading} type={"submit"}>{t("提交")}</Button>
                 <BackButton />
             </Space>
         </BundleForm>

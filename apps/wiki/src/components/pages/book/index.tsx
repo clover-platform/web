@@ -7,7 +7,7 @@ export const BookPage = () => {
     useLayoutConfig<BookLayoutProps>({
         path: [
             {
-                title: "{#知识库#}",
+                title: t("知识库"),
                 type: "item",
             }
         ],

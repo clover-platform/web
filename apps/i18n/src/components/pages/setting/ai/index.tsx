@@ -10,20 +10,20 @@ export const ModuleSettingAIPage = () => {
         active: "setting",
         path: [
             {
-                title: "{#设置#}",
+                title: t("设置"),
                 type: "link",
                 href: "/{#LANG#}/i18n/setting/",
                 withQuery: true,
             },
             {
-                title: "{#AI#}",
+                title: t("AI"),
                 type: "item",
             }
         ],
     })
     return <>
         <TitleBar
-            title={"{#设置#}"}
+            title={t("设置")}
             border={false}
         />
         <SettingTabsTitle active={"ai"} />

@@ -6,6 +6,6 @@ export type TimeAgoProps = {
 }
 
 export const TimeAgo: FC<TimeAgoProps> = (props) => {
-    const timeAgo = new JTimeAgo('{#LANG#}')
+    const timeAgo = new JTimeAgo(t("LANG"))
     return timeAgo.format(new Date(props.time))
 }

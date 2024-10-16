@@ -8,7 +8,7 @@ import { ResultPanel } from "@/components/pages/worktop/main/panel/result";
 import { PluginPanel } from "@/components/pages/worktop/main/panel/plugin";
 import { useEntriesLoader } from "@/components/layout/worktop/hooks";
 import classNames from "classnames";
-import bus from "@easy-kit/common/events";
+import bus from "@easykit/common/events";
 import {ENTRY_RELOAD} from "@/events/worktop";
 
 export const MainPanel = () => {

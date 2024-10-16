@@ -75,7 +75,7 @@ export const MentionsEditor = forwardRef<any, CommentEditorProps>((props, ref) =
     return <div
         onInput={onInput}
         ref={editorRef}
-        data-tip={"{#输入 @ 以提及其他人#}"}
+        data-tip={t("输入 @ 以提及其他人")}
         className={classNames(
             "comment-editor",
             "outline-none p-2 min-h-20 max-h-32",

@@ -4,7 +4,7 @@ import {PageProps} from "@/types/pages/page";
 import {detail} from "@/rest/page";
 
 export const metadata = {
-    title: title("{#详情#}"),
+    title: title(t("详情")),
     keywords: keywords(),
 }
 

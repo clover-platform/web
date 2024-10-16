@@ -15,7 +15,7 @@ export const MainLayout: FC<MainLayoutProps> = (origin) => {
         {...props}
         sidebarProps={{
             menus: NAV_MENUS,
-            title: "{#你的工作#}",
+            title: t("你的工作"),
             active: props.active
         }}
     >

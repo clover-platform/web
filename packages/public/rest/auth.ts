@@ -1,5 +1,5 @@
-import {get, post} from "@easy-kit/common/utils/rest";
-import { RestResult } from "@easy-kit/common/types/rest";
+import {get, post} from "@easykit/common/utils/rest";
+import { RestResult } from "@easykit/common/types/rest";
 import {Account} from "@clover/public/types/account";
 
 export const login = async (data: {

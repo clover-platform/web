@@ -1,5 +1,5 @@
-import { RestResult } from "@easy-kit/common/types/rest";
-import {del, get, post, put} from "@easy-kit/common/utils/rest";
+import { RestResult } from "@easykit/common/types/rest";
+import {del, get, post, put} from "@easykit/common/utils/rest";
 import {BaseInfo, InviteDetail, Language, UpdateInfo} from "@/types/pages/module";
 
 export const list = async (params: any): Promise<RestResult<any>> =>

@@ -1,4 +1,4 @@
-import {RestResult} from "@easy-kit/common/types/rest";
+import {RestResult} from "@easykit/common/types/rest";
 
 export type ActivityQueryParams = {
     moduleId: number;

@@ -41,7 +41,7 @@ export const InvitePageBody: FC<InvitePageBodyProps> = (props) => {
 
     return <div className={"w-[360px] space-y-4 mt-8"}>
         <div className={"text-base"}>
-            {"{#邀请你加入翻译项目#}"}
+            {t("邀请你加入翻译项目")}
         </div>
         <div className={"space-y-2"}>
             <div className={"space-x-2 text-muted-foreground"}>
@@ -81,9 +81,9 @@ export const InvitePageBody: FC<InvitePageBodyProps> = (props) => {
         </div>
         <div className={"!mt-8 flex space-x-2"}>
             {
-                isLogin ? <Button loading={submitting} onClick={acceptInvite} className={"w-full"}>{"{#加入#}"}</Button> : <>
-                    <Button onClick={login} className={"flex-1"}>{"{#登录#}"}</Button>
-                    <Button onClick={register} variant={"outline"} className={"flex-1"}>{"{#注册#}"}</Button>
+                isLogin ? <Button loading={submitting} onClick={acceptInvite} className={"w-full"}>{t("加入")}</Button> : <>
+                    <Button onClick={login} className={"flex-1"}>{t("登录")}</Button>
+                    <Button onClick={register} variant={"outline"} className={"flex-1"}>{t("注册")}</Button>
                 </>
             }
         </div>

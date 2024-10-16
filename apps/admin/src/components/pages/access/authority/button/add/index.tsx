@@ -1,6 +1,7 @@
 import {FC, useState} from "react";
 import {Button} from "@easykit/design";
 import AddAuthorityDialog from "@/components/pages/access/authority/dialog/add";
+import { t } from '@easykit/common/utils/locale'
 
 export interface AddAuthorityButtonProps {
     onSuccess?: () => void;
@@ -15,7 +16,7 @@ const AddAuthorityButton: FC<AddAuthorityButtonProps> = (props) => {
 
     return <>
         <Button onClick={() => setVisible(true)}>
-            {"{#添加#}"}
+            {t("添加")}
         </Button>
         <AddAuthorityDialog
             visible={visible}

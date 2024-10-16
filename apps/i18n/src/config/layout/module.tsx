@@ -10,37 +10,37 @@ const base = "/{#LANG#}/i18n"
 export const NAV_MENUS: MenuItemProps[] = [
     {
         id: "dashboard",
-        title: "{#概览#}",
+        title: t("概览"),
         url: `${base}/dashboard/`,
         icon: <IconDashboard />,
     },
     {
         id: "branch",
-        title: "{#分支#}",
+        title: t("分支"),
         url: `${base}/branch/`,
         icon: <IconBranch />,
     },
     {
         id: "download",
-        title: "{#下载#}",
+        title: t("下载"),
         url: `${base}/bundle/`,
         icon: <IconDownload />,
     },
     {
         id: "member",
-        title: "{#成员#}",
+        title: t("成员"),
         url: `${base}/member/`,
         icon: <IconMember />,
     },
     {
         id: "activity",
-        title: "{#动态#}",
+        title: t("动态"),
         url: `${base}/activity/`,
         icon: <IconActivity />,
     },
     {
         id: "setting",
-        title: "{#设置#}",
+        title: t("设置"),
         url: `${base}/setting/`,
         icon: <IconSetting />,
     },

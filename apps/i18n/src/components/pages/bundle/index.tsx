@@ -5,7 +5,7 @@ import {Button, DataTable} from "@easykit/design";
 import {COLUMNS, ROW_ACTIONS} from "@/config/pages/bundle/table";
 import {list} from "@/rest/bundle";
 import {Bundle} from "@/types/pages/bundle";
-import {useTableLoader} from "@easy-kit/common/hooks";
+import {useTableLoader} from "@easykit/common/hooks";
 import {useSearchParams} from "next/navigation";
 import {useEffect} from "react";
 import {IconAdd} from "@arco-iconbox/react-clover";
@@ -20,7 +20,7 @@ export const BundlePage = () => {
         active: "download",
         path: [
             {
-                title: "{#下载#}",
+                title: t("下载"),
                 type: "item",
             }
         ],
@@ -44,7 +44,7 @@ export const BundlePage = () => {
         <Link href={"/{#LANG#}/i18n/bundle/add/?id=" + id}>
             <Button type={"button"}>
                 <IconAdd />
-                <span>{"{#添加文件#}"}</span>
+                <span>{t("添加文件")}</span>
             </Button>
         </Link>
 
@@ -52,7 +52,7 @@ export const BundlePage = () => {
 
     return <>
         <TitleBar
-            title={"{#下载#}"}
+            title={t("下载")}
             actions={actions}
             border={false}
         />

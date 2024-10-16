@@ -7,7 +7,7 @@ import { add } from "@/rest/entry.comment";
 import { useRecoilValue } from "recoil";
 import { currentEntryState, currentLanguageState, entriesState } from "@/state/worktop";
 import classNames from "classnames";
-import bus from '@easy-kit/common/events';
+import bus from '@easykit/common/events';
 import { ENTRY_COMMENT_RELOAD } from "@/events/worktop";
 
 export const CommentEditor = () => {
@@ -22,7 +22,7 @@ export const CommentEditor = () => {
 
     const send = async () => {
         if(!value) {
-            msg.error("{#请输入评论内容#}");
+            msg.error(t("请输入评论内容"));
             return;
         }
         setLoading(true);

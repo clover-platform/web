@@ -34,7 +34,7 @@ export const DashboardPage = () => {
         active: "dashboard",
         path: [
             {
-                title: "{#概览#}",
+                title: t("概览"),
                 type: "item",
             }
         ],
@@ -72,13 +72,13 @@ export const DashboardPage = () => {
 
     const actions = <Space>
         <Link href={"/{#LANG#}/i18n/worktop/?id=" + id}>
-            <Button>{"{#工作台#}"}</Button>
+            <Button>{t("工作台")}</Button>
         </Link>
     </Space>;
 
     return <>
         <TitleBar
-            title={"{#概览#}"}
+            title={t("概览")}
             actions={actions}
             border={false}
         />
@@ -89,8 +89,8 @@ export const DashboardPage = () => {
                         <Table className={"min-w-[600px]"}>
                             <TableHeader>
                                 <TableRow>
-                                    <TableHead>{"{#语言#}"}</TableHead>
-                                    <TableHead className={"w-64"}>{"{#进度#}"}</TableHead>
+                                    <TableHead>{t("语言")}</TableHead>
+                                    <TableHead className={"w-64"}>{t("进度")}</TableHead>
                                     <TableHead className={"w-24"}></TableHead>
                                 </TableRow>
                             </TableHeader>
@@ -109,28 +109,28 @@ export const DashboardPage = () => {
                     </ScrollArea>
                 </div>
                 <div className={"w-96 bg-muted p-4 rounded-md"}>
-                    <DetailTitle title={"{#详情#}"}>
-                        {i18n("{#编号：%id#}", {id})}
+                    <DetailTitle title={t("详情")}>
+                        {i18n(t("编号：%id"), {id})}
                     </DetailTitle>
                     <div className={"space-y-3"}>
-                        <DetailInfoItem label="{#源语言#}">
+                        <DetailInfoItem label=t("源语言")>
                             { all.filter((item) => item.code === detail.source).map((item) => item.name).join("") || '' }
                         </DetailInfoItem>
-                        <DetailInfoItem label="{#项目成员#}">
+                        <DetailInfoItem label=t("项目成员")>
                             {count?.memberCount || '--'}
                         </DetailInfoItem>
-                        <DetailInfoItem label="{#词条#}">
+                        <DetailInfoItem label=t("词条")>
                             {count?.wordCount || '--'}
                         </DetailInfoItem>
-                        <DetailInfoItem label="{#创建时间#}">
+                        <DetailInfoItem label=t("创建时间")>
                             <ValueFormatter value={detail.createTime} formatters={["time"]}/>
                         </DetailInfoItem>
-                        <DetailInfoItem label="{#更新时间#}">
+                        <DetailInfoItem label=t("更新时间")>
                             <ValueFormatter value={detail.updateTime} formatters={["time"]}/>
                         </DetailInfoItem>
                     </div>
                     <Separator className={"my-4"}/>
-                    <DetailTitle title={"{#管理员#}"}/>
+                    <DetailTitle title={t("管理员")}/>
                     <div className={"space-y-3"}>
                         { members.map((item) => <MemberItem key={item.id} {...item} />) }
                     </div>

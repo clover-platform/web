@@ -15,7 +15,7 @@ export const EditEntryButton: FC<EditEntryButtonProps> = (props) => {
     const [visible, setVisible] = useState(false);
 
     return <>
-        <Tooltip content={"{#编辑#}"}>
+        <Tooltip content={t("编辑")}>
             <Action onClick={() => setVisible(true)}>
                 <Pencil1Icon />
             </Action>

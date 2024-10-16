@@ -7,7 +7,7 @@ export const useTextmenuContentTypes = (editor: Editor) => {
         return [
             {
                 type: 'category',
-                label: '{#内容#}',
+                label: t("内容"),
                 id: 'hierarchy',
             },
             {
@@ -20,7 +20,7 @@ export const useTextmenuContentTypes = (editor: Editor) => {
           !editor.isActive('orderedList') &&
           !editor.isActive('bulletList') &&
           !editor.isActive('taskList'),
-                label: '{#正文#}',
+                label: t("正文"),
                 type: 'option',
             },
             {
@@ -29,7 +29,7 @@ export const useTextmenuContentTypes = (editor: Editor) => {
                 id: 'heading1',
                 disabled: () => !editor.can().setHeading({ level: 1 }),
                 isActive: () => editor.isActive('heading', { level: 1 }),
-                label: '{#标题一#}',
+                label: t("标题一"),
                 type: 'option',
             },
             {
@@ -38,7 +38,7 @@ export const useTextmenuContentTypes = (editor: Editor) => {
                 id: 'heading2',
                 disabled: () => !editor.can().setHeading({ level: 2 }),
                 isActive: () => editor.isActive('heading', { level: 2 }),
-                label: '{#标题二#}',
+                label: t("标题二"),
                 type: 'option',
             },
             {
@@ -47,12 +47,12 @@ export const useTextmenuContentTypes = (editor: Editor) => {
                 id: 'heading3',
                 disabled: () => !editor.can().setHeading({ level: 3 }),
                 isActive: () => editor.isActive('heading', { level: 3 }),
-                label: '{#标题三#}',
+                label: t("标题三"),
                 type: 'option',
             },
             {
                 type: 'category',
-                label: '{#列表#}',
+                label: t("列表"),
                 id: 'lists',
             },
             {
@@ -61,7 +61,7 @@ export const useTextmenuContentTypes = (editor: Editor) => {
                 id: 'bulletList',
                 disabled: () => !editor.can().toggleBulletList(),
                 isActive: () => editor.isActive('bulletList'),
-                label: '{#无序列表#}',
+                label: t("无序列表"),
                 type: 'option',
             },
             {
@@ -70,7 +70,7 @@ export const useTextmenuContentTypes = (editor: Editor) => {
                 id: 'orderedList',
                 disabled: () => !editor.can().toggleOrderedList(),
                 isActive: () => editor.isActive('orderedList'),
-                label: '{#有序列表#}',
+                label: t("有序列表"),
                 type: 'option',
             },
             {
@@ -79,7 +79,7 @@ export const useTextmenuContentTypes = (editor: Editor) => {
                 id: 'todoList',
                 disabled: () => !editor.can().toggleTaskList(),
                 isActive: () => editor.isActive('taskList'),
-                label: '{#待办列表#}',
+                label: t("待办列表"),
                 type: 'option',
             },
         ]

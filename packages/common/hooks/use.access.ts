@@ -1,5 +1,5 @@
-import {useRecoilValue} from "@easy-kit/common/state";
-import {accessState} from "@easy-kit/common/state/access";
+import {useRecoilValue} from "@easykit/common/state";
+import {accessState} from "@easykit/common/state/access";
 
 export type AccessChecker = (v: string|string[]|undefined, every?: boolean) => boolean;
 

@@ -32,7 +32,7 @@ export const RenameBranchModal: FC<RenameBranchModalProps> = (props) => {
 
     return <Dialog
         {...props}
-        title={"{#新建分支#}"}
+        title={t("新建分支")}
         maskClosable={false}
     >
         <Form
@@ -40,17 +40,17 @@ export const RenameBranchModal: FC<RenameBranchModalProps> = (props) => {
             onSubmit={onSubmit}
             defaultValues={branch}
         >
-            <FormItem name="name" label="{#分支名#}" description={"{#使用分支控制，可以在不影响主分支的情况下，推进翻译的改进。#}"}>
-                <Input placeholder={"{#请输入分支名#}"} />
+            <FormItem name="name" label=t("分支名") description={t("使用分支控制，可以在不影响主分支的情况下，推进翻译的改进。")}>
+                <Input placeholder={t("请输入分支名")} />
             </FormItem>
             <Space className={"justify-end"}>
-                <Button loading={loading} type={"submit"}>{"{#保存#}"}</Button>
+                <Button loading={loading} type={"submit"}>{t("保存")}</Button>
                 <Button
                     variant={"outline"}
                     type={"button"}
                     onClick={() => props.onCancel?.()}
                 >
-                    {"{#取消#}"}
+                    {t("取消")}
                 </Button>
             </Space>
         </Form>

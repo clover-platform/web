@@ -8,9 +8,9 @@ export const MenuLanguageSheet = () => {
     const [current, setCurrent] = useRecoilState(currentLanguageState);
 
     return <div className={"space-y-2"}>
-        <div className={"text-xl font-bold"}>{"{#语言#}"}</div>
+        <div className={"text-xl font-bold"}>{t("语言")}</div>
         <Command className={"h-auto"}>
-            <CommandInput className={"h-8"} placeholder="{#请输入关键词#}" />
+            <CommandInput className={"h-8"} placeholder=t("请输入关键词") />
             <SheetClose>
                 <CommandList className={"p-0 mt-2 text-left"}>
                     {

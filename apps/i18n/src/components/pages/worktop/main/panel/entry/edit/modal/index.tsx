@@ -34,18 +34,18 @@ export const EditEntryModal: FC<CreateEntryModalProps> = (props) => {
 
     return <Dialog
         {...props}
-        title={"{#编辑词条#}"}
+        title={t("编辑词条")}
         maskClosable={false}
     >
         <EntryEditForm defaultValues={entry} key={formKey} onSubmit={onSubmit}>
             <div className={"flex justify-end items-center space-x-2"}>
-                <Button loading={loading} type={"submit"}>{"{#保存#}"}</Button>
+                <Button loading={loading} type={"submit"}>{t("保存")}</Button>
                 <Button
                     variant={"outline"}
                     type={"button"}
                     onClick={() => props.onCancel?.()}
                 >
-                    {"{#取消#}"}
+                    {t("取消")}
                 </Button>
             </div>
         </EntryEditForm>

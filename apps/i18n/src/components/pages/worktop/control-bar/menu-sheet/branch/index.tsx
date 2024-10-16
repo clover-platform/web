@@ -9,9 +9,9 @@ export const MenuBranchSheet = () => {
     const setCurrentEntry = useSetRecoilState(currentEntryState);
 
     return <div className={"space-y-2"}>
-        <div className={"text-xl font-bold"}>{"{#分支#}"}</div>
+        <div className={"text-xl font-bold"}>{t("分支")}</div>
         <Command className={"h-auto"}>
-            <CommandInput className={"h-8"} placeholder="{#请输入关键词#}" />
+            <CommandInput className={"h-8"} placeholder=t("请输入关键词") />
             <SheetClose>
                 <CommandList className={"p-0 mt-2 text-left"}>
                     <CommandItem key={'all'} onSelect={() => {
@@ -19,7 +19,7 @@ export const MenuBranchSheet = () => {
                         setCurrent('');
                     }}>
                         <div className={"flex justify-center items-center w-full"}>
-                            <span className={"flex-1"}>{"{#所有分支#}"}</span>
+                            <span className={"flex-1"}>{t("所有分支")}</span>
                             { '' === current ? <CheckIcon /> : null }
                         </div>
                     </CommandItem>

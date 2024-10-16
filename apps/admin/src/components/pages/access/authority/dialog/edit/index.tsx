@@ -2,6 +2,7 @@ import { Dialog, DialogProps } from "@easykit/design";
 import { FC, PropsWithChildren, useEffect, useState } from "react";
 import AuthorityForm from "@/components/pages/access/authority/form";
 import { authorityDetail } from "@/rest/access";
+import { t } from '@easykit/common/utils/locale'
 
 export interface EditAuthorityDialogProps extends PropsWithChildren<DialogProps>{
     onSuccess?: () => void;
@@ -35,7 +36,7 @@ const EditAuthorityDialog: FC<EditAuthorityDialogProps> = (props) => {
     return  <Dialog
         {...props}
         maskClosable={false}
-        title={"{#编辑权限#}"}
+        title={t("编辑权限")}
         className={"w-[460px]"}
         loading={loading}
     >

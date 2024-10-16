@@ -1,4 +1,4 @@
-import Link from "@easy-kit/common/components/link";
+import Link from "@easykit/common/components/link";
 import { PropsWithChildren, useMemo } from "react";
 import { useSearchParams } from "next/navigation";
 

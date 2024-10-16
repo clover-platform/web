@@ -1,7 +1,7 @@
 import Axios, {AxiosRequestConfig} from 'axios';
 const CancelToken = Axios.CancelToken;
 const isDev = process.env.NODE_ENV !== 'production';
-const ERROR_MESSAGE = "{#网络错误#}";
+const ERROR_MESSAGE = t("网络错误");
 const ERROR_CODE = -999;
 const isServer = typeof window === 'undefined';
 

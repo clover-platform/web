@@ -5,7 +5,7 @@ import cloneDeep from 'lodash/cloneDeep';
 import pick from 'lodash/pick';
 import {usePathname, useRouter, useSearchParams} from "next/navigation";
 import {useMessage} from "@easykit/design";
-import { RestResult } from "@easy-kit/common/types/rest";
+import { RestResult } from "@easykit/common/types/rest";
 
 export interface TableLoaderOptions {
     initialParams: any;
@@ -100,10 +100,10 @@ export const useTableLoader = <D> (options: TableLoaderOptions) => {
                 // }
                 setResult(res);
             } else {
-                msg.error(message || "{#网络错误#}")
+                msg.error(message || t("网络错误"))
             }
         } catch (error: any) {
-            msg.error(error.message || "{#网络错误#}")
+            msg.error(error.message || t("网络错误"))
         } finally {
             setLoading(false);
         }

@@ -2,7 +2,7 @@ import {keywords, title} from "@clover/public/utils/seo";
 import {AddBundlePage} from "@/components/pages/bundle/add";
 
 export const metadata = {
-    title: title("{#添加文件#}"),
+    title: title(t("添加文件")),
     keywords: keywords(),
 }
 

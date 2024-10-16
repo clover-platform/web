@@ -17,7 +17,7 @@ export const ActivityPage = () => {
         active: "activity",
         path: [
             {
-                title: "{#动态#}",
+                title: t("动态"),
                 type: "item",
             }
         ],
@@ -80,14 +80,14 @@ export const ActivityPage = () => {
     }, [list])
 
     return <>
-        <TitleBar title={"{#动态#}"} border={false} />
+        <TitleBar title={t("动态")} border={false} />
         <ActivityList
             loading={loading}
             items={items}
         />
         {
             !loading && total > list.length ? <div className={"w-full flex justify-center"}>
-                <Button onClick={loadMore} variant="link">{"{#加载更多#}"}</Button>
+                <Button onClick={loadMore} variant="link">{t("加载更多")}</Button>
             </div> : null
         }
     </>

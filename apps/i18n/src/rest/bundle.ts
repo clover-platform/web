@@ -1,5 +1,5 @@
-import {RestResult} from "@easy-kit/common/types/rest";
-import {get, post} from "@easy-kit/common/utils/rest";
+import {RestResult} from "@easykit/common/types/rest";
+import {get, post} from "@easykit/common/utils/rest";
 import {Bundle} from "@/types/pages/bundle";
 
 export type BundleQuery = {

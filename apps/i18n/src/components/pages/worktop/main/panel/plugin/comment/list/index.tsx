@@ -3,7 +3,7 @@ import { useRecoilValue } from "recoil";
 import { currentEntryState, currentLanguageState, entriesState } from "@/state/worktop";
 import { list as listRest } from "@/rest/entry.comment";
 import { ENTRY_COMMENT_RELOAD } from "@/events/worktop";
-import bus from '@easy-kit/common/events';
+import bus from '@easykit/common/events';
 import { CommentListItem } from "@/components/pages/worktop/main/panel/plugin/comment/list/item";
 import { EntryComment } from "@/types/pages/entry";
 import {Button, Empty, ScrollArea} from "@easykit/design";
@@ -68,10 +68,10 @@ export const CommentList = () => {
             <div className={"space-y-3 pb-2"}>
                 { list.map((item) => <CommentListItem key={item.id} item={item} />) }
                 { loading ? <CommentListLoading/> : null }
-                { !loading && list.length === 0 ? <Empty text={"{#暂无评论#}"}/> : null }
+                { !loading && list.length === 0 ? <Empty text={t("暂无评论")}/> : null }
                 {
                     !loading && total > list.length ? <div className={"w-full flex justify-center"}>
-                        <Button onClick={loadMore} variant="link">{"{#加载更多#}"}</Button>
+                        <Button onClick={loadMore} variant="link">{t("加载更多")}</Button>
                     </div> : null
                 }
             </div>

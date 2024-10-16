@@ -39,7 +39,7 @@ export const failover = (v: string) => {
 }
 
 export const getLangCode = () => {
-    const lang = "{#LANG#}";
+    const lang = t("LANG");
     const item = langList.find(({key}) => (key === lang))
     if(item) return item.code;
     return 'zh-CN';

@@ -26,14 +26,14 @@ export const BookLayout: FC<BookLayoutProps> = (origin) => {
         const list: MenuItemProps[] = [
             {
                 id: "home",
-                title: "{#首页#}",
+                title: t("首页"),
                 url: `/{#LANG#}/wiki/book/?id=${id}`,
                 icon: <IconHome />,
             },
             {
                 id: "catalog",
                 title: <div className={"flex justify-center items-center"}>
-                    <div className={"flex-1"}>{"{#目录#}"}</div>
+                    <div className={"flex-1"}>{t("目录")}</div>
                     <div className={"-mr-3 flex space-x-1"}>
                         <AddPageAction className={"w-6 h-6 !p-0"} />
                         <ExpandAction
@@ -68,13 +68,13 @@ export const BookLayout: FC<BookLayoutProps> = (origin) => {
         {...props}
         sidebarProps={{
             menus: menus,
-            title: "{#知识库#}",
+            title: t("知识库"),
             active: props.active,
             extra,
         }}
         path={[
             {
-                title: "{#文档#}",
+                title: t("文档"),
                 type: "link",
                 href: "/{#LANG#}/wiki/",
                 withQuery: false,

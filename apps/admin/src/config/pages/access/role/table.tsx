@@ -6,11 +6,11 @@ import {RoleStatus} from "@/components/pages/access/role/status";
 export const FILTERS: FilterItemProps[] = [
     {
         field: 'keyword',
-        render: () => <Input placeholder={"{#请输入关键词#}"}/>,
+        render: () => <Input placeholder={t("请输入关键词")}/>,
     },
     {
         field: 'enable',
-        label: '{#启用状态#}',
+        label: t("启用状态"),
         render: () => <EnableSelector />,
     }
 ]
@@ -18,20 +18,20 @@ export const FILTERS: FilterItemProps[] = [
 export const COLUMNS: DataTableColumn<any>[] = [
     {
         accessorKey: "name",
-        header: "{#名称#}",
+        header: t("名称"),
         enableHiding: false,
         className: "w-[300px] min-w-[200px]",
     },
     {
         accessorKey: "description",
-        header: "{#描述#}",
+        header: t("描述"),
         enableHiding: false,
         className: "min-w-[300px]"
     },
     {
         accessorKey: "enable",
         enableHiding: false,
-        header: "{#启用状态#}",
+        header: t("启用状态"),
         className: "w-[100px] min-w-[100px]",
         cell: ({ row }) => {
             const data = row.original as any;
@@ -45,12 +45,12 @@ export const ROW_ACTIONS = (cell: any): DropdownMenuItemProps[] => {
         {
             id: "detail",
             type: "item",
-            label: "{#详情#}"
+            label: t("详情")
         },
         {
             id: "edit",
             type: "item",
-            label: "{#编辑#}"
+            label: t("编辑")
         },
         {
             type: "separator",
@@ -59,12 +59,12 @@ export const ROW_ACTIONS = (cell: any): DropdownMenuItemProps[] => {
         {
             id: cell.enable ? "disable" : "enable",
             type: "item",
-            label: cell.enable ? "{#禁用#}": "{#启用#}"
+            label: cell.enable ? t("禁用"): t("启用")
         },
         {
             id: "delete",
             type: "item",
-            label: "{#删除#}"
+            label: t("删除")
         },
     ];
 }

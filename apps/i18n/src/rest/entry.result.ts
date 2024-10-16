@@ -1,5 +1,5 @@
-import { RestResult } from "@easy-kit/common/types/rest";
-import { post, get, del, put } from "@easy-kit/common/utils/rest";
+import { RestResult } from "@easykit/common/types/rest";
+import { post, get, del, put } from "@easykit/common/utils/rest";
 import { EntryResultPage } from "@/types/pages/entry";
 
 export type SaveEntryResultData = {

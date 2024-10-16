@@ -9,7 +9,7 @@ import {HomeStart, StartItem} from "@/components/pages/home/start";
 import {CreateBookModal} from "@/components/pages/home/create/modal";
 import {COLUMNS, FILTERS, ROW_ACTIONS} from "@/config/pages/book";
 import {DataTable} from "@easykit/design";
-import {useTableLoader} from "@easy-kit/common/hooks";
+import {useTableLoader} from "@easykit/common/hooks";
 import {list} from "@/rest/book";
 import {Book} from "@/types/pages/book";
 
@@ -22,15 +22,15 @@ export const SectionTitle: FC<PropsWithChildren> = (props) => {
 export const TABS: TabsTitleItem[] = [
     {
         id: "all",
-        title: "{#全部#}",
+        title: t("全部"),
     },
     {
         id: "create",
-        title: "{#由我创建#}",
+        title: t("由我创建"),
     },
     {
         id: "join",
-        title: "{#我加入的#}",
+        title: t("我加入的"),
     }
 ]
 
@@ -43,7 +43,7 @@ export const IndexPage = () => {
         active: "wiki",
         path: [
             {
-                title: "{#文档#}",
+                title: t("文档"),
                 type: "item",
             }
         ],
@@ -78,9 +78,9 @@ export const IndexPage = () => {
 
     return <div className={"flex justify-center"}>
         <div className={"container space-y-4"}>
-            <SectionTitle>{"{#开始#}"}</SectionTitle>
+            <SectionTitle>{t("开始")}</SectionTitle>
             <HomeStart onClick={onStartClick} />
-            <SectionTitle>{"{#知识库#}"}</SectionTitle>
+            <SectionTitle>{t("知识库")}</SectionTitle>
             <div>
                 <TabsTitle
                     active={active}

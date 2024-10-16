@@ -15,17 +15,17 @@ export type ExportFormatConfig = {
 export const SUPPORTED_FORMATS: ExportFormatConfig[] = [
     {
         id: "android",
-        name: "{#安卓资源文件#}",
+        name: t("安卓资源文件"),
         icon: <IconAndroid className={"w-8 h-8"}/>,
     },
     {
         id: "ios",
-        name: "{#iOS 资源文件#}",
+        name: t("iOS 资源文件"),
         icon: <IconIOS className={"w-8 h-8"}/>,
     },
     {
         id: "flutter",
-        name: "{#Flutter .ARB 文件#}",
+        name: t("Flutter .ARB 文件"),
         icon: <IconFlutter className={"w-8 h-8"}/>,
         configComponent: <ARBConfigForm />,
         configDefault: {
@@ -34,7 +34,7 @@ export const SUPPORTED_FORMATS: ExportFormatConfig[] = [
     },
     {
         id: "json",
-        name: "{#JSON 文件#}",
+        name: t("JSON 文件"),
         icon: <IconJSON className={"w-8 h-8"}/>,
         configComponent: <JSONConfigForm />,
         configDefault: {

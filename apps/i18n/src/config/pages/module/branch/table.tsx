@@ -5,23 +5,23 @@ import { Branch } from "@/types/pages/branch";
 export const COLUMNS: DataTableColumn<Branch>[] = [
     {
         accessorKey: "name",
-        header: "{#名称#}",
+        header: t("名称"),
         enableHiding: false,
         className: "min-w-[200px]",
     },
     {
         accessorKey: "isDefault",
-        header: "{#默认分支#}",
+        header: t("默认分支"),
         enableHiding: false,
         className: "!w-[200px]",
         cell: (cell) => {
             const branch = cell.row.original;
-            return branch.isDefault ? <Badge>{"{#是#}"}</Badge> : null;
+            return branch.isDefault ? <Badge>{t("是")}</Badge> : null;
         }
     },
     {
         accessorKey: "updateTime",
-        header: "{#最后更新#}",
+        header: t("最后更新"),
         enableHiding: false,
         formatters: ["time"],
         className: "!w-[200px]",
@@ -31,7 +31,7 @@ export const COLUMNS: DataTableColumn<Branch>[] = [
 export const FILTERS: FilterItemProps[] = [
     {
         field: 'keyword',
-        render: () => <Input placeholder={"{#请输入关键词#}"}/>,
+        render: () => <Input placeholder={t("请输入关键词")}/>,
     },
 ]
 
@@ -41,14 +41,14 @@ export const ROW_ACTIONS = (cell: Branch): DropdownMenuItemProps[] => {
         {
             id: "rename",
             type: "item",
-            label: "{#重命名#}"
+            label: t("重命名")
         },
     ];
     if(!isDefault) {
         items.push({
             id: "merge",
             type: "item",
-            label: "{#合并至默认分支#}"
+            label: t("合并至默认分支")
         })
     }
     if(!isDefault) {
@@ -59,7 +59,7 @@ export const ROW_ACTIONS = (cell: Branch): DropdownMenuItemProps[] => {
         items.push({
             id: "delete",
             type: "item",
-            label: "{#删除#}"
+            label: t("删除")
         })
     }
     return items;

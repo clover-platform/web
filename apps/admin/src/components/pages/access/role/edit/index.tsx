@@ -1,13 +1,14 @@
 'use client';
 
 import {Button, Card, Space, Breadcrumbs, BreadcrumbsItem, useMessage, Loading, Separator} from "@easykit/design";
-import Link from "@easy-kit/common/components/link";
+import Link from "@easykit/common/components/link";
 import RoleForm from "@/components/pages/access/role/form";
 import { useState } from "react";
 import { editRole } from "@/rest/access";
 import {useRouter, useSearchParams} from "next/navigation";
-import BackButton from "@easy-kit/common/components/button/back";
+import BackButton from "@easykit/common/components/button/back";
 import {useRole} from "@/components/pages/access/role/hooks";
+import { t } from '@easykit/common/utils/locale';
 
 const EditRolePage = () => {
     const [submitting, setSubmitting] = useState(false);
@@ -32,9 +33,9 @@ const EditRolePage = () => {
     return <>
         <Breadcrumbs className={"mx-2"}>
             <BreadcrumbsItem>
-                <Link href={"/{#LANG#}/access/"}>{"{#角色管理#}"}</Link>
+                <Link href={"/{#LANG#}/access/"}>{t("角色管理")}</Link>
             </BreadcrumbsItem>
-            <BreadcrumbsItem>{"{#编辑角色#}"}</BreadcrumbsItem>
+            <BreadcrumbsItem>{t("编辑角色")}</BreadcrumbsItem>
         </Breadcrumbs>
         <Separator className={"my-4"} />
         <Loading loading={loading}>
@@ -45,7 +46,7 @@ const EditRolePage = () => {
                     onSubmit={onSubmit}
                 >
                     <Space>
-                        <Button loading={submitting} type={"submit"}>{"{#保存#}"}</Button>
+                        <Button loading={submitting} type={"submit"}>{t("保存")}</Button>
                         <BackButton />
                     </Space>
                 </RoleForm>

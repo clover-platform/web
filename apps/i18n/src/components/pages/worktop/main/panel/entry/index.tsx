@@ -48,7 +48,7 @@ export const EntryPanel: FC<EntryPanelProps> = (props) => {
                     value={keyword}
                     onChange={(e) => setKeyword(e.target.value)}
                     className={"flex-1"}
-                    placeholder={"{#搜索词条#}"}
+                    placeholder={t("搜索词条")}
                     onKeyUp={search}
                 />
                 <CreateEntryButton/>
@@ -76,7 +76,7 @@ export const EntryPanel: FC<EntryPanelProps> = (props) => {
                                     {entry.value}
                                 </div>
                             </div>
-                        }) : <Empty text={"{#暂无词条#}"}/>
+                        }) : <Empty text={t("暂无词条")}/>
                     }
                 </ScrollArea>
                 <div className={"absolute bottom-2 right-2"}>

@@ -1,4 +1,4 @@
-import {atom} from "@easy-kit/common/state";
+import {atom} from "@easykit/common/state";
 
 // 由业务方提供权限值
 

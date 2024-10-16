@@ -8,7 +8,7 @@ const TaskGanttPage = () => {
         active: "task.gantt",
         path: [
             {
-                title: "{#任务#}",
+                title: t("任务"),
                 type: "item",
             }
         ],

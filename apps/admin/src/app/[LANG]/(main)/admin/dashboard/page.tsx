@@ -1,7 +1,8 @@
 import {keywords, title} from "@clover/public/utils/seo";
+import { t } from '@easykit/common/utils/locale'
 
 export const metadata = {
-    title: title("{#管理中心#}"),
+    title: title(t("管理中心")),
     keywords: keywords(),
 }
 

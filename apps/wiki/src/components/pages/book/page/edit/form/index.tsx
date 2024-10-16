@@ -6,8 +6,8 @@ import {StarIcon} from "@radix-ui/react-icons";
 import {Editor, EditorRef} from "@/components/common/editor";
 import {FC, useCallback, useEffect, useRef, useState} from "react";
 import {detail, save} from "@/rest/page";
-import {uuid} from "@easy-kit/common/utils";
-import bus from "@easy-kit/common/events";
+import {uuid} from "@easykit/common/utils";
+import bus from "@easykit/common/events";
 import {UPDATE_TITLE} from "@/events/book";
 import {useRouter, useSearchParams} from "next/navigation";
 import {CollectAction} from "@/components/pages/book/page/actions/collect";
@@ -85,11 +85,11 @@ export const EditForm: FC<PageEditFormProps> = (props) => {
                         )}
                     />
                     <div className={"bg-green-500 h-2 w-2 rounded-full"}/>
-                    <span>{"{#已连接#}"}</span>
+                    <span>{t("已连接")}</span>
                 </div>
                 <Separator orientation={"vertical"} className={"h-6"}/>
                 {
-                    loading ? <Skeleton className={"w-20 h-5"}/> : <span>{i18n("{#%size 字#}", {size: loading ? "--" : size})}</span>
+                    loading ? <Skeleton className={"w-20 h-5"}/> : <span>{i18n(t("%size 字"), {size: loading ? "--" : size})}</span>
                 }
             </div>
             <div className={"flex space-x-2"}>
@@ -103,7 +103,7 @@ export const EditForm: FC<PageEditFormProps> = (props) => {
                     loading={pending}
                     className={"h-8"}
                 >
-                    {"{#更新#}"}
+                    {t("更新")}
                 </Button>
             </div>
         </div>
@@ -130,7 +130,7 @@ export const EditForm: FC<PageEditFormProps> = (props) => {
                         <Input
                             value={title}
                             onChange={(e) => setTitle(e.target.value)}
-                            placeholder={"{#请输入标题#}"}
+                            placeholder={t("请输入标题")}
                             className={"border-none p-0 m-0 h-auto rounded-none shadow-none focus-visible:ring-0 text-2xl font-medium"}
                         />
                     </div>

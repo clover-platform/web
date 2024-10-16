@@ -1,5 +1,5 @@
-import { RestResult } from "@easy-kit/common/types/rest";
-import { get } from "@easy-kit/common/utils/rest";
+import { RestResult } from "@easykit/common/types/rest";
+import { get } from "@easykit/common/utils/rest";
 
 export type MemberQuery = {
     moduleId: number;

@@ -42,26 +42,26 @@ export const MenuSheet: FC<MenuSheetProps> = (props) => {
                     active={active === "project"}
                     onClick={() => setActive("project")}
                     icon={<IconProject className={"text-lg"} />}
-                    label={"{#项目#}"}
+                    label={t("项目")}
                 />
                 <MenuItem
                     active={active === "language"}
                     onClick={() => setActive("language")}
                     icon={<IconTranslation className={"text-lg"} />}
-                    label={"{#语言#}"}
+                    label={t("语言")}
                 />
                 <MenuItem
                     active={active === "branch"}
                     onClick={() => setActive("branch")}
                     icon={<IconBranch className={"text-lg"} />}
-                    label={"{#分支#}"}
+                    label={t("分支")}
                 />
                 <Separator className={"my-1"} />
                 <MenuItem
                     active={active === "help"}
                     onClick={() => setActive("help")}
                     icon={<IconHelp className={"text-lg"} />}
-                    label={"{#帮助#}"}
+                    label={t("帮助")}
                 />
             </div>
             <div className={"flex-grow p-3"}>

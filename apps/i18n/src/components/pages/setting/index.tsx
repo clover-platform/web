@@ -26,13 +26,13 @@ export const ModuleSettingPage = () => {
         active: "setting",
         path: [
             {
-                title: "{#设置#}",
+                title: t("设置"),
                 type: "link",
                 href: "/{#LANG#}/i18n/setting/",
                 withQuery: true,
             },
             {
-                title: "{#常规#}",
+                title: t("常规"),
                 type: "item",
             }
         ],
@@ -81,8 +81,8 @@ export const ModuleSettingPage = () => {
 
     const remove = () => {
         alert.confirm({
-            title: "{#删除#}",
-            description: "{#删除该翻译项目，所以的翻译数据将无法使用，是否继续？#}",
+            title: t("删除"),
+            description: t("删除该翻译项目，所以的翻译数据将无法使用，是否继续？"),
             onOk: async () => {
                 const { success, message } = await deleteModule(Number(id));
                 if(success) {
@@ -97,12 +97,12 @@ export const ModuleSettingPage = () => {
 
     return <>
         <TitleBar
-            title={"{#设置#}"}
+            title={t("设置")}
             border={false}
         />
         <SettingTabsTitle active={"general"} />
         <Loading loading={loading} className={"space-y-4"}>
-            <div className={"text-lg font-medium"}>{"{#基本信息#}"}</div>
+            <div className={"text-lg font-medium"}>{t("基本信息")}</div>
             <Form<UpdateInfo>
                 key={formKey}
                 schema={INFO_SCHEMA}
@@ -110,26 +110,26 @@ export const ModuleSettingPage = () => {
                 defaultValues={info}
                 onValuesChange={(vs) => setValues(vs)}
             >
-                <FormItem name="name" label="{#名称#}" description={"{#唯一标识只能是小写字母和-，小写字母开头#}"}>
-                    <Input placeholder={"{#请输入模块名称#}"} className={"max-w-96"}/>
+                <FormItem name="name" label=t("名称") description={t("唯一标识只能是小写字母和-，小写字母开头")}>
+                    <Input placeholder={t("请输入模块名称")} className={"max-w-96"}/>
                 </FormItem>
-                <FormItem name="description" label="{#描述#}">
-                    <Textarea placeholder="{#请输入模块描述#}" className={"max-w-6xl"}/>
+                <FormItem name="description" label=t("描述")>
+                    <Textarea placeholder=t("请输入模块描述") className={"max-w-6xl"}/>
                 </FormItem>
                 <div>
-                    <Button loading={submitting} disabled={!changed} variant={"default"}>{"{#保存#}"}</Button>
+                    <Button loading={submitting} disabled={!changed} variant={"default"}>{t("保存")}</Button>
                 </div>
             </Form>
             <Separator className={"!my-6"}/>
-            <div className={"text-lg font-medium"}>{"{#删除项目#}"}</div>
+            <div className={"text-lg font-medium"}>{t("删除项目")}</div>
             <Alert variant={"destructive"}>
                 <AlertDescription className={"space-x-2"}>
-                    <Badge variant={"destructive"}>{"{#重要#}"}</Badge>
-                    <span>{"{#删除项目将永久删除与该项目关联的所有资源，包括上传的文件、翻译、审批等。删除的项目无法恢复！#}"}</span>
+                    <Badge variant={"destructive"}>{t("重要")}</Badge>
+                    <span>{t("删除项目将永久删除与该项目关联的所有资源，包括上传的文件、翻译、审批等。删除的项目无法恢复！")}</span>
                 </AlertDescription>
             </Alert>
             <div>
-                <Button onClick={remove} variant={"destructive"}>{"{#删除项目#}"}</Button>
+                <Button onClick={remove} variant={"destructive"}>{t("删除项目")}</Button>
             </div>
         </Loading>
     </>

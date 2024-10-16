@@ -1,4 +1,4 @@
-import {isServer} from "@easy-kit/common/utils";
+import {isServer} from "@easykit/common/utils";
 import localforage from "localforage";
 
 export const detectLang = async (langList: [], fallback = 'en-us') => {

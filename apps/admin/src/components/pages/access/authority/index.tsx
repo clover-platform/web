@@ -6,6 +6,7 @@ import { COLUMNS } from "@/config/pages/access/authority/table";
 import {authorityTree} from "@/rest/access";
 import AddAuthorityButton from "@/components/pages/access/authority/button/add";
 import TableActions from "@/components/pages/access/authority/table-actions";
+import { t } from '@easykit/common/utils/locale'
 
 const AuthorityPage = () => {
     const [tree, setTree] = useState<any>([]);
@@ -30,7 +31,7 @@ const AuthorityPage = () => {
         </div>
         <TreeTable
             loading={loading}
-            emptyText={"{#暂无权限#}"}
+            emptyText={t("暂无权限")}
             columns={[
                 ...COLUMNS,
                 {

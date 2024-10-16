@@ -1,3 +1,5 @@
+import {LangItem} from "@easykit/common/utils/locale";
+
 export default [
     {
         name: '简体中文',
@@ -14,4 +16,4 @@ export default [
         code: 'zh-tw',
         locale: 'zh-TW',
     }
-]
+] as LangItem[]

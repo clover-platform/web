@@ -29,7 +29,7 @@ export const ModuleLayout: FC<ModuleLayoutProps> = (origin) => {
         {...props}
         path={[
             {
-                title: "{#国际化#}",
+                title: t("国际化"),
                 type: "link",
                 href: "/{#LANG#}/i18n/"
             },
@@ -37,7 +37,7 @@ export const ModuleLayout: FC<ModuleLayoutProps> = (origin) => {
         ]}
         sidebarProps={{
             menus: menus,
-            title: "{#国际化#}",
+            title: t("国际化"),
             active: props.active
         }}
     >

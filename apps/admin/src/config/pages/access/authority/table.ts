@@ -3,7 +3,7 @@ import { ColumnsProps, DropdownMenuItemProps } from "@easykit/design";
 export const COLUMNS: ColumnsProps[] = [
     {
         key: "name",
-        label: "{#权限#}",
+        label: t("权限"),
         style: {
             flex: "1",
             width: 0
@@ -11,12 +11,12 @@ export const COLUMNS: ColumnsProps[] = [
     },
     {
         key: "key",
-        label: "{#权限码#}",
+        label: t("权限码"),
         width: 300
     },
     {
         key: "sort",
-        label: "{#排序#}",
+        label: t("排序"),
         width: 100
     },
 ]
@@ -25,11 +25,11 @@ export const ACTIONS: DropdownMenuItemProps[] = [
     {
         id: "edit",
         type: "item",
-        label: "{#编辑#}"
+        label: t("编辑")
     },
     {
         id: "delete",
         type: "item",
-        label: "{#删除#}"
+        label: t("删除")
     },
 ];

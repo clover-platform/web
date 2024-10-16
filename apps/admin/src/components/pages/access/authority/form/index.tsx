@@ -4,6 +4,7 @@ import { Button, Form, FormItem, Input, useMessage } from "@easykit/design";
 import ApiSelector from "@/components/pages/access/authority/form/api-selector";
 import AuthoritySelector from "@/components/pages/access/authority/form/authority-selector";
 import {addAuthority, editAuthority} from "@/rest/access";
+import { t } from '@easykit/common/utils/locale'
 
 export interface AuthorityFormProps extends PropsWithChildren {
     onSuccess?: () => void;
@@ -43,22 +44,22 @@ const AuthorityForm: FC<AuthorityFormProps> = (props) => {
         onSubmit={onSubmit}
         defaultValues={authority}
     >
-        <FormItem name="parentId" label="{#上级#}">
+        <FormItem name="parentId" label={t("上级")}>
             <AuthoritySelector disabledNodeId={authority?.id} />
         </FormItem>
-        <FormItem name="name" label="{#名称#}">
-            <Input placeholder={"{#请输入权限名称#}"} />
+        <FormItem name="name" label={t("名称")}>
+            <Input placeholder={t("请输入权限名称")} />
         </FormItem>
-        <FormItem name="key" label={"{#权限码#}"}>
-            <Input placeholder="{#请输入权限码#}" />
+        <FormItem name="key" label={t("权限码")}>
+            <Input placeholder={t("请输入权限码")} />
         </FormItem>
-        <FormItem name="sort" label={"{#排序#}"}>
-            <Input placeholder="{#请输入排序号#}" />
+        <FormItem name="sort" label={t("排序")}>
+            <Input placeholder={t("请输入排序号")} />
         </FormItem>
-        <FormItem name="apis" label={"{#关联接口#}"}>
+        <FormItem name="apis" label={t("关联接口")}>
             <ApiSelector />
         </FormItem>
-        <Button loading={submitting} long type={"submit"}>{"{#保存#}"}</Button>
+        <Button loading={submitting} long type={"submit"}>{t("保存")}</Button>
     </Form>
 }
 

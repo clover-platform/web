@@ -2,7 +2,7 @@ import {keywords, title} from "@clover/public/utils/seo";
 import ProjectPage from "@/components/pages/project";
 
 export const metadata = {
-    title: title("{#首页#}"),
+    title: title(t("首页")),
     keywords: keywords(),
 }
 

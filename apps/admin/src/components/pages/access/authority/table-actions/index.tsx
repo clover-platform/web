@@ -5,6 +5,7 @@ import { FC, useState } from "react";
 import EditAuthorityDialog from "@/components/pages/access/authority/dialog/edit";
 import {useAlert} from "@easykit/design/components/uix/alert";
 import {deleteAuthority} from "@/rest/access";
+import { t } from '@easykit/common/utils/locale';
 
 export interface TableActionsProps {
     item: any;
@@ -32,10 +33,10 @@ const TableActions: FC<TableActionsProps> = (props) => {
                     setVisible(true);
                 }else if(key === "delete") {
                     alert.confirm({
-                        title: "{#删除？#}",
-                        description: "{#是否要删除这条记录，所有的子权限以及关联的角色权限将会失效，是否继续？#}",
-                        cancelText: "{#取消#}",
-                        okText: "{#删除#}",
+                        title: t("删除？"),
+                        description: t("是否要删除这条记录，所有的子权限以及关联的角色权限将会失效，是否继续？"),
+                        cancelText: t("取消"),
+                        okText: t("删除"),
                         onOk: async () => {
                             const {success, message} = await deleteAuthority(item.id);
                             if(success) {

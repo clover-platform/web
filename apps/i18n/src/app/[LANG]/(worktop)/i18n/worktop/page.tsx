@@ -2,7 +2,7 @@ import {keywords, title} from "@clover/public/utils/seo";
 import {ModuleWorktopPage} from "@/components/pages/worktop";
 
 export const metadata = {
-    title: title("{#工作台#}"),
+    title: title(t("工作台")),
     keywords: keywords(),
 }
 

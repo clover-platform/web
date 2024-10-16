@@ -35,7 +35,7 @@ export const CreateEntryModal: FC<CreateEntryModalProps> = (props) => {
 
     return <Dialog
         {...props}
-        title={"{#新增词条#}"}
+        title={t("新增词条")}
         maskClosable={false}
     >
         <EntryForm key={formKey} onSubmit={onSubmit}>
@@ -49,16 +49,16 @@ export const CreateEntryModal: FC<CreateEntryModalProps> = (props) => {
                         htmlFor="hold-entry-modal"
                         className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
                     >
-                        {"{#成功后不关闭窗口#}"}
+                        {t("成功后不关闭窗口")}
                     </label>
                 </div>
-                <Button loading={loading} type={"submit"}>{"{#提交#}"}</Button>
+                <Button loading={loading} type={"submit"}>{t("提交")}</Button>
                 <Button
                     variant={"outline"}
                     type={"button"}
                     onClick={() => props.onCancel?.()}
                 >
-                    {"{#取消#}"}
+                    {t("取消")}
                 </Button>
             </div>
         </EntryForm>

@@ -39,7 +39,7 @@ export const InviteLinkListModal: FC<InviteLinkListModalProps> = (props) => {
 
     return <Dialog
         {...props}
-        title={"{#管理链接#}"}
+        title={t("管理链接")}
         maskClosable={false}
     >
         <div className={"h-[380px] max-h-[80vh]"}>
@@ -47,7 +47,7 @@ export const InviteLinkListModal: FC<InviteLinkListModalProps> = (props) => {
                 <div className={"space-y-6 mr-2"}>
                     { !loading && listData.map((item) => <InviteLinkItem onRevoke={onRevoke} key={item.id} item={item} />) }
                     { loading && Array.from({length: 3}).map((_, index) => <InviteLinkItemLoading key={index} />) }
-                    { !loading && listData.length === 0 && <Empty text={"{#暂无链接#}"} /> }
+                    { !loading && listData.length === 0 && <Empty text={t("暂无链接")} /> }
                 </div>
             </ScrollArea>
         </div>

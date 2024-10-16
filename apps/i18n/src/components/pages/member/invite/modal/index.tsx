@@ -26,7 +26,7 @@ export const InviteModal: FC<InviteModalProps> = (props) => {
         const { success, message } = await send(data);
         setLoading(false);
         if(success) {
-            msg.success("{#邀请发送成功#}");
+            msg.success(t("邀请发送成功"));
             props.onCancel?.();
         }else{
             msg.error(message)
@@ -35,7 +35,7 @@ export const InviteModal: FC<InviteModalProps> = (props) => {
 
     return <Dialog
         {...props}
-        title={"{#邀请成员#}"}
+        title={t("邀请成员")}
         maskClosable={false}
     >
         <MemberInviteForm
@@ -51,7 +51,7 @@ export const InviteModal: FC<InviteModalProps> = (props) => {
                     <InviteLinkListButton />
                 </div>
                 <div>
-                    <Button loading={loading} type={"submit"}>{"{#发送邀请#}"}</Button>
+                    <Button loading={loading} type={"submit"}>{t("发送邀请")}</Button>
                 </div>
             </div>
         </MemberInviteForm>

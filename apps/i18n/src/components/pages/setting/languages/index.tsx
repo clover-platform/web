@@ -10,20 +10,20 @@ export const ModuleSettingLanguagesPage = () => {
         active: "setting",
         path: [
             {
-                title: "{#设置#}",
+                title: t("设置"),
                 type: "link",
                 href: "/{#LANG#}/i18n/setting/",
                 withQuery: true,
             },
             {
-                title: "{#语言#}",
+                title: t("语言"),
                 type: "item",
             }
         ],
     })
     return <>
         <TitleBar
-            title={"{#设置#}"}
+            title={t("设置")}
             border={false}
         />
         <SettingTabsTitle active={"languages"} />

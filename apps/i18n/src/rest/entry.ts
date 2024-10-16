@@ -1,5 +1,5 @@
-import { RestResult } from "@easy-kit/common/types/rest";
-import {get, post, put, del} from "@easy-kit/common/utils/rest";
+import { RestResult } from "@easykit/common/types/rest";
+import {get, post, put, del} from "@easykit/common/utils/rest";
 import { CountEntryData, CountEntryQuery, Entry } from "@/types/pages/entry";
 
 export type EntryQueryParams = {

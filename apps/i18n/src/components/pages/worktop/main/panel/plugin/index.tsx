@@ -17,19 +17,19 @@ export type Plugin = {
 export const plugins: Plugin[] = [
     {
         id: "comment",
-        name: "{#评论#}",
+        name: t("评论"),
         icon: <IconComment className={"text-lg"} />,
         panel: <Comment />
     },
     {
         id: "ai",
-        name: "{#AI建议#}",
+        name: t("AI建议"),
         icon: <IconChatGPT className={"text-lg"} />,
         panel: <AIPlugin />
     },
     {
         id: "google",
-        name: "{#谷歌翻译#}",
+        name: t("谷歌翻译"),
         icon: <IconGoogleTranslate className={"text-lg"} />,
         panel: <ComingSoon />
     }

@@ -20,7 +20,7 @@ export default [{ path: "/admin/access/authority/", config:  {
     active: "overview.dashboard",
     path: [
         {
-            title: "{#管理中心#}",
+            title: t("管理中心"),
             type: "item",
         }
     ],

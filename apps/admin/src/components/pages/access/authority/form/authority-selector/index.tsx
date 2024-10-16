@@ -3,6 +3,7 @@ import {TreeItemProps, TreeSelect} from "@easykit/design";
 import {authorityTree} from "@/rest/access";
 import {findNodeById} from "@easykit/design/components/uix/tree/utils";
 import {toItems} from "@/components/pages/access/authority/form/utils";
+import { t } from '@easykit/common/utils/locale'
 
 const setChildrenDisabled = (items?: TreeItemProps[]) => {
     if(items && items.length) {
@@ -49,7 +50,7 @@ const AuthoritySelector: FC<AuthoritySelectorProps> = forwardRef((props, ref) =>
         loading={loading}
         items={items}
         className={"w-full"}
-        placeholder={"{#根节点#}"}
+        placeholder={t("根节点")}
     />
 })
 

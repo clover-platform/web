@@ -2,7 +2,7 @@ import {keywords, title} from "@clover/public/utils/seo";
 import {InvitePage} from "@/components/pages/invite";
 
 export const metadata = {
-    title: title("{#加入翻译#}"),
+    title: title(t("加入翻译")),
     keywords: keywords(),
 }
 

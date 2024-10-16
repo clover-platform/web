@@ -5,7 +5,7 @@ import classNames from "classnames";
 import {Button, Dialog, Spin, Uploader, useMessage} from "@easykit/design";
 import {PlusIcon} from "@radix-ui/react-icons";
 import {IconDelete} from "@arco-iconbox/react-clover";
-import {dataURLToFile, fileToDataURL} from "@easy-kit/common/utils/file";
+import {dataURLToFile, fileToDataURL} from "@easykit/common/utils/file";
 import {upload} from "@clover/public/utils/file";
 
 export type ImageCropperProps = {
@@ -124,8 +124,8 @@ export const ImageCropper = forwardRef<any, ImageCropperProps>((props, ref) => {
                     {...rest}
                 />
                 <div className={"flex justify-end w-full space-x-2"}>
-                    <Button onClick={onCrop}>{"{#确定#}"}</Button>
-                    <Button onClick={() => setVisible(false)} variant={"outline"}>{"{#取消#}"}</Button>
+                    <Button onClick={onCrop}>{t("确定")}</Button>
+                    <Button onClick={() => setVisible(false)} variant={"outline"}>{t("取消")}</Button>
                 </div>
             </div>
         </Dialog>

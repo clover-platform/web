@@ -2,7 +2,7 @@
 
 import { TitleBar } from "@clover/public/components/common/title-bar";
 import {Button, Space, useMessage} from "@easykit/design";
-import BackButton from "@easy-kit/common/components/button/back";
+import BackButton from "@easykit/common/components/button/back";
 import ModuleForm from "@/components/pages/module/form";
 import { useState } from "react";
 import {create} from "@/rest/module";
@@ -15,12 +15,12 @@ export const CreateModulePage = () => {
         active: "i18n",
         path: [
             {
-                title: "{#国际化#}",
+                title: t("国际化"),
                 type: "link",
                 href: "/{#LANG#}/i18n/"
             },
             {
-                title: "{#创建模块#}",
+                title: t("创建模块"),
                 type: "item",
             }
         ],
@@ -41,10 +41,10 @@ export const CreateModulePage = () => {
     }
 
     return <>
-        <TitleBar title={"{#创建模块#}"} />
+        <TitleBar title={t("创建模块")} />
         <ModuleForm onSubmit={onSubmit}>
             <Space>
-                <Button loading={loading} type={"submit"}>{"{#提交#}"}</Button>
+                <Button loading={loading} type={"submit"}>{t("提交")}</Button>
                 <BackButton />
             </Space>
         </ModuleForm>

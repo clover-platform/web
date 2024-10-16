@@ -1,7 +1,7 @@
 import {useRecoilValue} from "recoil";
 import {accountInfoState, isLoginState} from "@clover/public/state/account";
 import {useRouter} from "next/navigation";
-import bus from "@easy-kit/common/events";
+import bus from "@easykit/common/events";
 import {UNAUTHORIZED} from "@clover/public/events/auth";
 import { useEffect } from "react";
 

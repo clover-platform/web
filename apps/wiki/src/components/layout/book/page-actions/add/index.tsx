@@ -4,7 +4,7 @@ import {FC, useCallback, useState} from "react";
 import {useRouter, useSearchParams} from "next/navigation";
 import {Spin, Tooltip, useMessage} from "@easykit/design";
 import {create} from "@/rest/page";
-import bus from "@easy-kit/common/events";
+import bus from "@easykit/common/events";
 import {ADD_PAGE} from "@/events/book";
 
 export type AddPageActionProps = {
@@ -38,7 +38,7 @@ export const AddPageAction: FC<AddPageActionProps> = (props) => {
         }
     }, [id, parent])
 
-    return <Tooltip content={"{#创建#}"}>
+    return <Tooltip content={t("创建")}>
         <Action
             disabled={submitting}
             className={className}

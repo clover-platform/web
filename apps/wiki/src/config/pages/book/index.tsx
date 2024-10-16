@@ -5,7 +5,7 @@ import {Book} from "@/types/pages/book";
 export const COLUMNS: DataTableColumn<Book>[] = [
     {
         accessorKey: "name",
-        header: "{#名称#}",
+        header: t("名称"),
         enableHiding: false,
         className: "w-[300px] min-w-[200px]",
         cell: (cell) => {
@@ -21,13 +21,13 @@ export const COLUMNS: DataTableColumn<Book>[] = [
     },
     {
         accessorKey: "description",
-        header: "{#简介#}",
+        header: t("简介"),
         enableHiding: false,
         className: "min-w-[150px]",
     },
     {
         accessorKey: "updateTime",
-        header: "{#最后更新#}",
+        header: t("最后更新"),
         enableHiding: false,
         className: "w-[200px] min-w-[200px]",
         formatters: ["time"],
@@ -38,7 +38,7 @@ export const COLUMNS: DataTableColumn<Book>[] = [
 export const FILTERS: FilterItemProps[] = [
     {
         field: 'keyword',
-        render: () => <Input placeholder={"{#请输入关键词#}"}/>,
+        render: () => <Input placeholder={t("请输入关键词")}/>,
     },
 ];
 
@@ -46,11 +46,11 @@ export const ROW_ACTIONS: DropdownMenuItemProps[] = [
     {
         id: "detail",
         type: "item",
-        label: "{#详情#}"
+        label: t("详情")
     },
     {
         id: "activity",
         type: "item",
-        label: "{#动态#}"
+        label: t("动态")
     },
 ];

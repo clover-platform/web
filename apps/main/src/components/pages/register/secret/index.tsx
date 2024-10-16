@@ -23,7 +23,7 @@ const SecretItem: FC<PropsWithChildren> = (props) => {
         loadSecret().then();
     }, []);
 
-    return <FormItem name={"qrcode"} label={"{#身份验证 App 密钥#}"}>
+    return <FormItem name={"qrcode"} label={t("身份验证 App 密钥")}>
         <OtpInfo loading={loading} secret={otpData.secret} qrcode={otpData.qrcode} />
     </FormItem>
 };

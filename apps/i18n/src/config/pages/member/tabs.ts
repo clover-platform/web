@@ -3,18 +3,18 @@ import {TabsTitleItem} from "@clover/public/components/common/tabs-title";
 export const TABS: TabsTitleItem[] = [
     {
         id: "all",
-        title: "{#全部#}",
+        title: t("全部"),
     },
     {
         id: "manager",
-        title: "{#管理员#}",
+        title: t("管理员"),
     },
     {
         id: "translator",
-        title: "{#翻译员#}",
+        title: t("翻译员"),
     },
     {
         id: "proofreader",
-        title: "{#校对员#}",
+        title: t("校对员"),
     }
 ]

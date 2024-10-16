@@ -23,15 +23,15 @@ export const InviteLinkItem: FC<InviteLinkItemProps> = (props) => {
 
     const doRevoke = () => {
         alert.confirm({
-            title: "{#确认撤销#}",
-            description: "{#撤销后，该邀请链接将失效，是否继续？#}",
+            title: t("确认撤销"),
+            description: t("撤销后，该邀请链接将失效，是否继续？"),
             onOk: async () => {
                 const { success, message } = await revoke({
                     moduleId: Number(search.get("id")),
                     id: item.id
                 });
                 if(success) {
-                    msg.success("{#撤销成功#}");
+                    msg.success(t("撤销成功"));
                     props.onRevoke?.();
                 }else{
                     msg.error(message);
@@ -50,11 +50,11 @@ export const InviteLinkItem: FC<InviteLinkItemProps> = (props) => {
                 { url }
             </div>
             <div className={"p-1 border-l"}>
-                <Tooltip content={"{#复制#}"}>
+                <Tooltip content={t("复制")}>
                     <Action
                         onClick={() => {
                             copy(url);
-                            msg.success("{#复制成功#}");
+                            msg.success(t("复制成功"));
                         }}
                         className={"w-8 h-8 !p-0"}
                     >
@@ -63,7 +63,7 @@ export const InviteLinkItem: FC<InviteLinkItemProps> = (props) => {
                 </Tooltip>
             </div>
             <div className={"p-1 border-l"}>
-                <Tooltip content={"{#撤销#}"}>
+                <Tooltip content={t("撤销")}>
                     <Action
                         onClick={doRevoke}
                         className={"w-8 h-8 !p-0"}

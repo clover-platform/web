@@ -8,17 +8,17 @@ import {Account} from "@clover/public/types/account";
 export const COLUMNS: DataTableColumn<Module>[] = [
     {
         accessorKey: "name",
-        header: "{#名称#}",
+        header: t("名称"),
         enableHiding: false,
         className: "w-[300px] min-w-[200px]",
         cell: (cell) => {
-            const timeAgo = new TimeAgo('{#LANG#}')
+            const timeAgo = new TimeAgo(t("LANG"))
             const data = cell.row.original;
             const { name, updateTime, memberSize } = data;
-            const time = i18n("{#更新于%time#}", {
+            const time = i18n(t("更新于%time"), {
                 time: timeAgo.format(new Date(updateTime!))
             });
-            const member = i18n("{#成员%size#}", {
+            const member = i18n(t("成员%size"), {
                 size: memberSize
             });
             return <div>
@@ -29,7 +29,7 @@ export const COLUMNS: DataTableColumn<Module>[] = [
     },
     {
         accessorKey: "sourceSize",
-        header: "{#词条数#}",
+        header: t("词条数"),
         enableHiding: false,
         className: "min-w-[150px]",
         cell: (cell) => {
@@ -37,13 +37,13 @@ export const COLUMNS: DataTableColumn<Module>[] = [
             const { wordSize = 0 } = data;
             return <div>
                 <div className={"text-base font-medium"}>{wordSize}</div>
-                <div className={"text-muted-foreground text-xs"}>{"{#词条数#}"}</div>
+                <div className={"text-muted-foreground text-xs"}>{t("词条数")}</div>
             </div>
         }
     },
     {
         accessorKey: "targetSize",
-        header: "{#语言#}",
+        header: t("语言"),
         enableHiding: false,
         className: "min-w-[150px]",
         cell: (cell) => {
@@ -51,7 +51,7 @@ export const COLUMNS: DataTableColumn<Module>[] = [
             const { targetSize } = data;
             return <div>
                 <div className={"text-base font-medium"}>{targetSize}</div>
-                <div className={"text-muted-foreground text-xs"}>{"{#目标语言#}"}</div>
+                <div className={"text-muted-foreground text-xs"}>{t("目标语言")}</div>
             </div>
         }
     },
@@ -60,7 +60,7 @@ export const COLUMNS: DataTableColumn<Module>[] = [
 export const FILTERS: FilterItemProps[] = [
     {
         field: 'keyword',
-        render: () => <Input placeholder={"{#请输入关键词#}"}/>,
+        render: () => <Input placeholder={t("请输入关键词")}/>,
     },
 ]
 
@@ -69,12 +69,12 @@ export const ROW_ACTIONS = (profile: Account, row: Module): DropdownMenuItemProp
         {
             id: "detail",
             type: "item",
-            label: "{#详情#}"
+            label: t("详情")
         },
         {
             id: "activity",
             type: "item",
-            label: "{#动态#}"
+            label: t("动态")
         },
         {
             type: "separator",
@@ -84,7 +84,7 @@ export const ROW_ACTIONS = (profile: Account, row: Module): DropdownMenuItemProp
         {
             id: "delete",
             type: "item",
-            label: "{#删除#}",
+            label: t("删除"),
             hidden: row.owner !== profile.id,
         },
     ];

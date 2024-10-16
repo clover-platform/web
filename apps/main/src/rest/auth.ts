@@ -1,5 +1,5 @@
-import {get, post} from "@easy-kit/common/utils/rest";
-import {RestResult} from "@easy-kit/common/types/rest";
+import {get, post} from "@easykit/common/utils/rest";
+import {RestResult} from "@easykit/common/types/rest";
 
 export const sendEmailCode = async (email: string) =>
     post(`@main/account/register/email/send`, {email});

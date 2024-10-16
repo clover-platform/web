@@ -13,6 +13,6 @@ export const LanguageAction: FC<LanguageActionProps> = (props) => {
     const language = languages.find(item => item.code === current);
 
     return <Action className={"!px-1.5 h-8"} onClick={props.onClick}>
-        { language ? language.name : "{#请选择语言#}" }
+        { language ? language.name : t("请选择语言") }
     </Action>
 }

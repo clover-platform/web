@@ -26,18 +26,18 @@ export const JSONConfigForm: FC<JSONConfigFormProps> = (props) => {
             defaultValues={defaultValues}
         >
             <FormItem name="convert" label="">
-                <Checkbox field={"true"} label={"{#以 . 作为分隔符转换为对象#}"} />
+                <Checkbox field={"true"} label={t("以 . 作为分隔符转换为对象")} />
             </FormItem>
             <Space className={"justify-end"}>
                 <Button type={"submit"}>
-                    {"{#确定#}"}
+                    {t("确定")}
                 </Button>
                 <Button
                     variant={"outline"}
                     type={"button"}
                     onClick={() => onCancel?.()}
                 >
-                    {"{#取消#}"}
+                    {t("取消")}
                 </Button>
             </Space>
         </Form>

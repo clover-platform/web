@@ -9,7 +9,7 @@ export type NewBranchButtonProps = {
 export const NewBranchButton: FC<NewBranchButtonProps> = (props) => {
     const [visible, setVisible] = useState(false);
     return <>
-        <Button onClick={() => setVisible(true)}>{"{#新分支#}"}</Button>
+        <Button onClick={() => setVisible(true)}>{t("新分支")}</Button>
         <NewBranchModal
             onSuccess={() => {
                 setVisible(false);

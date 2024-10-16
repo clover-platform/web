@@ -12,15 +12,15 @@ export interface OtpInfoProps extends PropsWithChildren{
 
 const apps = [
     {
-        name: "{#腾讯身份验证器#}",
+        name: t("腾讯身份验证器"),
         icon: "/assets/main/image/2fa/tencent.webp"
     },
     {
-        name: "{#谷歌身份验证器#}",
+        name: t("谷歌身份验证器"),
         icon: "/assets/main/image/2fa/google.webp"
     },
     {
-        name: "{#微软身份验证器#}",
+        name: t("微软身份验证器"),
         icon: "/assets/main/image/2fa/microsoft.webp"
     }
 ]
@@ -39,7 +39,7 @@ const OtpInfo: FC<OtpInfoProps> = forwardRef((props, ref) => {
     }, [qrcode]);
 
     const onCopy = () => {
-        msg.success("{#复制成功#}")
+        msg.success(t("复制成功"))
     }
 
     return <div className={"flex items-center flex-col"}>
@@ -48,7 +48,7 @@ const OtpInfo: FC<OtpInfoProps> = forwardRef((props, ref) => {
                 width={200}
                 height={200}
                 src={qrcodeImage}
-                alt={"{#二维码#}"}
+                alt={t("二维码")}
             />
         </div>
         <div className={"break-all my-[10px] py-[5px] px-[10px] bg-[#F2F3F5] inline-block"}>
@@ -59,20 +59,20 @@ const OtpInfo: FC<OtpInfoProps> = forwardRef((props, ref) => {
         </div>
         <div className={"text-center flex justify-center items-center"}>
             <span className={"opacity-50"}>
-                {"{#使用#}"}
+                {t("使用")}
             </span>
             <Popover>
                 <PopoverTrigger>
                     <span className={"flex justify-center items-center mx-1"}>
                         <InfoCircledIcon className={"mr-1"} />
-                        {"{#身份验证应用#}"}
+                        {t("身份验证应用")}
                     </span>
                 </PopoverTrigger>
                 <PopoverContent className={"w-[300px]"}>
                     <div className="space-y-2">
-                        <h4 className="font-medium leading-none">{"{#支持主流的验证器#}"}</h4>
+                        <h4 className="font-medium leading-none">{t("支持主流的验证器")}</h4>
                         <p className="text-sm text-muted-foreground">
-                            {"{#请在应用市场下载适合您手机的应用使用#}"}
+                            {t("请在应用市场下载适合您手机的应用使用")}
                         </p>
                         <div className={"space-y-2"}>
                             {
@@ -95,7 +95,7 @@ const OtpInfo: FC<OtpInfoProps> = forwardRef((props, ref) => {
             </Popover>
 
             <span className={"opacity-50"}>
-                {"{#扫码二维码或复制密钥到应用。#}"}
+                {t("扫码二维码或复制密钥到应用。")}
             </span>
         </div>
     </div>

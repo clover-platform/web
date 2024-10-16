@@ -1,5 +1,5 @@
-import { RestResult } from "@easy-kit/common/types/rest";
-import { get, post, del, put } from "@easy-kit/common/utils/rest";
+import { RestResult } from "@easykit/common/types/rest";
+import { get, post, del, put } from "@easykit/common/utils/rest";
 import {Branch} from "@/types/pages/module";
 import {BranchMergeOverview} from "@/types/pages/branch";
 

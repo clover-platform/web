@@ -32,7 +32,7 @@ export const MorePageAction: FC<MorePageActionProps> = (props) => {
         items={[
             {
                 id: "edit",
-                label: "{#编辑#}",
+                label: t("编辑"),
                 type: "item",
                 onItemClick: (item, e) => {
                     router.push(`/{#LANG#}/wiki/book/page/edit/?id=${bookId}&page=${id}`)
@@ -41,12 +41,12 @@ export const MorePageAction: FC<MorePageActionProps> = (props) => {
             },
             {
                 id: "star",
-                label: "{#收藏#}",
+                label: t("收藏"),
                 type: "item",
             },
             {
                 id: "copy",
-                label: "{#复制#}",
+                label: t("复制"),
                 type: "item",
             },
             {
@@ -55,7 +55,7 @@ export const MorePageAction: FC<MorePageActionProps> = (props) => {
             },
             {
                 id: "delete",
-                label: "{#删除#}",
+                label: t("删除"),
                 type: "item",
                 onItemClick: (item, e) => {
                     console.log("delete", item);
@@ -64,7 +64,7 @@ export const MorePageAction: FC<MorePageActionProps> = (props) => {
             }
         ]}
     >
-        <Tooltip content={"{#更多操作#}"}>
+        <Tooltip content={t("更多操作")}>
             <Action
                 elType={"span"}
                 onClick={(e) => {

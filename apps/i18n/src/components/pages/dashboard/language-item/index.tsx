@@ -25,7 +25,7 @@ export const LanguageItem: FC<LanguageItemProps> = (props) => {
             </div>
         </TableCell>
         <TableCell className={"text-right"}>
-            <Tooltip content={"{#翻译·校验#}"}>
+            <Tooltip content={t("翻译·校验")}>
                 <div className={"bg-muted inline-flex px-2 py-0.5 rounded-sm text-muted-foreground text-xs"}>
                     <span>{translatedPercent}%</span> · <span>{verifiedPercent}%</span>
                 </div>

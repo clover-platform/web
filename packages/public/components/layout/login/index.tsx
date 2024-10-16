@@ -1,7 +1,7 @@
 import {FC, PropsWithChildren} from "react";
 import Logo from "@clover/public/components/common/logo";
 import classNames from "classnames";
-import Link from "@easy-kit/common/components/link";
+import Link from "@easykit/common/components/link";
 import { LangSelect } from "@clover/public/components/common/select/lang";
 import {useLayoutProps} from "@clover/public/components/layout/hooks/use.layout.props";
 
@@ -13,7 +13,7 @@ export type LoginLayoutProps = PropsWithChildren<{
 export const LoginLayout: FC<LoginLayoutProps> = (originProps) => {
     const props = useLayoutProps<LoginLayoutProps>(originProps);
     const {
-        title= "{#幸运草#}",
+        title= t("幸运草"),
         showLogo= true
     } = props;
 
@@ -33,10 +33,10 @@ export const LoginLayout: FC<LoginLayoutProps> = (originProps) => {
         )}>
             <div className={"container flex justify-center items-center"}>
                 <div className={"flex-1 space-x-2"}>
-                    <Link href={"#"}>{"{#探索#}"}</Link>
-                    <Link href={"#"}>{"{#帮助#}"}</Link>
-                    <Link href={"#"}>{"{#关于#}"}</Link>
-                    <Link href={"#"}>{"{#社区论坛#}"}</Link>
+                    <Link href={"#"}>{t("探索")}</Link>
+                    <Link href={"#"}>{t("帮助")}</Link>
+                    <Link href={"#"}>{t("关于")}</Link>
+                    <Link href={"#"}>{t("社区论坛")}</Link>
                 </div>
                 <div className={"flex-1 space-x-2 flex justify-end"}>
                     <LangSelect />

@@ -3,12 +3,12 @@ export const layoutConfig = {
     active: "i18n",
     path: [
         {
-            title: "{#国际化#}",
+            title: t("国际化"),
             type: "link",
             href: "/{#LANG#}/i18n/"
         },
         {
-            title: "{#创建模块#}",
+            title: t("创建模块"),
             type: "item",
         }
     ],

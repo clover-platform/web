@@ -3,7 +3,7 @@
 import { TitleBar } from "@clover/public/components/common/title-bar";
 import {Button, DataTable, Space, useAlert, useMessage} from "@easykit/design";
 import Link from "next/link";
-import { useTableLoader } from "@easy-kit/common/hooks";
+import { useTableLoader } from "@easykit/common/hooks";
 import { COLUMNS, FILTERS, ROW_ACTIONS } from "@/config/pages/module/table";
 import {list} from "@/rest/module";
 import {useEffect, useState} from "react";
@@ -24,7 +24,7 @@ export const ModulePage = () => {
         active: "i18n",
         path: [
             {
-                title: "{#国际化#}",
+                title: t("国际化"),
                 type: "item",
             }
         ],
@@ -53,13 +53,13 @@ export const ModulePage = () => {
 
     const actions = <Space>
         <Link href={"/{#LANG#}/i18n/module/create/"}>
-            <Button>{"{#新建#}"}</Button>
+            <Button>{t("新建")}</Button>
         </Link>
     </Space>;
 
     return <>
         <TitleBar
-            title={"{#国际化#}"}
+            title={t("国际化")}
             actions={actions}
             border={false}
         />

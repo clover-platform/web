@@ -2,6 +2,7 @@ import { cn, ComboSelect } from "@easykit/design";
 import { forwardRef, useEffect, useState } from "react";
 import { ComboSelectOptionProps } from "@easykit/design/components/uix/combo-select";
 import { AccessApi, apiList } from "@/rest/access";
+import { t } from '@easykit/common/utils/locale'
 
 type COLOR_MAP_TYPE = {
     [key: string]: string;
@@ -55,13 +56,13 @@ const ApiSelector = forwardRef((props, ref) => {
         {...props}
         ref={ref}
         className={"w-full max-h-[150px] overflow-auto"}
-        placeholder={"{#请选择#}"}
-        searchPlaceholder={"{#关键词#}"}
+        placeholder={t("请选择")}
+        searchPlaceholder={t("关键词")}
         options={options}
         loading={loading}
         multiple={true}
-        title={"{#接口#}"}
-        clearText={"{#清空选择#}"}
+        title={t("接口")}
+        clearText={t("清空选择")}
         filter={(value: string, search: string) => {
             const result = options.filter((option) => (value === option.value && (option.raw?.path.includes(search) || option.raw?.method.includes(search))));
             return result.length;

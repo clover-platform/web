@@ -13,14 +13,14 @@ export type StartItem = {
 export const START_ITEMS: StartItem[] = [
     {
         id: "new.file",
-        title: "{#新建文档#}",
-        description: "{#AI编辑器梳理文档#}",
+        title: t("新建文档"),
+        description: t("AI编辑器梳理文档"),
         icon: <IconAddFile className={"text-3xl text-primary"} />
     },
     {
         id: "new.book",
-        title: "{#新建知识库#}",
-        description: "{#使用知识库整理知识#}",
+        title: t("新建知识库"),
+        description: t("使用知识库整理知识"),
         icon: <IconBook className={"text-3xl text-primary"} />
     }
 ]

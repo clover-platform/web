@@ -16,7 +16,7 @@ const options: SelectOptionProps[] = [
 ]
 
 export const LangSelect = () => {
-    const current = "{#LANG#}";
+    const current = t("LANG");
 
     return <Select
         value={current}

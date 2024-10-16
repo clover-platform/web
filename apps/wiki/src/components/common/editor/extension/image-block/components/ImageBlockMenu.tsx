@@ -80,13 +80,13 @@ export const ImageBlockMenu = ({ editor, appendTo }: MenuProps): JSX.Element => 
             }}
         >
             <Toolbar.Wrapper shouldShowContent={shouldShow()} ref={menuRef}>
-                <Toolbar.Button tooltip="{#左对齐#}" active={isImageLeft} onClick={onAlignImageLeft}>
+                <Toolbar.Button tooltip=t("左对齐") active={isImageLeft} onClick={onAlignImageLeft}>
                     <Icon name="AlignHorizontalDistributeStart" />
                 </Toolbar.Button>
-                <Toolbar.Button tooltip="{#居中#}" active={isImageCenter} onClick={onAlignImageCenter}>
+                <Toolbar.Button tooltip=t("居中") active={isImageCenter} onClick={onAlignImageCenter}>
                     <Icon name="AlignHorizontalDistributeCenter" />
                 </Toolbar.Button>
-                <Toolbar.Button tooltip="{#右对齐#}" active={isImageRight} onClick={onAlignImageRight}>
+                <Toolbar.Button tooltip=t("右对齐") active={isImageRight} onClick={onAlignImageRight}>
                     <Icon name="AlignHorizontalDistributeEnd" />
                 </Toolbar.Button>
                 <Toolbar.Divider />

@@ -1,5 +1,5 @@
-import {RestResult} from "@easy-kit/common/types/rest";
-import {post, get, put, AbortPromise} from "@easy-kit/common/utils/rest";
+import {RestResult} from "@easykit/common/types/rest";
+import {post, get, put, AbortPromise} from "@easykit/common/utils/rest";
 import {Catalog} from "@/types/pages/book";
 import {PageDetail} from "@/types/pages/page";
 

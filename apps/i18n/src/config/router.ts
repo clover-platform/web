@@ -5,7 +5,7 @@ export default [{ path: "/i18n/activity/", config:  {
     active: "activity",
     path: [
         {
-            title: "{#动态#}",
+            title: t("动态"),
             type: "item",
         }
     ],
@@ -14,7 +14,7 @@ export default [{ path: "/i18n/activity/", config:  {
     active: "branch",
     path: [
         {
-            title: "{#分支#}",
+            title: t("分支"),
             type: "item",
         }
     ],
@@ -23,13 +23,13 @@ export default [{ path: "/i18n/activity/", config:  {
     active: "download",
     path: [
         {
-            title: "{#下载#}",
+            title: t("下载"),
             type: "link",
             href: "/{#LANG#}/i18n/bundle/",
             withQuery: true,
         },
         {
-            title: "{#添加文件#}",
+            title: t("添加文件"),
             type: "item",
         }
     ],
@@ -38,7 +38,7 @@ export default [{ path: "/i18n/activity/", config:  {
     active: "download",
     path: [
         {
-            title: "{#下载#}",
+            title: t("下载"),
             type: "item",
         }
     ],
@@ -47,7 +47,7 @@ export default [{ path: "/i18n/activity/", config:  {
     active: "i18n",
     path: [
         {
-            title: "{#国际化#}",
+            title: t("国际化"),
             type: "item",
         }
     ],
@@ -56,7 +56,7 @@ export default [{ path: "/i18n/activity/", config:  {
     active: "dashboard",
     path: [
         {
-            title: "{#概览#}",
+            title: t("概览"),
             type: "item",
         }
     ],
@@ -68,7 +68,7 @@ export default [{ path: "/i18n/activity/", config:  {
     active: "member",
     path: [
         {
-            title: "{#成员#}",
+            title: t("成员"),
             type: "item",
         }
     ],
@@ -77,12 +77,12 @@ export default [{ path: "/i18n/activity/", config:  {
     active: "i18n",
     path: [
         {
-            title: "{#国际化#}",
+            title: t("国际化"),
             type: "link",
             href: "/{#LANG#}/i18n/"
         },
         {
-            title: "{#创建模块#}",
+            title: t("创建模块"),
             type: "item",
         }
     ],
@@ -91,13 +91,13 @@ export default [{ path: "/i18n/activity/", config:  {
     active: "setting",
     path: [
         {
-            title: "{#设置#}",
+            title: t("设置"),
             type: "link",
             href: "/{#LANG#}/i18n/setting/",
             withQuery: true,
         },
         {
-            title: "{#AI#}",
+            title: t("AI"),
             type: "item",
         }
     ],
@@ -106,13 +106,13 @@ export default [{ path: "/i18n/activity/", config:  {
     active: "setting",
     path: [
         {
-            title: "{#设置#}",
+            title: t("设置"),
             type: "link",
             href: "/{#LANG#}/i18n/setting/",
             withQuery: true,
         },
         {
-            title: "{#API#}",
+            title: t("API"),
             type: "item",
         }
     ],
@@ -121,13 +121,13 @@ export default [{ path: "/i18n/activity/", config:  {
     active: "setting",
     path: [
         {
-            title: "{#设置#}",
+            title: t("设置"),
             type: "link",
             href: "/{#LANG#}/i18n/setting/",
             withQuery: true,
         },
         {
-            title: "{#常规#}",
+            title: t("常规"),
             type: "item",
         }
     ],
@@ -136,13 +136,13 @@ export default [{ path: "/i18n/activity/", config:  {
     active: "setting",
     path: [
         {
-            title: "{#设置#}",
+            title: t("设置"),
             type: "link",
             href: "/{#LANG#}/i18n/setting/",
             withQuery: true,
         },
         {
-            title: "{#语言#}",
+            title: t("语言"),
             type: "item",
         }
     ],

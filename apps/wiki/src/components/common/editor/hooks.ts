@@ -135,12 +135,12 @@ export const useEditor = (props: UseEditorProps): [EditorInstance, NodeData, str
                 showOnlyCurrent: false,
                 placeholder: ({node}) => {
                     if(node.type.name === 'quoteCaption') {
-                        return "{#请输入引用作者#}";
+                        return t("请输入引用作者");
                     }
                     if(node.type.name === 'quote') {
-                        return "{#请输入引用内容#}";
+                        return t("请输入引用内容");
                     }
-                    return "{#输入 / 快速插入#}";
+                    return t("输入 / 快速插入");
                 },
             }),
             SlashCommand,

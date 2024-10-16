@@ -1,6 +1,6 @@
 import { Button, Input, useMessage, InputProps } from "@easykit/design";
 import { useMemo, useState, useCallback, useRef, useEffect, ChangeEvent, forwardRef } from "react";
-import { isEmail } from "@easy-kit/common/utils";
+import { isEmail } from "@easykit/common/utils";
 import { i18n } from '@easy-kit/i18n/utils';
 
 interface EmailCodeInputProps extends InputProps {
@@ -62,7 +62,7 @@ const EmailCodeInput = forwardRef<HTMLInputElement, EmailCodeInputProps>((props:
     }, [email, loading, waiting])
 
     const buttonText = useMemo(() => {
-        return waiting ?  i18n("{#%time秒后重发#}", {time}): "{#发送验证码#}";
+        return waiting ?  i18n(t("%time秒后重发"), {time}): t("发送验证码");
     }, [waiting, time])
 
     const handleChange = (e: ChangeEvent<HTMLInputElement>) => {

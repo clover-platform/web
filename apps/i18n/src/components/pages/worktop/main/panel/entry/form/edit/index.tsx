@@ -18,10 +18,10 @@ export const EntryEditForm:FC<EntryEditFormProps> = (props) => {
         onSubmit={props.onSubmit}
         defaultValues={defaultValues}
     >
-        <FormItem name="value" label="{#词条#}">
+        <FormItem name="value" label=t("词条")>
             <TextareaAutosize
                 minRows={3}
-                placeholder={"{#请输入原始语言词条#}"}
+                placeholder={t("请输入原始语言词条")}
                 className={"p-2 border w-full rounded-md"}
             />
         </FormItem>

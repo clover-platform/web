@@ -44,12 +44,12 @@ export const DragHandleControl:FC<DragHandleControlProps> = (props) => {
                     className={data.hidden ? "hidden" : ""}
                     items={[
                         {
-                            label: "{#清空格式#}",
+                            label: t("清空格式"),
                             type: "item",
                             id: "clear-formatting",
                         },
                         {
-                            label: "{#复制#}",
+                            label: t("复制"),
                             type: "item",
                             id: "duplicate",
                         },
@@ -58,7 +58,7 @@ export const DragHandleControl:FC<DragHandleControlProps> = (props) => {
                             id: "separator"
                         },
                         {
-                            label: "{#删除#}",
+                            label: t("删除"),
                             type: "item",
                             id: "delete",
                         }

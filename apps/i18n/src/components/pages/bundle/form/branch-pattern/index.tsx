@@ -37,7 +37,7 @@ export const BranchPattern = forwardRef<HTMLInputElement, BranchPatternProps>((p
                             setBranches(newBranches);
                             onChange?.(newBranches);
                         }}
-                        placeholder={"{#匹配分支#}"}
+                        placeholder={t("匹配分支")}
                     />
                     <div className={"absolute top-1 right-1 flex"}>
                         {

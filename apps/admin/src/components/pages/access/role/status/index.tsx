@@ -8,6 +8,6 @@ export interface RoleStatusProps {
 export const RoleStatus: FC<RoleStatusProps> = forwardRef((props, ref) => {
     const { value } = props;
     return <Badge variant={value ? "default" : "secondary"}>
-        { value ? "{#启用#}" : "{#禁用#}" }
+        { value ? t("启用") : t("禁用") }
     </Badge>
 })

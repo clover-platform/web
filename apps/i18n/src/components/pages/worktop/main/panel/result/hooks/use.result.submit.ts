@@ -1,4 +1,4 @@
-import bus from "@easy-kit/common/events";
+import bus from "@easykit/common/events";
 import {ENTRY_RESULT_RELOAD} from "@/events/worktop";
 import {useRecoilState, useRecoilValue} from "recoil";
 import {currentEntryState, currentLanguageState, entriesState} from "@/state/worktop";
@@ -24,7 +24,7 @@ export const useResultSubmit = (): [(content: string) => Promise<any>, boolean] 
 
     const submit = async (content: string) => {
         if(!content) {
-            return msg.error("{#请输入翻译结果#}")
+            return msg.error(t("请输入翻译结果"))
         }
         setLoading(true);
         const { success, message } = await save({

@@ -6,11 +6,11 @@ import { IconDelete } from "@arco-iconbox/react-clover";
 import { EntryResult } from "@/types/pages/entry";
 import { FC } from "react";
 import { approve as approveRest, deleteResult, removeApproval as removeApprovalRest } from "@/rest/entry.result";
-import bus from "@easy-kit/common/events";
+import bus from "@easykit/common/events";
 import { ENTRY_RESULT_EDITOR_RESET, ENTRY_RESULT_RELOAD } from "@/events/worktop";
 import { useEntriesUpdater } from "@/components/layout/worktop/hooks";
-import { RestResult } from "@easy-kit/common/types/rest";
-import { TimeAgo } from "@easy-kit/common/components/time-ago";
+import { RestResult } from "@easykit/common/types/rest";
+import { TimeAgo } from "@easykit/common/components/time-ago";
 
 export type ResultItemProps = {
     item: EntryResult;
@@ -37,8 +37,8 @@ export const ResultItem: FC<ResultItemProps> = (props) => {
 
     const deleteItem = () => {
         alert.confirm({
-            title: "{#删除#}",
-            description: "{#是否删除此翻译#}",
+            title: t("删除"),
+            description: t("是否删除此翻译"),
             onOk: async () => {
                 return resultWrapper(await deleteResult(item.id));
             }
@@ -47,8 +47,8 @@ export const ResultItem: FC<ResultItemProps> = (props) => {
 
     const approve = () => {
         alert.confirm({
-            title: "{#批准#}",
-            description: "{#是否批准改翻译作为有效结果#}",
+            title: t("批准"),
+            description: t("是否批准改翻译作为有效结果"),
             onOk: async () => {
                 return resultWrapper(await approveRest(item.id));
             }
@@ -57,8 +57,8 @@ export const ResultItem: FC<ResultItemProps> = (props) => {
 
     const removeApproval = () => {
         alert.confirm({
-            title: "{#撤销批准#}",
-            description: "{#是否撤销此翻译的有效结果#}",
+            title: t("撤销批准"),
+            description: t("是否撤销此翻译的有效结果"),
             onOk: async () => {
                 return resultWrapper(await removeApprovalRest({ id: item.id }));
             }
@@ -72,12 +72,12 @@ export const ResultItem: FC<ResultItemProps> = (props) => {
         <div className={"bg-muted px-3 py-2 flex justify-center items-start rounded-t-md"}>
             <div className={"flex-1 mr-2 py-1"}>{item.content}</div>
             <div className={"space-x-1 flex justify-center items-center"}>
-                <Tooltip content={item.verified ? "{#撤销批准#}" : "{#批准#}"}>
+                <Tooltip content={item.verified ? t("撤销批准") : t("批准")}>
                     <Action onClick={item.verified ? removeApproval : approve} active={item.verified}>
                         <CheckIcon />
                     </Action>
                 </Tooltip>
-                <Tooltip content={"{#删除#}"}>
+                <Tooltip content={t("删除")}>
                     <Action onClick={deleteItem}>
                         <IconDelete className={"text-base"} />
                     </Action>
@@ -104,7 +104,7 @@ export const ResultItem: FC<ResultItemProps> = (props) => {
                     <Badge variant={"outline"} className={"px-1 bg-success text-success-foreground"}>
                         <CheckIcon />
                     </Badge>
-                    <span className={"text-success-foreground"}>{"{#已批准#}"}</span>
+                    <span className={"text-success-foreground"}>{t("已批准")}</span>
                     <div className={"flex justify-start items-center"}>
                         <Avatar
                             src={verifier?.avatar!}

@@ -7,7 +7,7 @@ export const InviteButton = () => {
     const [visible, setVisible] = useState(false);
     return <>
         <Button onClick={() => setVisible(true)}>
-            <IconAdd /> {"{#邀请成员#}"}
+            <IconAdd /> {t("邀请成员")}
         </Button>
         <InviteModal
             visible={visible}

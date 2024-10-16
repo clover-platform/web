@@ -8,7 +8,7 @@ export interface BackButtonProps extends PropsWithChildren{
 
 const BackButton: FC<BackButtonProps> = (props) => {
     const {
-        text = "{#返回#}",
+        text = t("返回"),
     } = props;
 
     const router = useRouter();

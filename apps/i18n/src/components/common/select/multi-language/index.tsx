@@ -80,7 +80,7 @@ export const MultiLanguageSelect = forwardRef<HTMLDivElement, MultiLanguageSelec
                     <Input
                         value={keyword}
                         onChange={(e) => setKeyword(e.target.value)}
-                        placeholder={"{#请输入关键词#}"}
+                        placeholder={t("请输入关键词")}
                     />
                 </div>
                 <div className={"w-full flex-1 h-0 flex-shrink-0"}>
@@ -106,7 +106,7 @@ export const MultiLanguageSelect = forwardRef<HTMLDivElement, MultiLanguageSelec
             </div>
             <div className={"flex-1 h-96 border-r flex justify-start items-start flex-col bg-muted"}>
                 <div className={"p-2 border-b w-full flex justify-center items-center"}>
-                    <div className={"flex-1"}>{"{#已选#}"}</div>
+                    <div className={"flex-1"}>{t("已选")}</div>
                     <Action
                         onClick={() => {
                             setSelected([]);
@@ -133,7 +133,7 @@ export const MultiLanguageSelect = forwardRef<HTMLDivElement, MultiLanguageSelec
                                         }}
                                     />;
                                 }) : <div className={"p-6 flex justify-center items-center opacity-60"}>
-                                    { props.placeholder || "{#暂无选中#}" }
+                                    { props.placeholder || t("暂无选中") }
                                 </div>
                             }
                         </div>

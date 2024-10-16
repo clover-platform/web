@@ -1,5 +1,5 @@
-import { RestResult } from "@easy-kit/common/types/rest";
-import { post, get, del } from "@easy-kit/common/utils/rest";
+import { RestResult } from "@easykit/common/types/rest";
+import { post, get, del } from "@easykit/common/utils/rest";
 import { MemberInvite } from "@/types/pages/member";
 import {InviteDetail} from "@/types/pages/module";
 

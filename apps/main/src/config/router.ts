@@ -5,7 +5,7 @@ export default [{ path: "/", config:  {
     active: "project",
     path: [
         {
-            title: "{#项目#}",
+            title: t("项目"),
             type: "item",
         }
     ],
@@ -22,7 +22,7 @@ export default [{ path: "/", config:  {
     active: "project",
     path: [
         {
-            title: "{#项目#}",
+            title: t("项目"),
             type: "item",
         }
     ],
@@ -35,7 +35,7 @@ export default [{ path: "/", config:  {
     active: "task.list",
     path: [
         {
-            title: "{#任务#}",
+            title: t("任务"),
             type: "item",
         }
     ],
@@ -44,7 +44,7 @@ export default [{ path: "/", config:  {
     active: "task.gantt",
     path: [
         {
-            title: "{#任务#}",
+            title: t("任务"),
             type: "item",
         }
     ],

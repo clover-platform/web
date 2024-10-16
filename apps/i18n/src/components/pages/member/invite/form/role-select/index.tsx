@@ -9,7 +9,7 @@ import {
 } from "@easykit/design";
 import { forwardRef, useRef, useState } from "react";
 import { ChevronDownIcon } from "@radix-ui/react-icons";
-import { useDocumentClick } from "@easy-kit/common/hooks";
+import { useDocumentClick } from "@easykit/common/hooks";
 
 export type RoleSelectProps = {
     value?: string[];
@@ -24,19 +24,19 @@ type RoleOption = {
 
 const ROLE_OPTIONS: RoleOption[] = [
     {
-        label: "{#管理员#}",
+        label: t("管理员"),
         value: "1",
-        description: "{#对整个项目拥有无限的控制权#}",
+        description: t("对整个项目拥有无限的控制权"),
     },
     {
-        label: "{#翻译者#}",
+        label: t("翻译者"),
         value: "3",
-        description: "{#可以翻译内容并对现有翻译进行投票#}",
+        description: t("可以翻译内容并对现有翻译进行投票"),
     },
     {
-        label: "{#校对人#}",
+        label: t("校对人"),
         value: "4",
-        description: "{#可以翻译和校对内容#}",
+        description: t("可以翻译和校对内容"),
     },
 ];
 
@@ -73,14 +73,14 @@ export const RoleSelect = forwardRef<HTMLButtonElement, RoleSelectProps>((props,
                         }
                         <ChevronDownIcon className={"ml-1"} />
                     </div> : <div className={"text-muted-foreground flex justify-start items-center"}>
-                        <span>{"{#请选择#}"}</span>
+                        <span>{t("请选择")}</span>
                         <ChevronDownIcon className={"ml-1"} />
                     </div>
                 }
             </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent ref={contentRef} align={"start"} className="w-96">
-            <DropdownMenuLabel>{"{#请选择角色#}"}</DropdownMenuLabel>
+            <DropdownMenuLabel>{t("请选择角色")}</DropdownMenuLabel>
             <DropdownMenuSeparator />
             {
                 ROLE_OPTIONS.map((option) => {

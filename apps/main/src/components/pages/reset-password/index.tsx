@@ -2,7 +2,7 @@
 
 import { Button, Form, FormItem, FormValues, Input, Steps, StepsItem, useMessage } from "@easykit/design";
 import { useState } from "react";
-import EmailCodeInput from "@easy-kit/common/components/input/email-code";
+import EmailCodeInput from "@easykit/common/components/input/email-code";
 import {passwordReset, resetEmailCheck, sendResetEmailCode} from "@/rest/auth";
 import {useRouter, useSearchParams} from "next/navigation";
 import {setToken} from "@clover/public/utils/token";
@@ -54,12 +54,12 @@ const ResetPasswordPage = () => {
 
     return <div className={"w-[360px] m-[20px]"}>
         <div className={"flex justify-center items-center"}>
-            <div className={"text-[24px] font-bold flex-1"}>{"{#重置密码#}"}</div>
+            <div className={"text-[24px] font-bold flex-1"}>{t("重置密码")}</div>
         </div>
         <div className={"mt-[30px]"}>
             <Steps current={step} className={"mb-[30px]"}>
-                <StepsItem title='{#邮箱验证#}' />
-                <StepsItem title='{#设置密码#}' />
+                <StepsItem title=t("邮箱验证") />
+                <StepsItem title=t("设置密码") />
             </Steps>
             <Form
                 onValuesChange={setFormData1}
@@ -67,13 +67,13 @@ const ResetPasswordPage = () => {
                 schema={EMAIL_FORM_SCHEMA}
                 style={{ display: step === 0 ? 'block' : 'none' }}
             >
-                <FormItem name={"email"} label={"{#邮箱#}"}>
-                    <Input placeholder={"{#请输入正确的邮箱#}"} />
+                <FormItem name={"email"} label={t("邮箱")}>
+                    <Input placeholder={t("请输入正确的邮箱")} />
                 </FormItem>
-                <FormItem name={"code"} label={"{#邮箱验证码#}"}>
-                    <EmailCodeInput placeholder={"{#请输入邮箱验证码#}"} api={sendResetEmailCode} email={formData1.email} />
+                <FormItem name={"code"} label={t("邮箱验证码")}>
+                    <EmailCodeInput placeholder={t("请输入邮箱验证码")} api={sendResetEmailCode} email={formData1.email} />
                 </FormItem>
-                <Button loading={step1Submitting} type={"submit"} long>{"{#下一步#}"}</Button>
+                <Button loading={step1Submitting} type={"submit"} long>{t("下一步")}</Button>
             </Form>
             <Form
                 style={{ display: step === 1 ? 'block' : 'none' }}
@@ -81,15 +81,15 @@ const ResetPasswordPage = () => {
                 onSubmit={onStep2Submit}
                 schema={PASSWORD_FORM_SCHEMA}
             >
-                <FormItem name={"password"} label={"{#密码#}"}>
-                    <Input type={"password"} placeholder={"{#请输入正确的邮箱#}"} />
+                <FormItem name={"password"} label={t("密码")}>
+                    <Input type={"password"} placeholder={t("请输入正确的邮箱")} />
                 </FormItem>
-                <FormItem name={"password2"} label={"{#确认密码#}"}>
-                    <Input type={"password"} placeholder={"{#请再次输入密码#}"} />
+                <FormItem name={"password2"} label={t("确认密码")}>
+                    <Input type={"password"} placeholder={t("请再次输入密码")} />
                 </FormItem>
                 <div className={"flex mx-[-10px]"}>
-                    <Button disabled={step2Submitting} onClick={onPrev} className={"mx-[10px]"} variant={"outline"} long>{"{#上一步#}"}</Button>
-                    <Button loading={step2Submitting} className={"mx-[10px]"} long type={"submit"}>{"{#修改密码#}"}</Button>
+                    <Button disabled={step2Submitting} onClick={onPrev} className={"mx-[10px]"} variant={"outline"} long>{t("上一步")}</Button>
+                    <Button loading={step2Submitting} className={"mx-[10px]"} long type={"submit"}>{t("修改密码")}</Button>
                 </div>
             </Form>
         </div>

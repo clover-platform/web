@@ -15,26 +15,26 @@ const ICONS: Record<number, ReactNode> = {
 }
 
 const LABELS: Record<number, string> = {
-    1: "{#新增了#}",
-    2: "{#更新了#}",
-    3: "{#删除了#}",
-    4: "{#通过了#}",
-    5: "{#拒绝了#}"
+    1: t("新增了"),
+    2: t("更新了"),
+    3: t("删除了"),
+    4: t("通过了"),
+    5: t("拒绝了")
 }
 
 const TYPES: Record<number, string> = {
-    1: "{#模块#}",
-    2: "{#分支#}",
-    3: "{#下载#}",
-    4: "{#成员#}",
-    5: "{#设置#}",
-    6: "{#词条#}"
+    1: t("模块"),
+    2: t("分支"),
+    3: t("下载"),
+    4: t("成员"),
+    5: t("设置"),
+    6: t("词条")
 }
 
 const TYPE6_SUB_TYPES: Record<number, string> = {
-    1: "{#词条#}",
-    2: "{#翻译#}",
-    3: "{#评论#}",
+    1: t("词条"),
+    2: t("翻译"),
+    3: t("评论"),
 }
 
 export type ActivityListGroupItemProps = {
@@ -52,7 +52,7 @@ export const ActivityListGroupItem: FC<ActivityListGroupItemProps> = (props) => 
 
     const typeText = useMemo(() => {
         if(type === 6 && subType) {
-            return i18n("{#词条的%type#}", {type: TYPE6_SUB_TYPES[subType]});
+            return i18n(t("词条的%type"), {type: TYPE6_SUB_TYPES[subType]});
         }
         return TYPES[type];
     }, [type, subType])
@@ -90,7 +90,7 @@ export const ActivityListGroupItem: FC<ActivityListGroupItemProps> = (props) => 
         </div>
         <div className={"flex-1 mx-4 min-h-10 flex justify-start items-center"}>
             {
-                i18n("{#%operate%type：%content#}", {
+                i18n(t("%operate%type：%content"), {
                     operate: LABELS[operate],
                     type: typeText,
                     content: content||'--',

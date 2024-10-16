@@ -12,7 +12,7 @@ export type ExpandActionProps = {
 
 export const ExpandAction: FC<ExpandActionProps> = (props) => {
     const { className, all, enable, onClick } = props;
-    return enable ? <Tooltip content={all ? "{#收起全部#}" : "{#展开全部#}"}>
+    return enable ? <Tooltip content={all ? t("收起全部") : t("展开全部")}>
         <Action
             onClick={() => onClick(!all)}
             className={className}

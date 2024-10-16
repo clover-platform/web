@@ -5,6 +5,6 @@ export const InvitePageExpired = () => {
         <div className={"my-6 opacity-60"}>
             <LinkBreak2Icon className={"w-12 h-12"} />
         </div>
-        <div className={"text-muted-foreground"}>{"{#邀请链接已过期#}"}</div>
+        <div className={"text-muted-foreground"}>{t("邀请链接已过期")}</div>
     </div>
 }

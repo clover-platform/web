@@ -3,14 +3,14 @@
 import { Form, Steps, StepsItem, Button, Input, useMessage, FormItem } from "@easykit/design";
 import { useState } from "react";
 import SecretItem from "@/components/pages/register/secret";
-import EmailCodeInput from "@easy-kit/common/components/input/email-code";
+import EmailCodeInput from "@easykit/common/components/input/email-code";
 import { emailCheck, passwordSet, sendEmailCode } from "@/rest/auth";
 import { setToken } from "@clover/public/utils/token";
 import { encrypt } from "@clover/public/utils/crypto";
 import { useRouter, useSearchParams } from "next/navigation";
 import LoginLink from "@/components/common/login/link";
 import { FORM_STEP1_SCHEMA, FORM_STEP2_SCHEMA } from "@/config/pages/register/form";
-import CodeInput from "@easy-kit/common/components/input/code";
+import CodeInput from "@easykit/common/components/input/code";
 
 const RegisterPage = () => {
     const msg = useMessage();
@@ -57,16 +57,16 @@ const RegisterPage = () => {
 
     return <div className={"w-[400px] m-[20px]"}>
         <div className={"flex justify-center items-center"}>
-            <div className={"text-[24px] font-bold flex-1"}>{"{#注册#}"}</div>
+            <div className={"text-[24px] font-bold flex-1"}>{t("注册")}</div>
             <div className={"ml-[10px]"}>
-                <span>{"{#已有账号？#}"}</span>
-                <LoginLink href={"/{#LANG#}/login/"}>{"{#登录#}"}</LoginLink>
+                <span>{t("已有账号？")}</span>
+                <LoginLink href={"/{#LANG#}/login/"}>{t("登录")}</LoginLink>
             </div>
         </div>
         <div className={"mt-[30px]"}>
             <Steps current={step} className={"mb-[30px]"}>
-                <StepsItem title='{#邮箱验证#}' />
-                <StepsItem title='{#安全设置#}' />
+                <StepsItem title=t("邮箱验证") />
+                <StepsItem title=t("安全设置") />
             </Steps>
             <Form
                 onValuesChange={setFormData1}
@@ -74,16 +74,16 @@ const RegisterPage = () => {
                 schema={FORM_STEP1_SCHEMA}
                 style={{ display: step === 0 ? 'block' : 'none' }}
             >
-                <FormItem name={"username"} label={"{#用户名#}"}>
-                    <Input placeholder={"{#请输入用户名，字母数字或下划线，字母开头#}"} />
+                <FormItem name={"username"} label={t("用户名")}>
+                    <Input placeholder={t("请输入用户名，字母数字或下划线，字母开头")} />
                 </FormItem>
-                <FormItem name={"email"} label={"{#邮箱#}"}>
-                    <Input placeholder={"{#请输入正确的邮箱#}"} />
+                <FormItem name={"email"} label={t("邮箱")}>
+                    <Input placeholder={t("请输入正确的邮箱")} />
                 </FormItem>
-                <FormItem name={"code"} label={"{#邮箱验证码#}"}>
-                    <EmailCodeInput placeholder={"{#请输入邮箱验证码#}"} api={sendEmailCode} email={formData1.email} />
+                <FormItem name={"code"} label={t("邮箱验证码")}>
+                    <EmailCodeInput placeholder={t("请输入邮箱验证码")} api={sendEmailCode} email={formData1.email} />
                 </FormItem>
-                <Button loading={step1Submitting} type={"submit"} long>{"{#下一步#}"}</Button>
+                <Button loading={step1Submitting} type={"submit"} long>{t("下一步")}</Button>
             </Form>
             <Form
                 key={formKey}
@@ -91,19 +91,19 @@ const RegisterPage = () => {
                 schema={FORM_STEP2_SCHEMA}
                 style={{ display: step === 1 ? 'block' : 'none' }}
             >
-                <FormItem name="password" label={"{#密码#}"}>
-                    <Input type={"password"} placeholder={"{#请输入密码#}"} />
+                <FormItem name="password" label={t("密码")}>
+                    <Input type={"password"} placeholder={t("请输入密码")} />
                 </FormItem>
-                <FormItem name="password2" label={"{#确认密码#}"}>
-                    <Input type={"password"} placeholder={"{#请再次输入密码#}"} />
+                <FormItem name="password2" label={t("确认密码")}>
+                    <Input type={"password"} placeholder={t("请再次输入密码")} />
                 </FormItem>
                 { step === 1 ? <SecretItem /> : null }
-                <FormItem name="code" label={"{#验证码#}"}>
-                    <CodeInput placeholder={"{#请输入身份验证 App 验证码#}"} />
+                <FormItem name="code" label={t("验证码")}>
+                    <CodeInput placeholder={t("请输入身份验证 App 验证码")} />
                 </FormItem>
                 <div className={"flex mx-[-10px]"}>
-                    <Button disabled={step2Submitting} onClick={onPrev} className={"mx-[10px]"} long variant={"outline"}>{"{#上一步#}"}</Button>
-                    <Button loading={step2Submitting} className={"mx-[10px]"} long type={"submit"}>{"{#提交注册#}"}</Button>
+                    <Button disabled={step2Submitting} onClick={onPrev} className={"mx-[10px]"} long variant={"outline"}>{t("上一步")}</Button>
+                    <Button loading={step2Submitting} className={"mx-[10px]"} long type={"submit"}>{t("提交注册")}</Button>
                 </div>
             </Form>
         </div>

@@ -31,33 +31,33 @@ export const MenuProjectSheet = () => {
     }, [])
 
     return <div className={"space-y-2"}>
-        <div className={"text-xl font-bold"}>{"{#项目#}"}</div>
+        <div className={"text-xl font-bold"}>{t("项目")}</div>
         <Command className={"h-auto"}>
             <CommandList className={"p-0"}>
                 <CommandItem onSelect={() => open('dashboard')}>
                     <div className={"flex justify-center items-center w-full"}>
-                        <span className={"flex-1"}>{"{#概览#}"}</span>
+                        <span className={"flex-1"}>{t("概览")}</span>
                         <IconShare />
                     </div>
                 </CommandItem>
                 <CommandItem onSelect={() => open('activity')}>
                     <div className={"flex justify-center items-center w-full"}>
-                        <span className={"flex-1"}>{"{#动态#}"}</span>
+                        <span className={"flex-1"}>{t("动态")}</span>
                         <IconShare />
                     </div>
                 </CommandItem>
                 <CommandItem onSelect={() => open('setting')}>
                     <div className={"flex justify-center items-center w-full"}>
-                        <span className={"flex-1"}>{"{#设置#}"}</span>
+                        <span className={"flex-1"}>{t("设置")}</span>
                         <IconShare />
                     </div>
                 </CommandItem>
             </CommandList>
         </Command>
         <Separator/>
-        <div className={"text-muted-foreground text-xs"}>{"{#打开项目#}"}</div>
+        <div className={"text-muted-foreground text-xs"}>{t("打开项目")}</div>
         <Command className={"h-auto"}>
-            <CommandInput className={"h-8"} placeholder="{#请输入关键词#}" />
+            <CommandInput className={"h-8"} placeholder=t("请输入关键词") />
             {
                 loading ? <div className={"flex justify-center items-center p-6"}>
                     <Spin/>

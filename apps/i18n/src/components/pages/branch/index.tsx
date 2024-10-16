@@ -3,7 +3,7 @@
 import { TitleBar } from "@clover/public/components/common/title-bar";
 import { DataTable, Space, useAlert, useMessage } from "@easykit/design";
 import { COLUMNS, FILTERS, ROW_ACTIONS } from "@/config/pages/module/branch/table";
-import { useTableLoader } from "@easy-kit/common/hooks";
+import { useTableLoader } from "@easykit/common/hooks";
 import { deleteBranch, list } from "@/rest/branch";
 import { useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
@@ -23,7 +23,7 @@ export const ModuleBranchPage = () => {
         active: "branch",
         path: [
             {
-                title: "{#分支#}",
+                title: t("分支"),
                 type: "item",
             }
         ],
@@ -53,7 +53,7 @@ export const ModuleBranchPage = () => {
 
     return <>
         <TitleBar
-            title={"{#分支#}"}
+            title={t("分支")}
             actions={actions}
             border={false}
         />
@@ -76,8 +76,8 @@ export const ModuleBranchPage = () => {
             onRowActionClick={({id: key}, {original}) => {
                 if(key === "delete") {
                     alert.confirm({
-                        title: "{#删除分支#}",
-                        description: "{#确认删除分支#}",
+                        title: t("删除分支"),
+                        description: t("确认删除分支"),
                         onOk: async () => {
                             const { success, message } = await deleteBranch({
                                 id: original.id,

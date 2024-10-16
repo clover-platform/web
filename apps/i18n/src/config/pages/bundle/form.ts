@@ -3,8 +3,8 @@ import {ExportFormatValue} from "@/components/pages/bundle/form/export-format";
 
 export const SCHEMA = z.object({
     name: z.string()
-        .min(1, "{#名称不能为空#}")
-        .max(255, "{#最多 255 个字符#}"),
+        .min(1, t("名称不能为空"))
+        .max(255, t("最多 255 个字符")),
     sources: z.array(z.string()),
     export: z.any().refine((value) => {
         if(!value) return false;
@@ -18,7 +18,7 @@ export const SCHEMA = z.object({
         ctx.addIssue({
             code: 'custom',
             path: ['name'],
-            message: '{#名称只能是小写字母、符号：. -，小写字母开头#}'
+            message: t("名称只能是小写字母、符号：. -，小写字母开头")
         })
     }
     if(sources.length) {
@@ -27,7 +27,7 @@ export const SCHEMA = z.object({
             ctx.addIssue({
                 code: 'custom',
                 path: ['sources'],
-                message: '{#请输入完整的匹配规则#}'
+                message: t("请输入完整的匹配规则")
             })
         }
         // 如果存在重复的匹配规则，则报错
@@ -35,7 +35,7 @@ export const SCHEMA = z.object({
             ctx.addIssue({
                 code: 'custom',
                 path: ['sources'],
-                message: '{#匹配规则不能重复#}'
+                message: t("匹配规则不能重复")
             })
         }
     }

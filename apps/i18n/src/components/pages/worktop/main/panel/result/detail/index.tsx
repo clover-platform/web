@@ -27,12 +27,12 @@ const menus: DropdownMenuItemProps[] = [
     {
         type: "item",
         id: "copy.key",
-        label: <IconMenuItem icon={<CopyIcon className={"text-lg"} />} label={"{#复制键值#}"}/>,
+        label: <IconMenuItem icon={<CopyIcon className={"text-lg"} />} label={t("复制键值")}/>,
     },
     {
         type: "item",
         id: "copy.value",
-        label: <IconMenuItem icon={<CopyIcon className={"text-lg"} />} label={"{#复制内容#}"}/>
+        label: <IconMenuItem icon={<CopyIcon className={"text-lg"} />} label={t("复制内容")}/>
     },
     {
         type: "separator",
@@ -41,7 +41,7 @@ const menus: DropdownMenuItemProps[] = [
     {
         type: "item",
         id: "remove",
-        label: <IconMenuItem label={"{#删除#}"}/>,
+        label: <IconMenuItem label={t("删除")}/>,
     },
 ];
 
@@ -64,14 +64,14 @@ export const Detail = () => {
     const onItemClick = ({id}: DropdownMenuItemProps) => {
         if(id === "copy.key") {
             copy(entry.identifier);
-            msg.success("{#复制成功#}")
+            msg.success(t("复制成功"))
         }else if(id === "copy.value") {
             copy(entry.value);
-            msg.success("{#复制成功#}")
+            msg.success(t("复制成功"))
         }else if(id === "remove") {
             alert.confirm({
-                title: "{#撤销批准#}",
-                description: "{#是否撤销此翻译的有效结果#}",
+                title: t("撤销批准"),
+                description: t("是否撤销此翻译的有效结果"),
                 onOk: async () => {
                     const { success, message } = await removeRest(entry.id)
                     if(success) {
@@ -88,14 +88,14 @@ export const Detail = () => {
 
     return <div className={"w-full"}>
         <div className={"flex justify-center items-center p-2 px-4"}>
-            <div className={"flex-1 text-base font-medium"}>{"{#原始内容#}"}</div>
+            <div className={"flex-1 text-base font-medium"}>{t("原始内容")}</div>
             <div className={"flex"}>
-                <Tooltip content={"{#上一个#}"}>
+                <Tooltip content={t("上一个")}>
                     <Action disabled={current === 0} onClick={() => setCurrent(current - 1)}>
                         <ArrowLeftIcon />
                     </Action>
                 </Tooltip>
-                <Tooltip content={"{#下一个#}"}>
+                <Tooltip content={t("下一个")}>
                     <Action disabled={current === entries.length - 1} onClick={() => setCurrent(current + 1)}>
                         <ArrowRightIcon />
                     </Action>

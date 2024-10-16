@@ -1,13 +1,14 @@
 'use client';
 
 import {Button, Card, Space, Breadcrumbs, BreadcrumbsItem, useMessage, Separator} from "@easykit/design";
-import Link from "@easy-kit/common/components/link";
+import Link from "@easykit/common/components/link";
 import RoleForm from "@/components/pages/access/role/form";
 import {useState} from "react";
 import {addRole} from "@/rest/access";
 import {useRouter} from "next/navigation";
-import BackButton from "@easy-kit/common/components/button/back";
+import BackButton from "@easykit/common/components/button/back";
 import {TitleBar} from "@clover/public/components/common/title-bar";
+import { t } from '@easykit/common/utils/locale';
 
 const AddRolePage = () => {
     const [loading, setLoading] = useState(false);
@@ -26,11 +27,11 @@ const AddRolePage = () => {
     }
 
     return <>
-        <TitleBar title={"{#添加角色#}"} />
+        <TitleBar title={t("添加角色")} />
         <div className={"w-[550px] mx-auto"}>
             <RoleForm onSubmit={onSubmit}>
                 <Space>
-                    <Button loading={loading} type={"submit"}>{"{#保存#}"}</Button>
+                    <Button loading={loading} type={"submit"}>{t("保存")}</Button>
                     <BackButton />
                 </Space>
             </RoleForm>

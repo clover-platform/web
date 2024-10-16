@@ -27,17 +27,17 @@ export const Editor = () => {
             minRows={3}
             value={content}
             onChange={e => setContent(e.target.value)}
-            placeholder={"{#请输入翻译内容#}"}
+            placeholder={t("请输入翻译内容")}
             className={"border-none rounded-none shadow-none focus-visible:ring-0 px-4 py-2 w-full focus:outline-none resize-none"}
         />
         <div className={"flex justify-center items-center p-2 px-4"}>
             <div className={"flex-1 flex justify-start items-center"}>
-                <Tooltip content={"{#使用源语言填充#}"}>
+                <Tooltip content={t("使用源语言填充")}>
                     <Action onClick={() => setContent(entry?.value)}>
                         <CopyIcon />
                     </Action>
                 </Tooltip>
-                <Tooltip content={"{#清空#}"}>
+                <Tooltip content={t("清空")}>
                     <Action onClick={() => setContent('')}>
                         <IconClear className={"text-base"} />
                     </Action>
@@ -49,7 +49,7 @@ export const Editor = () => {
                     variant={"outline"}
                     onClick={onSave}
                 >
-                    {"{#保存#}"}
+                    {t("保存")}
                 </Button>
             </div>
         </div>

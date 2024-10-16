@@ -6,11 +6,11 @@ import * as Dropdown from '@radix-ui/react-dropdown-menu'
 import { useCallback } from 'react'
 
 const FONT_SIZES = [
-    { label: '{#极小#}', value: '12px' },
-    { label: '{#小#}', value: '14px' },
-    { label: '{#默认#}', value: '' },
-    { label: '{#大#}', value: '18px' },
-    { label: '{#超大#}', value: '24px' },
+    { label: t("极小"), value: '12px' },
+    { label: t("小"), value: '14px' },
+    { label: t("默认"), value: '' },
+    { label: t("大"), value: '18px' },
+    { label: t("超大"), value: '24px' },
 ]
 
 export type FontSizePickerProps = {
@@ -20,7 +20,7 @@ export type FontSizePickerProps = {
 
 export const FontSizePicker = ({ onChange, value }: FontSizePickerProps) => {
     const currentValue = FONT_SIZES.find(size => size.value === value)
-    const currentSizeLabel = currentValue?.label.split(' ')[0] || '{#默认#}'
+    const currentSizeLabel = currentValue?.label.split(' ')[0] || t("默认")
 
     const selectSize = useCallback((size: string) => () => onChange(size), [onChange])
 

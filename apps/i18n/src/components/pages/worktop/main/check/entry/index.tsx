@@ -22,5 +22,5 @@ export const EntryCheck: FC<ResultCheckProps> = (props) => {
             "w-full h-full flex justify-center items-center text-md text-muted-foreground",
             props.className
         )}
-    >{"{#请选择词条#}"}</div>;
+    >{t("请选择词条")}</div>;
 }

@@ -1,5 +1,5 @@
 import type { Config } from 'tailwindcss';
-import plugin from "@easy-kit/common/plugin/tailwind";
+import plugin from "@easykit/common/plugin/tailwind";
 import ta from 'tailwindcss-animate';
 import {tailwindConfig} from '@easykit/design/lib';
 

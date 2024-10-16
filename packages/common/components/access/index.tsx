@@ -1,5 +1,5 @@
 import {FC, PropsWithChildren} from "react";
-import {useAccess} from "@easy-kit/common/hooks";
+import {useAccess} from "@easykit/common/hooks";
 
 export type AccessProps = {
     value?: string | string[];

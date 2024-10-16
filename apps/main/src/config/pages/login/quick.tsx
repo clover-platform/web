@@ -8,12 +8,12 @@ export const ICON_PROPS = {
 export const SUPPORT_WAY = [
     {
         id: 'wechat',
-        title: "{#微信#}",
+        title: t("微信"),
         icon: <IconWechat {...ICON_PROPS} />
     },
     {
         id: 'github',
-        title: "{#Github#}",
+        title: t("Github"),
         icon: <IconGithub {...ICON_PROPS} />
     }
 ]

@@ -25,7 +25,7 @@ export const GetInviteLinkButton: FC<GetInviteLinkButtonProps> = (props) => {
         if(success) {
             const url = `${window.location.origin}/i18n/invite/?t=${data}`;
             copy(url);
-            msg.success("{#邀请链接已复制#}");
+            msg.success(t("邀请链接已复制"));
         }else{
             msg.error(message);
         }
@@ -37,6 +37,6 @@ export const GetInviteLinkButton: FC<GetInviteLinkButtonProps> = (props) => {
         type={"button"} variant={"outline"}
         onClick={doGenerate}
     >
-        {"{#获取链接#}"}
+        {t("获取链接")}
     </Button>
 }

@@ -1,7 +1,7 @@
 'use client';
 
 import { useSearchParams } from "next/navigation";
-import { useTableLoader } from "@easy-kit/common/hooks";
+import { useTableLoader } from "@easykit/common/hooks";
 import { list } from "@/rest/member";
 import { useEffect, useState } from "react";
 import { TitleBar } from "@clover/public/components/common/title-bar";
@@ -23,7 +23,7 @@ export const MemberPage = () => {
         active: "member",
         path: [
             {
-                title: "{#成员#}",
+                title: t("成员"),
                 type: "item",
             }
         ],
@@ -54,7 +54,7 @@ export const MemberPage = () => {
 
     return <>
         <TitleBar
-            title={"{#成员#}"}
+            title={t("成员")}
             actions={actions}
             border={false}
         />

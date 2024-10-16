@@ -14,7 +14,7 @@ export const AIItem: FC<AIItemProps> = (props) => {
     return <div className={"flex bg-muted p-3 rounded-lg justify-center items-center space-x-1 group"}>
         <div className={"flex-1 min-h-7 flex justify-start items-center"}>{props.value}</div>
         <div className={"w-7 h-7 hidden justify-center items-center group-hover:flex"}>
-            <Tooltip content={"{#采用该建议#}"}>
+            <Tooltip content={t("采用该建议")}>
                 <Action disabled={loading} onClick={() => submit(props.value)} className={"!p-1"}>
                     { loading ? <Spin /> : <CheckIcon /> }
                 </Action>

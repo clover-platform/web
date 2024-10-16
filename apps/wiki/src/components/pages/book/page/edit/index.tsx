@@ -12,13 +12,13 @@ export const EditPage = () => {
     useLayoutConfig<BookLayoutProps>({
         path: [
             {
-                title: "{#知识库#}",
+                title: t("知识库"),
                 type: "link",
                 href: "/{#LANG#}/wiki/book/",
                 withQuery: ["id"],
             },
             {
-                title: "{#编辑#}",
+                title: t("编辑"),
                 type: "item",
             }
         ],

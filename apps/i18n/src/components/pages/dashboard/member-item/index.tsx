@@ -5,8 +5,8 @@ import { Avatar, Badge } from "@easykit/design";
 export type MemberItemProps = {} & Member;
 
 const TYPE_MAP: Record<number, string> = {
-    2: "{#所有者#}",
-    1: "{#管理员#}",
+    2: t("所有者"),
+    1: t("管理员"),
 }
 
 export const MemberItem: FC<MemberItemProps> = (props) => {

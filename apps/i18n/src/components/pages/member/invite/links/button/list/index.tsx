@@ -9,7 +9,7 @@ export const InviteLinkListButton = () => {
             onClick={() => setVisible(true)}
             type={"button"} variant={"link"}
         >
-            {"{#管理链接#}"}
+            {t("管理链接")}
         </Button>
         <InviteLinkListModal
             visible={visible}

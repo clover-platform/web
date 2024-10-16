@@ -28,18 +28,18 @@ export const NewBranchModal: FC<NewBranchModalProps> = (props) => {
 
     return <Dialog
         {...props}
-        title={"{#新建分支#}"}
+        title={t("新建分支")}
         maskClosable={false}
     >
         <ModuleBranchForm onSubmit={onSubmit}>
             <Space className={"justify-end"}>
-                <Button loading={loading} type={"submit"}>{"{#提交#}"}</Button>
+                <Button loading={loading} type={"submit"}>{t("提交")}</Button>
                 <Button
                     variant={"outline"}
                     type={"button"}
                     onClick={() => props.onCancel?.()}
                 >
-                    {"{#取消#}"}
+                    {t("取消")}
                 </Button>
             </Space>
         </ModuleBranchForm>

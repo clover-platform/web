@@ -1,5 +1,5 @@
 // Rest 配置
-import { config, alias } from '@easy-kit/common/utils/rest';
+import { config, alias } from '@easykit/common/utils/rest';
 import { NextResponse } from "next/server";
 import { get } from "@clover/public/utils/headers.server";
 

@@ -19,8 +19,8 @@ export const InvitePageJoined: FC<InvitePageJoinedProps> = (props) => {
             <CheckCircledIcon className={"w-12 h-12 text-primary"} />
         </div>
         <div>
-            <span className={"text-muted-foreground"}>{"{#你已经加入该项目#}"}</span>
-            <Button onClick={detail} className={"p-1"} variant={"link"}>{"{#查看详情#}"}</Button>
+            <span className={"text-muted-foreground"}>{t("你已经加入该项目")}</span>
+            <Button onClick={detail} className={"p-1"} variant={"link"}>{t("查看详情")}</Button>
         </div>
     </div>
 }

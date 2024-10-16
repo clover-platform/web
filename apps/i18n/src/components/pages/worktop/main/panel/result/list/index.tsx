@@ -4,7 +4,7 @@ import { Button, Empty, ScrollArea, Spin } from "@easykit/design";
 import { useEffect, useRef, useState } from "react";
 import { list as listRest } from "@/rest/entry.result";
 import { ResultItem } from "@/components/pages/worktop/main/panel/result/list/item";
-import bus from '@easy-kit/common/events';
+import bus from '@easykit/common/events';
 import { ENTRY_RESULT_RELOAD } from "@/events/worktop";
 import compact from "lodash/compact";
 import uniq from "lodash/uniq";
@@ -70,7 +70,7 @@ export const ResultList = () => {
 
     return <div className={"w-full flex-1 h-0 flex-shrink-0"}>
         <ScrollArea className={"w-full h-full"}>
-            { !loading && list.length === 0 ? <Empty text={"{#暂无翻译#}"} /> : null  }
+            { !loading && list.length === 0 ? <Empty text={t("暂无翻译")} /> : null  }
             <div className={"p-2 space-y-2"}>
                 {
                     list.map((item, index) => {
@@ -83,7 +83,7 @@ export const ResultList = () => {
                 { loading ? <ResultListLoading /> : null }
                 {
                     !loading && total > list.length ? <div className={"w-full flex justify-center"}>
-                        <Button onClick={loadMore} variant="link">{"{#加载更多#}"}</Button>
+                        <Button onClick={loadMore} variant="link">{t("加载更多")}</Button>
                     </div> : null
                 }
             </div>

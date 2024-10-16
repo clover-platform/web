@@ -12,23 +12,23 @@ type RoleItem = {
 
 const ROLE_MAP: Record<number, RoleItem> = {
     0: {
-        label: "{#成员#}",
+        label: t("成员"),
         variant: "outline",
     },
     1: {
-        label: "{#管理员#}",
+        label: t("管理员"),
         variant: "default",
     },
     2: {
-        label: "{#创建者#}",
+        label: t("创建者"),
         variant: "default",
     },
     3: {
-        label: "{#翻译员#}",
+        label: t("翻译员"),
         variant: "secondary",
     },
     4: {
-        label: "{#校验员#}",
+        label: t("校验员"),
         variant: "secondary",
     }
 }
