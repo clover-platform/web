@@ -3,10 +3,17 @@ import {DetailPage} from "@/components/pages/book/page";
 import {PageProps} from "@/types/pages/page";
 import {detail} from "@/rest/page";
 import { t } from '@easykit/common/utils/locale';
+import {Metadata} from "next";
 
-export const metadata = {
-    title: title(t("详情")),
-    keywords: keywords(),
+export const fetchCache = 'force-no-store';
+
+export async function generateMetadata(props: PageProps): Promise<Metadata> {
+    const {bookId, pageId} = props.params;
+    const {data} = await detail(bookId, pageId);
+    return {
+        title: title(data?.title || t("详情")),
+        keywords: keywords(),
+    }
 }
 
 const Page = async (props: PageProps) => {

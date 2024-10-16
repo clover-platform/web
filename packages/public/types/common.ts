@@ -1,4 +1,4 @@
-declare module '@easy-kit/i18n/utils/data' {
+declare module '@easykit/common/utils/locale/data' {
     export const getPath: (path: string) => string;
     export const dataLoader: (config: any) => Promise<any>;
     const langData: any;

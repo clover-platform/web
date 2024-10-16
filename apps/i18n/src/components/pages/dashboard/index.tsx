@@ -14,7 +14,7 @@ import {
     Loading, TableCell, Empty, ScrollArea, ScrollBar
 } from "@easykit/design";
 import Link from "next/link";
-import { i18n } from "@easy-kit/i18n/utils";
+import { i18n } from "@easykit/common/utils/locale";
 import { DetailInfoItem } from "@/components/pages/dashboard/detail/info-item";
 import { DetailTitle } from "@/components/pages/dashboard/detail/title";
 import { dashboard } from "@/rest/module";

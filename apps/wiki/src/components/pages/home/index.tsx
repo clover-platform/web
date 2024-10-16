@@ -9,10 +9,11 @@ import {HomeStart, StartItem} from "@/components/pages/home/start";
 import {CreateBookModal} from "@/components/pages/home/create/modal";
 import {COLUMNS, FILTERS, ROW_ACTIONS} from "@/config/pages/book";
 import {DataTable} from "@easykit/design";
-import {useTableLoader} from "@easykit/common/hooks";
+import {useLocaleCode, useTableLoader} from "@easykit/common/hooks";
 import {list} from "@/rest/book";
 import {Book} from "@/types/pages/book";
 import { t } from '@easykit/common/utils/locale';
+import {useLocale} from "@easykit/common/hooks/use.locale";
 
 export const SectionTitle: FC<PropsWithChildren> = (props) => {
     return <div className={"text-lg font-medium"}>
@@ -59,16 +60,13 @@ export const IndexPage = () => {
         action: list,
         keys: ['type'],
     });
+    const locale = useLocaleCode();
 
     const onStartClick = ({id}: StartItem) => {
         if(id === "new.book") {
             setCreateVisible(true);
         }
     }
-
-    useEffect(() => {
-        load({type}).then();
-    }, []);
 
     useEffect(() => {
         load({
@@ -107,16 +105,16 @@ export const IndexPage = () => {
                     onRowActionClick={({id: key}, {original}) => {
                         const {id} = original;
                         if(key === "detail") {
-                            router.push("/{#LANG#}/i18n/dashboard/?id=" + id);
+                            router.push(`/${locale}/i18n/dashboard/?id=` + id);
                         }else if(key === "activity") {
-                            router.push("/{#LANG#}/i18n/activity/?id=" + id);
+                            router.push(`/${locale}/i18n/activity/?id=` + id);
                         }else if(key === "delete") {
 
                         }
                     }}
                     onRowClick={(row) => {
                         const {id} = row.original;
-                        router.push("/{#LANG#}/wiki/book/" + id + "/");
+                        router.push(`/${locale}/wiki/book/` + id + "/");
                     }}
                 />
             </div>

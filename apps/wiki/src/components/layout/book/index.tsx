@@ -8,6 +8,7 @@ import {CatalogTree, CatalogTreeRef} from "@/components/layout/book/catalog";
 import {AddPageAction} from "@/components/layout/book/page-actions/add";
 import {ExpandAction} from "@/components/layout/book/page-actions/expand";
 import { t } from '@easykit/common/utils/locale';
+import {useLocaleCode} from "@easykit/common/hooks";
 
 export type BookLayoutProps = {
     active?: string;
@@ -22,13 +23,14 @@ export const BookLayout: FC<BookLayoutProps> = (origin) => {
     const [expandAll, setExpandAll] = useState<boolean>(false);
     const [expandAble, setExpandAble] = useState<boolean>(false);
     const treeRef = useRef<CatalogTreeRef>(null);
+    const locale = useLocaleCode();
 
     const menus: MenuItemProps[] = useMemo(() => {
         const list: MenuItemProps[] = [
             {
                 id: "home",
                 title: t("首页"),
-                url: `/{#LANG#}/wiki/book/?id=${id}`,
+                url: `/${locale}/wiki/book/?id=${id}`,
                 icon: <IconHome />,
             },
             {

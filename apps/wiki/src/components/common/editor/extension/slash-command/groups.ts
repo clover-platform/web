@@ -1,5 +1,4 @@
 import { Group } from './types'
-import { t } from '@easykit/common/utils/locale'
 import { t } from '@easykit/common/utils/locale';
 
 export const GROUPS: Group[] = [

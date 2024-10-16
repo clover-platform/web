@@ -21,8 +21,8 @@ import Placeholder from "@tiptap/extension-placeholder";
 import SlashCommand from "@/components/common/editor/extension/slash-command";
 import {useHandleId} from "@/components/common/editor/control/drag-handle/use.handle.id";
 import {NodeData, useData} from "@/components/common/editor/control/drag-handle/use.data";
-import {Editor as EditorInstance, JSONContent} from '@tiptap/core';
-import { useCallback, useState } from 'react';
+import {Editor as EditorInstance, JSONContent, EditorEvents} from '@tiptap/core';
+import { useCallback } from 'react';
 import { Node as ProseMirrorNode } from '@tiptap/pm/model'
 import { t } from '@easykit/common/utils/locale';
 
@@ -32,6 +32,7 @@ export type UseEditorProps = {
     onChange?: (value: string) => void;
     onReadOnlyChange?: (value: string) => void;
     editable?: boolean;
+    onCreate?: (props: EditorEvents['create']) => void;
 }
 
 const updateAttrById = (json: JSONContent, id: string, attr: string, value: any) => {
@@ -56,7 +57,7 @@ export const getJSONString = (editor: EditorInstance): string => {
 const UNIQUE_ATTRIBUTE_NAME = "id";
 
 export const useEditor = (props: UseEditorProps): [EditorInstance, NodeData, string] => {
-    const {onReadOnlyChange, value, onChange, limit, editable = true} = props;
+    const {onReadOnlyChange, value,onCreate, onChange, limit, editable = true} = props;
     const handleId = useHandleId();
     const data = useData();
 
@@ -173,7 +174,8 @@ export const useEditor = (props: UseEditorProps): [EditorInstance, NodeData, str
                 onChange?.(getJSONString(editor));
             }
         },
-    }, [onChange, onReadOnlyChecked]);
+        onCreate,
+    }, [onChange, onReadOnlyChecked, onCreate]);
 
     return [editor!, data, handleId];
 }

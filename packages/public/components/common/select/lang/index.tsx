@@ -1,23 +1,16 @@
 import { Select, SelectOptionProps } from "@easykit/design";
-import {useLocale} from "@clover/public/hooks/use.locale";
+import {useLocaleCode} from "@easykit/common/hooks/use.locale";
+import { setCookie } from "cookies-next"
+import langList from "@clover/public/config/lang.list";
+import {COOKIE_MAX_AGE} from "@clover/public/config/app";
 
-const options: SelectOptionProps[] = [
-    {
-        value: 'zh-cn',
-        label: '简体中文'
-    },
-    {
-        value: 'zh-tw',
-        label: '繁體中文'
-    },
-    {
-        value: 'en-us',
-        label: 'English'
-    }
-]
+const options: SelectOptionProps[] = langList.map((lang) => ({
+    value: lang.code,
+    label: lang.name,
+}));
 
 export const LangSelect = () => {
-    const locale = useLocale().toLowerCase();
+    const locale = useLocaleCode();
 
     return <Select
         value={locale}
@@ -26,7 +19,9 @@ export const LangSelect = () => {
         align={"end"}
         onChange={(value) => {
             if(locale !== value) {
-                localStorage.setItem('lang', value);
+                setCookie("locale", value, {
+                    maxAge: COOKIE_MAX_AGE,
+                });
                 location.href = location.href.replaceAll(locale, value);
             }
         }}

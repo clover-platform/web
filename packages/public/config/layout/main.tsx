@@ -10,7 +10,7 @@ export const getNavMenus = (): MenuItemProps[] => {
         {
             id: "project",
             title: t("项目"),
-            url: "/{#LANG#}/project/",
+            url: `/${t("LANG")}/project/`,
             icon: <IconProject />,
             external: true,
         },
@@ -22,13 +22,13 @@ export const getNavMenus = (): MenuItemProps[] => {
                 {
                     id: "task.list",
                     title: t("任务列表"),
-                    url: "/{#LANG#}/task/",
+                    url: `/${t("LANG")}/task/`,
                     external: true,
                 },
                 {
                     id: "task.gantt",
                     title: t("甘特图"),
-                    url: "/{#LANG#}/task/gantt",
+                    url: `/${t("LANG")}/task/gantt`,
                     external: true,
                 },
             ]
@@ -36,14 +36,14 @@ export const getNavMenus = (): MenuItemProps[] => {
         {
             id: "wiki",
             title: t("文档"),
-            url: "/{#LANG#}/wiki/",
+            url: `/${t("LANG")}/wiki/`,
             icon: <IconWiki/>,
             external: true,
         },
         {
             id: "i18n",
             title: t("国际化"),
-            url: "/{#LANG#}/i18n/",
+            url: `/${t("LANG")}/i18n/`,
             icon: <IconI18n/>,
             external: true,
         },

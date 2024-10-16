@@ -1,6 +1,6 @@
 import LangList from '@clover/public/config/lang.list';
-import build from '@easy-kit/i18n/utils/static'
-import langData from '@easy-kit/i18n/utils/data'
+import build from '@easykit/common/utils/locale/static'
+import langData from '@easykit/common/utils/locale/data'
 
 const config = {
     supports: LangList.map(({code}) => code),

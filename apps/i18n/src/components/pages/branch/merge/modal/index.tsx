@@ -14,7 +14,7 @@ import {
 } from "@easykit/design";
 import {IconBranch} from "@arco-iconbox/react-clover";
 import classNames from "classnames";
-import {i18n} from "@easy-kit/i18n/utils";
+import {i18n} from "@easykit/common/utils/locale";
 import {mergeOverview, merge as mergeRest} from "@/rest/branch";
 import {CheckedState} from "@radix-ui/react-checkbox";
 import { t } from '@easykit/common/utils/locale';

@@ -7,6 +7,7 @@ import {Action, ActionProps} from "../../../common/action";
 import {Tooltip} from "@easykit/design";
 import { setCookie } from "cookies-next";
 import { t } from '@easykit/common/utils/locale';
+import {COOKIE_MAX_AGE} from "@clover/public/config/app";
 
 export type SwitchProps = HTMLAttributes<HTMLButtonElement> & ActionProps;
 
@@ -14,7 +15,9 @@ const Switch: FC<SwitchProps> = (props) => {
     const [open, setOpen] = useRecoilState(sidebarOpenState);
 
     useEffect(() => {
-        setCookie(SIDEBAR_OPEN_KEY, open);
+        setCookie(SIDEBAR_OPEN_KEY, open, {
+            maxAge: COOKIE_MAX_AGE,
+        });
     }, [open]);
 
     const onSwitchClick = () => {

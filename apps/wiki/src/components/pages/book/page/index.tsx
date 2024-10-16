@@ -7,29 +7,32 @@ import {PageDetail, PageProps} from "@/types/pages/page";
 import {useMessage} from "@easykit/design";
 import {AbortPromise} from "@easykit/common/utils/rest";
 import {RestResult} from "@easykit/common/types/rest";
-import TimeAgo from "javascript-time-ago";
 import {save} from "@/rest/page";
 import classNames from "classnames";
-import {i18n} from "@easy-kit/i18n/utils";
+import {i18n} from "@easykit/common/utils/locale";
 import {CollectAction} from "@/components/pages/book/page/actions/collect";
 import Link from "next/link";
 import {Action} from "@clover/public/components/common/action";
 import {Pencil1Icon} from "@radix-ui/react-icons";
 import {ContentViewer} from "@/components/common/editor/viewer";
 import { t } from '@easykit/common/utils/locale';
+import {useLocaleCode} from "@easykit/common/hooks/use.locale";
+import {useTimeAgo} from "@easykit/common/hooks/use.time.ago";
 
 export type DetailPageProps = {
     detail: PageDetail
 } & PageProps;
 
 export const DetailPage: FC<DetailPageProps> = (props) => {
+    const locale = useLocaleCode();
+    const { detail } = props;
+    const { bookId, pageId } = props.params;
     useLayoutConfig<BookLayoutProps>({
         path: [
             {
                 title: t("知识库"),
                 type: "link",
-                href: "/{#LANG#}/wiki/book/",
-                withQuery: ["id"],
+                href: `/${locale}/wiki/book/${bookId}/`,
             },
             {
                 title: t("详情"),
@@ -37,11 +40,9 @@ export const DetailPage: FC<DetailPageProps> = (props) => {
             }
         ],
     });
-    const { detail } = props;
-    const { bookId, pageId } = props.params;
     const msg = useMessage();
     const saveHandler = useRef<AbortPromise<RestResult<any>>>();
-    const timeAgo = new TimeAgo(t("LANG"))
+    const timeAgo = useTimeAgo();
 
     const onChange = useCallback(async (json: string) => {
         saveHandler.current?.abort();
@@ -88,7 +89,7 @@ export const DetailPage: FC<DetailPageProps> = (props) => {
             </div>
             <div className={"flex space-x-2"}>
                 <CollectAction id={Number(pageId)} collected={detail?.collected!}/>
-                <Link href={`/{#LANG#}/wiki/book/page/edit/?id=${bookId}&page=${pageId}`}>
+                <Link href={`/${locale}/wiki/book/${bookId}/page/${pageId}/edit/?t=${Date.now()}`}>
                     <Action>
                         <Pencil1Icon/>
                     </Action>

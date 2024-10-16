@@ -3,13 +3,14 @@ import "./editor.css";
 import { EditorContent } from '@tiptap/react'
 import {forwardRef, useRef, useImperativeHandle} from "react";
 import {EditorController} from "@/components/common/editor/control";
-import {Editor as EditorInstance} from '@tiptap/core';
+import {Editor as EditorInstance, EditorEvents} from '@tiptap/core';
 import {useEditor} from "@/components/common/editor/hooks";
 
 export type EditorProps = {
     limit?: number;
     value?: string;
     onChange?: (value: string) => void;
+    onCreate?: (props: EditorEvents['create']) => void;
 }
 
 export type EditorRef = {
@@ -20,10 +21,12 @@ export const Editor = forwardRef<EditorRef, EditorProps>((props, ref) => {
     const {
         limit,
         value, onChange,
+        onCreate,
     } = props;
     const menuContainerRef = useRef<HTMLDivElement>(null);
     const [editor, data, handleId] = useEditor({
         limit, value, onChange,
+        onCreate
     });
 
     useImperativeHandle(ref, () => ({

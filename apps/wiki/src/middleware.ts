@@ -1,10 +1,12 @@
 import { NextResponse, NextRequest } from "next/server";
+import langList from '@clover/public/config/lang.list';
+import {FALLBACK} from "@clover/public/config/locale";
 
-let locales = ['en-us', 'zh-cn']
+const locales = langList.map((lang) => lang.code);
 
 // Get the preferred locale, similar to the above or using a library
 const getLocale = (request: NextRequest) => {
-    return "zh-cn";
+    return request.cookies.get('locale')?.value || FALLBACK;
 }
 
 export async function middleware(request: NextRequest) {

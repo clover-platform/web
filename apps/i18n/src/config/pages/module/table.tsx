@@ -1,7 +1,7 @@
 import { DataTableColumn } from "@easykit/design/components/uix/data-table";
 import { DropdownMenuItemProps, FilterItemProps, Input } from "@easykit/design";
 import TimeAgo from "javascript-time-ago";
-import { i18n } from "@easy-kit/i18n/utils";
+import { i18n } from "@easykit/common/utils/locale";
 import {Module} from "@/types/pages/module";
 import {Account} from "@clover/public/types/account";
 import { t } from '@easykit/common/utils/locale';
