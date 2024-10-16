@@ -7,7 +7,7 @@ const isDev = process.env.NODE_ENV !== 'production';
 /** @type {import('next').NextConfig} */
 export default {
     reactStrictMode: false,
-    trailingSlash: true,
+    // trailingSlash: true,
     // output: isDev ? 'standalone' : "export",
     transpilePackages: ['@easy-kit/common'],
     devIndicators: {

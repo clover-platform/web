@@ -20,6 +20,8 @@ import {
 import Link from "next/link";
 import { IconHome } from "@arco-iconbox/react-clover";
 import {withQuery} from "@easy-kit/common/utils/path";
+import {useGoLogin} from "@clover/public/components/layout/hooks/main";
+import {isLoginState} from "@clover/public/state/account";
 
 export type PathProps = {
     type: "item" | "link";
@@ -39,8 +41,10 @@ export interface MainLayoutProps extends PropsWithChildren {
 export const MainLayout: FC<MainLayoutProps> = (props) => {
     const { path, className } = props;
     const teams = useRecoilValue(teamsState);
+    const isLogin = useRecoilValue(isLoginState);
     const open = useSidebarState();
     const searchParams = useSearchParams();
+    useGoLogin();
 
     const showGuide = useMemo(() => {
         return !teams.length;
@@ -76,6 +80,8 @@ export const MainLayout: FC<MainLayoutProps> = (props) => {
         });
         return nodes;
     }, [path, searchParams])
+
+    if(!isLogin) return null;
 
     return showGuide ? <Guide /> : <div className={"layout-admin flex justify-start w-full items-stretch min-h-[100vh]"}>
         <Sidebar {...props.sidebarProps!}/>
