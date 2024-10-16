@@ -1,9 +1,13 @@
 import {keywords, title} from "@clover/public/utils/seo";
 import {IndexPage} from "@/components/pages/home";
+import {Metadata} from "next";
+import {t} from "@clover/public/utils/locale";
 
-export const metadata = {
-    title: title("{#首页#}"),
-    keywords: keywords(),
+export async function generateMetadata(): Promise<Metadata> {
+    return {
+        title: title(t("首页")),
+        keywords: keywords(),
+    }
 }
 
 const Page = () => <IndexPage />

@@ -11,6 +11,7 @@ import { SidebarProfile } from "@clover/public/components/layout/main/sidebar/pr
 import { ActionButton } from "@clover/public/components/common/action/button";
 import { MenuItem, MenuItemProps } from "@clover/public/components/layout/main/sidebar/menu-item";
 import { Action } from "@clover/public/components/common/action";
+import { t } from "@clover/public/utils/locale";
 
 export interface SidebarProps extends PropsWithChildren {
     active?: string;
@@ -115,7 +116,7 @@ const Sidebar: FC<SidebarProps> = (props) => {
             <div className={"flex-1 mx-0.5 my-1"}>
                 <a href={"/{#LANG#}/admin/"}>
                     <Action theme={"dark"} className={"w-full py-1"}>
-                        <IconSetting className={"mr-1 text-base"} /> {"{#管理中心#}"}
+                        <IconSetting className={"mr-1 text-base"} /> {t("管理中心")}
                     </Action>
                 </a>
             </div>

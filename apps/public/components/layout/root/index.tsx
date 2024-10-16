@@ -1,26 +1,19 @@
 'use client';
 
+import "@/plugin/rest.client";
+import "@clover/public/plugin/rest.client";
+import "@clover/public/plugin/locales";
 import { RecoilRoot } from 'recoil';
 import {FC, PropsWithChildren} from "react";
 import { ConfigProvider } from "@easykit/design";
 import locales from "@clover/public/config/locale";
-import i18next from "i18next";
-import * as z from "zod";
-import { zodI18nMap } from "zod-i18n-map";
-import zhCNZod from "zod-i18n-map/locales/zh-CN/zod.json";
-import enUSZod from "zod-i18n-map/locales/en/zod.json";
-import enAgo from 'javascript-time-ago/locale/en'
-import zhCNAgo from 'javascript-time-ago/locale/zh'
-import TimeAgo from "javascript-time-ago";
-import "@/plugin/rest.client";
-import "@clover/public/plugin/rest.client";
 import {accountInfoState, isLoginState} from "@clover/public/state/account";
 import {Account} from "@clover/public/types/account";
-import {projectsState, teamsState} from "@clover/public/state/public";
+import {localeState, projectsState, teamsState} from "@clover/public/state/public";
 import {accessState} from "@easy-kit/common/state/access";
 import {sidebarOpenState} from "@clover/public/components/layout/main/state";
-TimeAgo.addLocale(zhCNAgo);
-TimeAgo.addLocale(enAgo);
+import i18next from "i18next";
+import {getLocale} from "@clover/public/utils/locale";
 
 export type RootLayoutProps = PropsWithChildren<{
     isLogin: boolean;
@@ -28,6 +21,7 @@ export type RootLayoutProps = PropsWithChildren<{
     teams: any[];
     projects: any[];
     sideOpen: boolean;
+    locale: string;
 }>;
 
 export const RootLayout: FC<RootLayoutProps> = (props) => {
@@ -38,7 +32,9 @@ export const RootLayout: FC<RootLayoutProps> = (props) => {
         teams,
         projects,
         sideOpen,
+        locale,
     } = props;
+
 
     return <html className={`{#LANG#}`}>
     <head>
@@ -62,20 +58,10 @@ export const RootLayout: FC<RootLayoutProps> = (props) => {
             });
             snapshot.set(accessState, accountInfo?.authorities || []);
             snapshot.set(sidebarOpenState, sideOpen);
+            snapshot.set(localeState, locale);
+            i18next.changeLanguage(getLocale(locale)).then();
         }}>
-            <ConfigProvider
-                locale={locales['{#LANG#}']}
-                onLocaleChange={(key) => {
-                    i18next.init({
-                        lng: key,
-                        resources: {
-                            'zh-CN': {zod: zhCNZod},
-                            'en-US': {zod: enUSZod},
-                        },
-                    }).then();
-                    z.setErrorMap(zodI18nMap);
-                }}
-            >
+            <ConfigProvider locale={locales[locale]}>
                 { children }
             </ConfigProvider>
         </RecoilRoot>

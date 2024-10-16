@@ -1,7 +1,8 @@
 import { RootLayout as PublicRootLayout } from "@clover/public/components/layout/root";
-import { PropsWithChildren } from "react";
+import { PropsWithChildren, FC } from "react";
 import "@/plugin/rest.server";
 import "@clover/public/plugin/rest.server";
+import "@clover/public/plugin/locales";
 import '@/assets/style/index.scss';
 import {profile} from "@clover/public/rest/auth";
 import {my as myTeams} from "@clover/public/rest/team";
@@ -9,8 +10,17 @@ import {my as myProjects} from "@clover/public/rest/project";
 import { getCookie } from "cookies-next";
 import { cookies } from 'next/headers';
 import {SIDEBAR_OPEN_KEY} from "@clover/public/components/layout/main/const";
+import {changeLanguage} from "@clover/public/utils/locale";
 
-const RootLayout = async ({children}: PropsWithChildren) => {
+export type RootLayoutProps = PropsWithChildren<{
+    params: {
+        LANG: string;
+    };
+}>;
+
+const RootLayout: FC<RootLayoutProps> = async (props) => {
+    const { LANG } = props.params;
+    await changeLanguage(LANG);
     const { success, data } = await profile();
     let teams = [];
     let projects = [];
@@ -28,8 +38,9 @@ const RootLayout = async ({children}: PropsWithChildren) => {
         accountInfo={data}
         isLogin={success}
         sideOpen={!(open === 'false')}
+        locale={LANG}
     >
-        {children}
+        {props.children}
     </PublicRootLayout>
 }
 
