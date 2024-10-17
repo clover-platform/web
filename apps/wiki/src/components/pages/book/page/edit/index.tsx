@@ -71,6 +71,7 @@ export const EditPage: FC<EditPageProps> = (props) => {
                 title
             });
             router.push(`/${l}/wiki/book/${bookId}/page/${pageId}/`);
+            router.refresh()
         }else{
             msg.error(message);
         }

@@ -11,13 +11,13 @@ import {save} from "@/rest/page";
 import classNames from "classnames";
 import {i18n} from "@easykit/common/utils/locale";
 import {CollectAction} from "@/components/pages/book/page/actions/collect";
-import Link from "next/link";
 import {Action} from "@clover/public/components/common/action";
 import {Pencil1Icon} from "@radix-ui/react-icons";
 import {ContentViewer} from "@/components/common/editor/viewer";
 import { t } from '@easykit/common/utils/locale';
 import {useLocaleCode} from "@easykit/common/hooks/use.locale";
 import {useTimeAgo} from "@easykit/common/hooks/use.time.ago";
+import {useRouter} from "next/navigation";
 
 export type DetailPageProps = {
     detail: PageDetail
@@ -43,6 +43,7 @@ export const DetailPage: FC<DetailPageProps> = (props) => {
     const msg = useMessage();
     const saveHandler = useRef<AbortPromise<RestResult<any>>>();
     const timeAgo = useTimeAgo();
+    const router = useRouter();
 
     const onChange = useCallback(async (json: string) => {
         saveHandler.current?.abort();
@@ -89,11 +90,12 @@ export const DetailPage: FC<DetailPageProps> = (props) => {
             </div>
             <div className={"flex space-x-2"}>
                 <CollectAction id={Number(pageId)} collected={detail?.collected!}/>
-                <Link href={`/${locale}/wiki/book/${bookId}/page/${pageId}/edit/`}>
-                    <Action>
-                        <Pencil1Icon/>
-                    </Action>
-                </Link>
+                <Action onClick={() =>{
+                    router.push(`/${locale}/wiki/book/${bookId}/page/${pageId}/edit/`);
+                    router.refresh();
+                }}>
+                    <Pencil1Icon/>
+                </Action>
             </div>
         </div>
         <div className={"p-16 pt-4 max-w-[860px] mx-auto"}>
