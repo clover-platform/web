@@ -14,7 +14,7 @@ export type CatalogQuery = {
     bookId: number;
 }
 export const catalog = (params: CatalogQuery): Promise<RestResult<Catalog[]>> =>
-    get(`@wiki/book/${params.bookId}/page/catalog`, params);
+    get(`@wiki/book/${params.bookId}/page/catalog`);
 
 export type ChangeCatalogParentData = {
     bookId: number;
@@ -34,7 +34,7 @@ export type SavePageData = {
     content: string;
     newVersion?: boolean;
 }
-export const save = (data: SavePageData): AbortPromise<RestResult<any>> =>
+export const save = (data: SavePageData): AbortPromise<RestResult<number>> =>
     put(`@wiki/book/${data.bookId}/page/${data.id}`, data);
 
 export type CollectData = {

@@ -3,7 +3,7 @@ import {FC, useMemo, useCallback, useState, useRef} from "react";
 import {useLayoutProps} from "@clover/public/components/layout/hooks/use.layout.props";
 import {IconCatalog, IconHome} from "@arco-iconbox/react-clover";
 import {MenuItemProps} from "@clover/public/components/layout/main/sidebar/menu-item";
-import {useSearchParams} from "next/navigation";
+import {useParams} from "next/navigation";
 import {CatalogTree, CatalogTreeRef} from "@/components/layout/book/catalog";
 import {AddPageAction} from "@/components/layout/book/page-actions/add";
 import {ExpandAction} from "@/components/layout/book/page-actions/expand";
@@ -18,19 +18,19 @@ export type BookLayoutProps = {
 
 export const BookLayout: FC<BookLayoutProps> = (origin) => {
     const props = useLayoutProps<BookLayoutProps>(origin);
-    const search = useSearchParams();
-    const id = search.get("id");
     const [expandAll, setExpandAll] = useState<boolean>(false);
     const [expandAble, setExpandAble] = useState<boolean>(false);
     const treeRef = useRef<CatalogTreeRef>(null);
     const locale = useLocaleCode();
+    const params = useParams();
+    const { bookId } = params;
 
     const menus: MenuItemProps[] = useMemo(() => {
         const list: MenuItemProps[] = [
             {
                 id: "home",
                 title: t("首页"),
-                url: `/${locale}/wiki/book/?id=${id}`,
+                url: `/${locale}/wiki/book/${bookId}/`,
                 icon: <IconHome />,
             },
             {
@@ -58,7 +58,7 @@ export const BookLayout: FC<BookLayoutProps> = (origin) => {
             },
         ];
         return list;
-    }, [id, expandAll, expandAble, treeRef]);
+    }, [bookId, expandAll, expandAble, treeRef]);
 
     const onTreeExpand = useCallback((expandedKeys: string[], allKeys: string[]) => {
         setExpandAll(expandedKeys.length === allKeys.length);
@@ -79,7 +79,7 @@ export const BookLayout: FC<BookLayoutProps> = (origin) => {
             {
                 title: t("文档"),
                 type: "link",
-                href: "/{#LANG#}/wiki/",
+                href: `/${locale}/wiki/`,
                 withQuery: false,
                 external: true,
             },

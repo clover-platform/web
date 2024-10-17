@@ -5,8 +5,6 @@ import {detail} from "@/rest/page";
 import { t } from '@easykit/common/utils/locale';
 import {Metadata} from "next";
 
-export const fetchCache = 'force-no-store';
-
 export async function generateMetadata(props: PageProps): Promise<Metadata> {
     const {bookId, pageId} = props.params;
     const {data} = await detail(bookId, pageId);

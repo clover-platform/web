@@ -89,7 +89,7 @@ export const DetailPage: FC<DetailPageProps> = (props) => {
             </div>
             <div className={"flex space-x-2"}>
                 <CollectAction id={Number(pageId)} collected={detail?.collected!}/>
-                <Link href={`/${locale}/wiki/book/${bookId}/page/${pageId}/edit/?t=${Date.now()}`}>
+                <Link href={`/${locale}/wiki/book/${bookId}/page/${pageId}/edit/`}>
                     <Action>
                         <Pencil1Icon/>
                     </Action>

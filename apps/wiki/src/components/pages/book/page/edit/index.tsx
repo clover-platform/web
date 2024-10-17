@@ -70,7 +70,7 @@ export const EditPage: FC<EditPageProps> = (props) => {
                 id: Number(pageId),
                 title
             });
-            router.push(`/${l}/wiki/book/${bookId}/page/${pageId}/?t=${Date.now()}`);
+            router.push(`/${l}/wiki/book/${bookId}/page/${pageId}/`);
         }else{
             msg.error(message);
         }

@@ -3,7 +3,7 @@ import {Action} from "@clover/public/components/common/action";
 import {FC, useState, useCallback, useEffect} from 'react';
 import {Spin, useMessage} from "@easykit/design";
 import {collect as collectRest} from "@/rest/page";
-import {useSearchParams} from "next/navigation";
+import {useParams} from "next/navigation";
 
 export type CollectActionProps = {
     id: number;
@@ -12,8 +12,8 @@ export type CollectActionProps = {
 
 export const CollectAction: FC<CollectActionProps> = (props) => {
     const { id: pageId } = props;
-    const search = useSearchParams();
-    const id = search.get("id");
+    const params = useParams();
+    const { bookId } = params
     const [loading, setLoading] = useState<boolean>(false);
     const msg = useMessage();
     const [collected, setCollected] = useState<boolean>(props.collected);
@@ -25,7 +25,7 @@ export const CollectAction: FC<CollectActionProps> = (props) => {
     const collect = useCallback(async () => {
         setLoading(true);
         const {success, message} = await collectRest({
-            bookId: Number(id),
+            bookId: Number(bookId),
             id: pageId,
             collect: !collected
         });
@@ -36,7 +36,7 @@ export const CollectAction: FC<CollectActionProps> = (props) => {
         }else{
             setCollected(!collected);
         }
-    }, [collected, id, pageId])
+    }, [collected, bookId, pageId])
 
     return <Action disabled={loading} onClick={collect}>
         {
