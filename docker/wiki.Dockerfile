@@ -1,45 +1,7 @@
 ARG APP=wiki
-ARG NODE_REGISTRY=https://registry.npmmirror.com/
 
 # 指定基础镜像版本，确保每次构建都是幂等的
-FROM node:20.17-alpine AS base
-
-FROM base AS builder
-
-RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories
-
-# 添加依赖
-RUN apk add make libc6-compat vips-dev fftw-dev --update-cache
-
-# Node v16.13 开始支持 corepack 用于管理第三方包管理器
-# 锁定包管理器版本，确保 CI 每次构建都是幂等的
-# RUN corepack enable && corepack prepare pnpm@9.12.1 --activate
-RUN npm i -g pnpm --registry=$REGISTRY
-
-WORKDIR /app
-
-# pnpm fetch does require only lockfile
-# 注意还需要复制 `.npmrc`，因为里面可能包含 npm registry 等配置，下载依赖需要用到
-COPY .npmrc pnpm-lock.yaml ./
-
-# 推荐使用 pnpm fetch 命令下载依赖到 virtual store，专为 docker 构建优化
-# 参考：https://pnpm.io/cli/fetch
-RUN pnpm fetch
-
-# 将本地文件复制到构建上下文
-COPY . .
-
-# Uncomment the following line in case you want to disable telemetry during the build.
-ENV NEXT_TELEMETRY_DISABLED 1
-
-# 基于 virtual store 生成 node_modules && 打包构建
-# 此处不需要与 package registry 进行通信，因此依赖安装速度极快
-# 注意 PNPM v8.4.0 版本有一个 breaking change
-# 当 `node_modules` 存在，运行 `pnpm install` 会出现命令行交互操作，导致 CI 挂掉
-# 这里加上 `--force` 参数，关闭命令行交互操作
-RUN pnpm install --offline --force && pnpm build:$APP
-
-FROM base AS runner
+FROM node:20.17-alpine
 
 RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories
 
@@ -73,9 +35,9 @@ WORKDIR /app
 
 # `standalone` 模式打包，默认包含服务端代码，没有客户端代码
 # 因为官方建议通过 CDN 托管，但也可以手动复制 `public`、`.next/static` 目录
-COPY --from=builder --chown=nextjs:nodejs /app/apps/$APP/.next/standalone ./
-COPY --from=builder --chown=nextjs:nodejs /app/apps/$APP/.next/static ./apps/$APP/.next/static
-COPY --from=builder --chown=nextjs:nodejs /app/apps/$APP/public ./apps/$APP/public
+COPY ./apps/$APP/.next/standalone ./
+COPY ./apps/$APP/.next/static ./apps/$APP/.next/static
+COPY ./apps/$APP/public ./apps/$APP/public
 
 USER nextjs
 

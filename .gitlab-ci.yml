@@ -81,6 +81,8 @@ package-wiki:
     tags:
         - dev
     script:
+        - pnpm i
+        - pnpm build:wiki
         - docker login -u $DOCKER_USER --password $DOCKER_TOKEN $CI_REGISTRY
         - docker build -t $CI_REGISTRY/clover/web/wiki:$CI_PIPELINE_ID -f ./docker/wiki.Dockerfile .
         - docker tag $CI_REGISTRY/clover/web/wiki:$CI_PIPELINE_ID $CI_REGISTRY/clover/web/wiki:latest
