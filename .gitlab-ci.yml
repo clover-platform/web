@@ -12,9 +12,6 @@ package-main:
         paths:
             - apps/main/.next/cache/
         policy: pull-push
-    artifacts:
-        paths:
-            - apps/main/i18n/
     script:
         - pnpm i
         - pnpm build:main
@@ -36,9 +33,6 @@ package-i18n:
         paths:
             - apps/i18n/.next/cache/
         policy: pull-push
-    artifacts:
-        paths:
-            - apps/i18n/i18n/
     script:
         - pnpm i
         - pnpm build:i18n
@@ -60,9 +54,6 @@ package-admin:
         paths:
             - apps/admin/.next/cache/
         policy: pull-push
-    artifacts:
-        paths:
-            - apps/admin/i18n/
     script:
         - pnpm i
         - pnpm build:admin
@@ -80,6 +71,10 @@ package-wiki:
         - /^wiki-.*$/
     tags:
         - dev
+    cache:
+        paths:
+            - apps/wiki/.next/cache/
+        policy: pull-push
     script:
         - pnpm i
         - pnpm build:wiki

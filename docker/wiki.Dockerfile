@@ -1,7 +1,7 @@
-ARG APP=wiki
-
 # 指定基础镜像版本，确保每次构建都是幂等的
 FROM node:20.17-alpine
+
+ARG APP=wiki
 
 RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories
 
@@ -35,9 +35,9 @@ WORKDIR /app
 
 # `standalone` 模式打包，默认包含服务端代码，没有客户端代码
 # 因为官方建议通过 CDN 托管，但也可以手动复制 `public`、`.next/static` 目录
-COPY ./apps/$APP/.next/standalone ./
-COPY ./apps/$APP/.next/static ./apps/$APP/.next/static
-COPY ./apps/$APP/public ./apps/$APP/public
+COPY ./apps/${APP}/.next/standalone ./
+COPY ./apps/${APP}/.next/static ./apps/${APP}/.next/static
+COPY ./apps/${APP}/public ./apps/${APP}/public
 
 USER nextjs
 
