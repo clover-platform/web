@@ -1,4 +1,6 @@
 ARG APP=wiki
+ARG NODE_REGISTRY=https://registry.npmmirror.com/
+ARG APK_REPOSITORY=https://dl-3.alpinelinux.org/alpine/edge/testing/
 
 # 指定基础镜像版本，确保每次构建都是幂等的
 FROM node:20.17-alpine AS base
@@ -6,12 +8,12 @@ FROM node:20.17-alpine AS base
 FROM base AS builder
 
 # 添加依赖
-RUN apk add make libc6-compat vips-dev fftw-dev --update-cache --repository https://dl-3.alpinelinux.org/alpine/edge/testing/
+RUN apk add make libc6-compat vips-dev fftw-dev --update-cache --repository $APK_REPOSITORY
 
 # Node v16.13 开始支持 corepack 用于管理第三方包管理器
 # 锁定包管理器版本，确保 CI 每次构建都是幂等的
 # RUN corepack enable && corepack prepare pnpm@9.12.1 --activate
-RUN npm i -g pnpm --registry=https://registry.npmmirror.com/
+RUN npm i -g pnpm --registry=$REGISTRY
 
 WORKDIR /app
 
@@ -39,7 +41,7 @@ RUN pnpm install --offline --force && pnpm build:$APP
 FROM base AS runner
 
 # 添加依赖
-RUN apk add curl vips-dev fftw-dev --update-cache --repository https://dl-3.alpinelinux.org/alpine/edge/testing/
+RUN apk add curl vips-dev fftw-dev --update-cache --repository $APK_REPOSITORY
 
 # 如果需要是用 TZ 环境变量 实现时区控制，需要安装 tzdata 这个包
 # debian 的基础镜像默认情况下已经安装了 tzdata，而 ubuntu 并没有
