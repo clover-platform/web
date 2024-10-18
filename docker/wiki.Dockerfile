@@ -10,14 +10,13 @@ RUN apk add --no-cache libc6-compat
 
 # Node v16.13 开始支持 corepack 用于管理第三方包管理器
 # 锁定包管理器版本，确保 CI 每次构建都是幂等的
-# RUN corepack enable && corepack prepare pnpm@9.12.1 --activate
-RUN npm i -g pnpm --registry=https://r.cnpmjs.org/
+RUN corepack enable && corepack prepare pnpm@9.12.1 --activate
 
 WORKDIR /app
 
 # pnpm fetch does require only lockfile
 # 注意还需要复制 `.npmrc`，因为里面可能包含 npm registry 等配置，下载依赖需要用到
-COPY .npmrc pnpm-lock.yaml ./
+COPY pnpm-lock.yaml ./
 
 # 推荐使用 pnpm fetch 命令下载依赖到 virtual store，专为 docker 构建优化
 # 参考：https://pnpm.io/cli/fetch
