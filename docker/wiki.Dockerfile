@@ -1,13 +1,12 @@
 ARG APP=wiki
 ARG NODE_REGISTRY=https://registry.npmmirror.com/
-ARG APK_REPOSITORY=dl-cdn.alpinelinux.org/mirrors.aliyun.com
 
 # 指定基础镜像版本，确保每次构建都是幂等的
 FROM node:20.17-alpine AS base
 
 FROM base AS builder
 
-RUN sed -i 's/$APK_REPOSITORY/g' /etc/apk/repositories
+RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories
 
 # 添加依赖
 RUN apk add make libc6-compat vips-dev fftw-dev --update-cache
@@ -42,7 +41,7 @@ RUN pnpm install --offline --force && pnpm build:$APP
 
 FROM base AS runner
 
-RUN sed -i 's/$APK_REPOSITORY/g' /etc/apk/repositories
+RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories
 
 # 添加依赖
 RUN apk add curl vips-dev fftw-dev --update-cache
