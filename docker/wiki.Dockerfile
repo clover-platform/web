@@ -7,16 +7,18 @@ FROM base AS builder
 
 # Check https://github.com/nodejs/docker-node/tree/b4117f9333da4138b03a546ec926ef50a31506c3#nodealpine to understand why libc6-compat might be needed.
 RUN apk add --no-cache libc6-compat
+RUN apk add --no-cache libvips-dev
 
 # Node v16.13 开始支持 corepack 用于管理第三方包管理器
 # 锁定包管理器版本，确保 CI 每次构建都是幂等的
-RUN corepack enable && corepack prepare pnpm@9.12.1 --activate
+# RUN corepack enable && corepack prepare pnpm@9.12.1 --activate
+RUN npm i -g pnpm --registry=https://registry.npmmirror.com/
 
 WORKDIR /app
 
 # pnpm fetch does require only lockfile
 # 注意还需要复制 `.npmrc`，因为里面可能包含 npm registry 等配置，下载依赖需要用到
-COPY pnpm-lock.yaml ./
+COPY .npmrc pnpm-lock.yaml ./
 
 # 推荐使用 pnpm fetch 命令下载依赖到 virtual store，专为 docker 构建优化
 # 参考：https://pnpm.io/cli/fetch
@@ -39,6 +41,7 @@ FROM base AS runner
 
 # RUN apk update && apk add --no-cache git
 RUN apk add --no-cache curl
+RUN apk add --no-cache libvips-dev
 
 # 如果需要是用 TZ 环境变量 实现时区控制，需要安装 tzdata 这个包
 # debian 的基础镜像默认情况下已经安装了 tzdata，而 ubuntu 并没有
