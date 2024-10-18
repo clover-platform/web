@@ -3,38 +3,22 @@
 import {useLayoutConfig} from "@clover/public/components/layout/hooks/use.layout.config";
 import {MainLayoutProps} from "@/components/layout/main";
 import {FC, PropsWithChildren, useEffect, useState} from "react";
-import {TabsTitle, TabsTitleItem} from "@clover/public/components/common/tabs-title";
+import {TabsTitle} from "@clover/public/components/common/tabs-title";
 import {useRouter, useSearchParams} from "next/navigation";
 import {HomeStart, StartItem} from "@/components/pages/home/start";
 import {CreateBookModal} from "@/components/pages/home/create/modal";
-import {COLUMNS, FILTERS, ROW_ACTIONS} from "@/config/pages/book";
+import {getColumns, getFilters, getRowActions, getTabs} from "@/config/pages/book";
 import {DataTable} from "@easykit/design";
 import {useLocaleCode, useTableLoader} from "@easykit/common/hooks";
 import {list} from "@/rest/book";
 import {Book} from "@/types/pages/book";
 import { t } from '@easykit/common/utils/locale';
-import {useLocale} from "@easykit/common/hooks/use.locale";
 
 export const SectionTitle: FC<PropsWithChildren> = (props) => {
     return <div className={"text-lg font-medium"}>
         { props.children }
     </div>
 }
-
-export const TABS: TabsTitleItem[] = [
-    {
-        id: "all",
-        title: t("全部"),
-    },
-    {
-        id: "create",
-        title: t("由我创建"),
-    },
-    {
-        id: "join",
-        title: t("我加入的"),
-    }
-]
 
 const initialParams = {
     keyword: '',
@@ -83,12 +67,12 @@ export const IndexPage = () => {
             <div>
                 <TabsTitle
                     active={active}
-                    items={TABS}
+                    items={getTabs()}
                     onChange={setActive}
                 />
                 <DataTable<Book>
                     filter={{
-                        items: FILTERS,
+                        items: getFilters(),
                         defaultValues: initialParams,
                         query: query,
                     }}
@@ -98,8 +82,8 @@ export const IndexPage = () => {
                         page: query.page,
                         size: query.size,
                     }}
-                    columns={COLUMNS}
-                    rowActions={ROW_ACTIONS}
+                    columns={getColumns()}
+                    rowActions={getRowActions()}
                     data={result?.data || []}
                     loading={loading}
                     onRowActionClick={({id: key}, {original}) => {

@@ -11,26 +11,26 @@ export type StartItem = {
 
 }
 
-export const START_ITEMS: StartItem[] = [
-    {
-        id: "new.file",
-        title: t("新建文档"),
-        description: t("AI编辑器梳理文档"),
-        icon: <IconAddFile className={"text-3xl text-primary"} />
-    },
-    {
-        id: "new.book",
-        title: t("新建知识库"),
-        description: t("使用知识库整理知识"),
-        icon: <IconBook className={"text-3xl text-primary"} />
-    }
-]
-
 export type HomeStartProps = {
     onClick?: (item: StartItem) => void;
 }
 
 export const HomeStart: FC<HomeStartProps> = (props) => {
+    const START_ITEMS: StartItem[] = [
+        {
+            id: "new.file",
+            title: t("新建文档"),
+            description: t("AI编辑器梳理文档"),
+            icon: <IconAddFile className={"text-3xl text-primary"} />
+        },
+        {
+            id: "new.book",
+            title: t("新建知识库"),
+            description: t("使用知识库整理知识"),
+            icon: <IconBook className={"text-3xl text-primary"} />
+        }
+    ]
+
     return <div className={"flex space-x-4"}>
         {
             START_ITEMS.map((item) => {

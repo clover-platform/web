@@ -1,3 +1,5 @@
+ARG APP=wiki
+
 # 指定基础镜像版本，确保每次构建都是幂等的
 FROM node:20.17-alpine AS base
 
@@ -32,7 +34,7 @@ ENV NEXT_TELEMETRY_DISABLED 1
 # 注意 PNPM v8.4.0 版本有一个 breaking change
 # 当 `node_modules` 存在，运行 `pnpm install` 会出现命令行交互操作，导致 CI 挂掉
 # 这里加上 `--force` 参数，关闭命令行交互操作
-RUN pnpm install --offline --force && pnpm build
+RUN pnpm install --offline --force && pnpm build:$APP
 
 FROM base AS runner
 
@@ -43,8 +45,6 @@ RUN apk add --no-cache curl
 # debian 的基础镜像默认情况下已经安装了 tzdata，而 ubuntu 并没有
 # RUN apk add --no-cache tzdata
 
-ARG RUNTIME_ENV
-ENV RUNTIME_ENV=$RUNTIME_ENV
 ENV NODE_ENV production
 
 # Docker 容器不推荐用 root 身份运行
@@ -68,12 +68,9 @@ WORKDIR /app
 
 # `standalone` 模式打包，默认包含服务端代码，没有客户端代码
 # 因为官方建议通过 CDN 托管，但也可以手动复制 `public`、`.next/static` 目录
-COPY --from=builder /app/public ./public
-COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
-COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
-
-# 注意，`standalone` 目录下已经包含了服务端代码，无需再复制 `.next/server`
-# COPY --from=builder /app/.next/server ./.next/server
+COPY --from=builder --chown=nextjs:nodejs /app/apps/$APP/.next/standalone ./
+COPY --from=builder --chown=nextjs:nodejs /app/apps/$APP/.next/static ./apps/$APP/.next/static
+COPY --from=builder --chown=nextjs:nodejs /app/apps/$APP/public ./apps/$APP/public
 
 USER nextjs
 
@@ -87,4 +84,4 @@ EXPOSE 3000
 # 用 standalone 模式打包后，生成的 `standalone/node_modules` 目录下缺少 `.bin` 目录
 # 导致无法用 `next` 命令启动项目，但可以用 `node server.js` 启动
 # 参考：https://nextjs.org/docs/advanced-features/output-file-tracing
-CMD ["node", "server.js"]
+CMD ["node", "apps/$APP/server.js"]
