@@ -41,7 +41,7 @@ FROM base AS runner
 
 # RUN apk update && apk add --no-cache git
 RUN apk add --no-cache curl
-RUN apk add --no-cache libvips-dev
+RUN apk add --no-cache vips-dev
 
 # 如果需要是用 TZ 环境变量 实现时区控制，需要安装 tzdata 这个包
 # debian 的基础镜像默认情况下已经安装了 tzdata，而 ubuntu 并没有
