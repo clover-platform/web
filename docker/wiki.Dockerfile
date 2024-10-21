@@ -51,4 +51,4 @@ EXPOSE 3000
 # 用 standalone 模式打包后，生成的 `standalone/node_modules` 目录下缺少 `.bin` 目录
 # 导致无法用 `next` 命令启动项目，但可以用 `node server.js` 启动
 # 参考：https://nextjs.org/docs/advanced-features/output-file-tracing
-CMD ["node", "apps/$APP/server.js"]
+CMD ["node", "apps/${APP}/server.js"]
