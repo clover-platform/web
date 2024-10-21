@@ -1,10 +1,4 @@
-'use client';
-import { RootLayout as PublicRootLayout } from "@clover/public/components/layout/root";
-import { PropsWithChildren } from "react";
-import '@/assets/style/index.scss';
+import {FC, PropsWithChildren} from "react";
 
-const RootLayout = ({children}: PropsWithChildren) => {
-    return <PublicRootLayout>{children}</PublicRootLayout>
-}
-
-export default RootLayout;
+const Layout: FC<PropsWithChildren> = (props) => props.children;
+export default Layout;
