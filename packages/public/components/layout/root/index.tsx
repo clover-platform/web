@@ -1,6 +1,5 @@
 'use client';
 
-import "@/plugin/rest.client";
 import "@clover/public/plugin/rest.client";
 import "@clover/public/plugin/locales";
 import { RecoilRoot } from 'recoil';

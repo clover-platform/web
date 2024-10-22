@@ -5,7 +5,6 @@ import {
     RootLayout as PublicRootLayout
 } from "@clover/public/components/layout/root";
 import {FC} from "react";
-import "@/plugin/rest.client";
 import "@/plugin/locales";
 
 export type RootLayoutProps = PublicRootLayoutProps;

@@ -2,6 +2,7 @@ import { RootLayout as PublicRootLayout } from "@/components/layout/root";
 import { PropsWithChildren, FC } from "react";
 import "@/plugin/rest.server";
 import "@clover/public/plugin/rest.server";
+import "@/plugin/locales";
 import "@clover/public/plugin/locales";
 import '@/assets/style/index.scss';
 import {changeLanguage} from "@easykit/common/utils/locale";
