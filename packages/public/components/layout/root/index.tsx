@@ -34,36 +34,25 @@ export const RootLayout: FC<RootLayoutProps> = (props) => {
         locale,
     } = props;
 
-
-    return <html className={`{#LANG#}`}>
-    <head>
-        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
-        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
-        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
-        <link rel="manifest" href="/site.webmanifest" />
-    </head>
-    <body>
-        <RecoilRoot initializeState={(snapshot) => {
-            snapshot.set(isLoginState, isLogin);
-            snapshot.set(teamsState, teams);
-            snapshot.set(projectsState, projects);
-            snapshot.set(accountInfoState, accountInfo || {
-                id: 0,
-                username: '',
-                authorities: [],
-                otpStatus: 0,
-                currentProjectId: 0,
-                currentTeamId: 0,
-            });
-            snapshot.set(accessState, accountInfo?.authorities || []);
-            snapshot.set(sidebarOpenState, sideOpen);
-            snapshot.set(localeState, locale);
-            i18next.changeLanguage(getLocale(locale)).then();
-        }}>
-            <ConfigProvider locale={locales[locale]}>
-                { children }
-            </ConfigProvider>
-        </RecoilRoot>
-    </body>
-    </html>
+    return <RecoilRoot initializeState={(snapshot) => {
+        snapshot.set(isLoginState, isLogin);
+        snapshot.set(teamsState, teams);
+        snapshot.set(projectsState, projects);
+        snapshot.set(accountInfoState, accountInfo || {
+            id: 0,
+            username: '',
+            authorities: [],
+            otpStatus: 0,
+            currentProjectId: 0,
+            currentTeamId: 0,
+        });
+        snapshot.set(accessState, accountInfo?.authorities || []);
+        snapshot.set(sidebarOpenState, sideOpen);
+        snapshot.set(localeState, locale);
+        i18next.changeLanguage(getLocale(locale)).then();
+    }}>
+        <ConfigProvider locale={locales[locale]}>
+            { children }
+        </ConfigProvider>
+    </RecoilRoot>
 };
