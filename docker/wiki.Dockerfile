@@ -39,6 +39,7 @@ COPY ./apps/${APP}/.next/standalone ./
 COPY ./apps/${APP}/package.json ./
 COPY ./apps/${APP}/.next/static ./apps/${APP}/.next/static
 COPY ./apps/${APP}/public ./apps/${APP}/public
+RUN rm -rf ./.env
 
 USER nextjs
 
