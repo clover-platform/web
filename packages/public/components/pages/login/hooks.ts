@@ -4,12 +4,14 @@ import {setToken} from "@clover/public/utils/token";
 import {useSearchParams} from "next/navigation";
 import {useState} from "react";
 import {useMessage} from "@easykit/design";
+import {useLocaleCode} from "@easykit/common/hooks";
 
 export const useLoginSubmit = () => {
     const params = useSearchParams();
     const from = params.get("from");
     const [loading, setLoading] = useState(false);
     const msg = useMessage();
+    const lc = useLocaleCode();
 
     const submit = async (data: any) => {
         setLoading(true);
@@ -18,7 +20,7 @@ export const useLoginSubmit = () => {
         setLoading(false);
         if(success) {
             setToken(result);
-            location.href = from || "/{#LANG#}/";
+            location.href = from || `/${lc}/`;
         }else{
             msg.error(message);
         }
