@@ -12,6 +12,7 @@ import LoginLink from "@/components/common/login/link";
 import { FORM_STEP1_SCHEMA, FORM_STEP2_SCHEMA } from "@/config/pages/register/form";
 import CodeInput from "@easykit/common/components/input/code";
 import { t } from '@easykit/common/utils/locale';
+import {useLocaleCode} from "@easykit/common/hooks";
 
 const RegisterPage = () => {
     const msg = useMessage();
@@ -23,6 +24,7 @@ const RegisterPage = () => {
     const [step1Submitting, setStep1Submitting] = useState(false);
     const [formKey, setFormKey] = useState(Date.now());
     const [step2Submitting, setStep2Submitting] = useState(false);
+    const lc = useLocaleCode();
 
     const onStep1Submit = async (data: any) => {
         setStep1Submitting(true);
@@ -50,7 +52,7 @@ const RegisterPage = () => {
         setStep2Submitting(false);
         if(success) {
             setToken(result);
-            router.push(from || "/{#LANG#}/");
+            router.push(from || `/${lc}/`);
         }else{
             msg.error(message);
         }
@@ -61,7 +63,7 @@ const RegisterPage = () => {
             <div className={"text-[24px] font-bold flex-1"}>{t("注册")}</div>
             <div className={"ml-[10px]"}>
                 <span>{t("已有账号？")}</span>
-                <LoginLink href={"/{#LANG#}/login/"}>{t("登录")}</LoginLink>
+                <LoginLink href={`/${lc}/login/`}>{t("登录")}</LoginLink>
             </div>
         </div>
         <div className={"mt-[30px]"}>

@@ -10,6 +10,7 @@ import {setToken} from "@clover/public/utils/token";
 import {SUPPORT_WAY} from "@/config/pages/login/quick";
 import {SCHEMA} from "@/config/pages/link/form";
 import { t } from '@easykit/common/utils/locale';
+import {useLocaleCode} from "@easykit/common/hooks";
 
 export interface LinkPageProps extends PropsWithChildren {
     type: string
@@ -28,6 +29,7 @@ const LinkPage = (props: LinkPageProps) => {
     const [error, setError] = useState(false);
     const [user, setUser] = useState(null as any);
     const [submitting, setSubmitting] = useState(false);
+    const lc = useLocaleCode();
 
     const load = async () => {
         setLoading(true);
@@ -38,7 +40,7 @@ const LinkPage = (props: LinkPageProps) => {
         if(success) {
             if(data?.isBind) {
                 setToken(data);
-                router.push("/{#LANG#}/");
+                router.push(`/${lc}/`);
             }else{
                 setUser(data);
             }
@@ -60,7 +62,7 @@ const LinkPage = (props: LinkPageProps) => {
         setSubmitting(false);
         if(success) {
             setToken(result);
-            router.push("/{#LANG#}/");
+            router.push(`/${lc}/`);
         }else{
             msg.error(message);
         }
@@ -68,7 +70,7 @@ const LinkPage = (props: LinkPageProps) => {
 
     const buttons = <Space>
         <Button onClick={() => load()} variant={"secondary"}>{t("重试")}</Button>
-        <Link href={"/{#LANG#}/login/"}>
+        <Link href={`/${lc}/login/`}>
             <Button>{t("返回登录")}</Button>
         </Link>
     </Space>
@@ -81,7 +83,7 @@ const LinkPage = (props: LinkPageProps) => {
                 status='error'
                 subTitle={t("第三方平台接口错误或链接已超时")}
                 extra={buttons}
-            ></Result> : <div className={"w-[360px]"}>
+            /> : <div className={"w-[360px]"}>
                 <div className={"flex justify-start items-center"}>
                     <div className={"w-[40px] h-[40px] rounded-full bg-[#2E3340] flex items-center justify-center"}>
                         { icon }

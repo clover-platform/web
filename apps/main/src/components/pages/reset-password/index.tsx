@@ -1,6 +1,6 @@
 'use client';
 
-import { Button, Form, FormItem, FormValues, Input, Steps, StepsItem, useMessage } from "@easykit/design";
+import { Button, Form, FormItem, Input, Steps, StepsItem, useMessage } from "@easykit/design";
 import { useState } from "react";
 import EmailCodeInput from "@easykit/common/components/input/email-code";
 import {passwordReset, resetEmailCheck, sendResetEmailCode} from "@/rest/auth";
@@ -9,6 +9,7 @@ import {setToken} from "@clover/public/utils/token";
 import {encrypt} from "@clover/public/utils/crypto";
 import { EMAIL_FORM_SCHEMA, PASSWORD_FORM_SCHEMA } from "@/config/pages/reset-password/form";
 import { t } from '@easykit/common/utils/locale';
+import {useLocaleCode} from "@easykit/common/hooks";
 
 const ResetPasswordPage = () => {
     const msg = useMessage();
@@ -16,10 +17,11 @@ const ResetPasswordPage = () => {
     const from = params.get("from");
     const router = useRouter();
     const [step, setStep] = useState(0);
-    const [formData1, setFormData1] = useState<FormValues>({});
+    const [formData1, setFormData1] = useState<any>({});
     const [step1Submitting, setStep1Submitting] = useState(false);
     const [formKey, setFormKey] = useState(Date.now());
     const [step2Submitting, setStep2Submitting] = useState(false);
+    const lc = useLocaleCode();
 
     const onStep1Submit = async (data: any) => {
         setStep1Submitting(true);
@@ -47,7 +49,7 @@ const ResetPasswordPage = () => {
         setStep2Submitting(false);
         if(success) {
             setToken(result);
-            router.push(from || "/{#LANG#}/");
+            router.push(from || `/${lc}/`);
         }else{
             msg.error(message);
         }
