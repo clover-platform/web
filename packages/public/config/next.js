@@ -15,14 +15,4 @@ export default {
     typescript: {
         ignoreBuildErrors: true,
     },
-    async rewrites() {
-        return {
-            fallback: [
-                {
-                    source: '/api/:path*',
-                    destination: `${process.env.API_URL}/api/:path*`,
-                },
-            ],
-        }
-    },
 }

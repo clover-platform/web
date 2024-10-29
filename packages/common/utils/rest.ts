@@ -38,7 +38,7 @@ const rest = Axios.create({
         },
     },
     withCredentials: true,
-    baseURL: process.env.API_URL || "",
+    baseURL: process.env.NEXT_PUBLIC_API_URL || "",
 });
 
 rest.interceptors.response.use(

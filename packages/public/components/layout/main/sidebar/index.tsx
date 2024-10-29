@@ -43,7 +43,7 @@ const Sidebar: FC<SidebarProps> = (props) => {
     )}>
         <div className={"bg-[var(--sidebar-user-bg)] text-white p-2"}>
             <div className={"flex justify-center items-center"}>
-                <a href={"/{#LANG#}/"}>
+                <a href={`/${locale}/`}>
                     <Tooltip content={t("首页")}>
                         <div className={classNames(loading ? "animate-spin" : "")}>
                             <Logo type={"dark"} size={28} className={"bg-transparent cursor-pointer"}/>
