@@ -2,7 +2,7 @@ import {FC, useEffect, useState} from "react";
 import {DotsHorizontalIcon} from "@radix-ui/react-icons";
 import {Action} from "@clover/public/components/common/action";
 import {Dropdown, Tooltip} from "@easykit/design";
-import {useParams, useRouter, useSearchParams} from "next/navigation";
+import {useParams, useRouter} from "next/navigation";
 import { t } from '@easykit/common/utils/locale';
 
 export type MorePageActionProps = {
@@ -36,7 +36,7 @@ export const MorePageAction: FC<MorePageActionProps> = (props) => {
                 label: t("编辑"),
                 type: "item",
                 onItemClick: (item, e) => {
-                    router.push(`/{#LANG#}/wiki/book/${bookPath}/page/${id}/edit/`)
+                    router.push(`/wiki/book/${bookPath}/page/${id}/edit`)
                     e.stopPropagation();
                 }
             },

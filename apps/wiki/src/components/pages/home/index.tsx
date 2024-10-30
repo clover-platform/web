@@ -9,7 +9,7 @@ import {HomeStart, StartItem} from "@/components/pages/home/start";
 import {CreateBookModal} from "@/components/pages/home/create/modal";
 import {getColumns, getFilters, getRowActions, getTabs} from "@/config/pages/book";
 import {DataTable, useAlert, useMessage} from "@easykit/design";
-import {useLocaleCode, useTableLoader} from "@easykit/common/hooks";
+import {useTableLoader} from "@easykit/common/hooks";
 import {deleteBook, list} from "@/rest/book";
 import {Book} from "@/types/pages/book";
 import { t } from '@easykit/common/utils/locale';
@@ -44,7 +44,6 @@ export const IndexPage = () => {
         action: list,
         keys: ['type'],
     });
-    const locale = useLocaleCode();
     const alert = useAlert();
     const msg = useMessage();
 
@@ -91,7 +90,7 @@ export const IndexPage = () => {
                     onRowActionClick={({id: key}, {original}) => {
                         const {path} = original;
                         if(key === "setting") {
-                            router.push(`/${locale}/wiki/book/${path}/setting/`);
+                            router.push(`/wiki/book/${path}/setting`);
                         }else if(key === "delete") {
                             alert.confirm({
                                 title: t("删除"),
@@ -109,7 +108,7 @@ export const IndexPage = () => {
                     }}
                     onRowClick={(row) => {
                         const {path} = row.original;
-                        router.push(`/${locale}/wiki/book/${path}/`);
+                        router.push(`/wiki/book/${path}`);
                     }}
                 />
             </div>

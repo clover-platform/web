@@ -12,7 +12,6 @@ import { ActionButton } from "@clover/public/components/common/action/button";
 import { MenuItem, MenuItemProps } from "@clover/public/components/layout/main/sidebar/menu-item";
 import { Action } from "@clover/public/components/common/action";
 import { t } from '@easykit/common/utils/locale';
-import {useLocaleCode} from "@easykit/common/hooks";
 
 export interface SidebarProps extends PropsWithChildren {
     active?: string;
@@ -30,7 +29,6 @@ const Sidebar: FC<SidebarProps> = (props) => {
 
     const loading = useRecoilValue(loadingState);
     const open = useSidebarState();
-    const locale = useLocaleCode();
 
     const iconClassName = "text-base font-bold";
     const groupClassName = "flex justify-center items-center -mx-1 mt-1";
@@ -43,7 +41,7 @@ const Sidebar: FC<SidebarProps> = (props) => {
     )}>
         <div className={"bg-[var(--sidebar-user-bg)] text-white p-2"}>
             <div className={"flex justify-center items-center"}>
-                <a href={`/${locale}/`}>
+                <a href={`/`}>
                     <Tooltip content={t("首页")}>
                         <div className={classNames(loading ? "animate-spin" : "")}>
                             <Logo type={"dark"} size={28} className={"bg-transparent cursor-pointer"}/>
@@ -63,7 +61,7 @@ const Sidebar: FC<SidebarProps> = (props) => {
             <div className={groupClassName}>
                 <div className={"m-1 flex-1"}>
                     <Tooltip side={"bottom"} content={t("项目")}>
-                        <a href={`/${locale}/project/`}>
+                        <a href={`/project`}>
                             <ActionButton className={"w-full"}>
                                 <IconProject className={iconClassName} />
                             </ActionButton>
@@ -72,7 +70,7 @@ const Sidebar: FC<SidebarProps> = (props) => {
                 </div>
                 <div className={"m-1 flex-1"}>
                     <Tooltip side={"bottom"} content={t("任务")}>
-                        <a href={`/${locale}/task/`}>
+                        <a href={`/task`}>
                             <ActionButton className={"w-full"}>
                                 <IconGantt className={iconClassName} />
                             </ActionButton>
@@ -81,7 +79,7 @@ const Sidebar: FC<SidebarProps> = (props) => {
                 </div>
                 <div className={"m-1 flex-1"}>
                     <Tooltip side={"bottom"} content={t("Wiki")}>
-                        <a href={`/${locale}/wiki/`}>
+                        <a href={`/wiki`}>
                             <ActionButton className={"w-full"}>
                                 <IconWiki className={iconClassName} />
                             </ActionButton>
@@ -109,14 +107,14 @@ const Sidebar: FC<SidebarProps> = (props) => {
         </div>
         <div className={"flex p-1 py-0 border-t"}>
             <div className={"flex-1 mx-0.5 my-1"}>
-                <a href={`/${locale}/help/`}>
+                <a href={`/help`}>
                     <Action theme={"dark"} className={"w-full py-1"}>
                         <IconHelp className={"mr-1 text-base"} /> {t("帮助")}
                     </Action>
                 </a>
             </div>
             <div className={"flex-1 mx-0.5 my-1"}>
-                <a href={`/${locale}/admin/`}>
+                <a href={`/admin`}>
                     <Action theme={"dark"} className={"w-full py-1"}>
                         <IconSetting className={"mr-1 text-base"} /> {t("管理中心")}
                     </Action>

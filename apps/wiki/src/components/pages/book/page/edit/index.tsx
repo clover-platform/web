@@ -13,7 +13,6 @@ import bus from "@easykit/common/events";
 import {UPDATE_TITLE} from "@/events/book";
 import classNames from "classnames";
 import {CollectAction} from "@/components/pages/book/page/actions/collect";
-import {useLocaleCode} from "@easykit/common/hooks";
 import {EditorEvents} from "@tiptap/core";
 
 export type EditPageProps = {
@@ -45,7 +44,6 @@ export const EditPage: FC<EditPageProps> = (props) => {
     const [pending, setPending] = useState<boolean>(false);
     const router = useRouter();
     const [size, setSize] = useState<number>(0);
-    const l = useLocaleCode();
 
     useEffect(() => {
         setSize(editorRef.current?.editor?.storage.characterCount.characters() || 0);
@@ -70,12 +68,12 @@ export const EditPage: FC<EditPageProps> = (props) => {
                 id: Number(pageId),
                 title
             });
-            router.push(`/${l}/wiki/book/${bookPath}/page/${pageId}/`);
+            router.push(`/wiki/book/${bookPath}/page/${pageId}`);
             router.refresh()
         }else{
             msg.error(message);
         }
-    }, [title, value, bookPath, pageId, l]);
+    }, [title, value, bookPath, pageId]);
 
     return <div className={"space-y-4"}>
         <div className={"flex justify-center items-center sticky top-[48px] -m-4 px-4 py-2 border-b bg-white z-50"}>

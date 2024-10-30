@@ -18,7 +18,7 @@ export const useGoLogin = () => {
     const router = useRouter();
     const isLogin = useRecoilValue(isLoginState);
     const goLogin = () => {
-        router.push(`/${t("LANG")}/login/?from=${encodeURIComponent(location.href)}`)
+        router.push(`/login?from=${encodeURIComponent(location.href)}`)
     }
 
     useEffect(() => {

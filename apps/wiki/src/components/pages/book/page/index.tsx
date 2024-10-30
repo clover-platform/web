@@ -15,7 +15,6 @@ import {Action} from "@clover/public/components/common/action";
 import {Pencil1Icon} from "@radix-ui/react-icons";
 import {ContentViewer} from "@/components/common/editor/viewer";
 import { t } from '@easykit/common/utils/locale';
-import {useLocaleCode} from "@easykit/common/hooks/use.locale";
 import {useTimeAgo} from "@easykit/common/hooks/use.time.ago";
 import {useRouter} from "next/navigation";
 
@@ -24,7 +23,6 @@ export type DetailPageProps = {
 } & PageProps;
 
 export const DetailPage: FC<DetailPageProps> = (props) => {
-    const locale = useLocaleCode();
     const { detail } = props;
     const { bookPath, pageId } = props.params;
     useLayoutConfig<BookLayoutProps>({
@@ -32,7 +30,7 @@ export const DetailPage: FC<DetailPageProps> = (props) => {
             {
                 title: t("知识库"),
                 type: "link",
-                href: `/${locale}/wiki/book/${bookPath}/`,
+                href: `/wiki/book/${bookPath}/`,
             },
             {
                 title: t("详情"),
@@ -91,7 +89,7 @@ export const DetailPage: FC<DetailPageProps> = (props) => {
             <div className={"flex space-x-2"}>
                 <CollectAction id={Number(pageId)} collected={detail?.collected!}/>
                 <Action onClick={() =>{
-                    router.push(`/${locale}/wiki/book/${bookPath}/page/${pageId}/edit/`);
+                    router.push(`/wiki/book/${bookPath}/page/${pageId}/edit`);
                     router.refresh();
                 }}>
                     <Pencil1Icon/>

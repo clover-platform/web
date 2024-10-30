@@ -4,7 +4,7 @@ const isDev = process.env.NODE_ENV !== 'production';
 export default {
     output: 'standalone',
     reactStrictMode: false,
-    trailingSlash: true,
+    trailingSlash: false,
     transpilePackages: ['@easykit/common'],
     devIndicators: {
         buildActivity: false

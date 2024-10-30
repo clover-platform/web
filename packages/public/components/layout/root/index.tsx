@@ -12,7 +12,6 @@ import {localeState, projectsState, teamsState} from "@clover/public/state/publi
 import {accessState} from "@easykit/common/state/access";
 import {sidebarOpenState} from "@clover/public/components/layout/main/state";
 import i18next from "i18next";
-import {getLocale} from "@easykit/common/utils/locale";
 
 export type RootLayoutProps = PropsWithChildren<{
     isLogin: boolean;
@@ -49,7 +48,7 @@ export const RootLayout: FC<RootLayoutProps> = (props) => {
         snapshot.set(accessState, accountInfo?.authorities || []);
         snapshot.set(sidebarOpenState, sideOpen);
         snapshot.set(localeState, locale);
-        i18next.changeLanguage(getLocale(locale)).then();
+        i18next.changeLanguage(locale).then();
     }}>
         <ConfigProvider locale={locales[locale]}>
             { children }

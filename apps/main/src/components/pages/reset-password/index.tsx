@@ -9,7 +9,6 @@ import {setToken} from "@clover/public/utils/token";
 import {encrypt} from "@clover/public/utils/crypto";
 import { EMAIL_FORM_SCHEMA, PASSWORD_FORM_SCHEMA } from "@/config/pages/reset-password/form";
 import { t } from '@easykit/common/utils/locale';
-import {useLocaleCode} from "@easykit/common/hooks";
 
 const ResetPasswordPage = () => {
     const msg = useMessage();
@@ -21,7 +20,6 @@ const ResetPasswordPage = () => {
     const [step1Submitting, setStep1Submitting] = useState(false);
     const [formKey, setFormKey] = useState(Date.now());
     const [step2Submitting, setStep2Submitting] = useState(false);
-    const lc = useLocaleCode();
 
     const onStep1Submit = async (data: any) => {
         setStep1Submitting(true);
@@ -49,7 +47,7 @@ const ResetPasswordPage = () => {
         setStep2Submitting(false);
         if(success) {
             setToken(result);
-            router.push(from || `/${lc}/`);
+            router.push(from || `/`);
         }else{
             msg.error(message);
         }

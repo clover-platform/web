@@ -1,16 +1,16 @@
 import { Select, SelectOptionProps } from "@easykit/design";
-import {useLocaleCode} from "@easykit/common/hooks/use.locale";
+import {useLocale} from "@easykit/common/hooks/use.locale";
 import { setCookie } from "cookies-next"
 import langList from "@clover/public/config/lang.list";
 import {COOKIE_MAX_AGE} from "@clover/public/config/app";
 
 const options: SelectOptionProps[] = langList.map((lang) => ({
-    value: lang.code,
+    value: lang.locale,
     label: lang.name,
 }));
 
 export const LangSelect = () => {
-    const locale = useLocaleCode();
+    const locale = useLocale();
 
     return <Select
         value={locale}

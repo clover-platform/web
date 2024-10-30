@@ -10,7 +10,6 @@ import {setToken} from "@clover/public/utils/token";
 import {SUPPORT_WAY} from "@/config/pages/login/quick";
 import {SCHEMA} from "@/config/pages/link/form";
 import { t } from '@easykit/common/utils/locale';
-import {useLocaleCode} from "@easykit/common/hooks";
 
 export interface LinkPageProps extends PropsWithChildren {
     type: string
@@ -29,7 +28,6 @@ const LinkPage = (props: LinkPageProps) => {
     const [error, setError] = useState(false);
     const [user, setUser] = useState(null as any);
     const [submitting, setSubmitting] = useState(false);
-    const lc = useLocaleCode();
 
     const load = async () => {
         setLoading(true);
@@ -40,7 +38,7 @@ const LinkPage = (props: LinkPageProps) => {
         if(success) {
             if(data?.isBind) {
                 setToken(data);
-                router.push(`/${lc}/`);
+                router.push(`/`);
             }else{
                 setUser(data);
             }
@@ -62,7 +60,7 @@ const LinkPage = (props: LinkPageProps) => {
         setSubmitting(false);
         if(success) {
             setToken(result);
-            router.push(`/${lc}/`);
+            router.push(`/`);
         }else{
             msg.error(message);
         }
@@ -70,7 +68,7 @@ const LinkPage = (props: LinkPageProps) => {
 
     const buttons = <Space>
         <Button onClick={() => load()} variant={"secondary"}>{t("重试")}</Button>
-        <Link href={`/${lc}/login/`}>
+        <Link href={`/login`}>
             <Button>{t("返回登录")}</Button>
         </Link>
     </Space>

@@ -8,7 +8,6 @@ import {CatalogTree, CatalogTreeRef} from "@/components/layout/book/catalog";
 import {AddPageAction} from "@/components/layout/book/page-actions/add";
 import {ExpandAction} from "@/components/layout/book/page-actions/expand";
 import { t } from '@easykit/common/utils/locale';
-import {useLocaleCode} from "@easykit/common/hooks";
 
 export type BookLayoutProps = {
     active?: string;
@@ -21,7 +20,6 @@ export const BookLayout: FC<BookLayoutProps> = (origin) => {
     const [expandAll, setExpandAll] = useState<boolean>(false);
     const [expandAble, setExpandAble] = useState<boolean>(false);
     const treeRef = useRef<CatalogTreeRef>(null);
-    const locale = useLocaleCode();
     const params = useParams();
     const { bookPath } = params;
 
@@ -30,7 +28,7 @@ export const BookLayout: FC<BookLayoutProps> = (origin) => {
             {
                 id: "home",
                 title: t("首页"),
-                url: `/${locale}/wiki/book/${bookPath}/`,
+                url: `/wiki/book/${bookPath}`,
                 icon: <IconHome />,
             },
             {
@@ -79,7 +77,7 @@ export const BookLayout: FC<BookLayoutProps> = (origin) => {
             {
                 title: t("文档"),
                 type: "link",
-                href: `/${locale}/wiki/`,
+                href: `/wiki`,
                 withQuery: false,
                 external: true,
             },

@@ -7,7 +7,6 @@ import {create} from "@/rest/page";
 import bus from "@easykit/common/events";
 import {ADD_PAGE} from "@/events/book";
 import { t } from '@easykit/common/utils/locale';
-import {useLocaleCode} from "@easykit/common/hooks";
 
 export type AddPageActionProps = {
     className?: string;
@@ -23,7 +22,6 @@ export const AddPageAction: FC<AddPageActionProps> = (props) => {
     const [submitting, setSubmitting] = useState(false);
     const router = useRouter();
     const msg = useMessage();
-    const locale = useLocaleCode();
 
     const add = useCallback(async (e: any) => {
         e.stopPropagation();
@@ -35,7 +33,7 @@ export const AddPageAction: FC<AddPageActionProps> = (props) => {
         setSubmitting(false);
         if(success) {
             bus.emit(ADD_PAGE, data);
-            router.push(`/${locale}/wiki/book/${bookPath}/page/${data?.id}/edit/`);
+            router.push(`/wiki/book/${bookPath}/page/${data?.id}/edit`);
         }else{
             msg.error(message);
         }

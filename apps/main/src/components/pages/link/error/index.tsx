@@ -4,16 +4,13 @@ import {Button, Result, Space} from "@easykit/design";
 import React from "react";
 import Link from "next/link";
 import { t } from '@easykit/common/utils/locale';
-import {useLocaleCode} from "@easykit/common/hooks";
 
 const LinkErrorPage = () => {
-    const lc = useLocaleCode();
-
     const buttons = <Space>
-        <Link href={`/${lc}/login/`}>
+        <Link href={`/login`}>
             <Button>{t("返回登录")}</Button>
         </Link>
-        <Link href={`/${lc}/`}>
+        <Link href={`/`}>
             <Button variant={"outline"}>{t("返回首页")}</Button>
         </Link>
     </Space>

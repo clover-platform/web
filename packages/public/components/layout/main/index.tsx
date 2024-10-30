@@ -22,7 +22,6 @@ import { IconHome } from "@arco-iconbox/react-clover";
 import {withQuery} from "@easykit/common/utils/path";
 import {useGoLogin} from "@clover/public/components/layout/hooks/main";
 import {isLoginState} from "@clover/public/state/account";
-import {useLocaleCode} from "@easykit/common/hooks";
 
 export type PathProps = {
     type: "item" | "link";
@@ -46,7 +45,6 @@ export const MainLayout: FC<MainLayoutProps> = (props) => {
     const open = useSidebarState();
     const searchParams = useSearchParams();
     useGoLogin();
-    const locale = useLocaleCode();
 
     const showGuide = useMemo(() => {
         return !teams.length;
@@ -97,7 +95,7 @@ export const MainLayout: FC<MainLayoutProps> = (props) => {
                         <BreadcrumbList>
                             <BreadcrumbItem>
                                 <BreadcrumbLink asChild={true}>
-                                    <a href={`/${locale}/`} className={"flex items-center"}>
+                                    <a href={`/`} className={"flex items-center"}>
                                         <IconHome />
                                     </a>
                                 </BreadcrumbLink>

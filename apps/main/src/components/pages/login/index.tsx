@@ -6,16 +6,14 @@ import LoginLink from "@/components/common/login/link";
 import {SCHEMA} from "@clover/public/config/pages/login/form";
 import {useLoginSubmit} from "@clover/public/components/pages/login/hooks";
 import { t } from '@easykit/common/utils/locale';
-import {useLocaleCode} from "@easykit/common/hooks";
 
 const LoginPage = () => {
     const { loading, submit } = useLoginSubmit();
-    const lc = useLocaleCode();
 
     const passwordLabel = <div className={"flex justify-center items-center"}>
         <div className={"flex-1"}>{t("密码")}</div>
         <div className={"ml-[10px]"}>
-            <LoginLink href={`/${lc}/reset-password/`} tabIndex={-1}>{t("找回密码")}</LoginLink>
+            <LoginLink href={`/reset-password`} tabIndex={-1}>{t("找回密码")}</LoginLink>
         </div>
     </div>
     return <div className={"w-[360px]"}>
@@ -23,7 +21,7 @@ const LoginPage = () => {
             <div className={"text-[24px] font-bold flex-1"}>{t("登录")}</div>
             <div className={"ml-[10px]"}>
                 <span>{t("没有账号？")}</span>
-                <LoginLink href={`/${lc}/register/`}>{t("注册")}</LoginLink>
+                <LoginLink href={`/register`}>{t("注册")}</LoginLink>
             </div>
         </div>
         <div className={"mt-[30px]"}>
