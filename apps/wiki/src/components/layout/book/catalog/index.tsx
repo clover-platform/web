@@ -19,6 +19,7 @@ import bus from "@easykit/common/events";
 import {ADD_PAGE, UPDATE_TITLE} from "@/events/book";
 import uniq from 'lodash/uniq';
 import concat from 'lodash/concat';
+import {CatalogLoading} from "@/components/layout/book/catalog/loading";
 
 export type CatalogTreeProps = {
     onExpand?: (expandedKeys: string[], allKeys: string[]) => void;
@@ -38,11 +39,14 @@ export const CatalogTree = forwardRef<CatalogTreeRef, CatalogTreeProps>((props, 
     const msg = useMessage();
     const [expandedKeys, setExpandedKeys] = useState<string[]>([]);
     const expandedKeysRef = useRef<string[]>([]);
+    const [loading, setLoading] = useState(true);
 
     const load = useCallback(async () => {
+        setLoading(true);
         const { success, data } = await catalog({
             bookPath: bookPath as string
         });
+        setLoading(false);
         if(success) {
             setData(data!);
         }else{
@@ -122,33 +126,35 @@ export const CatalogTree = forwardRef<CatalogTreeRef, CatalogTreeProps>((props, 
     }), [allExpandedKeys]);
 
     return <div className={"mx-2"}>
-        <Tree
-            prefixCls={"rc-tree"}
-            treeData={treeData}
-            draggable={true}
-            selectable={true}
-            onDrop={(info) => {
-                const { dropToGap, node, dragNode, dropPosition } = info;
-                const { key: dragKey } = dragNode;
-                const { key } = node;
-                const cloneData = cloneDeep(data);
-                let parentId;
-                if(dropToGap) { // 推动到目标节点后面
-                    parentId = moveToAfter(cloneData, dragKey, key, dropPosition);
-                }else{ // 添加为子元素
-                    parentId = moveToChild(cloneData, dragKey, key);
-                }
-                setData(cloneData);
-                saveChange(Number(dragKey), parentId).then();
-            }}
-            expandedKeys={expandedKeys}
-            onExpand={(expandedKeys) => setExpandedKeys(expandedKeys as string[])}
-            selectedKeys={selectedKeys}
-            onSelect={(selectedKeys, {selected}) => {
-                if(selected) {
-                    setSelectedKeys(selectedKeys as string[]);
-                }
-            }}
-        />
+        {
+            loading ? <CatalogLoading/> : <Tree
+                prefixCls={"rc-tree"}
+                treeData={treeData}
+                draggable={true}
+                selectable={true}
+                onDrop={(info) => {
+                    const { dropToGap, node, dragNode, dropPosition } = info;
+                    const { key: dragKey } = dragNode;
+                    const { key } = node;
+                    const cloneData = cloneDeep(data);
+                    let parentId;
+                    if(dropToGap) { // 推动到目标节点后面
+                        parentId = moveToAfter(cloneData, dragKey, key, dropPosition);
+                    }else{ // 添加为子元素
+                        parentId = moveToChild(cloneData, dragKey, key);
+                    }
+                    setData(cloneData);
+                    saveChange(Number(dragKey), parentId).then();
+                }}
+                expandedKeys={expandedKeys}
+                onExpand={(expandedKeys) => setExpandedKeys(expandedKeys as string[])}
+                selectedKeys={selectedKeys}
+                onSelect={(selectedKeys, {selected}) => {
+                    if(selected) {
+                        setSelectedKeys(selectedKeys as string[]);
+                    }
+                }}
+            />
+        }
     </div>
 })
