@@ -37,7 +37,7 @@ export const EditPage: FC<EditPageProps> = (props) => {
     });
 
     const { detail } = props;
-    const { bookId, pageId } = props.params;
+    const { bookPath, pageId } = props.params;
     const editorRef = useRef<EditorRef>(null);
     const [value, setValue] = useState<string>(detail?.content);
     const [title, setTitle] = useState<string>(detail?.title);
@@ -58,7 +58,7 @@ export const EditPage: FC<EditPageProps> = (props) => {
     const submit = useCallback(async () => {
         setPending(true);
         const {success, message} = await save({
-            bookId,
+            bookPath,
             id: pageId,
             title,
             content: value,
@@ -70,12 +70,12 @@ export const EditPage: FC<EditPageProps> = (props) => {
                 id: Number(pageId),
                 title
             });
-            router.push(`/${l}/wiki/book/${bookId}/page/${pageId}/`);
+            router.push(`/${l}/wiki/book/${bookPath}/page/${pageId}/`);
             router.refresh()
         }else{
             msg.error(message);
         }
-    }, [title, value, bookId, pageId, l]);
+    }, [title, value, bookPath, pageId, l]);
 
     return <div className={"space-y-4"}>
         <div className={"flex justify-center items-center sticky top-[48px] -m-4 px-4 py-2 border-b bg-white z-50"}>

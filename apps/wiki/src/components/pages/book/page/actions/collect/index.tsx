@@ -13,7 +13,7 @@ export type CollectActionProps = {
 export const CollectAction: FC<CollectActionProps> = (props) => {
     const { id: pageId } = props;
     const params = useParams();
-    const { bookId } = params
+    const { bookPath } = params
     const [loading, setLoading] = useState<boolean>(false);
     const msg = useMessage();
     const [collected, setCollected] = useState<boolean>(props.collected);
@@ -25,7 +25,7 @@ export const CollectAction: FC<CollectActionProps> = (props) => {
     const collect = useCallback(async () => {
         setLoading(true);
         const {success, message} = await collectRest({
-            bookId: Number(bookId),
+            bookPath: bookPath as string,
             id: pageId,
             collect: !collected
         });
@@ -36,7 +36,7 @@ export const CollectAction: FC<CollectActionProps> = (props) => {
         }else{
             setCollected(!collected);
         }
-    }, [collected, bookId, pageId])
+    }, [collected, bookPath, pageId])
 
     return <Action disabled={loading} onClick={collect}>
         {

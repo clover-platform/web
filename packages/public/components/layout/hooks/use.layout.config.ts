@@ -9,5 +9,5 @@ export const useLayoutConfig = <T>(config: T) => {
         return () => {
             setConfig(null);
         }
-    }, [])
+    }, [setConfig])
 }

@@ -26,13 +26,13 @@ export type DetailPageProps = {
 export const DetailPage: FC<DetailPageProps> = (props) => {
     const locale = useLocaleCode();
     const { detail } = props;
-    const { bookId, pageId } = props.params;
+    const { bookPath, pageId } = props.params;
     useLayoutConfig<BookLayoutProps>({
         path: [
             {
                 title: t("知识库"),
                 type: "link",
-                href: `/${locale}/wiki/book/${bookId}/`,
+                href: `/${locale}/wiki/book/${bookPath}/`,
             },
             {
                 title: t("详情"),
@@ -48,7 +48,7 @@ export const DetailPage: FC<DetailPageProps> = (props) => {
     const onChange = useCallback(async (json: string) => {
         saveHandler.current?.abort();
         saveHandler.current = save({
-            bookId,
+            bookPath: bookPath as string,
             id: pageId,
             title: detail?.title!,
             content: json,
@@ -59,7 +59,7 @@ export const DetailPage: FC<DetailPageProps> = (props) => {
         if(!success && message !== "ERR_CANCELED") {
             msg.error(message);
         }
-    }, [bookId, pageId, detail, saveHandler])
+    }, [bookPath, pageId, detail, saveHandler])
 
     const lastAuthor = useMemo(() => {
         const { userList, updateUser } = detail || {};
@@ -91,7 +91,7 @@ export const DetailPage: FC<DetailPageProps> = (props) => {
             <div className={"flex space-x-2"}>
                 <CollectAction id={Number(pageId)} collected={detail?.collected!}/>
                 <Action onClick={() =>{
-                    router.push(`/${locale}/wiki/book/${bookId}/page/${pageId}/edit/`);
+                    router.push(`/${locale}/wiki/book/${bookPath}/page/${pageId}/edit/`);
                     router.refresh();
                 }}>
                     <Pencil1Icon/>

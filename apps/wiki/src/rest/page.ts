@@ -5,42 +5,42 @@ import {PageDetail} from "@/types/pages/page";
 
 export type CreatePageData = {
     parent?: number;
-    bookId: number;
+    bookPath: string;
 }
 export const create = (data: CreatePageData): Promise<RestResult<Catalog>> =>
-    post(`@wiki/book/${data.bookId}/page/create`, data);
+    post(`@wiki/book/${data.bookPath}/page/create`, data);
 
 export type CatalogQuery = {
-    bookId: number;
+    bookPath: string;
 }
 export const catalog = (params: CatalogQuery): Promise<RestResult<Catalog[]>> =>
-    get(`@wiki/book/${params.bookId}/page/catalog`);
+    get(`@wiki/book/${params.bookPath}/page/catalog`);
 
 export type ChangeCatalogParentData = {
-    bookId: number;
+    bookPath: string;
     id: number;
     parentId?: number;
 }
 export const changeCatalogParent = (params: ChangeCatalogParentData): Promise<RestResult<any>> =>
-    put(`@wiki/book/${params.bookId}/page/parent`, params);
+    put(`@wiki/book/${params.bookPath}/page/parent`, params);
 
-export const detail = (bookId:number|string, id: number|string): AbortPromise<RestResult<PageDetail>> =>
-    get(`@wiki/book/${bookId}/page/${id}`);
+export const detail = (bookPath:number|string, id: number|string): AbortPromise<RestResult<PageDetail>> =>
+    get(`@wiki/book/${bookPath}/page/${id}`);
 
 export type SavePageData = {
-    bookId: number;
+    bookPath: string;
     id: number;
     title: string;
     content: string;
     newVersion?: boolean;
 }
 export const save = (data: SavePageData): AbortPromise<RestResult<number>> =>
-    put(`@wiki/book/${data.bookId}/page/${data.id}`, data);
+    put(`@wiki/book/${data.bookPath}/page/${data.id}`, data);
 
 export type CollectData = {
-    bookId: number;
+    bookPath: string;
     id: number;
     collect: boolean;
 }
 export const collect = (data: CollectData): AbortPromise<RestResult<any>> =>
-    post(`@wiki/book/${data.bookId}/page/${data.id}/collect`, data);
+    post(`@wiki/book/${data.bookPath}/page/${data.id}/collect`, data);

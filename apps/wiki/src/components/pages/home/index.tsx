@@ -8,9 +8,9 @@ import {useRouter, useSearchParams} from "next/navigation";
 import {HomeStart, StartItem} from "@/components/pages/home/start";
 import {CreateBookModal} from "@/components/pages/home/create/modal";
 import {getColumns, getFilters, getRowActions, getTabs} from "@/config/pages/book";
-import {DataTable} from "@easykit/design";
+import {DataTable, useAlert, useMessage} from "@easykit/design";
 import {useLocaleCode, useTableLoader} from "@easykit/common/hooks";
-import {list} from "@/rest/book";
+import {deleteBook, list} from "@/rest/book";
 import {Book} from "@/types/pages/book";
 import { t } from '@easykit/common/utils/locale';
 
@@ -45,6 +45,8 @@ export const IndexPage = () => {
         keys: ['type'],
     });
     const locale = useLocaleCode();
+    const alert = useAlert();
+    const msg = useMessage();
 
     const onStartClick = ({id}: StartItem) => {
         if(id === "new.book") {
@@ -87,18 +89,27 @@ export const IndexPage = () => {
                     data={result?.data || []}
                     loading={loading}
                     onRowActionClick={({id: key}, {original}) => {
-                        const {id} = original;
-                        if(key === "detail") {
-                            router.push(`/${locale}/i18n/dashboard/?id=` + id);
-                        }else if(key === "activity") {
-                            router.push(`/${locale}/i18n/activity/?id=` + id);
+                        const {path} = original;
+                        if(key === "setting") {
+                            router.push(`/${locale}/wiki/book/${path}/setting/`);
                         }else if(key === "delete") {
-
+                            alert.confirm({
+                                title: t("删除"),
+                                description: t("删除知识库后将无法恢复，确定删除？"),
+                                onOk: async () => {
+                                    const { success, message } = await deleteBook(path);
+                                    if(success) {
+                                        load().then();
+                                    }else{
+                                        msg.error(message);
+                                    }
+                                }
+                            });
                         }
                     }}
                     onRowClick={(row) => {
-                        const {id} = row.original;
-                        router.push(`/${locale}/wiki/book/` + id + "/");
+                        const {path} = row.original;
+                        router.push(`/${locale}/wiki/book/${path}/`);
                     }}
                 />
             </div>

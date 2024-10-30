@@ -23,14 +23,14 @@ export const BookLayout: FC<BookLayoutProps> = (origin) => {
     const treeRef = useRef<CatalogTreeRef>(null);
     const locale = useLocaleCode();
     const params = useParams();
-    const { bookId } = params;
+    const { bookPath } = params;
 
     const menus: MenuItemProps[] = useMemo(() => {
         const list: MenuItemProps[] = [
             {
                 id: "home",
                 title: t("首页"),
-                url: `/${locale}/wiki/book/${bookId}/`,
+                url: `/${locale}/wiki/book/${bookPath}/`,
                 icon: <IconHome />,
             },
             {
@@ -58,7 +58,7 @@ export const BookLayout: FC<BookLayoutProps> = (origin) => {
             },
         ];
         return list;
-    }, [bookId, expandAll, expandAble, treeRef]);
+    }, [bookPath, expandAll, expandAble, treeRef]);
 
     const onTreeExpand = useCallback((expandedKeys: string[], allKeys: string[]) => {
         setExpandAll(expandedKeys.length === allKeys.length);

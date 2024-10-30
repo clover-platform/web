@@ -19,7 +19,7 @@ export const AddPageAction: FC<AddPageActionProps> = (props) => {
         className, parent
     } = props;
     const params = useParams();
-    const { bookId, pageId } = params;
+    const { bookPath } = params;
     const [submitting, setSubmitting] = useState(false);
     const router = useRouter();
     const msg = useMessage();
@@ -30,16 +30,16 @@ export const AddPageAction: FC<AddPageActionProps> = (props) => {
         setSubmitting(true);
         const { success, message, data } = await create({
             parent: parent,
-            bookId: Number(bookId),
+            bookPath: bookPath as string,
         })
         setSubmitting(false);
         if(success) {
             bus.emit(ADD_PAGE, data);
-            router.push(`/${locale}/wiki/book/${bookId}/page/${data?.id}/edit/`);
+            router.push(`/${locale}/wiki/book/${bookPath}/page/${data?.id}/edit/`);
         }else{
             msg.error(message);
         }
-    }, [bookId, parent])
+    }, [bookPath, parent])
 
     return <Tooltip content={t("创建")}>
         <Action

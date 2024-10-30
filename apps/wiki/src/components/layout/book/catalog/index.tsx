@@ -32,7 +32,7 @@ export type CatalogTreeRef = {
 export const CatalogTree = forwardRef<CatalogTreeRef, CatalogTreeProps>((props, ref) => {
     const { onExpand } = props;
     const params = useParams();
-    const {bookId, pageId} = params;
+    const {bookPath, pageId} = params;
     const [data, setData] = useState<Catalog[]>([]);
     const [selectedKeys, setSelectedKeys] = useState<string[]>([]);
     const msg = useMessage();
@@ -41,14 +41,14 @@ export const CatalogTree = forwardRef<CatalogTreeRef, CatalogTreeProps>((props, 
 
     const load = useCallback(async () => {
         const { success, data } = await catalog({
-            bookId
+            bookPath: bookPath as string
         });
         if(success) {
             setData(data!);
         }else{
             setData([]);
         }
-    }, [bookId]);
+    }, [bookPath]);
 
     useEffect(() => {
         load().then();
@@ -64,7 +64,7 @@ export const CatalogTree = forwardRef<CatalogTreeRef, CatalogTreeProps>((props, 
 
     const saveChange = useCallback(async (pageId: number, parentId: number|undefined) => {
         const {success, message} = await changeCatalogParent({
-            bookId,
+            bookPath: bookPath as string,
             id: pageId,
             parentId
         });
@@ -72,7 +72,7 @@ export const CatalogTree = forwardRef<CatalogTreeRef, CatalogTreeProps>((props, 
             msg.error(message);
             load().then();
         }
-    }, [bookId]);
+    }, [bookPath]);
 
     const onAdd = useCallback((item: Catalog) => {
         const cloneData = cloneDeep(data);
@@ -106,7 +106,7 @@ export const CatalogTree = forwardRef<CatalogTreeRef, CatalogTreeProps>((props, 
     useEffect(() => {
         if(pageId) {
             setExpandedKeys(uniq(concat(expandedKeysRef.current, allParent(data, Number(pageId)))))
-            setSelectedKeys([pageId]);
+            setSelectedKeys([pageId as string]);
         }else{
             setSelectedKeys([]);
         }

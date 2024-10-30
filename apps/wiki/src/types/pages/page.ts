@@ -3,7 +3,7 @@ import {User} from "@clover/public/types/account";
 export type PageProps = {
     params: {
         LANG: string;
-        bookId: number;
+        bookPath: string;
         pageId: number;
     }
 }

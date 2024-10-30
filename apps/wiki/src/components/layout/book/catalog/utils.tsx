@@ -20,13 +20,13 @@ export type UpdateData = {
 const MenuTitle: FC<MenuTitleProps> = (props) => {
     const {title, id} = props;
     const params = useParams();
-    const {bookId} = params;
+    const {bookPath} = params;
     const [moreOpen, setMoreOpen] = useState(false);
     const router = useRouter();
     const l = useLocaleCode();
 
     return <div
-        onClick={() => router.push(`/${l}/wiki/book/${bookId}/page/${id}/`)}
+        onClick={() => router.push(`/${l}/wiki/book/${bookPath}/page/${id}/`)}
         className={"flex justify-start items-center pr-1 group w-full"}
     >
         <div className={"flex-1 w-0 flex-shrink-0 truncate"}>{title}</div>
