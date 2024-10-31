@@ -7,7 +7,7 @@ import bus from '@easykit/common/events';
 import {clearToken} from "@clover/public/utils/token";
 import { t } from '@easykit/common/utils/locale';
 
-const menus: DropdownMenuItemProps[] = [
+const getMenus = (): DropdownMenuItemProps[] => [
     {
         id: 'profile',
         label: t("个人资料"),
@@ -47,7 +47,7 @@ export const SidebarProfile = () => {
                 })
             }
         }}
-        items={menus}
+        items={getMenus()}
         align={"end"}
         asChild
     >

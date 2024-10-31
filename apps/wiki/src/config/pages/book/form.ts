@@ -1,7 +1,7 @@
 import * as z from "zod";
 import { t } from '@easykit/common/utils/locale';
 
-export const SCHEMA = z.object({
+export const getSchema = () => z.object({
     path: z.string()
         .min(1, t("路径不能为空"))
         .max(255, t("最多 255 个字符")),
@@ -33,7 +33,7 @@ export type Privacy = {
     value: string;
     label: string;
 }
-export const PRIVACY_LIST: Privacy[] = [
+export const getPrivacyList = (): Privacy[] => [
     {
         value: "1",
         label: t("知识库成员可见")
