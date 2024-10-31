@@ -1,3 +1,17 @@
+export type BookHomePage = {
+    id: number;
+    bookId: number;
+    content: string;
+    createTime: Date;
+    updateUser: number;
+}
+
+export type BookCount = {
+    memberCount: number;
+    pageCount: number;
+    wordCount: number;
+}
+
 export type Book = {
     id: number;
     name: string;
@@ -9,6 +23,8 @@ export type Book = {
     updateTime: Date;
     privacy: number;
     path: string;
+    homePage?: BookHomePage;
+    count?: BookCount;
 }
 
 export type Catalog = {

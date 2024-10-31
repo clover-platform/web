@@ -67,9 +67,18 @@ export const getFilters = (): FilterItemProps[] => {
 export const getRowActions = (): DropdownMenuItemProps[] => {
     return [
         {
+            id: "detail",
+            type: "item",
+            label: t("详情")
+        },
+        {
             id: "setting",
             type: "item",
             label: t("设置")
+        },
+        {
+            id: "separator.1",
+            type: "separator",
         },
         {
             id: "delete",

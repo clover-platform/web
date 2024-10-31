@@ -49,7 +49,7 @@ export const ImageIconSelector = forwardRef<HTMLDivElement, ImageIconSelectorPro
                 { value ? <img className={"w-full h-full bg-cover"} src={value} alt={value}/> : null}
             </div>
         </PopoverTrigger>
-        <PopoverContent align={"start"} className={"m-1 flex flex-wrap -m-1"}>
+        <PopoverContent autoFocus={false} align={"start"} className={"m-1 flex flex-wrap -m-1"}>
             {
                 allFiles?.map((option) => {
                     return <ImageIconItem key={option} active={value === option} onClick={() => {

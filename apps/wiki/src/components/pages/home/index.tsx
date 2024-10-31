@@ -60,58 +60,58 @@ export const IndexPage = () => {
         }).then();
     }, [active]);
 
-    return <div className={"flex justify-center"}>
-        <div className={"container space-y-4"}>
-            <SectionTitle>{t("开始")}</SectionTitle>
-            <HomeStart onClick={onStartClick} />
-            <SectionTitle>{t("知识库")}</SectionTitle>
-            <div>
-                <TabsTitle
-                    active={active}
-                    items={getTabs()}
-                    onChange={setActive}
-                />
-                <DataTable<Book>
-                    filter={{
-                        items: getFilters(),
-                        defaultValues: initialParams,
-                        query: query,
-                    }}
-                    load={load}
-                    pagination={{
-                        total: result?.total || 0,
-                        page: query.page,
-                        size: query.size,
-                    }}
-                    columns={getColumns()}
-                    rowActions={getRowActions()}
-                    data={result?.data || []}
-                    loading={loading}
-                    onRowActionClick={({id: key}, {original}) => {
-                        const {path} = original;
-                        if(key === "setting") {
-                            router.push(`/wiki/book/${path}/setting`);
-                        }else if(key === "delete") {
-                            alert.confirm({
-                                title: t("删除"),
-                                description: t("删除知识库后将无法恢复，确定删除？"),
-                                onOk: async () => {
-                                    const { success, message } = await deleteBook(path);
-                                    if(success) {
-                                        load().then();
-                                    }else{
-                                        msg.error(message);
-                                    }
-                                }
-                            });
-                        }
-                    }}
-                    onRowClick={(row) => {
-                        const {path} = row.original;
+    return <div className={"space-y-4"}>
+        <SectionTitle>{t("开始")}</SectionTitle>
+        <HomeStart onClick={onStartClick} />
+        <SectionTitle>{t("知识库")}</SectionTitle>
+        <div>
+            <TabsTitle
+                active={active}
+                items={getTabs()}
+                onChange={setActive}
+            />
+            <DataTable<Book>
+                filter={{
+                    items: getFilters(),
+                    defaultValues: initialParams,
+                    query: query,
+                }}
+                load={load}
+                pagination={{
+                    total: result?.total || 0,
+                    page: query.page,
+                    size: query.size,
+                }}
+                columns={getColumns()}
+                rowActions={getRowActions()}
+                data={result?.data || []}
+                loading={loading}
+                onRowActionClick={({id: key}, {original}) => {
+                    const {path} = original;
+                    if(key === "detail") {
                         router.push(`/wiki/book/${path}`);
-                    }}
-                />
-            </div>
+                    }else if(key === "setting") {
+                        router.push(`/wiki/book/${path}/setting`);
+                    }else if(key === "delete") {
+                        alert.confirm({
+                            title: t("删除"),
+                            description: t("删除知识库后将无法恢复，确定删除？"),
+                            onOk: async () => {
+                                const { success, message } = await deleteBook(path);
+                                if(success) {
+                                    load().then();
+                                }else{
+                                    msg.error(message);
+                                }
+                            }
+                        });
+                    }
+                }}
+                onRowClick={(row) => {
+                    const {path} = row.original;
+                    router.push(`/wiki/book/${path}`);
+                }}
+            />
         </div>
         <CreateBookModal
             visible={createVisible}

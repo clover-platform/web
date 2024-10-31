@@ -107,7 +107,7 @@ export const ImageCropper = forwardRef<any, ImageCropperProps>((props, ref) => {
             >
                 <div
                     className={classNames(
-                        "border rounded-md flex justify-center items-center p-2",
+                        "border rounded-md flex justify-center items-center p-2 outline-none",
                         props.className
                     )}
                 >
