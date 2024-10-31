@@ -20,13 +20,14 @@ export type EditPageProps = {
 } & PageProps;
 
 export const EditPage: FC<EditPageProps> = (props) => {
+    const { detail } = props;
+    const { bookPath, pageId } = props.params;
     useLayoutConfig<BookLayoutProps>({
         path: [
             {
                 title: t("知识库"),
                 type: "link",
-                href: "/{#LANG#}/wiki/book/",
-                withQuery: ["id"],
+                href: `/wiki/book/${bookPath}`,
             },
             {
                 title: t("编辑"),
@@ -34,9 +35,6 @@ export const EditPage: FC<EditPageProps> = (props) => {
             }
         ],
     });
-
-    const { detail } = props;
-    const { bookPath, pageId } = props.params;
     const editorRef = useRef<EditorRef>(null);
     const [value, setValue] = useState<string>(detail?.content);
     const [title, setTitle] = useState<string>(detail?.title);

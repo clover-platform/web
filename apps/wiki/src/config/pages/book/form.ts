@@ -5,18 +5,26 @@ export const SCHEMA = z.object({
     path: z.string()
         .min(1, t("路径不能为空"))
         .max(255, t("最多 255 个字符")),
-    name: z.string()
-        .min(1, t("名称不能为空"))
-        .max(255, t("最多 255 个字符")),
+    nameAndLogo: z.object({
+        name: z.string(),
+        logo: z.string(),
+    }),
     privacy: z.string(),
-    logo: z.string().optional(),
     description: z.string().optional(),
-}).superRefine(({path}, ctx) => {
+}).superRefine(({nameAndLogo, path}, ctx) => {
     if (!/[0-9a-z-]*$/.test(path)) {
         ctx.addIssue({
             code: 'custom',
             path: ['path'],
             message: t("访问路径只能是小写字母和-，小写字母开头")
+        })
+    }
+    const { name } = nameAndLogo;
+    if(!name) {
+        ctx.addIssue({
+            code: 'custom',
+            path: ['nameAndLogo'],
+            message: t("请输入知识库名称")
         })
     }
 });

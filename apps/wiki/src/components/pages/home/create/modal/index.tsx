@@ -15,6 +15,9 @@ export const CreateBookModal: FC<CreateBookModalProps> = (props) => {
 
     const onSubmit = async (values: CreateBookData) => {
         setLoading(true);
+        const { nameAndLogo } = values;
+        values.name = nameAndLogo.name;
+        values.logo = nameAndLogo.logo;
         const { success, message } = await create(values);
         setLoading(false);
         if(success) {

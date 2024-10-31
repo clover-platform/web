@@ -30,7 +30,7 @@ export const DetailPage: FC<DetailPageProps> = (props) => {
             {
                 title: t("知识库"),
                 type: "link",
-                href: `/wiki/book/${bookPath}/`,
+                href: `/wiki/book/${bookPath}`,
             },
             {
                 title: t("详情"),

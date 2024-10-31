@@ -4,7 +4,7 @@ export type PageProps = {
     params: {
         LANG: string;
         bookPath: string;
-        pageId: number;
+        pageId?: number;
     }
 }
 

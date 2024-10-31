@@ -3,8 +3,15 @@ import {PageRequest, RestResult} from "@easykit/common/types/rest";
 import {Book} from "@/types/pages/book";
 
 export type CreateBookData = {
+    nameAndLogo: {
+        name: string;
+        logo: string;
+    };
+    name: string;
     logo: string;
-
+    path: string;
+    privacy: string;
+    description?: string;
 }
 export const create = (data: CreateBookData): Promise<RestResult<any>> =>
     post("@wiki/book/create", data);
@@ -21,3 +28,6 @@ export const list = (query: BookListQuery): Promise<PageRequest<Book>> =>
 
 export const deleteBook = (path: string): Promise<RestResult<any>> =>
     del(`@wiki/book/${path}`);
+
+export const detail = (path: string): Promise<RestResult<Book>> =>
+    get(`@wiki/book/${path}`);

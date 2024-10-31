@@ -1,6 +1,6 @@
 import Cropper, {ReactCropperElement, ReactCropperProps} from "react-cropper";
 import "cropperjs/dist/cropper.css";
-import {FC, useRef, useState, forwardRef} from "react";
+import {FC, useRef, useState, forwardRef, useEffect} from "react";
 import classNames from "classnames";
 import {Button, Dialog, Spin, Uploader, useMessage} from "@easykit/design";
 import {PlusIcon} from "@radix-ui/react-icons";
@@ -26,8 +26,12 @@ export const ImageCropper = forwardRef<any, ImageCropperProps>((props, ref) => {
     const [visible, setVisible] = useState(false);
     const [src, setSrc] = useState<string>();
     const cropperRef = useRef<ReactCropperElement>(null);
-    const [result, setResult] = useState<string>();
+    const [result, setResult] = useState<string|undefined>(props.value);
     const [uploading, setUploading] = useState(false);
+
+    useEffect(() => {
+        setResult(props.value);
+    }, [props.value]);
 
     const onCrop = () => {
         const cropper = cropperRef.current?.cropper;
@@ -69,7 +73,7 @@ export const ImageCropper = forwardRef<any, ImageCropperProps>((props, ref) => {
         });
     }
 
-    return <div>
+    return <>
         {
             result ? <div
                 className={classNames(
@@ -116,8 +120,9 @@ export const ImageCropper = forwardRef<any, ImageCropperProps>((props, ref) => {
             visible={visible}
             onCancel={() => setVisible(false)}
             maskClosable={false}
+            title={t("裁剪图片")}
         >
-            <div className={"pt-4 -mb-2 flex items-center flex-col space-y-4"}>
+            <div className={"-mb-2 flex items-center flex-col space-y-4"}>
                 <Cropper
                     src={src}
                     className={classNames("w-full max-h-[80vh]", props.cropperClassName)}
@@ -130,5 +135,5 @@ export const ImageCropper = forwardRef<any, ImageCropperProps>((props, ref) => {
                 </div>
             </div>
         </Dialog>
-    </div>
+    </>
 });
