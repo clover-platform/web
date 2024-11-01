@@ -1,0 +1,14 @@
+import {User} from "@clover/public/types/account";
+import {FC} from "react";
+import {UserItem} from "@clover/public/components/common/user-item";
+
+export type UserListProps = {
+    items?: User[];
+}
+
+export const UserList: FC<UserListProps> = (props) => {
+    const { items } = props;
+    return (items && items.length) ? <div>
+        { items?.map((item) => <UserItem key={item.id} info={item}/>)}
+    </div> : null
+}

@@ -1,3 +1,5 @@
+import {User} from "@clover/public/types/account";
+
 export type BookHomePage = {
     id: number;
     bookId: number;
@@ -25,6 +27,7 @@ export type Book = {
     path: string;
     homePage?: BookHomePage;
     count?: BookCount;
+    members?: User[];
 }
 
 export type Catalog = {

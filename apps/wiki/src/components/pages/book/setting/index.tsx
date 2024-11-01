@@ -10,7 +10,7 @@ import {getTabs} from "@/config/pages/book/setting";
 import {TabsTitle} from "@clover/public/components/common/tabs-title";
 
 export type BookSettingPageProps = {
-    data: Book;
+    data?: Book;
 }
 
 export const BookSettingPage: FC<BookSettingPageProps> = (props) => {

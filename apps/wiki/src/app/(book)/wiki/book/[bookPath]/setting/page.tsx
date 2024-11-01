@@ -17,7 +17,7 @@ const Page: FC<PageProps> = async (props) => {
     const { params } = props;
     const {bookPath} = params;
     const { data } = await detail(bookPath);
-    return  <BookSettingPage data={data!} />
+    return  <BookSettingPage data={data} />
 }
 
 export default Page;

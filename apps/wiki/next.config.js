@@ -3,5 +3,5 @@ import publicConfig from "@clover/public/config/next.js";
 /** @type {import('next').NextConfig} */
 export default {
     ...publicConfig,
-    assetPrefix: "/assets/wiki",
+    assetPrefix: "/assets/wiki/static",
 }
