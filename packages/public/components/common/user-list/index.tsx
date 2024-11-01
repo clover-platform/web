@@ -8,7 +8,7 @@ export type UserListProps = {
 
 export const UserList: FC<UserListProps> = (props) => {
     const { items } = props;
-    return (items && items.length) ? <div className={"flex flex-wrap"}>
+    return (items && items.length) ? <div className={"flex flex-wrap ml-2"}>
         { items?.map((item) => <UserItem key={item.id} info={item} className={"-ml-2"}/>)}
     </div> : null
 }

@@ -13,6 +13,7 @@ import {useTableLoader} from "@easykit/common/hooks";
 import {deleteBook, list} from "@/rest/book";
 import {Book} from "@/types/pages/book";
 import { t } from '@easykit/common/utils/locale';
+import {CreatePageModal} from "@/components/pages/home/create/page/modal";
 
 export const SectionTitle: FC<PropsWithChildren> = (props) => {
     return <div className={"text-lg font-medium"}>
@@ -46,10 +47,13 @@ export const IndexPage = () => {
     });
     const alert = useAlert();
     const msg = useMessage();
+    const [createPageVisible, setCreatePageVisible] = useState(false);
 
     const onStartClick = ({id}: StartItem) => {
         if(id === "new.book") {
             setCreateVisible(true);
+        }else if(id === "new.file") {
+            setCreatePageVisible(true);
         }
     }
 
@@ -120,6 +124,11 @@ export const IndexPage = () => {
                 setCreateVisible(false);
                 load({type: 'create'}).then();
             }}
+        />
+        <CreatePageModal
+            visible={createPageVisible}
+            onCancel={() => setCreatePageVisible(false)}
+            onSuccess={() => setCreatePageVisible(false)}
         />
     </div>
 }

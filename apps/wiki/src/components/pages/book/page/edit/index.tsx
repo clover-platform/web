@@ -55,7 +55,7 @@ export const EditPage: FC<EditPageProps> = (props) => {
         setPending(true);
         const {success, message} = await save({
             bookPath,
-            id: pageId,
+            id: pageId!,
             title,
             content: value,
             newVersion: true,

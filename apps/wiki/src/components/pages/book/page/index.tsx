@@ -47,7 +47,7 @@ export const DetailPage: FC<DetailPageProps> = (props) => {
         saveHandler.current?.abort();
         saveHandler.current = save({
             bookPath: bookPath as string,
-            id: pageId,
+            id: pageId!,
             title: detail?.title!,
             content: json,
             newVersion: false,
