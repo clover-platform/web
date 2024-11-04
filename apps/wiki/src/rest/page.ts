@@ -6,6 +6,7 @@ import {PageDetail} from "@/types/pages/page";
 export type CreatePageData = {
     parent?: number;
     bookPath: string;
+    title?: string;
 }
 export const create = (data: CreatePageData): Promise<RestResult<Catalog>> =>
     post(`@wiki/book/${data.bookPath}/page/create`, data);

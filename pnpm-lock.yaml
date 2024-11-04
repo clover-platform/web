@@ -28,8 +28,8 @@ importers:
         specifier: workspace:*
         version: link:packages/common
       '@easykit/design':
-        specifier: 0.0.29
-        version: 0.0.29(@types/react-dom@18.3.0)(@types/react@18.3.3)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(vite@5.4.6(@types/node@20.14.9)(less@4.2.0)(lightningcss@1.27.0)(sass@1.77.6))
+        specifier: 0.0.31
+        version: 0.0.31(@types/react-dom@18.3.0)(@types/react@18.3.3)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(vite@5.4.6(@types/node@20.14.9)(less@4.2.0)(lightningcss@1.27.0)(sass@1.77.6))
       '@easykit/eslint-config':
         specifier: 0.0.1
         version: 0.0.1(eslint@8.57.0)
@@ -570,8 +570,8 @@ packages:
     resolution: {integrity: sha512-Z/yiTPj+lDVnF7lWeKCIJzaIkI0vYO87dMpZ4bg4TDrFe4XXLFWL1TbXU27gBP3QccxV9mZICCrnjnYlJjXHOA==}
     engines: {node: '>=6.9.0'}
 
-  '@easykit/design@0.0.29':
-    resolution: {integrity: sha512-5TMEgtFFWkByVZJ7XT4OqxUD5h9bN21+30GXWyCp9V9/WooQz9m55clGQkpilK4V555rBO3VEuAMkYa89NQaEQ==}
+  '@easykit/design@0.0.31':
+    resolution: {integrity: sha512-QXrdqvUEV0h0Fsu+KckJDSmcVlX4CzZ3wnWa9a6lGojZNi9eF89KRVd/R76sAmE1isZ9dzr7rgLNR7pBhhNCCw==}
 
   '@easykit/eslint-config@0.0.1':
     resolution: {integrity: sha512-b7oZhdpdp3LxHQmqdhZ0SNaqL0/6xlpgoLaSXEYLUS+ikXmGpIloW2GkwmTpMDATPUaKDyKTDnJ/Jv4WrjOnYQ==}
@@ -6920,7 +6920,7 @@ snapshots:
       '@babel/helper-string-parser': 7.25.9
       '@babel/helper-validator-identifier': 7.25.9
 
-  '@easykit/design@0.0.29(@types/react-dom@18.3.0)(@types/react@18.3.3)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(vite@5.4.6(@types/node@20.14.9)(less@4.2.0)(lightningcss@1.27.0)(sass@1.77.6))':
+  '@easykit/design@0.0.31(@types/react-dom@18.3.0)(@types/react@18.3.3)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(vite@5.4.6(@types/node@20.14.9)(less@4.2.0)(lightningcss@1.27.0)(sass@1.77.6))':
     dependencies:
       '@arco-iconbox/react-atom-ui': 0.0.4
       '@emotion/react': 11.11.4(@types/react@18.3.3)(react@18.3.1)

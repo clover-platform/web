@@ -7,5 +7,5 @@ export type RestResult<T> = {
 
 export type PageRequest<T> = RestResult<{
     total: number;
-    list: T[];
+    data: T[];
 }>

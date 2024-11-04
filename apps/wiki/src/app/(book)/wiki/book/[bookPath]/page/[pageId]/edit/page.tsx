@@ -17,6 +17,7 @@ export async function generateMetadata(props: PageProps): Promise<Metadata> {
 const Page = async (props: PageProps) => {
     const {bookPath, pageId} = props.params;
     const {data} = await detail(bookPath, pageId!);
+    console.log(data);
     return <EditPage {...props} detail={data!} />;
 }
 
