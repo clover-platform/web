@@ -39,4 +39,5 @@ export type Catalog = {
     ownerInfo: string;
     createTime: Date;
     children: Catalog[];
+    collected: boolean;
 }

@@ -16,7 +16,7 @@ import {
 } from "@/components/layout/book/catalog/utils";
 import {useMessage} from "@easykit/design";
 import bus from "@easykit/common/events";
-import {ADD_PAGE, UPDATE_TITLE} from "@/events/book";
+import {ADD_PAGE, UPDATE_COLLECTED, UPDATE_TITLE} from "@/events/book";
 import uniq from 'lodash/uniq';
 import concat from 'lodash/concat';
 import {CatalogLoading} from "@/components/layout/book/catalog/loading";
@@ -84,20 +84,38 @@ export const CatalogTree = forwardRef<CatalogTreeRef, CatalogTreeProps>((props, 
         setData(cloneData)
     }, [data]);
 
-    const onUpdate = useCallback((ud: UpdateData) => {
+    const onTitleUpdate = useCallback((ud: UpdateData) => {
         const cloneData = cloneDeep(data);
-        updateItem(cloneData, ud);
+        updateItem(cloneData, ud, "title");
+        setData(cloneData);
+    }, [data])
+
+    const onCollectedUpdate = useCallback((ud: UpdateData) => {
+        const cloneData = cloneDeep(data);
+        updateItem(cloneData, ud, "collected");
         setData(cloneData);
     }, [data])
 
     useEffect(() => {
+        bus.on(UPDATE_COLLECTED, onCollectedUpdate);
+        return () => {
+            bus.off(UPDATE_COLLECTED, onCollectedUpdate);
+        }
+    }, [onCollectedUpdate]);
+
+    useEffect(() => {
+        bus.on(UPDATE_TITLE, onTitleUpdate);
+        return () => {
+            bus.off(UPDATE_TITLE, onTitleUpdate);
+        }
+    }, [onTitleUpdate]);
+
+    useEffect(() => {
         bus.on(ADD_PAGE, onAdd);
-        bus.on(UPDATE_TITLE, onUpdate);
         return () => {
             bus.off(ADD_PAGE, onAdd);
-            bus.off(UPDATE_TITLE, onUpdate);
         }
-    }, [onAdd, onUpdate]);
+    }, [onAdd]);
 
     useEffect(() => {
         expandedKeysRef.current = expandedKeys;

@@ -1,9 +1,11 @@
 import {StarFilledIcon, StarIcon} from "@radix-ui/react-icons";
 import {Action} from "@clover/public/components/common/action";
-import {FC, useState, useCallback, useEffect} from 'react';
+import {FC, useCallback, useEffect} from 'react';
 import {Spin, useMessage} from "@easykit/design";
 import {collect as collectRest} from "@/rest/page";
 import {useParams} from "next/navigation";
+import {useCollectLoading} from "@/hooks/use.collect.loading";
+import {useCollected} from "@/hooks/use.collected";
 
 export type CollectActionProps = {
     id: number;
@@ -14,9 +16,9 @@ export const CollectAction: FC<CollectActionProps> = (props) => {
     const { id: pageId } = props;
     const params = useParams();
     const { bookPath } = params
-    const [loading, setLoading] = useState<boolean>(false);
+    const [loading, setLoading] = useCollectLoading(pageId);
     const msg = useMessage();
-    const [collected, setCollected] = useState<boolean>(props.collected);
+    const [collected, setCollected] = useCollected(pageId);
 
     useEffect(() => {
         setCollected(props.collected);
@@ -31,7 +33,6 @@ export const CollectAction: FC<CollectActionProps> = (props) => {
         });
         setLoading(false);
         if(!success) {
-            console.log(message);
             msg.error(message);
         }else{
             setCollected(!collected);

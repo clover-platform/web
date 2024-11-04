@@ -5,19 +5,22 @@ import classNames from "classnames";
 import {AddPageAction} from "@/components/layout/book/page-actions/add";
 import {MorePageAction} from "@/components/layout/book/page-actions/more";
 import {useParams, useRouter} from "next/navigation";
+import set from "lodash/set";
 
 type MenuTitleProps = {
     title: string;
     id: number;
+    collected: boolean;
 }
 
 export type UpdateData = {
     id: number;
-    title: string;
+    title?: string;
+    collected?: boolean;
 }
 
 const MenuTitle: FC<MenuTitleProps> = (props) => {
-    const {title, id} = props;
+    const {title, id, collected} = props;
     const params = useParams();
     const {bookPath} = params;
     const [moreOpen, setMoreOpen] = useState(false);
@@ -33,7 +36,7 @@ const MenuTitle: FC<MenuTitleProps> = (props) => {
             moreOpen ? "!flex" : ""
         )}>
             <AddPageAction parent={id} className={"w-6 h-6 !p-0"}/>
-            <MorePageAction onOpenChange={setMoreOpen} id={id} className={"w-6 h-6 !p-0"}/>
+            <MorePageAction onOpenChange={setMoreOpen} id={id} collected={collected} className={"w-6 h-6 !p-0"}/>
         </div>
     </div>
 }
@@ -42,7 +45,7 @@ export const toTreeItemProps = (data: Catalog[]): TreeData[] => {
     return data?.map(item => {
         return {
             key: `${item.id}`,
-            title: <MenuTitle title={item.title} id={item.id} />,
+            title: <MenuTitle title={item.title} id={item.id} collected={item.collected} />,
             children: toTreeItemProps(item.children)
         }
     });
@@ -118,9 +121,9 @@ export const allParent = (data: Catalog[], id: number): string[] => {
     return result;
 }
 
-export const updateItem = (data: Catalog[], ud: UpdateData) => {
+export const updateItem = (data: Catalog[], ud: UpdateData, property: keyof UpdateData) => {
     const item = findByKey(data, `${ud.id}`, false);
-    item.title = ud.title;
+    set(item, property, ud[property]);
 }
 
 export const getAllExpandedKeys = (data: TreeData[]): string[] => {

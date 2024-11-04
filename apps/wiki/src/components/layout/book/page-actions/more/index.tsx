@@ -4,11 +4,13 @@ import {Action} from "@clover/public/components/common/action";
 import {Dropdown, Tooltip} from "@easykit/design";
 import {useParams, useRouter} from "next/navigation";
 import { t } from '@easykit/common/utils/locale';
+import {CollectTitle} from "@/components/layout/book/page-actions/more/collect-title";
 
 export type MorePageActionProps = {
     id: number;
     className?: string;
     onOpenChange?: (open: boolean) => void;
+    collected: boolean;
 }
 
 export const MorePageAction: FC<MorePageActionProps> = (props) => {
@@ -16,6 +18,7 @@ export const MorePageAction: FC<MorePageActionProps> = (props) => {
         id,
         className,
         onOpenChange,
+        collected = false,
     } = props;
     const [open, setOpen] = useState(false);
     const params = useParams();
@@ -42,8 +45,11 @@ export const MorePageAction: FC<MorePageActionProps> = (props) => {
             },
             {
                 id: "star",
-                label: t("收藏"),
+                label: <CollectTitle id={id} collected={collected}/>,
                 type: "item",
+                onItemClick: (item, e) => {
+                    e.stopPropagation();
+                }
             },
             {
                 id: "copy",
@@ -51,7 +57,7 @@ export const MorePageAction: FC<MorePageActionProps> = (props) => {
                 type: "item",
             },
             {
-                id: "separator.2",
+                id: "separator.1",
                 type: "separator",
             },
             {
