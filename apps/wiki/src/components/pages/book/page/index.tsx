@@ -13,7 +13,7 @@ import {i18n} from "@easykit/common/utils/locale";
 import {CollectAction} from "@/components/pages/book/page/actions/collect";
 import {Action} from "@clover/public/components/common/action";
 import {Pencil1Icon} from "@radix-ui/react-icons";
-import {ContentViewer} from "@/components/common/editor/viewer";
+import {ContentViewer} from "@easykit/editor";
 import { t } from '@easykit/common/utils/locale';
 import {useTimeAgo} from "@easykit/common/hooks/use.time.ago";
 import {useRouter} from "next/navigation";

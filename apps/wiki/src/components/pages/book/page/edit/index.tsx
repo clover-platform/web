@@ -6,14 +6,13 @@ import {useRouter} from "next/navigation";
 import {i18n, t} from '@easykit/common/utils/locale';
 import {PageDetail, PageProps} from "@/types/pages/page";
 import {FC, useCallback, useEffect, useRef, useState} from "react";
-import {Editor, EditorRef} from "@/components/common/editor";
+import {Editor, EditorRef, EditorEvents} from "@easykit/editor";
 import {Button, Input, Separator, useMessage} from "@easykit/design";
 import {save} from "@/rest/page";
 import bus from "@easykit/common/events";
 import {UPDATE_TITLE} from "@/events/book";
 import classNames from "classnames";
 import {CollectAction} from "@/components/pages/book/page/actions/collect";
-import {EditorEvents} from "@tiptap/core";
 
 export type EditPageProps = {
     detail: PageDetail

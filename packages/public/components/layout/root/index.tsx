@@ -3,7 +3,7 @@
 import "@clover/public/plugin/rest.client";
 import "@clover/public/plugin/locales";
 import { RecoilRoot } from 'recoil';
-import {FC, PropsWithChildren} from "react";
+import {FC, PropsWithChildren, useEffect} from "react";
 import { ConfigProvider } from "@easykit/design";
 import locales from "@clover/public/config/locale";
 import {accountInfoState, isLoginState} from "@clover/public/state/account";
