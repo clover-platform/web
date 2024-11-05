@@ -1,5 +1,5 @@
 import {Catalog} from "@/types/pages/book";
-import {TreeData} from "@/components/common/tree";
+import {TreeData} from "@easykit/design";
 import {FC, useState} from "react";
 import classNames from "classnames";
 import {AddPageAction} from "@/components/layout/book/page-actions/add";
@@ -11,6 +11,7 @@ type MenuTitleProps = {
     title: string;
     id: number;
     collected: boolean;
+    hasChildren: boolean;
 }
 
 export type UpdateData = {
@@ -20,7 +21,7 @@ export type UpdateData = {
 }
 
 const MenuTitle: FC<MenuTitleProps> = (props) => {
-    const {title, id, collected} = props;
+    const {title, id, collected, hasChildren} = props;
     const params = useParams();
     const {bookPath} = params;
     const [moreOpen, setMoreOpen] = useState(false);
@@ -36,7 +37,10 @@ const MenuTitle: FC<MenuTitleProps> = (props) => {
             moreOpen ? "!flex" : ""
         )}>
             <AddPageAction parent={id} className={"w-6 h-6 !p-0"}/>
-            <MorePageAction onOpenChange={setMoreOpen} id={id} collected={collected} className={"w-6 h-6 !p-0"}/>
+            <MorePageAction
+                hasChildren={hasChildren}
+                onOpenChange={setMoreOpen} id={id} collected={collected} className={"w-6 h-6 !p-0"}
+            />
         </div>
     </div>
 }
@@ -45,7 +49,10 @@ export const toTreeItemProps = (data: Catalog[]): TreeData[] => {
     return data?.map(item => {
         return {
             key: `${item.id}`,
-            title: <MenuTitle title={item.title} id={item.id} collected={item.collected} />,
+            title: <MenuTitle
+                hasChildren={!!(item.children?.length)}
+                title={item.title} id={item.id} collected={item.collected}
+            />,
             children: toTreeItemProps(item.children)
         }
     });

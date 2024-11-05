@@ -19,10 +19,10 @@
         "build:wiki": "pnpm --filter @clover/wiki run build"
     },
     "dependencies": {
-        "@arco-iconbox/react-clover": "0.0.26",
         "@clover/public": "workspace:*",
         "@easykit/common": "workspace:*",
-        "@easykit/design": "0.0.31",
+        "@arco-iconbox/react-clover": "0.0.26",
+        "@easykit/design": "0.0.33",
         "@easykit/eslint-config": "0.0.1",
         "@radix-ui/react-checkbox": "1.1.1",
         "@radix-ui/react-icons": "1.3.0",

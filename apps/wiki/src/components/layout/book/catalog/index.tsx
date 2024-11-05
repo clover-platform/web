@@ -2,7 +2,7 @@ import {useCallback, useEffect, useMemo, useRef, useState, forwardRef, useImpera
 import {catalog, changeCatalogParent} from "@/rest/page";
 import {useParams} from "next/navigation";
 import {Catalog} from "@/types/pages/book";
-import {TreeData, Tree} from "@/components/common/tree";
+import {TreeData, Tree} from "@easykit/design";
 import {cloneDeep} from "lodash";
 import {
     updateItem,
