@@ -20,6 +20,8 @@ import {ADD_PAGE, UPDATE_COLLECTED, UPDATE_TITLE} from "@/events/book";
 import uniq from 'lodash/uniq';
 import concat from 'lodash/concat';
 import {CatalogLoading} from "@/components/layout/book/catalog/loading";
+import "./style.css";
+import {useCatalogLoader} from "@/hooks/use.catalog.loader";
 
 export type CatalogTreeProps = {
     onExpand?: (expandedKeys: string[], allKeys: string[]) => void;
@@ -34,29 +36,11 @@ export const CatalogTree = forwardRef<CatalogTreeRef, CatalogTreeProps>((props, 
     const { onExpand } = props;
     const params = useParams();
     const {bookPath, pageId} = params;
-    const [data, setData] = useState<Catalog[]>([]);
     const [selectedKeys, setSelectedKeys] = useState<string[]>([]);
     const msg = useMessage();
     const [expandedKeys, setExpandedKeys] = useState<string[]>([]);
     const expandedKeysRef = useRef<string[]>([]);
-    const [loading, setLoading] = useState(true);
-
-    const load = useCallback(async () => {
-        setLoading(true);
-        const { success, data } = await catalog({
-            bookPath: bookPath as string
-        });
-        setLoading(false);
-        if(success) {
-            setData(data!);
-        }else{
-            setData([]);
-        }
-    }, [bookPath]);
-
-    useEffect(() => {
-        load().then();
-    }, [load]);
+    const [loading, load, data, setData] = useCatalogLoader();
 
     const treeData = useMemo<TreeData[]>(() => {
         return toTreeItemProps(data);
@@ -146,7 +130,7 @@ export const CatalogTree = forwardRef<CatalogTreeRef, CatalogTreeProps>((props, 
     return <div className={"mx-2"}>
         {
             loading ? <CatalogLoading/> : <Tree
-                prefixCls={"rc-tree"}
+                className={"clover-tree"}
                 treeData={treeData}
                 draggable={true}
                 selectable={true}

@@ -139,7 +139,7 @@ export const getAllExpandedKeys = (data: TreeData[]): string[] => {
         data.forEach(item => {
             if(!!(item.children?.length||0)) {
                 result.push(item.key);
-                find(item.children);
+                find(item.children || []);
             }
         })
     }

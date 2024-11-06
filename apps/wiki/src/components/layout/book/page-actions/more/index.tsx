@@ -5,6 +5,7 @@ import {Dropdown, Select, Tooltip, useAlert, useMessage} from "@easykit/design";
 import {useParams, useRouter} from "next/navigation";
 import { t } from '@easykit/common/utils/locale';
 import {CollectTitle} from "@/components/layout/book/page-actions/more/collect-title";
+import {DeleteModal} from "@/components/pages/book/page/modal/delete";
 
 export type MorePageActionProps = {
     id: number;
@@ -26,83 +27,74 @@ export const MorePageAction: FC<MorePageActionProps> = (props) => {
     const params = useParams();
     const { bookPath } = params;
     const router = useRouter();
-    const alert = useAlert();
-    const msg = useMessage();
+    const [deleteVisible, setDeleteVisible] = useState(false);
 
     useEffect(() => {
         onOpenChange?.(open);
     }, [open]);
 
-    return <Dropdown
-        onOpenChange={setOpen}
-        className={open ? "opacity-100" : "opacity-0"}
-        align={"start"}
-        items={[
-            {
-                id: "edit",
-                label: t("编辑"),
-                type: "item",
-                onItemClick: (item, e) => {
-                    router.push(`/wiki/book/${bookPath}/page/${id}/edit`)
-                    e.stopPropagation();
+    return <>
+        <Dropdown
+            onOpenChange={setOpen}
+            className={open ? "opacity-100" : "opacity-0"}
+            align={"start"}
+            items={[
+                {
+                    id: "edit",
+                    label: t("编辑"),
+                    type: "item",
+                    onItemClick: (item, e) => {
+                        router.push(`/wiki/book/${bookPath}/page/${id}/edit`)
+                        e.stopPropagation();
+                    }
+                },
+                {
+                    id: "star",
+                    label: <CollectTitle id={id} collected={collected}/>,
+                    type: "item",
+                    onItemClick: (item, e) => {
+                        e.stopPropagation();
+                    }
+                },
+                {
+                    id: "copy",
+                    label: t("复制"),
+                    type: "item",
+                },
+                {
+                    id: "separator.1",
+                    type: "separator",
+                },
+                {
+                    id: "delete",
+                    label: t("删除"),
+                    type: "item",
+                    onItemClick: (item, e) => {
+                        setDeleteVisible(true);
+                        e.stopPropagation();
+                    }
                 }
-            },
-            {
-                id: "star",
-                label: <CollectTitle id={id} collected={collected}/>,
-                type: "item",
-                onItemClick: (item, e) => {
-                    e.stopPropagation();
-                }
-            },
-            {
-                id: "copy",
-                label: t("复制"),
-                type: "item",
-            },
-            {
-                id: "separator.1",
-                type: "separator",
-            },
-            {
-                id: "delete",
-                label: t("删除"),
-                type: "item",
-                onItemClick: (item, e) => {
-                    alert.confirm({
-                        title: t("删除"),
-                        description: <span className={"block"}>
-                            <span className={"block"}>{t("删除文章后将无法恢复，确定删除？")}</span>
-                            { hasChildren ? <span className={"block"}>
-                                <span>{t("子页面移动至：")}</span>
-                                <span>
-                                    <Select options={[]} />
-                                </span>
-                            </span> : null }
-                        </span>,
-                        onOk: async () => {
-                            // const { success, message } = await deleteBook(path);
-                            // if(success) {
-                            //     load().then();
-                            // }else{
-                            //     msg.error(message);
-                            // }
-                        }
-                    });
-                    e.stopPropagation();
-                }
-            }
-        ]}
-    >
-        <Tooltip content={t("更多操作")}>
-            <Action
-                elType={"span"}
-                onClick={(e) => {
-                    e.stopPropagation();
-                }}
-                className={className}>
-                <DotsHorizontalIcon />
-            </Action>
-        </Tooltip>
-    </Dropdown>
+            ]}
+        >
+            <Tooltip content={t("更多操作")}>
+                <Action
+                    elType={"span"}
+                    onClick={(e) => {
+                        e.stopPropagation();
+                    }}
+                    className={className}>
+                    <DotsHorizontalIcon />
+                </Action>
+            </Tooltip>
+        </Dropdown>
+        <DeleteModal
+            visible={deleteVisible}
+            id={id}
+            hasChildren={hasChildren}
+            onCancel={() => setDeleteVisible(false)}
+            onSuccess={() => {
+                console.log("onSuccess");
+            }}
+        />
+    </>
 }
