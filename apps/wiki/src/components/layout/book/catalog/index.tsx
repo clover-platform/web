@@ -1,5 +1,5 @@
 import {useCallback, useEffect, useMemo, useRef, useState, forwardRef, useImperativeHandle} from "react";
-import {catalog, changeCatalogParent} from "@/rest/page";
+import {changeCatalogParent} from "@/rest/page";
 import {useParams} from "next/navigation";
 import {Catalog} from "@/types/pages/book";
 import {TreeData, Tree} from "@easykit/design";
@@ -41,6 +41,10 @@ export const CatalogTree = forwardRef<CatalogTreeRef, CatalogTreeProps>((props, 
     const [expandedKeys, setExpandedKeys] = useState<string[]>([]);
     const expandedKeysRef = useRef<string[]>([]);
     const [loading, load, data, setData] = useCatalogLoader();
+
+    useEffect(() => {
+        load().then();
+    }, [load]);
 
     const treeData = useMemo<TreeData[]>(() => {
         return toTreeItemProps(data);

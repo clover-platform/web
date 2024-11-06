@@ -6,6 +6,7 @@ import {useParams, useRouter} from "next/navigation";
 import { t } from '@easykit/common/utils/locale';
 import {CollectTitle} from "@/components/layout/book/page-actions/more/collect-title";
 import {DeleteModal} from "@/components/pages/book/page/modal/delete";
+import {useCatalogLoader} from "@/hooks/use.catalog.loader";
 
 export type MorePageActionProps = {
     id: number;
@@ -25,9 +26,10 @@ export const MorePageAction: FC<MorePageActionProps> = (props) => {
     } = props;
     const [open, setOpen] = useState(false);
     const params = useParams();
-    const { bookPath } = params;
+    const { bookPath, pageId } = params;
     const router = useRouter();
     const [deleteVisible, setDeleteVisible] = useState(false);
+    const [_, load] = useCatalogLoader();
 
     useEffect(() => {
         onOpenChange?.(open);
@@ -87,14 +89,20 @@ export const MorePageAction: FC<MorePageActionProps> = (props) => {
                 </Action>
             </Tooltip>
         </Dropdown>
-        <DeleteModal
-            visible={deleteVisible}
-            id={id}
-            hasChildren={hasChildren}
-            onCancel={() => setDeleteVisible(false)}
-            onSuccess={() => {
-                console.log("onSuccess");
-            }}
-        />
+        <div onClick={(e) => e.stopPropagation()}>
+            <DeleteModal
+                visible={deleteVisible}
+                id={id}
+                hasChildren={hasChildren}
+                onCancel={() => setDeleteVisible(false)}
+                onSuccess={() => {
+                    if(pageId === `${id}`) {
+                        router.push(`/wiki/book/${bookPath}`)
+                    }
+                    load().then();
+                    setDeleteVisible(false);
+                }}
+            />
+        </div>
     </>
 }

@@ -1,5 +1,5 @@
 import {RestResult} from "@easykit/common/types/rest";
-import {post, get, put, AbortPromise} from "@easykit/common/utils/rest";
+import {post, get, put, AbortPromise, del} from "@easykit/common/utils/rest";
 import {Catalog} from "@/types/pages/book";
 import {PageDetail} from "@/types/pages/page";
 
@@ -23,7 +23,7 @@ export type ChangeCatalogParentData = {
     parentId?: number;
 }
 export const changeCatalogParent = (params: ChangeCatalogParentData): Promise<RestResult<any>> =>
-    put(`@wiki/book/${params.bookPath}/page/parent`, params);
+    put(`@wiki/book/${params.bookPath}/page/${params.id}/parent`, params);
 
 export const detail = (bookPath:number|string, id: number|string): AbortPromise<RestResult<PageDetail>> =>
     get(`@wiki/book/${bookPath}/page/${id}`);
@@ -45,3 +45,12 @@ export type CollectData = {
 }
 export const collect = (data: CollectData): AbortPromise<RestResult<any>> =>
     post(`@wiki/book/${data.bookPath}/page/${data.id}/collect`, data);
+
+export type DeletePageData = {
+    bookPath: string;
+    id: number;
+    parent?: number;
+}
+
+export const deletePage = (data: DeletePageData): AbortPromise<RestResult<any>> =>
+    del(`@wiki/book/${data.bookPath}/page/${data.id}`, data);

@@ -69,7 +69,6 @@ export const CatalogSelector: FC<CatalogSelectorProps> = (props) => {
         {...props}
         placeholder={t("请选择目录")}
         clearable={true}
-        loading={loading}
         treeData={treeData}
     />
 }

@@ -1,13 +1,15 @@
 import {useParams} from "next/navigation";
-import {useCallback, useEffect, useState} from "react";
+import {useCallback, useState} from "react";
 import {Catalog} from "@/types/pages/book";
 import {catalog} from "@/rest/page";
+import {useRecoilState} from "recoil";
+import {catalogState} from "@/state/page";
 
 export const useCatalogLoader = (): [boolean, () => Promise<void>, Catalog[], (data: Catalog[]) => void] => {
     const params = useParams();
     const {bookPath} = params;
     const [loading, setLoading] = useState(true);
-    const [data, setData] = useState<Catalog[]>([]);
+    const [data, setData] = useRecoilState(catalogState);
 
     const load = useCallback(async () => {
         setLoading(true);
@@ -21,10 +23,6 @@ export const useCatalogLoader = (): [boolean, () => Promise<void>, Catalog[], (d
             setData([]);
         }
     }, [bookPath]);
-
-    useEffect(() => {
-        load().then();
-    }, [load]);
 
     return [loading, load, data, setData];
 }

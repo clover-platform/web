@@ -2,6 +2,9 @@ import {t} from "@easykit/common/utils/locale";
 import {Button, Dialog, DialogProps} from "@easykit/design";
 import {FC, useCallback, useEffect, useState} from "react";
 import {CatalogSelector} from "@/components/common/selector/catalog";
+import {deletePage} from "@/rest/page";
+import {useParams} from "next/navigation";
+import { useAlert, useMessage } from "@easykit/design"
 
 export type DeleteModalProps = {
     onSuccess?: () => void;
@@ -12,10 +15,38 @@ export type DeleteModalProps = {
 export const DeleteModal: FC<DeleteModalProps> = (props) => {
     const { id, hasChildren, onSuccess, visible } = props;
     const [parentId, setParentId] = useState<number|undefined>();
+    const p = useParams();
+    const { bookPath } = p;
+    const alert = useAlert();
+    const msg = useMessage();
+    const [pending, setPending] = useState(false);
 
-    const onSubmit = useCallback(() => {
-        console.log("delete", id, 'new parent', parentId);
-    }, [parentId, id, onSuccess])
+    const deletePageAction = useCallback(async  () => {
+        setPending(true);
+        const { success, message } = await deletePage({
+            bookPath: bookPath as string,
+            id,
+            parent: parentId
+        })
+        setPending(false);
+        if(success) {
+            onSuccess?.();
+        }else{
+            msg.error(message);
+        }
+    }, [bookPath, id, parentId, onSuccess])
+
+    const onSubmit = useCallback(async () => {
+        if(!parentId && hasChildren) {
+            alert.confirm({
+                title: t("确认"),
+                description: t("如果指定新的父级，子页面将会一并删除，是否继续？"),
+                onOk: deletePageAction
+            });
+        }else{
+            await deletePageAction();
+        }
+    }, [bookPath, id, parentId, deletePageAction])
 
     useEffect(() => {
         if(!visible) {
@@ -43,8 +74,8 @@ export const DeleteModal: FC<DeleteModalProps> = (props) => {
             }
         </div>
         <div className={"flex justify-end items-center mt-4 space-x-2"}>
-            <Button onClick={onSubmit}>{t("确定")}</Button>
             <Button onClick={props.onCancel} variant={"outline"}>{t("取消")}</Button>
+            <Button loading={pending} onClick={onSubmit}>{t("确定")}</Button>
         </div>
     </Dialog>
 }
