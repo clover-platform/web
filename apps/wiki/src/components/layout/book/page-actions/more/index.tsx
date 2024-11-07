@@ -1,4 +1,4 @@
-import {FC, useEffect, useState} from "react";
+import {FC, useCallback, useEffect, useState} from "react";
 import {DotsHorizontalIcon} from "@radix-ui/react-icons";
 import {Action} from "@clover/public/components/common/action";
 import {Dropdown, Select, Tooltip, useAlert, useMessage} from "@easykit/design";
@@ -7,6 +7,7 @@ import { t } from '@easykit/common/utils/locale';
 import {CollectTitle} from "@/components/layout/book/page-actions/more/collect-title";
 import {DeleteModal} from "@/components/pages/book/page/modal/delete";
 import {useCatalogLoader} from "@/hooks/use.catalog.loader";
+import {CopyTitle} from "@/components/layout/book/page-actions/more/copy-title";
 
 export type MorePageActionProps = {
     id: number;
@@ -60,8 +61,11 @@ export const MorePageAction: FC<MorePageActionProps> = (props) => {
                 },
                 {
                     id: "copy",
-                    label: t("复制"),
+                    label: <CopyTitle id={id} />,
                     type: "item",
+                    onItemClick: (item, e) => {
+                        e.stopPropagation();
+                    }
                 },
                 {
                     id: "separator.1",

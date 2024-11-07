@@ -54,3 +54,6 @@ export type DeletePageData = {
 
 export const deletePage = (data: DeletePageData): AbortPromise<RestResult<any>> =>
     del(`@wiki/book/${data.bookPath}/page/${data.id}`, data);
+
+export const copyPage = (bookPath: string, pageId: number): AbortPromise<RestResult<Catalog>> =>
+    post(`@wiki/book/${bookPath}/page/${pageId}/copy`);

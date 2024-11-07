@@ -5,3 +5,8 @@ export const catalogState = atom<Catalog[]>({
     key: 'page/catalog',
     default: []
 })
+
+export const copyLoadingState = atom<number[]>({
+    key: 'page/copy/loading',
+    default: []
+})
