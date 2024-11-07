@@ -5,13 +5,17 @@ import {DotsHorizontalIcon, StarIcon} from "@radix-ui/react-icons";
 import {Book} from "@/types/pages/book";
 import {FC} from "react";
 import {UserList} from "@clover/public/components/common/user-list";
+import {Dropdown} from "@easykit/design";
+import {useRouter} from "next/navigation";
 
 export type HomeHeaderProps = {
     data?: Book;
+    onEdit?: () => void;
 }
 
 export const HomeHeader: FC<HomeHeaderProps> = (props) => {
     const { data } = props;
+    const router = useRouter();
 
     return <div className={"flex space-x-4"}>
         <div className={"bg-secondary w-9 h-9 rounded-md overflow-hidden"}>
@@ -31,13 +35,33 @@ export const HomeHeader: FC<HomeHeaderProps> = (props) => {
             </div>
             <UserList items={data?.members}/>
         </div>
-        <div className={"flex space-x-1"}>
+        <div className={"flex space-x-1 justify-center items-start"}>
             <Action className={"w-8 h-8"}>
                 <StarIcon/>
             </Action>
-            <Action className={"w-8 h-8"}>
-                <DotsHorizontalIcon/>
-            </Action>
+            <Dropdown
+                items={[
+                    {
+                        label: t("编辑首页"),
+                        type: "item",
+                        id: "edit.home.page",
+                        onItemClick: () => props.onEdit?.(),
+                    },
+                    {
+                        label: t("设置"),
+                        type: "item",
+                        id: "setting",
+                        onItemClick: (item, e) => {
+                            router.push(`/wiki/book/${data?.path}/setting`);
+                        }
+                    }
+                ]}
+                asChild={true}
+            >
+                <Action className={"w-8 h-8"}>
+                    <DotsHorizontalIcon/>
+                </Action>
+            </Dropdown>
         </div>
     </div>
 }

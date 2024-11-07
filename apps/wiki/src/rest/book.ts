@@ -1,4 +1,4 @@
-import {post, get, del} from "@easykit/common/utils/rest";
+import {post, get, del, put} from "@easykit/common/utils/rest";
 import {PageRequest, RestResult} from "@easykit/common/types/rest";
 import {Book} from "@/types/pages/book";
 
@@ -31,3 +31,10 @@ export const deleteBook = (path: string): Promise<RestResult<any>> =>
 
 export const detail = (path: string): Promise<RestResult<Book>> =>
     get(`@wiki/book/${path}`);
+
+export type SaveHomePageData = {
+    path: string;
+    content: string;
+}
+export const saveHomePage = (data: SaveHomePageData): Promise<RestResult<void>> =>
+    put(`@wiki/book/${data.path}/home/page/save`, data);
