@@ -43,7 +43,7 @@ export const CatalogTree = forwardRef<CatalogTreeRef, CatalogTreeProps>((props, 
     const [loading, load, data, setData] = useCatalogLoader();
 
     useEffect(() => {
-        load().then();
+        load(true).then();
     }, [load]);
 
     const treeData = useMemo<TreeData[]>(() => {
