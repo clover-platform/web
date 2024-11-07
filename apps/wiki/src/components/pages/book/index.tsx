@@ -9,6 +9,7 @@ import {HomeHeader} from "@/components/pages/book/home/header";
 import {HomeCatalog} from "@/components/pages/book/home/catalog";
 import {Divider} from "@easykit/design";
 import {HomeEditor} from "@/components/pages/book/home/editor";
+import {useRouter} from "next/navigation";
 
 export type BookPageProps = {
     data?: Book;
@@ -27,6 +28,7 @@ export const BookPage: FC<BookPageProps> = (props) => {
     const { data } = props;
     const [editing, setEditing] = useState(false);
     const [homeContent, setHomeContent] = useState<string | undefined>(data?.homePage?.content);
+    const router = useRouter();
 
     return <div className={"space-y-4"}>
         <HomeHeader data={data} onEdit={() => setEditing(true)} />
@@ -36,6 +38,7 @@ export const BookPage: FC<BookPageProps> = (props) => {
             onSuccess={(content) => {
                 setHomeContent(content);
                 setEditing(false);
+                router.refresh(); // 刷新页面缓存
             }}
             onCancel={() => setEditing(false)}
         />
