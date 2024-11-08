@@ -4,7 +4,6 @@ import {useRouter} from "next/navigation";
 import bus from "@easykit/common/events";
 import {UNAUTHORIZED} from "@clover/public/events/auth";
 import { useEffect } from "react";
-import { t } from "@easykit/common/utils/locale";
 
 export const useCurrent = () => {
     const account = useRecoilValue(accountInfoState);

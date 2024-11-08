@@ -1,9 +1,9 @@
 'use client';
 
 import { TitleBar } from "@clover/public/components/common/title-bar";
-import {Button, DataTable, Space, useAlert, useMessage} from "@easykit/design";
+import {Button, DataTable, Space} from "@easykit/design";
 import Link from "next/link";
-import { useTableLoader } from "@easykit/common/hooks";
+import {useTableLoader} from "@easykit/common/hooks";
 import { COLUMNS, FILTERS, ROW_ACTIONS } from "@/config/pages/module/table";
 import {list} from "@/rest/module";
 import {useEffect, useState} from "react";
@@ -53,7 +53,7 @@ export const ModulePage = () => {
     }, [active]);
 
     const actions = <Space>
-        <Link href={"/{#LANG#}/i18n/module/create/"}>
+        <Link href={"/i18n/module/create"}>
             <Button>{t("新建")}</Button>
         </Link>
     </Space>;
@@ -89,16 +89,16 @@ export const ModulePage = () => {
             onRowActionClick={({id: key}, {original}) => {
                 const {id} = original;
                 if(key === "detail") {
-                    router.push("/{#LANG#}/i18n/dashboard/?id=" + id);
+                    router.push(`/i18n/${original.identifier}/dashboard`);
                 }else if(key === "activity") {
-                    router.push("/{#LANG#}/i18n/activity/?id=" + id);
+                    router.push(`/i18n/${original.identifier}/activity`);
                 }else if(key === "delete") {
 
                 }
             }}
             onRowClick={(row) => {
-                const {id} = row.original;
-                router.push("/{#LANG#}/i18n/dashboard/?id=" + id);
+                const { identifier } = row.original;
+                router.push(`/i18n/${identifier}/dashboard`);
             }}
         />
     </>

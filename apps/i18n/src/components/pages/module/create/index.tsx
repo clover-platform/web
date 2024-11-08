@@ -18,7 +18,7 @@ export const CreateModulePage = () => {
             {
                 title: t("国际化"),
                 type: "link",
-                href: "/{#LANG#}/i18n/"
+                href: "/i18n"
             },
             {
                 title: t("创建模块"),
@@ -35,7 +35,7 @@ export const CreateModulePage = () => {
         const { success, message } = await create(data);
         setLoading(false);
         if(success) {
-            router.push("/{#LANG#}/i18n/");
+            router.push("/i18n");
         }else{
             msg.error(message)
         }

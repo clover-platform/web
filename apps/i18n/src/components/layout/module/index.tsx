@@ -1,8 +1,7 @@
 import { MainLayout as PublicMainLayout, PathProps } from "@clover/public/components/layout/main";
 import { FC, PropsWithChildren, useMemo } from "react";
-import { NAV_MENUS } from "@/config/layout/module";
-import { useSearchParams } from "next/navigation";
-import { cloneDeep } from "lodash";
+import { getNavMenus } from "@/config/layout/module";
+import {useParams} from "next/navigation";
 import { useLanguagesInit } from "@/hooks/use.languages.init";
 import {useLayoutProps} from "@clover/public/components/layout/hooks/use.layout.props";
 import { t } from '@easykit/common/utils/locale';
@@ -15,16 +14,12 @@ export type ModuleLayoutProps = {
 
 export const ModuleLayout: FC<ModuleLayoutProps> = (origin) => {
     const props = useLayoutProps<ModuleLayoutProps>(origin);
-    const search = useSearchParams();
-    const id = search.get("id");
     useLanguagesInit();
+    const { module } = useParams();
 
     const menus = useMemo(() => {
-        return cloneDeep(NAV_MENUS).map((item) => {
-            item.url = item.url + (id ? `?id=${id}` : "");
-            return item;
-        });
-    }, [NAV_MENUS, id])
+        return getNavMenus(module as string);
+    }, [getNavMenus, module])
 
     return <PublicMainLayout
         {...props}
@@ -32,7 +27,7 @@ export const ModuleLayout: FC<ModuleLayoutProps> = (origin) => {
             {
                 title: t("国际化"),
                 type: "link",
-                href: "/{#LANG#}/i18n/"
+                href: "/i18n"
             },
             ...(props.path || [])
         ]}
