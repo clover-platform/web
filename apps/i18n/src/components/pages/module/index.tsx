@@ -4,11 +4,11 @@ import { TitleBar } from "@clover/public/components/common/title-bar";
 import {Button, DataTable, Space} from "@easykit/design";
 import Link from "next/link";
 import {useTableLoader} from "@easykit/common/hooks";
-import { COLUMNS, FILTERS, ROW_ACTIONS } from "@/config/pages/module/table";
+import {getColumns, getFilters, ROW_ACTIONS} from "@/config/pages/module/table";
 import {list} from "@/rest/module";
 import {useEffect, useState} from "react";
 import {TabsTitle} from "@clover/public/components/common/tabs-title";
-import {TABS} from "@/config/pages/module/tabs";
+import {getTabs} from "@/config/pages/module/tabs";
 import { useRouter, useSearchParams } from "next/navigation";
 import {Module} from "@/types/pages/module";
 import {useProfile} from "@clover/public/hooks/use.profile";
@@ -66,13 +66,13 @@ export const ModulePage = () => {
         />
         <TabsTitle
             active={active}
-            items={TABS}
+            items={getTabs()}
             onChange={setActive}
         />
         <DataTable<Module>
             showHeader={false}
             filter={{
-                items: FILTERS,
+                items: getFilters(),
                 defaultValues: initialParams,
                 query: query,
             }}
@@ -82,7 +82,7 @@ export const ModulePage = () => {
                 page: query.page,
                 size: query.size,
             }}
-            columns={COLUMNS}
+            columns={getColumns()}
             rowActions={(row) => ROW_ACTIONS(profile, row)}
             data={result?.data || []}
             loading={loading}

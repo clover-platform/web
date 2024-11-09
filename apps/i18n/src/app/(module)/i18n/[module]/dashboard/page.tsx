@@ -20,7 +20,7 @@ const Page = async (props: ModulePageProps)=> {
         languages={languages}
         members={members}
         count={count}
-    />;
+    />
 }
 
 export default Page;

@@ -22,6 +22,7 @@ export const LanguageSelect = forwardRef<HTMLSelectElement, LanguageSelectProps>
 
     return <ComboSelect
         {...rest}
+        search={true}
         ref={ref}
         className={cn(
             "w-full max-h-[150px] overflow-auto",
@@ -31,7 +32,7 @@ export const LanguageSelect = forwardRef<HTMLSelectElement, LanguageSelectProps>
         options={options}
         clearText={t("清空选择")}
         filter={(value: string, search: string) => {
-            const item = options.find((o) => o.value.toLowerCase() === value);
+            const item = options.find((o) => o.value.toLowerCase() === value.toLowerCase());
             const label = item?.label?.toString();
             const v = item?.value;
             return (

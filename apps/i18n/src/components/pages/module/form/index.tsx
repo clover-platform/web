@@ -1,6 +1,6 @@
 import {Form, FormItem, Input, Textarea} from "@easykit/design";
 import {FC, PropsWithChildren} from "react";
-import { SCHEMA } from "@/config/pages/module/form";
+import {getSchema} from "@/config/pages/module/form";
 import { LanguageSelect } from "@/components/common/select/language";
 import { MultiLanguageSelect } from "@/components/common/select/multi-language";
 import { t } from '@easykit/common/utils/locale';
@@ -16,7 +16,7 @@ const ModuleForm:FC<ModuleFormProps> = (props) => {
     } = props;
 
     return <Form
-        schema={SCHEMA}
+        schema={getSchema()}
         onSubmit={props.onSubmit}
         defaultValues={defaultValues}
     >

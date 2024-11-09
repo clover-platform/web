@@ -6,7 +6,7 @@ import {Module} from "@/types/pages/module";
 import {Account} from "@clover/public/types/account";
 import { t } from '@easykit/common/utils/locale';
 
-export const COLUMNS: DataTableColumn<Module>[] = [
+export const getColumns = (): DataTableColumn<Module>[] => [
     {
         accessorKey: "name",
         header: t("名称"),
@@ -58,7 +58,7 @@ export const COLUMNS: DataTableColumn<Module>[] = [
     },
 ]
 
-export const FILTERS: FilterItemProps[] = [
+export const getFilters = (): FilterItemProps[] => [
     {
         field: 'keyword',
         render: () => <Input placeholder={t("请输入关键词")}/>,
