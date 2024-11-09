@@ -12,7 +12,7 @@ export const MenuBranchSheet = () => {
     return <div className={"space-y-2"}>
         <div className={"text-xl font-bold"}>{t("分支")}</div>
         <Command className={"h-auto"}>
-            <CommandInput className={"h-8"} placeholder=t("请输入关键词") />
+            <CommandInput className={"h-8"} placeholder={t("请输入关键词")} />
             <SheetClose>
                 <CommandList className={"p-0 mt-2 text-left"}>
                     <CommandItem key={'all'} onSelect={() => {

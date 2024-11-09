@@ -2,7 +2,7 @@
 
 import "@clover/public/plugin/rest.client";
 import "@clover/public/plugin/locales";
-import { RecoilRoot } from 'recoil';
+import {MutableSnapshot, RecoilRoot} from 'recoil';
 import {FC, PropsWithChildren, useEffect} from "react";
 import { ConfigProvider } from "@easykit/design";
 import locales from "@clover/public/config/locale";
@@ -20,6 +20,7 @@ export type RootLayoutProps = PropsWithChildren<{
     projects: any[];
     sideOpen: boolean;
     locale: string;
+    onInitState?: (snapshot: MutableSnapshot) => void;
 }>;
 
 export const RootLayout: FC<RootLayoutProps> = (props) => {
@@ -31,6 +32,7 @@ export const RootLayout: FC<RootLayoutProps> = (props) => {
         projects,
         sideOpen,
         locale,
+        onInitState,
     } = props;
 
     return <RecoilRoot initializeState={(snapshot) => {
@@ -48,6 +50,7 @@ export const RootLayout: FC<RootLayoutProps> = (props) => {
         snapshot.set(accessState, accountInfo?.authorities || []);
         snapshot.set(sidebarOpenState, sideOpen);
         snapshot.set(localeState, locale);
+        onInitState?.(snapshot);
         i18next.changeLanguage(locale).then();
     }}>
         <ConfigProvider locale={locales[locale]}>

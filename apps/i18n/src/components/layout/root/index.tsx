@@ -7,9 +7,19 @@ import {
 import {FC} from "react";
 import "@/plugin/rest.client";
 import "@/plugin/locales";
+import {Language} from "@/types/pages/public";
+import {languagesState} from "@/state/public";
 
-export type RootLayoutProps = PublicRootLayoutProps;
+export type RootLayoutProps = PublicRootLayoutProps & {
+    languages: Language[];
+};
 
 export const RootLayout: FC<RootLayoutProps> = (props) => {
-    return <PublicRootLayout {...props}/>
+    const { languages } = props;
+    return <PublicRootLayout
+        {...props}
+        onInitState={(snapshot) => {
+            snapshot.set(languagesState, languages);
+        }}
+    />
 }

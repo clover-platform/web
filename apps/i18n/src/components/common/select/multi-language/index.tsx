@@ -1,10 +1,10 @@
 import { FC, forwardRef, HTMLAttributes, useState } from "react";
-import { Checkbox, CheckboxProps, Input, ScrollArea, Spin } from "@easykit/design";
+import { Checkbox, CheckboxProps, Input, ScrollArea } from "@easykit/design";
 import classNames from "classnames";
 import { Action } from "@clover/public/components/common/action";
 import { IconDelete } from "@arco-iconbox/react-clover";
 import { useRecoilValue } from "recoil";
-import { languagesLoadingState, languagesState } from "@/state/public";
+import { languagesState } from "@/state/public";
 import { t } from '@easykit/common/utils/locale';
 
 export type MultiLanguageSelectProps = {
@@ -19,7 +19,7 @@ export type OptionProps = {
     value: string;
 }
 
-type LangItemProps = {} & OptionProps & CheckboxProps;
+type LangItemProps = OptionProps & Pick<CheckboxProps, any>;
 
 const LangItem: FC<LangItemProps> = (props) => {
     const [idPrefix] = useState(Date.now());
@@ -58,7 +58,6 @@ export const MultiLanguageSelect = forwardRef<HTMLDivElement, MultiLanguageSelec
     const [selected, setSelected] = useState<string[]>(props.value || []);
     const [keyword, setKeyword] = useState<string>("");
     const languages = useRecoilValue(languagesState);
-    const loading = useRecoilValue(languagesLoadingState);
 
     const options = languages.map((lang) => {
         return {
@@ -93,7 +92,7 @@ export const MultiLanguageSelect = forwardRef<HTMLDivElement, MultiLanguageSelec
                                         key={option.value}
                                         {...option}
                                         checked={selected.includes(option.value)}
-                                        onCheckedChange={(checked) => {
+                                        onCheckedChange={(checked: boolean) => {
                                             const newSelected = checked ? [...selected, option.value] : selected.filter((v) => v !== option.value);
                                             setSelected(newSelected);
                                             props.onChange?.(newSelected);
@@ -142,12 +141,5 @@ export const MultiLanguageSelect = forwardRef<HTMLDivElement, MultiLanguageSelec
                 </div>
             </div>
         </div>
-        {
-            loading ? <div
-                className={"absolute top-0 left-0 bottom-0 right-0 z-10 bg-white/30 flex justify-center items-center"}
-            >
-                <Spin />
-            </div> : null
-        }
     </div>
 })

@@ -1,6 +1,5 @@
 'use client';
 
-import {useLayoutState} from "@clover/public/components/layout/hooks/main";
 import {InvitePageLoading} from "@/components/pages/invite/loading";
 import {InvitePageBody} from "@/components/pages/invite/page";
 import {useEffect, useState} from "react";
@@ -9,19 +8,21 @@ import {InviteDetail} from "@/types/pages/module";
 import {InvitePageExpired} from "@/components/pages/invite/expired";
 import {InvitePageJoined} from "@/components/pages/invite/joined";
 import {detail as detailRest} from "@/rest/member.invite";
+import {useRecoilValue} from "recoil";
+import {isLoginState} from "@clover/public/state/account";
 
 export const InvitePage = () => {
     const search = useSearchParams();
     const token = search.get('t');
-    const { loading, isLogin } = useLayoutState();
-    const [loadingDetail, setLoadingDetail] = useState(true);
+    const [loading, setLoading] = useState(true);
     const [detail, setDetail] = useState<InviteDetail|undefined>();
     const [expired, setExpired] = useState<boolean>(false);
     const [joined, setJoined] = useState<boolean>(false);
     const [moduleId, setModuleId] = useState<number>();
+    const isLogin = useRecoilValue(isLoginState);
 
     const load = async () => {
-        setLoadingDetail(true);
+        setLoading(true);
         const { success, data, code } = await detailRest(token!);
         if(success) {
             setDetail(data as InviteDetail);
@@ -35,14 +36,14 @@ export const InvitePage = () => {
                 setExpired(true);
             }
         }
-        setLoadingDetail(false);
+        setLoading(false);
     }
 
     useEffect(() => {
         load().then();
     }, [])
 
-    return (loading || loadingDetail) ?
+    return loading ?
         <InvitePageLoading /> :
         <>
             { expired && <InvitePageExpired /> }

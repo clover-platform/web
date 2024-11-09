@@ -2,6 +2,8 @@ import {keywords, title} from "@clover/public/utils/seo";
 import { DashboardPage } from "@/components/pages/dashboard";
 import { t } from '@easykit/common/utils/locale';
 import {Metadata} from "next";
+import {ModulePageProps} from "@/types/pages/module";
+import {dashboard} from "@/rest/module";
 
 export async function generateMetadata(): Promise<Metadata> {
     return {
@@ -10,6 +12,15 @@ export async function generateMetadata(): Promise<Metadata> {
     }
 }
 
-export default function Page() {
-    return <DashboardPage />;
+const Page = async (props: ModulePageProps)=> {
+    const { success, data} = await dashboard(props.params.module);
+    const { detail, languages, members, count } = (data || {});
+    return <DashboardPage
+        detail={detail}
+        languages={languages}
+        members={members}
+        count={count}
+    />;
 }
+
+export default Page;

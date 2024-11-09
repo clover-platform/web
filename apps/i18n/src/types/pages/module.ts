@@ -1,5 +1,11 @@
 import { User } from "@clover/public/types/account";
 
+export type ModulePageProps = {
+    params: {
+        module: string;
+    }
+}
+
 export type Module = {
     id: number;
     name: string;

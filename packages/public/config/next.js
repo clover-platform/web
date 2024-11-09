@@ -13,6 +13,6 @@ export default {
         removeConsole: !isDev,
     },
     typescript: {
-        ignoreBuildErrors: true,
+        // ignoreBuildErrors: true,
     },
 }

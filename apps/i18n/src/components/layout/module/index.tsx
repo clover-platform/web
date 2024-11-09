@@ -2,7 +2,6 @@ import { MainLayout as PublicMainLayout, PathProps } from "@clover/public/compon
 import { FC, PropsWithChildren, useMemo } from "react";
 import { getNavMenus } from "@/config/layout/module";
 import {useParams} from "next/navigation";
-import { useLanguagesInit } from "@/hooks/use.languages.init";
 import {useLayoutProps} from "@clover/public/components/layout/hooks/use.layout.props";
 import { t } from '@easykit/common/utils/locale';
 
@@ -14,7 +13,6 @@ export type ModuleLayoutProps = {
 
 export const ModuleLayout: FC<ModuleLayoutProps> = (origin) => {
     const props = useLayoutProps<ModuleLayoutProps>(origin);
-    useLanguagesInit();
     const { module } = useParams();
 
     const menus = useMemo(() => {

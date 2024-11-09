@@ -5,8 +5,3 @@ export const languagesState = atom<Language[]>({
     key: 'public/languages',
     default: []
 })
-
-export const languagesLoadingState = atom<boolean>({
-    key: 'public/languages/loading',
-    default: true,
-})

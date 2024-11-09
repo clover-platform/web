@@ -1,8 +1,7 @@
-import { forwardRef, useEffect, useState } from "react";
-import {cn, ComboSelect, ComboSelectOptionProps, ComboSelectProps} from "@easykit/design";
-import { languages } from "@/rest/common";
+import { forwardRef } from "react";
+import {cn, ComboSelect, ComboSelectProps} from "@easykit/design";
 import { useRecoilValue } from "recoil";
-import { languagesLoadingState, languagesState } from "@/state/public";
+import { languagesState } from "@/state/public";
 import { t } from '@easykit/common/utils/locale';
 
 export type LanguageSelectProps = {
@@ -12,7 +11,6 @@ export type LanguageSelectProps = {
 export const LanguageSelect = forwardRef<HTMLSelectElement, LanguageSelectProps>((props, ref) => {
     const {className, ...rest} = props;
     const languages = useRecoilValue(languagesState);
-    const loading = useRecoilValue(languagesLoadingState);
 
     const options = languages.map((lang) => {
         return {
@@ -31,7 +29,6 @@ export const LanguageSelect = forwardRef<HTMLSelectElement, LanguageSelectProps>
         )}
         searchPlaceholder={t("关键词")}
         options={options}
-        loading={loading}
         clearText={t("清空选择")}
         filter={(value: string, search: string) => {
             const item = options.find((o) => o.value.toLowerCase() === value);

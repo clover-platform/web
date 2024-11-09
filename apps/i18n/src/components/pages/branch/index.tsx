@@ -6,13 +6,13 @@ import { COLUMNS, FILTERS, ROW_ACTIONS } from "@/config/pages/module/branch/tabl
 import { useTableLoader } from "@easykit/common/hooks";
 import { deleteBranch, list } from "@/rest/branch";
 import { useEffect, useState } from "react";
-import { useSearchParams } from "next/navigation";
+import { useParams } from "next/navigation";
 import { NewBranchButton } from "@/components/pages/branch/new/button";
 import { Branch } from "@/types/pages/branch";
 import { RenameBranchModal } from "@/components/pages/branch/rename/modal";
-import {MergeBranchModal} from "@/components/pages/branch/merge/modal";
-import {useLayoutConfig} from "@clover/public/components/layout/hooks/use.layout.config";
-import {ModuleLayoutProps} from "@/components/layout/module";
+import { MergeBranchModal } from "@/components/pages/branch/merge/modal";
+import { useLayoutConfig } from "@clover/public/components/layout/hooks/use.layout.config";
+import { ModuleLayoutProps } from "@/components/layout/module";
 import { t } from '@easykit/common/utils/locale';
 
 const initialParams = {
@@ -29,12 +29,11 @@ export const ModuleBranchPage = () => {
             }
         ],
     })
-    const search = useSearchParams();
-    const id = search.get('id');
+    const { module } = useParams();
     const [loading, result, query, load] = useTableLoader({
         initialParams: {
             ...initialParams,
-            moduleId: id,
+            module: module,
         },
         action: list,
     });

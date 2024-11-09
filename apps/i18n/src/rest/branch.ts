@@ -4,12 +4,12 @@ import {Branch} from "@/types/pages/module";
 import {BranchMergeOverview} from "@/types/pages/branch";
 
 export type ListBranchQuery = {
-    moduleId: number;
+    module: string;
     keyword?: string;
 }
 
 export const list = async (params: ListBranchQuery): Promise<RestResult<any>> =>
-    get(`@i18n/branch/list`, params);
+    get(`@i18n/${params.module}/branch/list`, params);
 
 export const all = async (id: number): Promise<RestResult<Branch[]>> =>
     get(`@i18n/branch/all`, {

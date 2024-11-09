@@ -2,7 +2,7 @@ import {Action} from "@clover/public/components/common/action";
 import {IconSetting} from "@arco-iconbox/react-clover";
 import {FormatConfigModal} from "@/components/pages/bundle/form/export-format/config/modal";
 import {FC, useState} from "react";
-import {ExportFormatConfig} from "@/components/pages/bundle/form/export-format";
+import {ExportFormatConfig} from "@/config/pages/bundle/config";
 
 export type FormatConfigButtonProps = {
     config: ExportFormatConfig;

@@ -1,4 +1,6 @@
 import { RestResult } from "@easykit/common/types/rest";
-import { get } from "@easykit/common/utils/rest";
+import {AbortPromise, get} from "@easykit/common/utils/rest";
+import {Language} from "@/types/pages/public";
 
-export const languages = async (): Promise<RestResult<any>> => get(`@i18n/language/list`);
+export const languages = (): AbortPromise<RestResult<Language[]>> =>
+    get(`@i18n/language/list`);

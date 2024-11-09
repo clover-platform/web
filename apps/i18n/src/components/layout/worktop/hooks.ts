@@ -1,6 +1,6 @@
 import {useEffect, useMemo, useRef, useState} from "react";
 import {languages} from "@/rest/module";
-import { useRouter, useSearchParams } from "next/navigation";
+import {useParams, useRouter, useSearchParams} from "next/navigation";
 import {all} from "@/rest/branch";
 import {useRecoilState, useRecoilValue, useSetRecoilState} from "recoil";
 import {
@@ -20,6 +20,7 @@ export const useWorktopState = () => {
     const branch = search.get("branch") || '';
     const target = search.get("target") || '';
     const [loading, setLoading] = useState(true);
+    const { module } = useParams();
     const setLanguages = useSetRecoilState(languagesState);
     const setBranches = useSetRecoilState(branchesState);
     const setCurrentLanguage = useSetRecoilState(currentLanguageState);
@@ -27,7 +28,7 @@ export const useWorktopState = () => {
 
     const load = async () => {
         setLoading(true);
-        const languagesResult = await languages(Number(id));
+        const languagesResult = await languages(module as string);
         const branchesResult = await all(Number(id));
         setLoading(false);
         if(languagesResult.success) setLanguages(languagesResult.data || []);

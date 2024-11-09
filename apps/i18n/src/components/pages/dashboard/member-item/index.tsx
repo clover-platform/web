@@ -5,12 +5,12 @@ import { t } from '@easykit/common/utils/locale';
 
 export type MemberItemProps = {} & Member;
 
-const TYPE_MAP: Record<number, string> = {
-    2: t("所有者"),
-    1: t("管理员"),
-}
-
 export const MemberItem: FC<MemberItemProps> = (props) => {
+    const TYPE_MAP: Record<number, string> = {
+        2: t("所有者"),
+        1: t("管理员"),
+    }
+
     const { user, roles } = props;
     return <div className={"flex justify-start items-center"}>
         <Avatar

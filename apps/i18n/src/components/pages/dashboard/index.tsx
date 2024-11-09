@@ -17,9 +17,8 @@ import Link from "next/link";
 import { i18n } from "@easykit/common/utils/locale";
 import { DetailInfoItem } from "@/components/pages/dashboard/detail/info-item";
 import { DetailTitle } from "@/components/pages/dashboard/detail/title";
-import { dashboard } from "@/rest/module";
-import {useEffect, useState} from "react";
-import {useRouter, useSearchParams} from "next/navigation";
+import {FC} from "react";
+import {useParams, useRouter} from "next/navigation";
 import {LanguageItem} from "@/components/pages/dashboard/language-item";
 import { MemberItem } from "@/components/pages/dashboard/member-item";
 import {Member, ModuleCount, ModuleDetail} from "@/types/pages/module";
@@ -30,7 +29,14 @@ import {useLayoutConfig} from "@clover/public/components/layout/hooks/use.layout
 import {ModuleLayoutProps} from "@/components/layout/module";
 import { t } from '@easykit/common/utils/locale';
 
-export const DashboardPage = () => {
+export type DashboardPageProps = {
+    detail: ModuleDetail;
+    languages: LanguageWithCount[];
+    members: Member[];
+    count: ModuleCount;
+}
+
+export const DashboardPage: FC<DashboardPageProps> = (props) => {
     useLayoutConfig<ModuleLayoutProps>({
         active: "dashboard",
         path: [
@@ -40,39 +46,17 @@ export const DashboardPage = () => {
             }
         ],
     })
-    const search = useSearchParams();
-    const id = search.get("id");
+    const { detail, members, languages, count } = props;
+    const { module } = useParams();
     const router = useRouter();
-    const [loading, setLoading] = useState(false);
-    const [languages, setLanguages] = useState<LanguageWithCount[]>([]);
-    const [detail, setDetail] = useState<ModuleDetail>({});
-    const [members, setMembers] = useState<Member[]>([]);
-    const [count, setCount] = useState<ModuleCount>();
     const all = useRecoilValue(languagesState);
 
-    const load = async () => {
-        setLoading(true);
-        const { success, data} = await dashboard(Number(id));
-        if(success) {
-            const { detail, languages, members, count } = data;
-            setDetail(detail);
-            setLanguages(languages);
-            setMembers(members);
-            setCount(count);
-        }
-        setLoading(false);
-    }
-
-    useEffect(() => {
-        load().then();
-    }, []);
-
     const onRowClick = (item: Language) => {
-        router.push(`/{#LANG#}/i18n/worktop/?id=${id}&target=${item.code}`);
+        router.push(`/i18n/${module}/worktop?target=${item.code}`);
     }
 
     const actions = <Space>
-        <Link href={"/{#LANG#}/i18n/worktop/?id=" + id}>
+        <Link href={`/i18n/${module}/worktop`}>
             <Button>{t("工作台")}</Button>
         </Link>
     </Space>;
@@ -83,7 +67,7 @@ export const DashboardPage = () => {
             actions={actions}
             border={false}
         />
-        <Loading loading={loading}>
+        <Loading>
             <div className={"flex justify-start items-start"}>
                 <div className={"flex-1 mr-4 w-0 flex-shrink-0"}>
                     <ScrollArea className={"w-full pb-2"}>
@@ -111,7 +95,7 @@ export const DashboardPage = () => {
                 </div>
                 <div className={"w-96 bg-muted p-4 rounded-md"}>
                     <DetailTitle title={t("详情")}>
-                        {i18n(t("编号：%id"), {id})}
+                        {i18n(t("标识：%id"), {id: module})}
                     </DetailTitle>
                     <div className={"space-y-3"}>
                         <DetailInfoItem label={t("源语言")}>

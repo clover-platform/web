@@ -1,4 +1,5 @@
 'use client';
 import { LoginLayout } from "@clover/public/components/layout/login";
-const Layout = (props: any) => <LoginLayout {...props} showLogo={false}/>
+import {FC, PropsWithChildren} from "react";
+const Layout: FC<PropsWithChildren> = (props) => <LoginLayout {...props} showLogo={false}/>
 export default Layout;
