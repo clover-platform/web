@@ -46,14 +46,12 @@ export const useWorktopState = () => {
 
 export const useQuerySync = () => {
     const router = useRouter();
-    const search = useSearchParams();
-    const id = search.get("id");
     const currentLanguage = useRecoilValue(currentLanguageState);
     const currentBranch = useRecoilValue(currentBranchState);
-    const query = [`id=${id}`, `target=${currentLanguage}`, `branch=${currentBranch}`].join('&');
+    const query = [`target=${currentLanguage}`, `branch=${currentBranch}`].join('&');
     useEffect(() => {
         router.replace(`?${query}`);
-    }, [id, currentLanguage, currentBranch]);
+    }, [currentLanguage, currentBranch]);
 }
 
 export const defaultEntriesParams = {
