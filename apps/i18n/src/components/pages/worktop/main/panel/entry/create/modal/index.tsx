@@ -1,6 +1,6 @@
 import { Button, Checkbox, Dialog, DialogProps, Space, useMessage } from "@easykit/design";
 import {FC, useEffect, useState} from "react";
-import { useSearchParams } from "next/navigation";
+import {useParams, useSearchParams} from "next/navigation";
 import { EntryForm } from "@/components/pages/worktop/main/panel/entry/form";
 import { create, CreateEntryData } from "@/rest/entry";
 import { t } from '@easykit/common/utils/locale';
@@ -10,8 +10,7 @@ export type CreateEntryModalProps = {
 } & DialogProps;
 
 export const CreateEntryModal: FC<CreateEntryModalProps> = (props) => {
-    const search = useSearchParams();
-    const id = search.get('id');
+    const { module } = useParams();
     const [loading, setLoading] = useState(false);
     const [close, setClose] = useState(true);
     const msg = useMessage();
@@ -19,7 +18,7 @@ export const CreateEntryModal: FC<CreateEntryModalProps> = (props) => {
 
     const onSubmit = async (data: CreateEntryData) => {
         setLoading(true);
-        data.moduleId = Number(id);
+        data.module = module as string;
         const { success, message } = await create(data);
         setLoading(false);
         if(success) {

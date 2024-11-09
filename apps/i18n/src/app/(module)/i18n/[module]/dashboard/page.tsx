@@ -13,7 +13,7 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 const Page = async (props: ModulePageProps)=> {
-    const { success, data} = await dashboard(props.params.module);
+    const { data } = await dashboard(props.params.module);
     const { detail, languages, members, count } = (data || {});
     return <DashboardPage
         detail={detail}

@@ -2,7 +2,6 @@ import { Progress, Separator } from "@easykit/design";
 import { Action } from "@clover/public/components/common/action";
 import {
     IconBack,
-    IconBranch,
     IconLeftSidebar,
     IconMenu,
     IconRightSidebar,
@@ -10,15 +9,14 @@ import {
 } from "@arco-iconbox/react-clover";
 import { countState, leftSideOpenState, rightSideOpenState } from "@/state/worktop";
 import { useRecoilState, useRecoilValue } from "recoil";
-import { useRouter, useSearchParams } from "next/navigation";
+import {useParams, useRouter} from "next/navigation";
 import { MenuSheet } from "@/components/pages/worktop/control-bar/menu-sheet";
 import { useState } from "react";
 import { LanguageAction } from "@/components/pages/worktop/control-bar/action/language";
 import { BranchAction } from "@/components/pages/worktop/control-bar/action/branch";
 
 export const ControlBar = () => {
-    const search = useSearchParams();
-    const id = search.get("id");
+    const { module } = useParams();
     const router = useRouter();
     const [leftSideOpen, setLeftSideOpen] = useRecoilState(leftSideOpenState);
     const [rightSideOpen, setRightSideOpen] = useRecoilState(rightSideOpenState);
@@ -51,7 +49,7 @@ export const ControlBar = () => {
         </div>
         <div className={"flex justify-center items-center px-2 py-1 border-b shadow-sm"}>
             <div className={"flex-1 flex justify-start items-center space-x-1"}>
-                <Action className={"!px-1.5 h-8"} onClick={() => router.push("/{#LANG#}/i18n/dashboard/?id=" + id)}>
+                <Action className={"!px-1.5 h-8"} onClick={() => router.push(`/i18n/${module}/dashboard`)}>
                     <IconBack className={"text-lg"} />
                 </Action>
                 <Action className={"!px-1.5 h-8"} onClick={showMenu}>

@@ -32,7 +32,7 @@ export type EntryResultPage = {
 }
 
 export type CountEntryQuery = {
-    moduleId: number;
+    module: string;
     language: string;
     branch?: string;
 }

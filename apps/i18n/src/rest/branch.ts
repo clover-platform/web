@@ -11,10 +11,8 @@ export type ListBranchQuery = {
 export const list = async (params: ListBranchQuery): Promise<RestResult<any>> =>
     get(`@i18n/${params.module}/branch/list`, params);
 
-export const all = async (id: number): Promise<RestResult<Branch[]>> =>
-    get(`@i18n/branch/all`, {
-        moduleId: id,
-    });
+export const all = async (module: string): Promise<RestResult<Branch[]>> =>
+    get(`@i18n/${module}/branch/all`);
 
 export type CreateBranchData = {
     moduleId: number;

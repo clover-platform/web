@@ -9,6 +9,7 @@ import { FC, ReactNode } from "react";
 import copy from 'copy-to-clipboard';
 import { remove as removeRest } from "@/rest/entry";
 import { t } from '@easykit/common/utils/locale';
+import {useParams} from "next/navigation";
 
 type IconMenuItemProps = {
     icon?: ReactNode;
@@ -55,6 +56,7 @@ export const Detail = () => {
     const branch = branches.find(b => b.id === entry?.branchId);
     const msg = useMessage();
     const alert = useAlert();
+    const { module } = useParams();
 
     const prev = () => {
         if(current === entries.length - 1) {
@@ -74,7 +76,10 @@ export const Detail = () => {
                 title: t("撤销批准"),
                 description: t("是否撤销此翻译的有效结果"),
                 onOk: async () => {
-                    const { success, message } = await removeRest(entry.id)
+                    const { success, message } = await removeRest({
+                        module: module as string,
+                        id: entry.id
+                    })
                     if(success) {
                         prev();
                         await remove(entry.id);

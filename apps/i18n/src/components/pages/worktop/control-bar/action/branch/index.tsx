@@ -14,6 +14,6 @@ export const BranchAction: FC<BranchActionProps> = (props) => {
     const current = useRecoilValue(currentBranchState);
     const branch = branches.find(item => item.name === current);
     return <Action className={"!px-1.5 h-8"} onClick={props.onClick}>
-        <IconBranch className={"mr-1"} /> { branch ? branch.name : t("请选择分支") }
+        <IconBranch className={"mr-1"} /> { branch ? branch.name : t("所有分支") }
     </Action>
 }

@@ -1,4 +1,4 @@
-import { Separator, Sheet, SheetContent } from "@easykit/design";
+import {Separator, Sheet, SheetContent, SheetDescription, SheetTitle} from "@easykit/design";
 import { IconBranch, IconHelp, IconProject, IconTranslation } from "@arco-iconbox/react-clover";
 import { Action } from "@clover/public/components/common/action";
 import { FC, ReactNode, useEffect, useState } from "react";
@@ -37,6 +37,8 @@ export const MenuSheet: FC<MenuSheetProps> = (props) => {
 
     return <Sheet {...props}>
         <SheetContent side={"left"} closable={false} className={"w-96 p-0 flex gap-0"}>
+            <SheetTitle />
+            <SheetDescription />
             <button />
             <div className={"w-32 border-r p-2 space-y-1"}>
                 <MenuItem

@@ -4,6 +4,7 @@ import { edit, EditEntryData } from "@/rest/entry";
 import { EntryEditForm } from "@/components/pages/worktop/main/panel/entry/form/edit";
 import { Entry } from "@/types/pages/entry";
 import { t } from '@easykit/common/utils/locale';
+import {useParams} from "next/navigation";
 
 export type CreateEntryModalProps = {
     entry: Entry;
@@ -15,10 +16,12 @@ export const EditEntryModal: FC<CreateEntryModalProps> = (props) => {
     const [loading, setLoading] = useState(false);
     const msg = useMessage();
     const [formKey, setFormKey] = useState(Date.now());
+    const { module } = useParams();
 
     const onSubmit = async (data: EditEntryData) => {
         setLoading(true);
         data.id = entry.id;
+        data.module = module as string;
         const { success, message } = await edit(data);
         setLoading(false);
         if(success) {

@@ -7,6 +7,7 @@ import {useMessage} from "@easykit/design";
 import {useEntriesUpdater} from "@/components/layout/worktop/hooks";
 import {save} from "@/rest/entry.result";
 import { t } from '@easykit/common/utils/locale';
+import {useParams} from "next/navigation";
 
 export const useResultSubmit = (): [(content: string) => Promise<any>, boolean] => {
     const entries = useRecoilValue(entriesState);
@@ -16,6 +17,7 @@ export const useResultSubmit = (): [(content: string) => Promise<any>, boolean] 
     const [loading, setLoading] = useState(false);
     const msg = useMessage();
     const {update} = useEntriesUpdater();
+    const { module } = useParams();
 
     const next = () => {
         if(current < entries.length - 1) {
@@ -29,7 +31,7 @@ export const useResultSubmit = (): [(content: string) => Promise<any>, boolean] 
         }
         setLoading(true);
         const { success, message } = await save({
-            moduleId: entry.moduleId,
+            module: module as string,
             entryId: entry.id,
             content,
             language,

@@ -10,6 +10,7 @@ import {Button, Empty, ScrollArea} from "@easykit/design";
 import { CommentListItemLoading } from "@/components/pages/worktop/main/panel/plugin/comment/list/item/loading";
 import {handler} from "tailwindcss-animate";
 import { t } from '@easykit/common/utils/locale';
+import {useParams} from "next/navigation";
 
 const CommentListLoading = () => {
     return [0,1,2].map((index) => <CommentListItemLoading key={index} />);
@@ -24,6 +25,7 @@ export const CommentList = () => {
     const [list, setList] = useState<EntryComment[]>([]);
     const [total, setTotal] = useState(0);
     const pageRef = useRef(1);
+    const { module } = useParams();
 
     const load = useCallback(async (options?: {append?: boolean}) => {
         const { append= false } = options || {};
@@ -34,6 +36,7 @@ export const CommentList = () => {
             language,
             page: pageRef.current,
             size: 50,
+            module: module as string
         });
         setLoading(false);
         success && setList([
@@ -41,7 +44,7 @@ export const CommentList = () => {
             ...data?.data || []
         ]);
         success && setTotal(data?.total || 0);
-    }, [language, entry, list])
+    }, [language, entry, list, module])
 
     useEffect(() => {
         pageRef.current = 1;

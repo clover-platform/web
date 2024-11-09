@@ -12,6 +12,7 @@ import { useEntriesUpdater } from "@/components/layout/worktop/hooks";
 import { RestResult } from "@easykit/common/types/rest";
 import { TimeAgo } from "@easykit/common/components/time-ago";
 import { t } from '@easykit/common/utils/locale';
+import {useParams} from "next/navigation";
 
 export type ResultItemProps = {
     item: EntryResult;
@@ -23,6 +24,7 @@ export const ResultItem: FC<ResultItemProps> = (props) => {
     const alert = useAlert();
     const msg = useMessage();
     const { update } = useEntriesUpdater();
+    const { module } = useParams();
 
     const resultWrapper = async (result: RestResult<any>) => {
         const { success, message } = result;
@@ -41,7 +43,11 @@ export const ResultItem: FC<ResultItemProps> = (props) => {
             title: t("删除"),
             description: t("是否删除此翻译"),
             onOk: async () => {
-                return resultWrapper(await deleteResult(item.id));
+                return resultWrapper(await deleteResult({
+                    module: module as string,
+                    id: item.id,
+                    entryId: item.entryId
+                }));
             }
         })
     }
@@ -51,7 +57,11 @@ export const ResultItem: FC<ResultItemProps> = (props) => {
             title: t("批准"),
             description: t("是否批准改翻译作为有效结果"),
             onOk: async () => {
-                return resultWrapper(await approveRest(item.id));
+                return resultWrapper(await approveRest({
+                    module: module as string,
+                    id: item.id,
+                    entryId: item.entryId
+                }));
             }
         })
     }
@@ -61,7 +71,11 @@ export const ResultItem: FC<ResultItemProps> = (props) => {
             title: t("撤销批准"),
             description: t("是否撤销此翻译的有效结果"),
             onOk: async () => {
-                return resultWrapper(await removeApprovalRest({ id: item.id }));
+                return resultWrapper(await removeApprovalRest({
+                    module: module as string,
+                    id: item.id,
+                    entryId: item.entryId
+                }));
             }
         })
     }

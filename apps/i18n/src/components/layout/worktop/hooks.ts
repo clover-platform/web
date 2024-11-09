@@ -16,7 +16,6 @@ import { count, detail, list } from "@/rest/entry";
 export const useWorktopState = () => {
     const search = useSearchParams();
     const setCurrentEntry = useSetRecoilState(currentEntryState);
-    const id = search.get("id");
     const branch = search.get("branch") || '';
     const target = search.get("target") || '';
     const [loading, setLoading] = useState(true);
@@ -29,7 +28,7 @@ export const useWorktopState = () => {
     const load = async () => {
         setLoading(true);
         const languagesResult = await languages(module as string);
-        const branchesResult = await all(Number(id));
+        const branchesResult = await all(module as string);
         setLoading(false);
         if(languagesResult.success) setLanguages(languagesResult.data || []);
         if(branchesResult.success) setBranches(branchesResult.data || []);
@@ -62,8 +61,7 @@ export const defaultEntriesParams = {
 };
 
 export const useEntriesLoader = () => {
-    const search = useSearchParams();
-    const id = search.get("id");
+    const { module } = useParams();
     const [loading, setLoading] = useRecoilState(entriesLoadingState);
     const [entries, setEntries] = useRecoilState(entriesState);
     const paramsRef = useRef(defaultEntriesParams);
@@ -81,7 +79,7 @@ export const useEntriesLoader = () => {
             ...paramsRef.current,
             ...(_params || {}),
             branchId: branchRef.current,
-            moduleId: Number(id),
+            module: module as string,
             language: currentLanguage
         }
         paramsRef.current = params;
@@ -95,7 +93,7 @@ export const useEntriesLoader = () => {
 
     const loadCount = async () => {
         const countResult = await count({
-            moduleId: Number(id),
+            module: module as string,
             language: currentLanguage,
             branch: currentBranch
         });
@@ -119,8 +117,7 @@ export const useEntriesLoader = () => {
 }
 
 export const useEntriesUpdater = () => {
-    const search = useSearchParams();
-    const id = search.get("id");
+    const { module } = useParams();
     const [entries, setEntries] = useRecoilState(entriesState);
     const currentLanguage = useRecoilValue(currentLanguageState);
     const currentBranch = useRecoilValue(currentBranchState);
@@ -129,7 +126,8 @@ export const useEntriesUpdater = () => {
     const update = async (id: number) => {
         const result = await detail({
             id,
-            language: currentLanguage
+            language: currentLanguage,
+            module: module as string
         });
         if(result.success) {
             setEntries(entries.map(entry => entry.id === id ? result.data! : entry));
@@ -144,7 +142,7 @@ export const useEntriesUpdater = () => {
 
     const loadCount = async () => {
         const countResult = await count({
-            moduleId: Number(id),
+            module: module as string,
             language: currentLanguage,
             branch: currentBranch
         });

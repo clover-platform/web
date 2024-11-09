@@ -10,6 +10,7 @@ import bus from "@easykit/common/events";
 import {ENTRY_COMMENT_RELOAD} from "@/events/worktop";
 import { IconDelete } from "@arco-iconbox/react-clover";
 import { t } from '@easykit/common/utils/locale';
+import {useParams} from "next/navigation";
 
 export type CommentListItemProps = {
     item: EntryComment;
@@ -20,13 +21,18 @@ export const CommentListItem: FC<CommentListItemProps> = (props) => {
     const profile = useProfile();
     const msg = useMessage();
     const alert = useAlert();
+    const { module } = useParams();
 
     const del = () => {
         alert.confirm({
             title: t("撤销批准"),
             description: t("是否撤销此翻译的有效结果"),
             onOk: async () => {
-                const { success, message } = await deleteComment(item.id)
+                const { success, message } = await deleteComment({
+                    module: module as string,
+                    entryId: item.entryId,
+                    id: item.id,
+                })
                 if(success) {
                     bus.emit(ENTRY_COMMENT_RELOAD);
                 }else{

@@ -11,6 +11,7 @@ import uniq from "lodash/uniq";
 import { EntryResult } from "@/types/pages/entry";
 import { ResultListLoading } from "@/components/pages/worktop/main/panel/result/list/loading";
 import { t } from '@easykit/common/utils/locale';
+import {useParams} from "next/navigation";
 
 export const ResultList = () => {
     const language = useRecoilValue(currentLanguageState);
@@ -23,12 +24,14 @@ export const ResultList = () => {
     const [total, setTotal] = useState(0);
     const [list, setList] = useState<EntryResult[]>([]);
     const [loading, setLoading] = useState(false);
+    const { module } = useParams();
 
     const load = async (options?: {append?: boolean}) => {
         const { append= false } = options || {};
         if(!append) setList([]);
         setLoading(true);
         const { success, data } = await listRest({
+            module: module as string,
             entryId: entry?.id,
             language,
             page: pageRef.current,
