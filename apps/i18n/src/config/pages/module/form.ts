@@ -22,7 +22,7 @@ export const getSchema = () => z.object({
     }
 })
 
-export const INFO_SCHEMA = z.object({
+export const getInfoSchema = () => z.object({
     name: z.string()
         .min(1, t("名称不能为空"))
         .max(255, t("最多 255 个字符")),

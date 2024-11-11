@@ -13,7 +13,7 @@ import {
     Separator,
     Textarea, useAlert, useMessage
 } from "@easykit/design";
-import {INFO_SCHEMA} from "@/config/pages/module/form";
+import {getInfoSchema} from "@/config/pages/module/form";
 import {deleteModule, detail, update} from "@/rest/module";
 import {useRouter, useSearchParams} from "next/navigation";
 import {useEffect, useMemo, useRef, useState} from "react";
@@ -106,7 +106,7 @@ export const ModuleSettingPage = () => {
             <div className={"text-lg font-medium"}>{t("基本信息")}</div>
             <Form<UpdateInfo>
                 key={formKey}
-                schema={INFO_SCHEMA}
+                schema={getInfoSchema()}
                 onSubmit={onSubmit}
                 defaultValues={info}
                 onValuesChange={(vs) => setValues(vs)}

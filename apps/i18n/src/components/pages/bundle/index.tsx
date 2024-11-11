@@ -2,7 +2,7 @@
 
 import {TitleBar} from "@clover/public/components/common/title-bar";
 import {Button, DataTable} from "@easykit/design";
-import {COLUMNS, ROW_ACTIONS} from "@/config/pages/bundle/table";
+import {getColumns, getRowActions} from "@/config/pages/bundle/table";
 import {list} from "@/rest/bundle";
 import {Bundle} from "@/types/pages/bundle";
 import {useTableLoader} from "@easykit/common/hooks";
@@ -64,8 +64,8 @@ export const BundlePage = () => {
                 page: query.page,
                 size: query.size,
             }}
-            columns={COLUMNS}
-            rowActions={ROW_ACTIONS}
+            columns={getColumns()}
+            rowActions={getRowActions()}
             data={result?.data || []}
             loading={loading}
             onRowActionClick={({id: key}, {original}) => {

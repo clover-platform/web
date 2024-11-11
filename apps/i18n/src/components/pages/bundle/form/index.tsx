@@ -1,6 +1,6 @@
 import {Checkbox, Form, FormItem, Input} from "@easykit/design";
 import {FC, PropsWithChildren} from "react";
-import { SCHEMA } from "@/config/pages/bundle/form";
+import {getSchema} from "@/config/pages/bundle/form";
 import {BranchPattern} from "@/components/pages/bundle/form/branch-pattern";
 import {ExportFormat} from "@/components/pages/bundle/form/export-format";
 import { t } from '@easykit/common/utils/locale';
@@ -16,7 +16,7 @@ export const BundleForm:FC<BundleFormProps> = (props) => {
     } = props;
 
     return <Form
-        schema={SCHEMA}
+        schema={getSchema()}
         onSubmit={props.onSubmit}
         defaultValues={defaultValues}
     >

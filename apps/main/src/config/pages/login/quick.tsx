@@ -6,7 +6,7 @@ export const ICON_PROPS = {
     fontSize: 20
 }
 
-export const SUPPORT_WAY = [
+export const getSupportWay = () => [
     {
         id: 'wechat',
         title: t("微信"),

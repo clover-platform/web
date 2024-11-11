@@ -5,14 +5,14 @@ import { Member } from "@/types/pages/member";
 import { MemberRole } from "@/components/pages/member/role";
 import { t } from '@easykit/common/utils/locale';
 
-export const FILTERS: FilterItemProps[] = [
+export const getFilters = (): FilterItemProps[] => [
     {
         field: 'keyword',
         render: () => <Input placeholder={t("请输入关键词")}/>,
     },
 ]
 
-export const COLUMNS: DataTableColumn<Member>[] = [
+export const getColumns = (): DataTableColumn<Member>[] => [
     {
         accessorKey: "user.username",
         header: t("名称"),
@@ -39,7 +39,7 @@ export const COLUMNS: DataTableColumn<Member>[] = [
 ];
 
 
-export const ROW_ACTIONS: DropdownMenuItemProps[] = [
+export const getRowActions = (): DropdownMenuItemProps[] => [
     {
         id: "detail",
         type: "item",

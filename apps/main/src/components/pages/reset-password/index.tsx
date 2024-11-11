@@ -7,7 +7,10 @@ import {passwordReset, resetEmailCheck, sendResetEmailCode} from "@/rest/auth";
 import {useRouter, useSearchParams} from "next/navigation";
 import {setToken} from "@clover/public/utils/token";
 import {encrypt} from "@clover/public/utils/crypto";
-import { EMAIL_FORM_SCHEMA, PASSWORD_FORM_SCHEMA } from "@/config/pages/reset-password/form";
+import {
+    getEmailFormSchema,
+    getPasswordFormSchema,
+} from "@/config/pages/reset-password/form";
 import { t } from '@easykit/common/utils/locale';
 
 const ResetPasswordPage = () => {
@@ -65,7 +68,7 @@ const ResetPasswordPage = () => {
             <Form
                 onValuesChange={setFormData1}
                 onSubmit={onStep1Submit}
-                schema={EMAIL_FORM_SCHEMA}
+                schema={getEmailFormSchema()}
                 style={{ display: step === 0 ? 'block' : 'none' }}
             >
                 <FormItem name={"email"} label={t("邮箱")}>
@@ -80,7 +83,7 @@ const ResetPasswordPage = () => {
                 style={{ display: step === 1 ? 'block' : 'none' }}
                 key={formKey}
                 onSubmit={onStep2Submit}
-                schema={PASSWORD_FORM_SCHEMA}
+                schema={getPasswordFormSchema()}
             >
                 <FormItem name={"password"} label={t("密码")}>
                     <Input type={"password"} placeholder={t("请输入正确的邮箱")} />

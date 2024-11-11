@@ -13,7 +13,7 @@ export type ExportFormatConfig = {
     config?: any;
 }
 
-export const SUPPORTED_FORMATS: ExportFormatConfig[] = [
+export const getSupportedFormats = (): ExportFormatConfig[] => [
     {
         id: "android",
         name: t("安卓资源文件"),

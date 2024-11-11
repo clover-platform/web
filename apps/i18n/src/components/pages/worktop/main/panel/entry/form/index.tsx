@@ -1,6 +1,6 @@
-import {Form, FormItem, Input, Textarea} from "@easykit/design";
+import {Form, FormItem, Input} from "@easykit/design";
 import {FC, PropsWithChildren} from "react";
-import { SCHEMA } from "@/config/pages/entry/form";
+import {getSchema} from "@/config/pages/entry/form";
 import { MultiBranchSelect } from "@/components/pages/worktop/select/multi-branch";
 import TextareaAutosize from "react-textarea-autosize";
 import { t } from '@easykit/common/utils/locale';
@@ -16,7 +16,7 @@ export const EntryForm:FC<EntryFormProps> = (props) => {
     } = props;
 
     return <Form
-        schema={SCHEMA}
+        schema={getSchema()}
         onSubmit={props.onSubmit}
         defaultValues={defaultValues}
     >

@@ -4,7 +4,7 @@ import { t } from '@easykit/common/utils/locale';
 
 const code = t("请输入6位数字验证码");
 
-export const FORM_STEP1_SCHEMA = z.object({
+export const getFormStep1Schema = () => z.object({
     username: z.string()
         .min(1, t("请输入用户名"))
         .regex(USERNAME, t("请输入用户名，字母数字或下划线，字母开头")),
@@ -16,7 +16,7 @@ export const FORM_STEP1_SCHEMA = z.object({
         .regex(CODE, code),
 })
 
-export const FORM_STEP2_SCHEMA = z.object({
+export const getFormStep2Schema = () => z.object({
     password: z.string()
         .min(1, t("请输入密码"))
         .regex(PASSWORD, t("密码格式不正确")),

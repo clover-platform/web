@@ -4,7 +4,7 @@ import {Bundle} from "@/types/pages/bundle";
 import { BundleFormat } from "@/components/pages/bundle/format";
 import { t } from '@easykit/common/utils/locale';
 
-export const COLUMNS: DataTableColumn<Bundle>[] = [
+export const getColumns = (): DataTableColumn<Bundle>[] => [
     {
         accessorKey: "name",
         header: t("文件名"),
@@ -36,7 +36,7 @@ export const COLUMNS: DataTableColumn<Bundle>[] = [
     },
 ]
 
-export const ROW_ACTIONS: DropdownMenuItemProps[] = [
+export const getRowActions = (): DropdownMenuItemProps[] => [
     {
         id: "download",
         type: "item",

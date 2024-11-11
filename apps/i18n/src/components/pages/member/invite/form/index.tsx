@@ -1,6 +1,6 @@
-import { Form, FormItem, Input, Textarea } from "@easykit/design";
+import { Form, FormItem, Textarea } from "@easykit/design";
 import {FC, PropsWithChildren} from "react";
-import { SCHEMA } from "@/config/pages/member/form";
+import {getSchema} from "@/config/pages/member/form";
 import { RoleSelect } from "@/components/pages/member/invite/form/role-select";
 import { MemberInviteRequest } from "@/types/pages/member";
 import { t } from '@easykit/common/utils/locale';
@@ -19,7 +19,7 @@ export const MemberInviteForm:FC<MemberInviteFormProps> = (props) => {
     } = props;
 
     return <Form
-        schema={SCHEMA}
+        schema={getSchema()}
         onSubmit={props.onSubmit}
         defaultValues={defaultValues}
         onValuesChange={(e) => props.onValuesChange?.(e as MemberInviteRequest)}

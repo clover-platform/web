@@ -2,7 +2,7 @@
 
 import { TitleBar } from "@clover/public/components/common/title-bar";
 import { DataTable, Space, useAlert, useMessage } from "@easykit/design";
-import { COLUMNS, FILTERS, ROW_ACTIONS } from "@/config/pages/module/branch/table";
+import { getColumns, getFilters, ROW_ACTIONS } from "@/config/pages/module/branch/table";
 import { useTableLoader } from "@easykit/common/hooks";
 import { deleteBranch, list } from "@/rest/branch";
 import { useEffect, useState } from "react";
@@ -59,7 +59,7 @@ export const ModuleBranchPage = () => {
         />
         <DataTable<Branch>
             filter={{
-                items: FILTERS,
+                items: getFilters(),
                 defaultValues: initialParams,
                 query: query,
             }}
@@ -69,7 +69,7 @@ export const ModuleBranchPage = () => {
                 page: query.page,
                 size: query.size,
             }}
-            columns={COLUMNS}
+            columns={getColumns()}
             rowActions={(cell) => ROW_ACTIONS(cell)}
             data={result?.data || []}
             loading={loading}

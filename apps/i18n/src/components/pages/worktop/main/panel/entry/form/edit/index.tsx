@@ -1,6 +1,6 @@
-import {Form, FormItem, Input, Textarea} from "@easykit/design";
+import {Form, FormItem} from "@easykit/design";
 import {FC, PropsWithChildren} from "react";
-import { SCHEMA } from "@/config/pages/entry/edit/form";
+import {getSchema} from "@/config/pages/entry/edit/form";
 import TextareaAutosize from "react-textarea-autosize";
 import { t } from '@easykit/common/utils/locale';
 
@@ -15,7 +15,7 @@ export const EntryEditForm:FC<EntryEditFormProps> = (props) => {
     } = props;
 
     return <Form
-        schema={SCHEMA}
+        schema={getSchema()}
         onSubmit={props.onSubmit}
         defaultValues={defaultValues}
     >

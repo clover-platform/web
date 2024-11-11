@@ -3,7 +3,7 @@ import { FC, useState } from "react";
 import { rename } from "@/rest/branch";
 import { useSearchParams } from "next/navigation";
 import { Branch } from "@/types/pages/branch";
-import { SCHEMA } from "@/config/pages/module/branch/rename/form";
+import {getSchema} from "@/config/pages/module/branch/rename/form";
 import { t } from '@easykit/common/utils/locale';
 
 export type RenameBranchModalProps = {
@@ -37,7 +37,7 @@ export const RenameBranchModal: FC<RenameBranchModalProps> = (props) => {
         maskClosable={false}
     >
         <Form
-            schema={SCHEMA}
+            schema={getSchema()}
             onSubmit={onSubmit}
             defaultValues={branch}
         >

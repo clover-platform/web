@@ -7,8 +7,8 @@ import {useSearchParams} from "next/navigation";
 import Link from "next/link";
 import {encrypt} from "@clover/public/utils/crypto";
 import {setToken} from "@clover/public/utils/token";
-import {SUPPORT_WAY} from "@/config/pages/login/quick";
-import {SCHEMA} from "@/config/pages/link/form";
+import {getSupportWay} from "@/config/pages/login/quick";
+import {getSchema} from "@/config/pages/link/form";
 import { t } from '@easykit/common/utils/locale';
 
 export interface LinkPageProps extends PropsWithChildren {
@@ -72,7 +72,7 @@ const LinkPage = (props: LinkPageProps) => {
         </Link>
     </Space>
 
-    const icon = SUPPORT_WAY.find((item) => item.id === type)?.icon;
+    const icon = getSupportWay().find((item) => item.id === type)?.icon;
 
     return loading ? <Spin /> : <>
         {
@@ -106,7 +106,7 @@ const LinkPage = (props: LinkPageProps) => {
                 </div>
                 <div className={"mt-[30px]"}>
                     <Form
-                        schema={SCHEMA}
+                        schema={getSchema()}
                         onSubmit={onSubmit}
                     >
                         <FormItem name={"account"} label={t("邮箱或用户名")}>

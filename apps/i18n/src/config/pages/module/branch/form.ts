@@ -2,7 +2,7 @@ import * as z from "zod";
 import { SimpleRadioGroupOptionProps } from "@easykit/design";
 import { t } from '@easykit/common/utils/locale';
 
-export const SCHEMA = z.object({
+export const getSchema = () => z.object({
     type: z.string()
         .min(1, t("请选择创建方式")),
     name: z.string()
@@ -18,7 +18,7 @@ export const SCHEMA = z.object({
     }
 })
 
-export const TYPE_OPTIONS: SimpleRadioGroupOptionProps[] = [
+export const getTypeOptions = (): SimpleRadioGroupOptionProps[] => [
     {
         label: t("从主分支克隆"),
         value: "clone"

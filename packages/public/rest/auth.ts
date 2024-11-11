@@ -11,6 +11,6 @@ export const login = async (data: {
 export type ProfileResult = RestResult<Account>
 
 // 获取个人信息
-export const profile = async (): Promise<ProfileResult> => get(`@main/account/profile`);
+export const profile = async (): Promise<ProfileResult> => get(`@main/account/profile`, null, {fetchOptions: {cache: 'force-cache'}});
 
 export const logout = async (): Promise<RestResult<any>> => post(`@main/account/logout`);

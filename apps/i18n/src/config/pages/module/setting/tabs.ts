@@ -1,7 +1,7 @@
 import {TabsTitleItem} from "@clover/public/components/common/tabs-title";
 import { t } from '@easykit/common/utils/locale';
 
-export const TABS: TabsTitleItem[] = [
+export const getTabs = (): TabsTitleItem[] => [
     {
         id: "general",
         title: t("常规"),

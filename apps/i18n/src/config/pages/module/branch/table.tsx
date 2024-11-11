@@ -3,7 +3,7 @@ import { Badge, DropdownMenuItemProps, FilterItemProps, Input } from "@easykit/d
 import { Branch } from "@/types/pages/branch";
 import { t } from '@easykit/common/utils/locale';
 
-export const COLUMNS: DataTableColumn<Branch>[] = [
+export const getColumns = (): DataTableColumn<Branch>[] => [
     {
         accessorKey: "name",
         header: t("名称"),
@@ -29,7 +29,7 @@ export const COLUMNS: DataTableColumn<Branch>[] = [
     },
 ]
 
-export const FILTERS: FilterItemProps[] = [
+export const getFilters = (): FilterItemProps[] => [
     {
         field: 'keyword',
         render: () => <Input placeholder={t("请输入关键词")}/>,

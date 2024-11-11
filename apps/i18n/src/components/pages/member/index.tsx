@@ -7,8 +7,8 @@ import { useEffect, useState } from "react";
 import { TitleBar } from "@clover/public/components/common/title-bar";
 import { DataTable } from "@easykit/design";
 import { TabsTitle } from "@clover/public/components/common/tabs-title";
-import { TABS } from "@/config/pages/member/tabs";
-import { COLUMNS, FILTERS, ROW_ACTIONS } from "@/config/pages/member/table";
+import {getTabs} from "@/config/pages/member/tabs";
+import { getColumns, getFilters, getRowActions } from "@/config/pages/member/table";
 import { Member } from "@/types/pages/member";
 import { InviteButton } from "@/components/pages/member/invite/button";
 import {useLayoutConfig} from "@clover/public/components/layout/hooks/use.layout.config";
@@ -61,12 +61,12 @@ export const MemberPage = () => {
         />
         <TabsTitle
             active={active}
-            items={TABS}
+            items={getTabs()}
             onChange={setActive}
         />
         <DataTable<Member>
             filter={{
-                items: FILTERS,
+                items: getFilters(),
                 defaultValues: initialParams,
                 query: query,
             }}
@@ -76,8 +76,8 @@ export const MemberPage = () => {
                 page: query.page,
                 size: query.size,
             }}
-            columns={COLUMNS}
-            rowActions={ROW_ACTIONS}
+            columns={getColumns()}
+            rowActions={getRowActions()}
             data={result?.data || []}
             loading={loading}
             onRowActionClick={({id: key}, {original}) => {

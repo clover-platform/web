@@ -2,7 +2,7 @@ import * as z from "zod";
 import {isEmail} from "@easykit/common/utils";
 import { t } from '@easykit/common/utils/locale';
 
-export const SCHEMA = z.object({
+export const getSchema = () => z.object({
     roles: z.array(z.string())
         .min(1, t("请选择角色")),
     emails: z.string()

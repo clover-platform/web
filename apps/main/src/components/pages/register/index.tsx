@@ -9,7 +9,7 @@ import { setToken } from "@clover/public/utils/token";
 import { encrypt } from "@clover/public/utils/crypto";
 import { useRouter, useSearchParams } from "next/navigation";
 import LoginLink from "@/components/common/login/link";
-import { FORM_STEP1_SCHEMA, FORM_STEP2_SCHEMA } from "@/config/pages/register/form";
+import {getFormStep1Schema, getFormStep2Schema} from "@/config/pages/register/form";
 import CodeInput from "@easykit/common/components/input/code";
 import { t } from '@easykit/common/utils/locale';
 
@@ -72,7 +72,7 @@ const RegisterPage = () => {
             <Form
                 onValuesChange={setFormData1}
                 onSubmit={onStep1Submit}
-                schema={FORM_STEP1_SCHEMA}
+                schema={getFormStep1Schema()}
                 style={{ display: step === 0 ? 'block' : 'none' }}
             >
                 <FormItem name={"username"} label={t("用户名")}>
@@ -89,7 +89,7 @@ const RegisterPage = () => {
             <Form
                 key={formKey}
                 onSubmit={onStep2Submit}
-                schema={FORM_STEP2_SCHEMA}
+                schema={getFormStep2Schema()}
                 style={{ display: step === 1 ? 'block' : 'none' }}
             >
                 <FormItem name="password" label={t("密码")}>

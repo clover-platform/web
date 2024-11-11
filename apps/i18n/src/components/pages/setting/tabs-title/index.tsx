@@ -1,4 +1,4 @@
-import {TABS} from "@/config/pages/module/setting/tabs";
+import {getTabs} from "@/config/pages/module/setting/tabs";
 import {TabsTitle} from "@clover/public/components/common/tabs-title";
 import {FC, useCallback} from "react";
 import {useRouter, useSearchParams} from "next/navigation";
@@ -25,7 +25,7 @@ export const SettingTabsTitle: FC<SettingTabsTitleProps> = (props) => {
     }, [searchParams])
     return <TabsTitle
         active={props.active}
-        items={TABS}
+        items={getTabs()}
         onChange={onChange}
     />
 }
