@@ -38,8 +38,8 @@ const LinkPage = (props: LinkPageProps) => {
         if(success) {
             if(data?.isBind) {
                 setToken(data);
-                router.push(`/`);
                 router.refresh();
+                router.push(`/`);
             }else{
                 setUser(data);
             }
@@ -61,8 +61,8 @@ const LinkPage = (props: LinkPageProps) => {
         setSubmitting(false);
         if(success) {
             setToken(result);
-            router.push(`/`);
             router.refresh();
+            router.push(`/`);
         }else{
             msg.error(message);
         }
