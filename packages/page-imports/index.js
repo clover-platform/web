@@ -1,19 +1,24 @@
 const plugin = (pluginOptions = {}) => {
-    const { imports = [] } = pluginOptions;
+    const {
+        test = /page\.(ts|js|tsx|jsx)$/,
+        include = /(src\/app)/,
+        imports = []
+    } = pluginOptions;
+
     return (nextConfig = {}) => {
         return Object.assign({}, nextConfig, {
             webpack(config, options) {
                 if (imports && imports.length) {
                     config.module.rules.push({
                         enforce: 'pre',
-                        test: /page\.(ts|js|tsx|jsx)$/,
+                        test,
                         use: [
                             {
                                 loader: '@easykit/page-imports/loader.js',
                                 options: pluginOptions
                             }
                         ],
-                        include: /(app|src)/,
+                        include: include,
                     });
                 }
                 if (typeof nextConfig.webpack === 'function') {
