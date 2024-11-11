@@ -3,7 +3,7 @@
 import React, {PropsWithChildren, useCallback, useEffect, useState} from "react";
 import {Button, Form, Input, Result, Space, Spin, Image, useMessage, FormItem} from "@easykit/design";
 import {linkCode, loginAndLink} from "@/rest/auth";
-import {useRouter, useSearchParams} from "next/navigation";
+import {useSearchParams} from "next/navigation";
 import Link from "next/link";
 import {encrypt} from "@clover/public/utils/crypto";
 import {setToken} from "@clover/public/utils/token";
@@ -21,7 +21,6 @@ const LinkPage = (props: LinkPageProps) => {
     } = props;
 
     const msg = useMessage();
-    const router = useRouter();
     const params = useSearchParams();
     const code = params.get('code') as string;
     const [loading, setLoading] = useState(true);
@@ -38,8 +37,7 @@ const LinkPage = (props: LinkPageProps) => {
         if(success) {
             if(data?.isBind) {
                 setToken(data);
-                router.refresh();
-                router.push(`/`);
+                location.href = "/";
             }else{
                 setUser(data);
             }
@@ -61,8 +59,7 @@ const LinkPage = (props: LinkPageProps) => {
         setSubmitting(false);
         if(success) {
             setToken(result);
-            router.refresh();
-            router.push(`/`);
+            location.href = "/";
         }else{
             msg.error(message);
         }
