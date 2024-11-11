@@ -50,7 +50,7 @@ const RegisterPage = () => {
         setStep2Submitting(false);
         if(success) {
             setToken(result);
-            router.push(from || `/`);
+            location.href = from || `/`;
         }else{
             msg.error(message);
         }
