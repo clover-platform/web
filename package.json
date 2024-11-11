@@ -25,6 +25,7 @@
     "dependencies": {
         "@clover/public": "workspace:*",
         "@easykit/common": "workspace:*",
+        "@easykit/page-imports": "workspace:*",
         "@arco-iconbox/react-clover": "0.0.26",
         "@easykit/design": "0.0.39",
         "@easykit/eslint-config": "0.0.1",

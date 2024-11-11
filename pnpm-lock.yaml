@@ -32,6 +32,9 @@ importers:
       '@easykit/eslint-config':
         specifier: 0.0.1
         version: 0.0.1(eslint@8.57.0)
+      '@easykit/page-imports':
+        specifier: workspace:*
+        version: link:packages/page-imports
       '@radix-ui/react-checkbox':
         specifier: 1.1.1
         version: 1.1.1(@types/react-dom@18.3.0)(@types/react@18.3.3)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -309,6 +312,8 @@ importers:
         specifier: 5.4.6
         version: 5.4.6(@types/node@20.14.9)(less@4.2.0)(lightningcss@1.28.1)(sass@1.77.6)
 
+  packages/page-imports: {}
+
   packages/public:
     dependencies:
       chalk:
@@ -346,6 +351,8 @@ packages:
 
   '@arco-iconbox/react-atom-ui@0.0.4':
     resolution: {integrity: sha512-gYBxZRGfVNcGrJu3MGYK6Xtgf9m+oobn/OL8QnqmI6/2zv6JmWwccI+4fMtvDfeh5U7sgfyK9wYh1ftn95Wlpg==}
+    peerDependencies:
+      react: 18.3.1
 
   '@arco-iconbox/react-clover@0.0.26':
     resolution: {integrity: sha512-ugLOFWCdjYz6OBnt7nNUfa7/dsJbq3sRmp/3aAVkS8NIEIXqArKPk35lte4RGpiZjEq3UHXY+lYDePHCYInsjw==}
@@ -6593,7 +6600,9 @@ snapshots:
       '@jridgewell/gen-mapping': 0.3.5
       '@jridgewell/trace-mapping': 0.3.25
 
-  '@arco-iconbox/react-atom-ui@0.0.4': {}
+  '@arco-iconbox/react-atom-ui@0.0.4(react@18.3.1)':
+    dependencies:
+      react: 18.3.1
 
   '@arco-iconbox/react-clover@0.0.26(react@18.3.1)':
     dependencies:
@@ -6703,7 +6712,7 @@ snapshots:
 
   '@easykit/design@0.0.39(@types/react-dom@18.3.0)(@types/react@18.3.3)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
     dependencies:
-      '@arco-iconbox/react-atom-ui': 0.0.4
+      '@arco-iconbox/react-atom-ui': 0.0.4(react@18.3.1)
       '@emotion/react': 11.11.4(@types/react@18.3.3)(react@18.3.1)
       '@hookform/resolvers': 3.7.0(react-hook-form@7.52.1(react@18.3.1))
       '@radix-ui/react-alert-dialog': 1.1.1(@types/react-dom@18.3.0)(@types/react@18.3.3)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
