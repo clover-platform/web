@@ -1,6 +1,6 @@
 import { MainLayout as PublicMainLayout, PathProps } from "@clover/public/components/layout/main";
 import {FC, PropsWithChildren} from "react";
-import { NAV_MENUS } from "@/config/layout/main";
+import {getNavMenus} from "@/config/layout/main";
 import {useLayoutProps} from "@clover/public/components/layout/hooks/use.layout.props";
 import { t } from '@easykit/common/utils/locale'
 
@@ -14,8 +14,16 @@ export const MainLayout: FC<MainLayoutProps> = (origin) => {
     const props = useLayoutProps<MainLayoutProps>(origin);
     return <PublicMainLayout
         {...props}
+        path={[
+            {
+                title: t("管理中心"),
+                type: "link",
+                href: "/admin"
+            },
+            ...(props.path || [])
+        ]}
         sidebarProps={{
-            menus: NAV_MENUS,
+            menus: getNavMenus(),
             title: t("管理中心"),
             active: props.active
         }}

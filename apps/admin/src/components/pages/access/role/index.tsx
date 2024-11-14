@@ -9,6 +9,8 @@ import {useEffect} from "react";
 import { useRouter } from "next/navigation";
 import {TitleBar} from "@clover/public/components/common/title-bar";
 import { t } from '@easykit/common/utils/locale';
+import {useLayoutConfig} from "@clover/public/components/layout/hooks/use.layout.config";
+import {MainLayoutProps} from "@/components/layout/main";
 
 const initialParams = {
     keyword: '',
@@ -16,6 +18,15 @@ const initialParams = {
 }
 
 const RolePage = () => {
+    useLayoutConfig<MainLayoutProps>({
+        active: "access.role",
+        path: [
+            {
+                title: t("角色管理"),
+                type: "item",
+            }
+        ],
+    })
     const router = useRouter();
     const [loading, result, query, load] = useTableLoader({
         initialParams,

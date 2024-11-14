@@ -42,7 +42,7 @@ export const addRole = async (data: any): Promise<RestResult<any>> =>
     post(`@access/role/create/`, data);
 
 export const roleList = async (params: any): Promise<RestResult<any>> =>
-    get(`@access/role/list/`, params);
+    get(`@access/role/list`, params);
 
 export const roleDetail = async (id?: number): Promise<RestResult<any>> =>
     get(`@access/role/${id}/detail/`);
