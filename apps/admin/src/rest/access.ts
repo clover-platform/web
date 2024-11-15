@@ -15,6 +15,7 @@ export interface Authority {
     name: string;
     key: string;
     parentId?: number;
+    sort: number;
 }
 
 export interface AuthorityTree extends Authority {

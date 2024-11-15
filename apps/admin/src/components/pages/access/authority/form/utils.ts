@@ -1,16 +1,12 @@
 import {AuthorityTree} from "@/rest/access";
-import {TreeItemProps} from "@easykit/design";
-import {handleItem} from "@easykit/design/components/uix/tree/utils";
+import {TreeData} from "@easykit/design";
 
-export const toItems = (data: AuthorityTree[]): TreeItemProps[] => {
-    return data.map<TreeItemProps>(item => {
+export const toItems = (data: AuthorityTree[]): TreeData[] => {
+    return data.map<TreeData>(item => {
         return {
-            id: `${item.id}`,
-            content: {
-                id: `${item.id}`,
-                label: item.name
-            },
+            key: `${item.id}`,
+            title: item.name,
             children: toItems(item.children || [])
         }
-    }).map((item) => handleItem(item, null))
+    });
 }

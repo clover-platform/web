@@ -4,7 +4,7 @@ import { DataTableColumn } from "@easykit/design/components/uix/data-table";
 import {RoleStatus} from "@/components/pages/access/role/status";
 import { t } from '@easykit/common/utils/locale';
 
-export const FILTERS: FilterItemProps[] = [
+export const getFilters = (): FilterItemProps[] => [
     {
         field: 'keyword',
         render: () => <Input placeholder={t("请输入关键词")}/>,
@@ -16,7 +16,7 @@ export const FILTERS: FilterItemProps[] = [
     }
 ]
 
-export const COLUMNS: DataTableColumn<any>[] = [
+export const getColumns = (): DataTableColumn<any>[] => [
     {
         accessorKey: "name",
         header: t("名称"),

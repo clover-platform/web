@@ -2,14 +2,26 @@
 
 import { TreeTable } from "@easykit/design";
 import {useEffect, useState} from "react";
-import { COLUMNS } from "@/config/pages/access/authority/table";
-import {authorityTree} from "@/rest/access";
+import {getColumns} from "@/config/pages/access/authority/table";
+import {AuthorityTree, authorityTree} from "@/rest/access";
 import AddAuthorityButton from "@/components/pages/access/authority/button/add";
 import TableActions from "@/components/pages/access/authority/table-actions";
 import { t } from '@easykit/common/utils/locale'
+import {useLayoutConfig} from "@clover/public/components/layout/hooks/use.layout.config";
+import {MainLayoutProps} from "@/components/layout/main";
+import {TitleBar} from "@clover/public/components/common/title-bar";
 
 const AuthorityPage = () => {
-    const [tree, setTree] = useState<any>([]);
+    useLayoutConfig<MainLayoutProps>({
+        active: "access.authority",
+        path: [
+            {
+                title: t("资源管理"),
+                type: "item",
+            }
+        ],
+    })
+    const [tree, setTree] = useState<AuthorityTree[]>([]);
     const [loading, setLoading] = useState(false);
 
     const load = async () => {
@@ -17,7 +29,7 @@ const AuthorityPage = () => {
         const {success, data} = await authorityTree();
         setLoading(false);
         if(success) {
-            setTree(data);
+            setTree(data!);
         }
     }
 
@@ -26,23 +38,17 @@ const AuthorityPage = () => {
     }, []);
 
     return <>
-        <div className={"my-2 flex justify-start items-center mt-3"}>
-            <AddAuthorityButton onSuccess={() => load().then()} />
-        </div>
+        <TitleBar
+            title={t("资源管理")}
+            actions={<AddAuthorityButton onSuccess={() => load().then()} />}
+        />
         <TreeTable
             loading={loading}
-            emptyText={t("暂无权限")}
             columns={[
-                ...COLUMNS,
+                ...getColumns(),
                 {
-                    key: "actions",
-                    label: "",
-                    style: {
-                        display: "flex",
-                        justifyContent: "flex-end",
-                        alignItems: "center",
-                    },
-                    width: 100,
+                    dataKey: "id",
+                    title: "",
                     render: (item) => <TableActions
                         onReload={load}
                         item={item}

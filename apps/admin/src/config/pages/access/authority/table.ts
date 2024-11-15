@@ -1,28 +1,23 @@
-import { ColumnsProps, DropdownMenuItemProps } from "@easykit/design";
+import { DropdownMenuItemProps, TreeTableColumn } from "@easykit/design";
 import { t } from '@easykit/common/utils/locale';
+import {AuthorityTree} from "@/rest/access";
 
-export const COLUMNS: ColumnsProps[] = [
+export const getColumns = (): TreeTableColumn<AuthorityTree>[] => [
     {
-        key: "name",
-        label: t("权限"),
-        style: {
-            flex: "1",
-            width: 0
-        }
+        dataKey: "name",
+        title: t("权限"),
     },
     {
-        key: "key",
-        label: t("权限码"),
-        width: 300
+        dataKey: "key",
+        title: t("权限码"),
     },
     {
-        key: "sort",
-        label: t("排序"),
-        width: 100
+        dataKey: "sort",
+        title: t("排序"),
     },
 ]
 
-export const ACTIONS: DropdownMenuItemProps[] = [
+export const getActions = (): DropdownMenuItemProps[] => [
     {
         id: "edit",
         type: "item",

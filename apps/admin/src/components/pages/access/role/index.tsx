@@ -1,7 +1,7 @@
 'use client';
 
 import {Button, DataTable, Space, useMessage, useAlert} from "@easykit/design";
-import {COLUMNS, FILTERS, ROW_ACTIONS} from "@/config/pages/access/role/table";
+import {getColumns, getFilters, ROW_ACTIONS} from "@/config/pages/access/role/table";
 import Link from "next/link";
 import {useTableLoader} from "@easykit/common/hooks";
 import {disableRole, enableRole, roleList, deleteRole} from "@/rest/access";
@@ -40,7 +40,7 @@ const RolePage = () => {
     }, []);
 
     const actions = <Space>
-        <Link href={"/{#LANG#}/admin/access/role/add/"}>
+        <Link href={"/admin/access/role/add"}>
             <Button>{t("新增")}</Button>
         </Link>
     </Space>;
@@ -52,7 +52,7 @@ const RolePage = () => {
         />
         <DataTable
             filter={{
-                items: FILTERS,
+                items: getFilters(),
                 defaultValues: initialParams,
                 query: query,
             }}
@@ -62,16 +62,16 @@ const RolePage = () => {
                 page: query.page,
                 size: query.size,
             }}
-            columns={COLUMNS}
+            columns={getColumns()}
             rowActions={ROW_ACTIONS}
             data={result?.data || []}
             loading={loading}
             onRowActionClick={({id: key}, {original}) => {
                 const id = (original as any).id;
                 if(key === "detail") {
-                    router.push("/{#LANG#}/access/role/detail/?id=" + id);
+                    router.push(`/access/role/${id}/detail`);
                 }else if(key === "edit") {
-                    router.push("/{#LANG#}/access/role/edit/?id=" + id);
+                    router.push(`/access/role/${id}/edit`);
                 }else if(key === "disable"){
                     alert.confirm({
                         title: t("禁用？"),

@@ -1,9 +1,8 @@
-import { ACTIONS } from "@/config/pages/access/authority/table";
-import {Action, Dropdown, useMessage} from "@easykit/design";
+import {getActions} from "@/config/pages/access/authority/table";
+import {Action, Dropdown, useMessage, useAlert} from "@easykit/design";
 import { DotsHorizontalIcon } from "@radix-ui/react-icons";
 import { FC, useState } from "react";
 import EditAuthorityDialog from "@/components/pages/access/authority/dialog/edit";
-import {useAlert} from "@easykit/design/components/uix/alert";
 import {deleteAuthority} from "@/rest/access";
 import { t } from '@easykit/common/utils/locale';
 
@@ -26,7 +25,7 @@ const TableActions: FC<TableActionsProps> = (props) => {
     return <>
         <Dropdown
             className={"w-30"}
-            items={ACTIONS}
+            items={getActions()}
             onItemClick={({id: key}) => {
                 if(key === "edit") {
                     setId(item.id);

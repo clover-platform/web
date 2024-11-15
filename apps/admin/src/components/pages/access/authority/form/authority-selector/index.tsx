@@ -1,26 +1,8 @@
 import {FC, forwardRef, useEffect, useState} from "react";
-import {TreeItemProps, TreeSelect} from "@easykit/design";
+import {TreeData, TreeSelect} from "@easykit/design";
 import {authorityTree} from "@/rest/access";
-import {findNodeById} from "@easykit/design/components/uix/tree/utils";
 import {toItems} from "@/components/pages/access/authority/form/utils";
 import { t } from '@easykit/common/utils/locale'
-
-const setChildrenDisabled = (items?: TreeItemProps[]) => {
-    if(items && items.length) {
-        items.forEach(item => {
-            item.disabled = true;
-            setChildrenDisabled(item.children);
-        })
-    }
-}
-
-const setDisabled = (id: string, items: TreeItemProps[]) => {
-    const node = findNodeById(items, id);
-    if(node) {
-        node.disabled = true;
-        setChildrenDisabled(node.children);
-    }
-}
 
 export interface AuthoritySelectorProps{
     disabledNodeId?: string;
@@ -28,7 +10,7 @@ export interface AuthoritySelectorProps{
 
 const AuthoritySelector: FC<AuthoritySelectorProps> = forwardRef((props, ref) => {
     const [loading, setLoading] = useState(false);
-    const [items, setItems] = useState<TreeItemProps[]>([]);
+    const [items, setItems] = useState<TreeData[]>([]);
 
     const load = async () => {
         setLoading(true);
@@ -36,7 +18,7 @@ const AuthoritySelector: FC<AuthoritySelectorProps> = forwardRef((props, ref) =>
         setLoading(false);
         if(success) {
             const items = toItems(data || []);
-            props.disabledNodeId && setDisabled(`${props.disabledNodeId}`, items);
+            // props.disabledNodeId && setDisabled(`${props.disabledNodeId}`, items);
             setItems(items)
         }
     }
@@ -48,7 +30,7 @@ const AuthoritySelector: FC<AuthoritySelectorProps> = forwardRef((props, ref) =>
     return <TreeSelect
         {...props}
         loading={loading}
-        items={items}
+        treeData={items}
         className={"w-full"}
         placeholder={t("根节点")}
     />
