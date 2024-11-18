@@ -1,5 +1,5 @@
 import { FC, PropsWithChildren, useState } from "react";
-import {SCHEMA} from "@/config/pages/access/authority/form";
+import {getSchema} from "@/config/pages/access/authority/form";
 import { Button, Form, FormItem, Input, useMessage } from "@easykit/design";
 import ApiSelector from "@/components/pages/access/authority/form/api-selector";
 import AuthoritySelector from "@/components/pages/access/authority/form/authority-selector";
@@ -40,7 +40,7 @@ const AuthorityForm: FC<AuthorityFormProps> = (props) => {
     }
 
     return <Form
-        schema={SCHEMA}
+        schema={getSchema()}
         onSubmit={onSubmit}
         defaultValues={authority}
     >
@@ -50,7 +50,7 @@ const AuthorityForm: FC<AuthorityFormProps> = (props) => {
         <FormItem name="name" label={t("名称")}>
             <Input placeholder={t("请输入权限名称")} />
         </FormItem>
-        <FormItem name="key" label={t("权限码")}>
+        <FormItem name="value" label={t("权限码")}>
             <Input placeholder={t("请输入权限码")} />
         </FormItem>
         <FormItem name="sort" label={t("排序")}>

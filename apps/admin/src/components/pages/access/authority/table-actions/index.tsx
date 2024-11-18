@@ -24,6 +24,7 @@ const TableActions: FC<TableActionsProps> = (props) => {
 
     return <>
         <Dropdown
+            align={"end"}
             className={"w-30"}
             items={getActions()}
             onItemClick={({id: key}) => {

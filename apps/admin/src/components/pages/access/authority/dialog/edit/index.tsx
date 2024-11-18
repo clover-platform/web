@@ -30,6 +30,7 @@ const EditAuthorityDialog: FC<EditAuthorityDialogProps> = (props) => {
     }
 
     useEffect(() => {
+        console.log(visible, dataId);
         if(visible && dataId) load().then();
     }, [visible, dataId]);
 

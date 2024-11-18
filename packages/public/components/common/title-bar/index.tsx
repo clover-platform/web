@@ -10,7 +10,7 @@ export type TitleBarProps = {
 
 export const TitleBar: FC<TitleBarProps> = (props) => {
     const {
-        border = true,
+        border = false,
     } = props;
     return <>
         <div className={classNames(

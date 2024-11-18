@@ -8,12 +8,13 @@ export const getColumns = (): TreeTableColumn<AuthorityTree>[] => [
         title: t("权限"),
     },
     {
-        dataKey: "key",
+        dataKey: "value",
         title: t("权限码"),
     },
     {
         dataKey: "sort",
         title: t("排序"),
+        className: "w-20",
     },
 ]
 

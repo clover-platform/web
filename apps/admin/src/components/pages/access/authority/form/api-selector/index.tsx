@@ -55,6 +55,7 @@ const ApiSelector = forwardRef((props, ref) => {
     return <ComboSelect
         {...props}
         ref={ref}
+        search={true}
         className={"w-full max-h-[150px] overflow-auto"}
         placeholder={t("请选择")}
         searchPlaceholder={t("关键词")}

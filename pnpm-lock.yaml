@@ -27,8 +27,8 @@ importers:
         specifier: workspace:*
         version: link:packages/common
       '@easykit/design':
-        specifier: 0.0.41
-        version: 0.0.41(@types/react-dom@18.3.0)(@types/react@18.3.3)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+        specifier: 0.0.42
+        version: 0.0.42(@types/react-dom@18.3.0)(@types/react@18.3.3)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@easykit/eslint-config':
         specifier: 0.0.1
         version: 0.0.1(eslint@8.57.0)
@@ -424,8 +424,8 @@ packages:
     resolution: {integrity: sha512-Z/yiTPj+lDVnF7lWeKCIJzaIkI0vYO87dMpZ4bg4TDrFe4XXLFWL1TbXU27gBP3QccxV9mZICCrnjnYlJjXHOA==}
     engines: {node: '>=6.9.0'}
 
-  '@easykit/design@0.0.41':
-    resolution: {integrity: sha512-Z8d7zOYN0tUO6RKiQZC/D3+yj5qF33W61uOhMH8AngrLA6jblF8NL30EoF2Kc2eSk6r2K+lw1eO22GWX1eBqnA==}
+  '@easykit/design@0.0.42':
+    resolution: {integrity: sha512-V8xWoYevRH4o7h1NCInNSA7/zu5prkLgYMm3+OmOXcyn9SJMVF79sYSJMOgVMK7d/1Iy3jsOhv6vaBTwQQaaKQ==}
 
   '@easykit/editor@0.0.12':
     resolution: {integrity: sha512-USMBIBs7fGL2bFBqqiNmXH6xTR++B7tuioF0TIZ9jRgJLHJxGn1lVwO2eXiYQeDf89KRLTy3v1wyvMqRbVcblA==}
@@ -3204,8 +3204,8 @@ packages:
   asynckit@0.4.0:
     resolution: {integrity: sha512-Oei9OH4tRh0YqU3GxhX79dM/mwVgvbZJaSNaRk+bshkj0S5cfHcgYakreBjrHwatXKbz+IoIdYLxrKim2MjW0Q==}
 
-  attr-accept@2.2.4:
-    resolution: {integrity: sha512-2pA6xFIbdTUDCAwjN8nQwI+842VwzbDUXO2IYlpPXQIORgKnavorcr4Ce3rwh+zsNg9zK7QPsdvDj3Lum4WX4w==}
+  attr-accept@2.2.5:
+    resolution: {integrity: sha512-0bDNnY/u6pPwHDMoF0FieU354oBi0a8rD9FcsLwzcGWbc8KS8KPIi7y+s13OlVY+gMWc/9xEMUgNE6Qm8ZllYQ==}
     engines: {node: '>=4'}
 
   autoprefixer@10.4.19:
@@ -6706,7 +6706,7 @@ snapshots:
       '@babel/helper-string-parser': 7.25.9
       '@babel/helper-validator-identifier': 7.25.9
 
-  '@easykit/design@0.0.41(@types/react-dom@18.3.0)(@types/react@18.3.3)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
+  '@easykit/design@0.0.42(@types/react-dom@18.3.0)(@types/react@18.3.3)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
     dependencies:
       '@arco-iconbox/react-atom-ui': 0.0.4
       '@emotion/react': 11.11.4(@types/react@18.3.3)(react@18.3.1)
@@ -9937,7 +9937,7 @@ snapshots:
 
   asynckit@0.4.0: {}
 
-  attr-accept@2.2.4: {}
+  attr-accept@2.2.5: {}
 
   autoprefixer@10.4.19(postcss@8.4.39):
     dependencies:
@@ -12644,7 +12644,7 @@ snapshots:
 
   react-dropzone@14.2.3(react@18.3.1):
     dependencies:
-      attr-accept: 2.2.4
+      attr-accept: 2.2.5
       file-selector: 0.6.0
       prop-types: 15.8.1
       react: 18.3.1

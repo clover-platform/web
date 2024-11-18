@@ -44,12 +44,14 @@ const AuthorityPage = () => {
         />
         <TreeTable
             loading={loading}
+            rowKey={"id"}
             columns={[
                 ...getColumns(),
                 {
                     dataKey: "id",
                     title: "",
-                    render: (item) => <TableActions
+                    className: "w-10",
+                    render: (v, item) => <TableActions
                         onReload={load}
                         item={item}
                     />
