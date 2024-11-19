@@ -5,9 +5,8 @@
         "jsx": "preserve",
         "paths": {
             "@/*": [ "./src/*" ],
-            "@clover/public/*": [ "../public/*" ],
-            "@easykit/common/*": [ "../../packages/common/*" ],
-            "@easy-kit/i18n/*": [ "../../packages/i18n/*"]
+            "@clover/public/*": [ "../../packages/public/*" ],
+            "@easykit/common/*": [ "../../packages/common/*" ]
         }
     },
     "include": [

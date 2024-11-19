@@ -13,7 +13,7 @@ import {getLocale} from "@clover/public/utils/locale";
 export type RootLayoutProps = PropsWithChildren<{}>;
 
 const RootLayout: FC<RootLayoutProps> = async (props) => {
-    const locale = getLocale();
+    const locale = await getLocale();
     await changeLanguage(locale);
     const initState = await loadState();
 

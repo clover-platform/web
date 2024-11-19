@@ -1,4 +1,4 @@
-import publicConfig from "@clover/public/config/next.js";
+import publicConfig from "@clover/public/config/next";
 import withPageImports from "@easykit/page-imports";
 
 const configWrapper = withPageImports({
@@ -11,8 +11,7 @@ const configWrapper = withPageImports({
     ]
 })
 
-/** @type {import('next').NextConfig} */
 export default configWrapper({
     ...publicConfig,
-    assetPrefix: "/assets/wiki/static",
-})
+    assetPrefix: "/assets/admin/static",
+});

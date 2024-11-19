@@ -16,8 +16,8 @@ export const clearToken = () => {
     deleteCookie("token");
 }
 
-export const getToken = (cookies?: any): Token | null => {
-    const token = getCookie('token', {cookies});
+export const getToken = async (cookies?: any): Promise<Token | null> => {
+    const token = await getCookie('token', {cookies});
     if(token) {
         return JSON.parse(token);
     }
