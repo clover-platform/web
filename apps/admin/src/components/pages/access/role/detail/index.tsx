@@ -43,12 +43,12 @@ const RoleDetailPage = () => {
                     </FormItem>
                     <FormItem name="authorities" label={t("关联接口")}>
                         <Tree
-                            border={true}
-                            items={toItems(role.authorityTree || [])}
+                            // border={true}
+                            treeData={toItems(role.authorityTree || [])}
                             selectable={false}
-                            checkbox={false}
-                            onExpandedChange={setExpansion}
-                            expanded={expansion}
+                            // checkbox={false}
+                            // onExpandedChange={setExpansion}
+                            // expanded={expansion}
                         />
                     </FormItem>
                 </Form>

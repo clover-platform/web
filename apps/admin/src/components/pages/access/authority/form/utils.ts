@@ -10,3 +10,21 @@ export const toItems = (data: AuthorityTree[]): TreeData[] => {
         }
     });
 }
+
+export const setDisabled = (id: string, items: TreeData[]) => {
+    items.forEach(item => {
+        if(item.key === id) {
+            item.disabled = true;
+            setAllChildrenDisabled(item.children || []);
+        }else{
+            setDisabled(id, item.children || []);
+        }
+    })
+}
+
+const setAllChildrenDisabled = (items: TreeData[]) => {
+    items.forEach(item => {
+        item.disabled = true;
+        setAllChildrenDisabled(item.children || []);
+    })
+}

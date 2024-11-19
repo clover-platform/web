@@ -12,5 +12,5 @@ export const getSchema = () => z.object({
         .max(200, t("最多 200 个字符")),
     apis: z.any(),
     sort: z.string()
-        .regex(NUMBER, t("排序必须为数字")),
+        .regex(NUMBER, t("排序必须为数字")).or(z.number()),
 })

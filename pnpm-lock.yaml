@@ -28,8 +28,8 @@ importers:
         specifier: workspace:*
         version: link:packages/common
       '@easykit/design':
-        specifier: 0.0.42
-        version: 0.0.42(@types/react-dom@18.3.0)(@types/react@18.3.3)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+        specifier: 0.0.45
+        version: 0.0.45(@types/react-dom@18.3.0)(@types/react@18.3.3)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@easykit/eslint-config':
         specifier: 0.0.1
         version: 0.0.1(eslint@8.57.0)
@@ -102,6 +102,9 @@ importers:
       react-dom:
         specifier: 18.3.1
         version: 18.3.1(react@18.3.1)
+      react-hook-form:
+        specifier: 7.52.1
+        version: 7.52.1(react@18.3.1)
       react-resizable-panels:
         specifier: 2.0.20
         version: 2.0.20(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -352,8 +355,6 @@ packages:
 
   '@arco-iconbox/react-atom-ui@0.0.4':
     resolution: {integrity: sha512-gYBxZRGfVNcGrJu3MGYK6Xtgf9m+oobn/OL8QnqmI6/2zv6JmWwccI+4fMtvDfeh5U7sgfyK9wYh1ftn95Wlpg==}
-    peerDependencies:
-      react: 18.3.1
 
   '@arco-iconbox/react-clover@0.0.26':
     resolution: {integrity: sha512-ugLOFWCdjYz6OBnt7nNUfa7/dsJbq3sRmp/3aAVkS8NIEIXqArKPk35lte4RGpiZjEq3UHXY+lYDePHCYInsjw==}
@@ -427,8 +428,8 @@ packages:
     resolution: {integrity: sha512-Z/yiTPj+lDVnF7lWeKCIJzaIkI0vYO87dMpZ4bg4TDrFe4XXLFWL1TbXU27gBP3QccxV9mZICCrnjnYlJjXHOA==}
     engines: {node: '>=6.9.0'}
 
-  '@easykit/design@0.0.42':
-    resolution: {integrity: sha512-V8xWoYevRH4o7h1NCInNSA7/zu5prkLgYMm3+OmOXcyn9SJMVF79sYSJMOgVMK7d/1Iy3jsOhv6vaBTwQQaaKQ==}
+  '@easykit/design@0.0.45':
+    resolution: {integrity: sha512-ij+9tjmtE/7+sDoidKGN5eW90DCSZH1NxLamtSYIPqdxSTHV0YVeVwSyo+DxVoKiApSSkZw9cpA5q8B8mPgqvA==}
 
   '@easykit/editor@0.0.12':
     resolution: {integrity: sha512-USMBIBs7fGL2bFBqqiNmXH6xTR++B7tuioF0TIZ9jRgJLHJxGn1lVwO2eXiYQeDf89KRLTy3v1wyvMqRbVcblA==}
@@ -6601,9 +6602,7 @@ snapshots:
       '@jridgewell/gen-mapping': 0.3.5
       '@jridgewell/trace-mapping': 0.3.25
 
-  '@arco-iconbox/react-atom-ui@0.0.4(react@18.3.1)':
-    dependencies:
-      react: 18.3.1
+  '@arco-iconbox/react-atom-ui@0.0.4': {}
 
   '@arco-iconbox/react-clover@0.0.26(react@18.3.1)':
     dependencies:
@@ -6711,9 +6710,9 @@ snapshots:
       '@babel/helper-string-parser': 7.25.9
       '@babel/helper-validator-identifier': 7.25.9
 
-  '@easykit/design@0.0.42(@types/react-dom@18.3.0)(@types/react@18.3.3)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
+  '@easykit/design@0.0.45(@types/react-dom@18.3.0)(@types/react@18.3.3)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
     dependencies:
-      '@arco-iconbox/react-atom-ui': 0.0.4(react@18.3.1)
+      '@arco-iconbox/react-atom-ui': 0.0.4
       '@emotion/react': 11.11.4(@types/react@18.3.3)(react@18.3.1)
       '@hookform/resolvers': 3.7.0(react-hook-form@7.52.1(react@18.3.1))
       '@radix-ui/react-alert-dialog': 1.1.1(@types/react-dom@18.3.0)(@types/react@18.3.3)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)

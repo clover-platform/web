@@ -1,4 +1,4 @@
-import {Tree, TreeItemProps} from "@easykit/design";
+import {Tree, TreeData} from "@easykit/design";
 import {FC, forwardRef, useEffect, useState} from "react";
 import {authorityTree} from "@/rest/access";
 import {toItems} from "@/components/pages/access/authority/form/utils";
@@ -15,7 +15,7 @@ const AuthorityTree: FC<AuthorityTreeProps> = forwardRef((props, ref) => {
     } = props;
 
     const [loading, setLoading] = useState(false);
-    const [items, setItems] = useState<TreeItemProps[]>([]);
+    const [items, setItems] = useState<TreeData[]>([]);
     const [treeKey, setTreeKey] = useState(Date.now());
     const [expansion, setExpansion] = useState<string[]>([]);
 
@@ -35,18 +35,18 @@ const AuthorityTree: FC<AuthorityTreeProps> = forwardRef((props, ref) => {
     }, []);
 
     return <Tree
-        checked={value}
-        onExpandedChange={setExpansion}
-        expanded={expansion}
+        // checked={value}
+        // onExpandedChange={setExpansion}
+        // expanded={expansion}
         key={treeKey}
-        loading={loading}
-        border={true}
-        items={items}
+        // loading={loading}
+        // border={true}
+        treeData={items}
         selectable={true}
-        checkbox={true}
-        onCheckedChange={(nodes) => {
-            onChange(nodes.map(({id}) => id));
-        }}
+        // checkbox={true}
+        // onCheckedChange={(nodes) => {
+        //     onChange(nodes.map(({id}) => id));
+        // }}
     />
 });
 

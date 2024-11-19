@@ -1,10 +1,12 @@
-import { FC, PropsWithChildren, useState } from "react";
+import {FC, PropsWithChildren, useRef, useState} from "react";
 import {getSchema} from "@/config/pages/access/authority/form";
-import { Button, Form, FormItem, Input, useMessage } from "@easykit/design";
+import {Button, Form, FormItem, Input} from "@easykit/design";
 import ApiSelector from "@/components/pages/access/authority/form/api-selector";
 import AuthoritySelector from "@/components/pages/access/authority/form/authority-selector";
 import {addAuthority, editAuthority} from "@/rest/access";
 import { t } from '@easykit/common/utils/locale'
+import {UseFormReturn} from "react-hook-form"
+import {useFormResult} from "@clover/public/hooks/use.form.result";
 
 export interface AuthorityFormProps extends PropsWithChildren {
     onSuccess?: () => void;
@@ -20,9 +22,12 @@ const AuthorityForm: FC<AuthorityFormProps> = (props) => {
         },
         type
     } = props
-
     const [submitting, setSubmitting] = useState(false);
-    const msg = useMessage();
+    const formRef = useRef<UseFormReturn>();
+    const formResult = useFormResult({
+        ref: formRef,
+        onSuccess
+    });
 
     const onSubmit = async (data: any) => {
         setSubmitting(true);
@@ -30,16 +35,14 @@ const AuthorityForm: FC<AuthorityFormProps> = (props) => {
         if(type === 'edit') {
             data.id = authority.id;
         }
-        const { success, message } = await api(data);
+        formResult(await api(data));
         setSubmitting(false);
-        if(success) {
-            onSuccess();
-        }else{
-            msg.error(message);
-        }
     }
 
+    console.log(authority);
+
     return <Form
+        ref={formRef}
         schema={getSchema()}
         onSubmit={onSubmit}
         defaultValues={authority}

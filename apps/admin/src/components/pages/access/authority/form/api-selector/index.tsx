@@ -1,8 +1,9 @@
 import { cn, ComboSelect } from "@easykit/design";
 import { forwardRef, useEffect, useState } from "react";
 import { ComboSelectOptionProps } from "@easykit/design/components/uix/combo-select";
-import { AccessApi, apiList } from "@/rest/access";
+import { apiList } from "@/rest/access";
 import { t } from '@easykit/common/utils/locale'
+import {AccessApi} from "@/types/pages/access/api";
 
 type COLOR_MAP_TYPE = {
     [key: string]: string;
