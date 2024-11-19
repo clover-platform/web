@@ -1,4 +1,4 @@
-import {useRecoilState} from "recoil";
+import {useAtom} from "jotai";
 import {collectedState as state} from "@/state/collect";
 import {useCallback, useMemo} from "react";
 import cloneDeep from "lodash/cloneDeep";
@@ -7,7 +7,7 @@ import bus from "@easykit/common/events";
 import {UPDATE_COLLECTED} from "@/events/book";
 
 export const useCollected = (id: number): [boolean, (collected: boolean) => void] => {
-    const [collectedState, setCollectedState] = useRecoilState(state);
+    const [collectedState, setCollectedState] = useAtom(state);
     const collected = useMemo(() => {
         return collectedState.includes(id);
     }, [collectedState, id])

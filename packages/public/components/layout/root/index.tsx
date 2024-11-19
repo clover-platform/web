@@ -2,8 +2,9 @@
 
 import "@clover/public/plugin/rest.client";
 import "@clover/public/plugin/locales";
-import {MutableSnapshot, RecoilRoot} from 'recoil';
-import {FC, PropsWithChildren, useEffect} from "react";
+import {Provider, WritableAtom} from 'jotai';
+import { useHydrateAtoms } from 'jotai/utils'
+import {FC, PropsWithChildren, ReactNode} from "react";
 import { ConfigProvider } from "@easykit/design";
 import locales from "@clover/public/config/locale";
 import {accountInfoState, isLoginState} from "@clover/public/state/account";
@@ -13,6 +14,20 @@ import {accessState} from "@easykit/common/state/access";
 import {sidebarOpenState} from "@clover/public/components/layout/main/state";
 import i18next from "i18next";
 
+export type AtomValues = Iterable<
+    readonly [WritableAtom<unknown, [any], unknown>, unknown]
+>;
+
+export type AtomsHydrateProps = {
+    atomValues: AtomValues;
+    children: ReactNode;
+}
+
+export const AtomsHydrate: FC<AtomsHydrateProps> = ({atomValues, children}) => {
+    useHydrateAtoms(new Map(atomValues))
+    return children;
+}
+
 export type RootLayoutProps = PropsWithChildren<{
     isLogin: boolean;
     accountInfo?: Account;
@@ -20,7 +35,7 @@ export type RootLayoutProps = PropsWithChildren<{
     projects: any[];
     sideOpen: boolean;
     locale: string;
-    onInitState?: (snapshot: MutableSnapshot) => void;
+    atomValues?: AtomValues;
 }>;
 
 export const RootLayout: FC<RootLayoutProps> = (props) => {
@@ -32,29 +47,32 @@ export const RootLayout: FC<RootLayoutProps> = (props) => {
         projects,
         sideOpen,
         locale,
-        onInitState,
+        atomValues = []
     } = props;
 
-    return <RecoilRoot initializeState={(snapshot) => {
-        snapshot.set(isLoginState, isLogin);
-        snapshot.set(teamsState, teams);
-        snapshot.set(projectsState, projects);
-        snapshot.set(accountInfoState, accountInfo || {
-            id: 0,
-            username: '',
-            authorities: [],
-            otpStatus: 0,
-            currentProjectId: 0,
-            currentTeamId: 0,
-        });
-        snapshot.set(accessState, accountInfo?.authorities || []);
-        snapshot.set(sidebarOpenState, sideOpen);
-        snapshot.set(localeState, locale);
-        onInitState?.(snapshot);
-        i18next.changeLanguage(locale).then();
-    }}>
-        <ConfigProvider locale={locales[locale]}>
-            { children }
-        </ConfigProvider>
-    </RecoilRoot>
+    i18next.changeLanguage(locale).then();
+
+    return <Provider>
+        <AtomsHydrate atomValues={[
+            [isLoginState, isLogin],
+            [teamsState, teams],
+            [projectsState, projects],
+            [accountInfoState, accountInfo || {
+                id: 0,
+                username: '',
+                authorities: [],
+                otpStatus: 0,
+                currentProjectId: 0,
+                currentTeamId: 0,
+            }],
+            [accessState, accountInfo?.authorities || []],
+            [sidebarOpenState, sideOpen],
+            [localeState, locale],
+            ...atomValues,
+        ]}>
+            <ConfigProvider locale={locales[locale]}>
+                { children }
+            </ConfigProvider>
+        </AtomsHydrate>
+    </Provider>
 };

@@ -1,7 +1,4 @@
-import { atom } from "recoil";
+import { atom } from "jotai";
 import { Language } from "@/types/pages/public";
 
-export const languagesState = atom<Language[]>({
-    key: 'public/languages',
-    default: []
-})
+export const languagesState = atom<Language[]>([])

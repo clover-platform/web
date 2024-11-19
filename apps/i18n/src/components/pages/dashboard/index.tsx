@@ -22,7 +22,7 @@ import {useParams, useRouter} from "next/navigation";
 import {LanguageItem} from "@/components/pages/dashboard/language-item";
 import { MemberItem } from "@/components/pages/dashboard/member-item";
 import {Member, ModuleCount, ModuleDetail} from "@/types/pages/module";
-import { useRecoilValue } from "recoil";
+import { useAtom } from "jotai";
 import { languagesState } from "@/state/public";
 import {Language, LanguageWithCount} from "@/types/pages/public";
 import {useLayoutConfig} from "@clover/public/components/layout/hooks/use.layout.config";
@@ -49,7 +49,7 @@ export const DashboardPage: FC<DashboardPageProps> = (props) => {
     const { detail, members, languages, count } = props;
     const { module } = useParams();
     const router = useRouter();
-    const all = useRecoilValue(languagesState);
+    const [all] = useAtom(languagesState);
 
     const onRowClick = (item: Language) => {
         router.push(`/i18n/${module}/worktop?target=${item.code}`);

@@ -18,8 +18,8 @@ export const RootLayout: FC<RootLayoutProps> = (props) => {
     const { languages } = props;
     return <PublicRootLayout
         {...props}
-        onInitState={(snapshot) => {
-            snapshot.set(languagesState, languages);
-        }}
+        atomValues={[
+            [languagesState, languages]
+        ]}
     />
 }

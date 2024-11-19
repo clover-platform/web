@@ -1,11 +1,11 @@
-import {RecoilState, useRecoilState} from "recoil";
+import {ExtractAtomValue, useAtom} from "jotai";
 import {useCallback, useMemo} from "react";
 import cloneDeep from "lodash/cloneDeep";
 
 export type UseRecordStateResult<T> = [T, (data: T) => void];
 
-export function useRecordState<T> (state: RecoilState<Record<string, T>>, key: string): UseRecordStateResult<T> {
-    const [recordState, setRecordState] = useRecoilState(state);
+export function useRecordState<T> (state: ExtractAtomValue<Record<string, T>>, key: string): UseRecordStateResult<T> {
+    const [recordState, setRecordState] = useAtom<Record<string, T>>(state);
 
     const data = useMemo(() => {
         return (recordState[key] || []) as T;

@@ -1,4 +1,4 @@
-import { useRecoilValue } from "recoil";
+import { useAtom } from "jotai";
 import { currentEntryState, currentLanguageState, entriesState } from "@/state/worktop";
 import { Button, Empty, ScrollArea, Spin } from "@easykit/design";
 import { useEffect, useRef, useState } from "react";
@@ -14,10 +14,9 @@ import { t } from '@easykit/common/utils/locale';
 import {useParams} from "next/navigation";
 
 export const ResultList = () => {
-    const language = useRecoilValue(currentLanguageState);
-
-    const entries = useRecoilValue(entriesState);
-    const current = useRecoilValue(currentEntryState);
+    const [language] = useAtom(currentLanguageState);
+    const [entries] = useAtom(entriesState);
+    const [current] = useAtom(currentEntryState);
     const entry = entries[current];
 
     const pageRef = useRef(1);

@@ -2,7 +2,7 @@ import { FC, PropsWithChildren } from "react";
 import Switch from "@clover/public/components/layout/main/switch";
 import classNames from "classnames";
 import {LangSelect} from "@clover/public/components/common/select/lang";
-import { useRecoilValue } from "recoil";
+import { useAtom } from "jotai";
 import { sidebarOpenState } from "@clover/public/components/layout/main/state";
 import { Separator, } from "@easykit/design";
 import {TeamsSwitcher} from "@clover/public/components/layout/main/navbar/switcher/teams";
@@ -13,7 +13,7 @@ export type LayoutNavbarProps = {
 } & PropsWithChildren;
 
 export const LayoutNavbar: FC<LayoutNavbarProps> = (props) => {
-    const open = useRecoilValue(sidebarOpenState);
+    const [open] = useAtom(sidebarOpenState);
 
     return <div className={classNames(
         "h-12 border-0 border-b border-solid flex justify-start items-center px-4",

@@ -8,7 +8,7 @@ import {InviteDetail} from "@/types/pages/module";
 import {InvitePageExpired} from "@/components/pages/invite/expired";
 import {InvitePageJoined} from "@/components/pages/invite/joined";
 import {detail as detailRest} from "@/rest/member.invite";
-import {useRecoilValue} from "recoil";
+import {useAtom} from "jotai";
 import {isLoginState} from "@clover/public/state/account";
 
 export const InvitePage = () => {
@@ -19,7 +19,7 @@ export const InvitePage = () => {
     const [expired, setExpired] = useState<boolean>(false);
     const [joined, setJoined] = useState<boolean>(false);
     const [moduleId, setModuleId] = useState<number>();
-    const isLogin = useRecoilValue(isLoginState);
+    const [isLogin] = useAtom(isLoginState);
 
     const load = async () => {
         setLoading(true);

@@ -1,6 +1,6 @@
 import { forwardRef, useState } from "react";
 import { Checkbox, ScrollArea } from "@easykit/design";
-import { useRecoilValue } from "recoil";
+import { useAtom } from "jotai";
 import { branchesState } from "@/state/worktop";
 import { IconBranch } from "@arco-iconbox/react-clover";
 
@@ -10,7 +10,7 @@ export type MultiBranchSelectProps = {
 };
 
 export const MultiBranchSelect = forwardRef<HTMLSelectElement, MultiBranchSelectProps>((props, ref) => {
-    const branches = useRecoilValue(branchesState);
+    const [branches] = useAtom(branchesState);
     const [selectId] = useState(Date.now());
     const [selected, setSelected] = useState(props.value || []);
 

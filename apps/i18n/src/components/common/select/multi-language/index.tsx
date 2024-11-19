@@ -3,7 +3,7 @@ import { Checkbox, CheckboxProps, Input, ScrollArea } from "@easykit/design";
 import classNames from "classnames";
 import { Action } from "@clover/public/components/common/action";
 import { IconDelete } from "@arco-iconbox/react-clover";
-import { useRecoilValue } from "recoil";
+import { useAtom } from "jotai";
 import { languagesState } from "@/state/public";
 import { t } from '@easykit/common/utils/locale';
 
@@ -57,7 +57,7 @@ const SelectedLangItem: FC<SelectedLangItemProps> = (props) => {
 export const MultiLanguageSelect = forwardRef<HTMLDivElement, MultiLanguageSelectProps>((props, ref) => {
     const [selected, setSelected] = useState<string[]>(props.value || []);
     const [keyword, setKeyword] = useState<string>("");
-    const languages = useRecoilValue(languagesState);
+    const [languages] = useAtom(languagesState);
 
     const options = languages.map((lang) => {
         return {

@@ -1,8 +1,5 @@
-import {atom} from "@easykit/common/state";
+import {atom} from "jotai";
 
 // 由业务方提供权限值
 
-export const accessState = atom<string[]>({
-    key: 'sdk.access',
-    default: []
-})
+export const accessState = atom<string[]>([])

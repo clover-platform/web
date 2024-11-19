@@ -1,6 +1,7 @@
-import { useRecoilValue } from "recoil";
+import { useAtom } from "jotai";
 import { sidebarOpenState } from "@clover/public/components/layout/main/state";
 
 export const useSidebarState = () => {
-    return useRecoilValue(sidebarOpenState)
+    const [open] = useAtom(sidebarOpenState);
+    return open;
 }

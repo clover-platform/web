@@ -11,7 +11,7 @@ export const get = async () => {
         "CLIENT-SYSTEM-VERSION": "",
         "CLIENT-TIMESTAMP": Date.now()
     }
-    const token = await getToken(cookies)?.token;
-    if(token) headers['Authorization'] = "Bearer " + token;
+    const token = await getToken(cookies);
+    if(token) headers['Authorization'] = "Bearer " + token.token;
     return headers;
 }

@@ -1,6 +1,6 @@
 import { Action } from "@clover/public/components/common/action";
 import { FC } from "react";
-import { useRecoilValue } from "recoil";
+import { useAtom } from "jotai";
 import { currentLanguageState, languagesState } from "@/state/worktop";
 import { t } from '@easykit/common/utils/locale';
 
@@ -9,8 +9,8 @@ export type LanguageActionProps = {
 };
 
 export const LanguageAction: FC<LanguageActionProps> = (props) => {
-    const languages = useRecoilValue(languagesState);
-    const current = useRecoilValue(currentLanguageState);
+    const [languages] = useAtom(languagesState);
+    const [current] = useAtom(currentLanguageState);
     const language = languages.find(item => item.code === current);
 
     return <Action className={"!px-1.5 h-8"} onClick={props.onClick}>

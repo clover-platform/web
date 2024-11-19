@@ -1,12 +1,12 @@
-import {RecoilState, useRecoilState} from "recoil";
+import {ExtractAtomValue, useAtom} from "jotai";
 import {useCallback, useMemo} from "react";
 import cloneDeep from "lodash/cloneDeep";
 import remove from "lodash/remove";
 
 export type GlobalLoadingResult = [boolean, (loading: boolean) => void];
 
-export function useGlobalLoading<T> (state: RecoilState<T[]>, id: T): GlobalLoadingResult {
-    const [loadingState, setLoadingState] = useRecoilState(state);
+export function useGlobalLoading<T> (state: ExtractAtomValue<T[]>, id: T): GlobalLoadingResult {
+    const [loadingState, setLoadingState] = useAtom<T[]>(state);
 
     const loading = useMemo(() => {
         return loadingState.includes(id);

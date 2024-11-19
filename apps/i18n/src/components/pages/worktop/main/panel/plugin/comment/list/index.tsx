@@ -1,5 +1,5 @@
 import {useCallback, useEffect, useRef, useState} from "react";
-import { useRecoilValue } from "recoil";
+import { useAtom } from "jotai";
 import { currentEntryState, currentLanguageState, entriesState } from "@/state/worktop";
 import { list as listRest } from "@/rest/entry.comment";
 import { ENTRY_COMMENT_RELOAD } from "@/events/worktop";
@@ -8,7 +8,6 @@ import { CommentListItem } from "@/components/pages/worktop/main/panel/plugin/co
 import { EntryComment } from "@/types/pages/entry";
 import {Button, Empty, ScrollArea} from "@easykit/design";
 import { CommentListItemLoading } from "@/components/pages/worktop/main/panel/plugin/comment/list/item/loading";
-import {handler} from "tailwindcss-animate";
 import { t } from '@easykit/common/utils/locale';
 import {useParams} from "next/navigation";
 
@@ -18,10 +17,10 @@ const CommentListLoading = () => {
 
 export const CommentList = () => {
     const [loading, setLoading] = useState(false);
-    const entries = useRecoilValue(entriesState);
-    const current = useRecoilValue(currentEntryState);
+    const [entries] = useAtom(entriesState);
+    const [current] = useAtom(currentEntryState);
     const entry = entries[current];
-    const language = useRecoilValue(currentLanguageState);
+    const [language] = useAtom(currentLanguageState);
     const [list, setList] = useState<EntryComment[]>([]);
     const [total, setTotal] = useState(0);
     const pageRef = useRef(1);

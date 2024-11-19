@@ -2,7 +2,7 @@ import {Empty, Input, ScrollArea} from "@easykit/design";
 import { CreateEntryButton } from "@/components/pages/worktop/main/panel/entry/create/button";
 import { FC, useState } from "react";
 import classNames from "classnames";
-import {useRecoilState} from "recoil";
+import {useAtom} from "jotai";
 import {currentEntryState} from "@/state/worktop";
 import { CheckIcon, } from "@radix-ui/react-icons";
 import {Pagination} from "@/components/pages/worktop/main/panel/entry/pagination";
@@ -21,7 +21,7 @@ export type EntryPanelProps = {
 export const EntryPanel: FC<EntryPanelProps> = (props) => {
     const {pages, entries, loading, load} = props;
     const [page, setPage] = useState<number>(1);
-    const [current, setCurrent] = useRecoilState(currentEntryState);
+    const [current, setCurrent] = useAtom(currentEntryState);
     const [keyword, setKeyword] = useState<string>('');
 
     const search = (e: any) => {

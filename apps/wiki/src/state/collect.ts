@@ -1,11 +1,5 @@
-import {atom} from "recoil";
+import {atom} from "jotai";
 
-export const loadingState = atom<number[]>({
-    key: 'collect/loading',
-    default: []
-})
+export const loadingState = atom<number[]>([])
 
-export const collectedState = atom<number[]>({
-    key: 'collect/list',
-    default: []
-})
+export const collectedState = atom<number[]>([])

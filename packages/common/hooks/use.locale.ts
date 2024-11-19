@@ -1,6 +1,7 @@
 import {localeState} from "@clover/public/state/public";
-import { useRecoilValue } from "recoil";
+import { useAtom } from "jotai";
 
 export const useLocale = () => {
-    return useRecoilValue(localeState);
+    const [locale] = useAtom(localeState);
+    return locale;
 }

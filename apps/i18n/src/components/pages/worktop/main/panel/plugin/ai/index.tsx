@@ -1,6 +1,6 @@
 import {ai} from "@/rest/entry.result";
 import {useCallback, useEffect, useState} from "react";
-import {useRecoilValue} from "recoil";
+import {useAtom} from "jotai";
 import {currentEntryState, currentLanguageState, entriesState} from "@/state/worktop";
 import {ScrollArea} from "@easykit/design";
 import {AIItem} from "@/components/pages/worktop/main/panel/plugin/ai/item";
@@ -12,10 +12,10 @@ const AIIListLoading = () => {
 }
 
 export const AIPlugin = () => {
-    const entries = useRecoilValue(entriesState);
-    const current = useRecoilValue(currentEntryState);
+    const [entries] = useAtom(entriesState);
+    const [current] = useAtom(currentEntryState);
     const entry = entries[current];
-    const language = useRecoilValue(currentLanguageState);
+    const [language] = useAtom(currentLanguageState);
     const [loading, setLoading] = useState(true);
     const [results, setResults] = useState<string[]>([]);
     const { module } = useParams();

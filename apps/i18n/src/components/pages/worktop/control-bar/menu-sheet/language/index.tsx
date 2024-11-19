@@ -1,12 +1,12 @@
 import { Command, CommandInput, CommandItem, CommandList, SheetClose } from "@easykit/design";
 import {CheckIcon} from "@radix-ui/react-icons";
-import { useRecoilState, useRecoilValue } from "recoil";
+import { useAtom } from "jotai";
 import { currentLanguageState, languagesState } from "@/state/worktop";
 import { t } from '@easykit/common/utils/locale';
 
 export const MenuLanguageSheet = () => {
-    const languages = useRecoilValue(languagesState);
-    const [current, setCurrent] = useRecoilState(currentLanguageState);
+    const [languages] = useAtom(languagesState);
+    const [current, setCurrent] = useAtom(currentLanguageState);
 
     return <div className={"space-y-2"}>
         <div className={"text-xl font-bold"}>{t("语言")}</div>

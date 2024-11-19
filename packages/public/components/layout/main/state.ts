@@ -1,11 +1,5 @@
-import { atom } from "recoil";
+import { atom } from "jotai";
 
-export const sidebarOpenState = atom({
-    key: 'layout.admin.sidebar.open',
-    default: true
-})
+export const sidebarOpenState = atom(true)
 
-export const loadingState = atom({
-    key: 'layout.admin.loading',
-    default: false
-})
+export const loadingState = atom(false)

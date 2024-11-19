@@ -1,5 +1,5 @@
 import {FC, HTMLAttributes, useEffect} from "react";
-import {useRecoilState} from "recoil";
+import {useAtom} from "jotai";
 import {sidebarOpenState} from "@clover/public/components/layout/main/state";
 import {SIDEBAR_OPEN_KEY} from "@clover/public/components/layout/main/const";
 import { IconSidebar } from "@arco-iconbox/react-clover";
@@ -12,7 +12,7 @@ import {COOKIE_MAX_AGE} from "@clover/public/config/app";
 export type SwitchProps = HTMLAttributes<HTMLButtonElement> & ActionProps;
 
 const Switch: FC<SwitchProps> = (props) => {
-    const [open, setOpen] = useRecoilState(sidebarOpenState);
+    const [open, setOpen] = useAtom(sidebarOpenState);
 
     useEffect(() => {
         setCookie(SIDEBAR_OPEN_KEY, open, {

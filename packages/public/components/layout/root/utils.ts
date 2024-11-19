@@ -15,7 +15,7 @@ export const loadState = async () => {
         const projectsResult = await myProjects();
         projects = projectsResult.success ? projectsResult.data : [];
     }
-    const open = getCookie(SIDEBAR_OPEN_KEY, {cookies});
+    const open = await getCookie(SIDEBAR_OPEN_KEY, {cookies});
     return {
         teams,
         projects,

@@ -2,7 +2,7 @@ import {useEffect, useMemo, useRef, useState} from "react";
 import {languages} from "@/rest/module";
 import {useParams, useRouter, useSearchParams} from "next/navigation";
 import {all} from "@/rest/branch";
-import {useRecoilState, useRecoilValue, useSetRecoilState} from "recoil";
+import {useAtom} from "jotai";
 import {
     branchesState, countState,
     currentBranchState, currentEntryState,
@@ -15,15 +15,15 @@ import { count, detail, list } from "@/rest/entry";
 
 export const useWorktopState = () => {
     const search = useSearchParams();
-    const setCurrentEntry = useSetRecoilState(currentEntryState);
+    const [_ce, setCurrentEntry] = useAtom(currentEntryState);
     const branch = search.get("branch") || '';
     const target = search.get("target") || '';
     const [loading, setLoading] = useState(true);
     const { module } = useParams();
-    const setLanguages = useSetRecoilState(languagesState);
-    const setBranches = useSetRecoilState(branchesState);
-    const setCurrentLanguage = useSetRecoilState(currentLanguageState);
-    const setCurrentBranch = useSetRecoilState(currentBranchState);
+    const [_l, setLanguages] = useAtom(languagesState);
+    const [_b, setBranches] = useAtom(branchesState);
+    const [_cl, setCurrentLanguage] = useAtom(currentLanguageState);
+    const [_cb, setCurrentBranch] = useAtom(currentBranchState);
 
     const load = async () => {
         setLoading(true);
@@ -46,8 +46,8 @@ export const useWorktopState = () => {
 
 export const useQuerySync = () => {
     const router = useRouter();
-    const currentLanguage = useRecoilValue(currentLanguageState);
-    const currentBranch = useRecoilValue(currentBranchState);
+    const [currentLanguage] = useAtom(currentLanguageState);
+    const [currentBranch] = useAtom(currentBranchState);
     const query = [`target=${currentLanguage}`, `branch=${currentBranch}`].join('&');
     useEffect(() => {
         router.replace(`?${query}`);
@@ -60,16 +60,16 @@ export const defaultEntriesParams = {
 
 export const useEntriesLoader = () => {
     const { module } = useParams();
-    const [loading, setLoading] = useRecoilState(entriesLoadingState);
-    const [entries, setEntries] = useRecoilState(entriesState);
+    const [loading, setLoading] = useAtom(entriesLoadingState);
+    const [entries, setEntries] = useAtom(entriesState);
     const paramsRef = useRef(defaultEntriesParams);
     const [total, setTotal] = useState(0);
     const pages = useMemo(() => Math.ceil(total / paramsRef.current.size), [total]);
-    const currentBranch = useRecoilValue(currentBranchState);
+    const [currentBranch] = useAtom(currentBranchState);
     const branchRef = useRef<number>();
-    const branches = useRecoilValue(branchesState);
-    const currentLanguage = useRecoilValue(currentLanguageState);
-    const setCount = useSetRecoilState(countState);
+    const [branches] = useAtom(branchesState);
+    const [currentLanguage] = useAtom(currentLanguageState);
+    const [_c, setCount] = useAtom(countState);
 
     const load = async (_params?: any) => {
         setLoading(true)
@@ -116,10 +116,10 @@ export const useEntriesLoader = () => {
 
 export const useEntriesUpdater = () => {
     const { module } = useParams();
-    const [entries, setEntries] = useRecoilState(entriesState);
-    const currentLanguage = useRecoilValue(currentLanguageState);
-    const currentBranch = useRecoilValue(currentBranchState);
-    const setCount = useSetRecoilState(countState);
+    const [entries, setEntries] = useAtom(entriesState);
+    const [currentLanguage] = useAtom(currentLanguageState);
+    const [currentBranch] = useAtom(currentBranchState);
+    const [_c, setCount] = useAtom(countState);
 
     const update = async (id: number) => {
         const result = await detail({

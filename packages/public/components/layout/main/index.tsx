@@ -3,7 +3,7 @@ import { FC, PropsWithChildren, ReactNode, useMemo } from "react";
 import { useSearchParams } from "next/navigation";
 import { AdminLayoutLoading } from "@clover/public/components/layout/main/loading";
 import Sidebar, { SidebarProps } from "@clover/public/components/layout/main/sidebar";
-import {useRecoilValue} from "recoil";
+import {useAtom} from "jotai";
 import {teamsState} from "@clover/public/state/public";
 import {Guide} from "@clover/public/components/layout/main/guide";
 import classNames from "classnames";
@@ -40,8 +40,8 @@ export interface MainLayoutProps extends PropsWithChildren {
 
 export const MainLayout: FC<MainLayoutProps> = (props) => {
     const { path, className } = props;
-    const teams = useRecoilValue(teamsState);
-    const isLogin = useRecoilValue(isLoginState);
+    const [teams] = useAtom(teamsState);
+    const [isLogin] = useAtom(isLoginState);
     const open = useSidebarState();
     const searchParams = useSearchParams();
     useGoLogin();

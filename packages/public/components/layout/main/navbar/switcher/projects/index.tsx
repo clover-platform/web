@@ -1,11 +1,11 @@
 import {Switcher} from "@clover/public/components/layout/main/navbar/switcher";
-import {useRecoilValue} from "recoil";
+import {useAtom} from "jotai";
 import {projectsState} from "@clover/public/state/public";
 import {useCurrent} from "@clover/public/components/layout/hooks/main";
 import { t } from '@easykit/common/utils/locale';
 
 export const ProjectsSwitcher = () => {
-    const projects = useRecoilValue(projectsState);
+    const [projects] = useAtom(projectsState);
     const { projectId } = useCurrent();
 
     return <Switcher
