@@ -1,4 +1,4 @@
-import {FC, forwardRef, useEffect, useState} from "react";
+import {FC, useEffect, useState} from "react";
 import {TreeData, TreeSelect, TreeSelectProps} from "@easykit/design";
 import {authorityTree} from "@/rest/access";
 import {setDisabled, toItems} from "@/components/pages/access/authority/form/utils";
@@ -8,7 +8,7 @@ export type AuthoritySelectorProps = Omit<TreeSelectProps, "treeData"> & {
     disabledNodeId?: string;
 }
 
-const AuthoritySelector = forwardRef<HTMLSelectElement, AuthoritySelectorProps>((props, ref) => {
+export const AuthoritySelector: FC<AuthoritySelectorProps> = (props) => {
     const {value, disabledNodeId, ...rest} = props;
     const [loading, setLoading] = useState(false);
     const [items, setItems] = useState<TreeData[]>([]);
@@ -36,6 +36,4 @@ const AuthoritySelector = forwardRef<HTMLSelectElement, AuthoritySelectorProps>(
         className={"w-full"}
         placeholder={t("根节点")}
     />
-})
-
-export default AuthoritySelector;
+}

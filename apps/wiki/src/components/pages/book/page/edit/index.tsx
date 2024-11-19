@@ -5,7 +5,7 @@ import {BookLayoutProps} from "@/components/layout/book";
 import {useRouter} from "next/navigation";
 import {i18n, t} from '@easykit/common/utils/locale';
 import {PageDetail, PageProps} from "@/types/pages/page";
-import {FC, useCallback, useEffect, useRef, useState} from "react";
+import {FC, useCallback, useEffect, useRef, useState, use} from "react";
 import {Editor, EditorRef, EditorEvents} from "@easykit/editor";
 import {Button, Input, Separator, useMessage} from "@easykit/design";
 import {save} from "@/rest/page";
@@ -20,7 +20,7 @@ export type EditPageProps = {
 
 export const EditPage: FC<EditPageProps> = (props) => {
     const { detail } = props;
-    const { bookPath, pageId } = props.params;
+    const { bookPath, pageId } = use(props.params);
     useLayoutConfig<BookLayoutProps>({
         path: [
             {

@@ -1,4 +1,4 @@
-import {FC, forwardRef, PropsWithChildren, useEffect, useState} from "react";
+import {FC, PropsWithChildren, useEffect, useState} from "react";
 import { Image, PopoverContent, PopoverTrigger, useMessage } from "@easykit/design";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import {CopyIcon, InfoCircledIcon} from "@radix-ui/react-icons";
@@ -26,7 +26,7 @@ const apps = [
     }
 ]
 
-const OtpInfo: FC<OtpInfoProps> = forwardRef((props, ref) => {
+export const OtpInfo: FC<OtpInfoProps> = (props) => {
     const { secret, qrcode } = props;
     const msg = useMessage();
     const [qrcodeImage, setQrcodeImage] = useState("");
@@ -100,6 +100,4 @@ const OtpInfo: FC<OtpInfoProps> = forwardRef((props, ref) => {
             </span>
         </div>
     </div>
-});
-
-export default OtpInfo;
+}

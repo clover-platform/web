@@ -1,5 +1,5 @@
 import {Popover, PopoverContent, PopoverTrigger} from "@easykit/design";
-import {FC, forwardRef, HTMLAttributes, PropsWithChildren, useEffect, useMemo, useState} from "react";
+import {FC, HTMLAttributes, PropsWithChildren, useEffect, useMemo, useState} from "react";
 import {ImageCropper} from "@easykit/common/components/cropper";
 import cloneDeep from "lodash/cloneDeep";
 import classNames from "classnames";
@@ -25,7 +25,7 @@ const ImageIconItem: FC<ImageIconItemProps> = (props) => {
     >{props.children}</div>
 }
 
-export const ImageIconSelector = forwardRef<HTMLDivElement, ImageIconSelectorProps>((props, ref) => {
+export const ImageIconSelector: FC<ImageIconSelectorProps> = (props) => {
     const { options, onChange } = props;
     const [value, setValue] = useState<string | undefined>(props.value);
     const [files, setFiles] = useState<string[]>(!options?.includes(props.value as string) ? [props.value as string] : []);
@@ -82,4 +82,4 @@ export const ImageIconSelector = forwardRef<HTMLDivElement, ImageIconSelectorPro
             </ImageIconItem>
         </PopoverContent>
     </Popover>
-});
+}

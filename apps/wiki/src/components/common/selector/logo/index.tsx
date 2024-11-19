@@ -1,10 +1,10 @@
 import {ImageIconSelector, ImageIconSelectorProps} from "@easykit/common/components/selector/image-icon";
 import {COVERS} from "@/config/book";
-import {forwardRef, useEffect, useState} from "react";
+import {FC, useEffect, useState} from "react";
 
 export type LogoSelectorProps = Omit<ImageIconSelectorProps, "options"> & {};
 
-export const LogoSelector = forwardRef<HTMLDivElement, LogoSelectorProps>((props, ref) => {
+export const LogoSelector: FC<LogoSelectorProps> = (props) => {
     const [value, setValue] = useState<string | undefined>(props.value);
 
     useEffect(() => {
@@ -19,4 +19,4 @@ export const LogoSelector = forwardRef<HTMLDivElement, LogoSelectorProps>((props
         }}
         options={COVERS}
     />
-});
+}

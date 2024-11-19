@@ -6,7 +6,7 @@ import { t } from '@easykit/common/utils/locale';
 import {Metadata} from "next";
 
 export async function generateMetadata(props: PageProps): Promise<Metadata> {
-    const {bookPath, pageId} = props.params;
+    const {bookPath, pageId} = await props.params;
     const {data} = await detail(bookPath, pageId!);
     return {
         title: title(data?.title || t("详情")),
@@ -15,7 +15,7 @@ export async function generateMetadata(props: PageProps): Promise<Metadata> {
 }
 
 const Page = async (props: PageProps) => {
-    const {bookPath, pageId} = props.params;
+    const {bookPath, pageId} = await props.params;
     const {data} = await detail(bookPath, pageId!);
     return <DetailPage {...props} detail={data!} />;
 }

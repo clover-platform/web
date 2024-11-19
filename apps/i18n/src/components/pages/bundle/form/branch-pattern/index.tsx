@@ -1,4 +1,4 @@
-import {forwardRef, useState} from "react";
+import {FC, useState} from "react";
 import {Input} from "@easykit/design";
 import {IconAdd} from "@arco-iconbox/react-clover";
 import {Action} from "@clover/public/components/common/action";
@@ -10,7 +10,7 @@ export type BranchPatternProps = {
     onChange?: (value: string[]) => void;
 };
 
-export const BranchPattern = forwardRef<HTMLInputElement, BranchPatternProps>((props, ref) => {
+export const BranchPattern: FC<BranchPatternProps> = (props) => {
     const { value, onChange } = props;
     const [branches, setBranches] = useState<string[]>(value || ['']);
 
@@ -54,4 +54,4 @@ export const BranchPattern = forwardRef<HTMLInputElement, BranchPatternProps>((p
             })
         }
     </div>
-})
+}

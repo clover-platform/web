@@ -15,7 +15,7 @@ export async function generateMetadata(): Promise<Metadata> {
 
 const Page: FC<PageProps> = async (props) => {
     const { params } = props;
-    const {bookPath} = params;
+    const {bookPath} = await params;
     const { data } = await detail(bookPath);
     return <BookPage data={data} />
 }

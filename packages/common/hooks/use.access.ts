@@ -1,10 +1,10 @@
-import {useRecoilValue} from "@easykit/common/state";
+import {useAtom} from "jotai";
 import {accessState} from "@easykit/common/state/access";
 
 export type AccessChecker = (v: string|string[]|undefined, every?: boolean) => boolean;
 
 export const useAccess = (): AccessChecker => {
-    const permissions = useRecoilValue(accessState);
+    const [permissions] = useAtom(accessState);
     return (v: string|string[]|undefined, every = true) => {
         // return true;
         let hasPermissions = false;

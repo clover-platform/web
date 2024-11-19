@@ -1,5 +1,5 @@
 import {Tree, TreeData} from "@easykit/design";
-import {FC, forwardRef, useEffect, useState} from "react";
+import {FC, useEffect, useState} from "react";
 import {authorityTree} from "@/rest/access";
 import {toItems} from "@/components/pages/access/authority/form/utils";
 
@@ -8,7 +8,7 @@ export interface AuthorityTreeProps {
     onChange?: (value: any[]) => void;
 }
 
-const AuthorityTree: FC<AuthorityTreeProps> = forwardRef((props, ref) => {
+export const AuthorityTree: FC<AuthorityTreeProps> = (props) => {
     const {
         value = [],
         onChange = (value: any[]) => {},
@@ -48,6 +48,4 @@ const AuthorityTree: FC<AuthorityTreeProps> = forwardRef((props, ref) => {
         //     onChange(nodes.map(({id}) => id));
         // }}
     />
-});
-
-export default AuthorityTree;
+}

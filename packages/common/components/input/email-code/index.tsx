@@ -1,5 +1,5 @@
 import { Button, Input, useMessage, InputProps } from "@easykit/design";
-import { useMemo, useState, useCallback, useRef, useEffect, ChangeEvent, forwardRef } from "react";
+import {useMemo, useState, useCallback, useRef, useEffect, ChangeEvent, FC} from "react";
 import { isEmail } from "@easykit/common/utils";
 import { i18n } from '@easykit/common/utils/locale';
 import { t } from '@easykit/common/utils/locale';
@@ -10,7 +10,7 @@ interface EmailCodeInputProps extends InputProps {
     placeholder: string;
 }
 
-const EmailCodeInput = forwardRef<HTMLInputElement, EmailCodeInputProps>((props: EmailCodeInputProps, ref) => {
+export const EmailCodeInput: FC<EmailCodeInputProps> = (props: EmailCodeInputProps) => {
     const {
         api = () => {},
         email = "",
@@ -78,7 +78,6 @@ const EmailCodeInput = forwardRef<HTMLInputElement, EmailCodeInputProps>((props:
             className={"flex-1"} {...rest}
             onChange={handleChange}
             maxLength={6}
-            ref={ref}
         />
         <Button
             loading={loading}
@@ -90,6 +89,4 @@ const EmailCodeInput = forwardRef<HTMLInputElement, EmailCodeInputProps>((props:
             {buttonText}
         </Button>
     </div>
-});
-
-export default EmailCodeInput;
+}

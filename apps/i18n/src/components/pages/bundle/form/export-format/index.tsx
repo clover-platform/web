@@ -1,4 +1,4 @@
-import {forwardRef, useState} from "react";
+import {FC, useState} from "react";
 import {RadioGroup, RadioGroupItem} from "@easykit/design";
 import classNames from "classnames";
 import {FormatConfigButton} from "@/components/pages/bundle/form/export-format/config/button";
@@ -14,14 +14,13 @@ export type ExportFormatProps = {
     onChange?: (value: ExportFormatValue) => void;
 };
 
-export const ExportFormat = forwardRef<HTMLInputElement, ExportFormatProps>((props, ref) => {
+export const ExportFormat: FC<ExportFormatProps> = (props) => {
     const { value: v } = props;
     const [value, setValue] = useState<ExportFormatValue>(v!);
     const [formats, setFormats] = useState<ExportFormatConfig[]>(getSupportedFormats().map(f => ({ ...f, config: f.configDefault})));
 
     return <div className={"bg-white rounded-md border"}>
         <RadioGroup
-            ref={ref}
             value={value?.format}
             onValueChange={(v) => {
                 const format = formats.find(f => f.id === v);
@@ -70,4 +69,4 @@ export const ExportFormat = forwardRef<HTMLInputElement, ExportFormatProps>((pro
             }
         </RadioGroup>
     </div>
-});
+}

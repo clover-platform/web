@@ -1,6 +1,6 @@
 import {LogoSelector} from "@/components/common/selector/logo";
 import {Input} from "@easykit/design";
-import {forwardRef, useCallback, useEffect, useState} from "react";
+import {FC, useCallback, useEffect, useState} from "react";
 import classNames from "classnames";
 
 export type NameLogoInputValue = {
@@ -20,7 +20,7 @@ const DEFAULT_VALUE = {
     name: '',
 }
 
-export const NameLogoInput = forwardRef<HTMLDivElement, NameLogoInputProps>((props, ref) => {
+export const NameLogoInput: FC<NameLogoInputProps> = (props) => {
     const { className, placeholder, onChange } = props;
     const [value, setValue] = useState<NameLogoInputValue|undefined>(props.value);
 
@@ -50,4 +50,4 @@ export const NameLogoInput = forwardRef<HTMLDivElement, NameLogoInputProps>((pro
         <LogoSelector value={value?.logo} onChange={onLogoChange} />
         <Input value={value?.name || ""} onChange={(e) => onInputChange(e.target.value)} placeholder={placeholder} className={"flex-1"} />
     </div>
-});
+}

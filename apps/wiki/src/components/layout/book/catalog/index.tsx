@@ -1,4 +1,4 @@
-import {useCallback, useEffect, useMemo, useRef, useState, forwardRef, useImperativeHandle} from "react";
+import {useCallback, useEffect, useMemo, useRef, useState, useImperativeHandle, FC, Ref} from "react";
 import {changeCatalogParent} from "@/rest/page";
 import {useParams} from "next/navigation";
 import {Catalog} from "@/types/pages/book";
@@ -23,16 +23,17 @@ import {CatalogLoading} from "@/components/layout/book/catalog/loading";
 import "./style.css";
 import {useCatalogLoader} from "@/hooks/use.catalog.loader";
 
-export type CatalogTreeProps = {
-    onExpand?: (expandedKeys: string[], allKeys: string[]) => void;
-}
-
 export type CatalogTreeRef = {
     expand: () => void;
     collapse: () => void;
 }
 
-export const CatalogTree = forwardRef<CatalogTreeRef, CatalogTreeProps>((props, ref) => {
+export type CatalogTreeProps = {
+    onExpand?: (expandedKeys: string[], allKeys: string[]) => void;
+    ref: Ref<CatalogTreeRef>
+}
+
+export const CatalogTree: FC<CatalogTreeProps> = ({ref, ...props}) => {
     const { onExpand } = props;
     const params = useParams();
     const {bookPath, pageId} = params;
@@ -163,4 +164,4 @@ export const CatalogTree = forwardRef<CatalogTreeRef, CatalogTreeProps>((props, 
             />
         }
     </div>
-})
+}

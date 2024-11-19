@@ -1,9 +1,9 @@
-import {forwardRef} from "react";
 import {cn, Input, InputProps} from "@easykit/design";
 import {IconSearch} from "@arco-iconbox/react-clover";
 import { t } from '@easykit/common/utils/locale';
+import {FC} from "react";
 
-const SearchInput = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
+export const SearchInput: FC<InputProps> = (props) => {
     const {
         className,
         placeholder = t("请输入关键词"),
@@ -18,11 +18,8 @@ const SearchInput = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
         </div>
         <Input
             {...rest}
-            ref={ref}
             placeholder={placeholder}
             className={"pl-8"}
         />
     </div>
-})
-
-export default SearchInput;
+}

@@ -1,7 +1,7 @@
 import {SCHEMA} from "@/config/pages/access/role/form";
 import {Form, FormItem, Input, Switch, Textarea} from "@easykit/design";
 import {FC, PropsWithChildren} from "react";
-import AuthorityTree from "../../authority/form/tree";
+import { AuthorityTree } from "../../authority/form/tree";
 import { t } from '@easykit/common/utils/locale';
 
 export interface RoleFormProps extends PropsWithChildren {
