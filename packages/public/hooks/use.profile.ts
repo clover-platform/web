@@ -1,6 +1,7 @@
 import {accountInfoState} from "@clover/public/state/account";
-import {useRecoilValue} from "recoil";
+import {useAtom} from "jotai";
 
 export const useProfile = () => {
-    return useRecoilValue(accountInfoState);
+    const [profile] = useAtom(accountInfoState);
+    return profile;
 }

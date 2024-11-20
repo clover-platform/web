@@ -7,7 +7,7 @@ import {
     DropdownMenuTrigger,
     Button, Checkbox,
 } from "@easykit/design";
-import { forwardRef, useRef, useState } from "react";
+import {FC, useRef, useState} from "react";
 import { ChevronDownIcon } from "@radix-ui/react-icons";
 import { useDocumentClick } from "@easykit/common/hooks";
 import { t } from '@easykit/common/utils/locale';
@@ -41,7 +41,7 @@ const ROLE_OPTIONS: RoleOption[] = [
     },
 ];
 
-export const RoleSelect = forwardRef<HTMLButtonElement, RoleSelectProps>((props, ref) => {
+export const RoleSelect: FC<RoleSelectProps> = (props) => {
     const [open, setOpen] = useState(false);
     const contentRef = useRef<any>(null);
     const buttonRef = useRef<any>(null);
@@ -107,4 +107,4 @@ export const RoleSelect = forwardRef<HTMLButtonElement, RoleSelectProps>((props,
             }
         </DropdownMenuContent>
     </DropdownMenu>
-});
+}

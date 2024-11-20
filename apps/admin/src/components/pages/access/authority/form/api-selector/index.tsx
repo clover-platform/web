@@ -1,5 +1,5 @@
-import { cn, ComboSelect } from "@easykit/design";
-import { forwardRef, useEffect, useState } from "react";
+import {cn, ComboSelect, ComboSelectProps} from "@easykit/design";
+import {FC, useEffect, useState} from "react";
 import { ComboSelectOptionProps } from "@easykit/design/components/uix/combo-select";
 import { apiList } from "@/rest/access";
 import { t } from '@easykit/common/utils/locale'
@@ -30,7 +30,7 @@ export const ApiItem = (item: AccessApi) => {
     </div>
 }
 
-const ApiSelector = forwardRef((props, ref) => {
+export const ApiSelector: FC<ComboSelectProps> = ({ref, ...props}) => {
     const [options, setOptions] = useState<ComboSelectOptionProps<AccessApi>[]>([]);
     const [loading, setLoading] = useState(true);
 
@@ -70,6 +70,4 @@ const ApiSelector = forwardRef((props, ref) => {
             return result.length;
         }}
     />
-});
-
-export default ApiSelector;
+};

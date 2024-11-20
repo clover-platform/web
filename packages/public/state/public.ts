@@ -1,16 +1,7 @@
-import {atom} from "recoil";
+import {atom} from "jotai";
 
-export const teamsState = atom<any[]>({
-    key: 'public/teams',
-    default: []
-})
+export const teamsState = atom<any[]>([])
 
-export const projectsState = atom<any[]>({
-    key: 'public/projects',
-    default: []
-})
+export const projectsState = atom<any[]>([])
 
-export const localeState = atom<string>({
-    key: 'public/locale',
-    default: "zh-cn"
-})
+export const localeState = atom<string>("zh-cn")

@@ -1,4 +1,4 @@
-import {useRecoilValue} from "recoil";
+import {useAtom} from "jotai";
 import {currentEntryState, entriesState} from "@/state/worktop";
 import {FC, PropsWithChildren, useMemo} from "react";
 import classNames from "classnames";
@@ -9,8 +9,8 @@ export type ResultCheckProps = PropsWithChildren<{
 }>;
 
 export const EntryCheck: FC<ResultCheckProps> = (props) => {
-    const currentIndex = useRecoilValue(currentEntryState);
-    const entries = useRecoilValue(entriesState);
+    const [currentIndex] = useAtom(currentEntryState);
+    const [entries] = useAtom(entriesState);
     const current = useMemo(() => {
         if(entries && entries.length) {
             return entries[currentIndex];

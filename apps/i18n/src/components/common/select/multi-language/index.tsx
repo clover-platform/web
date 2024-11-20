@@ -1,9 +1,9 @@
-import { FC, forwardRef, HTMLAttributes, useState } from "react";
+import { FC, HTMLAttributes, useState } from "react";
 import { Checkbox, CheckboxProps, Input, ScrollArea } from "@easykit/design";
 import classNames from "classnames";
 import { Action } from "@clover/public/components/common/action";
 import { IconDelete } from "@arco-iconbox/react-clover";
-import { useRecoilValue } from "recoil";
+import { useAtom } from "jotai";
 import { languagesState } from "@/state/public";
 import { t } from '@easykit/common/utils/locale';
 
@@ -54,10 +54,10 @@ const SelectedLangItem: FC<SelectedLangItemProps> = (props) => {
     </div>
 }
 
-export const MultiLanguageSelect = forwardRef<HTMLDivElement, MultiLanguageSelectProps>((props, ref) => {
+export const MultiLanguageSelect: FC<MultiLanguageSelectProps> = (props) => {
     const [selected, setSelected] = useState<string[]>(props.value || []);
     const [keyword, setKeyword] = useState<string>("");
-    const languages = useRecoilValue(languagesState);
+    const [languages] = useAtom(languagesState);
 
     const options = languages.map((lang) => {
         return {
@@ -73,7 +73,7 @@ export const MultiLanguageSelect = forwardRef<HTMLDivElement, MultiLanguageSelec
             || option.value.toLowerCase().includes(keyword.toLowerCase())
     );
 
-    return <div ref={ref} className={classNames("relative", props.className)}>
+    return <div className={classNames("relative", props.className)}>
         <div className={"flex justify-start items-start border rounded-md"}>
             <div className={"flex-1 h-96 border-r flex justify-start items-start flex-col"}>
                 <div className={"p-2 border-b w-full"}>
@@ -142,4 +142,4 @@ export const MultiLanguageSelect = forwardRef<HTMLDivElement, MultiLanguageSelec
             </div>
         </div>
     </div>
-})
+}

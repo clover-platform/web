@@ -1,13 +1,13 @@
 import { Command, CommandInput, CommandItem, CommandList, SheetClose } from "@easykit/design";
 import {CheckIcon} from "@radix-ui/react-icons";
-import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
+import { useAtom } from "jotai";
 import { branchesState, currentBranchState, currentEntryState } from "@/state/worktop";
 import { t } from '@easykit/common/utils/locale';
 
 export const MenuBranchSheet = () => {
-    const branches = useRecoilValue(branchesState);
-    const [current, setCurrent] = useRecoilState(currentBranchState);
-    const setCurrentEntry = useSetRecoilState(currentEntryState);
+    const [branches] = useAtom(branchesState);
+    const [current, setCurrent] = useAtom(currentBranchState);
+    const [_, setCurrentEntry] = useAtom(currentEntryState);
 
     return <div className={"space-y-2"}>
         <div className={"text-xl font-bold"}>{t("分支")}</div>

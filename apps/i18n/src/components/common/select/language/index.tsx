@@ -1,16 +1,16 @@
-import { forwardRef } from "react";
 import {cn, ComboSelect, ComboSelectProps} from "@easykit/design";
-import { useRecoilValue } from "recoil";
+import { useAtom } from "jotai";
 import { languagesState } from "@/state/public";
 import { t } from '@easykit/common/utils/locale';
+import {FC} from "react";
 
 export type LanguageSelectProps = {
     className?: string;
 } & ComboSelectProps;
 
-export const LanguageSelect = forwardRef<HTMLSelectElement, LanguageSelectProps>((props, ref) => {
+export const LanguageSelect: FC<LanguageSelectProps> = ({ref, ...props}) => {
     const {className, ...rest} = props;
-    const languages = useRecoilValue(languagesState);
+    const [languages] = useAtom(languagesState);
 
     const options = languages.map((lang) => {
         return {
@@ -41,5 +41,4 @@ export const LanguageSelect = forwardRef<HTMLSelectElement, LanguageSelectProps>
             ) ? 1 : 0;
         }}
     />
-
-})
+}

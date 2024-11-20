@@ -1,6 +1,3 @@
-import {atom} from "recoil";
+import {atom} from "jotai";
 
-export const layoutConfigState = atom<any>({
-    key: 'layout/config',
-    default: null
-})
+export const layoutConfigState = atom<any>()

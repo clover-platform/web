@@ -1,6 +1,6 @@
 'use client';
 
-import {FC, useCallback, useMemo, useRef} from "react";
+import {FC, use, useCallback, useMemo, useRef} from "react";
 import {useLayoutConfig} from "@clover/public/components/layout/hooks/use.layout.config";
 import {BookLayoutProps} from "@/components/layout/book";
 import {PageDetail, PageProps} from "@/types/pages/page";
@@ -24,7 +24,7 @@ export type DetailPageProps = {
 
 export const DetailPage: FC<DetailPageProps> = (props) => {
     const { detail } = props;
-    const { bookPath, pageId } = props.params;
+    const { bookPath, pageId } = use(props.params);
     useLayoutConfig<BookLayoutProps>({
         path: [
             {

@@ -14,7 +14,7 @@ import {languages} from "@/rest/common";
 export type RootLayoutProps = PropsWithChildren<{}>;
 
 const RootLayout: FC<RootLayoutProps> = async (props) => {
-    const locale = getLocale();
+    const locale = await getLocale();
     await changeLanguage(locale);
     const initState = await loadState();
     const { success, data } = await languages();

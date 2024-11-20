@@ -1,6 +1,6 @@
 import Tribute from "tributejs";
 import {
-    forwardRef,
+    FC, Ref,
     useEffect,
     useImperativeHandle,
     useRef,
@@ -15,9 +15,12 @@ export type CommentEditorProps = {
     className?: string;
     value?: string;
     onChange?: (value: string) => void;
+    ref?: Ref<{
+        reset: () => void;
+    }>;
 };
 
-export const MentionsEditor = forwardRef<any, CommentEditorProps>((props, ref) => {
+export const MentionsEditor: FC<CommentEditorProps> = ({ref, ...props}) => {
     const {
         value,
         onChange,
@@ -83,4 +86,4 @@ export const MentionsEditor = forwardRef<any, CommentEditorProps>((props, ref) =
             props.className,
         )}
     />
-});
+}

@@ -1,10 +1,12 @@
 import {User} from "@clover/public/types/account";
 
+type Params = Promise<{
+    bookPath: string;
+    pageId?: number;
+}>
+
 export type PageProps = {
-    params: {
-        bookPath: string;
-        pageId?: number;
-    }
+    params: Params
 }
 
 export type PageDetail = {

@@ -1,7 +1,7 @@
 import {Input, InputProps} from "@easykit/design";
-import {ChangeEvent, forwardRef} from "react";
+import {ChangeEvent, FC} from "react";
 
-const CodeInput = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
+export const CodeInput: FC<InputProps> = (props) => {
     const {
         onChange = (e) => {},
         ...rest
@@ -16,10 +16,7 @@ const CodeInput = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
 
     return <Input
         {...rest}
-        ref={ref}
         onChange={handleChange}
         maxLength={6}
     />
-});
-
-export default CodeInput;
+}

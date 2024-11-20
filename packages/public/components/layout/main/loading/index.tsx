@@ -1,10 +1,10 @@
-import { useSetRecoilState } from "recoil";
+import { useAtom } from "jotai";
 import { loadingState } from "@clover/public//components/layout/main/state";
 import { useRef } from "react";
 import { useFetchIntercept } from "@easykit/common/hooks/use.fetch.intercept";
 
 export const AdminLayoutLoading = () => {
-    const setLoading = useSetRecoilState(loadingState);
+    const [_, setLoading] = useAtom(loadingState);
     const timerRef = useRef<any>();
 
     useFetchIntercept({

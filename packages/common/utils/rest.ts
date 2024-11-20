@@ -101,21 +101,22 @@ const _handleUrl = (url: string) => {
     return url;
 };
 
-const _handleHeaders = (headers: any) => {
+const _handleHeaders = async (headers: any) => {
     const result = {
         ...(headers || {}),
         timezone: - (new Date().getTimezoneOffset() / 60)
     };
     const aliasHeaders = {};
-    Object.keys(_aliasMap).forEach((key) => {
+    const keys = Object.keys(_aliasMap);
+    for(let key of keys) {
         const config = _aliasMap[key];
         const { headers } = config;
         if (typeof headers === 'function') {
-            Object.assign(aliasHeaders, headers() || {});
+            Object.assign(aliasHeaders, await headers() || {});
         } else {
             Object.assign(aliasHeaders, headers || {});
         }
-    });
+    }
     Object.assign(aliasHeaders, result);
     return aliasHeaders;
 };
@@ -141,16 +142,18 @@ function request<T> (config: RestRequestConfig): AbortPromise<T> {
     const source = CancelToken.source();
     const p = new Promise<T>((resolve) => {
         if(url) {
-            rest({
-                ...config,
-                url: _handleUrl(url),
-                headers: _handleHeaders(headers),
-                cancelToken: source.token
-            }).then((res) => {
-                resolve(res as any);
-            }).catch((err) => {
-                resolve(err);
-            });
+            _handleHeaders(headers).then((headers) => {
+                rest({
+                    ...config,
+                    url: _handleUrl(url),
+                    headers,
+                    cancelToken: source.token
+                }).then((res) => {
+                    resolve(res as any);
+                }).catch((err) => {
+                    resolve(err);
+                });
+            })
         }else{
             const result = {
                 code: ERROR_CODE,

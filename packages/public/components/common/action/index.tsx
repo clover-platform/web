@@ -1,4 +1,4 @@
-import { forwardRef, HTMLAttributes, PropsWithChildren } from "react";
+import {FC, HTMLAttributes, PropsWithChildren} from "react";
 import classNames from "classnames";
 
 export type ActionProps = PropsWithChildren<HTMLAttributes<HTMLButtonElement>> & {
@@ -8,7 +8,7 @@ export type ActionProps = PropsWithChildren<HTMLAttributes<HTMLButtonElement>> &
     elType?: 'button' | 'span';
 };
 
-export const Action = forwardRef<HTMLButtonElement, ActionProps>((props, ref) => {
+export const Action: FC<ActionProps> = (props) => {
     const {
         theme = 'dark',
         active = false,
@@ -19,7 +19,6 @@ export const Action = forwardRef<HTMLButtonElement, ActionProps>((props, ref) =>
 
     const elProps = {
         ...rest,
-        ref,
         disabled,
         className: classNames(
             "p-2 flex justify-center items-center rounded-sm border border-transparent border-solid",
@@ -46,4 +45,4 @@ export const Action = forwardRef<HTMLButtonElement, ActionProps>((props, ref) =>
     >
         {props.children}
     </span>
-})
+}

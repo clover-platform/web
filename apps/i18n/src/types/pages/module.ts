@@ -1,9 +1,9 @@
 import { User } from "@clover/public/types/account";
 
 export type ModulePageProps = {
-    params: {
+    params: Promise<{
         module: string;
-    }
+    }>
 }
 
 export type Module = {

@@ -1,12 +1,12 @@
 import {ComboSelect, ComboSelectOptionProps, ComboSelectProps} from "@easykit/design";
-import {FC, forwardRef, useCallback, useEffect, useMemo, useState} from "react";
+import {FC, useCallback, useEffect, useMemo, useState} from "react";
 import debounce from "lodash/debounce";
 import {list} from "@/rest/book";
 import {Book} from "@/types/pages/book";
 
 export type BookSelectorProps = ComboSelectProps;
 
-export const BookSelector: FC<BookSelectorProps> = forwardRef<HTMLSelectElement, BookSelectorProps>((props, ref) => {
+export const BookSelector: FC<BookSelectorProps> = (props) => {
     const [result, setResult] = useState<Book[]>([]);
     const [loading, setLoading] = useState<boolean>(false);
 
@@ -39,7 +39,6 @@ export const BookSelector: FC<BookSelectorProps> = forwardRef<HTMLSelectElement,
 
     return <ComboSelect
         {...props}
-        ref={ref}
         options={options}
         loading={loading}
         placeholder={"请选择"}
@@ -54,4 +53,4 @@ export const BookSelector: FC<BookSelectorProps> = forwardRef<HTMLSelectElement,
             onSearch(value)?.then();
         }}
     />
-})
+}

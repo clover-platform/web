@@ -1,12 +1,11 @@
-import { forwardRef, HTMLAttributes, PropsWithChildren } from "react";
+import {FC, HTMLAttributes, PropsWithChildren} from "react";
 import classNames from "classnames";
 
 export type ActionButtonProps = {} & PropsWithChildren<HTMLAttributes<HTMLButtonElement>>;
 
-export const ActionButton = forwardRef<HTMLButtonElement, ActionButtonProps>((props, ref) => {
+export const ActionButton: FC<ActionButtonProps> = (props) => {
     return <button
         {...props}
-        ref={ref}
         className={classNames(
             "w-8 h-8 flex justify-center items-center rounded-sm",
             "border bg-white/10 border-white/40 border-solid",
@@ -18,4 +17,4 @@ export const ActionButton = forwardRef<HTMLButtonElement, ActionButtonProps>((pr
     >
         {props.children}
     </button>
-})
+}

@@ -1,4 +1,4 @@
-import {useRecoilValue} from "recoil";
+import {useAtom} from "jotai";
 import {accountInfoState, isLoginState} from "@clover/public/state/account";
 import {useRouter} from "next/navigation";
 import bus from "@easykit/common/events";
@@ -6,7 +6,7 @@ import {UNAUTHORIZED} from "@clover/public/events/auth";
 import { useEffect } from "react";
 
 export const useCurrent = () => {
-    const account = useRecoilValue(accountInfoState);
+    const [account] = useAtom(accountInfoState);
     return {
         teamId: account?.currentTeamId,
         projectId: account?.currentProjectId
@@ -15,7 +15,7 @@ export const useCurrent = () => {
 
 export const useGoLogin = () => {
     const router = useRouter();
-    const isLogin = useRecoilValue(isLoginState);
+    const [isLogin] = useAtom(isLoginState);
     const goLogin = () => {
         router.push(`/login?from=${encodeURIComponent(location.href)}`)
     }

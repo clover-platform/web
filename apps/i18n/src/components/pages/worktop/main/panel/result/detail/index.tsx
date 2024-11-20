@@ -2,7 +2,7 @@ import { Badge, Dropdown, DropdownMenuItemProps, Tooltip, useAlert, useMessage }
 import { Action } from "@clover/public/components/common/action";
 import { ArrowLeftIcon, ArrowRightIcon, CopyIcon, DotsHorizontalIcon } from "@radix-ui/react-icons";
 import { EditEntryButton } from "@/components/pages/worktop/main/panel/entry/edit/button";
-import { useRecoilState, useRecoilValue } from "recoil";
+import { useAtom } from "jotai";
 import { branchesState, currentEntryState, entriesState } from "@/state/worktop";
 import { useEntriesUpdater } from "@/components/layout/worktop/hooks";
 import { FC, ReactNode } from "react";
@@ -48,11 +48,11 @@ const menus: DropdownMenuItemProps[] = [
 ];
 
 export const Detail = () => {
-    const entries = useRecoilValue(entriesState);
-    const [current, setCurrent] = useRecoilState(currentEntryState);
+    const [entries] = useAtom(entriesState);
+    const [current, setCurrent] = useAtom(currentEntryState);
     const entry = entries[current];
     const { update, remove } = useEntriesUpdater();
-    const branches = useRecoilValue(branchesState);
+    const [branches] = useAtom(branchesState);
     const branch = branches.find(b => b.id === entry?.branchId);
     const msg = useMessage();
     const alert = useAlert();

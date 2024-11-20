@@ -1,6 +1,6 @@
 import "./style.css";
 import "../assets/font/font.css";
-import { RecoilRoot } from "recoil";
+import { Provider } from "jotai";
 import { Background } from "@/launcher/background";
 import { LauncherConfig } from "@/interface";
 import { FC, useEffect } from "react";
@@ -26,7 +26,7 @@ const TabLauncherCore: FC<TabLauncherProps> = (props) => {
 }
 
 export const TabLauncher: FC<TabLauncherProps> = (props) => {
-    return <RecoilRoot>
+    return <Provider>
         <TabLauncherCore {...props} />
-    </RecoilRoot>
+    </Provider>
 };

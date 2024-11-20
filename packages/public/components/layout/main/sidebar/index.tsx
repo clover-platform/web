@@ -1,6 +1,6 @@
 import {FC, PropsWithChildren, ReactNode} from "react";
 import { cn, ScrollArea, Tooltip } from "@easykit/design";
-import { useRecoilValue } from "recoil";
+import { useAtom } from "jotai";
 import classNames from 'classnames';
 import {IconAdd, IconGantt, IconHelp, IconProject, IconSearch, IconSetting, IconWiki} from "@arco-iconbox/react-clover";
 import { loadingState } from "@clover/public/components/layout/main/state";
@@ -27,7 +27,7 @@ const Sidebar: FC<SidebarProps> = (props) => {
         active,
     } = props;
 
-    const loading = useRecoilValue(loadingState);
+    const [loading] = useAtom(loadingState);
     const open = useSidebarState();
 
     const iconClassName = "text-base font-bold";

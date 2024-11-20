@@ -2,7 +2,7 @@ import { getLangCode, isMobile } from "@easykit/common/utils";
 import Bowser from 'bowser';
 import { getToken } from "@clover/public/utils/token";
 
-export const get = () => {
+export const get = async () => {
     const browser = Bowser.parse(window.navigator.userAgent);
     const acceptLanguage = getLangCode();
     const headers: any = {
@@ -13,6 +13,7 @@ export const get = () => {
         "CLIENT-SYSTEM-VERSION": browser.os.version,
         "CLIENT-TIMESTAMP": Date.now()
     }
-    if(getToken()) headers['Authorization'] = "Bearer " + getToken()?.token;
+    const token = await getToken();
+    if(token) headers['Authorization'] = "Bearer " + token?.token;
     return headers;
 }

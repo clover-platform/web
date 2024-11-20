@@ -1,9 +1,8 @@
-import publicConfig from "@clover/public/config/next.js";
+import publicConfig from "@clover/public/config/next";
 import withPageImports from "@easykit/page-imports";
 
 const configWrapper = withPageImports({
     imports: [
-        "@/plugin/rest.server",
         "@clover/public/plugin/rest.server",
         "@/plugin/locales",
         "@clover/public/plugin/locales",
@@ -11,8 +10,7 @@ const configWrapper = withPageImports({
     ]
 })
 
-/** @type {import('next').NextConfig} */
 export default configWrapper({
     ...publicConfig,
-    assetPrefix: "/assets/i18n/static"
-});
+    assetPrefix: "/assets/main/static",
+})

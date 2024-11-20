@@ -1,5 +1,5 @@
 import { ResizableHandle, ResizablePanel, ResizablePanelGroup } from "@easykit/design";
-import {useRecoilState, useSetRecoilState} from "recoil";
+import { useAtom } from "jotai";
 import {currentEntryState, leftSideOpenState, rightSideOpenState} from "@/state/worktop";
 import { useEffect, useRef } from "react";
 import { ImperativePanelHandle } from 'react-resizable-panels';
@@ -12,12 +12,12 @@ import bus from "@easykit/common/events";
 import {ENTRY_RELOAD} from "@/events/worktop";
 
 export const MainPanel = () => {
-    const [leftSideOpen, setLeftSideOpen] = useRecoilState(leftSideOpenState);
-    const [rightSideOpen, setRightSideOpen] = useRecoilState(rightSideOpenState);
+    const [leftSideOpen, setLeftSideOpen] = useAtom(leftSideOpenState);
+    const [rightSideOpen, setRightSideOpen] = useAtom(rightSideOpenState);
     const leftRef = useRef<ImperativePanelHandle>(null);
     const rightRef = useRef<ImperativePanelHandle>(null);
     const {pages, total, entries, loading, load} = useEntriesLoader();
-    const setCurrent = useSetRecoilState(currentEntryState);
+    const [_, setCurrent] = useAtom(currentEntryState);
 
     useEffect(() => {
         leftSideOpen ? leftRef.current?.expand() : leftRef.current?.collapse();

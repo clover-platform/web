@@ -8,7 +8,7 @@ import {
     IconSetting,
 } from "@arco-iconbox/react-clover";
 import { countState, leftSideOpenState, rightSideOpenState } from "@/state/worktop";
-import { useRecoilState, useRecoilValue } from "recoil";
+import { useAtom } from "jotai";
 import {useParams, useRouter} from "next/navigation";
 import { MenuSheet } from "@/components/pages/worktop/control-bar/menu-sheet";
 import { useState } from "react";
@@ -18,11 +18,11 @@ import { BranchAction } from "@/components/pages/worktop/control-bar/action/bran
 export const ControlBar = () => {
     const { module } = useParams();
     const router = useRouter();
-    const [leftSideOpen, setLeftSideOpen] = useRecoilState(leftSideOpenState);
-    const [rightSideOpen, setRightSideOpen] = useRecoilState(rightSideOpenState);
+    const [leftSideOpen, setLeftSideOpen] = useAtom(leftSideOpenState);
+    const [rightSideOpen, setRightSideOpen] = useAtom(rightSideOpenState);
     const [menuOpen, setMenuOpen] = useState(false);
     const [menuActive, setMenuActive] = useState("project");
-    const count = useRecoilValue(countState);
+    const [count] = useAtom(countState);
 
     const showMenu = () => {
         setMenuActive("project");

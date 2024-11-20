@@ -1,9 +1,9 @@
 import {useEffect} from "react";
-import {useSetRecoilState} from "recoil";
+import {useAtom} from "jotai";
 import {layoutConfigState} from "@clover/public/state/layout";
 
 export const useLayoutConfig = <T>(config: T) => {
-    const setConfig = useSetRecoilState(layoutConfigState);
+    const [_, setConfig] = useAtom(layoutConfigState);
     useEffect(() => {
         setConfig(config);
         return () => {

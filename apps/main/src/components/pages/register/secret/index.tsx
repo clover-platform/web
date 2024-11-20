@@ -1,7 +1,7 @@
 import { FormItem, useMessage } from "@easykit/design";
 import { FC, PropsWithChildren, useEffect, useState } from "react";
 import {otpSecret} from "@/rest/auth";
-import OtpInfo from "@/components/common/account/otp-info";
+import {OtpInfo} from "@/components/common/account/otp-info";
 import { t } from '@easykit/common/utils/locale';
 
 const SecretItem: FC<PropsWithChildren> = (props) => {

@@ -3,8 +3,7 @@
     "compilerOptions": {
         "jsx": "react-jsx",
         "paths": {
-            "@clover/public/*": [ "./*"],
-            "@easy-kit/i18n/*": [ "../../packages/i18n/*"]
+            "@clover/public/*": [ "./*"]
         }
     },
     "include": [

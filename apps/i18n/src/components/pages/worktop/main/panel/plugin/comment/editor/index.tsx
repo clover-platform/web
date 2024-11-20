@@ -4,7 +4,7 @@ import { IconSend } from "@arco-iconbox/react-clover";
 import { useRef, useState } from "react";
 import { Spin, useMessage } from "@easykit/design";
 import { add } from "@/rest/entry.comment";
-import { useRecoilValue } from "recoil";
+import { useAtom } from "jotai";
 import { currentEntryState, currentLanguageState, entriesState } from "@/state/worktop";
 import classNames from "classnames";
 import bus from '@easykit/common/events';
@@ -17,10 +17,10 @@ export const CommentEditor = () => {
     const editorRef = useRef<any>();
     const [loading, setLoading] = useState<boolean>(false);
     const msg = useMessage();
-    const entries = useRecoilValue(entriesState);
-    const current = useRecoilValue(currentEntryState);
+    const [entries] = useAtom(entriesState);
+    const [current] = useAtom(currentEntryState);
     const entry = entries[current];
-    const language = useRecoilValue(currentLanguageState);
+    const [language] = useAtom(currentLanguageState);
     const { module } = useParams();
 
     const send = async () => {

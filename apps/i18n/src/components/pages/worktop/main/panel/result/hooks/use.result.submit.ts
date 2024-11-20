@@ -1,6 +1,6 @@
 import bus from "@easykit/common/events";
 import {ENTRY_RESULT_RELOAD} from "@/events/worktop";
-import {useRecoilState, useRecoilValue} from "recoil";
+import {useAtom} from "jotai";
 import {currentEntryState, currentLanguageState, entriesState} from "@/state/worktop";
 import {useState} from "react";
 import {useMessage} from "@easykit/design";
@@ -10,9 +10,9 @@ import { t } from '@easykit/common/utils/locale';
 import {useParams} from "next/navigation";
 
 export const useResultSubmit = (): [(content: string) => Promise<any>, boolean] => {
-    const entries = useRecoilValue(entriesState);
-    const [current, setCurrent] = useRecoilState(currentEntryState);
-    const language = useRecoilValue(currentLanguageState);
+    const [entries] = useAtom(entriesState);
+    const [current, setCurrent] = useAtom(currentEntryState);
+    const [language] = useAtom(currentLanguageState);
     const entry = entries[current];
     const [loading, setLoading] = useState(false);
     const msg = useMessage();

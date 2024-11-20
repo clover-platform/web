@@ -1,8 +1,8 @@
-import {Select} from "@easykit/design";
-import {forwardRef} from "react";
+import {Select, SelectProps} from "@easykit/design";
 import { t } from '@easykit/common/utils/locale';
+import {FC} from "react";
 
-const EnableSelector = forwardRef((props, ref) => {
+export const EnableSelector: FC<Omit<SelectProps, "options">> = (props) => {
     return <Select
         {...props}
         placeholder={t("请选择状态")}
@@ -12,6 +12,4 @@ const EnableSelector = forwardRef((props, ref) => {
             { label: t("禁用"), value: '0' }
         ]}
     />
-});
-
-export default EnableSelector;
+}

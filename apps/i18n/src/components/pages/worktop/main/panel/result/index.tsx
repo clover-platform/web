@@ -1,8 +1,8 @@
-import { useRecoilValue } from "recoil";
-import {currentEntryState, entriesState} from "@/state/worktop";
+import { useAtom } from "jotai";
+import {currentEntryState} from "@/state/worktop";
 import { Editor } from "@/components/pages/worktop/main/panel/result/editor";
 import { ResultList } from "@/components/pages/worktop/main/panel/result/list";
-import {useEffect, useMemo, useState} from "react";
+import {useEffect, useState} from "react";
 import { ENTRY_RESULT_EDITOR_RESET } from "@/events/worktop";
 import bus from "@easykit/common/events";
 import { Detail } from "@/components/pages/worktop/main/panel/result/detail";
@@ -22,7 +22,7 @@ export const ResultPanel = () => {
         }
     }, []);
 
-    const current = useRecoilValue(currentEntryState);
+    const [current] = useAtom(currentEntryState);
 
     return <EntryCheck>
         <div className={"w-full h-full flex justify-center items-center flex-col"}>

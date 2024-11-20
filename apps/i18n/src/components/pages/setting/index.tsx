@@ -104,7 +104,7 @@ export const ModuleSettingPage = () => {
         <SettingTabsTitle active={"general"} />
         <Loading loading={loading} className={"space-y-4"}>
             <div className={"text-lg font-medium"}>{t("基本信息")}</div>
-            <Form<UpdateInfo>
+            <Form
                 key={formKey}
                 schema={getInfoSchema()}
                 onSubmit={onSubmit}

@@ -1,4 +1,4 @@
-import { useRecoilState, useRecoilValue } from "recoil";
+import { useAtom } from "jotai";
 import { currentEntryState, entriesState } from "@/state/worktop";
 import { Action } from "@clover/public/components/common/action";
 import { CopyIcon } from "@radix-ui/react-icons";
@@ -13,8 +13,8 @@ import {useResultSubmit} from "@/components/pages/worktop/main/panel/result/hook
 import { t } from '@easykit/common/utils/locale';
 
 export const Editor = () => {
-    const entries = useRecoilValue(entriesState);
-    const [current, setCurrent] = useRecoilState(currentEntryState);
+    const [entries] = useAtom(entriesState);
+    const [current, setCurrent] = useAtom(currentEntryState);
     const entry = entries[current];
     const [content, setContent] = useState(entry?.translation?.content);
     const [submit, loading] = useResultSubmit();

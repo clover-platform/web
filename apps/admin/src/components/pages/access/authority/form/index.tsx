@@ -1,8 +1,8 @@
 import {FC, PropsWithChildren, useRef, useState} from "react";
 import {getSchema} from "@/config/pages/access/authority/form";
 import {Button, Form, FormItem, Input} from "@easykit/design";
-import ApiSelector from "@/components/pages/access/authority/form/api-selector";
-import AuthoritySelector from "@/components/pages/access/authority/form/authority-selector";
+import {ApiSelector} from "@/components/pages/access/authority/form/api-selector";
+import {AuthoritySelector} from "@/components/pages/access/authority/form/authority-selector";
 import {addAuthority, editAuthority} from "@/rest/access";
 import { t } from '@easykit/common/utils/locale'
 import {UseFormReturn} from "react-hook-form"
