@@ -1,10 +1,10 @@
-import {ExtractAtomValue, useAtom} from "jotai";
+import {PrimitiveAtom, useAtom} from "jotai";
 import {useCallback, useMemo} from "react";
 import cloneDeep from "lodash/cloneDeep";
 
 export type UseRecordStateResult<T> = [T, (data: T) => void];
 
-export function useRecordState<T> (state: ExtractAtomValue<Record<string, T>>, key: string): UseRecordStateResult<T> {
+export function useRecordState<T> (state: PrimitiveAtom<Record<string, T>>, key: string): UseRecordStateResult<T> {
     const [recordState, setRecordState] = useAtom<Record<string, T>>(state);
 
     const data = useMemo(() => {
