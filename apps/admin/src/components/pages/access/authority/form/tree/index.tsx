@@ -14,10 +14,10 @@ export const AuthorityTree: FC<AuthorityTreeProps> = (props) => {
         onChange = (value: any[]) => {},
     } = props;
 
+    const [selectedKeys, setSelectedKeys] = useState<string[]>(value);
     const [loading, setLoading] = useState(false);
     const [items, setItems] = useState<TreeData[]>([]);
     const [treeKey, setTreeKey] = useState(Date.now());
-    const [expansion, setExpansion] = useState<string[]>([]);
 
     const load = async () => {
         setLoading(true);
@@ -35,17 +35,15 @@ export const AuthorityTree: FC<AuthorityTreeProps> = (props) => {
     }, []);
 
     return <Tree
-        // checked={value}
-        // onExpandedChange={setExpansion}
-        // expanded={expansion}
         key={treeKey}
-        // loading={loading}
-        // border={true}
+        selectedKeys={selectedKeys}
+        checkable={true}
+        onCheck={(keys) => {
+            const ks = keys as string[];
+            setSelectedKeys(ks);
+            onChange?.(ks);
+        }}
         treeData={items}
-        selectable={true}
-        // checkbox={true}
-        // onCheckedChange={(nodes) => {
-        //     onChange(nodes.map(({id}) => id));
-        // }}
+        selectable={false}
     />
 }

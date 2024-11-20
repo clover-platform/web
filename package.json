@@ -26,7 +26,7 @@
         "@arco-iconbox/react-clover": "0.0.26",
         "@clover/public": "workspace:*",
         "@easykit/common": "workspace:*",
-        "@easykit/design": "0.0.45",
+        "@easykit/design": "0.0.50",
         "@easykit/eslint-config": "0.0.1",
         "@easykit/page-imports": "workspace:*",
         "@radix-ui/react-checkbox": "1.1.1",

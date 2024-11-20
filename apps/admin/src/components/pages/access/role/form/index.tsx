@@ -1,4 +1,4 @@
-import {SCHEMA} from "@/config/pages/access/role/form";
+import {getSchema} from "@/config/pages/access/role/form";
 import {Form, FormItem, Input, Switch, Textarea} from "@easykit/design";
 import {FC, PropsWithChildren} from "react";
 import { AuthorityTree } from "../../authority/form/tree";
@@ -11,16 +11,18 @@ export interface RoleFormProps extends PropsWithChildren {
 
 const RoleForm:FC<RoleFormProps> = (props) => {
     const {
-        defaultValues = {}
+        defaultValues = {
+            enable: false,
+        }
     } = props;
 
     return <Form
-        schema={SCHEMA}
+        schema={getSchema()}
         onSubmit={props.onSubmit}
         defaultValues={defaultValues}
     >
         <FormItem name="name" label={t("名称")}>
-            <Input placeholder={t("请输入角色名称")} />
+            <Input placeholder={t("请输入角色名称")} className={"w-input-md"} />
         </FormItem>
         <FormItem name="description" label={t("描述")}>
             <Textarea placeholder={t("请输入角色描述")} />
