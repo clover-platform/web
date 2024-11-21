@@ -81,7 +81,7 @@ export const ModuleBranchPage = () => {
                         onOk: async () => {
                             const { success, message } = await deleteBranch({
                                 id: original.id,
-                                moduleId: original.moduleId,
+                                module: module as string,
                             });
                             if(success) {
                                 load().then();

@@ -1,7 +1,7 @@
 import { Button, Dialog, DialogProps, Form, FormItem, Input, Space, useMessage } from "@easykit/design";
 import { FC, useState } from "react";
 import { rename } from "@/rest/branch";
-import { useSearchParams } from "next/navigation";
+import {useParams, useSearchParams} from "next/navigation";
 import { Branch } from "@/types/pages/branch";
 import {getSchema} from "@/config/pages/module/branch/rename/form";
 import { t } from '@easykit/common/utils/locale';
@@ -12,15 +12,14 @@ export type RenameBranchModalProps = {
 } & DialogProps;
 
 export const RenameBranchModal: FC<RenameBranchModalProps> = (props) => {
-    const search = useSearchParams();
-    const id = search.get('id');
+    const { module } = useParams();
     const [loading, setLoading] = useState(false);
     const msg = useMessage();
     const { branch } = props;
 
     const onSubmit = async (data: any) => {
         setLoading(true);
-        data.moduleId = Number(id);
+        data.module = module;
         data.id = branch.id;
         const { success, message } = await rename(data);
         setLoading(false);

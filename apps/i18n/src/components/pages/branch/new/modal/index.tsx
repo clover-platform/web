@@ -2,7 +2,7 @@ import { Button, Dialog, DialogProps, Space, useMessage } from "@easykit/design"
 import { FC, useState } from "react";
 import { ModuleBranchForm } from "@/components/pages/branch/form";
 import { create, CreateBranchData } from "@/rest/branch";
-import { useSearchParams } from "next/navigation";
+import {useParams, useSearchParams} from "next/navigation";
 import { t } from '@easykit/common/utils/locale';
 
 export type NewBranchModalProps = {
@@ -10,14 +10,13 @@ export type NewBranchModalProps = {
 } & DialogProps;
 
 export const NewBranchModal: FC<NewBranchModalProps> = (props) => {
-    const search = useSearchParams();
-    const id = search.get('id');
+    const { module } = useParams();
     const [loading, setLoading] = useState(false);
     const msg = useMessage();
 
     const onSubmit = async (data: CreateBranchData) => {
         setLoading(true);
-        data.moduleId = Number(id);
+        data.module = module as string;
         const { success, message } = await create(data);
         setLoading(false);
         if(success) {

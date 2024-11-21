@@ -18,6 +18,7 @@ import {i18n} from "@easykit/common/utils/locale";
 import {mergeOverview, merge as mergeRest} from "@/rest/branch";
 import {CheckedState} from "@radix-ui/react-checkbox";
 import { t } from '@easykit/common/utils/locale';
+import {useParams} from "next/navigation";
 
 export type MergeBranchModalProps = {
     onSuccess?: () => void;
@@ -25,6 +26,7 @@ export type MergeBranchModalProps = {
 } & DialogProps;
 
 export const MergeBranchModal: FC<MergeBranchModalProps> = (props) => {
+    const { module } = useParams();
     const { branch, onSuccess } = props;
     const [loading, setLoading] = useState(true);
     const [submitting, setSubmitting] = useState(false);
@@ -35,7 +37,7 @@ export const MergeBranchModal: FC<MergeBranchModalProps> = (props) => {
 
     const loadOverview = async () => {
         setLoading(true);
-        const { success, data } = await mergeOverview(branch.id);
+        const { success, data } = await mergeOverview(module as string, branch.id);
         setLoading(false);
         if(success) setOverview(data);
     }
@@ -52,7 +54,7 @@ export const MergeBranchModal: FC<MergeBranchModalProps> = (props) => {
         setSubmitting(true);
         const { success, message } = await mergeRest({
             id: branch.id,
-            moduleId: branch.moduleId,
+            module: module as string,
             deleteAfterMerge: !!deleteAfterMerge
         })
         setSubmitting(false);
@@ -61,7 +63,7 @@ export const MergeBranchModal: FC<MergeBranchModalProps> = (props) => {
         }else{
             msg.error(message);
         }
-    }, [deleteAfterMerge, branch])
+    }, [deleteAfterMerge, branch, module])
 
     return <Dialog
         {...props}
