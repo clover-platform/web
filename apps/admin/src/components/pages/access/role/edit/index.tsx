@@ -1,57 +1,65 @@
 'use client';
 
-import {Button, Card, Space, Breadcrumbs, BreadcrumbsItem, useMessage, Loading, Separator} from "@easykit/design";
-import Link from "@easykit/common/components/link";
+import {Button, Space, useMessage} from "@easykit/design";
 import RoleForm from "@/components/pages/access/role/form";
-import { useState } from "react";
+import {FC, useState} from "react";
 import { editRole } from "@/rest/access";
-import {useRouter, useSearchParams} from "next/navigation";
+import {useParams, useRouter, useSearchParams} from "next/navigation";
 import BackButton from "@easykit/common/components/button/back";
-import {useRole} from "@/components/pages/access/role/hooks";
 import { t } from '@easykit/common/utils/locale';
+import {AccessRole} from "@/types/pages/access/role";
+import {useLayoutConfig} from "@clover/public/components/layout/hooks/use.layout.config";
+import {MainLayoutProps} from "@/components/layout/main";
+import {TitleBar} from "@clover/public/components/common/title-bar";
 
-const EditRolePage = () => {
+export type EditRolePageProps = {
+    data: AccessRole;
+}
+
+const EditRolePage: FC<EditRolePageProps> = (props) => {
+    useLayoutConfig<MainLayoutProps>({
+        active: "access.role",
+        path: [
+            {
+                title: t("角色管理"),
+                type: "link",
+                href: "/admin/access/role",
+            },
+            {
+                title: t("编辑角色"),
+                type: "item",
+            }
+        ],
+    })
+    const { data } = props;
+    const { roleId } = useParams();
     const [submitting, setSubmitting] = useState(false);
     const msg = useMessage();
     const router = useRouter();
-    const params = useSearchParams();
-    const id = params.get("id");
-    const [role, loading, key] = useRole(Number(id));
 
     const onSubmit = async (data: any) => {
         setSubmitting(true);
-        data.id = id;
+        data.id = roleId;
         const { success, message } = await editRole(data);
         setSubmitting(false);
         if(success) {
-            router.push("/{#LANG#}/access/")
+            router.push("/admin/access/role")
         }else{
             msg.error(message);
         }
     }
 
     return <>
-        <Breadcrumbs className={"mx-2"}>
-            <BreadcrumbsItem>
-                <Link href={"/{#LANG#}/access/"}>{t("角色管理")}</Link>
-            </BreadcrumbsItem>
-            <BreadcrumbsItem>{t("编辑角色")}</BreadcrumbsItem>
-        </Breadcrumbs>
-        <Separator className={"my-4"} />
-        <Loading loading={loading}>
-            <div className={"w-[550px] mx-auto"}>
-                <RoleForm
-                    defaultValues={role}
-                    key={key}
-                    onSubmit={onSubmit}
-                >
-                    <Space>
-                        <Button loading={submitting} type={"submit"}>{t("保存")}</Button>
-                        <BackButton />
-                    </Space>
-                </RoleForm>
-            </div>
-        </Loading>
+        <TitleBar title={t("编辑角色")} />
+        <RoleForm
+            defaultValues={data}
+            onSubmit={onSubmit}
+        >
+            <Space>
+                <Button loading={submitting} type={"submit"}>{t("保存")}</Button>
+                <BackButton />
+            </Space>
+        </RoleForm>
     </>;
 };
 

@@ -1,59 +1,58 @@
 'use client';
 
 import {
-    Card,
-    Breadcrumbs,
-    BreadcrumbsItem,
     FormItem,
-    Switch, Form, Loading, ValueFormatter, Tree, Separator
+    Form, ValueFormatter, Tree
 } from "@easykit/design";
-import Link from "@easykit/common/components/link";
-import {useSearchParams} from "next/navigation";
-import {useRole} from "@/components/pages/access/role/hooks";
 import {toItems} from "@/components/pages/access/authority/form/utils";
-import {useState} from "react";
+import {FC} from "react";
 import {RoleStatus} from "@/components/pages/access/role/status";
 import { t } from '@easykit/common/utils/locale';
+import {useLayoutConfig} from "@clover/public/components/layout/hooks/use.layout.config";
+import {MainLayoutProps} from "@/components/layout/main";
+import {AccessRole} from "@/types/pages/access/role";
+import {TitleBar} from "@clover/public/components/common/title-bar";
 
-const RoleDetailPage = () => {
-    const params = useSearchParams();
-    const id = params.get("id");
-    const [role, loading, key] = useRole(Number(id));
-    const [expansion, setExpansion] = useState<string[]>([]);
+export type RoleDetailPageProps = {
+    data: AccessRole;
+}
+
+const RoleDetailPage: FC<RoleDetailPageProps> = (props) => {
+    useLayoutConfig<MainLayoutProps>({
+        active: "access.role",
+        path: [
+            {
+                title: t("角色管理"),
+                type: "link",
+                href: "/admin/access/role",
+            },
+            {
+                title: t("角色详情"),
+                type: "item",
+            }
+        ],
+    })
+    const { data } = props;
 
     return <>
-        <Breadcrumbs className={"mx-2"}>
-            <BreadcrumbsItem>
-                <Link href={"/{#LANG#}/access/"}>{t("角色管理")}</Link>
-            </BreadcrumbsItem>
-            <BreadcrumbsItem>{t("角色详情")}</BreadcrumbsItem>
-        </Breadcrumbs>
-        <Separator className={"my-4"} />
-        <Loading loading={loading}>
-            <div className={"w-[550px] mx-auto"}>
-                <Form key={key} defaultValues={role}>
-                    <FormItem name="name" label={t("名称")}>
-                        <ValueFormatter />
-                    </FormItem>
-                    <FormItem name="description" label={t("描述")}>
-                        <ValueFormatter />
-                    </FormItem>
-                    <FormItem name="enable" label={t("启用状态")}>
-                        <RoleStatus />
-                    </FormItem>
-                    <FormItem name="authorities" label={t("关联接口")}>
-                        <Tree
-                            // border={true}
-                            treeData={toItems(role.authorityTree || [])}
-                            selectable={false}
-                            // checkbox={false}
-                            // onExpandedChange={setExpansion}
-                            // expanded={expansion}
-                        />
-                    </FormItem>
-                </Form>
-            </div>
-        </Loading>
+        <TitleBar title={t("角色详情")} />
+        <Form defaultValues={data}>
+            <FormItem name="name" label={t("名称")}>
+                <ValueFormatter/>
+            </FormItem>
+            <FormItem name="description" label={t("描述")}>
+                <ValueFormatter/>
+            </FormItem>
+            <FormItem name="enable" label={t("启用状态")}>
+                <RoleStatus/>
+            </FormItem>
+            <FormItem name="authorities" label={t("关联权限")}>
+                <Tree
+                    treeData={toItems(data?.authorityTree ?? [])}
+                    selectable={false}
+                />
+            </FormItem>
+        </Form>
     </>;
 };
 

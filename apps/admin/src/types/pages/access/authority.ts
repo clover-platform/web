@@ -6,3 +6,7 @@ export type Authority = {
     parentId?: number;
     apis?: number[];
 }
+
+export type AuthorityTreeNode = Authority & {
+    children: AuthorityTreeNode[];
+}

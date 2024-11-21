@@ -14,10 +14,9 @@ export const AuthorityTree: FC<AuthorityTreeProps> = (props) => {
         onChange = (value: any[]) => {},
     } = props;
 
-    const [selectedKeys, setSelectedKeys] = useState<string[]>(value);
+    const [checkedKeys, setCheckedKeys] = useState<string[]>(value);
     const [loading, setLoading] = useState(false);
     const [items, setItems] = useState<TreeData[]>([]);
-    const [treeKey, setTreeKey] = useState(Date.now());
 
     const load = async () => {
         setLoading(true);
@@ -26,7 +25,6 @@ export const AuthorityTree: FC<AuthorityTreeProps> = (props) => {
         if(success) {
             const items = toItems(data || []);
             setItems(items)
-            setTreeKey(Date.now());
         }
     }
 
@@ -35,12 +33,11 @@ export const AuthorityTree: FC<AuthorityTreeProps> = (props) => {
     }, []);
 
     return <Tree
-        key={treeKey}
-        selectedKeys={selectedKeys}
+        checkedKeys={checkedKeys}
         checkable={true}
         onCheck={(keys) => {
             const ks = keys as string[];
-            setSelectedKeys(ks);
+            setCheckedKeys(ks);
             onChange?.(ks);
         }}
         treeData={items}

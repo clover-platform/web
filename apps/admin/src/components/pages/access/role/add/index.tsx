@@ -35,7 +35,7 @@ const AddRolePage = () => {
         const { success, message } = await addRole(data);
         setLoading(false);
         if(success) {
-            router.push("/{#LANG#}/access/")
+            router.push("/admin/access/role")
         }else{
             msg.error(message);
         }

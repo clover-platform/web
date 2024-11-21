@@ -69,9 +69,9 @@ const RolePage = () => {
             onRowActionClick={({id: key}, {original}) => {
                 const id = (original as any).id;
                 if(key === "detail") {
-                    router.push(`/access/role/${id}/detail`);
+                    router.push(`/admin/access/role/${id}/detail`);
                 }else if(key === "edit") {
-                    router.push(`/access/role/${id}/edit`);
+                    router.push(`/admin/access/role/${id}/edit`);
                 }else if(key === "disable"){
                     alert.confirm({
                         title: t("禁用？"),

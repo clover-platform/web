@@ -30,7 +30,7 @@ const RoleForm:FC<RoleFormProps> = (props) => {
         <FormItem name="enable" label={t("启用状态")}>
             <Switch />
         </FormItem>
-        <FormItem name="authorities" label={t("关联接口")}>
+        <FormItem name="authorities" label={t("关联权限")}>
             <AuthorityTree />
         </FormItem>
         { props.children }
