@@ -4,7 +4,7 @@ import { CountEntryData, CountEntryQuery, Entry } from "@/types/pages/entry";
 
 export type EntryQueryParams = {
     keyword?: string;
-    branchId?: number;
+    branch?: number;
     module: string;
     language: string;
     page?: number;
@@ -12,7 +12,7 @@ export type EntryQueryParams = {
 }
 
 export const list = async (params: EntryQueryParams): Promise<RestResult<any>> =>
-    get(`@i18n/${params.module}/entry/list`, params);
+    get(`@i18n/${params.module}/branch/${params.branch}/entry/list`, params);
 
 export type CreateEntryData = {
     module: string;
@@ -21,7 +21,7 @@ export type CreateEntryData = {
     branches: string[];
 }
 export const create = async (data: CreateEntryData): Promise<RestResult<any>> =>
-    post(`@i18n/${data.module}/entry/create`, data);
+    post(`@i18n/${data.module}/branch/-/entry/create`, data);
 
 export type EntryDetailParams = {
     module: string;

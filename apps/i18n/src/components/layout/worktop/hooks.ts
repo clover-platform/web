@@ -66,17 +66,17 @@ export const useEntriesLoader = () => {
     const [total, setTotal] = useState(0);
     const pages = useMemo(() => Math.ceil(total / paramsRef.current.size), [total]);
     const [currentBranch] = useAtom(currentBranchState);
-    const branchRef = useRef<number>();
     const [branches] = useAtom(branchesState);
     const [currentLanguage] = useAtom(currentLanguageState);
     const [_c, setCount] = useAtom(countState);
+    const branch = branches.find(b => b.name === currentBranch);
 
     const load = async (_params?: any) => {
         setLoading(true)
         const params = {
             ...paramsRef.current,
             ...(_params || {}),
-            branchId: branchRef.current,
+            branch: branch?.name,
             module: module as string,
             language: currentLanguage
         }
@@ -99,8 +99,6 @@ export const useEntriesLoader = () => {
     }
 
     useEffect(() => {
-        const branch = branches.find(b => b.name === currentBranch);
-        branchRef.current = branch?.id;
         currentLanguage && load().then();
         currentLanguage && loadCount().then();
     }, [currentBranch, currentLanguage]);
