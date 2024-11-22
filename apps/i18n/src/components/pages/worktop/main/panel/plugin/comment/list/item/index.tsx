@@ -11,6 +11,7 @@ import {ENTRY_COMMENT_RELOAD} from "@/events/worktop";
 import { IconDelete } from "@arco-iconbox/react-clover";
 import { t } from '@easykit/common/utils/locale';
 import {useParams} from "next/navigation";
+import {useCurrentBranch} from "@/hooks/use.current.branch";
 
 export type CommentListItemProps = {
     item: EntryComment;
@@ -22,16 +23,18 @@ export const CommentListItem: FC<CommentListItemProps> = (props) => {
     const msg = useMessage();
     const alert = useAlert();
     const { module } = useParams();
+    const branch = useCurrentBranch();
 
     const del = () => {
         alert.confirm({
-            title: t("撤销批准"),
-            description: t("是否撤销此翻译的有效结果"),
+            title: t("删除"),
+            description: t("是否删除该评论？"),
             onOk: async () => {
                 const { success, message } = await deleteComment({
                     module: module as string,
                     entryId: item.entryId,
                     id: item.id,
+                    branch: branch?.name!
                 })
                 if(success) {
                     bus.emit(ENTRY_COMMENT_RELOAD);

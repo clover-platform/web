@@ -1,8 +1,7 @@
-import {Form, FormItem, Input} from "@easykit/design";
+import {Form, FormItem, Input, Textarea} from "@easykit/design";
 import {FC, PropsWithChildren} from "react";
 import {getSchema} from "@/config/pages/entry/form";
 import { MultiBranchSelect } from "@/components/pages/worktop/select/multi-branch";
-import TextareaAutosize from "react-textarea-autosize";
 import { t } from '@easykit/common/utils/locale';
 
 export interface EntryFormProps extends PropsWithChildren {
@@ -21,11 +20,7 @@ export const EntryForm:FC<EntryFormProps> = (props) => {
         defaultValues={defaultValues}
     >
         <FormItem name="value" label={t("词条")}>
-            <TextareaAutosize
-                minRows={3}
-                placeholder={t("请输入原始语言词条")}
-                className={"p-2 border w-full rounded-md"}
-            />
+            <Textarea placeholder={t("请输入原始语言词条")}/>
         </FormItem>
         <FormItem name="key" label={t("唯一标识")}>
             <Input placeholder={t("请输入唯一标识")} />

@@ -12,6 +12,7 @@ import { EntryResult } from "@/types/pages/entry";
 import { ResultListLoading } from "@/components/pages/worktop/main/panel/result/list/loading";
 import { t } from '@easykit/common/utils/locale';
 import {useParams} from "next/navigation";
+import {useCurrentBranch} from "@/hooks/use.current.branch";
 
 export const ResultList = () => {
     const [language] = useAtom(currentLanguageState);
@@ -24,6 +25,7 @@ export const ResultList = () => {
     const [list, setList] = useState<EntryResult[]>([]);
     const [loading, setLoading] = useState(false);
     const { module } = useParams();
+    const branch = useCurrentBranch();
 
     const load = async (options?: {append?: boolean}) => {
         const { append= false } = options || {};
@@ -35,6 +37,7 @@ export const ResultList = () => {
             language,
             page: pageRef.current,
             size: 5,
+            branch: branch?.name!
         });
         if(success) {
             const { total, data: newList } = data!;

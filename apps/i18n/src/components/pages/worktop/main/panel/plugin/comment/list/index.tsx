@@ -1,6 +1,6 @@
 import {useCallback, useEffect, useRef, useState} from "react";
 import { useAtom } from "jotai";
-import { currentEntryState, currentLanguageState, entriesState } from "@/state/worktop";
+import {branchesState, currentEntryState, currentLanguageState, entriesState} from "@/state/worktop";
 import { list as listRest } from "@/rest/entry.comment";
 import { ENTRY_COMMENT_RELOAD } from "@/events/worktop";
 import bus from '@easykit/common/events';
@@ -25,6 +25,8 @@ export const CommentList = () => {
     const [total, setTotal] = useState(0);
     const pageRef = useRef(1);
     const { module } = useParams();
+    const [branches] = useAtom(branchesState);
+    const branch = branches.find((item) => item.id === entry.branchId);
 
     const load = useCallback(async (options?: {append?: boolean}) => {
         const { append= false } = options || {};
@@ -35,7 +37,8 @@ export const CommentList = () => {
             language,
             page: pageRef.current,
             size: 50,
-            module: module as string
+            module: module as string,
+            branch: branch?.name!
         });
         setLoading(false);
         success && setList([

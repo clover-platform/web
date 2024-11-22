@@ -118,12 +118,16 @@ export const useEntriesUpdater = () => {
     const [currentLanguage] = useAtom(currentLanguageState);
     const [currentBranch] = useAtom(currentBranchState);
     const [_c, setCount] = useAtom(countState);
+    const [branches] = useAtom(branchesState);
 
     const update = async (id: number) => {
+        const entry = entries.find(e => e.id === id);
+        const branch = branches.find(b => b.id === entry?.branchId);
         const result = await detail({
             id,
             language: currentLanguage,
-            module: module as string
+            module: module as string,
+            branch: branch?.name!
         });
         if(result.success) {
             setEntries(entries.map(entry => entry.id === id ? result.data! : entry));

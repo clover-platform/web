@@ -73,12 +73,13 @@ export const Detail = () => {
             msg.success(t("复制成功"))
         }else if(id === "remove") {
             alert.confirm({
-                title: t("撤销批准"),
-                description: t("是否撤销此翻译的有效结果"),
+                title: t("删除"),
+                description: t("是否删除该词条"),
                 onOk: async () => {
                     const { success, message } = await removeRest({
                         module: module as string,
-                        id: entry.id
+                        id: entry.id,
+                        branch: branch?.name!
                     })
                     if(success) {
                         prev();

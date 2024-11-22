@@ -5,7 +5,7 @@ import { useRef, useState } from "react";
 import { Spin, useMessage } from "@easykit/design";
 import { add } from "@/rest/entry.comment";
 import { useAtom } from "jotai";
-import { currentEntryState, currentLanguageState, entriesState } from "@/state/worktop";
+import {branchesState, currentEntryState, currentLanguageState, entriesState} from "@/state/worktop";
 import classNames from "classnames";
 import bus from '@easykit/common/events';
 import { ENTRY_COMMENT_RELOAD } from "@/events/worktop";
@@ -22,6 +22,8 @@ export const CommentEditor = () => {
     const entry = entries[current];
     const [language] = useAtom(currentLanguageState);
     const { module } = useParams();
+    const [branches] = useAtom(branchesState);
+    const branch = branches.find(b => b.id === entry.branchId);
 
     const send = async () => {
         if(!value) {
@@ -34,6 +36,7 @@ export const CommentEditor = () => {
             entryId: entry.id,
             language,
             module: module as string,
+            branch: branch?.name!
         });
         if(success) {
             setValue("");

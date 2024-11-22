@@ -5,6 +5,8 @@ import { EntryEditForm } from "@/components/pages/worktop/main/panel/entry/form/
 import { Entry } from "@/types/pages/entry";
 import { t } from '@easykit/common/utils/locale';
 import {useParams} from "next/navigation";
+import {useAtom} from "jotai/index";
+import {branchesState} from "@/state/worktop";
 
 export type CreateEntryModalProps = {
     entry: Entry;
@@ -17,11 +19,14 @@ export const EditEntryModal: FC<CreateEntryModalProps> = (props) => {
     const msg = useMessage();
     const [formKey, setFormKey] = useState(Date.now());
     const { module } = useParams();
+    const [branches] = useAtom(branchesState);
+    const branch = branches.find(b => b.id === entry?.branchId);
 
     const onSubmit = async (data: EditEntryData) => {
         setLoading(true);
         data.id = entry.id;
         data.module = module as string;
+        data.branch = branch?.name!;
         const { success, message } = await edit(data);
         setLoading(false);
         if(success) {

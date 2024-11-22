@@ -7,10 +7,11 @@ export type AddCommentData = {
     entryId: number;
     content: string;
     language: string;
+    branch: string;
 }
 
 export const add = async (data: AddCommentData): Promise<RestResult<any>> =>
-    post(`@i18n/${data.module}/entry/${data.entryId}/comment/add`, data);
+    post(`@i18n/${data.module}/branch/${data.branch}/entry/${data.entryId}/comment/add`, data);
 
 export type EntryCommentQuery = {
     module: string;
@@ -18,6 +19,7 @@ export type EntryCommentQuery = {
     language: string;
     page: number;
     size: number;
+    branch: string;
 }
 
 export type EntryCommentPage = {
@@ -26,12 +28,13 @@ export type EntryCommentPage = {
 }
 
 export const list = async (data: EntryCommentQuery): Promise<RestResult<EntryCommentPage>> =>
-    get(`@i18n/${data.module}/entry/${data.entryId}/comment/list`, data);
+    get(`@i18n/${data.module}/branch/${data.branch}/entry/${data.entryId}/comment/list`, data);
 
 export type DeleteCommentData = {
     module: string;
     entryId: number;
+    branch: string;
     id: number;
 }
 export const deleteComment = async (data: DeleteCommentData): Promise<RestResult<EntryCommentPage>> =>
-    del(`@i18n/${data.module}/entry/${data.entryId}/comment/${data.id}`);
+    del(`@i18n/${data.module}/branch/${data.branch}/entry/${data.entryId}/comment/${data.id}`);

@@ -6,6 +6,7 @@ import {ScrollArea} from "@easykit/design";
 import {AIItem} from "@/components/pages/worktop/main/panel/plugin/ai/item";
 import {AIItemLoading} from "@/components/pages/worktop/main/panel/plugin/ai/item/loading";
 import {useParams} from "next/navigation";
+import {useCurrentBranch} from "@/hooks/use.current.branch";
 
 const AIIListLoading = () => {
     return [0,1,2].map((index) => <AIItemLoading key={index} />);
@@ -19,13 +20,15 @@ export const AIPlugin = () => {
     const [loading, setLoading] = useState(true);
     const [results, setResults] = useState<string[]>([]);
     const { module } = useParams();
+    const branch = useCurrentBranch();
 
     const load = useCallback(async () => {
         setLoading(true);
         const {success, data} = await ai({
             module: module as string,
             entryId: entry.id,
-            language
+            language,
+            branch: branch?.name!
         });
         setLoading(false);
         if(success) {

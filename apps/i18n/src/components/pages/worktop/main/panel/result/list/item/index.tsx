@@ -13,6 +13,7 @@ import { RestResult } from "@easykit/common/types/rest";
 import { TimeAgo } from "@easykit/common/components/time-ago";
 import { t } from '@easykit/common/utils/locale';
 import {useParams} from "next/navigation";
+import {useCurrentBranch} from "@/hooks/use.current.branch";
 
 export type ResultItemProps = {
     item: EntryResult;
@@ -25,6 +26,7 @@ export const ResultItem: FC<ResultItemProps> = (props) => {
     const msg = useMessage();
     const { update } = useEntriesUpdater();
     const { module } = useParams();
+    const branch = useCurrentBranch();
 
     const resultWrapper = async (result: RestResult<any>) => {
         const { success, message } = result;
@@ -46,7 +48,8 @@ export const ResultItem: FC<ResultItemProps> = (props) => {
                 return resultWrapper(await deleteResult({
                     module: module as string,
                     id: item.id,
-                    entryId: item.entryId
+                    entryId: item.entryId,
+                    branch: branch?.name!
                 }));
             }
         })
@@ -60,7 +63,8 @@ export const ResultItem: FC<ResultItemProps> = (props) => {
                 return resultWrapper(await approveRest({
                     module: module as string,
                     id: item.id,
-                    entryId: item.entryId
+                    entryId: item.entryId,
+                    branch: branch?.name!
                 }));
             }
         })
@@ -74,7 +78,8 @@ export const ResultItem: FC<ResultItemProps> = (props) => {
                 return resultWrapper(await removeApprovalRest({
                     module: module as string,
                     id: item.id,
-                    entryId: item.entryId
+                    entryId: item.entryId,
+                    branch: branch?.name!
                 }));
             }
         })

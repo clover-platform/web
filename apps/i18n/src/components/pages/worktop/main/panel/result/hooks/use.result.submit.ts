@@ -8,6 +8,7 @@ import {useEntriesUpdater} from "@/components/layout/worktop/hooks";
 import {save} from "@/rest/entry.result";
 import { t } from '@easykit/common/utils/locale';
 import {useParams} from "next/navigation";
+import {useCurrentBranch} from "@/hooks/use.current.branch";
 
 export const useResultSubmit = (): [(content: string) => Promise<any>, boolean] => {
     const [entries] = useAtom(entriesState);
@@ -18,6 +19,7 @@ export const useResultSubmit = (): [(content: string) => Promise<any>, boolean] 
     const msg = useMessage();
     const {update} = useEntriesUpdater();
     const { module } = useParams();
+    const branch = useCurrentBranch();
 
     const next = () => {
         if(current < entries.length - 1) {
@@ -35,6 +37,7 @@ export const useResultSubmit = (): [(content: string) => Promise<any>, boolean] 
             entryId: entry.id,
             content,
             language,
+            branch: branch?.name!
         });
         setLoading(false);
         if(success) {
