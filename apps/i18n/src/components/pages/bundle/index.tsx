@@ -6,7 +6,7 @@ import {getColumns, getRowActions} from "@/config/pages/bundle/table";
 import {list} from "@/rest/bundle";
 import {Bundle} from "@/types/pages/bundle";
 import {useTableLoader} from "@easykit/common/hooks";
-import {useSearchParams} from "next/navigation";
+import {useParams} from "next/navigation";
 import {useEffect} from "react";
 import {IconAdd} from "@arco-iconbox/react-clover";
 import Link from "next/link";
@@ -26,12 +26,11 @@ export const BundlePage = () => {
             }
         ],
     })
-    const search = useSearchParams();
-    const id = search.get('id');
+    const { module } = useParams<Record<string, string>>();
     const [loading, result, query, load] = useTableLoader({
         initialParams: {
             ...initialParams,
-            moduleId: id,
+            module,
         },
         action: list,
     });
@@ -42,13 +41,12 @@ export const BundlePage = () => {
 
 
     const actions = <div>
-        <Link href={"/{#LANG#}/i18n/bundle/add/?id=" + id}>
+        <Link href={`/i18n/${module}/bundle/add`}>
             <Button type={"button"}>
                 <IconAdd />
                 <span>{t("添加文件")}</span>
             </Button>
         </Link>
-
     </div>;
 
     return <>

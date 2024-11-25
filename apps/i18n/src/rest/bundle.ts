@@ -5,14 +5,15 @@ import {Bundle} from "@/types/pages/bundle";
 export type BundleQuery = {
     page: number;
     size: number;
+    module: string;
     keyword?: string;
 }
 
-export const list = async (query: BundleQuery): Promise<RestResult<{
+export const list = (query: BundleQuery): Promise<RestResult<{
     total: number;
     data: Bundle[];
 }>> =>
-    get(`@i18n/bundle/list`, query);
+    get(`@i18n/${query.module}/bundle/list`, query);
 
 export type AddBundleDataExport = {
     config: any;
@@ -27,5 +28,5 @@ export type AddBundleData = {
     moduleId: number;
 }
 
-export const create = async (data: AddBundleData): Promise<RestResult<any>> =>
+export const create = (data: AddBundleData): Promise<RestResult<any>> =>
     post(`@i18n/bundle/create`, data);
