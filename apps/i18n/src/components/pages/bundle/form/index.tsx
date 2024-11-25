@@ -27,7 +27,7 @@ export const BundleForm:FC<BundleFormProps> = (props) => {
             <BranchPattern />
         </FormItem>
         <FormItem name="includeSource" label="">
-            <Checkbox field={"true"} label={t("包含项目源语言")} />
+            <Checkbox field={true} label={t("包含项目源语言")} />
         </FormItem>
         <FormItem name="export" label={t("文件格式")}>
             <ExportFormat />
