@@ -7,6 +7,7 @@ import { InviteLinkListButton } from "@/components/pages/member/invite/links/but
 import {MemberInviteData, send} from "@/rest/member.invite";
 import {useSearchParams} from "next/navigation";
 import { t } from '@easykit/common/utils/locale';
+import {useModule} from "@/hooks/use.module";
 
 export type InviteModalProps = {} & DialogProps;
 
@@ -16,14 +17,13 @@ export const InviteModal: FC<InviteModalProps> = (props) => {
         emails: '',
         content: '',
     });
-    const search = useSearchParams();
-    const id = search.get("id");
+    const m = useModule();
     const [loading, setLoading] = useState(false);
     const msg = useMessage();
 
     const onSubmit = async (data: MemberInviteData) => {
         setLoading(true);
-        data.moduleId = Number(id);
+        data.module = m;
         const { success, message } = await send(data);
         setLoading(false);
         if(success) {

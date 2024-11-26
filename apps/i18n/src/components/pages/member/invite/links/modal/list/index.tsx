@@ -6,19 +6,19 @@ import { MemberInvite } from "@/types/pages/member";
 import { InviteLinkItem } from "@/components/pages/member/invite/links/modal/list/item";
 import { InviteLinkItemLoading } from "@/components/pages/member/invite/links/modal/list/item/loading";
 import { t } from '@easykit/common/utils/locale';
+import {useModule} from "@/hooks/use.module";
 
 export type InviteLinkListModalProps = {} & DialogProps;
 
 export const InviteLinkListModal: FC<InviteLinkListModalProps> = (props) => {
     const [loading, setLoading] = useState(false)
-    const search = useSearchParams();
-    const id = search.get("id");
+    const m = useModule();
     const [listData, setListData] = useState<MemberInvite[]>([]);
 
     const load = async () => {
         setLoading(true);
         const { success, data } = await list({
-            moduleId: Number(id),
+            module: m,
         });
         setLoading(false);
         if(success) {

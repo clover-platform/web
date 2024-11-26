@@ -4,32 +4,32 @@ import { MemberInvite } from "@/types/pages/member";
 import {InviteDetail} from "@/types/pages/module";
 
 export type InviteGenerateData = {
-    moduleId: number;
+    module: string;
     roles: string[];
 }
 
 export const generate = async (data: InviteGenerateData): Promise<RestResult<string>> =>
-    post(`@i18n/member/invite/generate`, data);
+    post(`@i18n/${data.module}/member/invite/generate`, data);
 
 export type InviteGenerateParams = {
-    moduleId: number;
+    module: string;
 }
 
 export const list = async (params: InviteGenerateParams): Promise<RestResult<MemberInvite[]>> =>
-    get(`@i18n/member/invite/list`, params);
+    get(`@i18n/${params.module}/member/invite/list`, params);
 
-export const revoke = async (params: {moduleId: number, id: number}): Promise<RestResult<any>> =>
-    del(`@i18n/member/invite/revoke`, params);
+export const revoke = async (params: {module: string, id: number}): Promise<RestResult<any>> =>
+    del(`@i18n/${params.module}/member/invite/revoke`, params);
 
 export type MemberInviteData = {
-    moduleId: number;
+    module: string;
     roles: string[];
     emails: string;
     content: string;
 }
 
 export const send = async (data: MemberInviteData): Promise<RestResult<any>> =>
-    post(`@i18n/member/invite/send`, data);
+    post(`@i18n/${data.module}/member/invite/send`, data);
 
 export type AcceptInviteData = {
     token: string;

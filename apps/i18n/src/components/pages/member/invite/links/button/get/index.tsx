@@ -4,6 +4,7 @@ import { generate } from "@/rest/member.invite";
 import { useSearchParams } from "next/navigation";
 import copy from 'copy-to-clipboard';
 import { t } from '@easykit/common/utils/locale';
+import {useModule} from "@/hooks/use.module";
 
 export type GetInviteLinkButtonProps = {
     disabled: boolean;
@@ -12,14 +13,13 @@ export type GetInviteLinkButtonProps = {
 
 export const GetInviteLinkButton: FC<GetInviteLinkButtonProps> = (props) => {
     const [loading, setLoading] = useState(false);
-    const search = useSearchParams();
-    const id = search.get("id");
+    const m = useModule();
     const msg = useMessage();
 
     const doGenerate = async () => {
         setLoading(true);
         const { success, message, data } = await generate({
-            moduleId: Number(id),
+            module: m,
             roles: props.roles
         });
         setLoading(false);

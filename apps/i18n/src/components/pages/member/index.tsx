@@ -14,6 +14,7 @@ import { InviteButton } from "@/components/pages/member/invite/button";
 import {useLayoutConfig} from "@clover/public/components/layout/hooks/use.layout.config";
 import {ModuleLayoutProps} from "@/components/layout/module";
 import { t } from '@easykit/common/utils/locale';
+import {useModule} from "@/hooks/use.module";
 
 const initialParams = {
     keyword: '',
@@ -30,13 +31,13 @@ export const MemberPage = () => {
         ],
     })
     const search = useSearchParams();
-    const id = search.get('id');
+    const m = useModule();
     const type = search.get('type') || 'all';
     const [active, setActive] = useState(type);
     const [loading, result, query, load] = useTableLoader({
         initialParams: {
             ...initialParams,
-            moduleId: id,
+            module: m,
         },
         action: list,
         keys: ['type'],

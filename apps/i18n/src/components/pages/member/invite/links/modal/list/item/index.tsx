@@ -9,6 +9,7 @@ import copy from 'copy-to-clipboard';
 import { revoke } from "@/rest/member.invite";
 import {useSearchParams} from "next/navigation";
 import { t } from '@easykit/common/utils/locale';
+import {useModule} from "@/hooks/use.module";
 
 export type InviteLinkItemProps = {
     item: MemberInvite;
@@ -17,7 +18,7 @@ export type InviteLinkItemProps = {
 
 export const InviteLinkItem: FC<InviteLinkItemProps> = (props) => {
     const { item } = props;
-    const search = useSearchParams();
+    const m = useModule();
     const url = `${window.location.origin}/i18n/invite/?t=${item.token}`;
     const msg = useMessage();
     const alert = useAlert();
@@ -28,7 +29,7 @@ export const InviteLinkItem: FC<InviteLinkItemProps> = (props) => {
             description: t("撤销后，该邀请链接将失效，是否继续？"),
             onOk: async () => {
                 const { success, message } = await revoke({
-                    moduleId: Number(search.get("id")),
+                    module: m,
                     id: item.id
                 });
                 if(success) {
