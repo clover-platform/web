@@ -68,7 +68,7 @@ export type BaseInfo = {
 }
 
 export type UpdateInfo = {
-    id?: number;
+    module?: string;
     name?: string;
     description?: string;
 }

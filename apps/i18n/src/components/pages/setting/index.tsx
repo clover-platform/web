@@ -15,22 +15,23 @@ import {
 } from "@easykit/design";
 import {getInfoSchema} from "@/config/pages/module/form";
 import {deleteModule, detail, update} from "@/rest/module";
-import {useRouter, useSearchParams} from "next/navigation";
-import {useEffect, useMemo, useRef, useState} from "react";
+import {useRouter} from "next/navigation";
+import {useEffect, useMemo, useState} from "react";
 import {BaseInfo, UpdateInfo} from "@/types/pages/module";
 import {useLayoutConfig} from "@clover/public/components/layout/hooks/use.layout.config";
 import {ModuleLayoutProps} from "@/components/layout/module";
 import { t } from '@easykit/common/utils/locale';
+import {useModule} from "@/hooks/use.module";
 
 export const ModuleSettingPage = () => {
+    const m = useModule();
     useLayoutConfig<ModuleLayoutProps>({
         active: "setting",
         path: [
             {
                 title: t("设置"),
                 type: "link",
-                href: "/{#LANG#}/i18n/setting/",
-                withQuery: true,
+                href: `/i18n/${m}/setting`
             },
             {
                 title: t("常规"),
@@ -38,8 +39,6 @@ export const ModuleSettingPage = () => {
             }
         ],
     })
-    const search = useSearchParams();
-    const id = search.get("id");
     const alert = useAlert();
     const msg = useMessage();
     const router = useRouter();
@@ -51,7 +50,7 @@ export const ModuleSettingPage = () => {
 
     const load = async () => {
         setLoading(true);
-        const { success, data } = await detail(Number(id));
+        const { success, data } = await detail(m);
         if(success) {
             setInfo(data!);
             setValues(data!);
@@ -69,7 +68,7 @@ export const ModuleSettingPage = () => {
     }, [info, values])
 
     const onSubmit = async (data: UpdateInfo) => {
-        data.id = info?.id!;
+        data.module = m;
         setSubmitting(true);
         const { success, message } = await update(data);
         setSubmitting(false);
@@ -85,9 +84,9 @@ export const ModuleSettingPage = () => {
             title: t("删除"),
             description: t("删除该翻译项目，所以的翻译数据将无法使用，是否继续？"),
             onOk: async () => {
-                const { success, message } = await deleteModule(Number(id));
+                const { success, message } = await deleteModule(m);
                 if(success) {
-                    router.push("/{#LANG#}/i18n/");
+                    router.push("/i18n");
                 }else{
                     msg.error(message);
                 }

@@ -18,7 +18,7 @@ export const InvitePage = () => {
     const [detail, setDetail] = useState<InviteDetail|undefined>();
     const [expired, setExpired] = useState<boolean>(false);
     const [joined, setJoined] = useState<boolean>(false);
-    const [moduleId, setModuleId] = useState<number>();
+    const [module, setModule] = useState<string>();
     const [isLogin] = useAtom(isLoginState);
 
     const load = async () => {
@@ -31,7 +31,7 @@ export const InvitePage = () => {
                 setExpired(true);
             }else if(code === 10032) {
                 setJoined(true);
-                setModuleId(data as number);
+                setModule(data as string);
             }else{ // 其他情况
                 setExpired(true);
             }
@@ -47,7 +47,7 @@ export const InvitePage = () => {
         <InvitePageLoading /> :
         <>
             { expired && <InvitePageExpired /> }
-            { joined && <InvitePageJoined moduleId={moduleId!} /> }
+            { joined && <InvitePageJoined module={module!} /> }
             { (!expired && !joined) && <InvitePageBody isLogin={isLogin} loading={loading} detail={detail} /> }
         </>
 }

@@ -22,11 +22,11 @@ export const InvitePageBody: FC<InvitePageBodyProps> = (props) => {
     const router = useRouter();
 
     const login = () => {
-        location.href = `/{#LANG#}/login/?from=${encodeURIComponent(location.href)}`
+        location.href = `/login/?from=${encodeURIComponent(location.href)}`
     }
 
     const register = () => {
-        location.href = `/{#LANG#}/register/?from=${encodeURIComponent(location.href)}`
+        location.href = `/register/?from=${encodeURIComponent(location.href)}`
     }
 
     const acceptInvite = async () => {
@@ -34,7 +34,7 @@ export const InvitePageBody: FC<InvitePageBodyProps> = (props) => {
         const { success, message, data } = await accept({token: token!});
         setSubmitting(false);
         if(success) {
-            router.push("/{#LANG#}/i18n/dashboard/?id=" + data);
+            router.push(`/i18n/${data}/dashboard`);
         }else{
             msg.error(message);
         }

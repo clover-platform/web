@@ -38,5 +38,5 @@ export type AcceptInviteData = {
 export const accept = async (data: AcceptInviteData): Promise<RestResult<any>> =>
     post(`@i18n/member/invite/accept`, data);
 
-export const detail = async (token: string): Promise<RestResult<InviteDetail|number>> =>
+export const detail = async (token: string): Promise<RestResult<InviteDetail|string>> =>
     get(`@i18n/member/invite/detail/${token}`);

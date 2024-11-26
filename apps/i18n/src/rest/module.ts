@@ -12,16 +12,16 @@ export const create = async (data: any): Promise<RestResult<any>> =>
     post(`@i18n/module/new`, data);
 
 export const dashboard = async (path: string): Promise<RestResult<any>> =>
-    get(`@i18n/module/${path}/dashboard`);
+    get(`@i18n/${path}/dashboard`);
 
 export const languages = async (path: string): Promise<RestResult<Language[]>> =>
-    get(`@i18n/module/${path}/languages`);
+    get(`@i18n/${path}/languages`);
 
-export const deleteModule = async (id: number): Promise<any> =>
-    del(`@i18n/module/${id}`);
+export const deleteModule = (module: string): Promise<any> =>
+    del(`@i18n/${module}`);
 
-export const detail = async (id: number): Promise<RestResult<BaseInfo>> =>
-    get(`@i18n/module/${id}`);
+export const detail = (module: string): Promise<RestResult<BaseInfo>> =>
+    get(`@i18n/${module}`);
 
-export const update = async (data: UpdateInfo): Promise<RestResult<BaseInfo>> =>
-    put(`@i18n/module/${data.id}`, data);
+export const update = (data: UpdateInfo): Promise<RestResult<BaseInfo>> =>
+    put(`@i18n/${data.module}`, data);

@@ -12,6 +12,7 @@ import {useLayoutConfig} from "@clover/public/components/layout/hooks/use.layout
 import {MainLayoutProps} from "@/components/layout/main";
 import {ModuleLayoutProps} from "@/components/layout/module";
 import { t } from '@easykit/common/utils/locale';
+import {useModule} from "@/hooks/use.module";
 
 export const ActivityPage = () => {
     useLayoutConfig<ModuleLayoutProps>({
@@ -23,8 +24,7 @@ export const ActivityPage = () => {
             }
         ],
     })
-    const search = useSearchParams();
-    const id = search.get('id');
+    const m = useModule();
     const [loading, setLoading] = useState(false);
     const [list, setList] = useState<Activity[]>([]);
     const [total, setTotal] = useState(0);
@@ -37,7 +37,7 @@ export const ActivityPage = () => {
         const { success, data: result } = await listRest({
             page: pageRef.current,
             size: 10,
-            moduleId: Number(id)
+            module: m
         });
         const { data , total } = result!;
         setLoading(false);

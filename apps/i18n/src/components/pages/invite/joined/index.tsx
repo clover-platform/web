@@ -5,14 +5,15 @@ import {useRouter} from "next/navigation";
 import { t } from '@easykit/common/utils/locale';
 
 export type InvitePageJoinedProps = {
-    moduleId: number;
+    module: string;
 }
 
 export const InvitePageJoined: FC<InvitePageJoinedProps> = (props) => {
     const router = useRouter();
+    const { module } = props;
 
     const detail = () => {
-        router.push("/{#LANG#}/i18n/dashboard/?id=" + props.moduleId);
+        router.push(`/i18n/${module}/dashboard`);
     }
 
     return <div className={"flex justify-center items-center flex-col"}>

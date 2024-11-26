@@ -1,7 +1,7 @@
 import {RestResult} from "@easykit/common/types/rest";
 
 export type ActivityQueryParams = {
-    moduleId: number;
+    module: string;
     page: number;
     size: number;
 }
