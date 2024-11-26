@@ -2,6 +2,7 @@
 
 import "@clover/public/plugin/rest.client";
 import "@clover/public/plugin/locales";
+import "@clover/public/plugin/formatters";
 import {Provider, WritableAtom} from 'jotai';
 import { useHydrateAtoms } from 'jotai/utils'
 import {FC, PropsWithChildren, ReactNode} from "react";

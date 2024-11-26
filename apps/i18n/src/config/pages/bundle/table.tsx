@@ -16,6 +16,7 @@ export const getColumns = (): DataTableColumn<Bundle>[] => [
         header: t("分支"),
         enableHiding: false,
         className: "!w-[200px]",
+        formatters: ["join"],
     },
     {
         accessorKey: "export",

@@ -25,8 +25,8 @@ export type AddBundleData = {
     sources: string[];
     export: AddBundleDataExport;
     includeSource: boolean;
-    moduleId: number;
+    module: string;
 }
 
 export const create = (data: AddBundleData): Promise<RestResult<any>> =>
-    post(`@i18n/bundle/create`, data);
+    post(`@i18n/${data.module}/bundle/create`, data);
