@@ -7,5 +7,5 @@ export type MemberQuery = {
     type: string;
 }
 
-export const list = async (params: MemberQuery): Promise<RestResult<any>> =>
+export const list = (params: MemberQuery): Promise<RestResult<any>> =>
     get(`@i18n/${params.module}/member/list`, params);

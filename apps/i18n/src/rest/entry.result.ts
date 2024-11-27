@@ -10,7 +10,7 @@ export type SaveEntryResultData = {
     branch: string;
 }
 
-export const save = async (data: SaveEntryResultData): Promise<RestResult<any>> =>
+export const save = (data: SaveEntryResultData): Promise<RestResult<any>> =>
     post(`@i18n/${data.module}/branch/${data.branch}/entry/${data.entryId}/result/save`, data);
 
 export type EntryResultQuery = {
@@ -22,7 +22,7 @@ export type EntryResultQuery = {
     branch: string;
 }
 
-export const list = async (data: EntryResultQuery): Promise<RestResult<EntryResultPage>> =>
+export const list = (data: EntryResultQuery): Promise<RestResult<EntryResultPage>> =>
     get(`@i18n/${data.module}/branch/${data.branch}/entry/${data.entryId}/result/list`, data);
 
 export type DeleteResultData = {
@@ -31,7 +31,7 @@ export type DeleteResultData = {
     id: number;
     branch: string;
 };
-export const deleteResult = async (data: DeleteResultData): Promise<RestResult<any>> =>
+export const deleteResult = (data: DeleteResultData): Promise<RestResult<any>> =>
     del(`@i18n/${data.module}/branch/${data.branch}/entry/${data.entryId}/result/${data.id}`);
 
 export type ApproveResultData = {
@@ -40,7 +40,7 @@ export type ApproveResultData = {
     id: number;
     branch: string;
 };
-export const approve = async (data: ApproveResultData): Promise<RestResult<any>> =>
+export const approve = (data: ApproveResultData): Promise<RestResult<any>> =>
     put(`@i18n/${data.module}/branch/${data.branch}/entry/${data.entryId}/result/${data.id}/approve`);
 
 export type RemoveApproveResultData = {
@@ -49,7 +49,7 @@ export type RemoveApproveResultData = {
     id: number;
     branch: string;
 };
-export const removeApproval = async (data: RemoveApproveResultData): Promise<RestResult<any>> =>
+export const removeApproval = (data: RemoveApproveResultData): Promise<RestResult<any>> =>
     put(`@i18n/${data.module}/branch/${data.branch}/entry/${data.entryId}/result/${data.id}/remove/approval`);
 
 export type AIData = {
@@ -59,5 +59,5 @@ export type AIData = {
     branch: string;
 }
 
-export const ai = async (data: AIData): Promise<RestResult<any>> =>
+export const ai = (data: AIData): Promise<RestResult<any>> =>
     post(`@i18n/${data.module}/branch/${data.branch}/entry/${data.entryId}/result/ai`, data);

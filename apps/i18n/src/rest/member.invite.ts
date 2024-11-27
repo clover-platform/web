@@ -8,17 +8,17 @@ export type InviteGenerateData = {
     roles: string[];
 }
 
-export const generate = async (data: InviteGenerateData): Promise<RestResult<string>> =>
+export const generate = (data: InviteGenerateData): Promise<RestResult<string>> =>
     post(`@i18n/${data.module}/member/invite/generate`, data);
 
 export type InviteGenerateParams = {
     module: string;
 }
 
-export const list = async (params: InviteGenerateParams): Promise<RestResult<MemberInvite[]>> =>
+export const list = (params: InviteGenerateParams): Promise<RestResult<MemberInvite[]>> =>
     get(`@i18n/${params.module}/member/invite/list`, params);
 
-export const revoke = async (params: {module: string, id: number}): Promise<RestResult<any>> =>
+export const revoke = (params: {module: string, id: number}): Promise<RestResult<any>> =>
     del(`@i18n/${params.module}/member/invite/revoke`, params);
 
 export type MemberInviteData = {
@@ -28,15 +28,15 @@ export type MemberInviteData = {
     content: string;
 }
 
-export const send = async (data: MemberInviteData): Promise<RestResult<any>> =>
+export const send = (data: MemberInviteData): Promise<RestResult<any>> =>
     post(`@i18n/${data.module}/member/invite/send`, data);
 
 export type AcceptInviteData = {
     token: string;
 }
 
-export const accept = async (data: AcceptInviteData): Promise<RestResult<any>> =>
+export const accept = (data: AcceptInviteData): Promise<RestResult<any>> =>
     post(`@i18n/member/invite/accept`, data);
 
-export const detail = async (token: string): Promise<RestResult<InviteDetail|string>> =>
+export const detail = (token: string): Promise<RestResult<InviteDetail|string>> =>
     get(`@i18n/member/invite/detail/${token}`);

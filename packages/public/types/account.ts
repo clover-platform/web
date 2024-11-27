@@ -1,5 +1,6 @@
 export type Account = {
     id: number;
+    email: string;
     authorities: string[];
     otpStatus: number;
     currentProjectId: number;

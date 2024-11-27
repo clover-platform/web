@@ -8,10 +8,10 @@ export type ListBranchQuery = {
     keyword?: string;
 }
 
-export const list = async (params: ListBranchQuery): Promise<RestResult<any>> =>
+export const list = (params: ListBranchQuery): Promise<RestResult<any>> =>
     get(`@i18n/${params.module}/branch/list`, params);
 
-export const all = async (module: string): Promise<RestResult<Branch[]>> =>
+export const all = (module: string): Promise<RestResult<Branch[]>> =>
     get(`@i18n/${module}/branch/all`);
 
 export type CreateBranchData = {
@@ -20,10 +20,10 @@ export type CreateBranchData = {
     type: string;
 }
 
-export const create = async (data: CreateBranchData): Promise<RestResult<any>> =>
+export const create = (data: CreateBranchData): Promise<RestResult<any>> =>
     post(`@i18n/${data.module}/branch/create`, data);
 
-export const deleteBranch = async (params: {
+export const deleteBranch = (params: {
     id: number;
     module: string;
 }): Promise<RestResult<any>> =>
@@ -35,10 +35,10 @@ export type RenameBranchData = {
     name: string;
 }
 
-export const rename = async (data: RenameBranchData): Promise<RestResult<any>> =>
+export const rename = (data: RenameBranchData): Promise<RestResult<any>> =>
     put(`@i18n/${data.module}/branch/${data.id}/rename`, data);
 
-export const mergeOverview = async (module: string, id: number): Promise<RestResult<BranchMergeOverview>> =>
+export const mergeOverview = (module: string, id: number): Promise<RestResult<BranchMergeOverview>> =>
     get(`@i18n/${module}/branch/${id}/merge/overview`);
 
 export type MergeBranchData = {
@@ -47,5 +47,5 @@ export type MergeBranchData = {
     deleteAfterMerge: boolean;
 }
 
-export const merge = async (data: MergeBranchData): Promise<RestResult<any>> =>
+export const merge = (data: MergeBranchData): Promise<RestResult<any>> =>
     put(`@i18n/${data.module}/branch/${data.id}/merge`, data);

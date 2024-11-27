@@ -1,5 +1,5 @@
 import {post, get, del, put} from "@easykit/common/utils/rest";
-import {PageRequest, RestResult} from "@easykit/common/types/rest";
+import {PageResult, RestResult} from "@easykit/common/types/rest";
 import {Book} from "@/types/pages/book";
 
 export type CreateBookData = {
@@ -23,7 +23,7 @@ export type BookListQuery = {
     type: "all" | "create" | "join";
 }
 
-export const list = (query: BookListQuery): Promise<PageRequest<Book>> =>
+export const list = (query: BookListQuery): Promise<PageResult<Book>> =>
     get("@wiki/book/list", query);
 
 export const deleteBook = (path: string): Promise<RestResult<any>> =>

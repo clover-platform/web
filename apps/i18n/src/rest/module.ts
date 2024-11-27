@@ -2,19 +2,19 @@ import { RestResult } from "@easykit/common/types/rest";
 import {del, get, post, put} from "@easykit/common/utils/rest";
 import {BaseInfo, Language, UpdateInfo} from "@/types/pages/module";
 
-export const list = async (params: any): Promise<RestResult<any>> =>
+export const list = (params: any): Promise<RestResult<any>> =>
     get(`@i18n/module/list`, params);
 
-export const all = async (params: any): Promise<RestResult<any>> =>
+export const all = (params: any): Promise<RestResult<any>> =>
     get(`@i18n/module/all`, params);
 
-export const create = async (data: any): Promise<RestResult<any>> =>
+export const create = (data: any): Promise<RestResult<any>> =>
     post(`@i18n/module/new`, data);
 
-export const dashboard = async (path: string): Promise<RestResult<any>> =>
+export const dashboard = (path: string): Promise<RestResult<any>> =>
     get(`@i18n/${path}/dashboard`);
 
-export const languages = async (path: string): Promise<RestResult<Language[]>> =>
+export const languages = (path: string): Promise<RestResult<Language[]>> =>
     get(`@i18n/${path}/languages`);
 
 export const deleteModule = (module: string): Promise<any> =>

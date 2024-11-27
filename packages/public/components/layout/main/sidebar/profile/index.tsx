@@ -6,15 +6,36 @@ import { UNAUTHORIZED } from "@clover/public/events/auth";
 import bus from '@easykit/common/events';
 import {clearToken} from "@clover/public/utils/token";
 import { t } from '@easykit/common/utils/locale';
+import {UserInfoItem} from "@clover/public/components/layout/main/sidebar/profile/user-info-item";
+
+export const URL_MAP: Record<string, any> = {
+    "profile": "/profile/-",
+    "profile.settings": "/profile/-/settings",
+    "profile.preferences": "/profile/-/preferences",
+}
 
 const getMenus = (): DropdownMenuItemProps[] => [
     {
         id: 'profile',
-        label: t("个人资料"),
+        label: <UserInfoItem />,
         type: 'item',
     },
     {
         id: 'separator.1',
+        type: 'separator',
+    },
+    {
+        id: 'profile.settings',
+        label: t("个人资料"),
+        type: 'item',
+    },
+    {
+        id: 'profile.preferences',
+        label: t("偏好设置"),
+        type: 'item',
+    },
+    {
+        id: 'separator.2',
         type: 'separator',
     },
     {
@@ -45,6 +66,11 @@ export const SidebarProfile = () => {
                         return success;
                     }
                 })
+            }else{
+                const url = URL_MAP[id];
+                if(url) {
+                    window.location.href = url;
+                }
             }
         }}
         items={getMenus()}

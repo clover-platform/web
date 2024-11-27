@@ -5,7 +5,7 @@ export type RestResult<T> = {
     data?: T;
 }
 
-export type PageRequest<T> = RestResult<{
+export type PageResult<T> = RestResult<{
     total: number;
     data: T[];
 }>
