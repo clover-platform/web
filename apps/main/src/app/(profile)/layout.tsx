@@ -1,3 +1,5 @@
 'use client';
 import { ProfileLayout } from "@/components/layout/profile";
-export default ProfileLayout;
+import {FC, PropsWithChildren} from "react";
+const Layout: FC<PropsWithChildren> = (props) => <ProfileLayout {...props} />
+export default Layout;
