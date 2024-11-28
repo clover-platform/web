@@ -39,8 +39,6 @@ const AuthorityForm: FC<AuthorityFormProps> = (props) => {
         setSubmitting(false);
     }
 
-    console.log(authority);
-
     return <Form
         ref={formRef}
         schema={getSchema()}

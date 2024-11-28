@@ -1,6 +1,7 @@
 import {AccessToken} from "@/types/profile/access/token";
 import {t} from "@easykit/common/utils/locale";
 import {DataTableColumn} from "@easykit/design/components/uix/data-table";
+import {DropdownMenuItemProps} from "@easykit/design";
 
 export const getColumns = (): DataTableColumn<AccessToken>[] => [
     {
@@ -25,6 +26,12 @@ export const getColumns = (): DataTableColumn<AccessToken>[] => [
     },
 ];
 
-export const getRowActions = (row: AccessToken) => {
-    return [];
+export const getRowActions = (row: AccessToken): DropdownMenuItemProps[] => {
+    return [
+        {
+            id: "revoke",
+            type: "item",
+            label: t("撤销"),
+        },
+    ];
 };

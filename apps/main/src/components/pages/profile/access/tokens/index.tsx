@@ -4,13 +4,13 @@ import {useLayoutConfig} from "@clover/public/components/layout/hooks/use.layout
 import {t} from "@easykit/common/utils/locale";
 import {ProfileLayoutProps} from "@/components/layout/profile";
 import {TitleBar} from "@clover/public/components/common/title-bar";
-import {DataTable} from "@easykit/design";
+import {Button, DataTable, useAlert, useMessage} from "@easykit/design";
 import {useTableLoader} from "@easykit/common/hooks";
 import {useEffect} from "react";
 import {AccessToken} from "@/types/profile/access/token";
-import {list} from "@/rest/profile/access/token";
+import {list, revoke} from "@/rest/profile/access/token";
 import {getColumns, getRowActions} from "@/config/pages/profile/access/token";
-import {CreateButton} from "@/components/pages/profile/access/tokens/create/button";
+import Link from "next/link";
 
 const initialParams = {};
 
@@ -31,13 +31,17 @@ export const AccessTokensPage = () => {
         action: list,
         keys: ['type'],
     });
+    const alert = useAlert();
+    const msg = useMessage();
 
     useEffect(() => {
         load().then();
     }, []);
 
     const actions = <div className={"space-x-2"}>
-        <CreateButton onSuccess={() => load().then()} />
+        <Link href={"/profile/-/access/tokens/create"}>
+            <Button>{t("创建访问令牌")}</Button>
+        </Link>
     </div>;
 
     return <>
@@ -58,7 +62,21 @@ export const AccessTokensPage = () => {
             loading={loading}
             onRowActionClick={({id: key}, {original}) => {
                 const {id} = original;
-                console.log(id);
+                if("revoke" === key) {
+                    alert.confirm({
+                        title: t("撤销令牌"),
+                        description: t("撤销后将无法再使用该令牌，且该操作无法恢复。"),
+                        onOk: async () => {
+                            const { success, message } = await revoke(id);
+                            if(success) {
+                                load().then();
+                            }else{
+                                msg.error(message);
+                            }
+                            return success;
+                        }
+                    });
+                }
             }}
         />
     </>

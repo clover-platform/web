@@ -9,18 +9,20 @@ export type ErrorItem = {
     code: string;
 }
 
-export type UseFormResultProps = {
+export type UseFormResultProps<T> = {
     ref: MutableRefObject<UseFormReturn|undefined>;
-    onSuccess?: () => void;
+    onSuccess?: (result?: T) => void;
 }
 
-export const useFormResult = function <T>(props: UseFormResultProps) {
+export type FormResult<T> = (d: RestResult<T>) => RestResult<T>;
+
+export const useFormResult = function <T>(props: UseFormResultProps<T>) {
     const {ref, onSuccess} = props;
     const msg = useMessage();
-    return useCallback((d: RestResult<T>): RestResult<T> => {
+    return useCallback<FormResult<T>>((d: RestResult<T>): RestResult<T> => {
         const { success, code, data, message } = d;
         if(success) {
-            onSuccess?.();
+            onSuccess?.(data);
         }else{
             if(code === 400) {
                 const errors = data as ErrorItem[];
