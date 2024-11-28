@@ -26,6 +26,7 @@
         "@clover/public": "workspace:*",
         "@easykit/common": "workspace:*",
         "@easykit/page-imports": "workspace:*",
+        "@clover/i18n-cli": "workspace:*",
         "@arco-iconbox/react-clover": "0.0.26",
         "@easykit/design": "0.0.59",
         "@easykit/eslint-config": "0.0.1",
