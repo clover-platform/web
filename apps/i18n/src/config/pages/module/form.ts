@@ -13,11 +13,11 @@ export const getSchema = () => z.object({
         .min(1, t("请选择语言")),
     targets: z.array(z.string()),
 }).superRefine(({identifier}, ctx) => {
-    if (!/^[a-z][a-z-]*$/.test(identifier)) {
+    if (!/^[a-z][0-9a-z-]*$/.test(identifier)) {
         ctx.addIssue({
             code: 'custom',
             path: ['identifier'],
-            message: t("唯一标识只能是小写字母和-，小写字母开头")
+            message: t("唯一标识只能是小写字母、数字和-，小写字母开头")
         })
     }
 })
