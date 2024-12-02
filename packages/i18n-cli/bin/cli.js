@@ -2,6 +2,7 @@
 import program from 'commander';
 import chalk from 'chalk';
 import Module from "node:module";
+import {I18nClient} from "../lib/client.js";
 const require = Module.createRequire(import.meta.url);
 const pkg = require('../package.json');
 
@@ -11,27 +12,19 @@ program
     .description(chalk(`[ ${pkg.description} - ${pkg.version} ]`).green);
 
 program
-    .command('pull [lang]')
-    .description('Pull translations. When there are no parameters, pull all translations.')
+    .command('pull')
+    .description('Pull all translations.')
     .action(function (args,otherArgs,cmd) {
-        // const crowdin = new CrowdinV2();
-        // crowdin.pull(cmd.args);
+        const client = new I18nClient();
+        client.pull().then();
     });
 
 program
     .command('push')
     .description('Push the entries in the current branch change code')
     .action(function (args,otherArgs,cmd) {
-        // const crowdin = new CrowdinV2();
-        // crowdin.push().then();
-    });
-
-program
-    .command('clean')
-    .description('Clean up deleted entries')
-    .action(function (args,otherArgs,cmd) {
-        // const crowdin = new CrowdinV2();
-        // crowdin.clean();
+        const client = new I18nClient();
+        client.push().then();
     });
 
 program.parse(process.argv);

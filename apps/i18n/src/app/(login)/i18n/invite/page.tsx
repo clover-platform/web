@@ -5,7 +5,7 @@ import {Metadata} from "next";
 
 export async function generateMetadata(): Promise<Metadata> {
     return {
-        title: title(t("加入翻译")),
+        title: title(t("加入翻译 'test' \"test\"")),
         keywords: keywords(),
     }
 }

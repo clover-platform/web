@@ -7,7 +7,8 @@
         "dev": "next dev -p 3700",
         "start": "next start -p 3700",
         "build": "next build",
-        "lint": "next lint"
+        "lint": "next lint",
+        "i18n": "i18n-cli"
     },
     "dependencies": {},
     "devDependencies": {},
