@@ -76,7 +76,6 @@ export class I18nClient {
                 Authorization: `Bearer ${token}`
             }
         }).then(res => res.data);
-        console.log("createBranchIfNotExists", r)
         return r.success;
     }
 
