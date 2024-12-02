@@ -15,7 +15,7 @@ export type Plugin = {
     panel: ReactNode;
 }
 
-export const plugins: Plugin[] = [
+export const getPlugins = (): Plugin[] => [
     {
         id: "comment",
         name: t("评论"),
@@ -40,7 +40,7 @@ export const PluginPanel = () => {
     const [activePlugin, setActivePlugin] = useState<string>("comment");
 
     const plugin = useMemo(() => {
-        return plugins.find(plugin => plugin.id === activePlugin);
+        return getPlugins().find(plugin => plugin.id === activePlugin);
     }, [activePlugin])
 
     return <EntryCheck className={"bg-muted"}>
@@ -55,12 +55,12 @@ export const PluginPanel = () => {
             </div>
             <div className={"bg-muted border-l p-2"}>
                 {
-                    plugins.map((plugin, index) => {
+                    getPlugins().map((plugin, index) => {
                         return <Tooltip content={plugin.name} side={"left"} key={plugin.name}>
                             <Action
                                 onClick={() => setActivePlugin(plugin.id)}
                                 active={activePlugin === plugin.id}
-                                className={index < plugins.length - 1 ? "mb-2" : ""}
+                                className={index < getPlugins().length - 1 ? "mb-2" : ""}
                             >
                                 {plugin.icon}
                             </Action>
