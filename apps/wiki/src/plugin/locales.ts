@@ -4,6 +4,9 @@ import { zodI18nMap } from "zod-i18n-map";
 import zhCNZod from "zod-i18n-map/locales/zh-CN/zod.json";
 import zhTWZod from "zod-i18n-map/locales/zh-TW/zod.json";
 import enUSZod from "zod-i18n-map/locales/en/zod.json";
+import zhCNCommon from "@easykit/common/assets/locales/zh-CN.json";
+import zhTWCommon from "@easykit/common/assets/locales/zh-TW.json";
+import enUSCommon from "@easykit/common/assets/locales/en-US.json";
 import zhCNPublic from "@clover/public/assets/locales/zh-CN.json";
 import zhTWPublic from "@clover/public/assets/locales/zh-TW.json";
 import enUSPublic from "@clover/public/assets/locales/en-US.json";
@@ -21,6 +24,7 @@ i18next.init({
             zod: zhCNZod,
             editor: zhCNEditor,
             common: {
+                ...zhCNCommon,
                 ...zhCNPublic,
                 ...zhCN
             },
@@ -29,6 +33,7 @@ i18next.init({
             zod: zhTWZod,
             editor: zhTWEditor,
             common: {
+                ...zhTWCommon,
                 ...zhTWPublic,
                 ...zhTW
             },
@@ -37,6 +42,7 @@ i18next.init({
             zod: enUSZod,
             editor: enUSEditor,
             common: {
+                ...enUSCommon,
                 ...enUSPublic,
                 ...enUS
             },
