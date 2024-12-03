@@ -1,5 +1,5 @@
 import {defaultConfig} from "./config.js";
-import {exists, getBranchName, readDirSync, writeJSON} from "./utils.js";
+import {exists, getBranchName, mkdirsSync, readDirSync, writeJSON} from "./utils.js";
 import path from "path";
 import fs from "fs";
 import axios from "axios";
@@ -59,6 +59,9 @@ export class I18nClient {
             }
         }).then(res => res.data);
         if(r.success) {
+            if(!exists(dir)) {
+                mkdirsSync(path.dirname(dir));
+            }
             writeJSON(dir, sourceObject);
             console.log("Push success");
         }else{

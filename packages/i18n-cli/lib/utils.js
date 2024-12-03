@@ -29,7 +29,7 @@ const mkdir = (path) => {
 };
 
 //递归创建目录 同步方法
-function mkdirsSync(dirname) {
+export function mkdirsSync(dirname) {
     if (fs.existsSync(dirname)) {
         return true;
     } else {

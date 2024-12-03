@@ -1,5 +1,6 @@
 {
     "module": "public-web",
+    "dist": "assets/locales",
     "languages": [
         {
             "code": "zh-CN",

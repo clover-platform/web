@@ -4,12 +4,12 @@ import { zodI18nMap } from "zod-i18n-map";
 import zhCNZod from "zod-i18n-map/locales/zh-CN/zod.json";
 import zhTWZod from "zod-i18n-map/locales/zh-TW/zod.json";
 import enUSZod from "zod-i18n-map/locales/en/zod.json";
-import zhCNPublic from "@clover/public/assets/locale/zh-CN.json";
-import zhTWPublic from "@clover/public/assets/locale/zh-TW.json";
-import enUSPublic from "@clover/public/assets/locale/en-US.json";
-import zhCN from "@/assets/locale/zh-CN.json";
-import zhTW from "@/assets/locale/zh-TW.json";
-import enUS from "@/assets/locale/en-US.json";
+import zhCNPublic from "@clover/public/assets/locales/zh-CN.json";
+import zhTWPublic from "@clover/public/assets/locales/zh-TW.json";
+import enUSPublic from "@clover/public/assets/locales/en-US.json";
+import zhCN from "@/assets/locales/zh-CN.json";
+import zhTW from "@/assets/locales/zh-TW.json";
+import enUS from "@/assets/locales/en-US.json";
 
 i18next.init({
     ns: ["zod", "common"],
