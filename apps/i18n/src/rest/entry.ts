@@ -14,6 +14,9 @@ export type EntryQueryParams = {
 export const list = (params: EntryQueryParams): Promise<RestResult<any>> =>
     get(`@i18n/${params.module}/branch/${params.branch || "-"}/entry/list`, params);
 
+export const all = (params: EntryQueryParams): Promise<RestResult<any>> =>
+    get(`@i18n/${params.module}/branch/${params.branch || "-"}/entry/all`, params);
+
 export type CreateEntryData = {
     module: string;
     key: string;

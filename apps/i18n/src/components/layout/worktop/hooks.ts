@@ -11,7 +11,7 @@ import {
     entriesState,
     languagesState,
 } from "@/state/worktop";
-import { count, detail, list } from "@/rest/entry";
+import { count, detail, all as allEntry } from "@/rest/entry";
 
 export const useWorktopState = () => {
     const search = useSearchParams();
@@ -54,36 +54,25 @@ export const useQuerySync = () => {
     }, [currentLanguage, currentBranch]);
 }
 
-export const defaultEntriesParams = {
-    page: 1, size: 50
-};
-
 export const useEntriesLoader = () => {
     const { module } = useParams();
     const [loading, setLoading] = useAtom(entriesLoadingState);
     const [entries, setEntries] = useAtom(entriesState);
-    const paramsRef = useRef(defaultEntriesParams);
-    const [total, setTotal] = useState(0);
-    const pages = useMemo(() => Math.ceil(total / paramsRef.current.size), [total]);
     const [currentBranch] = useAtom(currentBranchState);
     const [branches] = useAtom(branchesState);
     const [currentLanguage] = useAtom(currentLanguageState);
     const [_c, setCount] = useAtom(countState);
     const branch = branches.find(b => b.name === currentBranch);
 
-    const load = async (_params?: any) => {
+    const load = async () => {
         setLoading(true)
         const params = {
-            ...paramsRef.current,
-            ...(_params || {}),
             branch: branch?.name,
             module: module as string,
             language: currentLanguage
         }
-        paramsRef.current = params;
-        const { success, data } = await list(params);
+        const { success, data } = await allEntry(params);
         if(success) {
-            setTotal(data.total);
             setEntries(data.data)
         }
         setLoading(false)
@@ -106,9 +95,7 @@ export const useEntriesLoader = () => {
     return {
         load,
         loading,
-        entries,
-        total,
-        pages
+        entries
     }
 }
 

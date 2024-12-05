@@ -16,8 +16,6 @@ export const MainPanel = () => {
     const [rightSideOpen, setRightSideOpen] = useAtom(rightSideOpenState);
     const leftRef = useRef<ImperativePanelHandle>(null);
     const rightRef = useRef<ImperativePanelHandle>(null);
-    const {pages, total, entries, loading, load} = useEntriesLoader();
-    const [_, setCurrent] = useAtom(currentEntryState);
 
     useEffect(() => {
         leftSideOpen ? leftRef.current?.expand() : leftRef.current?.collapse();
@@ -26,17 +24,6 @@ export const MainPanel = () => {
     useEffect(() => {
         rightSideOpen ? rightRef.current?.expand() : rightRef.current?.collapse();
     }, [rightSideOpen]);
-
-    useEffect(() => {
-        const handler = () => {
-            setCurrent(0);
-            load({page: 1}).then();
-        }
-        bus.on(ENTRY_RELOAD, handler);
-        return () => {
-            bus.off(ENTRY_RELOAD, handler);
-        }
-    }, [])
 
     return <div className={"flex-1 w-full h-0 flex-shrink-0"}>
         <ResizablePanelGroup direction="horizontal" autoSaveId="module.worktop">
@@ -48,13 +35,7 @@ export const MainPanel = () => {
                 onCollapse={() => setLeftSideOpen(false)}
                 onExpand={() => setLeftSideOpen(true)}
             >
-                <EntryPanel
-                    pages={pages}
-                    total={total}
-                    entries={entries}
-                    loading={loading}
-                    load={load}
-                />
+                <EntryPanel />
             </ResizablePanel>
             <ResizableHandle className={leftSideOpen ? "" : "hidden"}/>
             <ResizablePanel defaultSize={40}>

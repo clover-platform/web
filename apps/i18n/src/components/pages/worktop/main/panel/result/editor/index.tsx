@@ -7,10 +7,12 @@ import {
     Tooltip,
 } from "@easykit/design";
 import { IconClear } from "@arco-iconbox/react-clover";
-import {useCallback, useState} from "react";
+import {useCallback, useEffect, useState} from "react";
 import TextareaAutosize from 'react-textarea-autosize';
 import {useResultSubmit} from "@/components/pages/worktop/main/panel/result/hooks/use.result.submit";
 import { t } from '@easykit/common/utils/locale';
+import bus from "@easykit/common/events";
+import {ENTRY_RESULT_AI_INSERT} from "@/events/worktop";
 
 export const Editor = () => {
     const [entries] = useAtom(entriesState);
@@ -22,6 +24,13 @@ export const Editor = () => {
     const onSave = useCallback(async () => {
         await submit(content!);
     }, [content])
+
+    useEffect(() => {
+        bus.on(ENTRY_RESULT_AI_INSERT, setContent);
+        return () => {
+            bus.off(ENTRY_RESULT_AI_INSERT, setContent);
+        }
+    }, [setContent])
 
     return <div className={"w-full"}>
         <TextareaAutosize

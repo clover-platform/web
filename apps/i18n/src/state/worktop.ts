@@ -20,6 +20,8 @@ export const entriesLoadingState = atom<boolean>(false)
 
 export const currentEntryState = atom<number>(0)
 
+export const currentPageState = atom<number>(1)
+
 export const countState = atom<CountEntryData>({
     total: 0,
     translated: 0,

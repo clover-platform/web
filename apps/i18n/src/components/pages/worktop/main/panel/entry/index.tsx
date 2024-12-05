@@ -1,28 +1,46 @@
 import {Empty, Input, ScrollArea} from "@easykit/design";
 import { CreateEntryButton } from "@/components/pages/worktop/main/panel/entry/create/button";
-import { FC, useState } from "react";
+import {FC, useEffect, useMemo, useState} from "react";
 import classNames from "classnames";
 import {useAtom} from "jotai";
-import {currentEntryState} from "@/state/worktop";
+import {currentEntryState, currentPageState} from "@/state/worktop";
 import { CheckIcon, } from "@radix-ui/react-icons";
 import {Pagination} from "@/components/pages/worktop/main/panel/entry/pagination";
 import { EntryLoading } from "@/components/pages/worktop/main/panel/entry/loading";
 import {LanguageCheck} from "@/components/pages/worktop/main/check/language";
 import { t } from '@easykit/common/utils/locale';
+import {useEntriesLoader} from "@/components/layout/worktop/hooks";
+import bus from "@easykit/common/events";
+import {ENTRY_RELOAD} from "@/events/worktop";
 
-export type EntryPanelProps = {
-    pages: number;
-    total: number;
-    entries: any[];
-    loading: boolean;
-    load: (params: any) => Promise<any>;
-}
+export type EntryPanelProps = {}
+
+export const SIZE = 50;
 
 export const EntryPanel: FC<EntryPanelProps> = (props) => {
-    const {pages, entries, loading, load} = props;
-    const [page, setPage] = useState<number>(1);
+    const [page, setPage] = useAtom(currentPageState);
     const [current, setCurrent] = useAtom(currentEntryState);
     const [keyword, setKeyword] = useState<string>('');
+    const {entries: _entries, loading, load} = useEntriesLoader();
+
+    useEffect(() => {
+        const handler = () => {
+            setCurrent(0);
+            load().then();
+        }
+        bus.on(ENTRY_RELOAD, handler);
+        return () => {
+            bus.off(ENTRY_RELOAD, handler);
+        }
+    }, [])
+
+    const pages = useMemo(() => {
+        return Math.ceil((_entries?.length || 0) / SIZE);
+    }, [_entries]);
+
+    const entries = useMemo(() => {
+        return _entries?.slice((page - 1) * SIZE, page * SIZE) || [];
+    }, [_entries, page]);
 
     const search = (e: any) => {
         if (e.keyCode === 13) {
@@ -35,7 +53,6 @@ export const EntryPanel: FC<EntryPanelProps> = (props) => {
     const changePage = (page: number) => {
         setPage(page);
         setCurrent(0);
-        load({page}).then();
     }
 
     const iconCheck = <CheckIcon className={"text-sm text-green-500"}/>;
