@@ -10,4 +10,5 @@ export const defaultConfig = {
     domain: "https://xyc.plus",
     exclude: ['.next', 'node_modules'],
     languages: [],
+    main: "main",
 }

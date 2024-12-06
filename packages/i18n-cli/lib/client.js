@@ -70,10 +70,11 @@ export class I18nClient {
     }
 
     async createBranchIfNotExists() {
-        const { domain, module, token } = this.config;
+        const { domain, module, token, main } = this.config;
         const branch = await getBranchName();
         const r = await axios.post(`${domain}/api/i18n/open/${module}/branch/create/if/not/exist`, {
-            name: branch
+            name: branch,
+            clone: main !== branch,
         }, {
             headers: {
                 Authorization: `Bearer ${token}`
