@@ -23,7 +23,7 @@ export const AIItem: FC<AIItemProps> = (props) => {
         <div className={"h-7 hidden justify-center items-center group-hover:flex space-x-1"}>
             <Tooltip content={t("采用")}>
                 <Action disabled={loading} onClick={() => insert(props.value)} className={"!p-1"}>
-                    { loading ? <Spin /> : <ArrowBottomLeftIcon /> }
+                    <ArrowBottomLeftIcon />
                 </Action>
             </Tooltip>
             <Tooltip content={t("采用并保存")}>

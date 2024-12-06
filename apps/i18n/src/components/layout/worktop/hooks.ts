@@ -6,12 +6,13 @@ import {useAtom} from "jotai";
 import {
     branchesState, countState,
     currentBranchState, currentEntryState,
-    currentLanguageState,
+    currentLanguageState, currentPageState,
     entriesLoadingState,
     entriesState,
     languagesState,
 } from "@/state/worktop";
 import { count, detail, all as allEntry } from "@/rest/entry";
+import {SIZE} from "@/components/pages/worktop/main/panel/entry";
 
 export const useWorktopState = () => {
     const search = useSearchParams();
@@ -56,6 +57,7 @@ export const useQuerySync = () => {
 
 export const useEntriesLoader = () => {
     const { module } = useParams();
+    const [originEntries, setOriginEntries] = useState([]);
     const [loading, setLoading] = useAtom(entriesLoadingState);
     const [entries, setEntries] = useAtom(entriesState);
     const [currentBranch] = useAtom(currentBranchState);
@@ -63,17 +65,40 @@ export const useEntriesLoader = () => {
     const [currentLanguage] = useAtom(currentLanguageState);
     const [_c, setCount] = useAtom(countState);
     const branch = branches.find(b => b.name === currentBranch);
+    const [page, setPage] = useAtom(currentPageState);
+    const [current, setCurrent] = useAtom(currentEntryState);
+    const [keyword, setKeyword] = useState<string>('');
+    const paramsRef = useRef({});
+
+    const filteredEntries = useMemo(() => {
+        return originEntries?.filter(entry => entry.value.includes(keyword)) || [];
+    }, [originEntries, keyword]);
+
+    const pages = useMemo(() => {
+        return Math.ceil((filteredEntries?.length || 0) / SIZE);
+    }, [filteredEntries]);
+
+    const pageEntries = useMemo(() => {
+        const startIndex = (page - 1) * SIZE; // 计算起始索引
+        return filteredEntries.slice(startIndex, startIndex + SIZE); // 使用 slice 获取分页数据
+    }, [filteredEntries, page]);
+
+    useEffect(() => {
+        setEntries(pageEntries);
+    }, [pageEntries]);
 
     const load = async () => {
         setLoading(true)
         const params = {
+            ...paramsRef.current,
             branch: branch?.name,
             module: module as string,
             language: currentLanguage
         }
+        paramsRef.current = params;
         const { success, data } = await allEntry(params);
         if(success) {
-            setEntries(data.data)
+            setOriginEntries(data.data)
         }
         setLoading(false)
     }
@@ -95,7 +120,14 @@ export const useEntriesLoader = () => {
     return {
         load,
         loading,
-        entries
+        entries,
+        setPage,
+        setCurrent,
+        setKeyword,
+        pages,
+        page,
+        current,
+        keyword
     }
 }
 

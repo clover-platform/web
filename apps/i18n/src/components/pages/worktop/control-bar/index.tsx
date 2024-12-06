@@ -14,6 +14,9 @@ import { MenuSheet } from "@/components/pages/worktop/control-bar/menu-sheet";
 import { useState } from "react";
 import { LanguageAction } from "@/components/pages/worktop/control-bar/action/language";
 import { BranchAction } from "@/components/pages/worktop/control-bar/action/branch";
+import {ReloadIcon} from "@radix-ui/react-icons";
+import bus from "@easykit/common/events";
+import {ENTRY_RELOAD} from "@/events/worktop";
 
 export const ControlBar = () => {
     const { module } = useParams();
@@ -39,6 +42,10 @@ export const ControlBar = () => {
         setMenuOpen(true);
     }
 
+    const refresh = () => {
+        bus.emit(ENTRY_RELOAD);
+    }
+
     return <div className={"w-full sticky top-0"}>
         <div className={"border-b"}>
             <Progress
@@ -49,31 +56,35 @@ export const ControlBar = () => {
         </div>
         <div className={"flex justify-center items-center px-2 py-1 border-b shadow-sm"}>
             <div className={"flex-1 flex justify-start items-center space-x-1"}>
-                <Action className={"!px-1.5 h-8"} onClick={() => router.push(`/i18n/${module}/dashboard`)}>
+                <Action className={"!px-1.5 h-8 w-8"} onClick={() => router.push(`/i18n/${module}/dashboard`)}>
                     <IconBack className={"text-lg"} />
                 </Action>
-                <Action className={"!px-1.5 h-8"} onClick={showMenu}>
+                <Action className={"!px-1.5 h-8 w-8"} onClick={showMenu}>
                     <IconMenu className={"text-lg"} />
                 </Action>
                 <Separator orientation={"vertical"} className={"h-5"} />
                 <LanguageAction onClick={showMenuByLanguage} />
                 <BranchAction onClick={showMenuByBranch} />
+                <Separator orientation={"vertical"} className={"h-5"} />
+                <Action className={"!px-1.5 h-8 w-8"} onClick={refresh}>
+                    <ReloadIcon className={"text-lg"} />
+                </Action>
             </div>
             <div className={"flex-1 flex justify-end items-center space-x-1"}>
                 <Action
                     onClick={() => setLeftSideOpen(!leftSideOpen)}
-                    active={leftSideOpen} className={"!px-1.5 h-8"}
+                    active={leftSideOpen} className={"!px-1.5 h-8 w-8"}
                 >
                     <IconLeftSidebar className={"text-lg"} />
                 </Action>
                 <Action
                     onClick={() => setRightSideOpen(!rightSideOpen)}
-                    active={rightSideOpen} className={"!px-1.5 h-8"}
+                    active={rightSideOpen} className={"!px-1.5 h-8 w-8"}
                 >
                     <IconRightSidebar className={"text-lg"} />
                 </Action>
                 <Separator orientation={"vertical"} className={"h-5"} />
-                <Action className={"!px-1.5 h-8"}>
+                <Action className={"!px-1.5 h-8 w-8"}>
                     <IconSetting className={"text-lg"} />
                 </Action>
             </div>

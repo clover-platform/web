@@ -1,9 +1,7 @@
 import {Empty, Input, ScrollArea} from "@easykit/design";
 import { CreateEntryButton } from "@/components/pages/worktop/main/panel/entry/create/button";
-import {FC, useEffect, useMemo, useState} from "react";
+import {FC, useEffect} from "react";
 import classNames from "classnames";
-import {useAtom} from "jotai";
-import {currentEntryState, currentPageState} from "@/state/worktop";
 import { CheckIcon, } from "@radix-ui/react-icons";
 import {Pagination} from "@/components/pages/worktop/main/panel/entry/pagination";
 import { EntryLoading } from "@/components/pages/worktop/main/panel/entry/loading";
@@ -14,18 +12,19 @@ import bus from "@easykit/common/events";
 import {ENTRY_RELOAD} from "@/events/worktop";
 
 export type EntryPanelProps = {}
-
 export const SIZE = 50;
 
 export const EntryPanel: FC<EntryPanelProps> = (props) => {
-    const [page, setPage] = useAtom(currentPageState);
-    const [current, setCurrent] = useAtom(currentEntryState);
-    const [keyword, setKeyword] = useState<string>('');
-    const {entries: _entries, loading, load} = useEntriesLoader();
+    const {
+        entries, loading, load,
+        setKeyword, setCurrent, setPage,
+        keyword, pages, page, current
+    } = useEntriesLoader();
 
     useEffect(() => {
         const handler = () => {
             setCurrent(0);
+            setPage(1);
             load().then();
         }
         bus.on(ENTRY_RELOAD, handler);
@@ -33,22 +32,6 @@ export const EntryPanel: FC<EntryPanelProps> = (props) => {
             bus.off(ENTRY_RELOAD, handler);
         }
     }, [])
-
-    const pages = useMemo(() => {
-        return Math.ceil((_entries?.length || 0) / SIZE);
-    }, [_entries]);
-
-    const entries = useMemo(() => {
-        return _entries?.slice((page - 1) * SIZE, page * SIZE) || [];
-    }, [_entries, page]);
-
-    const search = (e: any) => {
-        if (e.keyCode === 13) {
-            setPage(1);
-            setCurrent(0);
-            load({page: 1, keyword}).then();
-        }
-    }
 
     const changePage = (page: number) => {
         setPage(page);
@@ -64,10 +47,13 @@ export const EntryPanel: FC<EntryPanelProps> = (props) => {
             <div className={"p-2 flex justify-center items-center space-x-2 w-full"}>
                 <Input
                     value={keyword}
-                    onChange={(e) => setKeyword(e.target.value)}
+                    onChange={(e) => {
+                        setPage(1);
+                        setCurrent(0);
+                        setKeyword(e.target.value);
+                    }}
                     className={"flex-1"}
                     placeholder={t("搜索词条")}
-                    onKeyUp={search}
                 />
                 <CreateEntryButton/>
             </div>

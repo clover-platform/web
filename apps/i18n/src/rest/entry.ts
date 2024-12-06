@@ -3,10 +3,10 @@ import {get, post, put, del} from "@easykit/common/utils/rest";
 import { CountEntryData, CountEntryQuery, Entry } from "@/types/pages/entry";
 
 export type EntryQueryParams = {
-    keyword?: string;
-    branch?: number;
     module: string;
     language: string;
+    keyword?: string;
+    branch?: string;
     page?: number;
     size?: number;
 }
