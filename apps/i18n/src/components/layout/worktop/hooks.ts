@@ -13,6 +13,7 @@ import {
 } from "@/state/worktop";
 import { count, detail, all as allEntry } from "@/rest/entry";
 import {SIZE} from "@/components/pages/worktop/main/panel/entry";
+import {Entry} from "@/types/pages/entry";
 
 export const useWorktopState = () => {
     const search = useSearchParams();
@@ -57,7 +58,7 @@ export const useQuerySync = () => {
 
 export const useEntriesLoader = () => {
     const { module } = useParams();
-    const [originEntries, setOriginEntries] = useState([]);
+    const [originEntries, setOriginEntries] = useState<Entry[]>([]);
     const [loading, setLoading] = useAtom(entriesLoadingState);
     const [entries, setEntries] = useAtom(entriesState);
     const [currentBranch] = useAtom(currentBranchState);
