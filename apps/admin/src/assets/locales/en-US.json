@@ -48,7 +48,7 @@
 	"是否删除改角色，与之关联的用户、权限关联将会删除。": "Whether to delete this role, and the associated users and permission associations will be deleted.",
 	"仪表盘": "Dashboard",
 	"概览": "Overview",
-	"权限": "authority",
+	"权限": "Authority",
 	"权限名称不能为空": "The permission name cannot be empty.",
 	"最多 100 个字符": "No more than 100 characters",
 	"权限码不能为空": "Authorization code cannot be empty.",
