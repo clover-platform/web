@@ -2,6 +2,7 @@ import classNames from "classnames";
 import {FC, ReactNode} from "react";
 import {IconAddFile, IconBook} from "@arco-iconbox/react-clover";
 import { t } from '@clover/public/locale';
+import {useLocale} from "@clover/public/hooks";
 
 export type StartItem = {
     id: string;
@@ -16,6 +17,7 @@ export type HomeStartProps = {
 }
 
 export const HomeStart: FC<HomeStartProps> = (props) => {
+    const l = useLocale();
     const START_ITEMS: StartItem[] = [
         {
             id: "new.file",
@@ -31,6 +33,8 @@ export const HomeStart: FC<HomeStartProps> = (props) => {
         }
     ]
 
+    console.log(l);
+
     return <div className={"flex space-x-4"}>
         {
             START_ITEMS.map((item) => {
@@ -38,8 +42,9 @@ export const HomeStart: FC<HomeStartProps> = (props) => {
                     onClick={() => props.onClick?.(item)}
                     key={item.id}
                     className={classNames(
-                        "border rounded-md p-2 flex w-64 justify-center items-center cursor-pointer",
-                        "hover:bg-secondary hover:text-primary group"
+                        "border rounded-md p-2 flex justify-center items-center cursor-pointer",
+                        "hover:bg-secondary hover:text-primary group",
+                        ["zh-CN", "zh-TW", "zh-HK"].includes(l) ? "w-80" : "w-96",
                     )}
                 >
                     <div className={"w-12 h-12 flex justify-center items-center"}>
