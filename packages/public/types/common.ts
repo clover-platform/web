@@ -1,4 +1,4 @@
-declare module '@easykit/common/utils/locale/data' {
+declare module '@clover/public/locale/data' {
     export const getPath: (path: string) => string;
     export const dataLoader: (config: any) => Promise<any>;
     const langData: any;

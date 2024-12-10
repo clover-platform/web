@@ -1,6 +1,6 @@
 import {keywords, title} from "@clover/public/utils/seo";
 import {ModuleSettingAIPage} from "@/components/pages/setting/ai";
-import { t } from '@easykit/common/utils/locale';
+import { t } from '@clover/public/locale';
 import {Metadata} from "next";
 
 export async function generateMetadata(): Promise<Metadata> {

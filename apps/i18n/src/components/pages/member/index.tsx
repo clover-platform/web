@@ -1,7 +1,7 @@
 'use client';
 
 import { useSearchParams } from "next/navigation";
-import { useTableLoader } from "@easykit/common/hooks";
+import { useTableLoader } from "@clover/public/hooks";
 import { list } from "@/rest/member";
 import { useEffect, useState } from "react";
 import { TitleBar } from "@clover/public/components/common/title-bar";
@@ -13,7 +13,7 @@ import { Member } from "@/types/pages/member";
 import { InviteButton } from "@/components/pages/member/invite/button";
 import {useLayoutConfig} from "@clover/public/components/layout/hooks/use.layout.config";
 import {ModuleLayoutProps} from "@/components/layout/module";
-import { t } from '@easykit/common/utils/locale';
+import { t } from '@clover/public/locale';
 import {useModule} from "@/hooks/use.module";
 
 const initialParams = {

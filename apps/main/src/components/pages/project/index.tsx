@@ -2,7 +2,7 @@
 
 import {useLayoutConfig} from "@clover/public/components/layout/hooks/use.layout.config";
 import {MainLayoutProps} from "@/components/layout/main";
-import { t } from '@easykit/common/utils/locale';
+import { t } from '@clover/public/locale';
 
 const ProjectPage = () => {
     useLayoutConfig<MainLayoutProps>({

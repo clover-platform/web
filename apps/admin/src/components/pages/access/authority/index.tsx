@@ -6,7 +6,7 @@ import {getColumns} from "@/config/pages/access/authority/table";
 import {AuthorityTree, authorityTree} from "@/rest/access";
 import AddAuthorityButton from "@/components/pages/access/authority/button/add";
 import TableActions from "@/components/pages/access/authority/table-actions";
-import { t } from '@easykit/common/utils/locale'
+import { t } from '@clover/public/locale'
 import {useLayoutConfig} from "@clover/public/components/layout/hooks/use.layout.config";
 import {MainLayoutProps} from "@/components/layout/main";
 import {TitleBar} from "@clover/public/components/common/title-bar";

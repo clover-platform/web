@@ -3,7 +3,7 @@ import {FC, PropsWithChildren} from "react";
 import {getSchema} from "@/config/pages/module/form";
 import { LanguageSelect } from "@/components/common/select/language";
 import { MultiLanguageSelect } from "@/components/common/select/multi-language";
-import { t } from '@easykit/common/utils/locale';
+import { t } from '@clover/public/locale';
 
 export interface ModuleFormProps extends PropsWithChildren {
     onSubmit?: (data: any) => void;

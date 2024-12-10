@@ -3,7 +3,7 @@ import {collectedState as state} from "@/state/collect";
 import {useCallback, useMemo} from "react";
 import cloneDeep from "lodash/cloneDeep";
 import remove from "lodash/remove";
-import bus from "@easykit/common/events";
+import bus from "@clover/public/events";
 import {UPDATE_COLLECTED} from "@/events/book";
 
 export const useCollected = (id: number): [boolean, (collected: boolean) => void] => {

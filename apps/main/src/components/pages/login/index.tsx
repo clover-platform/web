@@ -5,7 +5,7 @@ import Quick from "@/components/pages/login/quick";
 import LoginLink from "@/components/common/login/link";
 import {SCHEMA} from "@clover/public/config/pages/login/form";
 import {useLoginSubmit} from "@clover/public/components/pages/login/hooks";
-import { t } from '@easykit/common/utils/locale';
+import { t } from '@clover/public/locale';
 
 const LoginPage = () => {
     const { loading, submit } = useLoginSubmit();

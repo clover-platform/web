@@ -8,7 +8,7 @@ import { useEntriesUpdater } from "@/components/layout/worktop/hooks";
 import { FC, ReactNode } from "react";
 import copy from 'copy-to-clipboard';
 import { remove as removeRest } from "@/rest/entry";
-import { t } from '@easykit/common/utils/locale';
+import { t } from '@clover/public/locale';
 import {useParams} from "next/navigation";
 
 type IconMenuItemProps = {

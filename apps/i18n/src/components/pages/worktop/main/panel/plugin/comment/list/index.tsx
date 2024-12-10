@@ -3,12 +3,12 @@ import { useAtom } from "jotai";
 import {branchesState, currentEntryState, currentLanguageState, entriesState} from "@/state/worktop";
 import { list as listRest } from "@/rest/entry.comment";
 import { ENTRY_COMMENT_RELOAD } from "@/events/worktop";
-import bus from '@easykit/common/events';
+import bus from '@clover/public/events';
 import { CommentListItem } from "@/components/pages/worktop/main/panel/plugin/comment/list/item";
 import { EntryComment } from "@/types/pages/entry";
 import {Button, Empty, ScrollArea} from "@easykit/design";
 import { CommentListItemLoading } from "@/components/pages/worktop/main/panel/plugin/comment/list/item/loading";
-import { t } from '@easykit/common/utils/locale';
+import { t } from '@clover/public/locale';
 import {useParams} from "next/navigation";
 
 const CommentListLoading = () => {

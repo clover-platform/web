@@ -4,7 +4,7 @@ import {Button, Form, FormItem, Input} from "@easykit/design";
 import {ApiSelector} from "@/components/pages/access/authority/form/api-selector";
 import {AuthoritySelector} from "@/components/pages/access/authority/form/authority-selector";
 import {addAuthority, editAuthority} from "@/rest/access";
-import { t } from '@easykit/common/utils/locale'
+import { t } from '@clover/public/locale'
 import {UseFormReturn} from "react-hook-form"
 import {useFormResult} from "@clover/public/hooks/use.form.result";
 

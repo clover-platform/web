@@ -2,7 +2,7 @@ import {DataTableColumn} from "@easykit/design/components/uix/data-table";
 import {DropdownMenuItemProps} from "@easykit/design";
 import {Bundle} from "@/types/pages/bundle";
 import { BundleFormat } from "@/components/pages/bundle/format";
-import { t } from '@easykit/common/utils/locale';
+import { t } from '@clover/public/locale';
 
 export const getColumns = (): DataTableColumn<Bundle>[] => [
     {

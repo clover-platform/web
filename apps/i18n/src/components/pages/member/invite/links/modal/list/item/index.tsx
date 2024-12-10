@@ -8,7 +8,7 @@ import { IconDelete } from "@arco-iconbox/react-clover";
 import copy from 'copy-to-clipboard';
 import { revoke } from "@/rest/member.invite";
 import {useSearchParams} from "next/navigation";
-import { t } from '@easykit/common/utils/locale';
+import { t } from '@clover/public/locale';
 import {useModule} from "@/hooks/use.module";
 
 export type InviteLinkItemProps = {

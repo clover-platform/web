@@ -4,7 +4,7 @@ import { Editor } from "@/components/pages/worktop/main/panel/result/editor";
 import { ResultList } from "@/components/pages/worktop/main/panel/result/list";
 import {useEffect, useState} from "react";
 import { ENTRY_RESULT_EDITOR_RESET } from "@/events/worktop";
-import bus from "@easykit/common/events";
+import bus from "@clover/public/events";
 import { Detail } from "@/components/pages/worktop/main/panel/result/detail";
 import { Separator } from "@easykit/design";
 import {EntryCheck} from "../../check/entry";

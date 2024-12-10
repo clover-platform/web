@@ -1,5 +1,5 @@
 import {Select, SelectProps} from "@easykit/design";
-import { t } from '@easykit/common/utils/locale';
+import { t } from '@clover/public/locale';
 import {FC} from "react";
 
 export const EnableSelector: FC<Omit<SelectProps, "options">> = (props) => {

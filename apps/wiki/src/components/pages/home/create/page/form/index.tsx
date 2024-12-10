@@ -1,7 +1,7 @@
 import {getSchema} from "@/config/pages/page/form";
 import {Form, FormItem, Input} from "@easykit/design";
 import {FC, PropsWithChildren} from "react";
-import {t} from "@easykit/common/utils/locale";
+import {t} from "@clover/public/locale";
 import {NameLogoInput} from "@/components/pages/home/create/form/name-logo-input";
 import {BookSelector} from "@/components/pages/home/create/page/form/book-selector";
 

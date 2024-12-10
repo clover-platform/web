@@ -11,7 +11,7 @@ import {useSearchParams} from "next/navigation";
 import {useLayoutConfig} from "@clover/public/components/layout/hooks/use.layout.config";
 import {MainLayoutProps} from "@/components/layout/main";
 import {ModuleLayoutProps} from "@/components/layout/module";
-import { t } from '@easykit/common/utils/locale';
+import { t } from '@clover/public/locale';
 import {useModule} from "@/hooks/use.module";
 
 export const ActivityPage = () => {

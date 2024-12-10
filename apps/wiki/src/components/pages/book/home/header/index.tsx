@@ -1,5 +1,5 @@
 import {DEFAULT_COVER} from "@/config/book";
-import {t} from "@easykit/common/utils/locale";
+import {t} from "@clover/public/locale";
 import {Action} from "@clover/public/components/common/action";
 import {DotsHorizontalIcon, StarIcon} from "@radix-ui/react-icons";
 import {Book} from "@/types/pages/book";

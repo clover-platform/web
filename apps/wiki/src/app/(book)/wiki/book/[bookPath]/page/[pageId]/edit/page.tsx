@@ -1,6 +1,6 @@
 import {keywords, title} from "@clover/public/utils/seo";
 import {EditPage} from "@/components/pages/book/page/edit";
-import { t } from '@easykit/common/utils/locale';
+import { t } from '@clover/public/locale';
 import {PageProps} from "@/types/pages/page";
 import {detail} from "@/rest/page";
 import {Metadata} from "next";

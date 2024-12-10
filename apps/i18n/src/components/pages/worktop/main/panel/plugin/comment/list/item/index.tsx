@@ -1,15 +1,15 @@
 import { EntryComment } from "@/types/pages/entry";
 import { FC } from "react";
 import {Avatar, useAlert, useMessage} from "@easykit/design";
-import { TimeAgo } from "@easykit/common/components/time-ago";
+import { TimeAgo } from "@clover/public/components/common/time-ago";
 import {Action} from "@clover/public/components/common/action";
 import classNames from "classnames";
 import {useProfile} from "@clover/public/hooks/use.profile";
 import {deleteComment} from "@/rest/entry.comment";
-import bus from "@easykit/common/events";
+import bus from "@clover/public/events";
 import {ENTRY_COMMENT_RELOAD} from "@/events/worktop";
 import { IconDelete } from "@arco-iconbox/react-clover";
-import { t } from '@easykit/common/utils/locale';
+import { t } from '@clover/public/locale';
 import {useParams} from "next/navigation";
 import {useCurrentBranch} from "@/hooks/use.current.branch";
 

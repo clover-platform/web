@@ -1,7 +1,7 @@
 import {useAtom} from "jotai";
 import {currentLanguageState} from "@/state/worktop";
 import {FC, PropsWithChildren} from "react";
-import { t } from '@easykit/common/utils/locale';
+import { t } from '@clover/public/locale';
 
 export type LanguageCheckProps = PropsWithChildren;
 

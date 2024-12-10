@@ -15,7 +15,7 @@ import {
     getAllExpandedKeys
 } from "@/components/layout/book/catalog/utils";
 import {useMessage} from "@easykit/design";
-import bus from "@easykit/common/events";
+import bus from "@clover/public/events";
 import {ADD_PAGE, UPDATE_COLLECTED, UPDATE_TITLE} from "@/events/book";
 import uniq from 'lodash/uniq';
 import concat from 'lodash/concat';

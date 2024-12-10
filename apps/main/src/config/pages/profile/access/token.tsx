@@ -1,5 +1,5 @@
 import {AccessToken} from "@/types/profile/access/token";
-import {t} from "@easykit/common/utils/locale";
+import {t} from "@clover/public/locale";
 import {DataTableColumn} from "@easykit/design/components/uix/data-table";
 import {DropdownMenuItemProps} from "@easykit/design";
 

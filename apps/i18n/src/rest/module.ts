@@ -1,5 +1,5 @@
-import { RestResult } from "@easykit/common/types/rest";
-import {del, get, post, put} from "@easykit/common/utils/rest";
+import { RestResult } from "@clover/public/types/rest";
+import {del, get, post, put} from "@clover/public/utils/rest";
 import {BaseInfo, Language, UpdateInfo} from "@/types/pages/module";
 
 export const list = (params: any): Promise<RestResult<any>> =>

@@ -7,7 +7,7 @@ import {
 import {toItems} from "@/components/pages/access/authority/form/utils";
 import {FC} from "react";
 import {RoleStatus} from "@/components/pages/access/role/status";
-import { t } from '@easykit/common/utils/locale';
+import { t } from '@clover/public/locale';
 import {useLayoutConfig} from "@clover/public/components/layout/hooks/use.layout.config";
 import {MainLayoutProps} from "@/components/layout/main";
 import {AccessRole} from "@/types/pages/access/role";

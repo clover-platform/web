@@ -2,7 +2,7 @@ import {useAtom} from "jotai";
 import {currentEntryState, entriesState} from "@/state/worktop";
 import {FC, PropsWithChildren, useMemo} from "react";
 import classNames from "classnames";
-import { t } from '@easykit/common/utils/locale';
+import { t } from '@clover/public/locale';
 
 export type ResultCheckProps = PropsWithChildren<{
     className?: string;

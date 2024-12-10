@@ -1,5 +1,5 @@
-import {get, post} from "@easykit/common/utils/rest";
-import {RestResult} from "@easykit/common/types/rest";
+import {get, post} from "@clover/public/utils/rest";
+import {RestResult} from "@clover/public/types/rest";
 
 export const sendEmailCode = async (email: string) =>
     post(`@main/account/register/email/send`, {email});

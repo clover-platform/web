@@ -1,4 +1,4 @@
-import {get} from "@easykit/common/utils/rest";
+import {get} from "@clover/public/utils/rest";
 import {ActivityQueryParams, ActivityResult} from "@/types/pages/activity";
 
 export const list = (params: ActivityQueryParams): Promise<ActivityResult> =>

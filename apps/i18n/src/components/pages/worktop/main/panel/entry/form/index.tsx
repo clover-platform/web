@@ -2,7 +2,7 @@ import {Form, FormItem, Input, Textarea} from "@easykit/design";
 import {FC, PropsWithChildren} from "react";
 import {getSchema} from "@/config/pages/entry/form";
 import { MultiBranchSelect } from "@/components/pages/worktop/select/multi-branch";
-import { t } from '@easykit/common/utils/locale';
+import { t } from '@clover/public/locale';
 
 export interface EntryFormProps extends PropsWithChildren {
     onSubmit?: (data: any) => void;

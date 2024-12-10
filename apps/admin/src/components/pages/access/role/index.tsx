@@ -3,12 +3,12 @@
 import {Button, DataTable, Space, useMessage, useAlert} from "@easykit/design";
 import {getColumns, getFilters, ROW_ACTIONS} from "@/config/pages/access/role/table";
 import Link from "next/link";
-import {useTableLoader} from "@easykit/common/hooks";
+import {useTableLoader} from "@clover/public/hooks";
 import {disableRole, enableRole, roleList, deleteRole} from "@/rest/access";
 import {useEffect} from "react";
 import { useRouter } from "next/navigation";
 import {TitleBar} from "@clover/public/components/common/title-bar";
-import { t } from '@easykit/common/utils/locale';
+import { t } from '@clover/public/locale';
 import {useLayoutConfig} from "@clover/public/components/layout/hooks/use.layout.config";
 import {MainLayoutProps} from "@/components/layout/main";
 

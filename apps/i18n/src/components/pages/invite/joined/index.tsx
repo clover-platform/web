@@ -2,7 +2,7 @@ import {CheckCircledIcon} from "@radix-ui/react-icons";
 import {Button} from "@easykit/design";
 import {FC} from "react";
 import {useRouter} from "next/navigation";
-import { t } from '@easykit/common/utils/locale';
+import { t } from '@clover/public/locale';
 
 export type InvitePageJoinedProps = {
     module: string;

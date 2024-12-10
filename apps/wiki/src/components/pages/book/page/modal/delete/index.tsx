@@ -1,4 +1,4 @@
-import {t} from "@easykit/common/utils/locale";
+import {t} from "@clover/public/locale";
 import {Button, Dialog, DialogProps} from "@easykit/design";
 import {FC, useCallback, useEffect, useState} from "react";
 import {CatalogSelector} from "@/components/common/selector/catalog";

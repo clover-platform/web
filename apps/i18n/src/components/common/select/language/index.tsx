@@ -1,7 +1,7 @@
 import {cn, ComboSelect, ComboSelectProps} from "@easykit/design";
 import { useAtom } from "jotai";
 import { languagesState } from "@/state/public";
-import { t } from '@easykit/common/utils/locale';
+import { t } from '@clover/public/locale';
 import {FC} from "react";
 
 export type LanguageSelectProps = {

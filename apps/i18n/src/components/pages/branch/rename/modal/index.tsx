@@ -4,7 +4,7 @@ import { rename } from "@/rest/branch";
 import {useParams, useSearchParams} from "next/navigation";
 import { Branch } from "@/types/pages/branch";
 import {getSchema} from "@/config/pages/module/branch/rename/form";
-import { t } from '@easykit/common/utils/locale';
+import { t } from '@clover/public/locale';
 
 export type RenameBranchModalProps = {
     onSuccess?: () => void;

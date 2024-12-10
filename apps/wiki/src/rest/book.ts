@@ -1,5 +1,5 @@
-import {post, get, del, put} from "@easykit/common/utils/rest";
-import {PageResult, RestResult} from "@easykit/common/types/rest";
+import {post, get, del, put} from "@clover/public/utils/rest";
+import {PageResult, RestResult} from "@clover/public/types/rest";
 import {Book} from "@/types/pages/book";
 
 export type CreateBookData = {

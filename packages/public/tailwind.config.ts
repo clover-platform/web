@@ -1,5 +1,4 @@
 import type { Config } from 'tailwindcss';
-import plugin from "@easykit/common/plugin/tailwind";
 import ta from 'tailwindcss-animate';
 import {tailwindConfig} from '@easykit/design/lib';
 
@@ -10,7 +9,6 @@ const config: Config = {
     ],
     plugins: [
         ta,
-        plugin
     ],
 }
 export default config

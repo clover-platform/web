@@ -1,5 +1,5 @@
-import { RestResult } from "@easykit/common/types/rest";
-import { get, post, del, put } from "@easykit/common/utils/rest";
+import { RestResult } from "@clover/public/types/rest";
+import { get, post, del, put } from "@clover/public/utils/rest";
 import {Branch} from "@/types/pages/module";
 import {BranchMergeOverview} from "@/types/pages/branch";
 

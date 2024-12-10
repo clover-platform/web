@@ -3,7 +3,7 @@
 import {Button, Form, FormItem, Input} from "@easykit/design";
 import {SCHEMA} from "@clover/public/config/pages/login/form";
 import {useLoginSubmit} from "@clover/public/components/pages/login/hooks";
-import { t } from '@easykit/common/utils/locale';
+import { t } from '@clover/public/locale';
 
 export const PublicLoginPage = () => {
     const { loading, submit } = useLoginSubmit();

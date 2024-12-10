@@ -1,7 +1,7 @@
 import {Editor, EditorRef, ContentViewer} from "@easykit/editor";
 import {FC, useCallback, useEffect, useRef, useState} from "react";
 import {Button, useMessage} from "@easykit/design";
-import { t } from "@easykit/common/utils/locale";
+import { t } from "@clover/public/locale";
 import {saveHomePage} from "@/rest/book";
 
 export type HomeEditorProps = {

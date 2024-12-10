@@ -5,7 +5,7 @@ import {InviteDetail} from "@/types/pages/module";
 import {MemberRole} from "@/components/pages/member/role";
 import {accept} from "@/rest/member.invite";
 import {useRouter, useSearchParams} from "next/navigation";
-import { t } from '@easykit/common/utils/locale';
+import { t } from '@clover/public/locale';
 
 export type InvitePageBodyProps = {
     loading: boolean;

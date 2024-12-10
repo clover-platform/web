@@ -2,7 +2,7 @@ import { Command, CommandInput, CommandItem, CommandList, SheetClose } from "@ea
 import {CheckIcon} from "@radix-ui/react-icons";
 import { useAtom } from "jotai";
 import { currentLanguageState, languagesState } from "@/state/worktop";
-import { t } from '@easykit/common/utils/locale';
+import { t } from '@clover/public/locale';
 
 export const MenuLanguageSheet = () => {
     const [languages] = useAtom(languagesState);

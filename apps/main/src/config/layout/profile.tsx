@@ -3,7 +3,7 @@ import {
     IconWiki, IconI18n, IconGantt,
 } from "@arco-iconbox/react-clover";
 import { MenuItemProps } from "@clover/public/components/layout/main/sidebar/menu-item";
-import { t } from '@easykit/common/utils/locale';
+import { t } from '@clover/public/locale';
 
 export const getNavMenus = (): MenuItemProps[] => {
     return [

@@ -3,13 +3,13 @@
 import {useLayoutConfig} from "@clover/public/components/layout/hooks/use.layout.config";
 import {BookLayoutProps} from "@/components/layout/book";
 import {useRouter} from "next/navigation";
-import {i18n, t} from '@easykit/common/utils/locale';
+import {i18n, t} from '@clover/public/locale';
 import {PageDetail, PageProps} from "@/types/pages/page";
 import {FC, useCallback, useEffect, useRef, useState, use} from "react";
 import {Editor, EditorRef, EditorEvents} from "@easykit/editor";
 import {Button, Input, Separator, useMessage} from "@easykit/design";
 import {save} from "@/rest/page";
-import bus from "@easykit/common/events";
+import bus from "@clover/public/events";
 import {UPDATE_TITLE} from "@/events/book";
 import classNames from "classnames";
 import {CollectAction} from "@/components/pages/book/page/actions/collect";

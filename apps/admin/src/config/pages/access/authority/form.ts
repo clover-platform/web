@@ -1,6 +1,6 @@
 import * as z from "zod";
-import {NUMBER} from "@easykit/common/utils/regular";
-import { t } from '@easykit/common/utils/locale';
+import {NUMBER} from "@clover/public/utils/regular";
+import { t } from '@clover/public/locale';
 
 export const getSchema = () => z.object({
     parentId: z.any(),

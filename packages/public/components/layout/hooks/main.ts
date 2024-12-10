@@ -1,7 +1,7 @@
 import {useAtom} from "jotai";
 import {accountInfoState, isLoginState} from "@clover/public/state/account";
 import {useRouter} from "next/navigation";
-import bus from "@easykit/common/events";
+import bus from "@clover/public/events";
 import {UNAUTHORIZED} from "@clover/public/events/auth";
 import { useEffect } from "react";
 

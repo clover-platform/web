@@ -2,7 +2,7 @@ import {cn, ComboSelect, ComboSelectProps} from "@easykit/design";
 import {FC, useEffect, useState} from "react";
 import { ComboSelectOptionProps } from "@easykit/design/components/uix/combo-select";
 import { apiList } from "@/rest/access";
-import { t } from '@easykit/common/utils/locale'
+import { t } from '@clover/public/locale'
 import {AccessApi} from "@/types/pages/access/api";
 
 type COLOR_MAP_TYPE = {

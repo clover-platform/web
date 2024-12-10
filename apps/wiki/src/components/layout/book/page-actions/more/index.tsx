@@ -3,7 +3,7 @@ import {DotsHorizontalIcon} from "@radix-ui/react-icons";
 import {Action} from "@clover/public/components/common/action";
 import {Dropdown, Select, Tooltip, useAlert, useMessage} from "@easykit/design";
 import {useParams, useRouter} from "next/navigation";
-import { t } from '@easykit/common/utils/locale';
+import { t } from '@clover/public/locale';
 import {CollectTitle} from "@/components/layout/book/page-actions/more/collect-title";
 import {DeleteModal} from "@/components/pages/book/page/modal/delete";
 import {useCatalogLoader} from "@/hooks/use.catalog.loader";

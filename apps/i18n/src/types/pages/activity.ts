@@ -1,4 +1,4 @@
-import {RestResult} from "@easykit/common/types/rest";
+import {RestResult} from "@clover/public/types/rest";
 
 export type ActivityQueryParams = {
     module: string;

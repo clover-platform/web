@@ -1,4 +1,4 @@
-import {LangItem} from "@easykit/common/utils/locale";
+import {LangItem} from "@clover/public/locale";
 
 export default [
     {

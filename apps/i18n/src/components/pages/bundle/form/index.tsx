@@ -3,7 +3,7 @@ import {FC, PropsWithChildren} from "react";
 import {getSchema} from "@/config/pages/bundle/form";
 import {BranchPattern} from "@/components/pages/bundle/form/branch-pattern";
 import {ExportFormat} from "@/components/pages/bundle/form/export-format";
-import { t } from '@easykit/common/utils/locale';
+import { t } from '@clover/public/locale';
 
 export type BundleFormProps = PropsWithChildren<{
     onSubmit?: (data: any) => void;

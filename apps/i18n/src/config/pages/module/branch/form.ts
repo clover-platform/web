@@ -1,6 +1,6 @@
 import * as z from "zod";
 import { SimpleRadioGroupOptionProps } from "@easykit/design";
-import { t } from '@easykit/common/utils/locale';
+import { t } from '@clover/public/locale';
 
 export const getSchema = () => z.object({
     type: z.string()

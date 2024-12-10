@@ -19,7 +19,7 @@ import {
 } from "@easykit/design";
 import Link from "next/link";
 import { IconHome } from "@arco-iconbox/react-clover";
-import {withQuery} from "@easykit/common/utils/path";
+import {withQuery} from "@clover/public/utils/path";
 import {useGoLogin} from "@clover/public/components/layout/hooks/main";
 import {isLoginState} from "@clover/public/state/account";
 

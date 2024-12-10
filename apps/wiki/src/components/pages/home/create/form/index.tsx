@@ -1,7 +1,7 @@
 import {Form, FormItem, Input, Select, Textarea} from "@easykit/design";
 import {FC, PropsWithChildren} from "react";
 import {getPrivacyList, getSchema} from "@/config/pages/book/form";
-import { t } from '@easykit/common/utils/locale';
+import { t } from '@clover/public/locale';
 import {NameLogoInput} from "@/components/pages/home/create/form/name-logo-input";
 import {DEFAULT_COVER} from "@/config/book";
 

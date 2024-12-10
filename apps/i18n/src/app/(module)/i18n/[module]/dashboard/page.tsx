@@ -1,6 +1,6 @@
 import {keywords, title} from "@clover/public/utils/seo";
 import { DashboardPage } from "@/components/pages/dashboard";
-import { t } from '@easykit/common/utils/locale';
+import { t } from '@clover/public/locale';
 import {Metadata} from "next";
 import {ModulePageProps} from "@/types/pages/module";
 import {dashboard} from "@/rest/module";

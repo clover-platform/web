@@ -1,5 +1,5 @@
 //文件自动生成，请勿编辑
-import { t } from '@easykit/common/utils/locale';
+import { t } from '@clover/public/locale';
 
 export default [{ path: "/admin/access/authority/", config:  {
     name: 'main',

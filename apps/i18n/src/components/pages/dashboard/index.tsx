@@ -14,7 +14,7 @@ import {
     Loading, TableCell, Empty, ScrollArea, ScrollBar
 } from "@easykit/design";
 import Link from "next/link";
-import { i18n } from "@easykit/common/utils/locale";
+import { i18n } from "@clover/public/locale";
 import { DetailInfoItem } from "@/components/pages/dashboard/detail/info-item";
 import { DetailTitle } from "@/components/pages/dashboard/detail/title";
 import {FC} from "react";
@@ -27,7 +27,7 @@ import { languagesState } from "@/state/public";
 import {Language, LanguageWithCount} from "@/types/pages/public";
 import {useLayoutConfig} from "@clover/public/components/layout/hooks/use.layout.config";
 import {ModuleLayoutProps} from "@/components/layout/module";
-import { t } from '@easykit/common/utils/locale';
+import { t } from '@clover/public/locale';
 
 export type DashboardPageProps = {
     detail: ModuleDetail;

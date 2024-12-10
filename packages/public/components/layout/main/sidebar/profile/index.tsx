@@ -3,9 +3,9 @@ import { Dropdown, DropdownMenuItemProps, useAlert, useMessage } from "@easykit/
 import classNames from 'classnames';
 import { logout } from "@clover/public/rest/auth";
 import { UNAUTHORIZED } from "@clover/public/events/auth";
-import bus from '@easykit/common/events';
+import bus from '@clover/public/events';
 import {clearToken} from "@clover/public/utils/token";
-import { t } from '@easykit/common/utils/locale';
+import { t } from '@clover/public/locale';
 import {UserInfoItem} from "@clover/public/components/layout/main/sidebar/profile/user-info-item";
 
 export const URL_MAP: Record<string, any> = {

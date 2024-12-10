@@ -3,7 +3,7 @@ import {FC, useEffect, useState} from "react";
 import {useParams, useSearchParams} from "next/navigation";
 import { EntryForm } from "@/components/pages/worktop/main/panel/entry/form";
 import { create, CreateEntryData } from "@/rest/entry";
-import { t } from '@easykit/common/utils/locale';
+import { t } from '@clover/public/locale';
 
 export type CreateEntryModalProps = {
     onSuccess?: (close?: boolean) => void;

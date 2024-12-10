@@ -1,7 +1,7 @@
 import {Button, Checkbox, Form, FormItem, Space} from "@easykit/design";
 import {FC} from "react";
 import * as z from "zod";
-import { t } from '@easykit/common/utils/locale';
+import { t } from '@clover/public/locale';
 
 export type JSONConfigFormProps = {
     onCancel?: () => void;

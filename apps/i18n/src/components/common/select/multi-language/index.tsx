@@ -5,7 +5,7 @@ import { Action } from "@clover/public/components/common/action";
 import { IconDelete } from "@arco-iconbox/react-clover";
 import { useAtom } from "jotai";
 import { languagesState } from "@/state/public";
-import { t } from '@easykit/common/utils/locale';
+import { t } from '@clover/public/locale';
 
 export type MultiLanguageSelectProps = {
     className?: string;

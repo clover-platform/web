@@ -9,7 +9,7 @@ import {encrypt} from "@clover/public/utils/crypto";
 import {setToken} from "@clover/public/utils/token";
 import {getSupportWay} from "@/config/pages/login/quick";
 import {getSchema} from "@/config/pages/link/form";
-import { t } from '@easykit/common/utils/locale';
+import { t } from '@clover/public/locale';
 
 export interface LinkPageProps extends PropsWithChildren {
     type: string

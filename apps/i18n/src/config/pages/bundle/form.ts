@@ -1,6 +1,6 @@
 import * as z from "zod";
 import {ExportFormatValue} from "@/components/pages/bundle/form/export-format";
-import { t } from '@easykit/common/utils/locale';
+import { t } from '@clover/public/locale';
 
 export const getSchema = () => z.object({
     name: z.string()

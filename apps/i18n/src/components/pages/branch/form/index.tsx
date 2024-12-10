@@ -1,7 +1,7 @@
 import {Form, FormItem, Input, SimpleRadioGroup} from "@easykit/design";
 import {FC, PropsWithChildren} from "react";
 import {getSchema, getTypeOptions} from "@/config/pages/module/branch/form";
-import { t } from '@easykit/common/utils/locale';
+import { t } from '@clover/public/locale';
 
 export type ModuleBranchFormProps = PropsWithChildren<{
     onSubmit?: (data: any) => void;

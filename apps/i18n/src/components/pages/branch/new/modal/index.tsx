@@ -3,7 +3,7 @@ import { FC, useState } from "react";
 import { ModuleBranchForm } from "@/components/pages/branch/form";
 import { create, CreateBranchData } from "@/rest/branch";
 import {useParams, useSearchParams} from "next/navigation";
-import { t } from '@easykit/common/utils/locale';
+import { t } from '@clover/public/locale';
 
 export type NewBranchModalProps = {
     onSuccess?: () => void;

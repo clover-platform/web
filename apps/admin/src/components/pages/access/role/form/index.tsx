@@ -2,7 +2,7 @@ import {getSchema} from "@/config/pages/access/role/form";
 import {Form, FormItem, Input, Switch, Textarea} from "@easykit/design";
 import {FC, PropsWithChildren} from "react";
 import { AuthorityTree } from "../../authority/form/tree";
-import { t } from '@easykit/common/utils/locale';
+import { t } from '@clover/public/locale';
 
 export interface RoleFormProps extends PropsWithChildren {
     onSubmit?: (data: any) => void;

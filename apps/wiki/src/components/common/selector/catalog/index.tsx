@@ -1,7 +1,7 @@
 import {TreeData, TreeSelect, TreeSelectProps} from "@easykit/design";
 import {FC, useMemo} from "react";
 import {useCatalogLoader} from "@/hooks/use.catalog.loader";
-import { t } from "@easykit/common/utils/locale";
+import { t } from "@clover/public/locale";
 import {Catalog} from "@/types/pages/book";
 import uniq from "lodash/uniq";
 

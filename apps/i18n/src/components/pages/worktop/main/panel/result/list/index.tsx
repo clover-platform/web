@@ -4,13 +4,13 @@ import { Button, Empty, ScrollArea, Spin } from "@easykit/design";
 import { useEffect, useRef, useState } from "react";
 import { list as listRest } from "@/rest/entry.result";
 import { ResultItem } from "@/components/pages/worktop/main/panel/result/list/item";
-import bus from '@easykit/common/events';
+import bus from '@clover/public/events';
 import { ENTRY_RESULT_RELOAD } from "@/events/worktop";
 import compact from "lodash/compact";
 import uniq from "lodash/uniq";
 import { EntryResult } from "@/types/pages/entry";
 import { ResultListLoading } from "@/components/pages/worktop/main/panel/result/list/loading";
-import { t } from '@easykit/common/utils/locale';
+import { t } from '@clover/public/locale';
 import {useParams} from "next/navigation";
 import {useCurrentBranch} from "@/hooks/use.current.branch";
 

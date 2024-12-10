@@ -2,7 +2,7 @@ import {Action} from "@clover/public/components/common/action";
 import {IconExpand} from "@arco-iconbox/react-clover";
 import {Tooltip} from "@easykit/design";
 import {FC} from "react";
-import { t } from '@easykit/common/utils/locale';
+import { t } from '@clover/public/locale';
 
 export type ExpandActionProps = {
     all: boolean;

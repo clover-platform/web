@@ -1,5 +1,5 @@
-import {RestResult} from "@easykit/common/types/rest";
-import {post} from "@easykit/common/utils/rest";
+import {RestResult} from "@clover/public/types/rest";
+import {post} from "@clover/public/utils/rest";
 
 export type PreSignData = {
     fileName: string;

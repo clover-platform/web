@@ -1,6 +1,6 @@
 import isArray from "lodash/isArray";
 import isString from "lodash/isString";
-import { t } from '@easykit/common/utils/locale';
+import { t } from '@clover/public/locale';
 
 export const title = (title: string) => {
     const titles = [

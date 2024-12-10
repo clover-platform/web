@@ -11,7 +11,7 @@ import { SidebarProfile } from "@clover/public/components/layout/main/sidebar/pr
 import { ActionButton } from "@clover/public/components/common/action/button";
 import { MenuItem, MenuItemProps } from "@clover/public/components/layout/main/sidebar/menu-item";
 import { Action } from "@clover/public/components/common/action";
-import { t } from '@easykit/common/utils/locale';
+import { t } from '@clover/public/locale';
 
 export interface SidebarProps extends PropsWithChildren {
     active?: string;

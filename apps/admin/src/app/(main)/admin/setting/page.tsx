@@ -1,5 +1,5 @@
 import {keywords, title} from "@clover/public/utils/seo";
-import { t } from '@easykit/common/utils/locale'
+import { t } from '@clover/public/locale'
 import {Metadata} from "next";
 import {SettingPage} from "@/components/pages/setting";
 

@@ -4,9 +4,9 @@ import {FC, useCallback, useState} from "react";
 import {useParams, useRouter} from "next/navigation";
 import {Spin, Tooltip, useMessage} from "@easykit/design";
 import {create} from "@/rest/page";
-import bus from "@easykit/common/events";
+import bus from "@clover/public/events";
 import {ADD_PAGE} from "@/events/book";
-import { t } from '@easykit/common/utils/locale';
+import { t } from '@clover/public/locale';
 
 export type AddPageActionProps = {
     className?: string;

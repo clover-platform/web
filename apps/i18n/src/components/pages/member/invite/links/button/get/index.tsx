@@ -3,7 +3,7 @@ import { FC, useState } from "react";
 import { generate } from "@/rest/member.invite";
 import { useSearchParams } from "next/navigation";
 import copy from 'copy-to-clipboard';
-import { t } from '@easykit/common/utils/locale';
+import { t } from '@clover/public/locale';
 import {useModule} from "@/hooks/use.module";
 
 export type GetInviteLinkButtonProps = {

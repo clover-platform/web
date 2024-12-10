@@ -1,11 +1,11 @@
 'use client';
 
 import {useLayoutConfig} from "@clover/public/components/layout/hooks/use.layout.config";
-import {t} from "@easykit/common/utils/locale";
+import {t} from "@clover/public/locale";
 import {ProfileLayoutProps} from "@/components/layout/profile";
 import {TitleBar} from "@clover/public/components/common/title-bar";
 import {Button, DataTable, useAlert, useMessage} from "@easykit/design";
-import {useTableLoader} from "@easykit/common/hooks";
+import {useTableLoader} from "@clover/public/hooks";
 import {useEffect} from "react";
 import {AccessToken} from "@/types/profile/access/token";
 import {list, revoke} from "@/rest/profile/access/token";

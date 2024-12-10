@@ -6,7 +6,7 @@ import { IconSidebar } from "@arco-iconbox/react-clover";
 import {Action, ActionProps} from "../../../common/action";
 import {Tooltip} from "@easykit/design";
 import { setCookie } from "cookies-next";
-import { t } from '@easykit/common/utils/locale';
+import { t } from '@clover/public/locale';
 import {COOKIE_MAX_AGE} from "@clover/public/config/app";
 
 export type SwitchProps = HTMLAttributes<HTMLButtonElement> & ActionProps;

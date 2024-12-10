@@ -4,7 +4,7 @@ import { DotsHorizontalIcon } from "@radix-ui/react-icons";
 import { FC, useState } from "react";
 import EditAuthorityDialog from "@/components/pages/access/authority/dialog/edit";
 import {deleteAuthority} from "@/rest/access";
-import { t } from '@easykit/common/utils/locale';
+import { t } from '@clover/public/locale';
 
 export interface TableActionsProps {
     item: any;

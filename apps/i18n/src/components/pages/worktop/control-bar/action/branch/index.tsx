@@ -3,7 +3,7 @@ import { FC } from "react";
 import { IconBranch } from "@arco-iconbox/react-clover";
 import { useAtom } from "jotai";
 import { branchesState, currentBranchState } from "@/state/worktop";
-import { t } from '@easykit/common/utils/locale';
+import { t } from '@clover/public/locale';
 
 export type BranchActionProps = {
     onClick: () => void;

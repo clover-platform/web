@@ -4,7 +4,7 @@ import {useSearchParams} from "next/navigation";
 import {useEffect, useState} from "react";
 import {all} from "@/rest/module";
 import { CheckIcon } from '@radix-ui/react-icons';
-import { t } from '@easykit/common/utils/locale';
+import { t } from '@clover/public/locale';
 
 export const MenuProjectSheet = () => {
     const search = useSearchParams();

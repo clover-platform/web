@@ -2,14 +2,14 @@
 
 import { TitleBar } from "@clover/public/components/common/title-bar";
 import {Button, Space, useMessage} from "@easykit/design";
-import BackButton from "@easykit/common/components/button/back";
+import BackButton from "@clover/public/components/common/button/back";
 import ModuleForm from "@/components/pages/module/form";
 import { useState } from "react";
 import {create} from "@/rest/module";
 import {useRouter} from "next/navigation";
 import {useLayoutConfig} from "@clover/public/components/layout/hooks/use.layout.config";
 import {MainLayoutProps} from "@/components/layout/main";
-import { t } from '@easykit/common/utils/locale';
+import { t } from '@clover/public/locale';
 
 export const CreateModulePage = () => {
     useLayoutConfig<MainLayoutProps>({

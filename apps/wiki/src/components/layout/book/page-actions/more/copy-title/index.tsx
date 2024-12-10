@@ -1,5 +1,5 @@
 import {FC, useCallback} from "react";
-import {t} from "@easykit/common/utils/locale";
+import {t} from "@clover/public/locale";
 import classNames from "classnames";
 import {Spin, useMessage} from "@easykit/design";
 import {usePageCopyLoading} from "@/hooks/use.page.copy.loading";

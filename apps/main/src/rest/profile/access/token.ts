@@ -1,5 +1,5 @@
-import {AbortPromise, get, post, del} from "@easykit/common/utils/rest";
-import {PageResult, RestResult} from "@easykit/common/types/rest";
+import {AbortPromise, get, post, del} from "@clover/public/utils/rest";
+import {PageResult, RestResult} from "@clover/public/types/rest";
 import {AccessToken} from "@/types/profile/access/token";
 
 export const list = (params: any): AbortPromise<PageResult<AccessToken>> =>

@@ -1,6 +1,6 @@
 import {MutableRefObject, useCallback} from "react";
 import {UseFormReturn} from "react-hook-form";
-import {RestResult} from "@easykit/common/types/rest";
+import {RestResult} from "@clover/public/types/rest";
 import {useMessage} from "@easykit/design";
 
 export type ErrorItem = {

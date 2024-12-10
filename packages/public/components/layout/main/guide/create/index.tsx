@@ -4,7 +4,7 @@ import {Button, Form, FormItem, Input, Space, useMessage} from "@easykit/design"
 import * as z from "zod";
 import { useState } from "react";
 import {init, TeamInitData} from "@clover/public/rest/team";
-import { t } from '@easykit/common/utils/locale';
+import { t } from '@clover/public/locale';
 
 const SCHEMA = z.object({
     name: z.string()

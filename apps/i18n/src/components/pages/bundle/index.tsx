@@ -5,14 +5,14 @@ import {Button, DataTable} from "@easykit/design";
 import {getColumns, getRowActions} from "@/config/pages/bundle/table";
 import {list} from "@/rest/bundle";
 import {Bundle} from "@/types/pages/bundle";
-import {useTableLoader} from "@easykit/common/hooks";
+import {useTableLoader} from "@clover/public/hooks";
 import {useParams} from "next/navigation";
 import {useEffect} from "react";
 import {IconAdd} from "@arco-iconbox/react-clover";
 import Link from "next/link";
 import {useLayoutConfig} from "@clover/public/components/layout/hooks/use.layout.config";
 import {ModuleLayoutProps} from "@/components/layout/module";
-import { t } from '@easykit/common/utils/locale';
+import { t } from '@clover/public/locale';
 
 const initialParams = {};
 

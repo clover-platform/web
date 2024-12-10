@@ -4,8 +4,8 @@ import {Avatar} from "@easykit/design";
 import dayjs from "dayjs";
 import {IconAdd, IconDelete} from "@arco-iconbox/react-clover";
 import {CheckIcon, Cross2Icon, Pencil1Icon} from "@radix-ui/react-icons";
-import {i18n} from "@easykit/common/utils/locale";
-import { t } from '@easykit/common/utils/locale';
+import {i18n} from "@clover/public/locale";
+import { t } from '@clover/public/locale';
 
 const ICONS: Record<number, ReactNode> = {
     1: <IconAdd />,

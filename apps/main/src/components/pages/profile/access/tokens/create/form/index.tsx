@@ -1,5 +1,5 @@
 import {DatePicker, Form, FormItem, Input} from "@easykit/design";
-import {t} from "@easykit/common/utils/locale";
+import {t} from "@clover/public/locale";
 import {FC, PropsWithChildren, useRef} from "react";
 import {getSchema} from "@/config/pages/profile/access/form";
 import {FormResult, useFormResult} from "@clover/public/hooks/use.form.result";

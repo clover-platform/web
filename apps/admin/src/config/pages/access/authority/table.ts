@@ -1,5 +1,5 @@
 import { DropdownMenuItemProps, TreeTableColumn } from "@easykit/design";
-import { t } from '@easykit/common/utils/locale';
+import { t } from '@clover/public/locale';
 import {AuthorityTree} from "@/rest/access";
 
 export const getColumns = (): TreeTableColumn<AuthorityTree>[] => [

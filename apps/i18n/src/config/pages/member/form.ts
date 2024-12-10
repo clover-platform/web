@@ -1,6 +1,6 @@
 import * as z from "zod";
-import {isEmail} from "@easykit/common/utils";
-import { t } from '@easykit/common/utils/locale';
+import {isEmail} from "@clover/public/utils";
+import { t } from '@clover/public/locale';
 
 export const getSchema = () => z.object({
     roles: z.array(z.string())

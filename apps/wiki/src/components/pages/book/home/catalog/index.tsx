@@ -3,7 +3,7 @@ import {Tree, TreeData, useMessage} from "@easykit/design";
 import {useCatalogLoader} from "@/hooks/use.catalog.loader";
 import {FC, useMemo, useState} from "react";
 import {Catalog} from "@/types/pages/book";
-import {useTimeAgo} from "@easykit/common/hooks";
+import {useTimeAgo} from "@clover/public/hooks";
 import {useParams, useRouter} from "next/navigation";
 
 type CatalogItemProps = Omit<Catalog, "children">;

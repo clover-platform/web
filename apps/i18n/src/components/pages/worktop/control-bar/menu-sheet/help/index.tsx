@@ -1,6 +1,6 @@
 import {Command, CommandItem, CommandList} from "@easykit/design";
 import {IconShare} from "@arco-iconbox/react-clover";
-import { t } from '@easykit/common/utils/locale';
+import { t } from '@clover/public/locale';
 
 export const MenuHelpSheet = () => {
     return <div className={"space-y-2"}>

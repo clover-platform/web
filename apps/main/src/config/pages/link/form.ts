@@ -1,6 +1,6 @@
 import * as z from "zod";
-import { PASSWORD } from "@easykit/common/utils/regular";
-import { t } from '@easykit/common/utils/locale';
+import { PASSWORD } from "@clover/public/utils/regular";
+import { t } from '@clover/public/locale';
 
 export const getSchema = () => z.object({
     account: z.string()

@@ -1,7 +1,7 @@
 import {Dialog, DialogProps} from "@easykit/design";
 import {FC, PropsWithChildren, useEffect, useState} from "react";
 import AuthorityForm from "@/components/pages/access/authority/form";
-import { t } from '@easykit/common/utils/locale'
+import { t } from '@clover/public/locale'
 
 export interface AddAuthorityDialogProps extends PropsWithChildren<DialogProps>{
     onSuccess?: () => void;

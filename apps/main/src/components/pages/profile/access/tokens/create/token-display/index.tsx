@@ -1,7 +1,7 @@
 import {FC, useCallback, useMemo, useState} from "react";
 import {Alert, AlertDescription, AlertTitle, useAlert, useMessage} from "@easykit/design";
 import {CheckCircledIcon, CopyIcon, EyeClosedIcon, EyeOpenIcon} from "@radix-ui/react-icons";
-import { t } from "@easykit/common/utils/locale";
+import { t } from "@clover/public/locale";
 import {Action} from "@clover/public/components/common/action";
 import {CopyToClipboard} from 'react-copy-to-clipboard';
 

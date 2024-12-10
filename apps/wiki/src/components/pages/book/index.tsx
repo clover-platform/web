@@ -2,7 +2,7 @@
 
 import {useLayoutConfig} from "@clover/public/components/layout/hooks/use.layout.config";
 import {BookLayoutProps} from "@/components/layout/book";
-import { t } from '@easykit/common/utils/locale';
+import { t } from '@clover/public/locale';
 import {Book} from "@/types/pages/book";
 import {FC, useState} from "react";
 import {HomeHeader} from "@/components/pages/book/home/header";

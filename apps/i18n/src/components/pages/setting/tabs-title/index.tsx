@@ -2,7 +2,7 @@ import {getTabs} from "@/config/pages/module/setting/tabs";
 import {TabsTitle} from "@clover/public/components/common/tabs-title";
 import {FC, useCallback} from "react";
 import {useRouter, useSearchParams} from "next/navigation";
-import {withQuery} from "@easykit/common/utils/path";
+import {withQuery} from "@clover/public/utils/path";
 import {useModule} from "@/hooks/use.module";
 
 export type SettingTabsTitleProps = {

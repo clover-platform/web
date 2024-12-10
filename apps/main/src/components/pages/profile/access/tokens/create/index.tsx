@@ -1,6 +1,6 @@
 'use client';
 
-import {t} from "@easykit/common/utils/locale";
+import {t} from "@clover/public/locale";
 import {useLayoutConfig} from "@clover/public/components/layout/hooks/use.layout.config";
 import {ProfileLayoutProps} from "@/components/layout/profile";
 import {TitleBar} from "@clover/public/components/common/title-bar";
@@ -10,7 +10,7 @@ import {Button, Space} from "@easykit/design";
 import {useCallback, useState} from "react";
 import {create, CreateData} from "@/rest/profile/access/token";
 import {FormResult} from "@clover/public/hooks/use.form.result";
-import BackButton from "@easykit/common/components/button/back";
+import BackButton from "@clover/public/components/common/button/back";
 import {useRouter} from "next/navigation";
 
 export const AccessTokensCreatePage = () => {

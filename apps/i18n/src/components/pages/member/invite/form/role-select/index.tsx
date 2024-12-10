@@ -9,8 +9,8 @@ import {
 } from "@easykit/design";
 import {FC, useRef, useState} from "react";
 import { ChevronDownIcon } from "@radix-ui/react-icons";
-import { useDocumentClick } from "@easykit/common/hooks";
-import { t } from '@easykit/common/utils/locale';
+import { useDocumentClick } from "@clover/public/hooks";
+import { t } from '@clover/public/locale';
 
 export type RoleSelectProps = {
     value?: string[];

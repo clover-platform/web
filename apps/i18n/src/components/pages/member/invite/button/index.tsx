@@ -2,7 +2,7 @@ import { IconAdd } from "@arco-iconbox/react-clover";
 import { Button } from "@easykit/design";
 import { useState } from "react";
 import { InviteModal } from "@/components/pages/member/invite/modal";
-import { t } from '@easykit/common/utils/locale';
+import { t } from '@clover/public/locale';
 
 export const InviteButton = () => {
     const [visible, setVisible] = useState(false);

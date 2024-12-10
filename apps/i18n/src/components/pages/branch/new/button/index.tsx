@@ -1,7 +1,7 @@
 import { Button } from "@easykit/design";
 import { FC, useState } from "react";
 import { NewBranchModal } from "@/components/pages/branch/new/modal";
-import { t } from '@easykit/common/utils/locale';
+import { t } from '@clover/public/locale';
 
 export type NewBranchButtonProps = {
     onSuccess?: () => void;

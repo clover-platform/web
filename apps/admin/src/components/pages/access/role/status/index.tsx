@@ -1,6 +1,6 @@
 import {Badge} from "@easykit/design";
 import {FC} from "react";
-import { t } from '@easykit/common/utils/locale';
+import { t } from '@clover/public/locale';
 
 export interface RoleStatusProps {
     value?: boolean;

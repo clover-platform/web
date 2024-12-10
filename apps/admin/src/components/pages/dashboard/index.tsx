@@ -1,7 +1,7 @@
 'use client';
 
 import {useLayoutConfig} from "@clover/public/components/layout/hooks/use.layout.config";
-import {t} from "@easykit/common/utils/locale";
+import {t} from "@clover/public/locale";
 import {MainLayoutProps} from "@/components/layout/main";
 
 export const DashboardPage = () => {

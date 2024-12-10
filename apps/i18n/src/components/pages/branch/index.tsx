@@ -3,7 +3,7 @@
 import { TitleBar } from "@clover/public/components/common/title-bar";
 import { DataTable, Space, useAlert, useMessage } from "@easykit/design";
 import { getColumns, getFilters, ROW_ACTIONS } from "@/config/pages/module/branch/table";
-import { useTableLoader } from "@easykit/common/hooks";
+import { useTableLoader } from "@clover/public/hooks";
 import { deleteBranch, list } from "@/rest/branch";
 import { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
@@ -13,7 +13,7 @@ import { RenameBranchModal } from "@/components/pages/branch/rename/modal";
 import { MergeBranchModal } from "@/components/pages/branch/merge/modal";
 import { useLayoutConfig } from "@clover/public/components/layout/hooks/use.layout.config";
 import { ModuleLayoutProps } from "@/components/layout/module";
-import { t } from '@easykit/common/utils/locale';
+import { t } from '@clover/public/locale';
 
 const initialParams = {
     keyword: '',

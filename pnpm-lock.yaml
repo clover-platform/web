@@ -28,9 +28,6 @@ importers:
       '@clover/public':
         specifier: workspace:*
         version: link:packages/public
-      '@easykit/common':
-        specifier: workspace:*
-        version: link:packages/common
       '@easykit/design':
         specifier: 0.0.59
         version: 0.0.59(@types/react-dom@18.3.0)(@types/react@18.3.3)(react-dom@19.0.0-rc.1(react@19.0.0-rc.1))(react@19.0.0-rc.1)
@@ -230,34 +227,6 @@ importers:
         specifier: 0.0.12
         version: 0.0.12(@types/react-dom@18.3.0)(@types/react@18.3.3)(highlight.js@11.9.0)(react-dom@19.0.0-rc.1(react@19.0.0-rc.1))(react@19.0.0-rc.1)
 
-  packages/common:
-    dependencies:
-      decimal.js-light:
-        specifier: 2.5.1
-        version: 2.5.1
-      fetch-intercept:
-        specifier: 2.4.0
-        version: 2.4.0
-      markdown-it:
-        specifier: 14.1.0
-        version: 14.1.0
-      path-to-regexp:
-        specifier: 8.0.0
-        version: 8.0.0
-      react-cropper:
-        specifier: 2.3.3
-        version: 2.3.3(react@19.0.0-rc.1)
-      supports-color:
-        specifier: 9.4.0
-        version: 9.4.0
-      whatwg-fetch:
-        specifier: 3.6.20
-        version: 3.6.20
-    devDependencies:
-      next:
-        specifier: 15.0.3
-        version: 15.0.3(react-dom@19.0.0-rc.1(react@19.0.0-rc.1))(react@19.0.0-rc.1)(sass@1.77.6)
-
   packages/extension:
     dependencies:
       plasmo:
@@ -367,18 +336,27 @@ importers:
       decimal.js-light:
         specifier: 2.5.1
         version: 2.5.1
+      fetch-intercept:
+        specifier: 2.4.0
+        version: 2.4.0
       markdown-it:
         specifier: 14.1.0
         version: 14.1.0
       path-to-regexp:
         specifier: 8.0.0
         version: 8.0.0
+      react-cropper:
+        specifier: 2.3.3
+        version: 2.3.3(react@19.0.0-rc.1)
       supports-color:
         specifier: 9.4.0
         version: 9.4.0
       unescape-js:
         specifier: 1.1.4
         version: 1.1.4
+      whatwg-fetch:
+        specifier: 3.6.20
+        version: 3.6.20
     devDependencies:
       next:
         specifier: 15.0.3

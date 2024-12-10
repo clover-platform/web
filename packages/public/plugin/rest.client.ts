@@ -1,6 +1,6 @@
 // Rest 配置
-import { config, alias } from '@easykit/common/utils/rest';
-import bus from '@easykit/common/events';
+import { config, alias } from '@clover/public/utils/rest';
+import bus from '@clover/public/events';
 import { UNAUTHORIZED } from "@clover/public/events/auth";
 import { get } from "@clover/public/utils/headers.client";
 

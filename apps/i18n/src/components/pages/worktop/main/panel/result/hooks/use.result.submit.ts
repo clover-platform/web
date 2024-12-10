@@ -1,4 +1,4 @@
-import bus from "@easykit/common/events";
+import bus from "@clover/public/events";
 import {ENTRY_RESULT_RELOAD} from "@/events/worktop";
 import {useAtom} from "jotai";
 import {currentEntryState, currentLanguageState, entriesState} from "@/state/worktop";
@@ -6,7 +6,7 @@ import {useState} from "react";
 import {useMessage} from "@easykit/design";
 import {useEntriesUpdater} from "@/components/layout/worktop/hooks";
 import {save} from "@/rest/entry.result";
-import { t } from '@easykit/common/utils/locale';
+import { t } from '@clover/public/locale';
 import {useParams} from "next/navigation";
 import {useCurrentBranch} from "@/hooks/use.current.branch";
 

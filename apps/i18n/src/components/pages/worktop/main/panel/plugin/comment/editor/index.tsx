@@ -7,9 +7,9 @@ import { add } from "@/rest/entry.comment";
 import { useAtom } from "jotai";
 import {branchesState, currentEntryState, currentLanguageState, entriesState} from "@/state/worktop";
 import classNames from "classnames";
-import bus from '@easykit/common/events';
+import bus from '@clover/public/events';
 import { ENTRY_COMMENT_RELOAD } from "@/events/worktop";
-import { t } from '@easykit/common/utils/locale';
+import { t } from '@clover/public/locale';
 import {useParams} from "next/navigation";
 
 export const CommentEditor = () => {

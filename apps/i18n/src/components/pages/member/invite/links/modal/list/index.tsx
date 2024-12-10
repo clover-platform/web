@@ -5,7 +5,7 @@ import { useSearchParams } from "next/navigation";
 import { MemberInvite } from "@/types/pages/member";
 import { InviteLinkItem } from "@/components/pages/member/invite/links/modal/list/item";
 import { InviteLinkItemLoading } from "@/components/pages/member/invite/links/modal/list/item/loading";
-import { t } from '@easykit/common/utils/locale';
+import { t } from '@clover/public/locale';
 import {useModule} from "@/hooks/use.module";
 
 export type InviteLinkListModalProps = {} & DialogProps;

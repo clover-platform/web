@@ -1,5 +1,5 @@
-import {del, get, post, put} from "@easykit/common/utils/rest";
-import {RestResult} from "@easykit/common/types/rest";
+import {del, get, post, put} from "@clover/public/utils/rest";
+import {RestResult} from "@clover/public/types/rest";
 import {Authority} from "@/types/pages/access/authority";
 import {AccessApi} from "@/types/pages/access/api";
 import {AccessRole} from "@/types/pages/access/role";

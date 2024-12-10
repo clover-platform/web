@@ -1,7 +1,7 @@
 import { useAtom } from "jotai";
 import { loadingState } from "@clover/public//components/layout/main/state";
 import { useRef } from "react";
-import { useFetchIntercept } from "@easykit/common/hooks/use.fetch.intercept";
+import { useFetchIntercept } from "@clover/public/hooks/use.fetch.intercept";
 
 export const AdminLayoutLoading = () => {
     const [_, setLoading] = useAtom(loadingState);

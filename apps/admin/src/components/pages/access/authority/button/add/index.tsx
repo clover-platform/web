@@ -1,7 +1,7 @@
 import {FC, useState} from "react";
 import {Button} from "@easykit/design";
 import AddAuthorityDialog from "@/components/pages/access/authority/dialog/add";
-import { t } from '@easykit/common/utils/locale'
+import { t } from '@clover/public/locale'
 
 export interface AddAuthorityButtonProps {
     onSuccess?: () => void;

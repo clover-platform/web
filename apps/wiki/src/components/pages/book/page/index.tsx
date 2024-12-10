@@ -5,17 +5,17 @@ import {useLayoutConfig} from "@clover/public/components/layout/hooks/use.layout
 import {BookLayoutProps} from "@/components/layout/book";
 import {PageDetail, PageProps} from "@/types/pages/page";
 import {useMessage} from "@easykit/design";
-import {AbortPromise} from "@easykit/common/utils/rest";
-import {RestResult} from "@easykit/common/types/rest";
+import {AbortPromise} from "@clover/public/utils/rest";
+import {RestResult} from "@clover/public/types/rest";
 import {save} from "@/rest/page";
 import classNames from "classnames";
-import {i18n} from "@easykit/common/utils/locale";
+import {i18n} from "@clover/public/locale";
 import {CollectAction} from "@/components/pages/book/page/actions/collect";
 import {Action} from "@clover/public/components/common/action";
 import {Pencil1Icon} from "@radix-ui/react-icons";
 import {ContentViewer} from "@easykit/editor";
-import { t } from '@easykit/common/utils/locale';
-import {useTimeAgo} from "@easykit/common/hooks/use.time.ago";
+import { t } from '@clover/public/locale';
+import {useTimeAgo} from "@clover/public/hooks/use.time.ago";
 import {useRouter} from "next/navigation";
 
 export type DetailPageProps = {

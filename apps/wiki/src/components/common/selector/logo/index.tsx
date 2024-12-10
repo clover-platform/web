@@ -1,4 +1,4 @@
-import {ImageIconSelector, ImageIconSelectorProps} from "@easykit/common/components/selector/image-icon";
+import {ImageIconSelector, ImageIconSelectorProps} from "@clover/public/components/common/selector/image-icon";
 import {COVERS} from "@/config/book";
 import {FC, useEffect, useState} from "react";
 

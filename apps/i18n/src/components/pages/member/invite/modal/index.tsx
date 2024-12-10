@@ -6,7 +6,7 @@ import { GetInviteLinkButton } from "@/components/pages/member/invite/links/butt
 import { InviteLinkListButton } from "@/components/pages/member/invite/links/button/list";
 import {MemberInviteData, send} from "@/rest/member.invite";
 import {useSearchParams} from "next/navigation";
-import { t } from '@easykit/common/utils/locale';
+import { t } from '@clover/public/locale';
 import {useModule} from "@/hooks/use.module";
 
 export type InviteModalProps = {} & DialogProps;

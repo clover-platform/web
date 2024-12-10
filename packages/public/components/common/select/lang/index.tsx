@@ -1,5 +1,5 @@
 import { Select, SelectOptionProps } from "@easykit/design";
-import {useLocale} from "@easykit/common/hooks/use.locale";
+import {useLocale} from "@clover/public/hooks/use.locale";
 import { setCookie } from "cookies-next"
 import langList from "@clover/public/config/lang.list";
 import {COOKIE_MAX_AGE} from "@clover/public/config/app";

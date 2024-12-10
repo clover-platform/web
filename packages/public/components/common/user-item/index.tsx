@@ -2,7 +2,7 @@ import {User} from "@clover/public/types/account";
 import {FC, useMemo} from "react";
 import classNames from "classnames";
 import {HoverCard, HoverCardContent, HoverCardTrigger, HoverCardArrow} from "@easykit/design";
-import { t } from "@easykit/common/utils/locale";
+import { t } from "@clover/public/locale";
 
 export type UserItemProps = {
     info: User;

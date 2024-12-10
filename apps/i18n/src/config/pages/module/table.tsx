@@ -1,10 +1,10 @@
 import { DataTableColumn } from "@easykit/design/components/uix/data-table";
 import { DropdownMenuItemProps, FilterItemProps, Input } from "@easykit/design";
 import TimeAgo from "javascript-time-ago";
-import { i18n } from "@easykit/common/utils/locale";
+import { i18n } from "@clover/public/locale";
 import {Module} from "@/types/pages/module";
 import {Account} from "@clover/public/types/account";
-import { t } from '@easykit/common/utils/locale';
+import { t } from '@clover/public/locale';
 
 export const getColumns = (): DataTableColumn<Module>[] => [
     {

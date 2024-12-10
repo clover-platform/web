@@ -3,7 +3,7 @@ import {FC, PropsWithChildren} from "react";
 import {getSchema} from "@/config/pages/member/form";
 import { RoleSelect } from "@/components/pages/member/invite/form/role-select";
 import { MemberInviteRequest } from "@/types/pages/member";
-import { t } from '@easykit/common/utils/locale';
+import { t } from '@clover/public/locale';
 
 export type MemberInviteFormProps = PropsWithChildren<{
     onSubmit?: (data: any) => void;

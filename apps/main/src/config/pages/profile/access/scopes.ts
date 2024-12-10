@@ -1,4 +1,4 @@
-import {t} from "@easykit/common/utils/locale";
+import {t} from "@clover/public/locale";
 
 export type Scope = {
     key: string;

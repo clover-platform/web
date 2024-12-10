@@ -1,5 +1,5 @@
-import { RestResult } from "@easykit/common/types/rest";
-import {del, get, post} from "@easykit/common/utils/rest";
+import { RestResult } from "@clover/public/types/rest";
+import {del, get, post} from "@clover/public/utils/rest";
 import { EntryComment, EntryResult, EntryResultPage } from "@/types/pages/entry";
 
 export type AddCommentData = {

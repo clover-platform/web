@@ -3,15 +3,15 @@
 import { Form, Steps, StepsItem, Button, Input, useMessage, FormItem } from "@easykit/design";
 import { useState } from "react";
 import SecretItem from "@/components/pages/register/secret";
-import { EmailCodeInput } from "@easykit/common/components/input/email-code";
+import { EmailCodeInput } from "@clover/public/components/common/input/email-code";
 import { emailCheck, passwordSet, sendEmailCode } from "@/rest/auth";
 import { setToken } from "@clover/public/utils/token";
 import { encrypt } from "@clover/public/utils/crypto";
 import { useRouter, useSearchParams } from "next/navigation";
 import LoginLink from "@/components/common/login/link";
 import {getFormStep1Schema, getFormStep2Schema} from "@/config/pages/register/form";
-import { CodeInput } from "@easykit/common/components/input/code";
-import { t } from '@easykit/common/utils/locale';
+import { CodeInput } from "@clover/public/components/common/input/code";
+import { t } from '@clover/public/locale';
 
 const RegisterPage = () => {
     const msg = useMessage();

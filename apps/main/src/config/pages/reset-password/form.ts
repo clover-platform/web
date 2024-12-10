@@ -1,6 +1,6 @@
 import * as z from "zod";
-import { CODE, EMAIL, PASSWORD } from "@easykit/common/utils/regular";
-import { t } from '@easykit/common/utils/locale';
+import { CODE, EMAIL, PASSWORD } from "@clover/public/utils/regular";
+import { t } from '@clover/public/locale';
 
 const code = t("请输入6位数字验证码");
 

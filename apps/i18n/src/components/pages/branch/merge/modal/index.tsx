@@ -14,10 +14,10 @@ import {
 } from "@easykit/design";
 import {IconBranch} from "@arco-iconbox/react-clover";
 import classNames from "classnames";
-import {i18n} from "@easykit/common/utils/locale";
+import {i18n} from "@clover/public/locale";
 import {mergeOverview, merge as mergeRest} from "@/rest/branch";
 import {CheckedState} from "@radix-ui/react-checkbox";
-import { t } from '@easykit/common/utils/locale';
+import { t } from '@clover/public/locale';
 import {useParams} from "next/navigation";
 
 export type MergeBranchModalProps = {

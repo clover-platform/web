@@ -3,7 +3,7 @@
 import { TitleBar } from "@clover/public/components/common/title-bar";
 import {Button, DataTable, Space} from "@easykit/design";
 import Link from "next/link";
-import {useTableLoader} from "@easykit/common/hooks";
+import {useTableLoader} from "@clover/public/hooks";
 import {getColumns, getFilters, ROW_ACTIONS} from "@/config/pages/module/table";
 import {list} from "@/rest/module";
 import {useEffect, useState} from "react";
@@ -14,7 +14,7 @@ import {Module} from "@/types/pages/module";
 import {useProfile} from "@clover/public/hooks/use.profile";
 import {useLayoutConfig} from "@clover/public/components/layout/hooks/use.layout.config";
 import {MainLayoutProps} from "@/components/layout/main";
-import { t } from '@easykit/common/utils/locale';
+import { t } from '@clover/public/locale';
 
 const initialParams = {
     keyword: '',

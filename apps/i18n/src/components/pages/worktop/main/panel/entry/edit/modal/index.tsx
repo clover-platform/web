@@ -3,7 +3,7 @@ import {FC, useEffect, useState} from "react";
 import { edit, EditEntryData } from "@/rest/entry";
 import { EntryEditForm } from "@/components/pages/worktop/main/panel/entry/form/edit";
 import { Entry } from "@/types/pages/entry";
-import { t } from '@easykit/common/utils/locale';
+import { t } from '@clover/public/locale';
 import {useParams} from "next/navigation";
 import {useAtom} from "jotai/index";
 import {branchesState} from "@/state/worktop";

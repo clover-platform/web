@@ -1,5 +1,5 @@
 import {LinkBreak2Icon} from "@radix-ui/react-icons";
-import { t } from '@easykit/common/utils/locale';
+import { t } from '@clover/public/locale';
 
 export const InvitePageExpired = () => {
     return <div className={"flex justify-center items-center flex-col"}>

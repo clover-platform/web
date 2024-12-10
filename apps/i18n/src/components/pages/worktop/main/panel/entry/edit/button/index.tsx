@@ -4,7 +4,7 @@ import { EditEntryModal } from "@/components/pages/worktop/main/panel/entry/edit
 import { FC, useState } from "react";
 import { Entry } from "@/types/pages/entry";
 import { Tooltip } from "@easykit/design";
-import { t } from '@easykit/common/utils/locale';
+import { t } from '@clover/public/locale';
 
 export type EditEntryButtonProps = {
     entry: Entry;

@@ -2,14 +2,14 @@
 
 import {TitleBar} from "@clover/public/components/common/title-bar";
 import { Button, Space, useMessage } from "@easykit/design";
-import BackButton from "@easykit/common/components/button/back";
+import BackButton from "@clover/public/components/common/button/back";
 import {useState} from "react";
 import {BundleForm} from "@/components/pages/bundle/form";
 import { create, AddBundleData } from "@/rest/bundle";
 import { useRouter } from "next/navigation";
 import {useLayoutConfig} from "@clover/public/components/layout/hooks/use.layout.config";
 import {ModuleLayoutProps} from "@/components/layout/module";
-import { t } from '@easykit/common/utils/locale';
+import { t } from '@clover/public/locale';
 import {useModule} from "@/hooks/use.module";
 
 export const AddBundlePage = () => {

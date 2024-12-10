@@ -9,10 +9,10 @@ import {HomeStart, StartItem} from "@/components/pages/home/start";
 import {CreateBookModal} from "@/components/pages/home/create/modal";
 import {getColumns, getFilters, getRowActions, getTabs} from "@/config/pages/book";
 import {DataTable, useAlert, useMessage} from "@easykit/design";
-import {useTableLoader} from "@easykit/common/hooks";
+import {useTableLoader} from "@clover/public/hooks";
 import {deleteBook, list} from "@/rest/book";
 import {Book} from "@/types/pages/book";
-import { t } from '@easykit/common/utils/locale';
+import { t } from '@clover/public/locale';
 import {CreatePageModal} from "@/components/pages/home/create/page/modal";
 
 export const SectionTitle: FC<PropsWithChildren> = (props) => {

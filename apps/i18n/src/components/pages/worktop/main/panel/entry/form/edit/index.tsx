@@ -2,7 +2,7 @@ import {Form, FormItem} from "@easykit/design";
 import {FC, PropsWithChildren} from "react";
 import {getSchema} from "@/config/pages/entry/edit/form";
 import TextareaAutosize from "react-textarea-autosize";
-import { t } from '@easykit/common/utils/locale';
+import { t } from '@clover/public/locale';
 
 export interface EntryEditFormProps extends PropsWithChildren {
     onSubmit?: (data: any) => void;

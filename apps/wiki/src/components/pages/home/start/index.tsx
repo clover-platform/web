@@ -1,7 +1,7 @@
 import classNames from "classnames";
 import {FC, ReactNode} from "react";
 import {IconAddFile, IconBook} from "@arco-iconbox/react-clover";
-import { t } from '@easykit/common/utils/locale';
+import { t } from '@clover/public/locale';
 
 export type StartItem = {
     id: string;

@@ -6,7 +6,7 @@ import {ComingSoon} from "@/components/pages/worktop/main/panel/plugin/coming-so
 import {Comment} from "@/components/pages/worktop/main/panel/plugin/comment";
 import {EntryCheck} from "../../check/entry";
 import {AIPlugin} from "@/components/pages/worktop/main/panel/plugin/ai";
-import { t } from '@easykit/common/utils/locale';
+import { t } from '@clover/public/locale';
 
 export type Plugin = {
     id: string;

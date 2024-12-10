@@ -1,6 +1,6 @@
 import {keywords, title} from "@clover/public/utils/seo";
 import {BookPage} from "@/components/pages/book";
-import { t } from '@easykit/common/utils/locale';
+import { t } from '@clover/public/locale';
 import {Metadata} from "next";
 import {FC} from "react";
 import {PageProps} from "@/types/pages/page";

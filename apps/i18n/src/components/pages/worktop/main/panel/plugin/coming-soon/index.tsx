@@ -1,5 +1,5 @@
 import {IconComingSoon} from "@arco-iconbox/react-clover";
-import { t } from '@easykit/common/utils/locale';
+import { t } from '@clover/public/locale';
 
 export const ComingSoon = () => {
     return <div className={"flex justify-center items-center flex-col p-6 space-y-2"}>

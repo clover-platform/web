@@ -2,7 +2,7 @@
 
 import { Button, Form, FormItem, Input, Steps, StepsItem, useMessage } from "@easykit/design";
 import { useState } from "react";
-import { EmailCodeInput } from "@easykit/common/components/input/email-code";
+import { EmailCodeInput } from "@clover/public/components/common/input/email-code";
 import {passwordReset, resetEmailCheck, sendResetEmailCode} from "@/rest/auth";
 import {useRouter, useSearchParams} from "next/navigation";
 import {setToken} from "@clover/public/utils/token";
@@ -11,7 +11,7 @@ import {
     getEmailFormSchema,
     getPasswordFormSchema,
 } from "@/config/pages/reset-password/form";
-import { t } from '@easykit/common/utils/locale';
+import { t } from '@clover/public/locale';
 
 const ResetPasswordPage = () => {
     const msg = useMessage();

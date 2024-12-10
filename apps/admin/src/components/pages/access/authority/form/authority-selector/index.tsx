@@ -2,7 +2,7 @@ import {FC, useEffect, useState} from "react";
 import {TreeData, TreeSelect, TreeSelectProps} from "@easykit/design";
 import {authorityTree} from "@/rest/access";
 import {setDisabled, toItems} from "@/components/pages/access/authority/form/utils";
-import { t } from '@easykit/common/utils/locale'
+import { t } from '@clover/public/locale'
 
 export type AuthoritySelectorProps = Omit<TreeSelectProps, "treeData"> & {
     disabledNodeId?: string;

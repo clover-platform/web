@@ -1,5 +1,5 @@
-import { RestResult } from "@easykit/common/types/rest";
-import {get, post, put, del} from "@easykit/common/utils/rest";
+import { RestResult } from "@clover/public/types/rest";
+import {get, post, put, del} from "@clover/public/utils/rest";
 import { CountEntryData, CountEntryQuery, Entry } from "@/types/pages/entry";
 
 export type EntryQueryParams = {

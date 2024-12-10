@@ -1,4 +1,4 @@
-import { t } from "@easykit/common/utils/locale";
+import { t } from "@clover/public/locale";
 import {FC, useCallback, useEffect} from "react";
 import {useCollectLoading} from "@/hooks/use.collect.loading";
 import {Spin, useMessage} from "@easykit/design";

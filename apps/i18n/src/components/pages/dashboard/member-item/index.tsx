@@ -1,7 +1,7 @@
 import { FC } from "react";
 import { Member } from "@/types/pages/module";
 import { Avatar, Badge } from "@easykit/design";
-import { t } from '@easykit/common/utils/locale';
+import { t } from '@clover/public/locale';
 
 export type MemberItemProps = {} & Member;
 

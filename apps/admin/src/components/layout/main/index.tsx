@@ -2,7 +2,7 @@ import { MainLayout as PublicMainLayout, PathProps } from "@clover/public/compon
 import {FC, PropsWithChildren} from "react";
 import {getNavMenus} from "@/config/layout/main";
 import {useLayoutProps} from "@clover/public/components/layout/hooks/use.layout.props";
-import { t } from '@easykit/common/utils/locale'
+import { t } from '@clover/public/locale'
 
 export type MainLayoutProps = {
     active?: string;
