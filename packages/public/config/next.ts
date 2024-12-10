@@ -6,7 +6,7 @@ export default {
     output: 'standalone',
     reactStrictMode: false,
     trailingSlash: false,
-    transpilePackages: ['@easykit/common'],
+    transpilePackages: ['@clover/public'],
     devIndicators: {
         buildActivity: false
     },

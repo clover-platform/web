@@ -3,8 +3,8 @@ import {Action} from "@clover/public/components/common/action";
 import {ArrowBottomLeftIcon, CheckIcon} from "@radix-ui/react-icons";
 import {FC, useCallback} from "react";
 import {useResultSubmit} from "@/components/pages/worktop/main/panel/result/hooks/use.result.submit";
-import { t } from '@easykit/common/utils/locale';
-import bus from "@easykit/common/events";
+import { t } from '@clover/public/locale';
+import bus from "@clover/public/events";
 import {ENTRY_RESULT_AI_INSERT} from "@/events/worktop";
 
 export type AIItemProps = {

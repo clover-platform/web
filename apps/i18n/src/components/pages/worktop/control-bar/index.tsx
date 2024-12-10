@@ -15,7 +15,7 @@ import { useState } from "react";
 import { LanguageAction } from "@/components/pages/worktop/control-bar/action/language";
 import { BranchAction } from "@/components/pages/worktop/control-bar/action/branch";
 import {ReloadIcon} from "@radix-ui/react-icons";
-import bus from "@easykit/common/events";
+import bus from "@clover/public/events";
 import {ENTRY_RELOAD} from "@/events/worktop";
 
 export const ControlBar = () => {

@@ -6,9 +6,9 @@ import { CheckIcon, } from "@radix-ui/react-icons";
 import {Pagination} from "@/components/pages/worktop/main/panel/entry/pagination";
 import { EntryLoading } from "@/components/pages/worktop/main/panel/entry/loading";
 import {LanguageCheck} from "@/components/pages/worktop/main/check/language";
-import { t } from '@easykit/common/utils/locale';
+import { t } from '@clover/public/locale';
 import {useEntriesLoader} from "@/components/layout/worktop/hooks";
-import bus from "@easykit/common/events";
+import bus from "@clover/public/events";
 import {ENTRY_RELOAD} from "@/events/worktop";
 
 export type EntryPanelProps = {}
