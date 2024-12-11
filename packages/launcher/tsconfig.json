@@ -1,39 +1,32 @@
 {
+    "extends": "../../tsconfig.json",
     "compilerOptions": {
-        "target": "ES2020",
-        "useDefineForClassFields": true,
-        "lib": [
-            "ES2020",
-            "DOM",
-            "DOM.Iterable"
-        ],
-        "module": "ESNext",
-        "skipLibCheck": true,
-        /* Bundler mode */
-        "moduleResolution": "bundler",
-        "allowImportingTsExtensions": true,
-        "resolveJsonModule": true,
-        "isolatedModules": true,
-        "noEmit": true,
-        "jsx": "react-jsx",
-        /* Linting */
-        "strict": false,
-        "noUnusedLocals": false,
-        "noUnusedParameters": false,
-        "noFallthroughCasesInSwitch": true,
-        "noImplicitAny": false,
-        "allowSyntheticDefaultImports": true,
+        "baseUrl": ".",
         "paths": {
-            "@/*": ["./src/*"]
-        }
+            "@/*": [
+                "./src/*"
+            ],
+            "@clover/launcher": [
+                "./lib/index.ts"
+            ],
+            "@clover/launcher/*": [
+                "./lib/*"
+            ]
+        },
+        "jsx": "preserve",
+        "esModuleInterop": true,
+        "resolveJsonModule": true
     },
     "include": [
-        "src",
-        "types.d.ts"
+        "next-env.d.ts",
+        "global.d.ts",
+        "lib/**/*.ts",
+        "lib/**/*.tsx",
+        "src/**/*.ts",
+        "src/**/*.tsx",
+        ".next/types/**/*.ts"
     ],
-    "references": [
-        {
-            "path": "./tsconfig.node.json"
-        }
+    "exclude": [
+        "node_modules"
     ]
 }

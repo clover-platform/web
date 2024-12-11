@@ -1,43 +1,61 @@
-import { defineConfig } from 'vite'
-import react from '@vitejs/plugin-react-swc';
-import path from 'path';
-import { readFileSync } from 'fs'
-
-function resolve(str: string) {
-    return path.resolve(__dirname, str)
-}
-
-const packageJson = JSON.parse(
-    readFileSync('./package.json', { encoding: 'utf-8' }),
-)
-const globals = {
-    ...(packageJson?.dependencies || {}),
-}
+import {defineConfig} from 'vite'
+import react from '@vitejs/plugin-react'
+import path from "path";
+import dts from 'vite-plugin-dts'
+import { viteStaticCopy } from 'vite-plugin-static-copy'
+import pkg from "./package.json";
 
 // https://vitejs.dev/config/
 export default defineConfig({
-    plugins: [react()],
+    plugins: [
+        dts({
+            include: [
+                "./lib/**/*",
+                "types.d.ts",
+                "global.d.ts"
+            ]
+        }),
+        react(),
+        viteStaticCopy({
+            targets: [
+                { src: './package.json', dest: './' },
+                { src: './lib/locales/en-US.json', dest: './locales' },
+                { src: './lib/locales/zh-CN.json', dest: './locales' },
+                { src: './lib/locales/zh-TW.json', dest: './locales' },
+                { src: './README.md', dest: './' }
+            ],
+        }),
+    ],
     resolve: {
-        alias:{
-            '@': resolve('./src')
+        alias: {
+            "@clover/launcher": path.resolve(__dirname, "./lib/"),
         }
     },
     build: {
-        // 输出文件夹
-        outDir: 'dist',
         lib: {
-            // 组件库源码的入口文件
-            entry: resolve('src/index.ts'),
-            // 组件库名称
-            name: 'TabLauncher',
-            // 文件名称
-            fileName: 'launcher',
-            // 打包格式
-            formats: ['es', 'cjs'],
+            entry: {
+                index: "./lib/index.ts"
+            },
+            formats: ["es"]
         },
         rollupOptions: {
-            //排除不相关的依赖
-            external: ['react', 'react-dom', "react/jsx-runtime", ...Object.keys(globals)],
+            external: [
+                "react",
+                "react-dom",
+                "react/jsx-runtime",
+                "@easykit/design",
+                "i18next",
+                ...Object.keys(pkg.dependencies || {}),
+            ],
+            output: {
+                entryFileNames: '[name].js',
+                chunkFileNames: '[name].js',
+                globals: {
+                    "react": "React",
+                    "react-dom": "ReactDOM",
+                    "react/jsx-runtime": "react/jsx-runtime",
+                },
+            },
         },
     },
 })
