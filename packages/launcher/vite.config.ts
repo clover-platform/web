@@ -28,7 +28,7 @@ export default defineConfig({
     ],
     resolve: {
         alias: {
-            "@clover/launcher": path.resolve(__dirname, "./lib/"),
+            "@clover-platform/launcher": path.resolve(__dirname, "./lib/"),
         }
     },
     build: {

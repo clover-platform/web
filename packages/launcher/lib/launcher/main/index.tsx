@@ -1,8 +1,8 @@
-import { ViewController } from "@clover/launcher/launcher/main/controller/view";
-import { Footer } from "@clover/launcher/launcher/main/footer";
-import { Header } from "@clover/launcher/launcher/main/header";
-import { Desktop } from "@clover/launcher/launcher/main/desktop";
-import { DesktopController } from "@clover/launcher/launcher/main/controller/desktop";
+import { ViewController } from "@clover-platform/launcher/launcher/main/controller/view";
+import { Footer } from "@clover-platform/launcher/launcher/main/footer";
+import { Header } from "@clover-platform/launcher/launcher/main/header";
+import { Desktop } from "@clover-platform/launcher/launcher/main/desktop";
+import { DesktopController } from "@clover-platform/launcher/launcher/main/controller/desktop";
 
 export const Main = () => {
     return <div className={"z-[var(--layer-main)] absolute cover-full"}>

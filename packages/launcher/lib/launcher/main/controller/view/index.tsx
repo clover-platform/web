@@ -1,7 +1,7 @@
-import { IconButton } from "@clover/launcher/common/button/icon";
+import { IconButton } from "@clover-platform/launcher/common/button/icon";
 import classNames from "classnames";
 import { useState } from "react";
-import { useConfig } from "@clover/launcher/state";
+import { useConfig } from "@clover-platform/launcher/state";
 
 const ICON_MAP: Record<string, string> = {
     "full": "leaf",

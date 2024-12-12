@@ -1,5 +1,5 @@
-import { Clock } from "@clover/launcher/common/clock";
-import { SearchInput } from "@clover/launcher/common/search-input";
+import { Clock } from "@clover-platform/launcher/common/clock";
+import { SearchInput } from "@clover-platform/launcher/common/search-input";
 
 export const Header = () => {
     return <div className={"my-10 flex justify-center items-center flex-col w-full relative z-50"}>

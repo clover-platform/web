@@ -1,4 +1,4 @@
-import "@clover/launcher/assets/iconfont/iconfont.css";
+import "@clover-platform/launcher/assets/iconfont/iconfont.css";
 import { FC } from "react";
 import classNames from "classnames";
 

@@ -1,8 +1,8 @@
 import { Avatar } from "@easykit/design";
-import { AddDesktop } from "@clover/launcher/launcher/main/controller/desktop/add";
-import { useConfig } from "@clover/launcher/state";
-import { DesktopGroup } from "@clover/launcher/interface";
-import { DesktopGroupIcon } from "@clover/launcher/launcher/main/controller/desktop/icon";
+import { AddDesktop } from "@clover-platform/launcher/launcher/main/controller/desktop/add";
+import { useConfig } from "@clover-platform/launcher/state";
+import { DesktopGroup } from "@clover-platform/launcher/interface";
+import { DesktopGroupIcon } from "@clover-platform/launcher/launcher/main/controller/desktop/icon";
 
 export const DesktopController = () => {
     const { config, update } = useConfig();
@@ -24,7 +24,7 @@ export const DesktopController = () => {
         <div className={"my-3"}>
             {
                 config.groups?.map((app: DesktopGroup) => <DesktopGroupIcon
-                    active={config.activeGroup === app.id}
+                    active={`${config.activeGroup === app.id}`}
                     key={app.id}
                     group={app}
                     onClick={() => onIconClick(app.id)}

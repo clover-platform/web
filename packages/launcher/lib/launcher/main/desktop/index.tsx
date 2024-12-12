@@ -1,11 +1,11 @@
 import "./style.css";
 import { FC, useEffect, useMemo, useRef } from "react";
 import Sortable from 'sortablejs';
-import { useConfig } from "@clover/launcher/state";
-import { DesktopIcon } from "@clover/launcher/launcher/main/desktop/icon";
-import { DesktopApp, DesktopGroup } from "@clover/launcher/interface";
+import { useConfig } from "@clover-platform/launcher/state";
+import { DesktopIcon } from "@clover-platform/launcher/launcher/main/desktop/icon";
+import { DesktopApp, DesktopGroup } from "@clover-platform/launcher/interface";
 import classNames from "classnames";
-import { useScrollAndWheel } from "@clover/launcher/hooks/use.scroll";
+import { useScrollAndWheel } from "@clover-platform/launcher/hooks/use.scroll";
 
 type AppContainerProps = {
     apps: DesktopApp[];

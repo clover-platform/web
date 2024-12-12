@@ -1,4 +1,4 @@
-import { DesktopApp } from "@clover/launcher/interface";
+import { DesktopApp } from "@clover-platform/launcher/interface";
 import { FC, useMemo } from "react";
 import classNames from "classnames";
 import "./style.css";

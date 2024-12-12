@@ -1,5 +1,5 @@
 import { Popover, PopoverTrigger, useOutside } from "@easykit/design";
-import { Icon } from "@clover/launcher/common/icon";
+import { Icon } from "@clover-platform/launcher/common/icon";
 import { useRef, useState } from "react";
 import classNames from "classnames";
 

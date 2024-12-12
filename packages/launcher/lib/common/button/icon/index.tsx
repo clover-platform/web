@@ -1,4 +1,4 @@
-import { Icon, IconProps } from "@clover/launcher/common/icon";
+import { Icon, IconProps } from "@clover-platform/launcher/common/icon";
 import { FC } from "react";
 import classNames from "classnames";
 

@@ -1,11 +1,11 @@
 import "./style.css";
 import "../assets/font/font.css";
 import { Provider } from "jotai";
-import { Background } from "@clover/launcher/launcher/background";
-import { LauncherConfig } from "@clover/launcher/interface";
+import { Background } from "@clover-platform/launcher/launcher/background";
+import { LauncherConfig } from "@clover-platform/launcher/interface";
 import { FC, useEffect } from "react";
-import { useConfig } from "@clover/launcher/state";
-import { Main } from "@clover/launcher/launcher/main";
+import { useConfig } from "@clover-platform/launcher/state";
+import { Main } from "@clover-platform/launcher/launcher/main";
 
 export type TabLauncherProps = {
     defaultConfig?: LauncherConfig;

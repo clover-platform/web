@@ -1,4 +1,4 @@
-import { useConfig } from "@clover/launcher/state";
+import { useConfig } from "@clover-platform/launcher/state";
 import classNames from "classnames";
 
 export const Background = () => {

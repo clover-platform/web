@@ -1,4 +1,4 @@
-import { Icon } from "@clover/launcher/common/icon";
+import { Icon } from "@clover-platform/launcher/common/icon";
 import { Input } from "@easykit/design";
 
 export const SearchInput = () => {

@@ -6,10 +6,10 @@
             "@/*": [
                 "./src/*"
             ],
-            "@clover/launcher": [
+            "@clover-platform/launcher": [
                 "./lib/index.ts"
             ],
-            "@clover/launcher/*": [
+            "@clover-platform/launcher/*": [
                 "./lib/*"
             ]
         },

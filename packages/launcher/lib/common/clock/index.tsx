@@ -1,3 +1,5 @@
+'use client';
+
 import dayjs from 'dayjs';
 import { FC, useEffect, useState } from "react";
 import classNames from "classnames";
@@ -7,9 +9,10 @@ export type ClockProps = {
 }
 
 export const Clock: FC<ClockProps> = (props) => {
-    const [time, setTime] = useState(dayjs().format("HH:mm:ss"));
+    const [time, setTime] = useState<string>();
 
     useEffect(() => {
+        setTime(dayjs().format("HH:mm:ss"));
         const interval = setInterval(() => {
             setTime(dayjs().format("HH:mm:ss"));
         }, 1000);
