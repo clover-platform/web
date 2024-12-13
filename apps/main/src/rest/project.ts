@@ -4,6 +4,8 @@ import {Project} from "@/types/project";
 
 export type ProjectListParams = {
     teamId: number;
+    type: string;
+    keyword?: string;
     page: number;
     size: number;
 }

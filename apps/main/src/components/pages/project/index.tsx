@@ -4,18 +4,20 @@ import {useLayoutConfig} from "@clover/public/components/layout/hooks/use.layout
 import {MainLayoutProps} from "@/components/layout/main";
 import { t } from '@clover/public/locale';
 import {TitleBar} from "@clover/public/components/common/title-bar";
-import {useEffect, useMemo} from "react";
+import {useEffect, useMemo, useState} from "react";
 import {Button, DataTable} from "@easykit/design";
 import Link from "next/link";
 import {useTableLoader} from "@clover/public/hooks";
 import {Project} from "@/types/project";
 import {list} from "@/rest/project";
-import {getColumns, getFilters, getRowActions} from "@/config/pages/project/table";
-import {useRouter} from "next/navigation";
+import {getColumns, getFilters, getRowActions, getTabs} from "@/config/pages/project/table";
+import {useRouter, useSearchParams} from "next/navigation";
+import {TabsTitle} from "@clover/public/components/common/tabs-title";
 
 const initialParams = {
     teamId: '',
     keyword: '',
+    type: 'all',
     page: 1,
     size: 20
 }
@@ -34,11 +36,22 @@ const ProjectPage = () => {
     const [loading, result, query, load] = useTableLoader<Project>({
         initialParams,
         action: list,
+        keys: ['type'],
     });
+    const search = useSearchParams();
+    const type = search.get('type') || 'all';
+    const [active, setActive] = useState(type);
 
     useEffect(() => {
-        load().then();
+        load({type}).then();
     }, []);
+
+    useEffect(() => {
+        load({
+            type: active,
+            page: 1,
+        }).then();
+    }, [active]);
 
     const actions = useMemo(() => {
         return <div className={"space-x-2"}>
@@ -57,8 +70,12 @@ const ProjectPage = () => {
             actions={actions}
             border={false}
         />
+        <TabsTitle
+            active={active}
+            items={getTabs()}
+            onChange={setActive}
+        />
         <DataTable<Project>
-            showHeader={false}
             filter={{
                 items: getFilters(),
                 defaultValues: initialParams,
