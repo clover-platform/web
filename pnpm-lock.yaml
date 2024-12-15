@@ -19,14 +19,11 @@ importers:
   .:
     dependencies:
       '@arco-iconbox/react-clover':
-        specifier: 0.0.26
-        version: 0.0.26(react@19.0.0)
+        specifier: 0.0.27
+        version: 0.0.27
       '@clover/i18n-cli':
         specifier: workspace:*
         version: link:packages/i18n-cli
-      '@clover/launcher':
-        specifier: workspace:*
-        version: link:packages/launcher
       '@clover/public':
         specifier: workspace:*
         version: link:packages/public
@@ -351,10 +348,8 @@ packages:
     peerDependencies:
       react: 19.0.0
 
-  '@arco-iconbox/react-clover@0.0.26':
-    resolution: {integrity: sha512-ugLOFWCdjYz6OBnt7nNUfa7/dsJbq3sRmp/3aAVkS8NIEIXqArKPk35lte4RGpiZjEq3UHXY+lYDePHCYInsjw==}
-    peerDependencies:
-      react: 19.0.0
+  '@arco-iconbox/react-clover@0.0.27':
+    resolution: {integrity: sha512-r0C2VbXrg1NRUFCN7apcF3GrVz+3ZPsjzQteOpICYkg+lcKDZu/8yYqLX0UfrwlpDrBqT2nd3h2nJqtptPZ6AA==}
 
   '@babel/code-frame@7.12.11':
     resolution: {integrity: sha512-Zt1yodBx1UcyiePMSkWnU4hPqhwq7hGi2nFL1LeA3EUl+q2LQx16MISgJ0+z7dnmgvP9QtIleuETGOiOH1RcIw==}
@@ -1752,11 +1747,6 @@ packages:
   '@rollup/rollup-darwin-arm64@4.28.1':
     resolution: {integrity: sha512-prduvrMKU6NzMq6nxzQw445zXgaDBbMQvmKSJaxpaZ5R1QDM8w+eGxo6Y/jhT/cLoCvnZI42oEqf9KQNYz1fqQ==}
     cpu: [arm64]
-    os: [darwin]
-
-  '@rollup/rollup-darwin-x64@4.28.1':
-    resolution: {integrity: sha512-WsvbOunsUk0wccO/TV4o7IKgloJ942hVFK1CLatwv6TJspcCZb9umQkPdvB7FihmdxgaKR5JyxDjWpCOp4uZlQ==}
-    cpu: [x64]
     os: [darwin]
 
   '@rollup/rollup-freebsd-arm64@4.28.1':
@@ -5755,9 +5745,7 @@ snapshots:
     dependencies:
       react: 19.0.0
 
-  '@arco-iconbox/react-clover@0.0.26(react@19.0.0)':
-    dependencies:
-      react: 19.0.0
+  '@arco-iconbox/react-clover@0.0.27': {}
 
   '@babel/code-frame@7.12.11':
     dependencies:
@@ -7427,9 +7415,6 @@ snapshots:
     optional: true
 
   '@rollup/rollup-darwin-arm64@4.28.1':
-    optional: true
-
-  '@rollup/rollup-darwin-x64@4.28.1':
     optional: true
 
   '@rollup/rollup-freebsd-arm64@4.28.1':
@@ -11128,7 +11113,6 @@ snapshots:
       '@rollup/rollup-android-arm-eabi': 4.28.1
       '@rollup/rollup-android-arm64': 4.28.1
       '@rollup/rollup-darwin-arm64': 4.28.1
-      '@rollup/rollup-darwin-x64': 4.28.1
       '@rollup/rollup-freebsd-arm64': 4.28.1
       '@rollup/rollup-freebsd-x64': 4.28.1
       '@rollup/rollup-linux-arm-gnueabihf': 4.28.1
