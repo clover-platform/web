@@ -1,4 +1,4 @@
-import {cloneElement, FC, ReactElement, ReactNode, useEffect, useState} from "react";
+import {cloneElement, FC, HTMLAttributes, ReactElement, ReactNode, ReactSVGElement, useEffect, useState} from "react";
 import {cn, HoverCard, HoverCardContent, HoverCardTrigger} from "@easykit/design";
 import Link from "next/link";
 import { ChevronRightIcon } from '@radix-ui/react-icons';
@@ -55,7 +55,7 @@ export const MenuItem: FC<MenuItemProps> = (props) => {
     >
         {
             showIcon ? <span className={iconClassName}>
-                {props.icon ? cloneElement(props.icon, {className: 'w-4 h-4'}) : null}
+                {props.icon ? cloneElement<any>(props.icon, {className: 'w-4 h-4'}) : null}
             </span> : null
         }
         <span className={"text-sm flex-1 mx-3"}>{props.title}</span>

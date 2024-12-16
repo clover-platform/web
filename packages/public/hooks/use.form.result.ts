@@ -1,4 +1,4 @@
-import {MutableRefObject, useCallback} from "react";
+import {RefObject, useCallback} from "react";
 import {UseFormReturn} from "react-hook-form";
 import {RestResult} from "@clover/public/types/rest";
 import {useMessage} from "@easykit/design";
@@ -10,7 +10,7 @@ export type ErrorItem = {
 }
 
 export type UseFormResultProps<T> = {
-    ref: MutableRefObject<UseFormReturn|undefined>;
+    ref: RefObject<UseFormReturn|undefined|null>;
     onSuccess?: (result?: T) => void;
 }
 

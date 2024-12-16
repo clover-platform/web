@@ -5,6 +5,7 @@ import {getSchema} from "@/config/pages/profile/access/form";
 import {FormResult, useFormResult} from "@clover/public/hooks/use.form.result";
 import {CreateData} from "@/rest/profile/access/token";
 import {ScopesSelect} from "@/components/pages/profile/access/tokens/scopes-select";
+import {UseFormReturn} from "react-hook-form";
 
 export type AccessTokenFormProps = PropsWithChildren<{
     onSubmit?: (data: CreateData, call: FormResult<string>) => void | Promise<void>;
@@ -13,7 +14,7 @@ export type AccessTokenFormProps = PropsWithChildren<{
 
 export const AccessTokenForm: FC<AccessTokenFormProps> = (props) => {
     const { onSuccess, onSubmit } = props;
-    const ref = useRef();
+    const ref = useRef<UseFormReturn>(null);
     const formResult = useFormResult<string>({
         ref,
         onSuccess

@@ -5,7 +5,7 @@ import { useFetchIntercept } from "@clover/public/hooks/use.fetch.intercept";
 
 export const AdminLayoutLoading = () => {
     const [_, setLoading] = useAtom(loadingState);
-    const timerRef = useRef<any>();
+    const timerRef = useRef<any>(undefined);
 
     useFetchIntercept({
         start: () => {
