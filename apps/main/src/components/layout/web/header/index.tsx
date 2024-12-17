@@ -6,9 +6,9 @@ import {LayoutLogo} from "@/components/layout/web/logo";
 
 export const Header = () => {
     return <div className={"w-full p-sm flex justify-center items-center border-b"}>
-        <div className={"flex-1 flex justify-start items-center space-x-lg"}>
+        <div className={"flex-1 flex justify-start items-center space-x-2xl"}>
             <LayoutLogo />
-            <ul className={"flex justify-start items-center space-x-md text-md"}>
+            <ul className={"flex justify-start items-center space-x-xl text-md"}>
                 <li>
                     <Link href={"/product"}>{tt("产品")}</Link>
                 </li>

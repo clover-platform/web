@@ -3,6 +3,7 @@ import {getNavGroups} from "@/components/layout/web/footer/config";
 import {tt} from "@clover/public/locale";
 import {Button, Input, Separator} from "@easykit/design";
 import {IconX, IconGithubCircle} from "@arco-iconbox/react-clover";
+import {ThemeSwitcher} from "@clover/public/components/common/theme-switcher";
 
 export const Footer = () => {
     return <div className={"border-t w-full py-2xl"}>
@@ -36,14 +37,14 @@ export const Footer = () => {
                         <div className={"relative"}>
                             <Input className={"bg-secondary"}/>
                             <div className={"absolute right-0 top-0 bottom-0 p-0.5"}>
-                                <Button variant={"outline"} className={"bg-white"} size={"sm"}>{tt("订阅")}</Button>
+                                <Button variant={"outline"} className={"bg-white dark:bg-transparent"} size={"sm"}>{tt("订阅")}</Button>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div className={"mt-2xl"}>
-                <div className={"space-y-sm"}>
+            <div className={"mt-2xl flex justify-center items-center"}>
+                <div className={"space-y-sm flex-1"}>
                     <div>© 2024 {tt("元一链科")}</div>
                     <div className={"flex justify-start items-center space-x-sm"}>
                         <IconGithubCircle className={"text-2xl"} />
@@ -51,6 +52,7 @@ export const Footer = () => {
                         <IconX className={"text-xl"} />
                     </div>
                 </div>
+                <ThemeSwitcher />
             </div>
         </div>
     </div>

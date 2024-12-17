@@ -4,7 +4,7 @@ import i18next from "i18next";
 export type HTMLLayoutProps = PropsWithChildren;
 
 export const HTMLLayout: FC<HTMLLayoutProps> = (props) => {
-    return <html className={i18next.language}>
+    return <html className={i18next.language} suppressHydrationWarning={true}>
     <head>
         <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"/>
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png"/>

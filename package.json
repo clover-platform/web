@@ -29,7 +29,7 @@
         "@clover/public": "workspace:*",
         "@clover/i18n-cli": "workspace:*",
         "@easykit/page-imports": "workspace:*",
-        "@arco-iconbox/react-clover": "0.0.27",
+        "@arco-iconbox/react-clover": "0.0.28",
         "@easykit/design": "0.0.59",
         "@easykit/eslint-config": "0.0.1",
         "@radix-ui/react-checkbox": "1.1.1",
@@ -70,7 +70,8 @@
         "vite": "5.4.8",
         "vite-plugin-dts": "^4.2.3",
         "vite-plugin-node-polyfills": "^0.22.0",
-        "vite-plugin-static-copy": "^2.0.0"
+        "vite-plugin-static-copy": "^2.0.0",
+        "next-themes": "0.4.4"
     },
     "devDependencies": {
         "@types/gulp": "4.0.17",

@@ -14,6 +14,7 @@ import {localeState, projectsState, teamsState} from "@clover/public/state/publi
 import {accessState} from "@clover/public/state/access";
 import {sidebarOpenState} from "@clover/public/components/layout/main/state";
 import i18next from "i18next";
+import { ThemeProvider } from "next-themes"
 
 export type AtomValues = Iterable<
     readonly [WritableAtom<unknown, [any], unknown>, unknown]
@@ -72,7 +73,14 @@ export const RootLayout: FC<RootLayoutProps> = (props) => {
             ...atomValues,
         ]}>
             <ConfigProvider locale={locales[locale]}>
-                { children }
+                <ThemeProvider
+                    attribute="class"
+                    defaultTheme="system"
+                    enableSystem
+                    disableTransitionOnChange
+                >
+                    { children }
+                </ThemeProvider>
             </ConfigProvider>
         </AtomsHydrate>
     </Provider>
