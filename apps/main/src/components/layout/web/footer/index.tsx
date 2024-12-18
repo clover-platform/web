@@ -37,7 +37,7 @@ export const Footer = () => {
                         <div className={"relative"}>
                             <Input className={"bg-secondary"}/>
                             <div className={"absolute right-0 top-0 bottom-0 p-0.5"}>
-                                <Button variant={"outline"} className={"bg-white dark:bg-transparent"} size={"sm"}>{tt("订阅")}</Button>
+                                <Button variant={"outline"} size={"sm"}>{tt("订阅")}</Button>
                             </div>
                         </div>
                     </div>

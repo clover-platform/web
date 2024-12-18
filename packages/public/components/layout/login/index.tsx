@@ -5,6 +5,7 @@ import Link from "@clover/public/components/common/link";
 import { LangSelect } from "@clover/public/components/common/select/lang";
 import {useLayoutProps} from "@clover/public/components/layout/hooks/use.layout.props";
 import { t } from '@clover/public/locale';
+import {ThemeSwitcher} from "@clover/public/components/common/theme-switcher";
 
 export type LoginLayoutProps = PropsWithChildren<{
     title?: string;
@@ -29,7 +30,7 @@ export const LoginLayout: FC<LoginLayoutProps> = (originProps) => {
             {props.children}
         </div>
         <div className={classNames(
-            "fixed bottom-0 left-0 right-0 h-[var(--login-footer-height)] border-0 border-t bg-white",
+            "fixed bottom-0 left-0 right-0 border-0 border-t",
             "flex justify-center items-center "
         )}>
             <div className={"container flex justify-center items-center"}>
@@ -39,8 +40,9 @@ export const LoginLayout: FC<LoginLayoutProps> = (originProps) => {
                     <Link href={"#"}>{t("关于")}</Link>
                     <Link href={"#"}>{t("社区论坛")}</Link>
                 </div>
-                <div className={"flex-1 space-x-2 flex justify-end"}>
-                    <LangSelect />
+                <div className={"flex-1 space-x-2 flex justify-end py-2"}>
+                    <ThemeSwitcher />
+                    <LangSelect className={"px-4"} />
                 </div>
             </div>
         </div>
