@@ -45,29 +45,20 @@ export const OtpInfo: FC<OtpInfoProps> = (props) => {
 
     return <div className={"flex items-center flex-col"}>
         <div className={"flex justify-center items-center"}>
-            <Image
-                width={200}
-                height={200}
-                src={qrcodeImage}
-                alt={t("二维码")}
-            />
+            {
+                qrcodeImage ? <Image src={qrcodeImage} width={150} height={150} /> : <div className={"w-[150px] h-[150px] bg-secondary"} />
+            }
         </div>
-        <div className={"break-all my-[10px] py-[5px] px-[10px] bg-[#F2F3F5] inline-block"}>
+        <div className={"my-2 py-1 px-3 bg-secondary flex justify-center items-center"}>
             {secret}
             <CopyToClipboard text={secret} onCopy={onCopy}>
                 <CopyIcon className={"ml-[10px]"} />
             </CopyToClipboard>
         </div>
         <div className={"text-center flex justify-center items-center"}>
-            <span className={"opacity-50"}>
-                {t("使用")}
-            </span>
             <Popover>
                 <PopoverTrigger>
-                    <span className={"flex justify-center items-center mx-1"}>
-                        <InfoCircledIcon className={"mr-1"} />
-                        {t("身份验证应用")}
-                    </span>
+                    <InfoCircledIcon className={"mr-2"} />
                 </PopoverTrigger>
                 <PopoverContent className={"w-[300px]"}>
                     <div className="space-y-2">
@@ -94,10 +85,7 @@ export const OtpInfo: FC<OtpInfoProps> = (props) => {
                     </div>
                 </PopoverContent>
             </Popover>
-
-            <span className={"opacity-50"}>
-                {t("扫码二维码或复制密钥到应用。")}
-            </span>
+            <span className={"text-left"}>{t("使用身份验证应用，扫码二维码或复制密钥到应用。")}</span>
         </div>
     </div>
 }

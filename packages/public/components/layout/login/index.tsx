@@ -31,7 +31,7 @@ export const LoginLayout: FC<LoginLayoutProps> = (originProps) => {
         </div>
         <div className={classNames(
             "fixed bottom-0 left-0 right-0 border-0 border-t",
-            "flex justify-center items-center "
+            "flex justify-center items-center bg-white dark:bg-[#121212]",
         )}>
             <div className={"container flex justify-center items-center"}>
                 <div className={"flex-1 space-x-2"}>
@@ -41,8 +41,8 @@ export const LoginLayout: FC<LoginLayoutProps> = (originProps) => {
                     <Link href={"#"}>{t("社区论坛")}</Link>
                 </div>
                 <div className={"flex-1 space-x-2 flex justify-end py-2"}>
-                    <ThemeSwitcher />
-                    <LangSelect className={"px-4"} />
+                    <ThemeSwitcher size={"sm"} />
+                    <LangSelect />
                 </div>
             </div>
         </div>

@@ -59,7 +59,7 @@ const RegisterPage = () => {
     return <div className={"w-[400px] m-[20px]"}>
         <div className={"flex justify-center items-center"}>
             <div className={"text-[24px] font-bold flex-1"}>{t("注册")}</div>
-            <div className={"ml-[10px]"}>
+            <div className={"ml-[10px] space-x-1"}>
                 <span>{t("已有账号？")}</span>
                 <LoginLink href={`/login`}>{t("登录")}</LoginLink>
             </div>

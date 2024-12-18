@@ -47,9 +47,9 @@ export const Footer = () => {
                 <div className={"space-y-sm flex-1"}>
                     <div>© 2024 {tt("元一链科")}</div>
                     <div className={"flex justify-start items-center space-x-sm"}>
-                        <IconGithubCircle className={"text-2xl"} />
+                        <IconGithubCircle className={"text-2xl text-secondary-foreground/50"} />
                         <Separator orientation={"vertical"} className={"h-4"} />
-                        <IconX className={"text-xl"} />
+                        <IconX className={"text-xl text-secondary-foreground/50"} />
                     </div>
                 </div>
                 <ThemeSwitcher />

@@ -1,7 +1,7 @@
 import {IconDark, IconLight, IconSystem} from "@arco-iconbox/react-clover";
 import {useTheme} from "next-themes";
 import classNames from "classnames";
-import {useEffect, useState} from "react";
+import {FC, useEffect, useState} from "react";
 
 export type Theme = {
     name: string;
@@ -23,9 +23,26 @@ const themes: Theme[] = [
     }
 ]
 
-export const ThemeSwitcher = () => {
+const BUTTON_SIZE = {
+    sm: "w-6 h-6",
+    md: "w-8 h-8",
+    lg: "w-10 h-10"
+}
+
+const ICON_SIZE = {
+    sm: "text-sm",
+    md: "text-md",
+    lg: "text-lg"
+}
+
+export type ThemeSwitcherProps = {
+    size?: "sm" | "md" | "lg";
+}
+
+export const ThemeSwitcher: FC<ThemeSwitcherProps> = (props) => {
     const [mounted, setMounted] = useState(false)
     const { theme, setTheme } = useTheme();
+    const { size = "md" } = props;
 
     useEffect(() => {
         setMounted(true)
@@ -36,10 +53,11 @@ export const ThemeSwitcher = () => {
             themes.map((item) => {
                 const Icon = item.icon;
                 return <div key={item.name} className={classNames(
-                    "w-8 h-8 flex justify-center items-center rounded-full cursor-pointer",
+                    BUTTON_SIZE[size],
+                    "flex justify-center items-center rounded-full cursor-pointer",
                     theme === item.name ? "bg-secondary" : ""
                 )} onClick={() => setTheme(item.name)} suppressHydrationWarning={true}>
-                    <Icon className={"text-lg"} />
+                    <Icon className={ICON_SIZE[size]} />
                 </div>
             })
         }
