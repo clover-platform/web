@@ -39,10 +39,12 @@ const LinkPage = (props: LinkPageProps) => {
                 setToken(data);
                 location.href = "/";
             }else{
+                setLoading(false);
                 setUser(data);
             }
+        }else{
+            setLoading(false);
         }
-        setLoading(false);
     }
 
     useEffect(() => {
@@ -81,13 +83,11 @@ const LinkPage = (props: LinkPageProps) => {
                 subTitle={t("第三方平台接口错误或链接已超时")}
                 extra={buttons}
             /> : <div className={"w-[360px]"}>
-                <div className={"flex justify-start items-center"}>
-                    <div className={"w-[40px] h-[40px] rounded-full bg-[#2E3340] flex items-center justify-center"}>
+                <div className={"flex justify-center items-center space-x-2"}>
+                    <div className={"w-[28px] h-[28px] rounded-full bg-[#2E3340] flex items-center justify-center"}>
                         { icon }
                     </div>
-                    <div className={"text-[24px] font-bold mx-[10px]"}>
-                        {t("账号绑定")}
-                    </div>
+                    <div>X</div>
                     {
                         user ? <>
                             <div className={"rounded-[50%] overflow-hidden"}>
@@ -112,7 +112,7 @@ const LinkPage = (props: LinkPageProps) => {
                         <FormItem name={"account"} label={t("邮箱或用户名")}>
                             <Input placeholder={t("请输入邮箱或用户名")} />
                         </FormItem>
-                        <FormItem name={"password1"} label={t("密码")}>
+                        <FormItem name={"password"} label={t("密码")}>
                             <Input type={"password"} placeholder={t("请输入密码")} />
                         </FormItem>
                         <Button loading={submitting} long type={"submit"}>{t("登录并绑定")}</Button>
