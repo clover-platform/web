@@ -12,6 +12,7 @@ import { ActionButton } from "@clover/public/components/common/action/button";
 import { MenuItem, MenuItemProps } from "@clover/public/components/layout/main/sidebar/menu-item";
 import { Action } from "@clover/public/components/common/action";
 import { t } from '@clover/public/locale';
+import {ThemeSwitcher} from "@clover/public/components/common/theme-switcher";
 
 export interface SidebarProps extends PropsWithChildren {
     active?: string;
@@ -105,20 +106,21 @@ const Sidebar: FC<SidebarProps> = (props) => {
                 { props.extra }
             </ScrollArea>
         </div>
-        <div className={"flex p-1 py-0 border-t"}>
-            <div className={"flex-1 mx-0.5 my-1"}>
+        <div className={"flex p-1 border-t"}>
+            <div className={"flex-1 flex justify-start items-center"}>
                 <a href={`/help`}>
-                    <Action theme={"dark"} className={"w-full py-1"}>
-                        <IconHelp className={"mr-1 text-base"} /> {t("帮助")}
+                    <Action theme={"dark"}>
+                        <IconHelp className={"text-base"}/>
+                    </Action>
+                </a>
+                <a href={`/admin`}>
+                    <Action theme={"dark"}>
+                        <IconSetting className={"text-base"}/>
                     </Action>
                 </a>
             </div>
-            <div className={"flex-1 mx-0.5 my-1"}>
-                <a href={`/admin`}>
-                    <Action theme={"dark"} className={"w-full py-1"}>
-                        <IconSetting className={"mr-1 text-base"} /> {t("管理中心")}
-                    </Action>
-                </a>
+            <div className={"flex-1 flex justify-end items-center"}>
+                <ThemeSwitcher size={"sm"} activeClassName={"bg-[rgba(31,30,36,0.08)] dark:bg-secondary"} />
             </div>
         </div>
     </div>

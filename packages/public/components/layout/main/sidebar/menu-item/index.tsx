@@ -40,17 +40,17 @@ export const MenuItem: FC<MenuItemProps> = (props) => {
         setOpen(hasActiveChild(children, active));
     }, [children, active])
 
-    const iconClassName = "flex justify-center items-center w-4 h-4 transform-all duration-200 ease";
+    const iconClassName = "flex justify-center items-center w-4 h-4 ml-1 transform-all duration-200 ease";
 
     const button = <div
         onClick={() => children?.length && setOpen(!open)}
         className={cn(
             "w-full px-2 py-1.5 my-0.5 flex justify-start items-center rounded-sm cursor-pointer relative text-left",
             "hover:bg-[var(--action-hover)] hover:text-primary",
-            "focus:bg-[rgba(31,30,36,0.08)] focus:border-[#bfbfc3] focus:shadow-[0_0_0_1px_#fff,0_0_0_3px_rgba(var(--primary))]",
-            activeEnable && "active:bg-[rgba(31,30,36,0.08)] active:border-[#bfbfc3] active:shadow-[0_0_0_1px_#fff,0_0_0_3px_rgba(var(--primary))]",
+            "focus:bg-[rgba(31,30,36,0.08)] focus:border-[#bfbfc3] dark:focus:border-black/10 focus:shadow-[0_0_0_1px_#fff,0_0_0_3px_rgba(var(--primary))] dark:focus:shadow-[0_0_0_1px_hsl(var(--secondary)),0_0_0_3px_rgba(var(--primary))]",
+            activeEnable && "active:bg-[rgba(31,30,36,0.08)] active:border-[#bfbfc3] dark:focus:border-black/10 active:shadow-[0_0_0_1px_#fff,0_0_0_3px_rgba(var(--primary))] dark:active:shadow-[0_0_0_1px_hsl(var(--secondary)),0_0_0_3px_rgba(var(--primary))]",
             (hasActive && !open) || active === id ? "before:absolute before:w-[3px] before:top-1 before:bottom-1 before:left-1 before:bg-primary before:rounded-md" : null,
-            (hasActive && !open) || active === id ? "text-primary !bg-[rgba(31,30,36,0.08)] font-bold" : null,
+            (hasActive && !open) || active === id ? "text-primary !bg-[rgba(31,30,36,0.08)] dark:!bg-secondary font-bold" : null,
         )}
     >
         {
@@ -75,7 +75,7 @@ export const MenuItem: FC<MenuItemProps> = (props) => {
         <HoverCard>
             <HoverCardTrigger asChild>{button}</HoverCardTrigger>
             {
-                open ? null : <HoverCardContent align={"start"} className="w-[calc(var(--sidebar-width)-50px)] ml-[calc(var(--sidebar-width)-5px)] -mt-[36px] p-1 bg-white">
+                open ? null : <HoverCardContent align={"start"} className="w-[calc(var(--sidebar-width)-50px)] ml-[calc(var(--sidebar-width)-5px)] -mt-[36px] p-1">
                     {children?.map((menu) => <MenuItem key={menu.id} showIcon={false} {...menu} active={active}/>)}
                 </HoverCardContent>
             }

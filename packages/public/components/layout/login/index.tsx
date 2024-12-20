@@ -22,10 +22,12 @@ export const LoginLayout: FC<LoginLayoutProps> = (originProps) => {
     return <div className={"flex justify-center w-full min-h-[100vh] flex-col"}>
         <div className={"flex-1 flex justify-center items-center flex-col p-4 mb-[--login-footer-height]"}>
             {
-                showLogo ? <div className={"mb-6"}>
-                    <Logo size={80}/>
-                    <div className={"text-center font-bold text-xl mt-2"}>{title}</div>
-                </div> : null
+                showLogo ? <a href={"/"}>
+                    <div className={"mb-6"}>
+                        <Logo size={80}/>
+                        <div className={"text-center font-bold text-xl mt-2"}>{title}</div>
+                    </div>
+                </a> : null
             }
             {props.children}
         </div>

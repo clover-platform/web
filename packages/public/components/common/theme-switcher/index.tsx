@@ -37,12 +37,13 @@ const ICON_SIZE = {
 
 export type ThemeSwitcherProps = {
     size?: "sm" | "md" | "lg";
+    activeClassName?: string;
 }
 
 export const ThemeSwitcher: FC<ThemeSwitcherProps> = (props) => {
     const [mounted, setMounted] = useState(false)
     const { theme, setTheme } = useTheme();
-    const { size = "md" } = props;
+    const { size = "md", activeClassName = "bg-secondary" } = props;
 
     useEffect(() => {
         setMounted(true)
@@ -55,7 +56,7 @@ export const ThemeSwitcher: FC<ThemeSwitcherProps> = (props) => {
                 return <div key={item.name} className={classNames(
                     BUTTON_SIZE[size],
                     "flex justify-center items-center rounded-full cursor-pointer",
-                    theme === item.name ? "bg-secondary" : ""
+                    theme === item.name ? activeClassName : ""
                 )} onClick={() => setTheme(item.name)} suppressHydrationWarning={true}>
                     <Icon className={ICON_SIZE[size]} />
                 </div>

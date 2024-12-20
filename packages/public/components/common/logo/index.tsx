@@ -28,7 +28,7 @@ const Logo = (props: LogoProps) => {
     const imageSize = useMemo(() => size - (margin * 2), [size, margin]);
 
     return <div className={classNames(
-        "flex justify-center items-center cursor-default rounded-sm",
+        "flex justify-center items-center rounded-sm",
         bg,
         className
     )}>
