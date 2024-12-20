@@ -14,7 +14,7 @@ import {useParams} from "next/navigation";
 
 export const CommentEditor = () => {
     const [value, setValue] = useState<string>("");
-    const editorRef = useRef<any>();
+    const editorRef = useRef<any>(undefined);
     const [loading, setLoading] = useState<boolean>(false);
     const msg = useMessage();
     const [entries] = useAtom(entriesState);

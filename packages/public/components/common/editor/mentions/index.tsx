@@ -37,7 +37,7 @@ export const MentionsEditor: FC<CommentEditorProps> = ({ref, ...props}) => {
             position: "后端开发工程师"
         }
     ]);
-    const editorRef = useRef<any>();
+    const editorRef = useRef<any>(undefined);
 
     const onInput = () => {
         const html = editorRef.current?.innerHTML;

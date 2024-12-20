@@ -23,7 +23,7 @@ const AuthorityForm: FC<AuthorityFormProps> = (props) => {
         type
     } = props
     const [submitting, setSubmitting] = useState(false);
-    const formRef = useRef<UseFormReturn>();
+    const formRef = useRef<UseFormReturn>(undefined);
     const formResult = useFormResult({
         ref: formRef,
         onSuccess

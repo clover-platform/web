@@ -39,7 +39,7 @@ export const DetailPage: FC<DetailPageProps> = (props) => {
         ],
     });
     const msg = useMessage();
-    const saveHandler = useRef<AbortPromise<RestResult<any>>>();
+    const saveHandler = useRef<AbortPromise<RestResult<any>>>(undefined);
     const timeAgo = useTimeAgo();
     const router = useRouter();
 

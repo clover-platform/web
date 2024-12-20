@@ -14,7 +14,7 @@ export const FormatConfigModal: FC<FormatConfigModalProps> = (props) => {
         maskClosable={false}
     >
         {
-            cloneElement(props.content, {
+            cloneElement<any>(props.content, {
                 onCancel: props.onCancel,
                 onConfirm: props.onConfirm,
                 defaultValues: props.config || props.configDefault,
