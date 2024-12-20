@@ -8,6 +8,13 @@ import { t } from '@clover/public/locale';
 export const getNavMenus = (): MenuItemProps[] => {
     return [
         {
+            id: "dashboard",
+            title: t("控制台"),
+            url: `/dashboard`,
+            icon: <IconProject />,
+            external: true,
+        },
+        {
             id: "project",
             title: t("项目"),
             url: `/project`,

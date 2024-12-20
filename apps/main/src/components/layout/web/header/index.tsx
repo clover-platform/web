@@ -3,8 +3,12 @@ import {tt} from "@clover/public/locale";
 import Link from "next/link";
 import {LangSelect} from "@clover/public/components/common/select/lang";
 import {LayoutLogo} from "@/components/layout/web/logo";
+import {useAtom} from "jotai/index";
+import {isLoginState} from "@clover/public/state/account";
 
 export const Header = () => {
+    const [isLogin] = useAtom(isLoginState);
+
     return <div className={"w-full p-sm flex justify-center items-center border-b"}>
         <div className={"flex-1 flex justify-start items-center space-x-2xl"}>
             <LayoutLogo />
@@ -18,12 +22,18 @@ export const Header = () => {
             </ul>
         </div>
         <div className={"space-x-xs flex justify-center items-center"}>
-            <Link href={"/login"}>
-                <Button size={"sm"}>{tt("登录")}</Button>
-            </Link>
-            <Link href={"/register"}>
-                <Button size={"sm"} variant={"outline"}>{tt("注册")}</Button>
-            </Link>
+            {
+                isLogin ? <Link href={"/dashboard"}>
+                    <Button size={"sm"}>{tt("控制台")}</Button>
+                </Link> : <>
+                    <Link href={"/login"}>
+                        <Button size={"sm"}>{tt("登录")}</Button>
+                    </Link>
+                    <Link href={"/register"}>
+                        <Button size={"sm"} variant={"outline"}>{tt("注册")}</Button>
+                    </Link>
+                </>
+            }
             <LangSelect className={"h-3xl"} />
         </div>
     </div>
