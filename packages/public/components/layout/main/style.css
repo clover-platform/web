@@ -3,10 +3,8 @@
     --sidebar-bg: #eef3f7;
     --sidebar-user-bg: rgba(var(--primary));
     --border-color: rgba(38,50,56,0.1);
-    --action-hover: rgba(38, 50, 56, 0.05);
 }
 .dark .layout-admin{
     --sidebar-bg: #1e1e1e;
     --border-color: rgba(38,50,56,0.1);
-    --action-hover: hsl(var(--secondary));
 }

@@ -1,10 +1,10 @@
 'use client';
 
 import { Form, Steps, StepsItem, Button, Input, useMessage, FormItem } from "@easykit/design";
-import { useState } from "react";
+import {useCallback, useState} from "react";
 import SecretItem from "@/components/pages/register/secret";
 import { EmailCodeInput } from "@clover/public/components/common/input/email-code";
-import { emailCheck, passwordSet, sendEmailCode } from "@/rest/auth";
+import {emailCheck, register, sendEmailCode} from "@/rest/auth";
 import { setToken } from "@clover/public/utils/token";
 import { encrypt } from "@clover/public/utils/crypto";
 import { useRouter, useSearchParams } from "next/navigation";
@@ -41,12 +41,15 @@ const RegisterPage = () => {
         setStep(0);
     }
 
-    const onStep2Submit = async (data: any) => {
+    const onStep2Submit = useCallback(async (data: any) => {
         data.password2 = undefined;
         delete data.password2;
         data.password = encrypt(data.password);
         setStep2Submitting(true);
-        const { success, message, data: result } = await passwordSet(data);
+        const { success, message, data: result } = await register({
+            ...formData1,
+            ...data
+        });
         setStep2Submitting(false);
         if(success) {
             setToken(result);
@@ -54,7 +57,7 @@ const RegisterPage = () => {
         }else{
             msg.error(message);
         }
-    }
+    }, [formData1])
 
     return <div className={"w-[400px] m-[20px]"}>
         <div className={"flex justify-center items-center"}>
@@ -98,7 +101,7 @@ const RegisterPage = () => {
                 <FormItem name="password2" label={t("确认密码")}>
                     <Input type={"password"} placeholder={t("请再次输入密码")} />
                 </FormItem>
-                { step === 1 ? <SecretItem /> : null }
+                { step === 1 ? <SecretItem username={formData1?.username} /> : null }
                 <FormItem name="code" label={t("验证码")}>
                     <CodeInput placeholder={t("请输入身份验证 App 验证码")} />
                 </FormItem>

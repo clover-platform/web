@@ -5,11 +5,11 @@ import {Metadata} from "next";
 
 export async function generateMetadata(): Promise<Metadata> {
     return {
-        title: title(t("项目")),
+        title: title(t("团队")),
         keywords: keywords(),
     }
 }
 
-const Page = () => <ProjectPage />;
+const Page = () => <>team</>;
 
 export default Page;

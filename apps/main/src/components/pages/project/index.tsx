@@ -56,10 +56,7 @@ const ProjectPage = () => {
     const actions = useMemo(() => {
         return <div className={"space-x-2"}>
             <Link href={"/project/new"}>
-                <Button>{t("创建项目")}</Button>
-            </Link>
-            <Link href={"/team"}>
-                <Button variant={"outline"}>{t("团队管理")}</Button>
+                <Button>{t("新建")}</Button>
             </Link>
         </div>
     }, [])

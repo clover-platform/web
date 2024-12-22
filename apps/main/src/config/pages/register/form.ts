@@ -26,6 +26,7 @@ export const getFormStep2Schema = () => z.object({
     code: z.string()
         .min(1, code)
         .regex(CODE, code),
+    secret: z.string(),
 }).superRefine(({password, password2}, ctx) => {
     if (password !== password2) {
         ctx.addIssue({

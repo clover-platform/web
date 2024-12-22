@@ -25,12 +25,10 @@ export const Action: FC<ActionProps> = (props) => {
             theme === 'light' && "hover:bg-white/20",
             theme === 'light' && "focus:bg-white/30 focus:border-white/30",
             theme === 'light' && "active:bg-white/30 active:border-white/30",
-            theme === 'dark' && "hover:bg-black/10",
-            theme === 'dark' && "focus:bg-[#ececef] focus:border-[#bfbfc3] focus:shadow-[0_0_0_1px_#fff,0_0_0_3px_rgba(var(--primary))]",
-            theme === 'dark' && "active:bg-[#ececef] active:border-[#bfbfc3] active:shadow-[0_0_0_1px_#fff,0_0_0_3px_rgba(var(--primary))]",
+            theme === 'dark' && "action-effect action-effect-active",
             (active && theme === 'light') && "bg-white/20",
-            (active && theme === 'dark') && "bg-black/10",
-            disabled && "opacity-50 cursor-not-allowed hover:bg-transparent focus:bg-transparent active:bg-transparent focus:shadow-none active:shadow-none focus:border-transparent active:border-transparent",
+            (active && theme === 'dark') && "action-active",
+            disabled && "action-effect-disabled",
             props.className
         )
     }

@@ -95,7 +95,7 @@ export const MainLayout: FC<MainLayoutProps> = (props) => {
                         <BreadcrumbList>
                             <BreadcrumbItem>
                                 <BreadcrumbLink asChild={true}>
-                                    <a href={`/`} className={"flex items-center"}>
+                                    <a href={`/dashboard`} className={"flex items-center"}>
                                         <IconHome />
                                     </a>
                                 </BreadcrumbLink>

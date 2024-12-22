@@ -11,12 +11,15 @@ export const emailCheck = async (data: {
 }): Promise<RestResult<any>> =>
     post(`@main/account/register/email/check`, data);
 
-export const otpSecret = async (): Promise<RestResult<any>> => get(`@main/account/otp/secret`);
+export const otpSecret = async (username: string): Promise<RestResult<any>> =>
+    get(`@main/account/otp/secret`, {username});
 
-export const passwordSet = async (data: {
+export const register = async (data: {
+    username: string;
+    email: string;
     password: string;
     code: string;
-}): Promise<RestResult<any>> => post(`@main/account/register/password/set`, data);
+}): Promise<RestResult<any>> => post(`@main/account/register`, data);
 
 export const sendResetEmailCode = async (email: string) =>
     post(`@main/account/reset/email/send`, {email});

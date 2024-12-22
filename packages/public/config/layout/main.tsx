@@ -1,6 +1,5 @@
 import {
-    IconProject,
-    IconWiki, IconI18n, IconGantt,
+    IconWiki, IconI18n, IconGantt, IconTeam, IconDashboard,
 } from "@arco-iconbox/react-clover";
 import { MenuItemProps } from "@clover/public/components/layout/main/sidebar/menu-item";
 import { t } from '@clover/public/locale';
@@ -11,15 +10,27 @@ export const getNavMenus = (): MenuItemProps[] => {
             id: "dashboard",
             title: t("控制台"),
             url: `/dashboard`,
-            icon: <IconProject />,
+            icon: <IconDashboard />,
             external: true,
         },
         {
-            id: "project",
-            title: t("项目"),
-            url: `/project`,
-            icon: <IconProject />,
-            external: true,
+            id: "project&team",
+            title: t("项目与团队"),
+            icon: <IconTeam />,
+            children: [
+                {
+                    id: "project",
+                    title: t("项目"),
+                    url: `/project`,
+                    external: true,
+                },
+                {
+                    id: "team",
+                    title: t("团队"),
+                    url: `/team`,
+                    external: true,
+                },
+            ]
         },
         {
             id: "task",

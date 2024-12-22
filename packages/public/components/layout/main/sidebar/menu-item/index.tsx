@@ -46,11 +46,10 @@ export const MenuItem: FC<MenuItemProps> = (props) => {
         onClick={() => children?.length && setOpen(!open)}
         className={cn(
             "w-full px-2 py-1.5 my-0.5 flex justify-start items-center rounded-sm cursor-pointer relative text-left",
-            "hover:bg-[var(--action-hover)] hover:text-primary",
-            "focus:bg-[rgba(31,30,36,0.08)] focus:border-[#bfbfc3] dark:focus:border-black/10 focus:shadow-[0_0_0_1px_#fff,0_0_0_3px_rgba(var(--primary))] dark:focus:shadow-[0_0_0_1px_hsl(var(--secondary)),0_0_0_3px_rgba(var(--primary))]",
-            activeEnable && "active:bg-[rgba(31,30,36,0.08)] active:border-[#bfbfc3] dark:focus:border-black/10 active:shadow-[0_0_0_1px_#fff,0_0_0_3px_rgba(var(--primary))] dark:active:shadow-[0_0_0_1px_hsl(var(--secondary)),0_0_0_3px_rgba(var(--primary))]",
+            "action-effect",
+            activeEnable && "action-effect-active",
             (hasActive && !open) || active === id ? "before:absolute before:w-[3px] before:top-1 before:bottom-1 before:left-1 before:bg-primary before:rounded-md" : null,
-            (hasActive && !open) || active === id ? "text-primary !bg-[rgba(31,30,36,0.08)] dark:!bg-secondary font-bold" : null,
+            (hasActive && !open) || active === id ? "action-active" : null,
         )}
     >
         {

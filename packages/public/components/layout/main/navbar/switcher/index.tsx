@@ -44,14 +44,17 @@ export const Switcher: FC<SwitcherProps> = (props) => {
                 {current?.label || '--'} <ChevronDownIcon />
             </div>
         </PopoverTrigger>
-        <PopoverContent align={"start"} className={"p-0"}>
+        <PopoverContent
+            align={"start"} className={"p-0"}
+            onOpenAutoFocus={(event) => event.preventDefault()}
+        >
             <div className={"py-2 px-4 flex justify-center items-center"}>
                 <div className={"flex-1"}>
                     <span className={"text-base font-bold"}>{props.title}</span>
                     <span className={"text-sm opacity-60 ml-2"}>{props.description}</span>
                 </div>
                 <Link href={props.listUrl!}>
-                    <Action theme={"dark"}>
+                    <Action theme={"dark"} elType={"span"}>
                         <GearIcon/>
                     </Action>
                 </Link>
