@@ -6,10 +6,11 @@ import { t } from '@clover/public/locale';
 
 export type SecretItemProps = PropsWithChildren<{
     username: string;
+    onLoad?: (secret: string) => void;
 }>;
 
 const SecretItem: FC<SecretItemProps> = (props) => {
-    const { username } = props;
+    const { username, onLoad } = props;
     const msg = useMessage();
     const [loading, setLoading] = useState(false);
     const [otpData, setOtpData] = useState({} as any);
@@ -20,23 +21,19 @@ const SecretItem: FC<SecretItemProps> = (props) => {
         setLoading(false);
         if(success) {
             setOtpData(data);
+            onLoad?.(data.secret);
         }else{
             msg.error(message);
         }
-    }, [username])
+    }, [username, onLoad])
 
     useEffect(() => {
         loadSecret().then();
     }, []);
 
-    return <>
-        <FormItem name={"secret"} label={t("身份验证 App 密钥")} className={"hidden"}>
-            <Input value={otpData.secret} />
-        </FormItem>
-        <FormItem name={"qrcode"} label={t("身份验证 App 密钥")}>
-            <OtpInfo loading={loading} secret={otpData.secret} qrcode={otpData.qrcode} />
-        </FormItem>
-    </>
+    return <FormItem name={"qrcode"} label={t("身份验证 App 密钥")}>
+        <OtpInfo loading={loading} secret={otpData.secret} qrcode={otpData.qrcode} />
+    </FormItem>
 };
 
 export default SecretItem;

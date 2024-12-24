@@ -10,7 +10,7 @@ import {
 } from "@easykit/design";
 import {ChevronDownIcon, GearIcon} from "@radix-ui/react-icons";
 import {Action} from "@clover/public/components/common/action";
-import {FC} from "react";
+import {FC, useState} from "react";
 import Link from "next/link";
 
 export type SwitcherItemProps = {
@@ -37,8 +37,9 @@ export const Switcher: FC<SwitcherProps> = (props) => {
     } = props;
 
     const current = items.find(item => item.value === value);
+    const [open, setOpen] = useState(false);
 
-    return <Popover>
+    return <Popover open={open} onOpenChange={setOpen}>
         <PopoverTrigger>
             <div className={"flex justify-center items-center"}>
                 {current?.label || '--'} <ChevronDownIcon />
@@ -47,6 +48,7 @@ export const Switcher: FC<SwitcherProps> = (props) => {
         <PopoverContent
             align={"start"} className={"p-0"}
             onOpenAutoFocus={(event) => event.preventDefault()}
+            onClick={() => setOpen(false)}
         >
             <div className={"py-2 px-4 flex justify-center items-center"}>
                 <div className={"flex-1"}>

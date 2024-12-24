@@ -11,7 +11,7 @@ export const Guide = () => {
     return <LoginLayout showLogo={false}>
         <div className={"container flex-1 flex justify-center items-center flex-col"}>
             {step === 'nav' && <GuideNav onCreate={() => setStep("create")} />}
-            {step === 'create' && <GuideCreate />}
+            {step === 'create' && <GuideCreate onBack={() => setStep("nav")} />}
         </div>
     </LoginLayout>
 }

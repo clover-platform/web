@@ -1,4 +1,4 @@
-import "./style.css";
+import "./style.scss";
 import { FC, PropsWithChildren, ReactNode, useMemo } from "react";
 import { useSearchParams } from "next/navigation";
 import { AdminLayoutLoading } from "@clover/public/components/layout/main/loading";

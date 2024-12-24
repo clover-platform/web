@@ -15,7 +15,6 @@ import { t } from '@clover/public/locale';
 
 const RegisterPage = () => {
     const msg = useMessage();
-    const router = useRouter();
     const params = useSearchParams();
     const from = params.get("from");
     const [step, setStep] = useState(0);
@@ -23,6 +22,7 @@ const RegisterPage = () => {
     const [step1Submitting, setStep1Submitting] = useState(false);
     const [formKey, setFormKey] = useState(Date.now());
     const [step2Submitting, setStep2Submitting] = useState(false);
+    const [secret, setSecret] = useState("");
 
     const onStep1Submit = async (data: any) => {
         setStep1Submitting(true);
@@ -45,6 +45,7 @@ const RegisterPage = () => {
         data.password2 = undefined;
         delete data.password2;
         data.password = encrypt(data.password);
+        data.secret = secret;
         setStep2Submitting(true);
         const { success, message, data: result } = await register({
             ...formData1,
@@ -57,7 +58,7 @@ const RegisterPage = () => {
         }else{
             msg.error(message);
         }
-    }, [formData1])
+    }, [formData1, secret])
 
     return <div className={"w-[400px] m-[20px]"}>
         <div className={"flex justify-center items-center"}>
@@ -101,7 +102,7 @@ const RegisterPage = () => {
                 <FormItem name="password2" label={t("确认密码")}>
                     <Input type={"password"} placeholder={t("请再次输入密码")} />
                 </FormItem>
-                { step === 1 ? <SecretItem username={formData1?.username} /> : null }
+                { step === 1 ? <SecretItem username={formData1?.username} onLoad={setSecret} /> : null }
                 <FormItem name="code" label={t("验证码")}>
                     <CodeInput placeholder={t("请输入身份验证 App 验证码")} />
                 </FormItem>

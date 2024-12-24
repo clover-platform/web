@@ -1,11 +1,8 @@
 import {profile} from "@clover/public/rest/auth";
 import {my as myTeams} from "@clover/public/rest/team";
 import {my as myProjects} from "@clover/public/rest/project";
-import {getCookie} from "cookies-next";
-import {SIDEBAR_OPEN_KEY} from "@clover/public/components/layout/main/const";
-import {cookies} from "next/headers";
 
-export const loadState = async () => {
+export const loadProfile = async () => {
     const { success, data } = await profile();
     let teams = [];
     let projects = [];
@@ -15,12 +12,5 @@ export const loadState = async () => {
         const projectsResult = await myProjects();
         projects = projectsResult.success ? projectsResult.data : [];
     }
-    const open = await getCookie(SIDEBAR_OPEN_KEY, {cookies});
-    return {
-        teams,
-        projects,
-        accountInfo: data,
-        isLogin: success,
-        sideOpen: !(open === 'false')
-    }
+    return {profile: data, teams, projects, success};
 }

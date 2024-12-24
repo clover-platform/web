@@ -39,6 +39,7 @@ export const MenuItem: FC<MenuItemProps> = (props) => {
     useEffect(() => {
         setOpen(hasActiveChild(children, active));
     }, [children, active])
+    const [hoverOpen, setHoverOpen] = useState(false);
 
     const iconClassName = "flex justify-center items-center w-4 h-4 ml-1 transform-all duration-200 ease";
 
@@ -71,10 +72,10 @@ export const MenuItem: FC<MenuItemProps> = (props) => {
     </div>;
 
     const body = children?.length ? <>
-        <HoverCard>
+        <HoverCard open={hoverOpen} onOpenChange={setHoverOpen}>
             <HoverCardTrigger asChild>{button}</HoverCardTrigger>
             {
-                open ? null : <HoverCardContent align={"start"} className="w-[calc(var(--sidebar-width)-50px)] ml-[calc(var(--sidebar-width)-5px)] -mt-[36px] p-1">
+                open ? null : <HoverCardContent onClick={() => setHoverOpen(false)} align={"start"} className="w-[calc(var(--sidebar-width)-50px)] ml-[calc(var(--sidebar-width)-5px)] -mt-[36px] p-1">
                     {children?.map((menu) => <MenuItem key={menu.id} showIcon={false} {...menu} active={active}/>)}
                 </HoverCardContent>
             }

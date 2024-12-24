@@ -19,7 +19,7 @@ export const GuideNav: FC<GuideNavProps> = (props) => {
     }
 
     return <>
-        <div className={"text-xl font-bold"}>{t("你需要加入或者创建团队")}</div>
+        <div className={"text-xl font-bold mb-md"}>{t("你需要加入或者创建团队")}</div>
         <div className={"mt-8 flex justify-center items-center w-full max-w-[900px] -m-2"}>
             <CardButton
                 onClick={props.onCreate}

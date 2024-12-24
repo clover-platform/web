@@ -1,7 +1,7 @@
 import { RootLayout as PublicRootLayout } from "@/components/layout/root";
 import { PropsWithChildren, FC } from "react";
 import {changeLanguage} from "@clover/public/locale";
-import {loadState} from "@clover/public/components/layout/root/utils";
+import {loadState} from "@clover/public/components/layout/root/utils.server";
 import {HTMLLayout} from "@clover/public/components/layout/html";
 import {getLocale} from "@clover/public/utils/locale";
 
