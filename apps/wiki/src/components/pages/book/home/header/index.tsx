@@ -22,7 +22,7 @@ export const HomeHeader: FC<HomeHeaderProps> = (props) => {
             <img src={data?.logo || DEFAULT_COVER} alt={"LOGO"} className={"w-full h-full bg-cover"}/>
         </div>
         <div className={"flex-1 space-y-2"}>
-            <div className={"text-2xl text-black font-medium"}>{data?.name}</div>
+            <div className={"text-2xl font-medium"}>{data?.name}</div>
             <div className={"flex flex-wrap text-secondary-foreground/50"}>
                 <div className={"mr-4 space-x-0.5"}>
                     <span className={"font-bold"}>2</span>

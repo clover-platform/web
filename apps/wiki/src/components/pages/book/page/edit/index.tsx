@@ -73,7 +73,7 @@ export const EditPage: FC<EditPageProps> = (props) => {
     }, [title, value, bookPath, pageId]);
 
     return <div className={"space-y-4"}>
-        <div className={"flex justify-center items-center sticky top-[48px] -m-4 px-4 py-2 border-b bg-white z-50"}>
+        <div className={"flex justify-center items-center sticky top-[48px] -m-4 px-4 py-2 border-b bg-background z-50"}>
             <div className={"flex-1 flex justify-start items-center space-x-2"}>
                 <div className={"flex justify-center items-center space-x-1"}>
                     <div
