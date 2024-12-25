@@ -3,7 +3,7 @@ import { t } from '@clover/public/locale';
 import {Metadata} from "next";
 import {BookSettingPage} from "@/components/pages/book/setting";
 import {FC} from "react";
-import {PageProps} from "@/types/pages/page";
+import {PageProps, PromisePageProps} from "@/types/pages/page";
 import {detail} from "@/rest/book";
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -13,7 +13,7 @@ export async function generateMetadata(): Promise<Metadata> {
     }
 }
 
-const Page: FC<PageProps> = async (props) => {
+const Page: FC<PromisePageProps> = async (props) => {
     const { params } = props;
     const {bookPath} = await params;
     const { data } = await detail(bookPath);
