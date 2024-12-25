@@ -33,8 +33,6 @@ export const HomeStart: FC<HomeStartProps> = (props) => {
         }
     ]
 
-    console.log(l);
-
     return <div className={"flex space-x-4"}>
         {
             START_ITEMS.map((item) => {
