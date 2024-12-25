@@ -24,7 +24,7 @@ export type DetailPageProps = {
 
 export const DetailPage: FC<DetailPageProps> = (props) => {
     const { detail } = props;
-    const { bookPath, pageId } = use(props.params);
+    const { bookPath, pageId } = props.params;
     useLayoutConfig<BookLayoutProps>({
         path: [
             {

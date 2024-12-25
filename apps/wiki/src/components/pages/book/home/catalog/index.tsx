@@ -16,7 +16,7 @@ const CatalogItem: FC<CatalogItemProps> = (props) => {
 
     return <div
         onClick={() => router.push(`/wiki/book/${bookPath}/page/${id}`)}
-        className={"flex space-x-4 justify-center items-center"}
+        className={"flex space-x-4 justify-center items-center text-sm"}
     >
         <div>{title}</div>
         <div className={"flex-1 h-0 border-b border-dashed"}/>

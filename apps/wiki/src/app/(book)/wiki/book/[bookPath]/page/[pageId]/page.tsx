@@ -1,11 +1,11 @@
 import {keywords, title} from "@clover/public/utils/seo";
 import {DetailPage} from "@/components/pages/book/page";
-import {PageProps} from "@/types/pages/page";
+import {PageProps, PromisePageProps} from "@/types/pages/page";
 import {detail} from "@/rest/page";
 import { t } from '@clover/public/locale';
 import {Metadata} from "next";
 
-export async function generateMetadata(props: PageProps): Promise<Metadata> {
+export async function generateMetadata(props: PromisePageProps): Promise<Metadata> {
     const {bookPath, pageId} = await props.params;
     const {data} = await detail(bookPath, pageId!);
     return {
@@ -14,10 +14,10 @@ export async function generateMetadata(props: PageProps): Promise<Metadata> {
     }
 }
 
-const Page = async (props: PageProps) => {
+const Page = async (props: PromisePageProps) => {
     const {bookPath, pageId} = await props.params;
     const {data} = await detail(bookPath, pageId!);
-    return <DetailPage {...props} detail={data!} />;
+    return <DetailPage params={{bookPath, pageId}} detail={data!} />;
 }
 
 export default Page;

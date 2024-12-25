@@ -29,7 +29,7 @@ const MenuTitle: FC<MenuTitleProps> = (props) => {
 
     return <div
         onClick={() => router.push(`/wiki/book/${bookPath}/page/${id}`)}
-        className={"flex justify-start items-center pr-1 group w-full"}
+        className={"flex justify-start items-center pr-1 group w-full text-sm"}
     >
         <div className={"flex-1 w-0 flex-shrink-0 truncate"}>{title}</div>
         <div className={classNames(

@@ -20,7 +20,7 @@ export type EditPageProps = {
 
 export const EditPage: FC<EditPageProps> = (props) => {
     const { detail } = props;
-    const { bookPath, pageId } = use(props.params);
+    const { bookPath, pageId } = props.params;
     useLayoutConfig<BookLayoutProps>({
         path: [
             {
