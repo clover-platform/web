@@ -65,14 +65,14 @@ export const EntryPanel: FC<EntryPanelProps> = (props) => {
                             return <div
                                 key={entry.id}
                                 className={classNames(
-                                    "flex justify-center items-center px-2 py-1 rounded-sm my-0.5 cursor-pointer",
-                                    "hover:bg-white/70",
-                                    current === index ? "bg-white" : "bg-transparent text-muted-foreground",
+                                    "flex justify-center items-center px-2 py-1 rounded-sm m-1 cursor-pointer",
+                                    "action-effect action-effect-active",
+                                    current === index ? "action-active" : "bg-transparent text-muted-foreground",
                                 )}
                                 onClick={() => setCurrent(index)}
                             >
                                 <div className={"w-6 h-6 flex justify-center items-center"}>
-                                    <div className={"w-5 h-5 rounded-full bg-white flex justify-center items-center"}>
+                                    <div className={"w-5 h-5 rounded-full bg-white dark:bg-black/30 flex justify-center items-center"}>
                                         {translated ? (verified ? iconCheck : iconTranslated) : iconNormal}
                                     </div>
                                 </div>

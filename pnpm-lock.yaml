@@ -30,8 +30,8 @@ importers:
         specifier: workspace:*
         version: link:packages/public
       '@easykit/design':
-        specifier: 0.0.66
-        version: 0.0.66(@types/react-dom@19.0.1)(@types/react@19.0.1)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
+        specifier: 0.0.68
+        version: 0.0.68(@types/react-dom@19.0.1)(@types/react@19.0.1)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
       '@easykit/eslint-config':
         specifier: 0.0.1
         version: 0.0.1(eslint@8.57.0)
@@ -463,8 +463,8 @@ packages:
     resolution: {integrity: sha512-Pqwr3+Doby9fH0FECbGJLo997heWop7QDnklbRM9gPM+dHVdRN8SzOXiCp0RyAhN01OPgFIP3+w7xsHXfptIsw==}
     engines: {node: '>=12.9.0'}
 
-  '@easykit/design@0.0.66':
-    resolution: {integrity: sha512-r4jYrgrh7ITdPgsD/49MGW8rdz0z8IGGCVoDl04Im3WB+hMBNOid3VUARvTovoAiEhMkanj/rj55HTzHwjSWZA==}
+  '@easykit/design@0.0.68':
+    resolution: {integrity: sha512-ribC1UBdAXyFHZaUcGmRPvK4B8jSYCsZ+WWD6NO/ZEVUxbAEvhtmLhwRRnXLRi81FL8r2a4NDR+8Ech6TALzow==}
 
   '@easykit/editor@0.0.14':
     resolution: {integrity: sha512-/dAQitaYvc/CEP4iXjAPJQWebT3UeFTAfUDCIOpgR0hYlZnnSvvAoYrJvcfFFwdcChjqGCKHYhXEgo+wWJwPWA==}
@@ -5894,7 +5894,7 @@ snapshots:
     transitivePeerDependencies:
       - debug
 
-  '@easykit/design@0.0.66(@types/react-dom@19.0.1)(@types/react@19.0.1)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)':
+  '@easykit/design@0.0.68(@types/react-dom@19.0.1)(@types/react@19.0.1)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)':
     dependencies:
       '@arco-iconbox/react-atom-ui': 0.0.4
       '@emotion/react': 11.11.4(@types/react@19.0.1)(react@19.0.0)

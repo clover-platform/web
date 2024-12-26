@@ -17,6 +17,7 @@ import { BranchAction } from "@/components/pages/worktop/control-bar/action/bran
 import {ReloadIcon} from "@radix-ui/react-icons";
 import bus from "@clover/public/events";
 import {ENTRY_RELOAD} from "@/events/worktop";
+import {ThemeSwitcher} from "@clover/public/components/common/theme-switcher";
 
 export const ControlBar = () => {
     const { module } = useParams();
@@ -87,6 +88,7 @@ export const ControlBar = () => {
                 <Action className={"!px-1.5 h-8 w-8"}>
                     <IconSetting className={"text-lg"} />
                 </Action>
+                <ThemeSwitcher size={"sm"} activeClassName={"bg-[rgba(31,30,36,0.08)] dark:bg-secondary"} />
             </div>
         </div>
         <MenuSheet
