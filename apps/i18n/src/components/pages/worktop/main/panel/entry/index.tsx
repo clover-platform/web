@@ -76,7 +76,7 @@ export const EntryPanel: FC<EntryPanelProps> = (props) => {
                                         {translated ? (verified ? iconCheck : iconTranslated) : iconNormal}
                                     </div>
                                 </div>
-                                <div className={"flex-1 w-0 flex-shrink-0 truncate"}>
+                                <div className={"flex-1 w-0 flex-shrink-0 truncate text-foreground text-sm pl-1"}>
                                     {entry.value}
                                 </div>
                             </div>

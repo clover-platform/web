@@ -35,7 +35,7 @@ export const BookLayout: FC<BookLayoutProps> = (origin) => {
                 id: "catalog",
                 title: <div className={"flex justify-center items-center"}>
                     <div className={"flex-1"}>{t("目录")}</div>
-                    <div className={"-mr-3 flex space-x-1"}>
+                    <div className={"-mr-3 flex space-x-1 text-foreground"}>
                         <AddPageAction className={"w-6 h-6 !p-0"} />
                         <ExpandAction
                             className={"w-6 h-6 !p-0"}

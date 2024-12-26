@@ -29,17 +29,17 @@ const MenuTitle: FC<MenuTitleProps> = (props) => {
 
     return <div
         onClick={() => router.push(`/wiki/book/${bookPath}/page/${id}`)}
-        className={"flex justify-start items-center pr-1 group w-full text-sm"}
+        className={"flex justify-start items-center group w-full text-sm"}
     >
         <div className={"flex-1 w-0 flex-shrink-0 truncate"}>{title}</div>
         <div className={classNames(
-            "hidden group-hover:flex space-x-1",
+            "hidden group-hover:flex text-foreground",
             moreOpen ? "!flex" : ""
         )}>
-            <AddPageAction parent={id} className={"w-6 h-6 !p-0"}/>
+            <AddPageAction parent={id} className={"w-6 h-6 !p-0 ml-1"}/>
             <MorePageAction
                 hasChildren={hasChildren}
-                onOpenChange={setMoreOpen} id={id} collected={collected} className={"w-6 h-6 !p-0"}
+                onOpenChange={setMoreOpen} id={id} collected={collected} className={"w-6 h-6 !p-0 ml-1"}
             />
         </div>
     </div>

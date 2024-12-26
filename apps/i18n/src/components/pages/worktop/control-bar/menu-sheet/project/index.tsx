@@ -1,23 +1,23 @@
 import {Command, CommandInput, CommandItem, CommandList, Input, Separator, Spin} from "@easykit/design";
 import {IconShare} from "@arco-iconbox/react-clover";
-import {useSearchParams} from "next/navigation";
+import {useParams, useSearchParams} from "next/navigation";
 import {useEffect, useState} from "react";
 import {all} from "@/rest/module";
 import { CheckIcon } from '@radix-ui/react-icons';
 import { t } from '@clover/public/locale';
 
 export const MenuProjectSheet = () => {
-    const search = useSearchParams();
-    const id = search.get("id");
+    const params = useParams();
+    const { module } = params;
     const [loading, setLoading] = useState(true);
     const [projects, setProjects] = useState<any>([]);
 
-    const switchProject = (id: number) => {
-        location.href = '?id=' + id;
+    const switchProject = (identifier: string) => {
+        location.href = `/i18n/${identifier}/worktop`;
     }
 
     const open = (url: string) => {
-        window.open(`/{#LANG#}/i18n/${url}/?id=${id}`, `_blank`);
+        window.open(`/i18n/${module}/${url}`, `_blank`);
     }
 
     const load = async () => {
@@ -65,10 +65,10 @@ export const MenuProjectSheet = () => {
                 </div> : <CommandList className={"p-0 mt-2"}>
                     {
                         projects.map((item: any) => {
-                            return <CommandItem key={item.id} onSelect={() => switchProject(item.id)}>
+                            return <CommandItem key={item.id} onSelect={() => switchProject(item.identifier)}>
                                 <div className={"flex justify-center items-center w-full"}>
                                     <span className={"flex-1"}>{`${item.name} [${item.identifier}]`}</span>
-                                    { item.id === Number(id) ? <CheckIcon /> : null }
+                                    { item.identifier === module ? <CheckIcon /> : null }
                                 </div>
                             </CommandItem>
                         })

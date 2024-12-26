@@ -16,7 +16,7 @@ export type MenuItemProps = {
 }
 
 export const MenuItem: FC<MenuItemProps> = (props) => {
-    return <Action onClick={props.onClick} active={props.active} className={"flex !px-1 !py-0.5 w-full justify-center items-center"}>
+    return <Action onClick={props.onClick} active={props.active} className={"flex !px-1 !py-0.5 w-full justify-start items-center"}>
         <div className={"h-8 w-9 flex justify-center items-center"}>{props.icon}</div>
         <div className={"flex-1 text-left"}>{props.label}</div>
     </Action>
@@ -40,7 +40,7 @@ export const MenuSheet: FC<MenuSheetProps> = (props) => {
             <SheetTitle />
             <SheetDescription />
             <button />
-            <div className={"w-32 border-r p-2 space-y-1"}>
+            <div className={"w-36 border-r p-2 space-y-1 flex-shrink-0"}>
                 <MenuItem
                     active={active === "project"}
                     onClick={() => setActive("project")}
