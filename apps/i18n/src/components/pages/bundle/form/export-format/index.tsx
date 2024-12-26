@@ -19,7 +19,7 @@ export const ExportFormat: FC<ExportFormatProps> = (props) => {
     const [value, setValue] = useState<ExportFormatValue>(v!);
     const [formats, setFormats] = useState<ExportFormatConfig[]>(getSupportedFormats().map(f => ({ ...f, config: f.configDefault})));
 
-    return <div className={"bg-white rounded-md border"}>
+    return <div className={"bg-white dark:bg-secondary rounded-md border"}>
         <RadioGroup
             value={value?.format}
             onValueChange={(v) => {
@@ -44,7 +44,7 @@ export const ExportFormat: FC<ExportFormatProps> = (props) => {
                             {format.icon}
                         </div>
                         <div className={"flex-1 ml-2"}>
-                            <div className={"text text-gray-800"}>{format.name}</div>
+                            <div className={"text"}>{format.name}</div>
                             <div className={"text-sm text-muted-foreground"}>{format.id}</div>
                         </div>
                         {

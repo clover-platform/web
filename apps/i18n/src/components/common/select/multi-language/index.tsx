@@ -1,4 +1,4 @@
-import { FC, HTMLAttributes, useState } from "react";
+import {FC, HTMLAttributes, useEffect, useState} from "react";
 import { Checkbox, CheckboxProps, Input, ScrollArea } from "@easykit/design";
 import classNames from "classnames";
 import { Action } from "@clover/public/components/common/action";
@@ -22,21 +22,13 @@ export type OptionProps = {
 type LangItemProps = OptionProps & Pick<CheckboxProps, any>;
 
 const LangItem: FC<LangItemProps> = (props) => {
-    const [idPrefix] = useState(Date.now());
-    const id = `${idPrefix}-${props.value}`;
-
-    return <div className={classNames(
+    return <label className={classNames(
         "rounded-sm h-8 flex items-center space-x-2 px-2",
         "hover:bg-muted"
     )}>
-        <Checkbox id={id} onCheckedChange={props.onCheckedChange} checked={props.checked} />
-        <label
-            htmlFor={id}
-            className="p-1 flex-1 peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-        >
-            { props.label }
-        </label>
-    </div>
+        <Checkbox onCheckedChange={props.onCheckedChange} checked={props.checked} />
+        <span className="p-1 flex-1 peer-disabled:cursor-not-allowed peer-disabled:opacity-70">{ props.label }</span>
+    </label>
 }
 
 type SelectedLangItemProps = HTMLAttributes<HTMLDivElement> & OptionProps;

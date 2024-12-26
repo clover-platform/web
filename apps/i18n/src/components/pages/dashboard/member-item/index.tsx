@@ -21,7 +21,7 @@ export const MemberItem: FC<MemberItemProps> = (props) => {
             fallbackClassName={"bg-[rgba(0,0,0,0.1)] uppercase font-bold"}
         />
         <div className={"flex-1 mx-3"}>
-            <div className={"text-lg text-black leading-none"}>{user.username}</div>
+            <div className={"text-lg leading-none"}>{user.username}</div>
             <div className={"text-muted-foreground"}>{user.email}</div>
         </div>
         { roles.map((role) => <Badge key={role} className={"mr-2"}>{TYPE_MAP[role]}</Badge>) }
