@@ -1,0 +1,14 @@
+.gantt-chart {
+    .gantt_container {
+        @apply border-none bg-background text-foreground;
+    }
+    .gantt_grid_scale {
+        @apply bg-background;
+    }
+    .gantt_task_scale {
+        @apply bg-background;
+    }
+    .gantt_task_row, .gantt_row {
+        @apply bg-background;
+    }
+}

@@ -36,10 +36,11 @@ export interface MainLayoutProps extends PropsWithChildren {
     sidebarProps?: SidebarProps;
     path?: PathProps[];
     className?: string;
+    container?: boolean;
 }
 
 export const MainLayout: FC<MainLayoutProps> = (props) => {
-    const { path, className } = props;
+    const { path, className, container = true } = props;
     const [teams] = useAtom(teamsState);
     const [isLogin] = useAtom(isLoginState);
     const open = useSidebarState();
@@ -106,7 +107,7 @@ export const MainLayout: FC<MainLayoutProps> = (props) => {
                     </Breadcrumb> : null
                 }
             </LayoutNavbar>
-            <div className={classNames("container p-4", className)}>{ props.children }</div>
+            <div className={classNames(container ? "container" : null, "p-4", className)}>{ props.children }</div>
         </div>
         <AdminLayoutLoading />
     </div>

@@ -1,4 +1,4 @@
-import { MainLayout as PublicMainLayout, PathProps } from "@clover/public/components/layout/main";
+import { MainLayout as PublicMainLayout, PathProps, MainLayoutProps as PublicMainLayoutProps } from "@clover/public/components/layout/main";
 import {FC, PropsWithChildren} from "react";
 import {getNavMenus} from "@clover/public/config/layout/main";
 import {useLayoutProps} from "@clover/public/components/layout/hooks/use.layout.props";
@@ -8,7 +8,7 @@ export type MainLayoutProps = {
     active?: string;
     path?: PathProps[];
     className?: string;
-} & PropsWithChildren;
+} & PublicMainLayoutProps;
 
 export const MainLayout: FC<MainLayoutProps> = (origin) => {
     const props = useLayoutProps<MainLayoutProps>(origin);

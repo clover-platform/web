@@ -10,8 +10,9 @@
         "lint": "next lint",
         "i18n": "i18n-cli"
     },
-    "dependencies": {},
-    "devDependencies": {},
+    "dependencies": {
+        "dhtmlx-gantt": "^9.0.3"
+    },
     "postcss": {
         "plugins": {
             "tailwindcss": {},
