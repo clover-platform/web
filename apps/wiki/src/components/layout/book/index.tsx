@@ -8,6 +8,7 @@ import {CatalogTree, CatalogTreeRef} from "@/components/layout/book/catalog";
 import {AddPageAction} from "@/components/layout/book/page-actions/add";
 import {ExpandAction} from "@/components/layout/book/page-actions/expand";
 import { t } from '@clover/public/locale';
+import {AiChat} from "@/components/layout/book/ai-chat";
 
 export type BookLayoutProps = {
     active?: string;
@@ -85,5 +86,6 @@ export const BookLayout: FC<BookLayoutProps> = (origin) => {
         ]}
     >
         {props.children }
+        <AiChat />
     </PublicMainLayout>
 }
