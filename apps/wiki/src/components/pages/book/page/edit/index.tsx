@@ -52,11 +52,13 @@ export const EditPage: FC<EditPageProps> = (props) => {
 
     const submit = useCallback(async () => {
         setPending(true);
+        const html = editorRef.current?.editor?.getHTML();
         const {success, message} = await save({
             bookPath,
             id: pageId!,
             title,
             content: value,
+            html: html?.replace(/\s*data-id\s*=\s*"[^"]*"/g, ''),
             newVersion: true,
         });
         setPending(false);

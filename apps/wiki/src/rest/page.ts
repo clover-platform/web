@@ -33,6 +33,7 @@ export type SavePageData = {
     id: number;
     title: string;
     content: string;
+    html?: string;
     newVersion?: boolean;
 }
 export const save = (data: SavePageData): AbortPromise<RestResult<number>> =>
