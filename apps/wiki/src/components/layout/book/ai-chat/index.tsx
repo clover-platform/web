@@ -87,7 +87,7 @@ export const AiChat = () => {
             </div>
             <div className={"flex-1 w-full flex-shrink-0 h-0"}>
                 <ScrollArea className="h-full w-full">
-                    <div className={"px-md py-sm space-y-2"}>
+                    <div className={"px-md py-sm space-y-2 break-all"}>
                         { messages.map((item) => <Message key={item.id} {...item}/>)}
                     </div>
                 </ScrollArea>

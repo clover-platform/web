@@ -38,7 +38,6 @@ export const BookPage: FC<BookPageProps> = (props) => {
             onSuccess={(content) => {
                 setHomeContent(content);
                 setEditing(false);
-                router.refresh(); // 刷新页面缓存
             }}
             onCancel={() => setEditing(false)}
         />

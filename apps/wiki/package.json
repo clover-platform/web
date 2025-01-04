@@ -11,7 +11,7 @@
         "i18n": "i18n-cli"
     },
     "dependencies": {
-        "@easykit/editor": "0.0.14"
+        "@easykit/editor": "0.0.15"
     },
     "postcss": {
         "plugins": {

@@ -90,7 +90,6 @@ export const DetailPage: FC<DetailPageProps> = (props) => {
                 <CollectAction id={Number(pageId)} collected={detail?.collected!}/>
                 <Action onClick={() =>{
                     router.push(`/wiki/book/${bookPath}/page/${pageId}/edit`);
-                    router.refresh();
                 }}>
                     <Pencil1Icon/>
                 </Action>
