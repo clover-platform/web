@@ -6,4 +6,5 @@ export type Message = {
     content: string;
     status: "sending" | "sent" | "failed";
     time: number|string|Date|dayjs.Dayjs;
+    request?: string;
 }

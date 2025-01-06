@@ -1,14 +1,26 @@
 import {Message as MessageData} from "@/types/chat";
-import {FC} from "react";
+import {FC, useEffect} from "react";
 import Markdown from "react-markdown";
 import {IconAI, IconUser} from "@arco-iconbox/react-clover";
-import {Spin, time, Tooltip} from "@easykit/design";
+import {Spin, time} from "@easykit/design";
 import classNames from "classnames";
+import {SendCallback} from "@clover/public/hooks/use.sse";
 
-export type MessageProps = MessageData;
+export type MessageProps = MessageData & {
+    send: SendCallback;
+};
 
 export const Message: FC<MessageProps> = (props) => {
-    const { content, time: timeData, role, status } = props;
+    const { content, time: timeData, role, status, request, send } = props;
+
+    useEffect(() => {
+        if(role === "bot" && request && send) {
+            send({content: request}, (data) => {
+                console.log(data);
+            })
+        }
+    }, [role, request, send]);
+
     return <div className={classNames(
         "flex justify-center items-start",
         role === "user" ? "flex-row-reverse ml-2xl" : "flex-row mr-2xl"
