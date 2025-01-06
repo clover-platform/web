@@ -1,64 +1,82 @@
-import {useCallback, useState} from "react";
+import {useCallback, useRef, useState} from "react";
 import {getToken} from "@clover/public/utils/token";
 
 export type SseProps = {
     url: string;
 }
 
-export type SendCallback = (data: any, onMessage: (data: string) => void) => void;
+export type SendEvent = {
+    onMessage?: (data: string) => void;
+    onError?: (error: Error) => void;
+    onClose?: () => void;
+}
+export type SendCallback = (data: any, events?: SendEvent) => void;
 
-async function fetchSSE(url: string, options: any) {
-    const { headers = {}, body, method = 'POST' } = options;
-
-    const response = await fetch(url, {
-        method,
-        headers: {
-            ...headers,
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(body),
-    });
-
-    if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-    }
-
-    // 处理 SSE 流
-    const reader = response.body?.getReader();
-    const decoder = new TextDecoder('utf-8');
-
-    let buffer = '';
-
-    while (true) {
-        const { done, value } = await reader?.read()!;
-        if (done) break;
-
-        buffer += decoder.decode(value, { stream: true });
-
-        // 处理 SSE 数据块
-        let lines = buffer.split('\n');
-        buffer = lines.pop()!; // 保留未完成的数据块
-
-        for (const line of lines) {
-            if (line.startsWith('data:')) {
-                console.log(line.replace('data:', ''));
-            }
-        }
-    }
+export type SseResult = {
+    send: SendCallback;
+    abort: () => void;
+    sending: boolean;
+    loading: boolean;
 }
 
-export const useSse = (props: SseProps): [SendCallback, boolean] => {
+export const useSse = (props: SseProps): SseResult => {
     const [loading, setLoading] = useState(false);
+    const [sending, setSending] = useState(false);
+    const controllerRef = useRef<AbortController>(null);
 
-    const send = useCallback<SendCallback>(async (params: any, onMessage: (data: string) => void) => {
+    const send = useCallback<SendCallback>(async (params, events) => {
+        const {onClose, onMessage, onError} = events || {};
         const token = await getToken();
-        await fetchSSE(`${process.env.NEXT_PUBLIC_API_URL || ""}${props.url}`, {
-            headers: {
-                Authorization: `Bearer ${token?.token}`,
-            },
-            body: params,
-        });
-    }, []);
 
-    return [send, loading];
+        setSending(true);
+        controllerRef.current = new AbortController();
+        const signal = controllerRef.current.signal;
+        const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL || ""}${props.url}`, {
+            method: "POST",
+            headers: {
+                 Authorization: `Bearer ${token?.token}`,
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(params),
+            signal,
+        });
+        setSending(false);
+
+        if (!response.ok) {
+            onError?.(new Error(`HTTP error! status: ${response.status}`));
+            return;
+        }
+
+        // 处理 SSE 流
+        setLoading(true);
+        const reader = response.body?.getReader();
+        const decoder = new TextDecoder('utf-8');
+
+        let buffer = '';
+
+        while (true) {
+            const { done, value } = await reader?.read()!;
+            if (done) break;
+
+            buffer += decoder.decode(value, { stream: true });
+
+            // 处理 SSE 数据块
+            let lines = buffer.split('\n');
+            buffer = lines.pop()!; // 保留未完成的数据块
+
+            for (const line of lines) {
+                if (line.startsWith('data:')) {
+                    onMessage?.(line.replace('data:', ''));
+                }
+            }
+        }
+        setLoading(false);
+        onClose?.();
+    }, [controllerRef]);
+
+    const abort = useCallback(() => {
+        controllerRef.current?.abort();
+    }, [controllerRef]);
+
+    return {send, abort, sending, loading};
 }

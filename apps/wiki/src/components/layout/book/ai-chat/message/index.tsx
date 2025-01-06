@@ -1,22 +1,33 @@
 import {Message as MessageData} from "@/types/chat";
-import {FC, useEffect} from "react";
+import {FC, useEffect, useState} from "react";
 import Markdown from "react-markdown";
 import {IconAI, IconUser} from "@arco-iconbox/react-clover";
 import {Spin, time} from "@easykit/design";
 import classNames from "classnames";
-import {SendCallback} from "@clover/public/hooks/use.sse";
+import {SendCallback, useSse} from "@clover/public/hooks/use.sse";
 
-export type MessageProps = MessageData & {
-    send: SendCallback;
-};
+export type MessageProps = MessageData;
 
 export const Message: FC<MessageProps> = (props) => {
-    const { content, time: timeData, role, status, request, send } = props;
+    const {
+        time: timeData, role, request
+    } = props;
+    const { send, abort, sending, loading } = useSse({
+        url: "/api/wiki/ai/chat",
+    })
+    const [content, setContent] = useState<string>(props.content);
 
     useEffect(() => {
         if(role === "bot" && request && send) {
-            send({content: request}, (data) => {
-                console.log(data);
+            let data = "";
+            send({content: request}, {
+                onMessage: (msg) => {
+                    const d = JSON.parse(msg).data;
+                    data += d;
+                    setContent(data);
+                },
+                onClose: () => {
+                }
             })
         }
     }, [role, request, send]);
@@ -40,7 +51,7 @@ export const Message: FC<MessageProps> = (props) => {
                 "py-xs leading-6",
                 role === "user" ? "ml-xs bg-secondary px-sm rounded-sm text-foreground" : ""
             )}>
-                { status === "sending" ? <div className={"h-6 leading-6 flex items-center"}><Spin /></div> : <div className={"markdown-body"}><Markdown>{content}</Markdown></div> }
+                { sending ? <div className={"h-6 leading-6 flex items-center"}><Spin /></div> : <div className={"markdown-body"}><Markdown>{content}</Markdown></div> }
             </div>
             <div className={"opacity-50 text-sm"}>{time(timeData)}</div>
         </div>

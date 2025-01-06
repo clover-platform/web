@@ -18,9 +18,6 @@ export const AiChat = () => {
     const [messages, setMessages] = useAtom(messagesState);
     const [visible, setVisible] = useState(false);
     const [message, setMessage] = useState("");
-    const [ send, loading ] = useSse({
-        url: "/api/wiki/ai/chat",
-    })
 
     useEffect(() => {
         setMessages([
@@ -29,7 +26,6 @@ export const AiChat = () => {
                 role: "bot",
                 content: tt("你好，我是知识库文档助手，需要帮助吗？"),
                 time: dayjs(),
-                status: "sent",
             },
         ])
     }, [])
@@ -43,14 +39,12 @@ export const AiChat = () => {
                     role: "user",
                     content: message,
                     time: dayjs(),
-                    status: "sent",
                 },
                 {
                     id: uuid(),
                     role: "bot",
                     content: "Thinking...",
                     time: dayjs(),
-                    status: "sending",
                     request: message
                 }
             ];
@@ -74,14 +68,14 @@ export const AiChat = () => {
             <div className={"flex-1 w-full flex-shrink-0 h-0"}>
                 <ScrollArea className="h-full w-full">
                     <div className={"px-md py-sm space-y-2 break-all"}>
-                        { messages.map((item) => <Message key={item.id} {...item} send={send}/>)}
+                        { messages.map((item) => <Message key={item.id} {...item} />) }
                     </div>
                 </ScrollArea>
             </div>
             <div className={"w-full px-md py-sm border-t flex justify-center items-center space-x-2"}>
                 <Input value={message} onChange={(e) => setMessage(e.target.value)} className={"flex-1"} />
-                <Action disabled={loading} onClick={sendMessage}>
-                    { loading ? <Spin /> : <IconSend /> }
+                <Action onClick={sendMessage}>
+                    <IconSend />
                 </Action>
             </div>
         </div>
