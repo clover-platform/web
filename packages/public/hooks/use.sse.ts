@@ -40,9 +40,8 @@ async function fetchSSE(url: string, options: any) {
         buffer = lines.pop()!; // 保留未完成的数据块
 
         for (const line of lines) {
-            if (line.startsWith('data: ')) {
-                const data = line.slice(6);
-                console.log('收到数据:', data);
+            if (line.startsWith('data:')) {
+                console.log(line.replace('data:', ''));
             }
         }
     }
