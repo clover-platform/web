@@ -13,6 +13,7 @@ import bus from "@clover/public/events";
 import {UPDATE_TITLE} from "@/events/book";
 import classNames from "classnames";
 import {CollectAction} from "@/components/pages/book/page/actions/collect";
+import {AiWriter} from "@/components/common/editor/ai/extensions";
 
 export type EditPageProps = {
     detail: PageDetail
@@ -117,6 +118,36 @@ export const EditPage: FC<EditPageProps> = (props) => {
                 value={value}
                 onChange={setValue}
                 onCreate={onCreate}
+                extensions={[
+                    AiWriter,
+                ]}
+                slashCommandProps={{
+                    groups: [
+                        {
+                            name: 'ai',
+                            title: "AI",
+                            position: "start",
+                            commands: [
+                                {
+                                    name: 'aiWriter',
+                                    label: "AI Writer",
+                                    iconName: 'Sparkles',
+                                    description: "Generate text with AI",
+                                    shouldBeHidden: editor => editor.isActive('columns'),
+                                    action: editor => editor.chain().focus().setAiWriter().run(),
+                                },
+                                {
+                                    name: 'aiImage',
+                                    label: "AI Image",
+                                    iconName: 'Sparkles',
+                                    description: "Generate image with AI",
+                                    shouldBeHidden: editor => editor.isActive('columns'),
+                                    action: editor => editor.chain().focus()//.setAiImage().run(),
+                                },
+                            ],
+                        },
+                    ]
+                }}
             />
         </div>
     </div>

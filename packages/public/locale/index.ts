@@ -6,11 +6,11 @@ export type LangItem = {
 }
 
 export const changeLanguage = async (locale: string) => {
-    await i18next.changeLanguage(locale);
+    await i18next?.changeLanguage(locale);
 }
 
 export const t = (key: string) => {
-    return i18next.t(key, { ns: "common" });
+    return i18next?.t(key, { ns: "common" });
 }
 
 export const tt = t;

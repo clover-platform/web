@@ -247,8 +247,15 @@ importers:
   apps/wiki:
     dependencies:
       '@easykit/editor':
-        specifier: 0.0.15
-        version: 0.0.15(@types/react-dom@19.0.1)(@types/react@19.0.1)(highlight.js@11.9.0)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
+        specifier: 0.0.16
+        version: 0.0.16(@types/react-dom@19.0.1)(@types/react@19.0.1)(highlight.js@11.9.0)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
+    devDependencies:
+      '@tiptap/core':
+        specifier: 2.9.1
+        version: 2.9.1(@tiptap/pm@2.9.1)
+      '@tiptap/react':
+        specifier: 2.9.1
+        version: 2.9.1(@tiptap/core@2.9.1(@tiptap/pm@2.9.1))(@tiptap/pm@2.9.1)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
 
   packages/i18n-cli:
     dependencies:
@@ -357,6 +364,8 @@ packages:
 
   '@arco-iconbox/react-atom-ui@0.0.4':
     resolution: {integrity: sha512-gYBxZRGfVNcGrJu3MGYK6Xtgf9m+oobn/OL8QnqmI6/2zv6JmWwccI+4fMtvDfeh5U7sgfyK9wYh1ftn95Wlpg==}
+    peerDependencies:
+      react: 19.0.0
 
   '@arco-iconbox/react-clover@0.0.31':
     resolution: {integrity: sha512-PUSjpwc0TS2BHAOiBG5+gVq7rkngGYmQej1O+vRkiExGBzLq3m8nD9XU2+BPd7/NMsvPLLhpHF5jrG+OpX+yIA==}
@@ -473,8 +482,8 @@ packages:
   '@easykit/design@0.0.69':
     resolution: {integrity: sha512-pWxdBumPctmQQHy7vFC1X+jlTLSDWYCALG3zK6pg72QmkFyqkhxueip+2+l6iJ7Jyy92iFL7A4EEL2hMKLlsqQ==}
 
-  '@easykit/editor@0.0.15':
-    resolution: {integrity: sha512-id4m+ozbgNE0iLoOHIz6heB63MdbwvshSnfgGDO4SVEz1nVngIKzX7GNQv0T1WYbEPL7PSF82H5AO06qHf29ig==}
+  '@easykit/editor@0.0.16':
+    resolution: {integrity: sha512-+d2A08bLiMFmcigkOgibMDx/I+rxgjcB0vei9twksatee542u0wfo9eiayZqGKks6JgxKhjK2XmMlnx5IKZ2kw==}
 
   '@easykit/eslint-config@0.0.1':
     resolution: {integrity: sha512-b7oZhdpdp3LxHQmqdhZ0SNaqL0/6xlpgoLaSXEYLUS+ikXmGpIloW2GkwmTpMDATPUaKDyKTDnJ/Jv4WrjOnYQ==}
@@ -6072,7 +6081,9 @@ snapshots:
       '@jridgewell/gen-mapping': 0.3.5
       '@jridgewell/trace-mapping': 0.3.25
 
-  '@arco-iconbox/react-atom-ui@0.0.4': {}
+  '@arco-iconbox/react-atom-ui@0.0.4(react@19.0.0)':
+    dependencies:
+      react: 19.0.0
 
   '@arco-iconbox/react-clover@0.0.31(react@19.0.0)':
     dependencies:
@@ -6224,7 +6235,7 @@ snapshots:
 
   '@easykit/design@0.0.69(@types/react-dom@19.0.1)(@types/react@19.0.1)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)':
     dependencies:
-      '@arco-iconbox/react-atom-ui': 0.0.4
+      '@arco-iconbox/react-atom-ui': 0.0.4(react@19.0.0)
       '@emotion/react': 11.11.4(@types/react@19.0.1)(react@19.0.0)
       '@hookform/resolvers': 3.7.0(react-hook-form@7.52.1(react@19.0.0))
       '@radix-ui/react-alert-dialog': 1.1.2(@types/react-dom@19.0.1)(@types/react@19.0.1)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
@@ -6282,7 +6293,7 @@ snapshots:
       - supports-color
       - ts-node
 
-  '@easykit/editor@0.0.15(@types/react-dom@19.0.1)(@types/react@19.0.1)(highlight.js@11.9.0)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)':
+  '@easykit/editor@0.0.16(@types/react-dom@19.0.1)(@types/react@19.0.1)(highlight.js@11.9.0)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)':
     dependencies:
       '@radix-ui/react-dropdown-menu': 2.1.1(@types/react-dom@19.0.1)(@types/react@19.0.1)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
       '@radix-ui/react-popover': 1.1.1(@types/react-dom@19.0.1)(@types/react@19.0.1)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
