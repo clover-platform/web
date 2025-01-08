@@ -11,11 +11,13 @@
         "i18n": "i18n-cli"
     },
     "dependencies": {
-        "@easykit/editor": "0.0.16"
+        "@easykit/editor": "0.0.16",
+        "markdown-it": "14.1.0"
     },
     "devDependencies": {
         "@tiptap/core": "2.9.1",
-        "@tiptap/react": "2.9.1"
+        "@tiptap/react": "2.9.1",
+        "@types/markdown-it": "14.1.2"
     },
     "postcss": {
         "plugins": {

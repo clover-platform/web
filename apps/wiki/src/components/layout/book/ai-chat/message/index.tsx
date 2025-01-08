@@ -1,10 +1,12 @@
 import {Message as MessageData} from "@/types/chat";
-import {FC, useEffect, useState} from "react";
-import Markdown from "react-markdown";
+import {FC, useEffect, useMemo, useState} from "react";
 import {IconAI, IconUser} from "@arco-iconbox/react-clover";
 import {Spin, time} from "@easykit/design";
 import classNames from "classnames";
-import {SendCallback, useSse} from "@clover/public/hooks/use.sse";
+import {useSse} from "@clover/public/hooks/use.sse";
+import MarkdownIt from "markdown-it";
+
+const md = new MarkdownIt();
 
 export type MessageProps = MessageData;
 
@@ -32,6 +34,8 @@ export const Message: FC<MessageProps> = (props) => {
         }
     }, [role, request, send]);
 
+    const html = useMemo(() => md.render(content), [content])
+
     return <div className={classNames(
         "flex justify-center items-start",
         role === "user" ? "flex-row-reverse ml-2xl" : "flex-row mr-2xl"
@@ -51,7 +55,7 @@ export const Message: FC<MessageProps> = (props) => {
                 "py-xs leading-6",
                 role === "user" ? "ml-xs bg-secondary px-sm rounded-sm text-foreground" : ""
             )}>
-                { sending ? <div className={"h-6 leading-6 flex items-center"}><Spin /></div> : <div className={"markdown-body"}><Markdown>{content}</Markdown></div> }
+                { sending ? <div className={"h-6 leading-6 flex items-center"}><Spin /></div> : <div className={"markdown-body"} dangerouslySetInnerHTML={{__html: html}}/> }
             </div>
             <div className={"opacity-50 text-sm"}>{time(timeData)}</div>
         </div>

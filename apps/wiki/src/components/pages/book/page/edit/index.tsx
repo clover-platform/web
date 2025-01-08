@@ -3,7 +3,7 @@
 import {useLayoutConfig} from "@clover/public/components/layout/hooks/use.layout.config";
 import {BookLayoutProps} from "@/components/layout/book";
 import {useRouter} from "next/navigation";
-import {i18n, t} from '@clover/public/locale';
+import {i18n, t, tt} from '@clover/public/locale';
 import {PageDetail, PageProps} from "@/types/pages/page";
 import {FC, useCallback, useEffect, useRef, useState, use} from "react";
 import {Editor, EditorRef, EditorEvents} from "@easykit/editor";
@@ -130,19 +130,11 @@ export const EditPage: FC<EditPageProps> = (props) => {
                             commands: [
                                 {
                                     name: 'aiWriter',
-                                    label: "AI Writer",
+                                    label: tt("生成文本"),
                                     iconName: 'Sparkles',
-                                    description: "Generate text with AI",
+                                    description: tt("使用 AI 生成文本"),
                                     shouldBeHidden: editor => editor.isActive('columns'),
                                     action: editor => editor.chain().focus().setAiWriter().run(),
-                                },
-                                {
-                                    name: 'aiImage',
-                                    label: "AI Image",
-                                    iconName: 'Sparkles',
-                                    description: "Generate image with AI",
-                                    shouldBeHidden: editor => editor.isActive('columns'),
-                                    action: editor => editor.chain().focus()//.setAiImage().run(),
                                 },
                             ],
                         },

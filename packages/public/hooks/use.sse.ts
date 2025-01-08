@@ -76,6 +76,8 @@ export const useSse = (props: SseProps): SseResult => {
 
     const abort = useCallback(() => {
         controllerRef.current?.abort();
+        setLoading(false);
+        setSending(false);
     }, [controllerRef]);
 
     return {send, abort, sending, loading};
