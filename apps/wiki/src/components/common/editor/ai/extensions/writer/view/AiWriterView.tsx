@@ -23,7 +23,11 @@ export const AiWriterView: FC<AiWriterViewProps> = (props) => {
     const sendPrompt = useCallback(() => {
         setResult("");
         let data = "";
-        send({content: prompt}, {
+        send({
+            type: "writer",
+            content: prompt,
+            data: editor.getHTML()
+        }, {
             onMessage: (msg) => {
                 const d = JSON.parse(msg).data;
                 data += d;

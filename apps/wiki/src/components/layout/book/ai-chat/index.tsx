@@ -12,7 +12,6 @@ import {Message as MessageData} from "@/types/chat";
 import {Cross1Icon} from "@radix-ui/react-icons";
 import {tt} from "@clover/public/locale";
 import "./style.scss";
-import {useSse} from "@clover/public/hooks/use.sse";
 
 export const AiChat = () => {
     const [messages, setMessages] = useAtom(messagesState);

@@ -19,12 +19,18 @@ export type SseResult = {
     loading: boolean;
 }
 
+export type ChatParams = {
+    content: string;
+    type: "chat" | "writer";
+    data?: string;
+}
+
 export const useSse = (props: SseProps): SseResult => {
     const [loading, setLoading] = useState(false);
     const [sending, setSending] = useState(false);
     const controllerRef = useRef<AbortController>(null);
 
-    const send = useCallback<SendCallback>(async (params, events) => {
+    const send = useCallback<SendCallback>(async (params: ChatParams, events) => {
         const {onClose, onMessage, onError} = events || {};
         const token = await getToken();
 

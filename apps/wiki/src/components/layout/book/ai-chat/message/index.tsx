@@ -22,7 +22,10 @@ export const Message: FC<MessageProps> = (props) => {
     useEffect(() => {
         if(role === "bot" && request && send) {
             let data = "";
-            send({content: request}, {
+            send({
+                content: request,
+                type: "chat"
+            }, {
                 onMessage: (msg) => {
                     const d = JSON.parse(msg).data;
                     data += d;
