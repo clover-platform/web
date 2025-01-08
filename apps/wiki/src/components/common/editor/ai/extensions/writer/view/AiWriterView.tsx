@@ -1,6 +1,6 @@
 import { NodeViewWrapper, NodeViewProps } from '@tiptap/react'
 import {FC, useCallback, useMemo, useState} from "react";
-import {Button, Card, Textarea} from "@easykit/design";
+import {Button, Card, ScrollArea, Textarea} from "@easykit/design";
 import {tt} from "@clover/public/locale";
 import {useSse} from "@clover/public/hooks/use.sse";
 import MarkdownIt from 'markdown-it';
@@ -51,7 +51,9 @@ export const AiWriterView: FC<AiWriterViewProps> = (props) => {
             {
                 result ? <>
                     <div className={"opacity-50 font-bold text-sm"}>{tt("预览")}</div>
-                    <div className={"markdown-body"} dangerouslySetInnerHTML={{__html: html}}></div>
+                    <ScrollArea className={"markdown-body"}>
+                        <div className={"max-h-64"} dangerouslySetInnerHTML={{__html: html}} />
+                    </ScrollArea>
                 </> : null
             }
             <div className={"opacity-50 font-bold text-sm"}>{tt("提示词")}</div>
@@ -63,13 +65,13 @@ export const AiWriterView: FC<AiWriterViewProps> = (props) => {
                 />
             </div>
             <div className={"flex justify-end space-x-2"}>
-                <Button onClick={cancel} variant={"destructive"}>{tt("取消")}</Button>
+                <Button onClick={cancel} variant={"secondary"}>{tt("取消")}</Button>
                 {
                     loading || sending ? <>
-                        <Button onClick={abort}>{tt("停止生成")}</Button>
+                        <Button variant={"outline"} onClick={abort}>{tt("停止生成")}</Button>
                     </> : <>
                         { result ? <Button onClick={insert} variant={"secondary"}>{tt("插入")}</Button> : null }
-                        <Button onClick={sendPrompt}>{result ? tt("重新生成") : tt("生成文本")}</Button>
+                        <Button variant={"outline"} onClick={sendPrompt}>{result ? tt("重新生成") : tt("生成文本")}</Button>
                     </>
                 }
             </div>
