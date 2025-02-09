@@ -1,5 +1,5 @@
 import { useAtom } from "jotai";
-import { loadingState } from "@clover/public//components/layout/main/state";
+import { loadingState } from "@clover/public/components/layout/main-v1/state";
 import { useRef } from "react";
 import { useFetchIntercept } from "@clover/public/hooks/use.fetch.intercept";
 

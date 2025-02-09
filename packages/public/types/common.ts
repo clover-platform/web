@@ -71,4 +71,5 @@ declare module '@arco-iconbox/react-clover' {
     export const IconTeam: IconProps;
     export const IconAIChatFill: IconProps;
     export const IconAI: IconProps;
+    export const IconApps: IconProps;
 }

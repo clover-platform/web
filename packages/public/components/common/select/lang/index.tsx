@@ -22,7 +22,7 @@ export const LangSelect: FC<LangSelectProps> = (props) => {
     return <Select
         value={locale}
         options={options}
-        className={classNames("w-auto px-2 py-1 h-auto", className)}
+        className={classNames("w-auto px-2 py-1 h-8", className)}
         align={"end"}
         onChange={(value) => {
             if(locale !== value) {

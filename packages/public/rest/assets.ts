@@ -14,5 +14,5 @@ export type PreSignResult = RestResult<{
     url: string;
 }>
 
-export const preSign = async (data: PreSignData): Promise<PreSignResult> =>
-    post(`@assets/oss/file/pre-sign`, data);
+export const preSign = (data: PreSignData) =>
+    post<PreSignResult, PreSignData>(`@assets/oss/file/pre-sign`, data);

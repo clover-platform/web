@@ -18,8 +18,11 @@ export const clearToken = () => {
 
 export const getToken = async (cookies?: any): Promise<Token | null> => {
     const token = await getCookie('token', {cookies});
+    let tokenData = null;
     if(token) {
-        return JSON.parse(token);
+        try{
+            tokenData = JSON.parse(token);
+        } catch (e) {}
     }
-    return null;
+    return tokenData;
 }

@@ -1,4 +1,4 @@
-import { CardButton } from "@clover/public/components/layout/main/guide/card-button";
+import { CardButton } from "@clover/public/components/layout/main-v1/guide/card-button";
 import { IconCreateTeam, IconJoinTeam } from "@arco-iconbox/react-clover";
 import { useAlert } from "@easykit/design";
 import { FC } from "react";

@@ -29,6 +29,12 @@ const BUTTON_SIZE = {
     lg: "w-10 h-10"
 }
 
+const CONTAINER_SIZE = {
+    sm: "h-8",
+    md: "h-10",
+    lg: "h-12"
+}
+
 const ICON_SIZE = {
     sm: "text-sm",
     md: "text-md",
@@ -49,7 +55,7 @@ export const ThemeSwitcher: FC<ThemeSwitcherProps> = (props) => {
         setMounted(true)
     }, [])
 
-    return <div className={"border rounded-full p-1 flex"} key={`switcher-${mounted}`}>
+    return <div className={classNames("border rounded-full px-1 flex items-center", CONTAINER_SIZE[size])} key={`switcher-${mounted}`}>
         {
             themes.map((item) => {
                 const Icon = item.icon;

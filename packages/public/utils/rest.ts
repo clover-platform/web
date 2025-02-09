@@ -1,36 +1,23 @@
-import Axios, {AxiosRequestConfig} from 'axios';
+import Axios, {AxiosHeaders, AxiosResponse} from 'axios';
+import type { AxiosRequestConfig } from 'axios';
 const CancelToken = Axios.CancelToken;
-const ERROR_MESSAGE = "Network Error";
-const ERROR_CODE = -999;
+
+export type RestResult<T> = {
+  success?: boolean;
+  code?: number;
+  message?: string;
+  data?: T;
+}
+
+export type CancellablePromise<T> = Promise<T> & { cancel: () => void };
 
 export type RestConfig = {
     useTransId?: boolean;
-    onResponse?: (data: any, response: any) => void;
-}
-export type RestRequestConfig = AxiosRequestConfig & {
-    fileName?: string;
-    trailingSlash?: boolean;
-    needLogin?: boolean;
+    onResponse?: (data: RestResult<any>, response: AxiosResponse) => void;
 }
 
-export type AbortPromise<T> = Promise<T> & {
-    _url: string;
-    abort: () => void;
-}
-
-export type AliasConfig = {
-    url: string;
-    headers?: () => any;
-}
-
-let _aliasMap: Record<string, AliasConfig> = {};
 let _config: RestConfig = {};
-let _currentQueueId = `${Date.now()}`;
-const _requestQueue: Record<string, AbortPromise<any>[]> = {};
-
-_requestQueue[_currentQueueId] = [];
-
-const rest = Axios.create({
+const instance = Axios.create({
     timeout: 30000,
     headers: {
         post: {
@@ -40,8 +27,9 @@ const rest = Axios.create({
     withCredentials: true,
     baseURL: process.env.NEXT_PUBLIC_API_URL || "",
 });
+let aliasMap: Record<string, any> = {};
 
-rest.interceptors.response.use(
+instance.interceptors.response.use(
     (response) => {
         const { config } = response;
         if(config && config.responseType && config.responseType === 'blob' && response.data.type !== 'application/json') {
@@ -56,180 +44,118 @@ rest.interceptors.response.use(
     }
 );
 
-// 响应拦截器
-rest.interceptors.response.use(
-    (response) => {
-        const { onResponse } = _config;
-        let data = {
-            code: response.status,
-            success: false,
-            message: ERROR_MESSAGE,
-        };
-        if ([200, 201].includes(response.status)) {
-            data = response.data;
-        }
-        if (typeof onResponse === 'function') {
-            onResponse(data, response);
-        }
-        return data as any;
-    },
-    (error) => {
-        const { onResponse } = _config;
-        let result = {
-            code: 500,
-            success: false,
-            message: error.code,
-        };
-        if (error.response && error.response.status) {
-            result.code = error.response.status;
-            if(error.response.data) {
-                result = error.response.data;
-            }
-        }
-        if (typeof onResponse === 'function') {
-            onResponse(result, error.response);
-        }
-        return Promise.reject(result);
-    },
-);
+const handleResponse = (data: RestResult<any>, response: AxiosResponse) => {
+    const { onResponse } = _config;
+    if (typeof onResponse === 'function') {
+        onResponse(data, response);
+    }
+    return data;
+}
 
-const _handleUrl = (url: string) => {
-    Object.keys(_aliasMap).forEach((key) => {
-        const config = _aliasMap[key];
-        url = url.replace(key, config.url);
+const handleUrl = (url?: string) => {
+    if(!url) return url;
+    Object.keys(aliasMap).forEach((key) => {
+        const config = aliasMap[key];
+        url = url?.replace(key, config.url);
     });
     return url;
 };
 
-const _handleHeaders = async (headers: any) => {
+const handleHeaders = (headers?: AxiosHeaders) => {
     const result = {
         ...(headers || {}),
         timezone: - (new Date().getTimezoneOffset() / 60)
     };
     const aliasHeaders = {};
-    const keys = Object.keys(_aliasMap);
-    for(let key of keys) {
-        const config = _aliasMap[key];
+    Object.keys(aliasMap).forEach((key) => {
+        const config = aliasMap[key];
         const { headers } = config;
         if (typeof headers === 'function') {
-            Object.assign(aliasHeaders, await headers() || {});
+            Object.assign(aliasHeaders, headers() || {});
         } else {
             Object.assign(aliasHeaders, headers || {});
         }
-    }
+    });
     Object.assign(aliasHeaders, result);
     return aliasHeaders;
 };
 
-const alias = (map: any) => {
-    // 合并 map 到 _aliasMap
-    _aliasMap = {
-        ..._aliasMap,
-        ...(map || {}),
-    };
-};
-
-const config = (config: RestConfig) => {
-    _config = config;
-};
-
-const pushQueue = (requestPromise: any) => {
-    _requestQueue[_currentQueueId].push(requestPromise);
-}
-
-function request<T> (config: RestRequestConfig): AbortPromise<T> {
-    const { url, headers } = config;
+export function request<T>(config: AxiosRequestConfig): CancellablePromise<RestResult<T>> {
+    const { url, headers, ...rest } = config;
     const source = CancelToken.source();
-    const p = new Promise<T>((resolve) => {
-        if(url) {
-            _handleHeaders(headers).then((headers) => {
-                rest({
-                    ...config,
-                    url: _handleUrl(url),
-                    headers,
-                    cancelToken: source.token
-                }).then((res) => {
-                    resolve(res as any);
-                }).catch((err) => {
-                    resolve(err);
-                });
-            })
-        }else{
-            const result = {
-                code: ERROR_CODE,
+    const promise = new Promise<RestResult<T>>((resolve) => {
+        instance.request<RestResult<T>>({
+            ...rest,
+            url: handleUrl(url),
+            headers: handleHeaders(headers as AxiosHeaders),
+            cancelToken: source.token,
+        }).then((response) => {
+            resolve(handleResponse(response.data, response));
+        }).catch((error) => {
+            resolve({
+                code: error?.status || 500,
+                message: error?.message || 'Network Error',
                 success: false,
-                message: ERROR_MESSAGE
-            };
-            resolve(result as any);
-        }
-    }) as AbortPromise<T>;
-    p._url = url!;
-    p.abort = source.cancel;
-    pushQueue(p);
-    return p;
+            })
+        });
+    }) as CancellablePromise<RestResult<T>>;
+    promise.cancel = () => {
+        source.cancel('Operation canceled by the user.');
+    };
+    return promise;
 }
 
-function get<T> (url: string, params?: any, config?: RestRequestConfig): AbortPromise<T> {
-    return request<T>({
+export function get<T, P = undefined>(url: string, params?: P, config?: AxiosRequestConfig): CancellablePromise<RestResult<T>> {
+    return request({
         ...config,
         url,
         method: 'get',
-        params
+        params,
     });
 }
 
-function post<T> (url: string, params?: any, config?: RestRequestConfig): AbortPromise<T> {
-    return request<T>({
+export function post<T, D = undefined>(url: string, data?: D, config?: AxiosRequestConfig): CancellablePromise<RestResult<T>> {
+    return request({
         ...config,
         url,
         method: 'post',
-        data: params || {}
+        data,
     });
 }
 
-function put<T> (url: string, params?: any, config?: RestRequestConfig): AbortPromise<T> {
-    return request<T>({
+export function put<T, D = undefined>(url: string, data?: D, config?: AxiosRequestConfig): CancellablePromise<RestResult<T>> {
+    return request({
         ...config,
         url,
         method: 'put',
-        data: params || {}
+        data,
     });
-};
+}
 
-function del<T> (url: string, params?: any, config?: RestRequestConfig): AbortPromise<T> {
-    return request<T>({
+export function del<T, D = undefined>(url: string, data?: D, config?: AxiosRequestConfig): CancellablePromise<RestResult<T>> {
+    return request({
         ...config,
         url,
         method: 'delete',
-        data: params || {}
+        data,
     });
+}
+
+export function download<T, P = undefined>(url: string, params?: P, config?: AxiosRequestConfig): CancellablePromise<RestResult<T>> {
+    return request({
+        ...config,
+        url,
+        method: 'get',
+        params,
+        responseType: 'blob',
+        timeout: 0,
+    });
+}
+
+export const alias = (map: Record<string, any>) => {
+    aliasMap = map;
 };
-const download = (url: string, params?: any, fileName?: string) => {
-    return get(url, params, { responseType: 'blob', fileName, trailingSlash: false, timeout: 0 })
-}
 
-const setCurrentQueueId = (id: string) => {
-    _currentQueueId = id;
-    _requestQueue[id] = [];
+export const config = (config: RestConfig) => {
+    _config = config;
 }
-const abortByQueueId = (id: string) => {
-    _requestQueue[id].forEach((p: any) => {
-        p.abort();
-    })
-}
-
-const instance = rest;
-
-export {
-    get,
-    config,
-    alias,
-    post,
-    put,
-    del,
-    request,
-    download,
-    setCurrentQueueId,
-    abortByQueueId,
-    instance
-};

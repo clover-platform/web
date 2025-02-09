@@ -1,4 +1,4 @@
-import {Switcher} from "@clover/public/components/layout/main/navbar/switcher";
+import {Switcher} from "@clover/public/components/layout/main-v1/navbar/switcher";
 import {useAtom} from "jotai";
 import {projectsState} from "@clover/public/state/public";
 import {useCurrent} from "@clover/public/components/layout/hooks/main";

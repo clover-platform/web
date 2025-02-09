@@ -25,7 +25,6 @@
     "homepage": "https://github.com/clover-platform/web",
     "dependencies": {
         "@crowdin/crowdin-api-client": "1.23.4",
-        "axios": "1.7.4",
         "chalk": "5.3.0",
         "commander": "7.2.0",
         "compressing": "1.9.0",
@@ -37,7 +36,7 @@
     "devDependencies": {
         "@babel/eslint-parser": "7.22.9",
         "@babel/plugin-syntax-import-assertions": "7.22.5",
-        "eslint": "7.27.0"
+        "eslint": "8.56.0"
     },
     "files": [
         "/bin",

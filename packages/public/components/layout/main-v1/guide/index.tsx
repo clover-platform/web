@@ -1,7 +1,7 @@
 import {LoginLayout} from "@clover/public/components/layout/login";
-import { GuideNav } from "@clover/public/components/layout/main/guide/nav";
+import { GuideNav } from "@clover/public/components/layout/main-v1/guide/nav";
 import { useState } from "react";
-import { GuideCreate } from "@clover/public/components/layout/main/guide/create";
+import { GuideCreate } from "@clover/public/components/layout/main-v1/guide/create";
 
 export type GuideStep = 'nav' | 'create';
 

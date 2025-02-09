@@ -1,9 +1,9 @@
-import {LayoutLogo} from "@/components/layout/web/logo";
-import {getNavGroups} from "@/components/layout/web/footer/config";
 import {tt} from "@clover/public/locale";
 import {Button, Input, Separator} from "@easykit/design";
 import {IconX, IconGithubCircle} from "@arco-iconbox/react-clover";
 import {ThemeSwitcher} from "@clover/public/components/common/theme-switcher";
+import {LayoutLogo} from "@clover/public/components/layout/main/logo";
+import {getNavGroups} from "@clover/public/components/layout/main/footer/config";
 
 export const Footer = () => {
     return <div className={"border-t w-full py-2xl"}>
@@ -52,7 +52,6 @@ export const Footer = () => {
                         <IconX className={"text-xl text-secondary-foreground/50"} />
                     </div>
                 </div>
-                <ThemeSwitcher />
             </div>
         </div>
     </div>

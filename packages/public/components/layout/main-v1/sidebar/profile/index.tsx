@@ -6,7 +6,7 @@ import { UNAUTHORIZED } from "@clover/public/events/auth";
 import bus from '@clover/public/events';
 import {clearToken} from "@clover/public/utils/token";
 import { t } from '@clover/public/locale';
-import {UserInfoItem} from "@clover/public/components/layout/main/sidebar/profile/user-info-item";
+import {UserInfoItem} from "@clover/public/components/layout/main-v1/sidebar/profile/user-info-item";
 
 export const URL_MAP: Record<string, any> = {
     "profile": "/profile/-",

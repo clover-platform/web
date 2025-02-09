@@ -7,11 +7,9 @@
         "node_modules/",
         "dist/",
         "coverage/",
-        "public/",
         "build/",
         "scripts/",
         "assets/",
-        "public/",
         "out/"
     ]
 }

@@ -12,7 +12,7 @@ import {accountInfoState, isLoginState} from "@clover/public/state/account";
 import {Account} from "@clover/public/types/account";
 import {localeState, projectsState, teamsState} from "@clover/public/state/public";
 import {accessState} from "@clover/public/state/access";
-import {sidebarOpenState} from "@clover/public/components/layout/main/state";
+// import {sidebarOpenState} from "@clover/public/components/layout/main/state";
 import i18next from "i18next";
 import { ThemeProvider } from "next-themes"
 
@@ -68,7 +68,7 @@ export const RootLayout: FC<RootLayoutProps> = (props) => {
                 currentTeamId: 0,
             }],
             [accessState, accountInfo?.authorities || []],
-            [sidebarOpenState, sideOpen],
+            // [sidebarOpenState, sideOpen],
             [localeState, locale],
             ...atomValues,
         ]}>

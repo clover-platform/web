@@ -1,7 +1,7 @@
 import {FC, HTMLAttributes, useEffect} from "react";
 import {useAtom} from "jotai";
-import {sidebarOpenState} from "@clover/public/components/layout/main/state";
-import {SIDEBAR_OPEN_KEY} from "@clover/public/components/layout/main/const";
+import {sidebarOpenState} from "@clover/public/components/layout/main-v1/state";
+import {SIDEBAR_OPEN_KEY} from "@clover/public/components/layout/main-v1/const";
 import { IconSidebar } from "@arco-iconbox/react-clover";
 import {Action, ActionProps} from "../../../common/action";
 import {Tooltip} from "@easykit/design";

@@ -1,6 +1,5 @@
 // Rest 配置
 import { config, alias } from '@clover/public/utils/rest';
-import { NextResponse } from "next/server";
 import { get } from "@clover/public/utils/headers.server";
 
 config({

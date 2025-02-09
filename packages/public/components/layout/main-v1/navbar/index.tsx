@@ -1,12 +1,12 @@
 import { FC, PropsWithChildren } from "react";
-import Switch from "@clover/public/components/layout/main/switch";
+import Switch from "@clover/public/components/layout/main-v1/switch";
 import classNames from "classnames";
 import {LangSelect} from "@clover/public/components/common/select/lang";
 import { useAtom } from "jotai";
-import { sidebarOpenState } from "@clover/public/components/layout/main/state";
+import { sidebarOpenState } from "@clover/public/components/layout/main-v1/state";
 import { Separator, } from "@easykit/design";
-import {TeamsSwitcher} from "@clover/public/components/layout/main/navbar/switcher/teams";
-import {ProjectsSwitcher} from "@clover/public/components/layout/main/navbar/switcher/projects";
+import {TeamsSwitcher} from "@clover/public/components/layout/main-v1/navbar/switcher/teams";
+import {ProjectsSwitcher} from "@clover/public/components/layout/main-v1/navbar/switcher/projects";
 
 export type LayoutNavbarProps = {
     className?: string;
