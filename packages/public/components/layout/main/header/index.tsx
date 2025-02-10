@@ -5,23 +5,16 @@ import {LangSelect} from "@clover/public/components/common/select/lang";
 import {useAtom} from "jotai/index";
 import {isLoginState} from "@clover/public/state/account";
 import {LayoutLogo} from "@clover/public/components/layout/main/logo";
-import {FC} from "react";
+import {FC, ReactNode} from "react";
 import {ThemeSwitcher} from "@clover/public/components/common/theme-switcher";
 import {Apps} from "@clover/public/components/layout/main/header/apps";
 
-export type HeaderNav = {
-    title: string;
-    href: string;
-    id: string;
-}
-
 export type HeaderProps = {
-    navs?: HeaderNav[];
-    active?: string;
+    extend?: ReactNode;
 }
 
 export const Header: FC<HeaderProps> = (props) => {
-    const { navs } = props;
+    const { extend } = props;
     const [isLogin] = useAtom(isLoginState);
 
     return <div className={"w-full p-sm flex justify-center items-center border-b"}>
@@ -31,15 +24,7 @@ export const Header: FC<HeaderProps> = (props) => {
                 <Separator orientation={"vertical"} className={"h-6"} />
                 <LayoutLogo />
             </div>
-            <ul className={"flex justify-start items-center space-x-xl text-md"}>
-                {
-                    navs?.map((nav, index) => {
-                        return <li key={nav.id}>
-                            <Link href={nav.href}>{nav.title}</Link>
-                        </li>
-                    })
-                }
-            </ul>
+            <div className={"flex-1"}>{ extend }</div>
         </div>
         <div className={"space-x-xs flex justify-center items-center"}>
             <LangSelect className={"h-3xl"} />
