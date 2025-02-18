@@ -6,6 +6,7 @@ import { LangSelect } from "@clover/public/components/common/select/lang";
 import {useLayoutProps} from "@clover/public/components/layout/hooks/use.layout.props";
 import { t } from '@clover/public/locale';
 import {ThemeSwitcher} from "@clover/public/components/common/theme-switcher";
+import {Card} from "@easykit/design";
 
 export type LoginLayoutProps = PropsWithChildren<{
     title?: string;
@@ -19,17 +20,19 @@ export const LoginLayout: FC<LoginLayoutProps> = (originProps) => {
         showLogo= true
     } = props;
 
-    return <div className={"flex justify-center w-full min-h-[100vh] flex-col"}>
-        <div className={"flex-1 flex justify-center items-center flex-col p-4 mb-[--login-footer-height]"}>
-            {
-                showLogo ? <a href={"/"}>
-                    <div className={"mb-6"}>
-                        <Logo size={80}/>
-                        <div className={"text-center font-bold text-xl mt-2"}>{title}</div>
-                    </div>
-                </a> : null
-            }
-            {props.children}
+    return <div className={"flex justify-center w-full min-h-[100vh] flex-col bg-secondary"}>
+        <div className={"flex-1 flex justify-center items-center flex-col p-8 mb-[--login-footer-height]"}>
+            <Card className={"shadow-none px-8 py-6"}>
+                {
+                    showLogo ? <a href={"/"}>
+                        <div className={"mb-6 flex justify-center items-center space-x-2"}>
+                            <Logo size={48}/>
+                            <div className={"text-center font-bold text-2xl"}>{title}</div>
+                        </div>
+                    </a> : null
+                }
+                {props.children}
+            </Card>
         </div>
         <div className={classNames(
             "fixed bottom-0 left-0 right-0 border-0 border-t",

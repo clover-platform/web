@@ -18,7 +18,7 @@ const LoginPage = () => {
     </div>
     return <div className={"w-[360px]"}>
         <div className={"flex justify-center items-center"}>
-            <div className={"text-[24px] font-bold flex-1"}>{t("登录")}</div>
+            <div className={"text-xl font-bold flex-1"}>{t("登录")}</div>
             <div className={"ml-[10px] space-x-1"}>
                 <span>{t("没有账号？")}</span>
                 <LoginLink href={`/register`}>{t("注册")}</LoginLink>

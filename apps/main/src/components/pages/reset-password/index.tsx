@@ -58,7 +58,7 @@ const ResetPasswordPage = () => {
 
     return <div className={"w-[360px] m-[20px]"}>
         <div className={"flex justify-center items-center"}>
-            <div className={"text-[24px] font-bold flex-1"}>{t("重置密码")}</div>
+            <div className={"text-xl font-bold flex-1"}>{t("重置密码")}</div>
         </div>
         <div className={"mt-[30px]"}>
             <Steps current={step} className={"mb-[30px]"}>
