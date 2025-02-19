@@ -61,42 +61,46 @@ const handleUrl = (url?: string) => {
     return url;
 };
 
-const handleHeaders = (headers?: AxiosHeaders) => {
+const handleHeaders = async (url: string, headers?: AxiosHeaders) => {
     const result = {
         ...(headers || {}),
         timezone: - (new Date().getTimezoneOffset() / 60)
     };
     const aliasHeaders = {};
-    Object.keys(aliasMap).forEach((key) => {
-        const config = aliasMap[key];
-        const { headers } = config;
-        if (typeof headers === 'function') {
-            Object.assign(aliasHeaders, headers() || {});
-        } else {
-            Object.assign(aliasHeaders, headers || {});
+    for(let key of Object.keys(aliasMap)) {
+        if(url.startsWith(key)) {
+            const config = aliasMap[key];
+            const { headers } = config;
+            if (typeof headers === 'function') {
+                Object.assign(aliasHeaders, await headers() || {});
+            } else {
+                Object.assign(aliasHeaders, headers || {});
+            }
+            return Object.assign(aliasHeaders, result);
         }
-    });
-    Object.assign(aliasHeaders, result);
-    return aliasHeaders;
+    }
+    return result;
 };
 
 export function request<T>(config: AxiosRequestConfig): CancellablePromise<RestResult<T>> {
     const { url, headers, ...rest } = config;
     const source = CancelToken.source();
     const promise = new Promise<RestResult<T>>((resolve) => {
-        instance.request<RestResult<T>>({
-            ...rest,
-            url: handleUrl(url),
-            headers: handleHeaders(headers as AxiosHeaders),
-            cancelToken: source.token,
-        }).then((response) => {
-            resolve(handleResponse(response.data, response));
-        }).catch((error) => {
-            resolve({
-                code: error?.status || 500,
-                message: error?.message || 'Network Error',
-                success: false,
-            })
+        handleHeaders(url as string, headers as AxiosHeaders).then((headers) => {
+            instance.request<RestResult<T>>({
+                ...rest,
+                url: handleUrl(url),
+                headers,
+                cancelToken: source.token,
+            }).then((response) => {
+                resolve(handleResponse(response.data, response));
+            }).catch((error) => {
+                resolve({
+                    code: error?.status || 500,
+                    message: error?.message || 'Network Error',
+                    success: false,
+                })
+            });
         });
     }) as CancellablePromise<RestResult<T>>;
     promise.cancel = () => {

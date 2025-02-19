@@ -1,47 +1,47 @@
 import {get, post} from "@clover/public/utils/rest";
-import {RestResult} from "@clover/public/types/rest";
 
-export const sendEmailCode = async (email: string) =>
-    post(`@main/account/register/email/send`, {email});
+export const sendEmailCode = (email: string) =>
+    post<any, {email:string}>(`@main/account/register/email/send`, {email});
 
-export const emailCheck = async (data: {
-    username: string;
-    email: string;
-    code: string;
-}): Promise<RestResult<any>> =>
-    post(`@main/account/register/email/check`, data);
+export const otpSecret = (username: string) =>
+    get<any, {username:string}>(`@main/account/otp/secret`, {username});
 
-export const otpSecret = async (username: string): Promise<RestResult<any>> =>
-    get(`@main/account/otp/secret`, {username});
-
-export const register = async (data: {
+type RegisterData = {
     username: string;
     email: string;
     password: string;
     code: string;
-}): Promise<RestResult<any>> => post(`@main/account/register`, data);
+}
+export const register = (data: RegisterData) =>
+    post<any, RegisterData>(`@main/account/register`, data);
 
 export const sendResetEmailCode = async (email: string) =>
-    post(`@main/account/reset/email/send`, {email});
+    post<any, {email:string}>(`@main/account/reset/email/send`, {email});
 
-export const resetEmailCheck = async (data: {
+type ResetEmailCheckData = {
     email: string;
     code: string;
-}): Promise<RestResult<any>> => post(`@main/account/reset/email/check`, data);
+}
+export const resetEmailCheck = (data: ResetEmailCheckData) =>
+    post<any, ResetEmailCheckData>(`@main/account/reset/email/check`, data);
 
-export const passwordReset = async (data: {
+type PasswordResetData = {
     password: string;
-}): Promise<RestResult<any>> => post(`@main/account/reset/password`, data);
+}
+export const passwordReset = (data: PasswordResetData) =>
+    post<any, PasswordResetData>(`@main/account/reset/password`, data);
 
-export const linkCode = async (data: {
-    type: string;
+type LinkCodeData = {
+    type?: string;
     code: string;
-}): Promise<RestResult<any>> =>
-    get(`@account/auth/link/${data.type}/code`, { code: data.code });
+}
+export const linkCode = (data: LinkCodeData) =>
+    get<any, LinkCodeData>(`@account/auth/link/${data.type}/code`, { code: data.code });
 
-
-export const loginAndLink = async (data: {
+type LoginAndLinkData = {
     account: string;
     password: string;
     token: string;
-}): Promise<RestResult<any>> => post(`@account/auth/link/bind`, data);
+}
+export const loginAndLink = (data: LoginAndLinkData) =>
+    post<any, LoginAndLinkData>(`@account/auth/link/bind`, data);
