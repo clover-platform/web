@@ -1,12 +1,12 @@
-import { getLangCode, isMobile } from "@clover/public/utils";
+import { isMobile } from "@clover/public/utils";
 import Bowser from 'bowser';
 import { getToken } from "@clover/public/utils/token";
+import i18next from "i18next";
 
 export const get = async () => {
     const browser = Bowser.parse(window.navigator.userAgent);
-    const acceptLanguage = getLangCode();
     const headers: any = {
-        "Accept-Language": acceptLanguage,
+        "Accept-Language": i18next.language,
         'CLIENT-PLATFORM-TYPE': isMobile() ? 'H5': 'PC',
         "CLIENT-BUNDLE-ID": location.hostname,
         "CLIENT-DEVICE-MODEL":browser.os.name,

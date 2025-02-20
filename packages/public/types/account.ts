@@ -5,8 +5,6 @@ export type Account = {
     currentProjectId: number;
     currentTeamId: number;
     username: string;
-    otpBind: boolean;
-    requireOtp: boolean;
 }
 
 export type User = {

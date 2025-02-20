@@ -10,6 +10,4 @@ export const accountInfoState = atom<Account>({
     authorities: [],
     currentProjectId: 0,
     currentTeamId: 0,
-    otpBind: false,
-    requireOtp: true,
 })

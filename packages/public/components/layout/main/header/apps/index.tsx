@@ -28,7 +28,7 @@ export const Apps = () => {
                 <IconApps />
             </Action>
         </DropdownMenuTrigger>
-        <DropdownMenuContent align={"start"} className={"p-2 w-80"}>
+        <DropdownMenuContent align={"start"} className={"p-4 w-96"}>
             {
                 loading ?
                     <AppsLoading /> :

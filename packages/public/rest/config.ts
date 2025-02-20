@@ -1,11 +1,13 @@
 import {get} from "@clover/public/utils/rest";
 
 export type AppsItemProps = {
-    title: string;
+    appId: string;
+    name: string;
     description: string;
-    url: string;
+    href: string;
     icon: string;
+    iconUrl: string;
 }
 
 export const apps = () =>
-    get<AppsItemProps[]>(`@main/config/apps`);
+    get<AppsItemProps[]>(`@main/config/app/list`);

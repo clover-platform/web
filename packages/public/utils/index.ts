@@ -39,13 +39,6 @@ export const failover = (v: string) => {
     return v;
 }
 
-export const getLangCode = () => {
-    const lang = t("LANG");
-    const item = langList.find(({key}) => (key === lang))
-    if(item) return item.code;
-    return 'zh-CN';
-}
-
 function isMobile(){
     if(isServer) return false;
     return !!window.navigator.userAgent.match(/(Metalpha|Antalpha|phone|pad|pod|iPhone|iPod|ios|iPad|Android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i);
