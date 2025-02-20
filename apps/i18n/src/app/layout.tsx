@@ -1,10 +1,10 @@
 import { RootLayout as PublicRootLayout } from "@/components/layout/root";
 import { PropsWithChildren, FC } from "react";
 import "@/plugin/rest.server";
-import "@clover/public/plugin/rest.server";
 import "@/plugin/locales";
-import "@clover/public/plugin/locales";
 import '@/assets/style/index.scss';
+import "@clover/public/plugin/rest.server";
+import "@clover/public/plugin/locales";
 import {changeLanguage} from "@clover/public/locale";
 import {loadState} from "@clover/public/components/layout/root/utils.server";
 import {HTMLLayout} from "@clover/public/components/layout/html";

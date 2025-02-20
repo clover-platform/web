@@ -12,5 +12,7 @@ export const loadProfile = async () => {
         const projectsResult = await myProjects();
         projects = projectsResult.success ? projectsResult.data : [];
     }
-    return {profile: data, teams, projects, success};
+    return {
+        profile: data, teams, projects, success
+    };
 }

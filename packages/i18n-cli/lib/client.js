@@ -36,7 +36,7 @@ export class I18nClient {
         // 工程中所有的词条
         files.forEach((file) => {
             const data = fs.readFileSync(file);
-            data.toString().replace(/(?<![a-zA-Z])t\(["'`](.*?)["'`]\)/g, (match, p1) => {
+            data.toString().replace(/(?<![a-zA-Z])t\(["'`](.*?)["'`][),]/g, (match, p1) => {
                 // 去重 push
                 if(!allWords.includes(p1)) {
                     allWords.push(p1);
@@ -58,6 +58,7 @@ export class I18nClient {
                 Authorization: `Bearer ${token}`
             }
         }).then(res => res.data);
+
         if(r.success) {
             if(!exists(dir)) {
                 mkdirsSync(path.dirname(dir));

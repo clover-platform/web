@@ -87,9 +87,18 @@ export function request<T>(config: AxiosRequestConfig): CancellablePromise<RestR
     const source = CancelToken.source();
     const promise = new Promise<RestResult<T>>((resolve) => {
         handleHeaders(url as string, headers as AxiosHeaders).then((headers) => {
+            const _url = handleUrl(url) || "";
+            if(_url.startsWith("@")) { // 没有处理别名的不请求
+                resolve({
+                    code: 500,
+                    message: 'Network Error',
+                    success: false,
+                })
+                return;
+            }
             instance.request<RestResult<T>>({
                 ...rest,
-                url: handleUrl(url),
+                url: _url,
                 headers,
                 cancelToken: source.token,
             }).then((response) => {

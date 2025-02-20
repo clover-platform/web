@@ -2,10 +2,11 @@ export type Account = {
     id: number;
     email: string;
     authorities: string[];
-    otpStatus: number;
     currentProjectId: number;
     currentTeamId: number;
     username: string;
+    otpBind: boolean;
+    requireOtp: boolean;
 }
 
 export type User = {

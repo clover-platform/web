@@ -1,4 +1,4 @@
-import {FormItem, Input, useMessage} from "@easykit/design";
+import {FormItem, useMessage} from "@easykit/design";
 import {FC, PropsWithChildren, useCallback, useEffect, useState} from "react";
 import {otpSecret} from "@/rest/auth";
 import {OtpInfo} from "@/components/common/account/otp-info";

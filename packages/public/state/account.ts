@@ -8,7 +8,8 @@ export const accountInfoState = atom<Account>({
     email: '',
     username: '',
     authorities: [],
-    otpStatus: 0,
     currentProjectId: 0,
     currentTeamId: 0,
+    otpBind: false,
+    requireOtp: true,
 })
