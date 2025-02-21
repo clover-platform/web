@@ -4,11 +4,11 @@ import {useLayoutConfig} from "@clover/public/components/layout/hooks/use.layout
 import {WebLayoutProps} from "@/components/layout/web";
 
 export const ProductPage = () => {
-    useLayoutConfig<WebLayoutProps>({
-        active: "product",
-    })
+  useLayoutConfig<WebLayoutProps>({
+    active: "product",
+  })
 
-    return <div>
-        ProductPage
-    </div>
+  return <div>
+    ProductPage
+  </div>
 }

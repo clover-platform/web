@@ -1,29 +1,29 @@
-import { useState } from "react";
-import { useMessage } from "@easykit/design";
+import {useState} from "react";
+import {useMessage} from "@easykit/design";
 
 export const useFetch = (api: (params: any) => Promise<any>, options?: {
-    showMessage: boolean
+  showMessage: boolean
 }) => {
-    const { showMessage = false } = options || {};
+  const {showMessage = false} = options || {};
 
-    const [loading, setLoading] = useState(false);
-    const [result, setResult] = useState<any>(null);
-    const msg = useMessage();
+  const [loading, setLoading] = useState(false);
+  const [result, setResult] = useState<any>(null);
+  const msg = useMessage();
 
-    const load = async (params?: any) => {
-        setLoading(true);
-        const { success, data, message } = await api(params);
-        if(success) {
-            setResult(data);
-        }else{
-            showMessage && msg.error(message);
-        }
-        setLoading(false);
+  const load = async (params?: any) => {
+    setLoading(true);
+    const {success, data, message} = await api(params);
+    if (success) {
+      setResult(data);
+    } else {
+      showMessage && msg.error(message);
     }
+    setLoading(false);
+  }
 
-    return {
-        loading,
-        result,
-        load
-    }
+  return {
+    loading,
+    result,
+    load
+  }
 }

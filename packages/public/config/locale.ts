@@ -5,7 +5,7 @@ import enUS from "@easykit/design/locales/en-US";
 export const FALLBACK = 'zh-CN';
 
 export default {
-    'zh-CN': zhCN,
-    'zh-TW': zhTW,
-    'en-US': enUS,
+  'zh-CN': zhCN,
+  'zh-TW': zhTW,
+  'en-US': enUS,
 } as any;

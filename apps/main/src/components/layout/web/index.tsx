@@ -4,13 +4,18 @@ import {HeaderExtend} from "@/components/layout/web/header-extend";
 import {useLayoutProps} from "@clover/public/components/layout/hooks/use.layout.props";
 
 export type WebLayoutProps = MainLayoutProps & {
-    active?: string;
+  active?: string;
 };
 
 export const WebLayout: FC<WebLayoutProps> = (origin) => {
-    const props = useLayoutProps<WebLayoutProps>(origin);
+  const props = useLayoutProps<WebLayoutProps>(origin);
 
-    return <MainLayout headerExtend={<HeaderExtend active={props.active} />}>
-        { props.children}
-    </MainLayout>
+  return <MainLayout
+    headerProps={{
+      extend: <HeaderExtend active={props.active}/>
+    }}
+    bodyClassName={"bg-secondary"}
+  >
+    {props.children}
+  </MainLayout>
 }

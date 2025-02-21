@@ -1,11 +1,8 @@
-export type RestResult<T> = {
-    success: boolean;
-    code: number;
-    message?: string;
-    data?: T;
-}
+import {RestResult as _RestResult} from "@clover/public/utils/rest";
+
+export type RestResult<T> = _RestResult<T>;
 
 export type PageResult<T> = RestResult<{
-    total: number;
-    data: T[];
+  total: number;
+  data: T[];
 }>

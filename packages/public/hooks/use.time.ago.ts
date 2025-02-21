@@ -3,6 +3,6 @@ import {useMemo} from "react";
 import TimeAgo from "javascript-time-ago";
 
 export const useTimeAgo = () => {
-    const locale = useLocale();
-    return useMemo(() => new TimeAgo(locale), [locale])
+  const locale = useLocale();
+  return useMemo(() => new TimeAgo(locale), [locale])
 }

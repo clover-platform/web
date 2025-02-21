@@ -1,131 +1,131 @@
 stages:
-    - package
-    - deploy
+  - package
+  - deploy
 
 package-main:
-    stage: package
-    only:
-        - /^main-.*$/
-    tags:
-        - dev
-    cache:
-        paths:
-            - apps/main/.next/cache/
-        policy: pull-push
-    script:
-        - pnpm i
-        - pnpm build:main
-        - docker login -u $DOCKER_USER --password $DOCKER_TOKEN $CI_REGISTRY
-        - docker build -t $CI_REGISTRY/clover/web/main:$CI_PIPELINE_ID -f ./docker/main.Dockerfile .
-        - docker tag $CI_REGISTRY/clover/web/main:$CI_PIPELINE_ID $CI_REGISTRY/clover/web/main:latest
-        - docker push $CI_REGISTRY/clover/web/main:$CI_PIPELINE_ID
-        - docker push $CI_REGISTRY/clover/web/main:latest
-        - docker rmi $CI_REGISTRY/clover/web/main:$CI_PIPELINE_ID
-        - docker rmi $CI_REGISTRY/clover/web/main:latest
+  stage: package
+  only:
+    - /^main-.*$/
+  tags:
+    - dev
+  cache:
+    paths:
+      - apps/main/.next/cache/
+    policy: pull-push
+  script:
+    - pnpm i
+    - pnpm build:main
+    - docker login -u $DOCKER_USER --password $DOCKER_TOKEN $CI_REGISTRY
+    - docker build -t $CI_REGISTRY/clover/web/main:$CI_PIPELINE_ID -f ./docker/main.Dockerfile .
+    - docker tag $CI_REGISTRY/clover/web/main:$CI_PIPELINE_ID $CI_REGISTRY/clover/web/main:latest
+    - docker push $CI_REGISTRY/clover/web/main:$CI_PIPELINE_ID
+    - docker push $CI_REGISTRY/clover/web/main:latest
+    - docker rmi $CI_REGISTRY/clover/web/main:$CI_PIPELINE_ID
+    - docker rmi $CI_REGISTRY/clover/web/main:latest
 
 package-i18n:
-    stage: package
-    only:
-        - /^i18n-.*$/
-    tags:
-        - dev
-    cache:
-        paths:
-            - apps/i18n/.next/cache/
-        policy: pull-push
-    script:
-        - pnpm i
-        - pnpm build:i18n
-        - docker login -u $DOCKER_USER --password $DOCKER_TOKEN $CI_REGISTRY
-        - docker build -t $CI_REGISTRY/clover/web/i18n:$CI_PIPELINE_ID -f ./docker/i18n.Dockerfile .
-        - docker tag $CI_REGISTRY/clover/web/i18n:$CI_PIPELINE_ID $CI_REGISTRY/clover/web/i18n:latest
-        - docker push $CI_REGISTRY/clover/web/i18n:$CI_PIPELINE_ID
-        - docker push $CI_REGISTRY/clover/web/i18n:latest
-        - docker rmi $CI_REGISTRY/clover/web/i18n:$CI_PIPELINE_ID
-        - docker rmi $CI_REGISTRY/clover/web/i18n:latest
+  stage: package
+  only:
+    - /^i18n-.*$/
+  tags:
+    - dev
+  cache:
+    paths:
+      - apps/i18n/.next/cache/
+    policy: pull-push
+  script:
+    - pnpm i
+    - pnpm build:i18n
+    - docker login -u $DOCKER_USER --password $DOCKER_TOKEN $CI_REGISTRY
+    - docker build -t $CI_REGISTRY/clover/web/i18n:$CI_PIPELINE_ID -f ./docker/i18n.Dockerfile .
+    - docker tag $CI_REGISTRY/clover/web/i18n:$CI_PIPELINE_ID $CI_REGISTRY/clover/web/i18n:latest
+    - docker push $CI_REGISTRY/clover/web/i18n:$CI_PIPELINE_ID
+    - docker push $CI_REGISTRY/clover/web/i18n:latest
+    - docker rmi $CI_REGISTRY/clover/web/i18n:$CI_PIPELINE_ID
+    - docker rmi $CI_REGISTRY/clover/web/i18n:latest
 
 package-admin:
-    stage: package
-    only:
-        - /^admin-.*$/
-    tags:
-        - dev
-    cache:
-        paths:
-            - apps/admin/.next/cache/
-        policy: pull-push
-    script:
-        - pnpm i
-        - pnpm build:admin
-        - docker login -u $DOCKER_USER --password $DOCKER_TOKEN $CI_REGISTRY
-        - docker build -t $CI_REGISTRY/clover/web/admin:$CI_PIPELINE_ID -f ./docker/admin.Dockerfile .
-        - docker tag $CI_REGISTRY/clover/web/admin:$CI_PIPELINE_ID $CI_REGISTRY/clover/web/admin:latest
-        - docker push $CI_REGISTRY/clover/web/admin:$CI_PIPELINE_ID
-        - docker push $CI_REGISTRY/clover/web/admin:latest
-        - docker rmi $CI_REGISTRY/clover/web/admin:$CI_PIPELINE_ID
-        - docker rmi $CI_REGISTRY/clover/web/admin:latest
+  stage: package
+  only:
+    - /^admin-.*$/
+  tags:
+    - dev
+  cache:
+    paths:
+      - apps/admin/.next/cache/
+    policy: pull-push
+  script:
+    - pnpm i
+    - pnpm build:admin
+    - docker login -u $DOCKER_USER --password $DOCKER_TOKEN $CI_REGISTRY
+    - docker build -t $CI_REGISTRY/clover/web/admin:$CI_PIPELINE_ID -f ./docker/admin.Dockerfile .
+    - docker tag $CI_REGISTRY/clover/web/admin:$CI_PIPELINE_ID $CI_REGISTRY/clover/web/admin:latest
+    - docker push $CI_REGISTRY/clover/web/admin:$CI_PIPELINE_ID
+    - docker push $CI_REGISTRY/clover/web/admin:latest
+    - docker rmi $CI_REGISTRY/clover/web/admin:$CI_PIPELINE_ID
+    - docker rmi $CI_REGISTRY/clover/web/admin:latest
 
 package-wiki:
-    stage: package
-    only:
-        - /^wiki-.*$/
-    tags:
-        - dev
-    cache:
-        paths:
-            - apps/wiki/.next/cache/
-        policy: pull-push
-    script:
-        - pnpm i
-        - pnpm build:wiki
-        - docker login -u $DOCKER_USER --password $DOCKER_TOKEN $CI_REGISTRY
-        - docker build -t $CI_REGISTRY/clover/web/wiki:$CI_PIPELINE_ID -f ./docker/wiki.Dockerfile .
-        - docker tag $CI_REGISTRY/clover/web/wiki:$CI_PIPELINE_ID $CI_REGISTRY/clover/web/wiki:latest
-        - docker push $CI_REGISTRY/clover/web/wiki:$CI_PIPELINE_ID
-        - docker push $CI_REGISTRY/clover/web/wiki:latest
-        - docker rmi $CI_REGISTRY/clover/web/wiki:$CI_PIPELINE_ID
-        - docker rmi $CI_REGISTRY/clover/web/wiki:latest
+  stage: package
+  only:
+    - /^wiki-.*$/
+  tags:
+    - dev
+  cache:
+    paths:
+      - apps/wiki/.next/cache/
+    policy: pull-push
+  script:
+    - pnpm i
+    - pnpm build:wiki
+    - docker login -u $DOCKER_USER --password $DOCKER_TOKEN $CI_REGISTRY
+    - docker build -t $CI_REGISTRY/clover/web/wiki:$CI_PIPELINE_ID -f ./docker/wiki.Dockerfile .
+    - docker tag $CI_REGISTRY/clover/web/wiki:$CI_PIPELINE_ID $CI_REGISTRY/clover/web/wiki:latest
+    - docker push $CI_REGISTRY/clover/web/wiki:$CI_PIPELINE_ID
+    - docker push $CI_REGISTRY/clover/web/wiki:latest
+    - docker rmi $CI_REGISTRY/clover/web/wiki:$CI_PIPELINE_ID
+    - docker rmi $CI_REGISTRY/clover/web/wiki:latest
 
 deploy-main:
-    stage: deploy
-    only:
-        - /^main-.*$/
-    tags:
-        - dev
-    script:
-        - cd ~/server/clover/web-main
-        - docker compose down
-        - docker compose up -d
+  stage: deploy
+  only:
+    - /^main-.*$/
+  tags:
+    - dev
+  script:
+    - cd ~/server/clover/web-main
+    - docker compose down
+    - docker compose up -d
 
 deploy-i18n:
-    stage: deploy
-    only:
-        - /^i18n-.*$/
-    tags:
-        - dev
-    script:
-        - cd ~/server/clover/web-i18n
-        - docker compose down
-        - docker compose up -d
+  stage: deploy
+  only:
+    - /^i18n-.*$/
+  tags:
+    - dev
+  script:
+    - cd ~/server/clover/web-i18n
+    - docker compose down
+    - docker compose up -d
 
 deploy-admin:
-    stage: deploy
-    only:
-        - /^admin-.*$/
-    tags:
-        - dev
-    script:
-        - cd ~/server/clover/web-admin
-        - docker compose down
-        - docker compose up -d
+  stage: deploy
+  only:
+    - /^admin-.*$/
+  tags:
+    - dev
+  script:
+    - cd ~/server/clover/web-admin
+    - docker compose down
+    - docker compose up -d
 
 deploy-wiki:
-    stage: deploy
-    only:
-        - /^wiki-.*$/
-    tags:
-        - dev
-    script:
-        - cd ~/server/clover/web-wiki
-        - docker compose down
-        - docker compose up -d
+  stage: deploy
+  only:
+    - /^wiki-.*$/
+  tags:
+    - dev
+  script:
+    - cd ~/server/clover/web-wiki
+    - docker compose down
+    - docker compose up -d

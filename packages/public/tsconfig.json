@@ -1,12 +1,14 @@
 {
-    "extends": "../../tsconfig.json",
-    "compilerOptions": {
-        "jsx": "react-jsx",
-        "paths": {
-            "@clover/public/*": [ "./*"]
-        }
-    },
-    "include": [
-        "./**/*"
-    ],
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    "jsx": "react-jsx",
+    "paths": {
+      "@clover/public/*": [
+        "./*"
+      ]
+    }
+  },
+  "include": [
+    "./**/*"
+  ]
 }

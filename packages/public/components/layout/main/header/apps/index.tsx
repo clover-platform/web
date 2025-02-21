@@ -6,36 +6,36 @@ import {apps as appsRest, AppsItemProps} from "@clover/public/rest/config";
 import {AppsItem} from "@clover/public/components/layout/main/header/apps/item";
 
 export const Apps = () => {
-    const [open, setOpen] = useState(false);
-    const [loading, setLoading] = useState(true);
-    const [apps, setApps] = useState<AppsItemProps[]>([]);
+  const [open, setOpen] = useState(false);
+  const [loading, setLoading] = useState(true);
+  const [apps, setApps] = useState<AppsItemProps[]>([]);
 
-    const load = useCallback(async () => {
-        const { success, data } = await appsRest();
-        setLoading(false);
-        setApps(success ? data! : []);
-    }, [])
+  const load = useCallback(async () => {
+    const {success, data} = await appsRest();
+    setLoading(false);
+    setApps(success ? data! : []);
+  }, [])
 
-    useEffect(() => {
-        if(open && loading) {
-            load().then();
-        }
-    }, [open, loading])
+  useEffect(() => {
+    if (open && loading) {
+      load().then();
+    }
+  }, [open, loading])
 
-    return <DropdownMenu open={open} onOpenChange={setOpen}>
-        <DropdownMenuTrigger asChild>
-            <Action className={"!outline-none"} active={open}>
-                <IconApps />
-            </Action>
-        </DropdownMenuTrigger>
-        <DropdownMenuContent align={"start"} className={"p-4 w-96"}>
-            {
-                loading ?
-                    <AppsLoading /> :
-                    <div className={"space-y-2"}>
-                        { apps.map((app, index) => <AppsItem key={index} {...app}/>) }
-                    </div>
-            }
-        </DropdownMenuContent>
-    </DropdownMenu>
+  return <DropdownMenu open={open} onOpenChange={setOpen}>
+    <DropdownMenuTrigger asChild>
+      <Action className={"!outline-none"} active={open}>
+        <IconApps/>
+      </Action>
+    </DropdownMenuTrigger>
+    <DropdownMenuContent align={"start"} className={"p-4 w-96"}>
+      {
+        loading ?
+          <AppsLoading/> :
+          <div className={"space-y-2"}>
+            {apps.map((app, index) => <AppsItem key={index} {...app}/>)}
+          </div>
+      }
+    </DropdownMenuContent>
+  </DropdownMenu>
 }

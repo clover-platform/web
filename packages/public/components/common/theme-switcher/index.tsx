@@ -4,69 +4,70 @@ import classNames from "classnames";
 import {FC, useEffect, useState} from "react";
 
 export type Theme = {
-    name: string;
-    icon: any;
+  name: string;
+  icon: any;
 }
 
 const themes: Theme[] = [
-    {
-        name: "light",
-        icon: IconLight
-    },
-    {
-        name: "system",
-        icon: IconSystem
-    },
-    {
-        name: "dark",
-        icon: IconDark
-    }
+  {
+    name: "light",
+    icon: IconLight
+  },
+  {
+    name: "system",
+    icon: IconSystem
+  },
+  {
+    name: "dark",
+    icon: IconDark
+  }
 ]
 
 const BUTTON_SIZE = {
-    sm: "w-6 h-6",
-    md: "w-8 h-8",
-    lg: "w-10 h-10"
+  sm: "w-6 h-6",
+  md: "w-8 h-8",
+  lg: "w-10 h-10"
 }
 
 const CONTAINER_SIZE = {
-    sm: "h-8",
-    md: "h-10",
-    lg: "h-12"
+  sm: "h-8",
+  md: "h-10",
+  lg: "h-12"
 }
 
 const ICON_SIZE = {
-    sm: "text-sm",
-    md: "text-md",
-    lg: "text-lg"
+  sm: "text-sm",
+  md: "text-md",
+  lg: "text-lg"
 }
 
 export type ThemeSwitcherProps = {
-    size?: "sm" | "md" | "lg";
-    activeClassName?: string;
+  size?: "sm" | "md" | "lg";
+  activeClassName?: string;
 }
 
 export const ThemeSwitcher: FC<ThemeSwitcherProps> = (props) => {
-    const [mounted, setMounted] = useState(false)
-    const { theme, setTheme } = useTheme();
-    const { size = "md", activeClassName = "bg-secondary" } = props;
+  const [mounted, setMounted] = useState(false)
+  const {theme, setTheme} = useTheme();
+  const {size = "md", activeClassName = "bg-secondary"} = props;
 
-    useEffect(() => {
-        setMounted(true)
-    }, [])
+  useEffect(() => {
+    setMounted(true)
+  }, [])
 
-    return <div className={classNames("border rounded-full px-1 flex items-center", CONTAINER_SIZE[size])} key={`switcher-${mounted}`}>
-        {
-            themes.map((item) => {
-                const Icon = item.icon;
-                return <div key={item.name} className={classNames(
-                    BUTTON_SIZE[size],
-                    "flex justify-center items-center rounded-full cursor-pointer",
-                    theme === item.name ? activeClassName : ""
-                )} onClick={() => setTheme(item.name)} suppressHydrationWarning={true}>
-                    <Icon className={ICON_SIZE[size]} />
-                </div>
-            })
-        }
-    </div>
+  return <div className={classNames("border rounded-full px-1 flex items-center", CONTAINER_SIZE[size])}
+              key={`switcher-${mounted}`}>
+    {
+      themes.map((item) => {
+        const Icon = item.icon;
+        return <div key={item.name} className={classNames(
+          BUTTON_SIZE[size],
+          "flex justify-center items-center rounded-full cursor-pointer",
+          theme === item.name ? activeClassName : ""
+        )} onClick={() => setTheme(item.name)} suppressHydrationWarning={true}>
+          <Icon className={ICON_SIZE[size]}/>
+        </div>
+      })
+    }
+  </div>
 }

@@ -1,21 +1,14 @@
 "use client";
 
 import {useLayoutConfig} from "@clover/public/components/layout/hooks/use.layout.config";
-import {MainLayoutProps} from "@/components/layout/main";
-import {t} from "@clover/public/locale";
+import {MainLayoutProps} from "../../layout/dashboard";
 
 export const DashboardPage = () => {
-    useLayoutConfig<MainLayoutProps>({
-        active: "dashboard",
-        path: [
-            {
-                title: t("控制台"),
-                type: "item",
-            }
-        ],
-    })
+  useLayoutConfig<MainLayoutProps>({
+    active: "dashboard",
+  })
 
-    return <div>
-        DashboardPage
-    </div>
+  return <div>
+    DashboardPage
+  </div>
 }

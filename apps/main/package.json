@@ -1,22 +1,22 @@
 {
-    "name": "@clover/main",
-    "version": "0.1.0",
-    "private": true,
-    "type": "module",
-    "scripts": {
-        "dev": "next dev -p 3700",
-        "start": "next start -p 3700",
-        "build": "next build",
-        "lint": "next lint",
-        "i18n": "i18n-cli"
-    },
-    "dependencies": {
-        "dhtmlx-gantt": "^9.0.3"
-    },
-    "postcss": {
-        "plugins": {
-            "tailwindcss": {},
-            "autoprefixer": {}
-        }
+  "name": "@clover/main",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "next dev -p 3700",
+    "start": "next start -p 3700",
+    "build": "next build",
+    "lint": "next lint",
+    "i18n": "i18n-cli"
+  },
+  "dependencies": {
+    "dhtmlx-gantt": "^9.0.3"
+  },
+  "postcss": {
+    "plugins": {
+      "tailwindcss": {},
+      "autoprefixer": {}
     }
+  }
 }

@@ -1,4 +1,4 @@
 export const HomePage = () => {
-    return <div>
-    </div>
+  return <div>
+  </div>
 }

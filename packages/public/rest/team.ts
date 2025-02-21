@@ -1,12 +1,12 @@
-import { get, post } from "@clover/public/utils/rest";
-import { RestResult } from "@clover/public/types/rest";
+import {get, post} from "@clover/public/utils/rest";
 
-export const my = async (): Promise<RestResult<any>> => get(`@main/team/my`);
+export const my = async () =>
+  get(`@main/team/my`);
 
 
 export type TeamInitData = {
-    name: string;
-    projectName: number;
+  name: string;
+  projectName: number;
 }
-export const init = async (data: TeamInitData): Promise<RestResult<any>> =>
-    post(`@main/team/init`, data);
+export const init = async (data: TeamInitData) =>
+  post(`@main/team/init`, data);

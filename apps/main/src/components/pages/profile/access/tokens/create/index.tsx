@@ -14,50 +14,39 @@ import BackButton from "@clover/public/components/common/button/back";
 import {useRouter} from "next/navigation";
 
 export const AccessTokensCreatePage = () => {
-    const title = t("创建访问令牌");
-    useLayoutConfig<ProfileLayoutProps>({
-        active: "access.tokens",
-        path: [
-            {
-                title: t("访问令牌"),
-                type: "link",
-                href: "/profile/-/access/tokens",
-            },
-            {
-                title,
-                type: "item",
-            },
-        ],
-    });
+  const title = t("创建访问令牌");
+  useLayoutConfig<ProfileLayoutProps>({
+    active: "access.tokens",
+  });
 
-    const [loading, setLoading] = useState(false);
-    const [token, setToken] = useState<string>();
-    const router = useRouter();
+  const [loading, setLoading] = useState(false);
+  const [token, setToken] = useState<string>();
+  const router = useRouter();
 
-    const onSubmit = useCallback(async (data: CreateData, result: FormResult<string>) => {
-        setLoading(true);
-        result(await create(data));
-        setLoading(false);
-    }, [setLoading])
+  const onSubmit = useCallback(async (data: CreateData, result: FormResult<string>) => {
+    setLoading(true);
+    result(await create(data));
+    setLoading(false);
+  }, [setLoading])
 
-    const onSuccess = useCallback((token?: string) => {
-        setToken(token);
-    }, [])
+  const onSuccess = useCallback((token?: string) => {
+    setToken(token);
+  }, [])
 
-    return <>
-        <TitleBar title={title} />
-        {
-            token ? <div className={"space-y-2"}>
-                <TokenDisplay token={token} />
-                <Space>
-                    <Button onClick={() => router.push("/profile/-/access/tokens")}>{t("确定")}</Button>
-                </Space>
-            </div> : <AccessTokenForm onSuccess={onSuccess} onSubmit={onSubmit}>
-                <Space>
-                    <Button loading={loading} type={"submit"}>{t("提交")}</Button>
-                    <BackButton />
-                </Space>
-            </AccessTokenForm>
-        }
-    </>
+  return <>
+    <TitleBar title={title}/>
+    {
+      token ? <div className={"space-y-2"}>
+        <TokenDisplay token={token}/>
+        <Space>
+          <Button onClick={() => router.push("/profile/-/access/tokens")}>{t("确定")}</Button>
+        </Space>
+      </div> : <AccessTokenForm onSuccess={onSuccess} onSubmit={onSubmit}>
+        <Space>
+          <Button loading={loading} type={"submit"}>{t("提交")}</Button>
+          <BackButton/>
+        </Space>
+      </AccessTokenForm>
+    }
+  </>
 }

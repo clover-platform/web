@@ -1,46 +1,44 @@
 {
-    "name": "@clover/i18n-cli",
-    "version": "0.0.1",
-    "description": "I18n CLI",
-    "main": "bin/cli.js",
-    "type": "module",
-    "scripts": {
-        "test": "node bin/cli"
-    },
-    "bin": {
-        "i18n-cli": "./bin/cli.js"
-    },
-    "repository": {
-        "type": "git",
-        "url": "git+https://github.com/clover-platform/web.git"
-    },
-    "keywords": [
-        "I18n"
-    ],
-    "author": "grant",
-    "license": "MIT",
-    "bugs": {
-        "url": "https://github.com/clover-platform/web/issues"
-    },
-    "homepage": "https://github.com/clover-platform/web",
-    "dependencies": {
-        "@crowdin/crowdin-api-client": "1.23.4",
-        "chalk": "5.3.0",
-        "commander": "7.2.0",
-        "compressing": "1.9.0",
-        "form-data": "4.0.0",
-        "got": "13.0.0",
-        "path": "0.12.7",
-        "prompts": "2.4.2"
-    },
-    "devDependencies": {
-        "@babel/eslint-parser": "7.22.9",
-        "@babel/plugin-syntax-import-assertions": "7.22.5",
-        "eslint": "8.56.0"
-    },
-    "files": [
-        "/bin",
-        "/lib",
-        "README.md"
-    ]
+  "name": "@clover/i18n-cli",
+  "version": "0.0.1",
+  "description": "I18n CLI",
+  "main": "bin/cli.js",
+  "type": "module",
+  "scripts": {
+    "test": "node bin/cli"
+  },
+  "bin": {
+    "i18n-cli": "./bin/cli.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/clover-platform/web.git"
+  },
+  "keywords": [
+    "I18n"
+  ],
+  "author": "grant",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/clover-platform/web/issues"
+  },
+  "homepage": "https://github.com/clover-platform/web",
+  "dependencies": {
+    "@crowdin/crowdin-api-client": "1.23.4",
+    "chalk": "5.3.0",
+    "commander": "7.2.0",
+    "compressing": "1.9.0",
+    "form-data": "4.0.0",
+    "got": "13.0.0",
+    "path": "0.12.7",
+    "prompts": "2.4.2"
+  },
+  "devDependencies": {
+    "@babel/plugin-syntax-import-assertions": "7.22.5"
+  },
+  "files": [
+    "/bin",
+    "/lib",
+    "README.md"
+  ]
 }

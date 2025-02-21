@@ -1,23 +1,23 @@
 {
-    "name": "@easykit/page-imports",
-    "version": "0.0.1",
-    "keywords": [
-        "easykit",
-        "nextjs",
-        "imports",
-        "page"
-    ],
-    "description": "Page Imports",
-    "author": "Grant <284885069@qq.com>",
-    "homepage": "https://github.com/zkit-org",
-    "license": "MIT",
-    "repository": {
-        "type": "git",
-        "url": "https://github.com/zkit-org/packages.git"
-    },
-    "type": "module",
-    "main": "index.js",
-    "types": "index.d.ts",
-    "dependencies": {},
-    "devDependencies": {}
+  "name": "@easykit/page-imports",
+  "version": "0.0.1",
+  "keywords": [
+    "easykit",
+    "nextjs",
+    "imports",
+    "page"
+  ],
+  "description": "Page Imports",
+  "author": "Grant <284885069@qq.com>",
+  "homepage": "https://github.com/zkit-org",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/zkit-org/packages.git"
+  },
+  "type": "module",
+  "main": "index.js",
+  "types": "index.d.ts",
+  "dependencies": {},
+  "devDependencies": {}
 }
