@@ -11,12 +11,15 @@ export type FooterProps = {
 
 export const Footer: FC<FooterProps> = (props) => {
   const { simple = false } = props;
-  return simple ? <div className={"container border-t py-lg flex justify-center items-center space-x-lg"}>
-    <div>© 2024 {tt("元一链科")}</div>
-    <div className={"flex justify-start items-center space-x-sm"}>
-      <IconGithubCircle className={"text-2xl text-secondary-foreground/50"}/>
-      <Separator orientation={"vertical"} className={"h-4"}/>
-      <IconX className={"text-xl text-secondary-foreground/50"}/>
+  return simple ? <div className={"container pb-lg flex flex-col justify-center items-center"}>
+    <Separator className={"mb-lg"} />
+    <div className={"flex justify-center items-center space-x-lg"}>
+      <div>© 2024 {tt("元一链科")}</div>
+      <div className={"flex justify-start items-center space-x-sm"}>
+        <IconGithubCircle className={"text-2xl text-secondary-foreground/50"}/>
+        <Separator orientation={"vertical"} className={"h-4"}/>
+        <IconX className={"text-xl text-secondary-foreground/50"}/>
+      </div>
     </div>
   </div> : <div className={"border-t w-full py-2xl"}>
     <div className={"container"}>

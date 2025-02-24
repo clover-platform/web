@@ -1,41 +1,65 @@
-import {Button, Separator} from "@easykit/design";
+import {Action, Button, Separator} from "@easykit/design";
 import {tt} from "@clover/public/locale";
 import Link from "next/link";
 import {LangSelect} from "@clover/public/components/common/select/lang";
 import {useAtom} from "jotai/index";
 import {isLoginState} from "@clover/public/state/account";
 import {LayoutLogo} from "@clover/public/components/layout/main/logo";
-import {FC, ReactNode} from "react";
-import {ThemeSwitcher} from "@clover/public/components/common/theme-switcher";
+import {FC, ReactNode, useMemo} from "react";
 import {Apps} from "@clover/public/components/layout/main/header/apps";
+import {Notice} from "@clover/public/components/layout/main/header/notice";
+import {IconHelpFill, IconSettingFill} from "@arco-iconbox/react-clover";
+import {ProfileMenu} from "@clover/public/components/layout/main/header/profile-menu";
+import classNames from "classnames";
 
 export type HeaderProps = {
-  extend?: ReactNode;
+  extra?: ReactNode;
   appName?: string;
+  profileExtra?: ReactNode;
+  className?: string;
+  logoUrl?: string;
 }
 
 export const Header: FC<HeaderProps> = (props) => {
-  const {extend, appName} = props;
+  const {
+    logoUrl,
+    extra, appName, profileExtra, className
+  } = props;
   const [isLogin] = useAtom(isLoginState);
 
-  return <div className={"w-full p-sm flex justify-center items-center border-b"}>
+  const logo = useMemo(() => {
+    return <>
+      <LayoutLogo/>
+      {appName ? <span className={"text-lg font-bold"}> · {appName}</span> : null}
+    </>
+  }, [appName])
+
+  return <div className={classNames("w-full p-sm flex justify-center items-center border-b", className)}>
     <div className={"flex-1 flex justify-start items-center space-x-2xl"}>
       <div className={"space-x-sm flex justify-center items-center"}>
         <Apps/>
         <Separator orientation={"vertical"} className={"h-6"}/>
-        <LayoutLogo/>
-        {appName ? <span className={"text-lg font-bold"}> · {appName}</span> : null}
+        { logoUrl ? <Link href={logoUrl}>{logo}</Link> : logo }
       </div>
-      <div className={"flex-1"}>{extend}</div>
+      <div className={"flex-1"}>{extra}</div>
     </div>
     <div className={"space-x-xs flex justify-center items-center"}>
       <LangSelect className={"h-3xl"}/>
-      <ThemeSwitcher size={"sm"}/>
       <Separator orientation={"vertical"} className={"h-6"}/>
       {
-        isLogin ? <Link href={"/dashboard"}>
-          <Button size={"sm"}>{tt("控制台")}</Button>
-        </Link> : <>
+        isLogin ? <>
+          <Link href={"/dashboard"}>
+            <Button size={"sm"}>{tt("控制台")}</Button>
+          </Link>
+          <Notice />
+          <Action className={"!outline-none"}>
+            <IconHelpFill />
+          </Action>
+          <Action className={"!outline-none"}>
+            <IconSettingFill />
+          </Action>
+          <ProfileMenu extra={profileExtra} />
+        </> : <>
           <Link href={"/login"}>
             <Button size={"sm"}>{tt("登录")}</Button>
           </Link>

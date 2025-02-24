@@ -25,7 +25,7 @@
   },
   "dependencies": {
     "@arco-iconbox/react-clover": "0.0.34",
-    "@easykit/design": "0.0.74",
+    "@easykit/design": "0.0.75",
     "@clover/i18n-cli": "workspace:*",
     "@clover/public": "workspace:*",
     "@easykit/page-imports": "workspace:*",

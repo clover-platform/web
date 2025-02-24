@@ -20,7 +20,7 @@ export const Apps = () => {
     if (open && loading) {
       load().then();
     }
-  }, [open, loading])
+  }, [open, loading, load])
 
   return <DropdownMenu open={open} onOpenChange={setOpen}>
     <DropdownMenuTrigger asChild>

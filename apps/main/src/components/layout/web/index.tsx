@@ -1,6 +1,6 @@
 import {FC} from "react";
 import {MainLayout, MainLayoutProps} from "@clover/public/components/layout/main";
-import {HeaderExtend} from "@/components/layout/web/header-extend";
+import {Header} from "./header";
 import {useLayoutProps} from "@clover/public/components/layout/hooks/use.layout.props";
 
 export type WebLayoutProps = MainLayoutProps & {
@@ -12,7 +12,8 @@ export const WebLayout: FC<WebLayoutProps> = (origin) => {
 
   return <MainLayout
     headerProps={{
-      extend: <HeaderExtend active={props.active}/>
+      logoUrl: "/",
+      extra: <Header active={props.active}/>
     }}
     bodyClassName={"bg-secondary"}
   >

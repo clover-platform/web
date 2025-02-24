@@ -30,8 +30,8 @@ importers:
         specifier: workspace:*
         version: link:packages/public
       '@easykit/design':
-        specifier: 0.0.74
-        version: 0.0.74(@types/react-dom@19.0.1)(@types/react@19.0.1)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
+        specifier: 0.0.75
+        version: 0.0.75(@types/react-dom@19.0.1)(@types/react@19.0.1)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
       '@easykit/page-imports':
         specifier: workspace:*
         version: link:packages/page-imports
@@ -444,8 +444,8 @@ packages:
     resolution: {integrity: sha512-Pqwr3+Doby9fH0FECbGJLo997heWop7QDnklbRM9gPM+dHVdRN8SzOXiCp0RyAhN01OPgFIP3+w7xsHXfptIsw==}
     engines: {node: '>=12.9.0'}
 
-  '@easykit/design@0.0.74':
-    resolution: {integrity: sha512-v1YJbOAlaM5rq1WnV0opUmfJxkpf+q5UXaWQEvf6H281TAryO5V4ipVPKUDqKxmTf5+A7n0ombka7p22fl5/tQ==}
+  '@easykit/design@0.0.75':
+    resolution: {integrity: sha512-rdu2N169F1Qt6dfHixERujXfJJeS6qJC4dLcVso4l+8DD77Mt1W3W6tuOxv0PBMGu/sBqLj6jyyMXLw9F/3Q9w==}
 
   '@easykit/editor@0.0.16':
     resolution: {integrity: sha512-+d2A08bLiMFmcigkOgibMDx/I+rxgjcB0vei9twksatee542u0wfo9eiayZqGKks6JgxKhjK2XmMlnx5IKZ2kw==}
@@ -5850,7 +5850,7 @@ snapshots:
     transitivePeerDependencies:
       - debug
 
-  '@easykit/design@0.0.74(@types/react-dom@19.0.1)(@types/react@19.0.1)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)':
+  '@easykit/design@0.0.75(@types/react-dom@19.0.1)(@types/react@19.0.1)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)':
     dependencies:
       '@arco-iconbox/react-atom-ui': 0.0.4
       '@emotion/react': 11.11.4(@types/react@19.0.1)(react@19.0.0)

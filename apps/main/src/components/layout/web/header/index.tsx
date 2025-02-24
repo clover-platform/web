@@ -11,7 +11,7 @@ import {
 } from "@easykit/design";
 import classNames from "classnames";
 
-export type HeaderExtendProps = {
+export type HeaderProps = {
   active?: string;
 }
 
@@ -53,7 +53,7 @@ const components: { title: string; href: string; description: string }[] = [
   },
 ]
 
-export const HeaderExtend: FC<HeaderExtendProps> = () => {
+export const Header: FC<HeaderProps> = () => {
   return <NavigationMenu>
     <NavigationMenuList>
       <NavigationMenuItem>
