@@ -17,7 +17,7 @@ const initialParams = {};
 export const AccessTokensPage = () => {
   const title = t("访问令牌");
   useLayoutConfig<MainLayoutProps>({
-    active: "access.tokens",
+    active: "profile",
   })
 
   const [loading, result, query, load] = useTableLoader<AccessToken>({
@@ -33,7 +33,7 @@ export const AccessTokensPage = () => {
   }, [load]);
 
   const actions = <div className={"space-x-2"}>
-    <Link href={"/profile/-/access/tokens/create"}>
+    <Link href={"/profile/access/tokens/create"}>
       <Button>{t("创建访问令牌")}</Button>
     </Link>
   </div>;

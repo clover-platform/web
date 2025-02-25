@@ -16,8 +16,8 @@ import {MainLayoutProps} from "@/components/layout/main";
 export const AccessTokensCreatePage = () => {
   const title = t("创建访问令牌");
   useLayoutConfig<MainLayoutProps>({
-    active: "access.tokens",
-  });
+    active: "profile",
+  })
 
   const [loading, setLoading] = useState(false);
   const [token, setToken] = useState<string>();

@@ -1,7 +1,7 @@
 'use client';
 
 import {useLayoutConfig} from "@clover/public/components/layout/hooks/use.layout.config";
-import {MainLayoutProps} from "../../layout/dashboard";
+import {MainLayoutProps} from "@/components/layout/main";
 
 const TaskPage = () => {
   useLayoutConfig<MainLayoutProps>({

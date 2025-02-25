@@ -1,11 +1,10 @@
 'use client';
 
 import {useLayoutConfig} from "@clover/public/components/layout/hooks/use.layout.config";
-import {MainLayoutProps} from "../../layout/dashboard";
 import {t} from '@clover/public/locale';
 import {TitleBar} from "@clover/public/components/common/title-bar";
 import {useEffect, useMemo, useState} from "react";
-import {Button, DataTable} from "@easykit/design";
+import {Button, Card, DataTable} from "@easykit/design";
 import Link from "next/link";
 import {useTableLoader} from "@clover/public/hooks";
 import {Project} from "@/types/project";
@@ -13,6 +12,7 @@ import {list} from "@/rest/project";
 import {getColumns, getFilters, getRowActions, getTabs} from "@/config/pages/project/table";
 import {useSearchParams} from "next/navigation";
 import {TabsTitle} from "@clover/public/components/common/tabs-title";
+import {MainLayoutProps} from "@/components/layout/main";
 
 const initialParams = {
   teamId: '',
@@ -60,44 +60,46 @@ const ProjectPage = () => {
       actions={actions}
       border={false}
     />
-    <TabsTitle
-      active={active}
-      items={getTabs()}
-      onChange={setActive}
-    />
-    <DataTable<Project>
-      filter={{
-        items: getFilters(),
-        defaultValues: initialParams,
-        query: query,
-      }}
-      load={load}
-      pagination={{
-        total: result?.total || 0,
-        page: query.page,
-        size: query.size,
-      }}
-      columns={getColumns()}
-      rowActions={(row) => getRowActions(row)}
-      data={result?.data || []}
-      loading={loading}
-      onRowActionClick={({id: key}, {original}) => {
-        const {id} = original;
-        console.log(id, key);
-        // if(key === "detail") {
-        //     router.push(`/i18n/${original.identifier}/dashboard`);
-        // }else if(key === "activity") {
-        //     router.push(`/i18n/${original.identifier}/activity`);
-        // }else if(key === "delete") {
-        //
-        // }
-      }}
-      onRowClick={(row) => {
-        console.log(row)
-        // const { identifier } = row.original;
-        // router.push(`/i18n/${identifier}/dashboard`);
-      }}
-    />
+    <Card className={"shadow-none"}>
+      <TabsTitle
+        active={active}
+        items={getTabs()}
+        onChange={setActive}
+      />
+      <DataTable<Project>
+        filter={{
+          items: getFilters(),
+          defaultValues: initialParams,
+          query: query,
+        }}
+        load={load}
+        pagination={{
+          total: result?.total || 0,
+          page: query.page,
+          size: query.size,
+        }}
+        columns={getColumns()}
+        rowActions={(row) => getRowActions(row)}
+        data={result?.data || []}
+        loading={loading}
+        onRowActionClick={({id: key}, {original}) => {
+          const {id} = original;
+          console.log(id, key);
+          // if(key === "detail") {
+          //     router.push(`/i18n/${original.identifier}/dashboard`);
+          // }else if(key === "activity") {
+          //     router.push(`/i18n/${original.identifier}/activity`);
+          // }else if(key === "delete") {
+          //
+          // }
+        }}
+        onRowClick={(row) => {
+          console.log(row)
+          // const { identifier } = row.original;
+          // router.push(`/i18n/${identifier}/dashboard`);
+        }}
+      />
+    </Card>
   </>
 };
 

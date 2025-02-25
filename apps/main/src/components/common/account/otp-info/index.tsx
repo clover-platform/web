@@ -32,6 +32,7 @@ export const OtpInfo: FC<OtpInfoProps> = (props) => {
   const [qrcodeImage, setQrcodeImage] = useState("");
 
   useEffect(() => {
+    // eslint-disable-next-line @typescript-eslint/no-unused-expressions
     qrcode && import('qrcode').then((QRCode) => {
       QRCode.toDataURL(qrcode).then((result) => {
         setQrcodeImage(result);

@@ -30,7 +30,7 @@ export const ProfileMenu: FC<ProfileMenuProps> = (props) => {
       <DropdownMenuLabel className={"text-secondary-foreground/50"}>{tt("账户")}</DropdownMenuLabel>
       <AccountInfo />
       <DropdownMenuSeparator />
-      <Link href={"/profile/-"}>
+      <Link href={"/profile"}>
         <DropdownMenuItem>{tt("管理账户")}</DropdownMenuItem>
       </Link>
       <ThemeMenu />

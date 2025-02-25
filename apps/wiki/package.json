@@ -11,7 +11,7 @@
         "i18n": "i18n-cli"
     },
     "dependencies": {
-        "@easykit/editor": "0.0.16",
+        "@easykit/editor": "0.0.17",
         "markdown-it": "14.1.0"
     },
     "devDependencies": {

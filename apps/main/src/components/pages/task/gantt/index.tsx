@@ -1,8 +1,8 @@
 'use client';
 
 import {useLayoutConfig} from "@clover/public/components/layout/hooks/use.layout.config";
-import {MainLayoutProps} from "../../../layout/dashboard";
 import dynamic from "next/dynamic";
+import {MainLayoutProps} from "@/components/layout/main";
 
 const Gantt = dynamic(() => import("@/components/common/gantt"), {ssr: false});
 

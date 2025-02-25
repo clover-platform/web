@@ -34,7 +34,7 @@ export const Header: FC<HeaderProps> = (props) => {
     </>
   }, [appName])
 
-  return <div className={classNames("w-full p-sm flex justify-center items-center border-b", className)}>
+  return <div className={classNames("w-full h-[60px] p-sm flex justify-center items-center border-b", className)}>
     <div className={"flex-1 flex justify-start items-center space-x-2xl"}>
       <div className={"space-x-sm flex justify-center items-center"}>
         <Apps/>
