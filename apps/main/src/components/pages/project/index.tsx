@@ -10,9 +10,9 @@ import {useTableLoader} from "@clover/public/hooks";
 import {Project} from "@/types/project";
 import {list} from "@/rest/project";
 import {getColumns, getFilters, getRowActions, getTabs} from "@/config/pages/project/table";
-import {useSearchParams} from "next/navigation";
 import {TabsTitle} from "@clover/public/components/common/tabs-title";
 import {MainLayoutProps} from "@/components/layout/main";
+import {useSearchParams} from "next/navigation";
 
 const initialParams = {
   teamId: '',
@@ -31,19 +31,12 @@ const ProjectPage = () => {
     action: list,
     keys: ['type'],
   });
-  const search = useSearchParams();
-  const type = search.get('type') || 'all';
-  const [active, setActive] = useState(type);
+  const searchParams = useSearchParams();
+  const type = searchParams.get('type');
+  const [active, setActive] = useState(type || "all");
 
   useEffect(() => {
-    load({type}).then();
-  }, [load, type]);
-
-  useEffect(() => {
-    load({
-      type: active,
-      page: 1,
-    }).then();
+    load({type:active}).then();
   }, [active, load]);
 
   const actions = useMemo(() => {
@@ -67,6 +60,7 @@ const ProjectPage = () => {
         onChange={setActive}
       />
       <DataTable<Project>
+        inCard={true}
         filter={{
           items: getFilters(),
           defaultValues: initialParams,

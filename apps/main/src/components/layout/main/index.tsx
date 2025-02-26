@@ -11,10 +11,10 @@ export const MainLayout: FC<MainLayoutProps> = (origin) => {
   const props = useLayoutProps<MainLayoutProps>(origin);
 
   return <PublicMainLayout
-    className={"bg-secondary"}
+    className={"bg-secondary dark:bg-background"}
     headerProps={{
       logoUrl: "/dashboard",
-      className: "bg-background",
+      className: "bg-background dark:bg-black/50",
       extra: <Header active={props.active}/>
     }}
     footerProps={{

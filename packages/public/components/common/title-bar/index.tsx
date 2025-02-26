@@ -14,7 +14,7 @@ export const TitleBar: FC<TitleBarProps> = (props) => {
   } = props;
   return <>
     <div className={classNames(
-      "flex justify-center items-center ",
+      "flex justify-center items-center min-h-9",
       !border && "mb-4"
     )}>
       <div className={"flex-1 mr-2 text-2xl font-bold"}>{props.title}</div>

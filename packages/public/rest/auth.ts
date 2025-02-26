@@ -1,5 +1,4 @@
 import {get, post} from "@clover/public/utils/rest";
-import {RestResult} from "@clover/public/types/rest";
 import {Account} from "@clover/public/types/account";
 
 export const login = (data: {

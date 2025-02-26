@@ -1,6 +1,17 @@
-import {RestResult as _RestResult} from "@clover/public/utils/rest";
+import {AxiosResponse} from "axios";
 
-export type RestResult<T> = _RestResult<T>;
+export type RestConfig = {
+  onResponse?: (data: RestResult<any>, response: AxiosResponse) => void;
+}
+
+export type CancellablePromise<T> = Promise<T> & { cancel: () => void };
+
+export type RestResult<T> = {
+  success?: boolean;
+  code?: number;
+  message?: string;
+  data?: T;
+}
 
 export type PageResult<T> = RestResult<{
   total: number;

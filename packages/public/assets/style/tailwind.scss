@@ -2,9 +2,14 @@
 @import "@easykit/design/style";
 
 @layer base {
-    :root {
-        --login-footer-height: 48px;
+  :root {
+    --login-footer-height: 48px;
+  }
+  html {
+    p {
+      a {
+        @apply text-primary/95 hover:text-primary hover:underline underline-offset-2;
+      }
     }
+  }
 }
-
-

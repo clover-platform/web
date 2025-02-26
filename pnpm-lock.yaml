@@ -34,8 +34,8 @@ importers:
         specifier: workspace:*
         version: link:packages/public
       '@easykit/design':
-        specifier: 0.0.76
-        version: 0.0.76(@types/react-dom@19.0.1)(@types/react@19.0.1)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
+        specifier: 0.0.81
+        version: 0.0.81(@types/react-dom@19.0.1)(@types/react@19.0.1)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
       '@easykit/page-imports':
         specifier: workspace:*
         version: link:packages/page-imports
@@ -349,8 +349,6 @@ packages:
 
   '@arco-iconbox/react-atom-ui@0.0.4':
     resolution: {integrity: sha512-gYBxZRGfVNcGrJu3MGYK6Xtgf9m+oobn/OL8QnqmI6/2zv6JmWwccI+4fMtvDfeh5U7sgfyK9wYh1ftn95Wlpg==}
-    peerDependencies:
-      react: 19.0.0
 
   '@arco-iconbox/react-clover@0.0.34':
     resolution: {integrity: sha512-JCj4E/7tc+Fysv37Q0I8IY9Sk+vUqpGpetzD5OVzduv1qJb6aDgtE8drKG6AFUNyWmJLud7U0mUjqfWk4LGdTA==}
@@ -450,8 +448,8 @@ packages:
     resolution: {integrity: sha512-Pqwr3+Doby9fH0FECbGJLo997heWop7QDnklbRM9gPM+dHVdRN8SzOXiCp0RyAhN01OPgFIP3+w7xsHXfptIsw==}
     engines: {node: '>=12.9.0'}
 
-  '@easykit/design@0.0.76':
-    resolution: {integrity: sha512-FQ9fQSaugY7o4yI7SnCm0OOe1GcdLlbSuczezlaXvJkTccSeGH5bCtrV6FaQlIJXhBcnDK61lM0S5xqOVOuzKg==}
+  '@easykit/design@0.0.81':
+    resolution: {integrity: sha512-pPXD5aRUImFHZCBXluSnNTOpMxc9iUvtvT6anHjmGi9BxSbnUcz0bugIQxk86sWTTAF2rseHmGFXykh4PyJZBA==}
 
   '@easykit/editor@0.0.17':
     resolution: {integrity: sha512-vttud+7Rgf9/5tcw05ZhU0tBIkR32rMqoL83PH/U0tV++eZi0WuJ3OKisqB6gpjibfqOQES3Mmnjb/AbGNPZrQ==}
@@ -2656,6 +2654,9 @@ packages:
 
   axios@1.7.4:
     resolution: {integrity: sha512-DukmaFRnY6AzAALSH4J2M3k6PkaC+MfaAGdEERRWcC9q3/TWQwLpHR8ZRLKTdQ3aBDL64EdluRDjJqKw+BPZEw==}
+
+  axios@1.7.8:
+    resolution: {integrity: sha512-Uu0wb7KNqK2t5K+YQyVCLM76prD5sRFjKHbJYCP1J7JFGEQ6nN7HWn9+04LAeiJ3ji54lgS/gZCH1oxyrf1SPw==}
 
   axios@1.7.9:
     resolution: {integrity: sha512-LhLcE7Hbiryz8oMDdDptSrWowmB4Bl6RCt6sIJKpRB4XtVf0iEgewX3au/pJqm+Py1kCASkb/FFKjxQaLtxJvw==}
@@ -5710,9 +5711,7 @@ snapshots:
       '@jridgewell/gen-mapping': 0.3.5
       '@jridgewell/trace-mapping': 0.3.25
 
-  '@arco-iconbox/react-atom-ui@0.0.4(react@19.0.0)':
-    dependencies:
-      react: 19.0.0
+  '@arco-iconbox/react-atom-ui@0.0.4': {}
 
   '@arco-iconbox/react-clover@0.0.34(react@19.0.0)':
     dependencies:
@@ -5843,9 +5842,9 @@ snapshots:
     transitivePeerDependencies:
       - debug
 
-  '@easykit/design@0.0.76(@types/react-dom@19.0.1)(@types/react@19.0.1)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)':
+  '@easykit/design@0.0.81(@types/react-dom@19.0.1)(@types/react@19.0.1)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)':
     dependencies:
-      '@arco-iconbox/react-atom-ui': 0.0.4(react@19.0.0)
+      '@arco-iconbox/react-atom-ui': 0.0.4
       '@emotion/react': 11.11.4(@types/react@19.0.1)(react@19.0.0)
       '@hookform/resolvers': 3.7.0(react-hook-form@7.52.1(react@19.0.0))
       '@radix-ui/react-alert-dialog': 1.1.2(@types/react-dom@19.0.1)(@types/react@19.0.1)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
@@ -5872,7 +5871,7 @@ snapshots:
       '@radix-ui/react-tooltip': 1.1.4(@types/react-dom@19.0.1)(@types/react@19.0.1)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
       '@tanstack/react-table': 8.20.5(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
       autoprefixer: 10.4.19(postcss@8.4.39)
-      axios: 1.7.4
+      axios: 1.7.8
       class-variance-authority: 0.7.0
       clsx: 2.1.1
       cmdk: 1.0.0(@types/react-dom@19.0.1)(@types/react@19.0.1)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
@@ -8165,6 +8164,14 @@ snapshots:
   axe-core@4.10.2: {}
 
   axios@1.7.4:
+    dependencies:
+      follow-redirects: 1.15.9
+      form-data: 4.0.0
+      proxy-from-env: 1.1.0
+    transitivePeerDependencies:
+      - debug
+
+  axios@1.7.8:
     dependencies:
       follow-redirects: 1.15.9
       form-data: 4.0.0

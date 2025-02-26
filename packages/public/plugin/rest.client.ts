@@ -3,13 +3,14 @@ import {config, alias} from '@clover/public/utils/rest';
 import bus from '@clover/public/events';
 import {UNAUTHORIZED} from "@clover/public/events/auth";
 import {get} from "@clover/public/utils/headers.client";
+import {AxiosResponse} from "axios";
+import {RestResult} from "@clover/public/types/rest";
 
 config({
-  useTransId: true,
-  onResponse: (data: any, response: any) => {
-    const {needLogin = true} = response?.config || {};
+  onResponse: (data: RestResult<any>, response: AxiosResponse) => {
+    const { url } = response.config;
     const {code} = data
-    if (code === 401 && needLogin) { // 未登录
+    if (code === 401 && url?.includes("main/account/profile")) {
       bus.emit(UNAUTHORIZED);
     }
   }

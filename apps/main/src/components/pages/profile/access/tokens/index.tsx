@@ -1,9 +1,19 @@
 'use client';
 
 import {useLayoutConfig} from "@clover/public/components/layout/hooks/use.layout.config";
-import {t} from "@clover/public/locale";
+import {t, tt} from "@clover/public/locale";
 import {TitleBar} from "@clover/public/components/common/title-bar";
-import {Button, Card, DataTable, useAlert, useMessage} from "@easykit/design";
+import {
+  BreadcrumbItem,
+  BreadcrumbLink,
+  BreadcrumbPage,
+  BreadcrumbSeparator,
+  Button,
+  Card,
+  DataTable,
+  useAlert,
+  useMessage
+} from "@easykit/design";
 import {useTableLoader} from "@clover/public/hooks";
 import {useEffect} from "react";
 import {AccessToken} from "@/types/profile/access/token";
@@ -11,6 +21,8 @@ import {list, revoke} from "@/rest/profile/access/token";
 import {getColumns, getRowActions} from "@/config/pages/profile/access/token";
 import Link from "next/link";
 import {MainLayoutProps} from "@/components/layout/main";
+import {Page} from "@clover/public/components/common/page";
+import {ProfileBreadcrumbBase} from "@/components/pages/profile/breadcrumb-base";
 
 const initialParams = {};
 
@@ -33,18 +45,30 @@ export const AccessTokensPage = () => {
   }, [load]);
 
   const actions = <div className={"space-x-2"}>
-    <Link href={"/profile/access/tokens/create"}>
-      <Button>{t("创建访问令牌")}</Button>
+    <Link href={"/profile/security/access/tokens/create"}>
+      <Button>{t("创建")}</Button>
     </Link>
   </div>;
 
-  return <>
+  return <Page>
+    <ProfileBreadcrumbBase>
+      <BreadcrumbItem>
+        <BreadcrumbLink asChild={true}>
+          <Link href="/profile/security">{tt("安全设置")}</Link>
+        </BreadcrumbLink>
+      </BreadcrumbItem>
+      <BreadcrumbSeparator />
+      <BreadcrumbItem>
+        <BreadcrumbPage>{title}</BreadcrumbPage>
+      </BreadcrumbItem>
+    </ProfileBreadcrumbBase>
     <TitleBar
       title={title}
       actions={actions}
     />
-    <Card className={"shadow-none"}>
+    <Card>
       <DataTable<AccessToken>
+        inCard={true}
         load={load}
         pagination={{
           total: result?.total || 0,
@@ -75,5 +99,5 @@ export const AccessTokensPage = () => {
         }}
       />
     </Card>
-  </>
+  </Page>
 }

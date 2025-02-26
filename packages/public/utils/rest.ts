@@ -1,21 +1,8 @@
 import Axios, {AxiosHeaders, AxiosResponse} from 'axios';
 import type {AxiosRequestConfig} from 'axios';
+import {RestResult, RestConfig, CancellablePromise} from "@clover/public/types/rest";
 
 const CancelToken = Axios.CancelToken;
-
-export type RestResult<T> = {
-  success?: boolean;
-  code?: number;
-  message?: string;
-  data?: T;
-}
-
-export type CancellablePromise<T> = Promise<T> & { cancel: () => void };
-
-export type RestConfig = {
-  useTransId?: boolean;
-  onResponse?: (data: RestResult<any>, response: AxiosResponse) => void;
-}
 
 let _config: RestConfig = {};
 const instance = Axios.create({

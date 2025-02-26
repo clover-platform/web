@@ -71,8 +71,8 @@ export const useTableLoader = <D>(options: TableLoaderOptions) => {
   const encodeParamsRef = useRef(encodeParams);
   const router = useRouter();
   const path = usePathname()
-  const urlParam = useUrlQuery();
-  const finalUrlParam = withURL ? urlParam : {};
+  const urlParamRef = useRef(useUrlQuery());
+  const finalUrlParam = withURL ? urlParamRef.current : {};
   const req = useRef(Object.assign((cloneDeep(initialParams) || {}), reqInit, finalUrlParam));
 
   const onLoad = useCallback(async (params: any) => {
@@ -85,11 +85,7 @@ export const useTableLoader = <D>(options: TableLoaderOptions) => {
         req.current = {...params};
       }
       if (withURL) {
-        let searchParams = params;
-        if (urlParam) {
-          searchParams = {...urlParam, ...params};
-        }
-        const queryString = new URLSearchParams(searchParams).toString();
+        const queryString = new URLSearchParams(params).toString();
         router.replace(`${path}?${queryString}`)
       }
       const data: any = standardRestParams(pick(params, legalKeys.current));
@@ -106,7 +102,7 @@ export const useTableLoader = <D>(options: TableLoaderOptions) => {
     } finally {
       setLoading(false);
     }
-  }, [withURL, encodeParamsRef, action, urlParam, router, path, msg]);
+  }, [withURL, encodeParamsRef, action, router, path, msg]);
 
   const reset = useCallback(() => {
     setLoading(true);
