@@ -10,7 +10,7 @@ config({
   onResponse: (data: RestResult<any>, response: AxiosResponse) => {
     const { url } = response.config;
     const {code} = data
-    if (code === 401 && url?.includes("main/account/profile")) {
+    if (code === 401 && !url?.includes("main/account/profile")) {
       bus.emit(UNAUTHORIZED);
     }
   }

@@ -12,6 +12,7 @@ import {useLayoutConfig} from "@clover/public/components/layout/hooks/use.layout
 import {MainLayoutProps} from "@/components/layout/main";
 import {Page} from "@clover/public/components/common/page";
 import {ProfileBreadcrumbBase} from "@/components/pages/profile/breadcrumb-base";
+import {Password} from "@/components/pages/profile/security/password";
 
 export const SecurityPage = () => {
   const title = tt("安全设置");
@@ -26,9 +27,7 @@ export const SecurityPage = () => {
       </BreadcrumbItem>
     </ProfileBreadcrumbBase>
     <TitleBar title={title} />
-    <Card title={tt("更改密码")}>
-      <p>{tt("当您更改密码后，我们会使您在此设备上保持已登录状态，但可能会将您从其他设备注销。")}</p>
-    </Card>
+    <Password />
     <Card title={tt("二次验证")}>
       <div className={"space-y-2"}>
         <p>{tt("通过第二个登录步骤确保您的帐户更加安全。")}</p>

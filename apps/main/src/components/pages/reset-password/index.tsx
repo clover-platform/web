@@ -16,7 +16,7 @@ import {t} from '@clover/public/locale';
 const ResetPasswordPage = () => {
   const msg = useMessage();
   const params = useSearchParams();
-  const from = params.get("from");
+  const redirect = params.get("redirect");
   const [step, setStep] = useState(0);
   const [formData1, setFormData1] = useState<any>({});
   const [step1Submitting, setStep1Submitting] = useState(false);
@@ -49,7 +49,7 @@ const ResetPasswordPage = () => {
     setStep2Submitting(false);
     if (success) {
       setToken(result);
-      location.href = from || `/`;
+      location.href = redirect || `/`;
     } else {
       msg.error(message);
     }

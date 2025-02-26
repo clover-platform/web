@@ -26,7 +26,7 @@ const LoginPage = () => {
     </div>
     <div className={"mt-[30px]"}>
       <Form
-        schema={SCHEMA}
+        schema={SCHEMA()}
         onSubmit={submit}
       >
         <FormItem name="username" label={t("邮箱或用户名")}>

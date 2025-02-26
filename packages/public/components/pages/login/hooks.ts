@@ -7,7 +7,7 @@ import {useMessage} from "@easykit/design";
 
 export const useLoginSubmit = () => {
   const params = useSearchParams();
-  const from = params.get("from");
+  const redirect = params.get("redirect");
   const [loading, setLoading] = useState(false);
   const msg = useMessage();
 
@@ -18,7 +18,7 @@ export const useLoginSubmit = () => {
     setLoading(false);
     if (success) {
       setToken(result as Token);
-      location.href = from || `/`;
+      location.href = redirect || `/`;
     } else {
       msg.error(message);
     }

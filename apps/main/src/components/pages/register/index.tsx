@@ -14,7 +14,7 @@ import {useSearchParams} from "next/navigation";
 const RegisterPage = () => {
   const msg = useMessage();
   const params = useSearchParams();
-  const from = params.get("from");
+  const redirect = params.get("redirect");
   const [formData, setFormData] = useState<any>({});
   const [submitting, setSubmitting] = useState(false);
 
@@ -27,7 +27,7 @@ const RegisterPage = () => {
     setSubmitting(false);
     if (success) {
       setToken(result);
-      location.href = from || `/`;
+      location.href = redirect || `/`;
     } else {
       msg.error(message);
     }
