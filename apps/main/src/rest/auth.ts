@@ -1,10 +1,7 @@
 import {get, post} from "@clover/public/utils/rest";
 
-export const sendEmailCode = (email: string) =>
-  post<any, { email: string }>(`@main/account/register/email/send`, {email});
-
-export const otpSecret = (username: string) =>
-  get<any, { username: string }>(`@main/account/otp/secret`, {username});
+export const sendEmailCode = (data: { email: string }) =>
+  post<any, { email: string }>(`@main/account/register/email/send`, data);
 
 type RegisterData = {
   username: string;
@@ -15,8 +12,8 @@ type RegisterData = {
 export const register = (data: RegisterData) =>
   post<any, RegisterData>(`@main/account/register`, data);
 
-export const sendResetEmailCode = (email: string) =>
-  post<any, { email: string }>(`@main/account/reset/email/send`, {email});
+export const sendResetEmailCode = (data: { email: string }) =>
+  post<any, { email: string }>(`@main/account/reset/email/send`, data);
 
 type ResetEmailCheckData = {
   email: string;
@@ -45,3 +42,14 @@ type LoginAndLinkData = {
 }
 export const loginAndLink = (data: LoginAndLinkData) =>
   post<any, LoginAndLinkData>(`@account/auth/link/bind`, data);
+
+export const otpSecret = () =>
+  get<any>(`@main/account/otp/secret`);
+
+export type OTPStatus = {
+  enable: boolean;
+  enableTime: number;
+}
+
+export const otpStatus = () =>
+  get<OTPStatus>(`@main/account/otp/status`);

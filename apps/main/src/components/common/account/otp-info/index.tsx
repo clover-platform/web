@@ -59,7 +59,7 @@ export const OtpInfo: FC<OtpInfoProps> = (props) => {
     </div>
     <div className={"text-center flex justify-center items-center"}>
       <Popover>
-        <PopoverTrigger>
+        <PopoverTrigger asChild={true}>
           <InfoCircledIcon className={"mr-2"}/>
         </PopoverTrigger>
         <PopoverContent className={"w-[300px]"}>

@@ -54,7 +54,11 @@ const RegisterPage = () => {
           <Input placeholder={t("请输入正确的邮箱")}/>
         </FormItem>
         <FormItem name={"code"} label={t("邮箱验证码")}>
-          <EmailCodeInput placeholder={t("请输入邮箱验证码")} api={sendEmailCode} email={formData.email}/>
+          <EmailCodeInput
+            needEmail={true}
+            placeholder={t("请输入邮箱验证码")} api={sendEmailCode}
+            data={{email: formData.email}}
+          />
         </FormItem>
         <FormItem name="password" label={t("密码")}>
           <Input type={"password"} placeholder={t("请输入密码")}/>

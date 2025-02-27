@@ -4,28 +4,23 @@ import {otpSecret} from "@/rest/auth";
 import {OtpInfo} from "@/components/common/account/otp-info";
 import {t} from '@clover/public/locale';
 
-export type SecretItemProps = PropsWithChildren<{
-  username: string;
-  onLoad?: (secret: string) => void;
-}>;
+export type SecretItemProps = PropsWithChildren;
 
-const SecretItem: FC<SecretItemProps> = (props) => {
-  const {username, onLoad} = props;
+const SecretItem: FC<SecretItemProps> = () => {
   const msg = useMessage();
   const [loading, setLoading] = useState(false);
   const [otpData, setOtpData] = useState({} as any);
 
   const loadSecret = useCallback(async () => {
     setLoading(true);
-    const {success, message, data} = await otpSecret(username);
+    const {success, message, data} = await otpSecret();
     setLoading(false);
     if (success) {
       setOtpData(data);
-      onLoad?.(data.secret);
     } else {
       msg.error(message);
     }
-  }, [username, onLoad, msg])
+  }, [msg])
 
   useEffect(() => {
     loadSecret().then();

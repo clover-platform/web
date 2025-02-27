@@ -3,18 +3,20 @@ import {useMemo, useState, useCallback, useRef, useEffect, ChangeEvent, FC} from
 import {isEmail} from "@clover/public/utils";
 import {i18n} from '@clover/public/locale';
 import {t} from '@clover/public/locale';
-import {CancellablePromise, RestResult} from "@clover/public/utils/rest";
+import {CancellablePromise, RestResult} from "@clover/public/types/rest";
 
 interface EmailCodeInputProps extends InputProps {
-  api: (email: string) => CancellablePromise<RestResult<any>>;
-  email: string;
+  api: (params: any) => CancellablePromise<RestResult<any>>;
   placeholder: string;
+  data?: any;
+  needEmail?: boolean;
 }
 
 export const EmailCodeInput: FC<EmailCodeInputProps> = (props: EmailCodeInputProps) => {
   const {
     api,
-    email = "",
+    data,
+    needEmail = false,
     onChange = () => {},
     ...rest
   } = props;
@@ -50,18 +52,20 @@ export const EmailCodeInput: FC<EmailCodeInputProps> = (props: EmailCodeInputPro
 
   const sendCode = useCallback(async () => {
     setLoading(true);
-    const {success, message} = await api(email);
+    const {success, message} = await api(data);
     setLoading(false);
     if (success) {
       startTimer();
     } else {
       Message.error(message);
     }
-  }, [api, email]);
+  }, [Message, api, data]);
 
   const buttonDisabled = useMemo(() => {
+    if(!needEmail) return false;
+    const { email } = data || {};
     return !isEmail(email) || loading || waiting
-  }, [email, loading, waiting])
+  }, [needEmail, data, loading, waiting])
 
   const buttonText = useMemo(() => {
     return waiting ? i18n(t("%time秒后重发"), {time}) : t("发送验证码");
@@ -69,7 +73,7 @@ export const EmailCodeInput: FC<EmailCodeInputProps> = (props: EmailCodeInputPro
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     let v = e.target.value;
-    v = v ? v.replace(/[^\d]/g, '') : v;
+    v = v ? v.replace(/\D/g, '') : v;
     e.target.value = v;
     onChange(e);
   }

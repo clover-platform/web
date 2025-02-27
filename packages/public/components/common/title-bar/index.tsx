@@ -3,7 +3,7 @@ import {Separator} from "@easykit/design";
 import classNames from "classnames";
 
 export type TitleBarProps = {
-  title: string;
+  title: ReactNode;
   actions?: ReactNode;
   border?: boolean;
 }

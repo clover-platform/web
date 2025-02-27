@@ -74,7 +74,11 @@ const ResetPasswordPage = () => {
           <Input placeholder={t("请输入正确的邮箱")}/>
         </FormItem>
         <FormItem name={"code"} label={t("邮箱验证码")}>
-          <EmailCodeInput placeholder={t("请输入邮箱验证码")} api={sendResetEmailCode} email={formData1.email}/>
+          <EmailCodeInput
+            needEmail={true}
+            placeholder={t("请输入邮箱验证码")} api={sendResetEmailCode}
+            data={{email: formData1.email}}
+          />
         </FormItem>
         <Button loading={step1Submitting} type={"submit"} long>{t("下一步")}</Button>
       </Form>
