@@ -32,7 +32,7 @@ export const SecurityPage = () => {
       <div className={"space-y-2"}>
         <p>{tt("通过第二个登录步骤确保您的帐户更加安全。")}</p>
         <p>
-          <Link href={"/profile/security/2fa"}>{tt("管理二次验证")}</Link>
+          <Link href={"/profile/security/mfa"}>{tt("管理二次验证")}</Link>
         </p>
       </div>
     </Card>

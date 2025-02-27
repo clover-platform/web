@@ -10,6 +10,8 @@ import * as z from "zod";
 import {PASSWORD} from "@clover/public/utils/regular";
 import {change, PasswordData} from "@/rest/profile/security/password";
 import {encrypt} from "@clover/public/utils/crypto";
+import bus from "@clover/public/events";
+import {UNAUTHORIZED} from "@clover/public/events/auth";
 
 export const SCHEMA = () => z.object({
   originPassword: z.string()
@@ -34,10 +36,10 @@ export const SCHEMA = () => z.object({
 
 export const Password = () => {
   const ref = useRef<UseFormReturn>(null);
-  const formResult = useFormResult<string>({
+  const formResult = useFormResult<any>({
     ref,
     onSuccess: () => {
-      console.log("success");
+      bus.emit(UNAUTHORIZED);
     }
   });
   const [loading, setLoading] = useState(false);

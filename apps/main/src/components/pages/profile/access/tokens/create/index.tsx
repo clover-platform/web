@@ -68,7 +68,7 @@ export const AccessTokensCreatePage = () => {
         token ? <div className={"space-y-2"}>
           <TokenDisplay token={token}/>
           <Space>
-            <Button onClick={() => router.push("/profile/-/access/tokens")}>{t("确定")}</Button>
+            <Button onClick={() => router.push("/profile/security/access/tokens")}>{t("确定")}</Button>
           </Space>
         </div> : <AccessTokenForm onSuccess={onSuccess} onSubmit={onSubmit}>
           <Space>
