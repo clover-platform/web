@@ -1,7 +1,12 @@
-import {FC, PropsWithChildren} from "react";
+import {FC, PropsWithChildren, useMemo} from "react";
 import {Header, HeaderProps} from "@clover/public/components/layout/main/header";
 import {Footer, FooterProps} from "@clover/public/components/layout/main/footer";
 import classNames from "classnames";
+import {projectsState, teamsState} from "@clover/public/state/public";
+import {useAtomValue} from "jotai";
+import {LoginLayout} from "@clover/public/components/layout/login";
+import {Guide} from "@clover/public/components/layout/main/guide";
+import {isLoginState} from "@clover/public/state/account";
 
 export type MainLayoutProps = PropsWithChildren<{
   headerProps?: HeaderProps;
@@ -20,8 +25,14 @@ export const MainLayout: FC<MainLayoutProps> = (props) => {
     children,
     container = true,
   } = props;
+  const teams = useAtomValue(teamsState);
+  const projects = useAtomValue(projectsState);
+  const isLogin = useAtomValue(isLoginState);
+  const needInit = useMemo(() => isLogin && (!teams?.length || !projects.length), [teams, projects, isLogin])
 
-  return <div className={classNames("flex justify-center items-center flex-col min-h-[100vh]", className)}>
+  return needInit ? <LoginLayout showLogo={false}>
+    <Guide />
+  </LoginLayout> : <div className={classNames("flex justify-center items-center flex-col min-h-[100vh]", className)}>
     <Header {...headerProps}/>
     <div className={classNames("flex-1 w-full", bodyClassName)}>
       {container ? <div className={"container py-4"}>{children}</div> : children}

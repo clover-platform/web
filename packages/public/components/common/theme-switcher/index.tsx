@@ -44,6 +44,7 @@ const ICON_SIZE = {
 export type ThemeSwitcherProps = {
   size?: "sm" | "md" | "lg";
   activeClassName?: string;
+  className?: string;
 }
 
 export const ThemeSwitcher: FC<ThemeSwitcherProps> = (props) => {
@@ -55,7 +56,7 @@ export const ThemeSwitcher: FC<ThemeSwitcherProps> = (props) => {
     setMounted(true)
   }, [])
 
-  return <div className={classNames("border rounded-full px-1 flex items-center", CONTAINER_SIZE[size])}
+  return <div className={classNames("border rounded-full px-1 flex items-center", CONTAINER_SIZE[size], props.className)}
     key={`switcher-${mounted}`}>
     {
       themes.map((item) => {

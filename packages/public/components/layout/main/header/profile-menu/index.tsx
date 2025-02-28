@@ -9,7 +9,6 @@ import {
   useMessage,
 } from "@easykit/design";
 import {FC, ReactNode, useCallback, useState} from "react";
-import {ThemeMenu} from "@clover/public/components/layout/main/header/profile-menu/theme-menu";
 import {t, tt} from "@clover/public/locale";
 import {AccountInfo} from "@clover/public/components/layout/main/header/profile-menu/account-info";
 import Link from "next/link";
@@ -52,9 +51,9 @@ export const ProfileMenu: FC<ProfileMenuProps> = (props) => {
       <AccountInfo />
       <DropdownMenuSeparator />
       <Link href={"/profile"}>
-        <DropdownMenuItem>{tt("管理账户")}</DropdownMenuItem>
+        <DropdownMenuItem>{tt("个人资料")}</DropdownMenuItem>
       </Link>
-      <ThemeMenu />
+      <DropdownMenuItem>{tt("切换团队")}</DropdownMenuItem>
       {extra}
       <DropdownMenuSeparator />
       <DropdownMenuItem onClick={exit}>{tt("退出")}</DropdownMenuItem>

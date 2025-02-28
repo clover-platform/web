@@ -6,6 +6,7 @@ import {
 } from "@clover/public/components/layout/root";
 import {FC} from "react";
 import "@/plugin/locales";
+import "@/assets/style/index.scss";
 
 export type RootLayoutProps = PublicRootLayoutProps;
 

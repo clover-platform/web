@@ -1,7 +1,6 @@
 import {Action, Button, Separator} from "@easykit/design";
 import {tt} from "@clover/public/locale";
 import Link from "next/link";
-import {LangSelect} from "@clover/public/components/common/select/lang";
 import {useAtom} from "jotai/index";
 import {isLoginState} from "@clover/public/state/account";
 import {LayoutLogo} from "@clover/public/components/layout/main/logo";
@@ -44,8 +43,6 @@ export const Header: FC<HeaderProps> = (props) => {
       <div className={"flex-1"}>{extra}</div>
     </div>
     <div className={"space-x-xs flex justify-center items-center"}>
-      <LangSelect className={"h-3xl"}/>
-      <Separator orientation={"vertical"} className={"h-6"}/>
       {
         isLogin ? <>
           <Link href={"/dashboard"}>

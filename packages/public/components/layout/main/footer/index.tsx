@@ -4,6 +4,8 @@ import {IconX, IconGithubCircle} from "@arco-iconbox/react-clover";
 import {LayoutLogo} from "@clover/public/components/layout/main/logo";
 import {getNavGroups} from "@clover/public/components/layout/main/footer/config";
 import {FC} from "react";
+import {LangSelect} from "@clover/public/components/common/select/lang";
+import {ThemeSwitcher} from "@clover/public/components/common/theme-switcher";
 
 export type FooterProps = {
   simple?: boolean;
@@ -13,15 +15,21 @@ export const Footer: FC<FooterProps> = (props) => {
   const { simple = false } = props;
   return simple ? <div className={"container pb-lg flex flex-col justify-center items-center"}>
     <Separator className={"mb-lg"} />
-    <div className={"flex justify-center items-center space-x-lg"}>
-      <div>© 2024 {tt("Easy Kit")}</div>
-      <div className={"flex justify-start items-center space-x-sm"}>
-        <IconGithubCircle className={"text-2xl text-secondary-foreground/50"}/>
-        <Separator orientation={"vertical"} className={"h-4"}/>
-        <IconX className={"text-xl text-secondary-foreground/50"}/>
+    <div className={"flex w-full"}>
+      <div className={"flex justify-start items-center space-x-lg flex-1"}>
+        <div>© 2024 {tt("Easy Kit")}</div>
+        <div className={"flex justify-start items-center space-x-sm"}>
+          <IconGithubCircle className={"text-2xl text-secondary-foreground/50"}/>
+          <Separator orientation={"vertical"} className={"h-4"}/>
+          <IconX className={"text-xl text-secondary-foreground/50"}/>
+        </div>
+      </div>
+      <div className={"flex space-x-sm"}>
+        <ThemeSwitcher size={"sm"} activeClassName={"bg-white dark:bg-secondary"}/>
+        <LangSelect className={"h-3xl"}/>
       </div>
     </div>
-  </div> : <div className={"border-t w-full py-2xl"}>
+  </div> : <div className={"border-t w-full py-2xl pb-lg"}>
     <div className={"container"}>
       <div className={"flex"}>
         <div className={"w-48"}>
@@ -58,7 +66,7 @@ export const Footer: FC<FooterProps> = (props) => {
           </div>
         </div>
       </div>
-      <div className={"mt-2xl flex justify-center items-center"}>
+      <div className={"mt-2xl flex justify-center items-end"}>
         <div className={"space-y-sm flex-1"}>
           <div>© 2024 {tt("Easy Kit")}</div>
           <div className={"flex justify-start items-center space-x-sm"}>
@@ -66,6 +74,10 @@ export const Footer: FC<FooterProps> = (props) => {
             <Separator orientation={"vertical"} className={"h-4"}/>
             <IconX className={"text-xl text-secondary-foreground/50"}/>
           </div>
+        </div>
+        <div className={"flex space-x-sm"}>
+          <ThemeSwitcher size={"sm"}/>
+          <LangSelect className={"h-3xl"}/>
         </div>
       </div>
     </div>
