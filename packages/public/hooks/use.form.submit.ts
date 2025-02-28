@@ -8,7 +8,7 @@ export type UseFormSubmitProps<T, P> = UseFormResultProps<T> & {
 };
 
 export const useFormSubmit = <T, P = void>(props: UseFormSubmitProps<T, P>):
-  [RefObject<UseFormReturn | null>, boolean, SubmitHandler<FieldValues>] => {
+  {ref: RefObject<UseFormReturn | null>, submitting: boolean, onSubmit: SubmitHandler<FieldValues>} => {
   const {
     action,
     ...rest
@@ -27,5 +27,5 @@ export const useFormSubmit = <T, P = void>(props: UseFormSubmitProps<T, P>):
     setSubmitting(false);
   }, [action, formResult])
 
-  return [ref, submitting, onSubmit as SubmitHandler<FieldValues>];
+  return {ref, submitting, onSubmit: onSubmit as SubmitHandler<FieldValues>};
 }

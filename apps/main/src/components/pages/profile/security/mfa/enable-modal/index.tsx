@@ -29,7 +29,7 @@ export const EnableModal: FC<EnableModalProps> = (props) => {
   const [visible, setVisible] = useState(false);
   const title = tt("启用二次验证");
   const account = useAtomValue(accountInfoState);
-  const [ref, submitting, onSubmit] = useFormSubmit<any,OTPBindData>({
+  const {ref, submitting, onSubmit} = useFormSubmit<any,OTPBindData>({
     action: otpBind,
     onSuccess: () => {
       setVisible(false);

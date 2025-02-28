@@ -24,7 +24,7 @@ export const DisableModal: FC<DisableModalProps> = (props) => {
   const [visible, setVisible] = useState(false);
   const title = tt("禁用二次验证");
   const account = useAtomValue(accountInfoState);
-  const [ref, submitting, onSubmit] = useFormSubmit<any,{code: string}>({
+  const {ref, submitting, onSubmit} = useFormSubmit<any,{code: string}>({
     action: otpDisable,
     onSuccess: () => {
       setVisible(false);
