@@ -10,7 +10,7 @@ export type ErrorItem = {
 }
 
 export type UseFormResultProps<T> = {
-  ref: RefObject<UseFormReturn | undefined | null>;
+  ref?: RefObject<UseFormReturn | undefined | null>;
   onSuccess?: (result?: T) => void;
 }
 
@@ -27,7 +27,7 @@ export const useFormResult = function <T>(props: UseFormResultProps<T>) {
       if (code === 400) {
         const errors = data as ErrorItem[];
         errors?.forEach(({field, message}) => {
-          ref.current?.setError(field, {message});
+          ref?.current?.setError(field, {message});
         });
       } else {
         msg.error(message);

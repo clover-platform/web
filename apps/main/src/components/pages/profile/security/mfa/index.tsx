@@ -18,7 +18,7 @@ import {Page} from "@clover/public/components/common/page";
 import Link from "next/link";
 import {useFetch} from "@clover/public/hooks";
 import {OTPStatus, otpStatus} from "@/rest/auth";
-import {useEffect} from "react";
+import {useCallback, useEffect} from "react";
 import {DisableModal} from "@/components/pages/profile/security/mfa/disable-modal";
 import {EnableModal} from "@/components/pages/profile/security/mfa/enable-modal";
 
@@ -27,8 +27,12 @@ export const MFAPage = () => {
   useLayoutConfig<MainLayoutProps>({
     active: "profile",
   })
-  const { loading, load, result } = useFetch<OTPStatus>(otpStatus);
+  const { loading, load, result } = useFetch<OTPStatus>(otpStatus, {initLoading: true});
   useEffect(() => {
+    load().then();
+  }, [load])
+
+  const onSuccess = useCallback(() => {
     load().then();
   }, [load])
 
@@ -70,7 +74,7 @@ export const MFAPage = () => {
         <Separator />
         {
           loading ? <Skeleton className={"w-28 h-6"} /> : (
-            result?.enable ? <DisableModal /> : <EnableModal />
+            result?.enable ? <DisableModal onSuccess={onSuccess} /> : <EnableModal onSuccess={onSuccess} />
           )
         }
       </div>

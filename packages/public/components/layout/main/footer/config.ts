@@ -62,7 +62,7 @@ export const getNavGroups = (): FooterNavGroup[] => {
       title: tt("关于"),
       items: [
         {
-          title: tt("元一链科"),
+          title: tt("Easy Kit"),
           href: "#"
         },
         {

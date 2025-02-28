@@ -1,6 +1,6 @@
 import {tt} from "@clover/public/locale";
 import {Button, Dialog, Form, FormItem} from "@easykit/design";
-import {useState} from "react";
+import {FC, useState} from "react";
 import {EmailCodeInput} from "@clover/public/components/common/input/email-code";
 import SecretItem from "@/components/pages/otp-bind/secret";
 import {CodeInput} from "@clover/public/components/common/input/code";
@@ -9,6 +9,8 @@ import {accountInfoState} from "@clover/public/state/account";
 import * as z from "zod";
 import {CODE} from "@clover/public/utils/regular";
 import {sendEmailCode} from "@clover/public/rest/common";
+import {otpBind, OTPBindData} from "@/rest/auth";
+import {useFormSubmit} from "@clover/public/hooks/use.form.submit";
 
 const getSchema = () => z.object({
   code: z.string()
@@ -19,17 +21,21 @@ const getSchema = () => z.object({
     .regex(CODE, tt("请输入6位数字验证码")),
 });
 
+export type EnableModalProps = {
+  onSuccess?: () => void;
+}
 
-export const EnableModal = () => {
+export const EnableModal: FC<EnableModalProps> = (props) => {
   const [visible, setVisible] = useState(false);
   const title = tt("启用二次验证");
   const account = useAtomValue(accountInfoState);
-  const [submitting, setSubmitting] = useState(false);
-
-  const onSubmit = async (data: any) => {
-    setSubmitting(true);
-    console.log(data)
-  }
+  const [ref, submitting, onSubmit] = useFormSubmit<any,OTPBindData>({
+    action: otpBind,
+    onSuccess: () => {
+      setVisible(false);
+      props.onSuccess?.();
+    }
+  })
 
   return <p>
     <a
@@ -45,6 +51,7 @@ export const EnableModal = () => {
       onCancel={() => setVisible(false)}
     >
       <Form
+        ref={ref}
         defaultValues={{
           email: account.email
         }}

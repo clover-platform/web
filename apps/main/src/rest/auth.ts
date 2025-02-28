@@ -53,3 +53,14 @@ export type OTPStatus = {
 
 export const otpStatus = () =>
   get<OTPStatus>(`@main/account/otp/status`);
+
+export type OTPBindData = {
+  code: string;
+  otpCode: string;
+}
+
+export const otpBind = (data: OTPBindData) =>
+  post<any, OTPBindData>(`@main/account/otp/bind`, data);
+
+export const otpDisable = (data: {code: string}) =>
+  post<any, {code: string}>(`@main/account/otp/disable`, data);
