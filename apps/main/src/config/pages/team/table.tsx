@@ -2,7 +2,7 @@ import {DropdownMenuItemProps, FilterItemProps, Input} from "@easykit/design";
 import {t} from "@clover/public/locale";
 import {DataTableColumn} from "@easykit/design/components/uix/data-table";
 import {TabsTitleItem} from "@clover/public/components/common/tabs-title";
-import {Project} from "@clover/public/types/project";
+import {Team} from "@clover/public/types/team";
 
 export const getTabs = (): TabsTitleItem[] => [
   {
@@ -19,7 +19,7 @@ export const getTabs = (): TabsTitleItem[] => [
   }
 ]
 
-export const getColumns = (): DataTableColumn<Project>[] => [
+export const getColumns = (): DataTableColumn<Team>[] => [
   {
     accessorKey: "name",
     header: t("名称"),
@@ -27,8 +27,8 @@ export const getColumns = (): DataTableColumn<Project>[] => [
     className: "min-w-[200px]"
   },
   {
-    accessorKey: "teamName",
-    header: t("所属团队"),
+    accessorKey: "teamKey",
+    header: t("唯一标识"),
     enableHiding: false,
     className: "w-[200px] min-w-[200px]"
   },
@@ -46,15 +46,10 @@ export const getFilters = (): FilterItemProps[] => [
     field: 'keyword',
     render: () => <Input placeholder={t("请输入关键词")}/>,
   },
-  {
-    field: 'teamId',
-    label: t("所属团队"),
-    render: () => <Input placeholder={t("请输入关键词")}/>,
-  },
 ]
 
-export const getRowActions = (row: Project): DropdownMenuItemProps[] => {
-  console.log(row)
+export const getRowActions = (row: Team): DropdownMenuItemProps[] => {
+  console.log(row);
   return [
     {
       id: "detail",

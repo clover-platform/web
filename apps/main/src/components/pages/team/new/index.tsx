@@ -1,36 +1,27 @@
 'use client';
 
 import {useLayoutConfig} from "@clover/public/components/layout/hooks/use.layout.config";
-import {t, tt} from "@clover/public/locale";
+import {tt} from "@clover/public/locale";
 import {TitleBar} from "@clover/public/components/common/title-bar";
-import {ProjectForm} from "@/components/pages/project/form";
 import {
   Breadcrumb,
   BreadcrumbItem,
   BreadcrumbLink,
   BreadcrumbList, BreadcrumbPage,
   BreadcrumbSeparator,
-  Button,
   Card,
-  Space
 } from "@easykit/design";
-import BackButton from "@clover/public/components/common/button/back";
-import {useCallback, useState} from "react";
 import {MainLayoutProps} from "@/components/layout/main";
 import Link from "next/link";
 import {DASHBOARD_URL} from "@/config/route";
 import {MainPage} from "@clover/public/components/common/page";
+import {TeamForm} from "@/components/pages/team/form";
 
-export const NewProjectPage = () => {
+export const NewTeamPage = () => {
   useLayoutConfig<MainLayoutProps>({
-    active: "project",
+    active: "team",
   })
-  const [loading] = useState(false);
-  const title = tt("新建项目");
-
-  const onSubmit = useCallback(() => {
-
-  }, [])
+  const title = tt("新建团队");
 
   return <MainPage>
     <Breadcrumb>
@@ -43,7 +34,7 @@ export const NewProjectPage = () => {
         <BreadcrumbSeparator />
         <BreadcrumbItem>
           <BreadcrumbLink asChild={true}>
-            <Link href={"/project"}>{tt("项目")}</Link>
+            <Link href={"/team"}>{tt("团队")}</Link>
           </BreadcrumbLink>
         </BreadcrumbItem>
         <BreadcrumbSeparator />
@@ -53,13 +44,8 @@ export const NewProjectPage = () => {
       </BreadcrumbList>
     </Breadcrumb>
     <TitleBar title={title}/>
-    <Card className={"shadow-none"}>
-      <ProjectForm onSubmit={onSubmit}>
-        <Space>
-          <Button loading={loading} type={"submit"}>{t("提交")}</Button>
-          <BackButton/>
-        </Space>
-      </ProjectForm>
+    <Card>
+      <TeamForm />
     </Card>
   </MainPage>
 }

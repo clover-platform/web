@@ -1,7 +1,7 @@
-export type Project = {
+export type Team = {
   id: number;
   name: string;
   ownerId: number;
   createTime: Date;
-  teamId: number;
+  teamKey: string;
 }

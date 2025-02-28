@@ -8,7 +8,7 @@ import {tt} from "@clover/public/locale";
 import Link from "next/link";
 
 export const Team = () => {
-  return <DropdownMenuContent className="w-64" align={"start"}>
+  return <DropdownMenuContent className="w-96" align={"start"}>
     <div>
       <Empty text={tt("你关注的团队在此处显示")}/>
     </div>

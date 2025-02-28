@@ -13,6 +13,8 @@ import {t, tt} from "@clover/public/locale";
 import {AccountInfo} from "@clover/public/components/layout/main/header/profile-menu/account-info";
 import Link from "next/link";
 import {logout} from "@clover/public/rest/auth";
+import {useAtomValue} from "jotai";
+import {accountInfoState} from "@clover/public/state/account";
 
 export type ProfileMenuProps = {
   extra?: ReactNode;
@@ -23,6 +25,7 @@ export const ProfileMenu: FC<ProfileMenuProps> = (props) => {
   const [open, setOpen] = useState(false);
   const alert = useAlert();
   const msg = useMessage();
+  const account = useAtomValue(accountInfoState);
 
   const exit = useCallback(() => {
     alert.confirm({
@@ -50,7 +53,7 @@ export const ProfileMenu: FC<ProfileMenuProps> = (props) => {
       <DropdownMenuLabel className={"text-secondary-foreground/50"}>{tt("账户")}</DropdownMenuLabel>
       <AccountInfo />
       <DropdownMenuSeparator />
-      <Link href={"/profile"}>
+      <Link href={`/profile/${account.username}`}>
         <DropdownMenuItem>{tt("个人资料")}</DropdownMenuItem>
       </Link>
       <DropdownMenuItem>{tt("切换团队")}</DropdownMenuItem>

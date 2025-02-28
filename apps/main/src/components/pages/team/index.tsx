@@ -1,43 +1,41 @@
 'use client';
 
-import {useLayoutConfig} from "@clover/public/components/layout/hooks/use.layout.config";
-import {t, tt} from '@clover/public/locale';
-import {TitleBar} from "@clover/public/components/common/title-bar";
-import {useEffect, useMemo, useState} from "react";
+import {MainPage} from "@clover/public/components/common/page";
 import {
   Breadcrumb,
   BreadcrumbItem,
   BreadcrumbLink,
-  BreadcrumbList, BreadcrumbPage,
-  BreadcrumbSeparator,
-  Button,
-  Card,
-  DataTable
+  BreadcrumbList,
+  BreadcrumbPage,
+  BreadcrumbSeparator, Button, Card, DataTable
 } from "@easykit/design";
 import Link from "next/link";
-import {useTableLoader} from "@clover/public/hooks";
-import {list} from "@/rest/project";
-import {getColumns, getFilters, getRowActions, getTabs} from "@/config/pages/project/table";
-import {TabsTitle} from "@clover/public/components/common/tabs-title";
-import {MainLayoutProps} from "@/components/layout/main";
-import {useSearchParams} from "next/navigation";
 import {DASHBOARD_URL} from "@/config/route";
-import {MainPage} from "@clover/public/components/common/page";
-import {Project} from "@clover/public/types/project";
+import {t, tt} from "@clover/public/locale";
+import {TitleBar} from "@clover/public/components/common/title-bar";
+import {TabsTitle} from "@clover/public/components/common/tabs-title";
+import {getColumns, getFilters, getRowActions, getTabs} from "@/config/pages/team/table";
+import {useEffect, useMemo, useState} from "react";
+import {useLayoutConfig} from "@clover/public/components/layout/hooks/use.layout.config";
+import {MainLayoutProps} from "@/components/layout/main";
+import {useTableLoader} from "@clover/public/hooks";
+import {list} from "@/rest/team";
+import {useSearchParams} from "next/navigation";
+import {Team} from "@clover/public/types/team";
 
 const initialParams = {
-  teamId: '',
   keyword: '',
   type: 'all',
   page: 1,
   size: 20
 }
 
-const ProjectPage = () => {
+export const TeamPage = () => {
+  const title = tt("团队");
   useLayoutConfig<MainLayoutProps>({
-    active: "project",
+    active: "team",
   })
-  const [loading, result, query, load] = useTableLoader<Project>({
+  const [loading, result, query, load] = useTableLoader<Team>({
     initialParams,
     action: list,
     keys: ['type'],
@@ -45,18 +43,17 @@ const ProjectPage = () => {
   const searchParams = useSearchParams();
   const type = searchParams.get('type');
   const [active, setActive] = useState(type || "all");
-
-  useEffect(() => {
-    load({type:active}).then();
-  }, [active, load]);
-
   const actions = useMemo(() => {
     return <div className={"space-x-2"}>
-      <Link href={"/project/new"}>
+      <Link href={"/team/new"}>
         <Button>{t("新建")}</Button>
       </Link>
     </div>
   }, [])
+
+  useEffect(() => {
+    load({type:active}).then();
+  }, [active, load]);
 
   return <MainPage>
     <Breadcrumb>
@@ -68,22 +65,22 @@ const ProjectPage = () => {
         </BreadcrumbItem>
         <BreadcrumbSeparator />
         <BreadcrumbItem>
-          <BreadcrumbPage>{tt("项目")}</BreadcrumbPage>
+          <BreadcrumbPage>{title}</BreadcrumbPage>
         </BreadcrumbItem>
       </BreadcrumbList>
     </Breadcrumb>
     <TitleBar
-      title={t("项目")}
+      title={title}
       actions={actions}
       border={false}
     />
-    <Card className={"shadow-none"}>
+    <Card>
       <TabsTitle
         active={active}
         items={getTabs()}
         onChange={setActive}
       />
-      <DataTable<Project>
+      <DataTable<Team>
         inCard={true}
         filter={{
           items: getFilters(),
@@ -119,6 +116,4 @@ const ProjectPage = () => {
       />
     </Card>
   </MainPage>
-};
-
-export default ProjectPage;
+}

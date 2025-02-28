@@ -10,3 +10,5 @@ export const Page: FC<PageProps> = (props) => {
     {props.children}
   </div>
 }
+
+export const MainPage = Page;

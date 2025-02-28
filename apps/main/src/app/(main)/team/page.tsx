@@ -1,6 +1,7 @@
 import {keywords, title} from "@clover/public/utils/seo";
 import {t} from '@clover/public/locale';
 import {Metadata} from "next";
+import {TeamPage} from "@/components/pages/team";
 
 export async function generateMetadata(): Promise<Metadata> {
   return {
@@ -9,6 +10,6 @@ export async function generateMetadata(): Promise<Metadata> {
   }
 }
 
-const Page = () => <>team</>;
+const Page = () => <TeamPage />;
 
 export default Page;
