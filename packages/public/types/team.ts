@@ -4,4 +4,6 @@ export type Team = {
   ownerId: number;
   createTime: Date;
   teamKey: string;
+  memberType: number;
+  isCollect: boolean;
 }

@@ -48,18 +48,46 @@ export const getFilters = (): FilterItemProps[] => [
   },
 ]
 
+enum MemberType {
+  Owner = 2,
+  Admin = 1,
+  Member = 0,
+}
+
 export const getRowActions = (row: Team): DropdownMenuItemProps[] => {
-  console.log(row);
   return [
     {
-      id: "detail",
+      id: "info",
       type: "item",
       label: t("详情")
     },
     {
-      id: "activity",
+      id: "member",
       type: "item",
-      label: t("动态")
+      label: t("成员")
     },
-  ];
+    row.isCollect ? {
+      id: "collect.cancel",
+      type: "item",
+      label: t("取消收藏")
+    }: {
+      id: "collect",
+      type: "item",
+      label: t("收藏")
+    },
+    {
+      id: "separator.1",
+      type: "separator"
+    },
+    [MemberType.Member, MemberType.Admin].includes(row.memberType) && {
+      id: "exit",
+      type: "item",
+      label: t("退出")
+    },
+    row.memberType === MemberType.Owner && {
+      id: "delete",
+      type: "item",
+      label: t("删除")
+    },
+  ].filter(Boolean) as DropdownMenuItemProps[];
 };

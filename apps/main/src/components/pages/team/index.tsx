@@ -7,7 +7,7 @@ import {
   BreadcrumbLink,
   BreadcrumbList,
   BreadcrumbPage,
-  BreadcrumbSeparator, Button, Card, DataTable
+  BreadcrumbSeparator, Button, Card, DataTable, useAlert
 } from "@easykit/design";
 import Link from "next/link";
 import {DASHBOARD_URL} from "@/config/route";
@@ -19,8 +19,8 @@ import {useEffect, useMemo, useState} from "react";
 import {useLayoutConfig} from "@clover/public/components/layout/hooks/use.layout.config";
 import {MainLayoutProps} from "@/components/layout/main";
 import {useTableLoader} from "@clover/public/hooks";
-import {list} from "@/rest/team";
-import {useSearchParams} from "next/navigation";
+import {addCollect, cancelCollect, deleteTeam, list} from "@/rest/team";
+import {useRouter, useSearchParams} from "next/navigation";
 import {Team} from "@clover/public/types/team";
 
 const initialParams = {
@@ -43,6 +43,8 @@ export const TeamPage = () => {
   const searchParams = useSearchParams();
   const type = searchParams.get('type');
   const [active, setActive] = useState(type || "all");
+  const alert = useAlert();
+  const router = useRouter();
   const actions = useMemo(() => {
     return <div className={"space-x-2"}>
       <Link href={"/team/new"}>
@@ -94,24 +96,47 @@ export const TeamPage = () => {
           size: query.size,
         }}
         columns={getColumns()}
-        rowActions={(row) => getRowActions(row)}
+        rowActions={getRowActions}
         data={result?.data || []}
         loading={loading}
         onRowActionClick={({id: key}, {original}) => {
-          const {id} = original;
-          console.log(id, key);
-          // if(key === "detail") {
-          //     router.push(`/i18n/${original.identifier}/dashboard`);
-          // }else if(key === "activity") {
-          //     router.push(`/i18n/${original.identifier}/activity`);
-          // }else if(key === "delete") {
-          //
-          // }
-        }}
-        onRowClick={(row) => {
-          console.log(row)
-          // const { identifier } = row.original;
-          // router.push(`/i18n/${identifier}/dashboard`);
+          const {id, teamKey} = original;
+          if(key === "delete") {
+            alert.confirm({
+              title: t("删除团队"),
+              description: t("确定删除团队吗？"),
+              onOk: async () => {
+                const { success } = await deleteTeam(id);
+                if(success) {
+                  load().then();
+                }
+              }
+            })
+          }else if(["info", "member"].includes(key)) {
+            router.push(`/team/${teamKey}?tab=${key}`);
+          }else if(key === "collect") {
+            alert.confirm({
+              title: t("收藏团队"),
+              description: t("确定收藏团队吗？"),
+              onOk: async () => {
+                const { success } = await addCollect(id);
+                if(success) {
+                  load().then();
+                }
+              }
+            })
+          }else if(key === "collect.cancel") {
+            alert.confirm({
+              title: t("取消收藏团队"),
+              description: t("确定取消收藏团队吗？"),
+              onOk: async () => {
+                const { success } = await cancelCollect(id);
+                if(success) {
+                  load().then();
+                }
+              }
+            })
+          }
         }}
       />
     </Card>
