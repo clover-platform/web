@@ -10,6 +10,7 @@ import {Notice} from "@clover/public/components/layout/main/header/notice";
 import {IconHelpFill, IconSettingFill} from "@arco-iconbox/react-clover";
 import {ProfileMenu} from "@clover/public/components/layout/main/header/profile-menu";
 import classNames from "classnames";
+import {ProjectSwitcher} from "@clover/public/components/layout/main/header/project-switcher";
 
 export type HeaderProps = {
   extra?: ReactNode;
@@ -56,6 +57,7 @@ export const Header: FC<HeaderProps> = (props) => {
             <IconSettingFill />
           </Action>
           <ProfileMenu extra={profileExtra} />
+          <ProjectSwitcher />
         </> : <>
           <Link href={"/login"}>
             <Button size={"sm"}>{tt("登录")}</Button>

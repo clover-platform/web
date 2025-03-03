@@ -5,4 +5,5 @@ export type Project = {
   ownerId: number;
   createTime: Date;
   teamId: number;
+  cover?: string;
 }

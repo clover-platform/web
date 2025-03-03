@@ -46,6 +46,7 @@ export const ImageIconSelector: FC<ImageIconSelectorProps> = (props) => {
   return <Popover onOpenChange={setOpen} open={open}>
     <PopoverTrigger>
       <div className={"h-9 w-9 border bg-secondary rounded-sm overflow-hidden"}>
+        {/* eslint-disable-next-line @next/next/no-img-element */}
         {value ? <img className={"w-full h-full bg-cover"} src={value} alt={value}/> : null}
       </div>
     </PopoverTrigger>

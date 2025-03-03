@@ -6,4 +6,5 @@ export type Team = {
   teamKey: string;
   memberType: number;
   isCollect: boolean;
+  cover?: string;
 }

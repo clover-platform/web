@@ -22,6 +22,7 @@ import {useTableLoader} from "@clover/public/hooks";
 import {addCollect, cancelCollect, deleteTeam, list} from "@/rest/team";
 import {useRouter, useSearchParams} from "next/navigation";
 import {Team} from "@clover/public/types/team";
+import {useCollectTeam} from "@/hooks/use.collect.team";
 
 const initialParams = {
   keyword: '',
@@ -52,6 +53,7 @@ export const TeamPage = () => {
       </Link>
     </div>
   }, [])
+  const { load: loadCollect } = useCollectTeam();
 
   useEffect(() => {
     load({type:active}).then();
@@ -109,6 +111,7 @@ export const TeamPage = () => {
                 const { success } = await deleteTeam(id);
                 if(success) {
                   load().then();
+                  loadCollect().then();
                 }
               }
             })
@@ -122,6 +125,7 @@ export const TeamPage = () => {
                 const { success } = await addCollect(id);
                 if(success) {
                   load().then();
+                  loadCollect().then();
                 }
               }
             })
@@ -133,6 +137,7 @@ export const TeamPage = () => {
                 const { success } = await cancelCollect(id);
                 if(success) {
                   load().then();
+                  loadCollect().then();
                 }
               }
             })

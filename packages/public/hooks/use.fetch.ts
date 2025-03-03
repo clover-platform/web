@@ -26,6 +26,7 @@ export const useFetch = <T, P = void>(api: (params?: P) => CancellablePromise<Re
       }
     }
     setLoading(false);
+    return data;
   }, [api, msg, showMessage])
 
   return {

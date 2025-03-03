@@ -6,6 +6,7 @@ import {useFormSubmit} from "@clover/public/hooks/use.form.submit";
 import {create, CreateTeamData} from "@/rest/team";
 import {useRouter} from "next/navigation";
 import {useStateLoader} from "@clover/public/components/layout/hooks/use.state.loader";
+import {ImageCropper} from "@clover/public/components/common/cropper";
 
 export const TeamForm = () => {
   const router = useRouter();
@@ -23,6 +24,9 @@ export const TeamForm = () => {
     schema={getSchema()}
     onSubmit={onSubmit}
   >
+    <FormItem name="cover" label={t("图标")}>
+      <ImageCropper className={"w-12 h-12"} />
+    </FormItem>
     <FormItem name="name" label={t("名称")}>
       <Input placeholder={t("请输入")} className={"max-w-96"}/>
     </FormItem>

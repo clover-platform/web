@@ -78,9 +78,10 @@ export const ImageCropper: FC<ImageCropperProps> = (props) => {
       result ? <div
         className={classNames(
           "border rounded-md flex justify-center items-center overflow-hidden group relative",
-          props.className
+          className
         )}
       >
+        {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           className={"w-full h-full"}
           src={result}

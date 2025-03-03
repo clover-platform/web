@@ -2,6 +2,7 @@ import {Form, FormItem, Input} from "@easykit/design";
 import {t} from "@clover/public/locale";
 import {FC, PropsWithChildren} from "react";
 import {getSchema} from "@/config/pages/project/form";
+import {TeamSelector} from "@clover/public/components/common/selector/team";
 
 export type ProjectFormProps = PropsWithChildren<{
   onSubmit?: (data: any) => void;
@@ -25,7 +26,7 @@ export const ProjectForm: FC<ProjectFormProps> = (props) => {
       <Input placeholder={t("请输入唯一标识")} className={"max-w-96"}/>
     </FormItem>
     <FormItem name="teamId" label={t("所属团队")}>
-      <div>team</div>
+      <TeamSelector />
     </FormItem>
     {props.children}
   </Form>
