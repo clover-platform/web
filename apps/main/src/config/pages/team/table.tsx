@@ -3,6 +3,7 @@ import {t} from "@clover/public/locale";
 import {DataTableColumn} from "@easykit/design/components/uix/data-table";
 import {TabsTitleItem} from "@clover/public/components/common/tabs-title";
 import {Team} from "@clover/public/types/team";
+import {UserItem} from "@clover/public/components/common/user-item";
 
 export const getTabs = (): TabsTitleItem[] => [
   {
@@ -24,13 +25,24 @@ export const getColumns = (): DataTableColumn<Team>[] => [
     accessorKey: "name",
     header: t("名称"),
     enableHiding: false,
-    className: "min-w-[200px]"
+    className: "min-w-[200px]",
+    cell: ({row}) => {
+      const { original } = row;
+      return <span>
+        <span>{original.name}</span>
+        <span className={"ml-1 text-secondary-foreground/60"}>@{original.teamKey}</span>
+      </span>
+    }
   },
   {
-    accessorKey: "teamKey",
-    header: t("唯一标识"),
+    accessorKey: "owner",
+    header: t("所有者"),
     enableHiding: false,
-    className: "w-[200px] min-w-[200px]"
+    className: "w-[200px] min-w-[200px]",
+    cell: ({row}) => {
+      const { original } = row;
+      return <UserItem info={original.owner} />
+    }
   },
   {
     accessorKey: "createTime",

@@ -1,6 +1,6 @@
-import Cropper, {ReactCropperElement, ReactCropperProps} from "react-cropper";
+import Cropper, { ReactCropperElement } from "react-cropper";
 import "cropperjs/dist/cropper.css";
-import {FC, useRef, useState, useEffect} from "react";
+import {FC, useState, useEffect, useRef} from "react";
 import classNames from "classnames";
 import {Button, Dialog, Spin, Uploader, useMessage} from "@easykit/design";
 import {PlusIcon} from "@radix-ui/react-icons";
@@ -14,20 +14,19 @@ export type ImageCropperProps = {
   cropperClassName?: string;
   value?: string;
   onChange?: (value: string) => void;
-} & ReactCropperProps;
+};
 
 export const ImageCropper: FC<ImageCropperProps> = (props) => {
   const {
     className,
-    ...rest
   } = props;
 
   const msg = useMessage();
   const [visible, setVisible] = useState(false);
   const [src, setSrc] = useState<string>();
-  const cropperRef = useRef<ReactCropperElement>(null);
   const [result, setResult] = useState<string | undefined>(props.value);
   const [uploading, setUploading] = useState(false);
+  const cropperRef = useRef<ReactCropperElement>(null);
 
   useEffect(() => {
     setResult(props.value);
@@ -126,10 +125,9 @@ export const ImageCropper: FC<ImageCropperProps> = (props) => {
     >
       <div className={"-mb-2 flex items-center flex-col space-y-4"}>
         <Cropper
+          ref={cropperRef}
           src={src}
           className={classNames("w-full max-h-[80vh]", props.cropperClassName)}
-          ref={cropperRef}
-          {...rest}
         />
         <div className={"flex justify-end w-full space-x-2"}>
           <Button onClick={onCrop}>{t("确定")}</Button>

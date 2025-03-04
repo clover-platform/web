@@ -57,7 +57,9 @@ export const NavItem: FC<NavItemProps> = (props) => {
           <ChevronDownIcon className={open ? "rotate-180" : ""} />
         </Action>
       </DropdownMenuTrigger>
-      { config.component }
+      <div onClick={() => setOpen(false)}>
+        { config.component }
+      </div>
     </DropdownMenu>
   </li>
 }

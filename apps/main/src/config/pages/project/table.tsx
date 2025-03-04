@@ -3,6 +3,9 @@ import {t} from "@clover/public/locale";
 import {DataTableColumn} from "@easykit/design/components/uix/data-table";
 import {TabsTitleItem} from "@clover/public/components/common/tabs-title";
 import {Project} from "@clover/public/types/project";
+import {TeamSelector} from "@clover/public/components/common/selector/team";
+import {UserItem} from "@clover/public/components/common/user-item";
+import {Team} from "@clover/public/types/team";
 
 export const getTabs = (): TabsTitleItem[] => [
   {
@@ -24,13 +27,38 @@ export const getColumns = (): DataTableColumn<Project>[] => [
     accessorKey: "name",
     header: t("名称"),
     enableHiding: false,
-    className: "min-w-[200px]"
+    className: "min-w-[200px]",
+    cell: ({row}) => {
+      const { original } = row;
+      return <span>
+        <span>{original.name}</span>
+        <span className={"ml-1 text-secondary-foreground/60"}>@{original.projectKey}</span>
+      </span>
+    }
   },
   {
     accessorKey: "teamName",
     header: t("所属团队"),
     enableHiding: false,
-    className: "w-[200px] min-w-[200px]"
+    className: "w-[200px] min-w-[200px]",
+    cell: ({row}) => {
+      const { original } = row;
+      const { team } = original;
+      return <span>
+        <span>{team.name}</span>
+        <span className={"ml-1 text-secondary-foreground/60"}>@{team.teamKey}</span>
+      </span>
+    }
+  },
+  {
+    accessorKey: "owner",
+    header: t("所有者"),
+    enableHiding: false,
+    className: "w-[150px] min-w-[150px]",
+    cell: ({row}) => {
+      const { original } = row;
+      return <UserItem info={original.owner} />
+    }
   },
   {
     accessorKey: "createTime",
@@ -49,22 +77,50 @@ export const getFilters = (): FilterItemProps[] => [
   {
     field: 'teamId',
     label: t("所属团队"),
-    render: () => <Input placeholder={t("请输入关键词")}/>,
+    render: () => <TeamSelector />,
   },
 ]
 
-export const getRowActions = (row: Project): DropdownMenuItemProps[] => {
-  console.log(row)
+enum MemberType {
+  Owner = 2,
+  Admin = 1,
+  Member = 0,
+}
+
+export const getRowActions = (row: Team): DropdownMenuItemProps[] => {
   return [
     {
-      id: "detail",
+      id: "info",
       type: "item",
       label: t("详情")
     },
     {
-      id: "activity",
+      id: "member",
       type: "item",
-      label: t("动态")
+      label: t("成员")
     },
-  ];
+    row.isCollect ? {
+      id: "collect.cancel",
+      type: "item",
+      label: t("取消收藏")
+    }: {
+      id: "collect",
+      type: "item",
+      label: t("收藏")
+    },
+    {
+      id: "separator.1",
+      type: "separator"
+    },
+    [MemberType.Member, MemberType.Admin].includes(row.memberType) && {
+      id: "exit",
+      type: "item",
+      label: t("退出")
+    },
+    row.memberType === MemberType.Owner && {
+      id: "delete",
+      type: "item",
+      label: t("删除")
+    },
+  ].filter(Boolean) as DropdownMenuItemProps[];
 };

@@ -26,7 +26,7 @@ importers:
     dependencies:
       '@arco-iconbox/react-clover':
         specifier: 0.0.35
-        version: 0.0.35
+        version: 0.0.35(react@19.0.0)
       '@clover/i18n-cli':
         specifier: workspace:*
         version: link:packages/i18n-cli
@@ -354,6 +354,8 @@ packages:
 
   '@arco-iconbox/react-clover@0.0.35':
     resolution: {integrity: sha512-VIqUX33Vn9p5RsTKXPc0w++EIhpQHb89MSRET4WxytVnASO/KUUhro0baPf9FAyo0HmeyVPWAt9frp+SsugOuw==}
+    peerDependencies:
+      react: 19.0.0
 
   '@babel/code-frame@7.26.2':
     resolution: {integrity: sha512-RJlIHRueQgwWitWgF8OdFYGZX328Ax5BCemNGlqHfplnRT9ESi8JkFlvaVYbS+UubVY6dpv87Fs2u5M29iNFVQ==}
@@ -3070,7 +3072,7 @@ packages:
     engines: {node: '>=0.10.0'}
 
   detect-libc@1.0.3:
-    resolution: {integrity: sha512-pGjwhsmsp4kL2RTz08wcOlGN83otlqHeD/Z5T8GXZB+/YcpQ/dgo+lbU8ZsGxV0HIvqqxo9l7mqYwyYMD9bKDg==}
+    resolution: {integrity: sha1-+hN8S9aY7fVc1c0CrFWfkaTEups=}
     engines: {node: '>=0.10'}
     hasBin: true
 
@@ -5715,7 +5717,9 @@ snapshots:
     dependencies:
       react: 19.0.0
 
-  '@arco-iconbox/react-clover@0.0.35': {}
+  '@arco-iconbox/react-clover@0.0.35(react@19.0.0)':
+    dependencies:
+      react: 19.0.0
 
   '@babel/code-frame@7.26.2':
     dependencies:

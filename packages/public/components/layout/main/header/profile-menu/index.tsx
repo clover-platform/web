@@ -15,6 +15,8 @@ import Link from "next/link";
 import {logout} from "@clover/public/rest/auth";
 import {useAtomValue} from "jotai";
 import {accountInfoState} from "@clover/public/state/account";
+import {useCurrentProject, useCurrentTeam} from "@clover/public/components/layout/hooks/main";
+import {ProjectSwitcher} from "@clover/public/components/common/switcher/project";
 
 export type ProfileMenuProps = {
   extra?: ReactNode;
@@ -26,6 +28,8 @@ export const ProfileMenu: FC<ProfileMenuProps> = (props) => {
   const alert = useAlert();
   const msg = useMessage();
   const account = useAtomValue(accountInfoState);
+  const team = useCurrentTeam();
+  const project = useCurrentProject();
 
   const exit = useCallback(() => {
     alert.confirm({
@@ -41,7 +45,7 @@ export const ProfileMenu: FC<ProfileMenuProps> = (props) => {
         return success;
       }
     });
-  }, [])
+  }, [alert, msg])
 
   return <DropdownMenu open={open} onOpenChange={setOpen}>
     <DropdownMenuTrigger asChild>
@@ -56,7 +60,30 @@ export const ProfileMenu: FC<ProfileMenuProps> = (props) => {
       <Link href={`/profile/${account.username}`}>
         <DropdownMenuItem>{tt("个人资料")}</DropdownMenuItem>
       </Link>
-      <DropdownMenuItem>{tt("切换团队")}</DropdownMenuItem>
+      <DropdownMenuItem>
+        <ProjectSwitcher
+          title={tt("切换团队")}
+          asChild={true}
+          teamId={team?.id}
+        >
+          <div className={"flex justify-start items-center space-x-1"}>
+            <span>{tt("切换团队")}</span>
+            <span className={"text-secondary-foreground/60"}>{"@"+team?.name}</span>
+          </div>
+        </ProjectSwitcher>
+      </DropdownMenuItem>
+      <DropdownMenuItem>
+        <ProjectSwitcher
+          title={tt("切换项目")}
+          asChild={true}
+          projectId={project?.id}
+        >
+          <div className={"flex justify-start items-center space-x-1"}>
+            <span>{tt("切换项目")}</span>
+            <span className={"text-secondary-foreground/60"}>{"@"+project?.name}</span>
+          </div>
+        </ProjectSwitcher>
+      </DropdownMenuItem>
       {extra}
       <DropdownMenuSeparator />
       <DropdownMenuItem onClick={exit}>{tt("退出")}</DropdownMenuItem>

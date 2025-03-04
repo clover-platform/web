@@ -1,3 +1,5 @@
+import {User} from "@clover/public/types/account";
+
 export type Team = {
   id: number;
   name: string;
@@ -7,4 +9,5 @@ export type Team = {
   memberType: number;
   isCollect: boolean;
   cover?: string;
+  owner: User;
 }

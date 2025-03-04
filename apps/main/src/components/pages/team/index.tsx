@@ -15,7 +15,7 @@ import {t, tt} from "@clover/public/locale";
 import {TitleBar} from "@clover/public/components/common/title-bar";
 import {TabsTitle} from "@clover/public/components/common/tabs-title";
 import {getColumns, getFilters, getRowActions, getTabs} from "@/config/pages/team/table";
-import {useEffect, useMemo, useState} from "react";
+import {useCallback, useEffect, useMemo, useState} from "react";
 import {useLayoutConfig} from "@clover/public/components/layout/hooks/use.layout.config";
 import {MainLayoutProps} from "@/components/layout/main";
 import {useTableLoader} from "@clover/public/hooks";
@@ -58,6 +58,11 @@ export const TeamPage = () => {
   useEffect(() => {
     load({type:active}).then();
   }, [active, load]);
+
+  const reload = useCallback(() => {
+    load().then();
+    loadCollect().then();
+  }, [load, loadCollect])
 
   return <MainPage>
     <Breadcrumb>
@@ -106,12 +111,14 @@ export const TeamPage = () => {
           if(key === "delete") {
             alert.confirm({
               title: t("删除团队"),
-              description: t("确定删除团队吗？"),
+              description: <div>
+                <div>{tt("团队下的所有项目将会被删除。")}</div>
+                <div>{t("确定删除团队吗？")}</div>
+              </div>,
               onOk: async () => {
                 const { success } = await deleteTeam(id);
                 if(success) {
-                  load().then();
-                  loadCollect().then();
+                  reload();
                 }
               }
             })
@@ -124,8 +131,7 @@ export const TeamPage = () => {
               onOk: async () => {
                 const { success } = await addCollect(id);
                 if(success) {
-                  load().then();
-                  loadCollect().then();
+                  reload();
                 }
               }
             })
@@ -136,8 +142,7 @@ export const TeamPage = () => {
               onOk: async () => {
                 const { success } = await cancelCollect(id);
                 if(success) {
-                  load().then();
-                  loadCollect().then();
+                  reload();
                 }
               }
             })

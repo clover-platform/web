@@ -3,6 +3,7 @@ import {t} from "@clover/public/locale";
 import {USERNAME} from "@clover/public/utils/regular";
 
 export const getSchema = () => z.object({
+  cover: z.string().optional(),
   name: z.string()
     .min(1, t("名称不能为空"))
     .max(255, t("最多 255 个字符")),
