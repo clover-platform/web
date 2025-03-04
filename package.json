@@ -107,7 +107,8 @@
     "@typescript-eslint/parser": "8.25.0",
     "@typescript-eslint/eslint-plugin": "8.25.0",
     "@typescript-eslint/type-utils": "8.25.0",
-    "@typescript-eslint/utils": "8.25.0"
+    "@typescript-eslint/utils": "8.25.0",
+    "esbuild": "0.25.0"
   },
   "pnpm": {
     "onlyBuiltDependencies": [
