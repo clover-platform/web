@@ -65,6 +65,7 @@ export const ProfileMenu: FC<ProfileMenuProps> = (props) => {
           title={tt("切换团队")}
           asChild={true}
           teamId={team?.id}
+          projectId={project?.id}
         >
           <div className={"flex justify-start items-center space-x-1"}>
             <span>{tt("切换团队")}</span>
@@ -76,6 +77,7 @@ export const ProfileMenu: FC<ProfileMenuProps> = (props) => {
         <ProjectSwitcher
           title={tt("切换项目")}
           asChild={true}
+          teamId={team?.id}
           projectId={project?.id}
         >
           <div className={"flex justify-start items-center space-x-1"}>
