@@ -57,8 +57,8 @@ importers:
         specifier: 4.3.2
         version: 4.3.2(vite@5.4.12(@types/node@20.14.9)(less@4.2.0)(lightningcss@1.28.1)(sass@1.77.6))
       axios:
-        specifier: 1.7.9
-        version: 1.7.9
+        specifier: 1.8.2
+        version: 1.8.2
       bowser:
         specifier: 2.11.0
         version: 2.11.0
@@ -351,6 +351,8 @@ packages:
 
   '@arco-iconbox/react-atom-ui@0.0.4':
     resolution: {integrity: sha512-gYBxZRGfVNcGrJu3MGYK6Xtgf9m+oobn/OL8QnqmI6/2zv6JmWwccI+4fMtvDfeh5U7sgfyK9wYh1ftn95Wlpg==}
+    peerDependencies:
+      react: 19.0.0
 
   '@arco-iconbox/react-clover@0.0.35':
     resolution: {integrity: sha512-VIqUX33Vn9p5RsTKXPc0w++EIhpQHb89MSRET4WxytVnASO/KUUhro0baPf9FAyo0HmeyVPWAt9frp+SsugOuw==}
@@ -2672,8 +2674,8 @@ packages:
   axios@1.7.8:
     resolution: {integrity: sha512-Uu0wb7KNqK2t5K+YQyVCLM76prD5sRFjKHbJYCP1J7JFGEQ6nN7HWn9+04LAeiJ3ji54lgS/gZCH1oxyrf1SPw==}
 
-  axios@1.7.9:
-    resolution: {integrity: sha512-LhLcE7Hbiryz8oMDdDptSrWowmB4Bl6RCt6sIJKpRB4XtVf0iEgewX3au/pJqm+Py1kCASkb/FFKjxQaLtxJvw==}
+  axios@1.8.2:
+    resolution: {integrity: sha512-ls4GYBm5aig9vWx8AWDSGLpnpDQRtWAfrjU+EuytuODrFBkqesN2RkOQCBzrA1RQNHw1SmRMSDDDSwzNAYQ6Rg==}
 
   axobject-query@4.1.0:
     resolution: {integrity: sha512-qIj0G9wZbMGNLjLmg1PT6v2mE9AH2zlnADJD/2tC6E00hgmhUOfEB6greHPAfLRSufHqROIUTkw6E+M3lH0PTQ==}
@@ -5720,7 +5722,9 @@ snapshots:
       '@jridgewell/gen-mapping': 0.3.5
       '@jridgewell/trace-mapping': 0.3.25
 
-  '@arco-iconbox/react-atom-ui@0.0.4': {}
+  '@arco-iconbox/react-atom-ui@0.0.4(react@19.0.0)':
+    dependencies:
+      react: 19.0.0
 
   '@arco-iconbox/react-clover@0.0.35(react@19.0.0)':
     dependencies:
@@ -5853,7 +5857,7 @@ snapshots:
 
   '@easykit/design@0.0.86(@types/react-dom@19.0.1)(@types/react@19.0.1)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)':
     dependencies:
-      '@arco-iconbox/react-atom-ui': 0.0.4
+      '@arco-iconbox/react-atom-ui': 0.0.4(react@19.0.0)
       '@emotion/react': 11.11.4(@types/react@19.0.1)(react@19.0.0)
       '@hookform/resolvers': 3.7.0(react-hook-form@7.52.1(react@19.0.0))
       '@radix-ui/react-alert-dialog': 1.1.2(@types/react-dom@19.0.1)(@types/react@19.0.1)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
@@ -8194,7 +8198,7 @@ snapshots:
     transitivePeerDependencies:
       - debug
 
-  axios@1.7.9:
+  axios@1.8.2:
     dependencies:
       follow-redirects: 1.15.9
       form-data: 4.0.0
