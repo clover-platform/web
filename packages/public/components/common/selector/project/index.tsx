@@ -31,8 +31,6 @@ export const ProjectSelector: FC<ProjectSelectorProps> = (props) => {
     }
   }, [teamId, load])
 
-  console.log("ProjectSelector", value)
-
   return <Loading loading={loading}>
     <Select
       placeholder={tt("请选择")}

@@ -1,14 +1,16 @@
-import {FC, PropsWithChildren, useCallback, useEffect, useMemo, useRef, useState} from "react";
-import {Dialog, Form, FormItem} from "@easykit/design";
-import {t} from "@clover/public/locale";
+import {FC, PropsWithChildren, useCallback, useRef, useState} from "react";
+import {Button, Dialog, Form, FormItem} from "@easykit/design";
+import {tt} from "@clover/public/locale";
 import {TeamSelector} from "@clover/public/components/common/selector/team";
 import * as z from "zod";
 import {ProjectSelector} from "@clover/public/components/common/selector/project";
 import {UseFormReturn} from "react-hook-form";
 
 export const getSchema = () => z.object({
-  teamId: z.string(),
-  projectId: z.string(),
+  teamId: z.string()
+    .min(1, tt("请选择团队")),
+  projectId: z.string()
+    .min(1, tt("请选择项目")),
 })
 
 export type ProjectSwitcherProps = PropsWithChildren<{
@@ -16,7 +18,7 @@ export type ProjectSwitcherProps = PropsWithChildren<{
   onSuccess?: () => void;
   asChild?: boolean;
   title: string;
-  teamId: number;
+  teamId?: number;
   projectId?: number;
 }>
 
@@ -24,18 +26,16 @@ export const ProjectSwitcher: FC<ProjectSwitcherProps> = (props) => {
   const {
     title,
     asChild = false, children, className,
+    projectId,
+    teamId
   } = props;
   const [open, setOpen] = useState(false);
-  const [teamId, setTeamId] = useState<number|string>(props.teamId);
   const formRef = useRef<UseFormReturn>(null);
+  const [teamIdValue, setTeamIdValue] = useState<string|number|undefined>(teamId);
 
   const onSubmit = useCallback((data: any) => {
     console.log(data);
   }, [])
-
-  useEffect(() => {
-    formRef.current?.setValue("projectId", undefined);
-  }, [teamId]);
 
   return <span
     onClick={(e) => {
@@ -52,23 +52,33 @@ export const ProjectSwitcher: FC<ProjectSwitcherProps> = (props) => {
       title={title}
       visible={open}
       onCancel={() => setOpen(false)}
+      className={"w-96"}
     >
       <Form
         ref={formRef}
         schema={getSchema()}
         onSubmit={onSubmit}
-        // defaultValues={defaultValues}
-        onValuesChange={(v) => {
-          setTeamId(v.teamId);
-          console.log(v);
+        defaultValues={{
+          projectId: projectId ? `${projectId}` : "",
+          teamId: teamId ? `${teamId}` : "",
         }}
       >
-        <FormItem name="teamId" label={t("团队")}>
-          <TeamSelector className={"w-full"}/>
+        <FormItem name="teamId" label={tt("团队")}>
+          <TeamSelector
+            onChange={(v) => {
+              formRef.current?.setValue("projectId", "");
+              setTeamIdValue(v);
+            }}
+            className={"w-full"}
+          />
         </FormItem>
-        <FormItem name="projectId" label={t("项目")}>
-          <ProjectSelector teamId={teamId} className={"w-full"} />
+        <FormItem name="projectId" label={tt("项目")}>
+          <ProjectSelector
+            teamId={teamIdValue!}
+            className={"w-full"}
+          />
         </FormItem>
+        <Button type={"submit"} className={"w-full"}>{tt("切换")}</Button>
       </Form>
     </Dialog>
   </span>
