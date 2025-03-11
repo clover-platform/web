@@ -38,7 +38,6 @@ export const CollectTeamItem: FC<CollectTeamItemProps> = (props) => {
         <Tooltip content={tt("切换到此团队")}>
           <ProjectSwitcher
             title={tt("切换团队")}
-            asChild={true}
             teamId={team.id}
           >
             <Action className={"!p-1.5"}>

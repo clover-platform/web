@@ -60,27 +60,25 @@ export const ProfileMenu: FC<ProfileMenuProps> = (props) => {
       <Link href={`/profile/${account.username}`}>
         <DropdownMenuItem>{tt("个人资料")}</DropdownMenuItem>
       </Link>
-      <DropdownMenuItem>
+      <DropdownMenuItem className={"p-0"}>
         <ProjectSwitcher
           title={tt("切换团队")}
-          asChild={true}
           teamId={team?.id}
           projectId={project?.id}
         >
-          <div className={"flex justify-start items-center space-x-1"}>
+          <div className={"flex justify-start items-center space-x-1 px-2 py-1.5 w-full"}>
             <span>{tt("切换团队")}</span>
             <span className={"text-secondary-foreground/60"}>{"@"+team?.name}</span>
           </div>
         </ProjectSwitcher>
       </DropdownMenuItem>
-      <DropdownMenuItem>
+      <DropdownMenuItem className={"p-0"}>
         <ProjectSwitcher
           title={tt("切换项目")}
-          asChild={true}
           teamId={team?.id}
           projectId={project?.id}
         >
-          <div className={"flex justify-start items-center space-x-1"}>
+          <div className={"flex justify-start items-center space-x-1 px-2 py-1.5 w-full"}>
             <span>{tt("切换项目")}</span>
             <span className={"text-secondary-foreground/60"}>{"@"+project?.name}</span>
           </div>

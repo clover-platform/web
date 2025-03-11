@@ -36,8 +36,8 @@ importers:
         specifier: workspace:*
         version: link:packages/public
       '@easykit/design':
-        specifier: 0.0.86
-        version: 0.0.86(@types/react-dom@19.0.1)(@types/react@19.0.1)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
+        specifier: 0.0.87
+        version: 0.0.87(@types/react-dom@19.0.1)(@types/react@19.0.1)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
       '@easykit/page-imports':
         specifier: workspace:*
         version: link:packages/page-imports
@@ -351,8 +351,6 @@ packages:
 
   '@arco-iconbox/react-atom-ui@0.0.4':
     resolution: {integrity: sha512-gYBxZRGfVNcGrJu3MGYK6Xtgf9m+oobn/OL8QnqmI6/2zv6JmWwccI+4fMtvDfeh5U7sgfyK9wYh1ftn95Wlpg==}
-    peerDependencies:
-      react: 19.0.0
 
   '@arco-iconbox/react-clover@0.0.35':
     resolution: {integrity: sha512-VIqUX33Vn9p5RsTKXPc0w++EIhpQHb89MSRET4WxytVnASO/KUUhro0baPf9FAyo0HmeyVPWAt9frp+SsugOuw==}
@@ -452,8 +450,8 @@ packages:
     resolution: {integrity: sha512-Pqwr3+Doby9fH0FECbGJLo997heWop7QDnklbRM9gPM+dHVdRN8SzOXiCp0RyAhN01OPgFIP3+w7xsHXfptIsw==}
     engines: {node: '>=12.9.0'}
 
-  '@easykit/design@0.0.86':
-    resolution: {integrity: sha512-efIgHSL0wXa9aZ/c7qrPZFcf5F25jkB1JbtwfE1mFdo/KXrrPDl1oAou4VqZsEWg7j53GQDbGJAxoI6wIw1a1A==}
+  '@easykit/design@0.0.87':
+    resolution: {integrity: sha512-8Dmsk+1ZIxuDyrKyovi655S2i7TZPoWOsFyP5asNJuHiSCtUXf9qZ/2/bJpVJLpgDa5Cq0sCvtgkwthd3TciDQ==}
 
   '@easykit/editor@0.0.19':
     resolution: {integrity: sha512-EpuL3uaqh6x4rwYfIbB6dDbFzEjSdMkiGAtQ1ATLo2kSnQp0GZt6QdshQ874YBcUerk7CdWj1lNdL6W+RmD/uA==}
@@ -2671,9 +2669,6 @@ packages:
   axios@1.7.4:
     resolution: {integrity: sha512-DukmaFRnY6AzAALSH4J2M3k6PkaC+MfaAGdEERRWcC9q3/TWQwLpHR8ZRLKTdQ3aBDL64EdluRDjJqKw+BPZEw==}
 
-  axios@1.7.8:
-    resolution: {integrity: sha512-Uu0wb7KNqK2t5K+YQyVCLM76prD5sRFjKHbJYCP1J7JFGEQ6nN7HWn9+04LAeiJ3ji54lgS/gZCH1oxyrf1SPw==}
-
   axios@1.8.2:
     resolution: {integrity: sha512-ls4GYBm5aig9vWx8AWDSGLpnpDQRtWAfrjU+EuytuODrFBkqesN2RkOQCBzrA1RQNHw1SmRMSDDDSwzNAYQ6Rg==}
 
@@ -3774,7 +3769,7 @@ packages:
     engines: {node: '>= 0.4'}
 
   is-arrayish@0.2.1:
-    resolution: {integrity: sha1-d8mYQFJ6qOyxqLppe4BkWnqSap0=}
+    resolution: {integrity: sha512-zz06S8t0ozoDXMG+ube26zeCTNXcKIPJZJi8hBrF4idCLms4CG9QtK7qBl1boi5ODzFpjswb5JPmHCbMpjaYzg==}
 
   is-arrayish@0.3.2:
     resolution: {integrity: sha512-eVRqCvVlZbuw3GrM63ovNSNAeA1K16kaR/LRY/92w0zxQ5/1YzwblUX652i4Xs9RwAGjW9d9y6X88t8OaAJfWQ==}
@@ -5722,9 +5717,7 @@ snapshots:
       '@jridgewell/gen-mapping': 0.3.5
       '@jridgewell/trace-mapping': 0.3.25
 
-  '@arco-iconbox/react-atom-ui@0.0.4(react@19.0.0)':
-    dependencies:
-      react: 19.0.0
+  '@arco-iconbox/react-atom-ui@0.0.4': {}
 
   '@arco-iconbox/react-clover@0.0.35(react@19.0.0)':
     dependencies:
@@ -5855,9 +5848,9 @@ snapshots:
     transitivePeerDependencies:
       - debug
 
-  '@easykit/design@0.0.86(@types/react-dom@19.0.1)(@types/react@19.0.1)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)':
+  '@easykit/design@0.0.87(@types/react-dom@19.0.1)(@types/react@19.0.1)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)':
     dependencies:
-      '@arco-iconbox/react-atom-ui': 0.0.4(react@19.0.0)
+      '@arco-iconbox/react-atom-ui': 0.0.4
       '@emotion/react': 11.11.4(@types/react@19.0.1)(react@19.0.0)
       '@hookform/resolvers': 3.7.0(react-hook-form@7.52.1(react@19.0.0))
       '@radix-ui/react-alert-dialog': 1.1.2(@types/react-dom@19.0.1)(@types/react@19.0.1)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
@@ -5884,7 +5877,7 @@ snapshots:
       '@radix-ui/react-tooltip': 1.1.4(@types/react-dom@19.0.1)(@types/react@19.0.1)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
       '@tanstack/react-table': 8.20.5(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
       autoprefixer: 10.4.19(postcss@8.4.39)
-      axios: 1.7.8
+      axios: 1.8.2
       class-variance-authority: 0.7.0
       clsx: 2.1.1
       cmdk: 1.0.0(@types/react-dom@19.0.1)(@types/react@19.0.1)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
@@ -8183,14 +8176,6 @@ snapshots:
   axe-core@4.10.2: {}
 
   axios@1.7.4:
-    dependencies:
-      follow-redirects: 1.15.9
-      form-data: 4.0.0
-      proxy-from-env: 1.1.0
-    transitivePeerDependencies:
-      - debug
-
-  axios@1.7.8:
     dependencies:
       follow-redirects: 1.15.9
       form-data: 4.0.0

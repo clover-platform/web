@@ -1,10 +1,13 @@
-import {FC, PropsWithChildren, useCallback, useRef, useState} from "react";
+import {FC, PropsWithChildren, useState} from "react";
 import {Button, Dialog, Form, FormItem} from "@easykit/design";
 import {tt} from "@clover/public/locale";
 import {TeamSelector} from "@clover/public/components/common/selector/team";
 import * as z from "zod";
 import {ProjectSelector} from "@clover/public/components/common/selector/project";
-import {UseFormReturn} from "react-hook-form";
+import classNames from "classnames";
+import {change} from "@clover/public/rest/team";
+import {useFormSubmit} from "@clover/public/hooks/use.form.submit";
+import {useStateLoader} from "@clover/public/components/layout/hooks/use.state.loader";
 
 export const getSchema = () => z.object({
   teamId: z.string()
@@ -16,7 +19,6 @@ export const getSchema = () => z.object({
 export type ProjectSwitcherProps = PropsWithChildren<{
   className?: string;
   onSuccess?: () => void;
-  asChild?: boolean;
   title: string;
   teamId?: number;
   projectId?: number;
@@ -25,29 +27,32 @@ export type ProjectSwitcherProps = PropsWithChildren<{
 export const ProjectSwitcher: FC<ProjectSwitcherProps> = (props) => {
   const {
     title,
-    asChild = false, children, className,
+    children,
+    className,
     projectId,
-    teamId
+    teamId,
+    onSuccess
   } = props;
   const [open, setOpen] = useState(false);
-  const formRef = useRef<UseFormReturn>(null);
   const [teamIdValue, setTeamIdValue] = useState<string|number|undefined>(teamId);
+  const loader = useStateLoader();
+  const {ref, onSubmit, submitting} = useFormSubmit({
+    action: change,
+    onSuccess: () => {
+      onSuccess?.();
+      setOpen(false);
+      loader().then();
+    }
+  })
 
-  const onSubmit = useCallback((data: any) => {
-    console.log(data);
-  }, [])
-
-  return <span
+  return <div
+    className={classNames("w-full", className)}
     onClick={(e) => {
       e.stopPropagation();
       setOpen(true);
     }}
   >
-    {
-      asChild ? children : <button className={className}>
-        {children}
-      </button>
-    }
+    {children}
     <Dialog
       title={title}
       visible={open}
@@ -55,7 +60,7 @@ export const ProjectSwitcher: FC<ProjectSwitcherProps> = (props) => {
       className={"w-96"}
     >
       <Form
-        ref={formRef}
+        ref={ref}
         schema={getSchema()}
         onSubmit={onSubmit}
         defaultValues={{
@@ -66,7 +71,7 @@ export const ProjectSwitcher: FC<ProjectSwitcherProps> = (props) => {
         <FormItem name="teamId" label={tt("团队")}>
           <TeamSelector
             onChange={(v) => {
-              formRef.current?.setValue("projectId", "");
+              ref.current?.setValue("projectId", "");
               setTeamIdValue(v);
             }}
             className={"w-full"}
@@ -78,8 +83,14 @@ export const ProjectSwitcher: FC<ProjectSwitcherProps> = (props) => {
             className={"w-full"}
           />
         </FormItem>
-        <Button type={"submit"} className={"w-full"}>{tt("切换")}</Button>
+        <Button
+          loading={submitting}
+          type={"submit"}
+          className={"w-full"}
+        >
+          {tt("切换")}
+        </Button>
       </Form>
     </Dialog>
-  </span>
+  </div>
 }

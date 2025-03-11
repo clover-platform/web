@@ -2,7 +2,7 @@ import {useCallback, useState} from "react";
 import {useMessage} from "@easykit/design";
 import {CancellablePromise, RestResult} from "@clover/public/types/rest";
 
-export const useFetch = <T, P = void>(api: (params?: P) => CancellablePromise<RestResult<T>>, options?: {
+export const useFetch = <T, P = any>(api: (params?: P) => CancellablePromise<RestResult<T>>, options?: {
   showMessage?: boolean,
   initLoading?: boolean
 }) => {
