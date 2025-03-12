@@ -25,7 +25,7 @@ export const CollectTeamItem: FC<CollectTeamItemProps> = (props) => {
       onClick={onClick}
       className={"bg-primary w-8 h-8 rounded-md flex justify-center items-center text-white"}
     >
-      <IconTeam />
+      { team.cover ? <img className={"w-full h-full object-cover"} alt={"Cover"} src={team.cover}/> : <IconTeam /> }
     </div>
     <div onClick={onClick} className={"flex-1"}>
       <span>{team.name}</span>

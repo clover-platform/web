@@ -1,6 +1,6 @@
-import {get} from "@clover/public/utils/rest";
+import {del, get, post} from "@clover/public/utils/rest";
 import {PageResult} from "@clover/public/types/rest";
-import {Project} from "@/types/project";
+import {Project} from "@clover/public/types/project";
 
 export type ProjectListParams = {
   teamId: number;
@@ -13,4 +13,18 @@ export type ProjectListParams = {
 export type ProjectListResult = PageResult<Project>;
 
 export const list = (params: ProjectListParams) =>
-  get<Project, ProjectListParams>(`@main/project/list`, params);
+  get<ProjectListResult, ProjectListParams>(`@main/project/list`, params);
+
+export type CreateProjectData = {
+  cover?: string;
+  name: string;
+  projectKey: string;
+  teamId: string;
+}
+
+export const create = (data: CreateProjectData) =>
+  post<any, CreateProjectData>(`@main/project/create`, data);
+
+export const deleteProject = (id: number) =>
+  del(`@main/project/${id}`);
+

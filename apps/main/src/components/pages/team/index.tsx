@@ -7,7 +7,7 @@ import {
   BreadcrumbLink,
   BreadcrumbList,
   BreadcrumbPage,
-  BreadcrumbSeparator, Button, Card, DataTable, useAlert
+  BreadcrumbSeparator, Button, Card, DataTable, useAlert, useMessage
 } from "@easykit/design";
 import Link from "next/link";
 import {DASHBOARD_URL} from "@/config/route";
@@ -23,6 +23,7 @@ import {addCollect, cancelCollect, deleteTeam, list} from "@/rest/team";
 import {useRouter, useSearchParams} from "next/navigation";
 import {Team} from "@clover/public/types/team";
 import {useCollectTeam} from "@/hooks/use.collect.team";
+import {useCurrentTeam} from "@clover/public/components/layout/hooks/main";
 
 const initialParams = {
   keyword: '',
@@ -54,6 +55,8 @@ export const TeamPage = () => {
     </div>
   }, [])
   const { load: loadCollect } = useCollectTeam();
+  const team = useCurrentTeam();
+  const msg = useMessage();
 
   useEffect(() => {
     load({type:active}).then();
@@ -102,8 +105,8 @@ export const TeamPage = () => {
           page: query.page,
           size: query.size,
         }}
-        columns={getColumns()}
-        rowActions={getRowActions}
+        columns={getColumns(team?.id)}
+        rowActions={(t) => getRowActions(t, team?.id)}
         data={result?.data || []}
         loading={loading}
         onRowActionClick={({id: key}, {original}) => {
@@ -111,14 +114,16 @@ export const TeamPage = () => {
           if(key === "delete") {
             alert.confirm({
               title: t("删除团队"),
-              description: <div>
-                <div>{tt("团队下的所有项目将会被删除。")}</div>
-                <div>{t("确定删除团队吗？")}</div>
-              </div>,
+              description: <>
+                {tt("团队下的所有项目将会被删除。")}<br/>
+                {t("确定删除团队吗？")}
+              </>,
               onOk: async () => {
-                const { success } = await deleteTeam(id);
+                const { success, message } = await deleteTeam(id);
                 if(success) {
                   reload();
+                }else{
+                  msg.error(message);
                 }
               }
             })

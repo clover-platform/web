@@ -1,11 +1,13 @@
-import {DropdownMenuItemProps, FilterItemProps, Input} from "@easykit/design";
-import {t} from "@clover/public/locale";
+import {Badge, DropdownMenuItemProps, FilterItemProps, Input} from "@easykit/design";
+import {t, tt} from "@clover/public/locale";
 import {DataTableColumn} from "@easykit/design/components/uix/data-table";
 import {TabsTitleItem} from "@clover/public/components/common/tabs-title";
 import {Project} from "@clover/public/types/project";
 import {TeamSelector} from "@clover/public/components/common/selector/team";
 import {UserItem} from "@clover/public/components/common/user-item";
 import {Team} from "@clover/public/types/team";
+import {IconProject, IconTeam} from "@arco-iconbox/react-clover";
+import React from "react";
 
 export const getTabs = (): TabsTitleItem[] => [
   {
@@ -22,7 +24,7 @@ export const getTabs = (): TabsTitleItem[] => [
   }
 ]
 
-export const getColumns = (): DataTableColumn<Project>[] => [
+export const getColumns = (current?: number): DataTableColumn<Project>[] => [
   {
     accessorKey: "name",
     header: t("名称"),
@@ -30,10 +32,14 @@ export const getColumns = (): DataTableColumn<Project>[] => [
     className: "min-w-[200px]",
     cell: ({row}) => {
       const { original } = row;
-      return <span>
+      return <div className={"flex items-center space-x-1"}>
+        <div className={"bg-secondary w-6 h-6 rounded-md flex justify-center items-center text-secondary-foreground"}>
+          { original.cover ? <img className={"w-full h-full object-cover"} alt={"Cover"} src={original.cover}/> : <IconProject /> }
+        </div>
         <span>{original.name}</span>
         <span className={"ml-1 text-secondary-foreground/60"}>@{original.projectKey}</span>
-      </span>
+        { original.id === current ? <Badge>{tt("当前")}</Badge> : null }
+      </div>
     }
   },
   {
@@ -87,7 +93,7 @@ enum MemberType {
   Member = 0,
 }
 
-export const getRowActions = (row: Team): DropdownMenuItemProps[] => {
+export const getRowActions = (project: Project, current?: number): DropdownMenuItemProps[] => {
   return [
     {
       id: "info",
@@ -99,7 +105,7 @@ export const getRowActions = (row: Team): DropdownMenuItemProps[] => {
       type: "item",
       label: t("成员")
     },
-    row.isCollect ? {
+    project.isCollect ? {
       id: "collect.cancel",
       type: "item",
       label: t("取消收藏")
@@ -108,16 +114,16 @@ export const getRowActions = (row: Team): DropdownMenuItemProps[] => {
       type: "item",
       label: t("收藏")
     },
-    {
+    project.id != current && {
       id: "separator.1",
       type: "separator"
     },
-    [MemberType.Member, MemberType.Admin].includes(row.memberType) && {
+    ([MemberType.Member, MemberType.Admin].includes(project.memberType) && project.id != current) && {
       id: "exit",
       type: "item",
       label: t("退出")
     },
-    row.memberType === MemberType.Owner && {
+    (project.memberType === MemberType.Owner && project.id != current) && {
       id: "delete",
       type: "item",
       label: t("删除")

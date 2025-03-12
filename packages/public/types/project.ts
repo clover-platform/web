@@ -11,4 +11,6 @@ export type Project = {
   cover?: string;
   owner: User;
   team: Team;
+  isCollect?: boolean;
+  memberType: number;
 }

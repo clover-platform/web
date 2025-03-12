@@ -3,6 +3,7 @@ import {Team} from "@clover/public/types/team";
 import {PageResult} from "@clover/public/types/rest";
 
 export type CreateTeamData = {
+  cover?: string;
   name: string;
   teamKey: string;
 }

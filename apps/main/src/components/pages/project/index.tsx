@@ -3,7 +3,7 @@
 import {useLayoutConfig} from "@clover/public/components/layout/hooks/use.layout.config";
 import {t, tt} from '@clover/public/locale';
 import {TitleBar} from "@clover/public/components/common/title-bar";
-import {useEffect, useMemo, useState} from "react";
+import {useCallback, useEffect, useMemo, useState} from "react";
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -12,7 +12,7 @@ import {
   BreadcrumbSeparator,
   Button,
   Card,
-  DataTable
+  DataTable, useAlert, useMessage
 } from "@easykit/design";
 import Link from "next/link";
 import {useTableLoader} from "@clover/public/hooks";
@@ -20,10 +20,12 @@ import {list} from "@/rest/project";
 import {getColumns, getFilters, getRowActions, getTabs} from "@/config/pages/project/table";
 import {TabsTitle} from "@clover/public/components/common/tabs-title";
 import {MainLayoutProps} from "@/components/layout/main";
-import {useSearchParams} from "next/navigation";
+import {useRouter, useSearchParams} from "next/navigation";
 import {DASHBOARD_URL} from "@/config/route";
 import {MainPage} from "@clover/public/components/common/page";
 import {Project} from "@clover/public/types/project";
+import {deleteProject} from "@/rest/project";
+import {useCurrentProject} from "@clover/public/components/layout/hooks/main";
 
 const initialParams = {
   teamId: '',
@@ -37,6 +39,7 @@ const ProjectPage = () => {
   useLayoutConfig<MainLayoutProps>({
     active: "project",
   })
+  const router = useRouter();
   const [loading, result, query, load] = useTableLoader<Project>({
     initialParams,
     action: list,
@@ -45,10 +48,18 @@ const ProjectPage = () => {
   const searchParams = useSearchParams();
   const type = searchParams.get('type');
   const [active, setActive] = useState(type || "all");
+  const alert = useAlert();
+  const project = useCurrentProject();
+  const msg = useMessage();
 
   useEffect(() => {
     load({type:active}).then();
   }, [active, load]);
+
+  const reload = useCallback(() => {
+    load().then();
+    // loadCollect().then();
+  }, [load])
 
   const actions = useMemo(() => {
     return <div className={"space-x-2"}>
@@ -96,25 +107,30 @@ const ProjectPage = () => {
           page: query.page,
           size: query.size,
         }}
-        columns={getColumns()}
-        rowActions={(row) => getRowActions(row)}
+        columns={getColumns(project?.id)}
+        rowActions={(row) => getRowActions(row, project?.id)}
         data={result?.data || []}
         loading={loading}
         onRowActionClick={({id: key}, {original}) => {
-          const {id} = original;
-          console.log(id, key);
-          // if(key === "detail") {
-          //     router.push(`/i18n/${original.identifier}/dashboard`);
-          // }else if(key === "activity") {
-          //     router.push(`/i18n/${original.identifier}/activity`);
-          // }else if(key === "delete") {
-          //
-          // }
-        }}
-        onRowClick={(row) => {
-          console.log(row)
-          // const { identifier } = row.original;
-          // router.push(`/i18n/${identifier}/dashboard`);
+          const {id, projectKey} = original;
+          if(key === "delete") {
+            alert.confirm({
+              title: t("删除项目"),
+              description: <>
+                {t("确定删除项目吗？")}
+              </>,
+              onOk: async () => {
+                const { success, message } = await deleteProject(id);
+                if(success) {
+                  reload();
+                }else{
+                  msg.error(message);
+                }
+              }
+            })
+          }else if(["info", "member"].includes(key)) {
+            router.push(`/project/${projectKey}?tab=${key}`);
+          }
         }}
       />
     </Card>
