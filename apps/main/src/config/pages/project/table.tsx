@@ -29,15 +29,17 @@ export const getColumns = (current?: number): DataTableColumn<Project>[] => [
     accessorKey: "name",
     header: t("名称"),
     enableHiding: false,
-    className: "min-w-[200px]",
+    className: "w-[300px] min-w-[300px]",
     cell: ({row}) => {
       const { original } = row;
       return <div className={"flex items-center space-x-1"}>
         <div className={"bg-secondary w-6 h-6 rounded-md flex justify-center items-center text-secondary-foreground"}>
           { original.cover ? <img className={"w-full h-full object-cover"} alt={"Cover"} src={original.cover}/> : <IconProject /> }
         </div>
-        <span>{original.name}</span>
-        <span className={"ml-1 text-secondary-foreground/60"}>@{original.projectKey}</span>
+        <div>
+          <span>{original.name}</span>
+          <span className={"ml-1 text-secondary-foreground/60"}>@{original.projectKey}</span>
+        </div>
         { original.id === current ? <Badge>{tt("当前")}</Badge> : null }
       </div>
     }

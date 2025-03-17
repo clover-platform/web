@@ -1,28 +1,28 @@
-import {initTeamCollectState, teamCollectState} from "@/state/collect";
+import {loadedTeamCollectState, teamCollectState} from "@/state/collect";
 import { useAtom } from "jotai";
 import {useCallback, useEffect, useState} from "react";
 import {myCollect} from "@/rest/team";
 
 export const useCollectTeam = () => {
-  const [inited, setInited] = useAtom(initTeamCollectState);
+  const [loaded, setLoaded] = useAtom(loadedTeamCollectState);
   const [teamCollect, setTeamCollect] = useAtom(teamCollectState);
   const [loading, setLoading] = useState(false);
 
   const load = useCallback(async () => {
     setLoading(true);
-    setInited(true);
+    setLoaded(true);
     const { success, data } = await myCollect();
     if(success) {
       setTeamCollect(data!);
     }
     setLoading(false);
-  }, [setInited, setTeamCollect])
+  }, [setLoaded, setTeamCollect])
 
   useEffect(() => {
-    if(!inited) {
+    if(!loaded) {
       load().then();
     }
-  }, [inited, load]);
+  }, [loaded, load]);
 
-  return { inited, loading, load, collect: teamCollect };
+  return { loaded, loading, load, collect: teamCollect };
 }

@@ -24,8 +24,10 @@ import {useRouter, useSearchParams} from "next/navigation";
 import {DASHBOARD_URL} from "@/config/route";
 import {MainPage} from "@clover/public/components/common/page";
 import {Project} from "@clover/public/types/project";
-import {deleteProject} from "@/rest/project";
+import {deleteProject, addCollect, cancelCollect} from "@/rest/project";
 import {useCurrentProject} from "@clover/public/components/layout/hooks/main";
+import {useCollectTeam} from "@/hooks/use.collect.team";
+import {useCollectProject} from "@/hooks/use.collect.project";
 
 const initialParams = {
   teamId: '',
@@ -51,6 +53,7 @@ const ProjectPage = () => {
   const alert = useAlert();
   const project = useCurrentProject();
   const msg = useMessage();
+  const { load: loadCollect } = useCollectProject();
 
   useEffect(() => {
     load({type:active}).then();
@@ -58,8 +61,8 @@ const ProjectPage = () => {
 
   const reload = useCallback(() => {
     load().then();
-    // loadCollect().then();
-  }, [load])
+    loadCollect().then();
+  }, [load, loadCollect])
 
   const actions = useMemo(() => {
     return <div className={"space-x-2"}>
@@ -130,6 +133,28 @@ const ProjectPage = () => {
             })
           }else if(["info", "member"].includes(key)) {
             router.push(`/project/${projectKey}?tab=${key}`);
+          }else if(key === "collect") {
+            alert.confirm({
+              title: t("收藏项目"),
+              description: t("确定收藏项目吗？"),
+              onOk: async () => {
+                const { success } = await addCollect(id);
+                if(success) {
+                  reload();
+                }
+              }
+            })
+          }else if(key === "collect.cancel") {
+            alert.confirm({
+              title: t("取消收藏项目"),
+              description: t("确定取消收藏项目吗？"),
+              onOk: async () => {
+                const { success } = await cancelCollect(id);
+                if(success) {
+                  reload();
+                }
+              }
+            })
           }
         }}
       />

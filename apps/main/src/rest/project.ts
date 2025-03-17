@@ -28,3 +28,12 @@ export const create = (data: CreateProjectData) =>
 export const deleteProject = (id: number) =>
   del(`@main/project/${id}`);
 
+export const myCollect = () =>
+  get<Project[]>(`@main/project/collect/my`);
+
+export const addCollect = (id: number) =>
+  post(`@main/project/collect/add`, {id});
+
+export const cancelCollect = (id: number) =>
+  del(`@main/project/collect/cancel`, {id});
+

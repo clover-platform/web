@@ -1,17 +1,16 @@
 import {
   DropdownMenuContent,
   DropdownMenuItem,
-  DropdownMenuSeparator, Empty,
+  DropdownMenuSeparator,
 } from "@easykit/design";
 import React from "react";
 import {tt} from "@clover/public/locale";
 import Link from "next/link";
+import {ProjectCollect} from "@/components/layout/main/header/project/collect";
 
 export const Project = () => {
   return <DropdownMenuContent className="w-96" align={"start"}>
-    <div>
-      <Empty text={tt("你关注的项目在此处显示")}/>
-    </div>
+    <ProjectCollect />
     <DropdownMenuSeparator />
     <Link href={"/project"}>
       <DropdownMenuItem>{tt("查看所有项目")}</DropdownMenuItem>

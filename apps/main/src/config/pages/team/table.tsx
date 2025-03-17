@@ -27,15 +27,17 @@ export const getColumns = (currentTeamId?: number): DataTableColumn<Team>[] => [
     accessorKey: "name",
     header: t("名称"),
     enableHiding: false,
-    className: "min-w-[200px]",
+    className: "w-[300px] min-w-[300px]",
     cell: ({row}) => {
       const { original } = row;
       return <div className={"flex items-center space-x-1"}>
         <div className={"bg-secondary w-6 h-6 rounded-md flex justify-center items-center text-secondary-foreground"}>
           { original.cover ? <img className={"w-full h-full object-cover"} alt={"Cover"} src={original.cover}/> : <IconTeam /> }
         </div>
-        <span>{original.name}</span>
-        <span className={"ml-1 text-secondary-foreground/60"}>@{original.teamKey}</span>
+        <div>
+          <span>{original.name}</span>
+          <span className={"ml-1 text-secondary-foreground/60"}>@{original.teamKey}</span>
+        </div>
         { original.id === currentTeamId ? <Badge>{tt("当前")}</Badge> : null }
       </div>
     }
