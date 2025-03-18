@@ -8,6 +8,7 @@ import {useRouter} from "next/navigation";
 import {useStateLoader} from "@clover/public/components/layout/hooks/use.state.loader";
 import {useFormSubmit} from "@clover/public/hooks/use.form.submit";
 import {create, CreateProjectData} from "@/rest/project";
+import {useCurrentTeam} from "@clover/public/components/layout/hooks/main";
 
 export const ProjectForm = () => {
   const router = useRouter();
@@ -19,11 +20,15 @@ export const ProjectForm = () => {
       load().then();
     }
   })
+  const team = useCurrentTeam();
 
   return <Form
     ref={ref}
     schema={getSchema()}
     onSubmit={onSubmit}
+    defaultValues={{
+      teamId: team?.id ? `${team.id}` : undefined,
+    }}
   >
     <FormItem name="cover" label={t("图标")}>
       <ImageCropper className={"w-20 h-20"} />

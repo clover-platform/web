@@ -26,7 +26,6 @@ import {MainPage} from "@clover/public/components/common/page";
 import {Project} from "@clover/public/types/project";
 import {deleteProject, addCollect, cancelCollect} from "@/rest/project";
 import {useCurrentProject} from "@clover/public/components/layout/hooks/main";
-import {useCollectTeam} from "@/hooks/use.collect.team";
 import {useCollectProject} from "@/hooks/use.collect.project";
 
 const initialParams = {

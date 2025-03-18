@@ -1,7 +1,8 @@
 import {IconNotice, IconShare} from "@arco-iconbox/react-clover";
 import {
   Tabs, TabsList, TabsTrigger, TabsContent,
-  Action, DropdownMenu, DropdownMenuContent, DropdownMenuTrigger} from "@easykit/design";
+  Action, DropdownMenu, DropdownMenuContent, DropdownMenuTrigger, Empty
+} from "@easykit/design";
 import {useState} from "react";
 import {tt} from "@clover/public/locale";
 
@@ -29,10 +30,10 @@ export const Notice = () => {
           <TabsTrigger value="follow">{tt("已关注")}</TabsTrigger>
         </TabsList>
         <TabsContent value="all">
-          1
+          <Empty text={tt("暂无通知")} />
         </TabsContent>
         <TabsContent value="follow">
-          2
+          <Empty text={tt("暂无通知")} />
         </TabsContent>
       </Tabs>
     </DropdownMenuContent>
