@@ -1,18 +1,18 @@
 {
-    "module": "i18n-web",
-    "languages": [
-        {
-            "code": "zh-CN",
-            "i18n": "zh-CN",
-            "source": true
-        },
-        {
-            "code": "zh-TW",
-            "i18n": "zh-TW"
-        },
-        {
-            "code": "en-US",
-            "i18n": "en-US"
-        }
-    ]
+  "module": "i18n-web",
+  "languages": [
+    {
+      "code": "zh-CN",
+      "i18n": "zh-CN",
+      "source": true
+    },
+    {
+      "code": "zh-TW",
+      "i18n": "zh-TW"
+    },
+    {
+      "code": "en-US",
+      "i18n": "en-US"
+    }
+  ]
 }

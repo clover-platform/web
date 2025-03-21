@@ -1,25 +1,28 @@
-import { MainLayout as PublicMainLayout, PathProps } from "@clover/public/components/layout/main";
-import {FC, PropsWithChildren} from "react";
-import { getNavMenus } from "@clover/public/config/layout/main";
+import {FC} from "react";
+import {MainLayout as PublicMainLayout, MainLayoutProps as PublicMainLayoutProps} from "@clover/public/components/layout/main";
 import {useLayoutProps} from "@clover/public/components/layout/hooks/use.layout.props";
-import { t } from '@clover/public/locale';
+import {Header} from "./header";
+import {useUnauthorizedHandle} from "@clover/public/hooks/use.unauthorized.handle";
 
-export type MainLayoutProps = {
-    active?: string;
-    path?: PathProps[];
-    className?: string;
-} & PropsWithChildren;
+export type MainLayoutProps = PublicMainLayoutProps & {
+  active?: string;
+};
 
 export const MainLayout: FC<MainLayoutProps> = (origin) => {
-    const props = useLayoutProps<MainLayoutProps>(origin);
-    return <PublicMainLayout
-        {...props}
-        sidebarProps={{
-            menus: getNavMenus(),
-            title: t("你的工作"),
-            active: props.active
-        }}
-    >
-        { props.children }
-    </PublicMainLayout>
+  const props = useLayoutProps<MainLayoutProps>(origin);
+  useUnauthorizedHandle();
+
+  return <PublicMainLayout
+    className={"bg-secondary dark:bg-background"}
+    headerProps={{
+      logoUrl: "/dashboard",
+      className: "bg-background dark:bg-black/50",
+      extra: <Header active={props.active}/>
+    }}
+    footerProps={{
+      simple: true,
+    }}
+  >
+    {props.children}
+  </PublicMainLayout>
 }

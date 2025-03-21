@@ -36,7 +36,7 @@ export const Assistant = () => {
       <div className={"flex flex-wrap"}>
         {
           getSuggestion().map((item) => {
-            return <div key={item.title} className={"flex justify-center items-center rounded-full border mr-2xs mb-2xs cursor-pointer"}>
+            return <div key={item.title} className={"flex justify-center items-center rounded-full border mr-2xs mb-2xs cursor-pointer text-sm"}>
               <div className={"px-2 py-1 bg-secondary text-secondary-foreground rounded-l-full border-r flex justify-center items-center space-x-1"}>
                 {item.icon}
                 <span>{item.title}</span>

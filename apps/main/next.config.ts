@@ -4,8 +4,8 @@ import withPageImports from "@easykit/page-imports";
 const configWrapper = withPageImports({
   imports: [
     "@clover/public/plugin/rest.server",
-    "@/plugin/locales",
     "@clover/public/plugin/locales",
+    "@/plugin/locales",
     "@/assets/style/index.scss"
   ]
 })

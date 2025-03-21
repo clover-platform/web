@@ -5,9 +5,9 @@ import publicConfig from "@clover/public/config/tailwind";
 import merge from "lodash/merge";
 
 const config: Config = {
-    ...merge(tailwindConfig, publicConfig),
-    plugins: [
-        ta,
-    ],
+  ...merge(tailwindConfig, publicConfig),
+  plugins: [
+    ta,
+  ],
 }
 export default config;

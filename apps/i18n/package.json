@@ -1,25 +1,25 @@
 {
-    "name": "@clover/i18n",
-    "version": "0.0.1",
-    "private": true,
-    "type": "module",
-    "scripts": {
-        "dev": "next dev -p 3702",
-        "start": "next start -p 3702",
-        "build": "next build",
-        "lint": "next lint",
-        "i18n": "i18n-cli"
-    },
-    "dependencies": {
-        "react-flag-icon-css": "1.0.25"
-    },
-    "devDependencies": {
-        "@types/react-flag-icon-css": "1.0.10"
-    },
-    "postcss": {
-        "plugins": {
-            "tailwindcss": {},
-            "autoprefixer": {}
-        }
+  "name": "@clover/i18n",
+  "version": "0.0.1",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "next dev -p 3702",
+    "start": "next start -p 3702",
+    "build": "next build",
+    "lint": "next lint",
+    "i18n": "i18n-cli"
+  },
+  "dependencies": {
+    "react-flag-icon-css": "1.0.25"
+  },
+  "devDependencies": {
+    "@types/react-flag-icon-css": "1.0.10"
+  },
+  "postcss": {
+    "plugins": {
+      "tailwindcss": {},
+      "autoprefixer": {}
     }
+  }
 }
