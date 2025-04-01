@@ -18,6 +18,6 @@
     "whatwg-fetch": "3.6.20"
   },
   "devDependencies": {
-    "next": "15.1.7"
+    "next": "15.2.3"
   }
 }
