@@ -72,7 +72,9 @@ export const LoginForm: FC<LoginFormProps> = (props) => {
       <FormItem name="password" label={passwordLabel}>
         <Input placeholder={t("请输入密码")} type={"password"}/>
       </FormItem>
-      <Button loading={loading} long type={"submit"}>{t("立即登录")}</Button>
+      <div>
+        <Button className={"mt-sm"} loading={loading} long type={"submit"}>{t("立即登录")}</Button>
+      </div>
     </Form>
     <Dialog
       visible={visible}

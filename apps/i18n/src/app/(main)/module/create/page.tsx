@@ -1,15 +1,15 @@
 import {keywords, title} from "@clover/public/utils/seo";
-import {ModulePage} from "@/components/pages/module";
-import {t} from '@clover/public/locale';
+import {CreateModulePage} from "@/components/pages/module/create";
+import {tt} from '@clover/public/locale';
 import {Metadata} from "next";
 
 export async function generateMetadata(): Promise<Metadata> {
   return {
-    title: title(t("国际化")),
+    title: title(tt("创建模块")),
     keywords: keywords(),
   }
 }
 
 export default function Page() {
-  return <ModulePage />
+  return <CreateModulePage/>;
 }

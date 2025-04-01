@@ -5,6 +5,7 @@ export type Account = {
   currentProjectId: number;
   currentTeamId: number;
   username: string;
+  avatar?: string;
 }
 
 export type User = {

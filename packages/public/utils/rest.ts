@@ -154,7 +154,10 @@ export function download<T, P = undefined>(url: string, params?: P, config?: Axi
 }
 
 export const alias = (map: Record<string, any>) => {
-  aliasMap = map;
+  aliasMap = {
+    ...aliasMap,
+    ...map,
+  };
 };
 
 export const config = (config: RestConfig) => {
