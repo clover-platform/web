@@ -7,9 +7,6 @@ export default {
   reactStrictMode: false,
   trailingSlash: false,
   transpilePackages: ['@clover/public'],
-  devIndicators: {
-    buildActivity: false
-  },
   compiler: {
     removeConsole: !isDev,
   },
