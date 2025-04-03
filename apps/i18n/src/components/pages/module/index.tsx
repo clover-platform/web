@@ -46,15 +46,11 @@ export const ModulePage = () => {
   });
 
   useEffect(() => {
-    load({type}).then();
-  }, [load, type]);
-
-  useEffect(() => {
     load({
       type: active,
       page: 1,
     }).then();
-  }, [active]);
+  }, [active, load]);
 
   const actions = <Space>
     <Link href={"/module/create"}>
