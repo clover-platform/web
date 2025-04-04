@@ -1,26 +1,13 @@
 import {Action, DropdownMenu, DropdownMenuContent, DropdownMenuTrigger} from "@easykit/design";
 import {IconApps} from "@arco-iconbox/react-clover";
-import {useCallback, useEffect, useState} from "react";
+import {useState} from "react";
 import {AppsLoading} from "@clover/public/components/layout/main/header/apps/loading";
-import {apps as appsRest, AppsItemProps} from "@clover/public/rest/config";
 import {AppsItem} from "@clover/public/components/layout/main/header/apps/item";
+import {useAppsLoader} from "@clover/public/hooks/use.apps.loader";
 
 export const Apps = () => {
   const [open, setOpen] = useState(false);
-  const [loading, setLoading] = useState(true);
-  const [apps, setApps] = useState<AppsItemProps[]>([]);
-
-  const load = useCallback(async () => {
-    const {success, data} = await appsRest();
-    setLoading(false);
-    setApps(success ? data! : []);
-  }, [])
-
-  useEffect(() => {
-    if (open && loading) {
-      load().then();
-    }
-  }, [open, loading, load])
+  const {loading, apps} = useAppsLoader();
 
   return <DropdownMenu open={open} onOpenChange={setOpen}>
     <DropdownMenuTrigger asChild>

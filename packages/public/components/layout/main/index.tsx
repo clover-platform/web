@@ -1,4 +1,4 @@
-import {FC, PropsWithChildren, useMemo} from "react";
+import {FC, PropsWithChildren, useEffect, useMemo} from "react";
 import {Header, HeaderProps} from "@clover/public/components/layout/main/header";
 import {Footer, FooterProps} from "@clover/public/components/layout/main/footer";
 import classNames from "classnames";
@@ -7,6 +7,7 @@ import {useAtomValue} from "jotai";
 import {LoginLayout} from "@clover/public/components/layout/login";
 import {Guide} from "@clover/public/components/layout/main/guide";
 import {isLoginState} from "@clover/public/state/account";
+import {useAppsLoader} from "@clover/public/hooks/use.apps.loader";
 
 export type MainLayoutProps = PropsWithChildren<{
   headerProps?: HeaderProps;
@@ -29,6 +30,11 @@ export const MainLayout: FC<MainLayoutProps> = (props) => {
   const projects = useAtomValue(projectsState);
   const isLogin = useAtomValue(isLoginState);
   const needInit = useMemo(() => isLogin && (!teams?.length || !projects.length), [teams, projects, isLogin])
+  const {load} = useAppsLoader();
+
+  useEffect(() => {
+    load().then();
+  }, [load])
 
   return needInit ? <LoginLayout showLogo={false}>
     <Guide />

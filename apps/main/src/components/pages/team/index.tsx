@@ -2,15 +2,11 @@
 
 import {MainPage} from "@clover/public/components/common/page";
 import {
-  Breadcrumb,
   BreadcrumbItem,
-  BreadcrumbLink,
-  BreadcrumbList,
   BreadcrumbPage,
-  BreadcrumbSeparator, Button, Card, DataTable, useAlert, useMessage
+  Button, Card, DataTable, useAlert, useMessage
 } from "@easykit/design";
 import Link from "next/link";
-import {DASHBOARD_URL} from "@/config/route";
 import {t, tt} from "@clover/public/locale";
 import {TitleBar} from "@clover/public/components/common/title-bar";
 import {TabsTitle} from "@clover/public/components/common/tabs-title";
@@ -24,6 +20,7 @@ import {useRouter, useSearchParams} from "next/navigation";
 import {Team} from "@clover/public/types/team";
 import {useCollectTeam} from "@/hooks/use.collect.team";
 import {useCurrentTeam} from "@clover/public/components/layout/hooks/main";
+import {AppBreadcrumb} from "@/components/common/app-breadcrumb";
 
 const initialParams = {
   keyword: '',
@@ -68,19 +65,11 @@ export const TeamPage = () => {
   }, [load, loadCollect])
 
   return <MainPage>
-    <Breadcrumb>
-      <BreadcrumbList>
-        <BreadcrumbItem>
-          <BreadcrumbLink asChild={true}>
-            <Link href={DASHBOARD_URL}>{tt("控制台")}</Link>
-          </BreadcrumbLink>
-        </BreadcrumbItem>
-        <BreadcrumbSeparator />
-        <BreadcrumbItem>
-          <BreadcrumbPage>{title}</BreadcrumbPage>
-        </BreadcrumbItem>
-      </BreadcrumbList>
-    </Breadcrumb>
+    <AppBreadcrumb>
+      <BreadcrumbItem>
+        <BreadcrumbPage>{title}</BreadcrumbPage>
+      </BreadcrumbItem>
+    </AppBreadcrumb>
     <TitleBar
       title={title}
       actions={actions}

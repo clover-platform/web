@@ -24,6 +24,7 @@ import {useLayoutConfig} from "@clover/public/components/layout/hooks/use.layout
 import {MainLayoutProps} from "@/components/layout/main";
 import {tt} from '@clover/public/locale';
 import {MainPage} from "@clover/public/components/common/page";
+import {AppBreadcrumb} from "@/components/common/app-breadcrumb";
 
 const initialParams = {
   keyword: '',
@@ -59,13 +60,11 @@ export const ModulePage = () => {
   </Space>;
 
   return <MainPage>
-    <Breadcrumb>
-      <BreadcrumbList>
-        <BreadcrumbItem>
-          <BreadcrumbPage>{title}</BreadcrumbPage>
-        </BreadcrumbItem>
-      </BreadcrumbList>
-    </Breadcrumb>
+    <AppBreadcrumb>
+      <BreadcrumbItem>
+        <BreadcrumbPage>{title}</BreadcrumbPage>
+      </BreadcrumbItem>
+    </AppBreadcrumb>
     <TitleBar
       title={title}
       actions={actions}

@@ -5,11 +5,8 @@ import {t, tt} from '@clover/public/locale';
 import {TitleBar} from "@clover/public/components/common/title-bar";
 import {useCallback, useEffect, useMemo, useState} from "react";
 import {
-  Breadcrumb,
   BreadcrumbItem,
-  BreadcrumbLink,
-  BreadcrumbList, BreadcrumbPage,
-  BreadcrumbSeparator,
+  BreadcrumbPage,
   Button,
   Card,
   DataTable, useAlert, useMessage
@@ -21,12 +18,12 @@ import {getColumns, getFilters, getRowActions, getTabs} from "@/config/pages/pro
 import {TabsTitle} from "@clover/public/components/common/tabs-title";
 import {MainLayoutProps} from "@/components/layout/main";
 import {useRouter, useSearchParams} from "next/navigation";
-import {DASHBOARD_URL} from "@/config/route";
 import {MainPage} from "@clover/public/components/common/page";
 import {Project} from "@clover/public/types/project";
 import {deleteProject, addCollect, cancelCollect} from "@/rest/project";
 import {useCurrentProject} from "@clover/public/components/layout/hooks/main";
 import {useCollectProject} from "@/hooks/use.collect.project";
+import {AppBreadcrumb} from "@/components/common/app-breadcrumb";
 
 const initialParams = {
   teamId: '',
@@ -72,19 +69,11 @@ const ProjectPage = () => {
   }, [])
 
   return <MainPage>
-    <Breadcrumb>
-      <BreadcrumbList>
-        <BreadcrumbItem>
-          <BreadcrumbLink asChild={true}>
-            <Link href={DASHBOARD_URL}>{tt("控制台")}</Link>
-          </BreadcrumbLink>
-        </BreadcrumbItem>
-        <BreadcrumbSeparator />
-        <BreadcrumbItem>
-          <BreadcrumbPage>{tt("项目")}</BreadcrumbPage>
-        </BreadcrumbItem>
-      </BreadcrumbList>
-    </Breadcrumb>
+    <AppBreadcrumb>
+      <BreadcrumbItem>
+        <BreadcrumbPage>{tt("项目")}</BreadcrumbPage>
+      </BreadcrumbItem>
+    </AppBreadcrumb>
     <TitleBar
       title={t("项目")}
       actions={actions}

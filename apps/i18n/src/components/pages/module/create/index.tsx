@@ -21,6 +21,7 @@ import {MainLayoutProps} from "@/components/layout/main";
 import {t, tt} from '@clover/public/locale';
 import {MainPage} from "@clover/public/components/common/page";
 import Link from "next/link";
+import {AppBreadcrumb} from "@/components/common/app-breadcrumb";
 
 export const CreateModulePage = () => {
   useLayoutConfig<MainLayoutProps>({
@@ -42,19 +43,17 @@ export const CreateModulePage = () => {
   }
 
   return <MainPage>
-    <Breadcrumb>
-      <BreadcrumbList>
-        <BreadcrumbItem>
-          <BreadcrumbLink asChild={true}>
-            <Link href={"/"}>{tt("模块")}</Link>
-          </BreadcrumbLink>
-        </BreadcrumbItem>
-        <BreadcrumbSeparator/>
-        <BreadcrumbItem>
-          <BreadcrumbPage>{tt("创建模块")}</BreadcrumbPage>
-        </BreadcrumbItem>
-      </BreadcrumbList>
-    </Breadcrumb>
+    <AppBreadcrumb>
+      <BreadcrumbItem>
+        <BreadcrumbLink asChild={true}>
+          <Link href={"/"}>{tt("模块")}</Link>
+        </BreadcrumbLink>
+      </BreadcrumbItem>
+      <BreadcrumbSeparator/>
+      <BreadcrumbItem>
+        <BreadcrumbPage>{tt("创建模块")}</BreadcrumbPage>
+      </BreadcrumbItem>
+    </AppBreadcrumb>
     <TitleBar title={t("创建模块")}/>
     <Card>
       <ModuleForm onSubmit={onSubmit}>
