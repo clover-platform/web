@@ -1,10 +1,9 @@
-import isArray from "lodash/isArray";
-import isBoolean from "lodash/isBoolean";
+import {isBoolean} from "es-toolkit";
 import {ReadonlyURLSearchParams} from "next/dist/client/components/navigation.react-server";
 
 export const withQuery = (href: string, withQuery: boolean | string[] | undefined, query: ReadonlyURLSearchParams) => {
-  if (isArray(withQuery)) {
-    const q = withQuery.map((name) => {
+  if (Array.isArray(withQuery)) {
+    const q = withQuery.map((name: string) => {
       const value = query.get(name);
       return `${name}=${value}`;
     }).join("&");

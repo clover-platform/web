@@ -2,7 +2,7 @@ import type {Config} from 'tailwindcss';
 import {tailwindConfig } from "@easykit/design/lib";
 import ta from "tailwindcss-animate";
 import publicConfig from "@clover/public/config/tailwind";
-import merge from "lodash/merge";
+import { merge } from "es-toolkit";
 
 const config: Config = {
   ...merge(tailwindConfig, publicConfig),

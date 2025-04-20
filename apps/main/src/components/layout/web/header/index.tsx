@@ -105,8 +105,8 @@ export const Header: FC<HeaderProps> = () => {
         </NavigationMenuContent>
       </NavigationMenuItem>
       <NavigationMenuItem>
-        <Link href="/docs" legacyBehavior passHref>
-          <NavigationMenuLink className={navigationMenuTriggerStyle()}>
+        <Link href="/docs" passHref>
+          <NavigationMenuLink className={navigationMenuTriggerStyle()} asChild>
             Documentation
           </NavigationMenuLink>
         </Link>

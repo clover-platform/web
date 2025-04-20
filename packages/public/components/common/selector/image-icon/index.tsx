@@ -1,7 +1,7 @@
 import {Popover, PopoverContent, PopoverTrigger} from "@easykit/design";
 import {FC, HTMLAttributes, PropsWithChildren, useEffect, useMemo, useState} from "react";
 import {ImageCropper} from "@clover/public/components/common/cropper";
-import cloneDeep from "lodash/cloneDeep";
+import { cloneDeep } from "es-toolkit";
 import classNames from "classnames";
 
 export type ImageIconSelectorProps = {

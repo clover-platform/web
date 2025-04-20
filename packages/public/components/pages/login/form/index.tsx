@@ -9,7 +9,7 @@ import {setToken, Token} from "@clover/public/utils/token";
 import {CodeInput} from "@clover/public/components/common/input/code";
 import * as z from "zod";
 import {CODE} from "@clover/public/utils/regular";
-import cloneDeep from "lodash/cloneDeep";
+import { cloneDeep } from "es-toolkit";
 
 const getSchema = () => z.object({
   code: z.string()

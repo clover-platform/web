@@ -1,5 +1,3 @@
-import isArray from "lodash/isArray";
-import isString from "lodash/isString";
 import {t} from '@clover/public/locale';
 
 export const title = (title: string) => {
@@ -14,9 +12,9 @@ export const title = (title: string) => {
 
 export const keywords = (keyword?: string | Array<string>) => {
   const list = [t("幸运草"), t("任务管理"), t("甘特图"), t("问题管理")];
-  if (isString(keyword)) {
+  if (typeof keyword === 'string') {
     list.push(keyword);
-  } else if (isArray(keyword)) {
+  } else if (Array.isArray(keyword)) {
     list.push(...keyword);
   }
   return list.join(', ');

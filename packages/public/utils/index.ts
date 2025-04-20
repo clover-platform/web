@@ -1,9 +1,4 @@
-import cloneDeep from 'lodash/cloneDeep';
-import omit from 'lodash/omit';
-import QRCode from 'qrcode';
-import {isValidElement} from 'react';
 import {EMAIL, URL as URL_REG} from "./regular";
-import {t} from '@clover/public/locale';
 
 const langList = [
   {
@@ -71,7 +66,8 @@ export const startWithLang = (path: string) => {
 
 function uuid() {
   return 'xxxxxxxxxxxx4xxxyxxxxxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
-    let r = Math.random() * 16 | 0, v = c === 'x' ? r : (r & 0x3 | 0x8);
+    const r = Math.random() * 16 | 0;
+    const v = c === 'x' ? r : (r & 0x3 | 0x8);
     return v.toString(16);
   });
 }
@@ -91,20 +87,24 @@ function loadScript(id: string, url: string) {
       return;
     }
     if (script.readyState) {
-      let originEvent = script.onreadystatechange;
+      const originEvent = script.onreadystatechange;
       script.onreadystatechange = function (event: any) {
         script.loaded = true;
         if (this.readyState === "loaded" || this.readyState === "complete") {
-          originEvent && originEvent(event);
+          if (originEvent) {
+            originEvent(event);
+          }
           console.log('script', id, 'ready');
           resolve(id);
         }
       };
     } else {
-      let originEvent = script.onload;
+      const originEvent = script.onload;
       script.onload = function (event: any) {
         script.loaded = true;
-        originEvent && originEvent(event);
+        if (originEvent) {
+          originEvent(event);
+        }
         console.log('script', id, 'onload');
         resolve(id);
       };
@@ -126,9 +126,11 @@ function loadStyle(id: string, url: string) {
       resolve(id);
       return;
     }
-    let originEvent = link.onload;
+    const originEvent = link.onload;
     link.onload = function (event: any) {
-      originEvent && originEvent(event);
+      if (originEvent) {
+        originEvent(event);
+      }
       console.log('loadStyle', id, 'onload');
       link.loaded = true;
       resolve(id);

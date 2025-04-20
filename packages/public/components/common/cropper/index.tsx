@@ -14,6 +14,7 @@ export type ImageCropperProps = {
   cropperClassName?: string;
   value?: string;
   onChange?: (value: string) => void;
+  aspectRatio?: number;
 };
 
 export const ImageCropper: FC<ImageCropperProps> = (props) => {

@@ -1,13 +1,9 @@
 import {useCallback, useMemo, useRef, useState} from "react";
-import entries from 'lodash/entries';
-import keys from 'lodash/keys';
-import cloneDeep from 'lodash/cloneDeep';
-import pick from 'lodash/pick';
+import { cloneDeep, pick } from "es-toolkit";
 import {usePathname, useRouter, useSearchParams} from "next/navigation";
 import {useMessage} from "@easykit/design";
-import {RestResult} from "@clover/public/types/rest";
+import {RestResult, CancellablePromise} from "@clover/public/types/rest";
 import {t} from '@clover/public/locale';
-import {CancellablePromise} from "@clover/public/utils/rest";
 
 export interface TableLoaderOptions {
   initialParams: any;
@@ -27,7 +23,7 @@ export const useUrlQuery = () => {
   return useMemo(() => {
     const params = new URLSearchParams(searchParams)
     const query: any = {};
-    for (const key of params.keys() as any) {
+    for (const key of params.keys()) {
       query[key] = params.get(key) || '';
     }
     return query;
@@ -35,7 +31,7 @@ export const useUrlQuery = () => {
 }
 
 const standardRestParams = (params = {}) =>
-  entries(params).reduce((prev, next) => {
+  Object.entries(params).reduce((prev: any, next) => {
     const [key, value] = next;
     let v = value;
     if (v === 'null') {
@@ -45,7 +41,7 @@ const standardRestParams = (params = {}) =>
     } else if (v === 'false' || v === 'true') {
       v = v === 'true'
     }
-    (prev as any)[key] = v;
+    prev[key] = v;
     return prev;
   }, {});
 
@@ -65,7 +61,7 @@ export const useTableLoader = <D>(options: TableLoaderOptions) => {
     data: D[];
   }> | null>(null);
   const legalKeys = useRef([
-    ...keys(Object.assign((cloneDeep(initialParams) || {}), reqInit)),
+    ...Object.keys(Object.assign((cloneDeep(initialParams) || {}), reqInit)),
     ...(keysOptions||[])
   ]);
   const encodeParamsRef = useRef(encodeParams);
