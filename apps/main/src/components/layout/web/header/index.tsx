@@ -56,10 +56,10 @@ const components: { title: string; href: string; description: string }[] = [
 export const Header: FC<HeaderProps> = () => {
   return <NavigationMenu>
     <NavigationMenuList>
-      <NavigationMenuItem>
+      <NavigationMenuItem value="getting-started">
         <NavigationMenuTrigger>Getting started</NavigationMenuTrigger>
         <NavigationMenuContent>
-          <ul className="grid gap-3 p-4 md:w-[400px] lg:w-[500px] lg:grid-cols-[.75fr_1fr]">
+          <ul className="grid gap-3 p-4 !w-[400px] md:w-[400px] lg:w-[500px] lg:grid-cols-[.75fr_1fr]">
             <li className="row-span-3">
               <NavigationMenuLink asChild>
                 <Link
@@ -88,10 +88,10 @@ export const Header: FC<HeaderProps> = () => {
           </ul>
         </NavigationMenuContent>
       </NavigationMenuItem>
-      <NavigationMenuItem>
+      <NavigationMenuItem value="components">
         <NavigationMenuTrigger>Components</NavigationMenuTrigger>
         <NavigationMenuContent>
-          <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px] ">
+          <ul className="grid !w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px] ">
             {components.map((component) => (
               <ListItem
                 key={component.title}
@@ -104,7 +104,7 @@ export const Header: FC<HeaderProps> = () => {
           </ul>
         </NavigationMenuContent>
       </NavigationMenuItem>
-      <NavigationMenuItem>
+      <NavigationMenuItem value="docs">
         <Link href="/docs" passHref>
           <NavigationMenuLink className={navigationMenuTriggerStyle()} asChild>
             Documentation

@@ -12,11 +12,5 @@
   },
   "dependencies": {
     "dhtmlx-gantt": "^9.0.3"
-  },
-  "postcss": {
-    "plugins": {
-      "tailwindcss": {},
-      "autoprefixer": {}
-    }
   }
 }

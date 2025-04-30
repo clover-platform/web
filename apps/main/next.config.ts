@@ -6,7 +6,7 @@ const configWrapper = withPageImports({
     "@clover/public/plugin/rest.server",
     "@clover/public/plugin/locales",
     "@/plugin/locales",
-    "@/assets/style/index.scss"
+    "@/assets/style/index.css"
   ]
 })
 
