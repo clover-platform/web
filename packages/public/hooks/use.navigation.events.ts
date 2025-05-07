@@ -77,7 +77,7 @@ export const useNavigationEvents = (props: UseNavigationEventsProps) => {
             const pushState = history.pushState;
             history.pushState = function () {
               done?.();
-              // eslint-disable-next-line prefer-rest-params, @typescript-eslint/no-explicit-any
+              // eslint-disable-next-line prefer-rest-params
               return pushState.apply(history, arguments as any);
             };
           })(window.history);
