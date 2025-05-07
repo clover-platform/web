@@ -1,12 +1,12 @@
 import {DropdownMenuContent, DropdownMenuItem} from "@easykit/design";
 import React from "react";
-import {t} from "@clover/public/utils/i18next";
 import Link from "next/link";
 import {useAtomValue} from "jotai/index";
 import {accountInfoState} from "@clover/public/state/account";
-
+import { useTranslation } from "react-i18next";
 export const Profile = () => {
   const account = useAtomValue(accountInfoState);
+  const { t } = useTranslation();
 
   return <DropdownMenuContent className="w-48" align={"start"}>
     <Link href={`/profile/${account.username}`}>

@@ -1,5 +1,5 @@
 import {IconGithub, IconWechat} from "@arco-iconbox/react-clover";
-import {t} from '@clover/public/utils/i18next';
+import {t} from '@clover/public/utils/locale.client';
 
 export const ICON_PROPS = {
   color: "white",

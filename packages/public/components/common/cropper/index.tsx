@@ -7,7 +7,7 @@ import {PlusIcon} from "@radix-ui/react-icons";
 import {IconDelete} from "@arco-iconbox/react-clover";
 import {dataURLToFile, fileToDataURL} from "@clover/public/utils/file";
 import {upload} from "@clover/public/utils/file";
-import {t} from '@clover/public/utils/i18next';
+import { useTranslation } from "react-i18next";
 
 export type ImageCropperProps = {
   className?: string;
@@ -21,7 +21,7 @@ export const ImageCropper: FC<ImageCropperProps> = (props) => {
   const {
     className,
   } = props;
-
+  const { t } = useTranslation();
   const msg = useMessage();
   const [visible, setVisible] = useState(false);
   const [src, setSrc] = useState<string>();

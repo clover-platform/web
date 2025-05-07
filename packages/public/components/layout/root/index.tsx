@@ -14,7 +14,7 @@ import { localeState, projectsState, teamsState } from "@clover/public/state/pub
 import { accessState } from "@clover/public/state/access";
 import { ThemeProvider } from "next-themes";
 import { I18nextProvider } from 'react-i18next';
-import { i18n } from "@clover/public/utils/i18next";
+import i18next from "i18next";
 
 export type AtomValues = Iterable<
   readonly [WritableAtom<unknown, [any], unknown>, unknown]
@@ -52,9 +52,9 @@ export const RootLayout: FC<RootLayoutProps> = (props) => {
   } = props;
 
   console.log("RootLayout locale", locale);
-  i18n.changeLanguage(locale);
+  i18next.changeLanguage(locale);
 
-  return <I18nextProvider i18n={i18n} defaultNS="translation">
+  return <I18nextProvider i18n={i18next} defaultNS="translation">
     <Provider>
       <AtomsHydrate atomValues={[
         [isLoginState, isLogin],

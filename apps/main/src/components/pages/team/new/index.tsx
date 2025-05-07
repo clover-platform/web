@@ -1,7 +1,6 @@
 'use client';
 
 import {useLayoutConfig} from "@clover/public/components/layout/hooks/use.layout.config";
-import {tt} from "@clover/public/utils/i18next";
 import {TitleBar} from "@clover/public/components/common/title-bar";
 import {
   BreadcrumbItem,
@@ -15,18 +14,20 @@ import Link from "next/link";
 import {MainPage} from "@clover/public/components/common/page";
 import {TeamForm} from "@/components/pages/team/form";
 import {AppBreadcrumb} from "@/components/common/app-breadcrumb";
+import { useTranslation } from "react-i18next";
 
 export const NewTeamPage = () => {
   useLayoutConfig<MainLayoutProps>({
     active: "team",
   })
-  const title = tt("新建团队");
+  const { t } = useTranslation();
+  const title = t("新建团队");
 
   return <MainPage>
     <AppBreadcrumb>
       <BreadcrumbItem>
         <BreadcrumbLink asChild={true}>
-          <Link href={"/team"}>{tt("团队")}</Link>
+          <Link href={"/team"}>{t("团队")}</Link>
         </BreadcrumbLink>
       </BreadcrumbItem>
       <BreadcrumbSeparator />

@@ -1,6 +1,6 @@
 import {SCHEMA} from "@clover/public/config/pages/login/form";
 import {Button, Dialog, Form, FormItem, Input, useMessage} from "@easykit/design";
-import {t, tt} from "@clover/public/utils/i18next";
+import {t} from "@clover/public/utils/locale.client";
 import {FC, ReactNode, useCallback, useState} from "react";
 import {useSearchParams} from "next/navigation";
 import {encrypt} from "@clover/public/utils/crypto";
@@ -10,11 +10,12 @@ import {CodeInput} from "@clover/public/components/common/input/code";
 import * as z from "zod";
 import {CODE} from "@clover/public/utils/regular";
 import { cloneDeep } from "es-toolkit";
+import { useTranslation } from "react-i18next"; 
 
 const getSchema = () => z.object({
   code: z.string()
-    .min(1, tt("请输入身份验证 App 验证码"))
-    .regex(CODE, tt("请输入6位数字验证码")),
+    .min(1, t("请输入身份验证 App 验证码"))
+    .regex(CODE, t("请输入6位数字验证码")),
 });
 
 export type LoginFormProps = {
@@ -29,6 +30,7 @@ export const LoginForm: FC<LoginFormProps> = (props) => {
   const msg = useMessage();
   const [formData, setFormData] = useState<any>();
   const [visible, setVisible] = useState(false);
+  const { t } = useTranslation();
 
   const submit = useCallback(async (data: any) => {
     const originData = cloneDeep(data);
@@ -79,7 +81,7 @@ export const LoginForm: FC<LoginFormProps> = (props) => {
     <Dialog
       visible={visible}
       onCancel={onCancel}
-      title={tt("二次验证")}
+      title={t("二次验证")}
       maskClosable={false}
       className={"max-w-[480px]"}
     >
@@ -87,10 +89,10 @@ export const LoginForm: FC<LoginFormProps> = (props) => {
         onSubmit={onSubmitOTP}
         schema={getSchema()}
       >
-        <FormItem name="code" label={tt("验证码")}>
-          <CodeInput placeholder={tt("请输入身份验证 App 验证码")}/>
+        <FormItem name="code" label={t("验证码")}>
+          <CodeInput placeholder={t("请输入身份验证 App 验证码")}/>
         </FormItem>
-        <Button loading={loading} type={"submit"} long>{tt("确认")}</Button>
+        <Button loading={loading} type={"submit"} long>{t("确认")}</Button>
       </Form>
     </Dialog>
   </>

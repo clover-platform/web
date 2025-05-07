@@ -1,9 +1,10 @@
 import {cn, Input, InputProps} from "@easykit/design";
 import {IconSearch} from "@arco-iconbox/react-clover";
-import {t} from '@clover/public/utils/i18next';
 import {FC} from "react";
+import { useTranslation } from "react-i18next";
 
 export const SearchInput: FC<InputProps> = (props) => {
+  const { t } = useTranslation();
   const {
     className,
     placeholder = t("请输入关键词"),

@@ -5,6 +5,7 @@ import Quick from "@/components/pages/login/quick";
 import LoginLink from "@/components/common/login/link";
 import {LoginForm} from "@clover/public/components/pages/login/form";
 import { useTranslation } from 'react-i18next';
+
 const LoginPage = () => {
   const { t } = useTranslation();
   const passwordLabel = <div className={"flex justify-center items-center"}>

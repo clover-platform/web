@@ -11,8 +11,7 @@ import {
   getEmailFormSchema,
   getPasswordFormSchema,
 } from "@/config/pages/reset-password/form";
-import {t} from '@clover/public/utils/i18next';
-
+import { useTranslation } from "react-i18next";
 const ResetPasswordPage = () => {
   const msg = useMessage();
   const params = useSearchParams();
@@ -22,6 +21,7 @@ const ResetPasswordPage = () => {
   const [step1Submitting, setStep1Submitting] = useState(false);
   const [formKey, setFormKey] = useState(Date.now());
   const [step2Submitting, setStep2Submitting] = useState(false);
+  const { t } = useTranslation();
 
   const onStep1Submit = async (data: any) => {
     setStep1Submitting(true);

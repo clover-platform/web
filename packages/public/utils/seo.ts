@@ -1,8 +1,8 @@
-import {t} from '@clover/public/utils/i18next';
+import {st} from '@clover/public/utils/locale.server';
 
-export const title = (title: string) => {
+export const title = async (title: string) => {
   const titles = [
-    t("幸运草"),
+    await st("幸运草"),
   ];
   if (title) {
     titles.unshift(title);
@@ -10,8 +10,8 @@ export const title = (title: string) => {
   return titles.join(' - ');
 }
 
-export const keywords = (keyword?: string | Array<string>) => {
-  const list = [t("幸运草"), t("任务管理"), t("甘特图"), t("问题管理")];
+export const keywords = async (keyword?: string | Array<string>) => {
+  const list = [await st("幸运草"), await st("任务管理"), await st("甘特图"), await st("问题管理")];
   if (typeof keyword === 'string') {
     list.push(keyword);
   } else if (Array.isArray(keyword)) {

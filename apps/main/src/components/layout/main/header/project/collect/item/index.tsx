@@ -1,12 +1,11 @@
 import {IconProject, IconSwitch} from "@arco-iconbox/react-clover";
 import {Action, Badge, Tooltip} from "@easykit/design";
-import {t} from "@clover/public/utils/i18next";
 import React, {FC, useCallback} from "react";
 import {useCurrent} from "@clover/public/components/layout/hooks/main";
 import {useRouter} from "next/navigation";
 import {ProjectSwitcher} from "@clover/public/components/common/switcher/project";
 import {Project} from "@clover/public/types/project";
-
+import { useTranslation } from "react-i18next";
 export type CollectProjectItemProps = {
   project: Project;
 }
@@ -15,6 +14,7 @@ export const CollectProjectItem: FC<CollectProjectItemProps> = (props) => {
   const { project } = props;
   const { projectId } = useCurrent();
   const router = useRouter();
+  const { t } = useTranslation();
 
   const onClick = useCallback(() => {
     router.push(`/team/${project.projectKey}?tab=info`)

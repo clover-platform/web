@@ -1,6 +1,6 @@
 // 转义HTML
 export const htmlEscape = (html: string) => {
-  return html.replace('&nbsp;', '').replace(/[<>"&]/g, function (match, pos, originalText) {
+  return html.replace('&nbsp;', '').replace(/[<>"&]/g, function (match) {
     switch (match) {
     case "<":
       return "&lt;";

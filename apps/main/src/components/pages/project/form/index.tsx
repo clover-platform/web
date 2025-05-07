@@ -1,5 +1,4 @@
 import {Button, Form, FormItem, Input, Space} from "@easykit/design";
-import {t} from "@clover/public/utils/i18next";
 import {getSchema} from "@/config/pages/project/form";
 import {TeamSelector} from "@clover/public/components/common/selector/team";
 import {ImageCropper} from "@clover/public/components/common/cropper";
@@ -9,9 +8,11 @@ import {useStateLoader} from "@clover/public/components/layout/hooks/use.state.l
 import {useFormSubmit} from "@clover/public/hooks/use.form.submit";
 import {create, CreateProjectData} from "@/rest/project";
 import {useCurrentTeam} from "@clover/public/components/layout/hooks/main";
+import { useTranslation } from "react-i18next";
 
 export const ProjectForm = () => {
   const router = useRouter();
+  const { t } = useTranslation();
   const load = useStateLoader();
   const {ref, submitting, onSubmit} = useFormSubmit<any,CreateProjectData>({
     action: create,

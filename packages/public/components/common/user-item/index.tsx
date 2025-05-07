@@ -2,8 +2,7 @@ import {User} from "@clover/public/types/account";
 import {FC, useMemo} from "react";
 import classNames from "classnames";
 import {HoverCard, HoverCardContent, HoverCardTrigger, HoverCardArrow} from "@easykit/design";
-import {t} from "@clover/public/utils/i18next";
-
+import { useTranslation } from "react-i18next";
 export type UserItemProps = {
   info: User;
   className?: string;
@@ -31,6 +30,7 @@ const Avatar: FC<AvatarProps> = (props) => {
 export const UserItem: FC<UserItemProps> = (props) => {
   const {className, info} = props;
   const firstLetter = info.username[0].toUpperCase();
+  const { t } = useTranslation();
 
   const avatar = useMemo(() => {
     return <Avatar className={className} avatar={info.avatar} fallback={firstLetter}/>

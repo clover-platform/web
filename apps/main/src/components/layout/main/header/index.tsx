@@ -4,7 +4,7 @@ import {
   DropdownMenu,
   DropdownMenuTrigger,
 } from "@easykit/design";
-import {t} from "@clover/public/utils/i18next";
+import {t} from "@clover/public/utils/locale.client";
 import {ChevronDownIcon} from "@radix-ui/react-icons";
 import {Team} from "@/components/layout/main/header/team";
 import {Profile} from "@/components/layout/main/header/profile";

@@ -1,12 +1,12 @@
 import {keywords, title} from "@clover/public/utils/seo";
 import LinkErrorPage from "@/components/pages/link/error";
-import {t} from '@clover/public/utils/i18next';
 import {Metadata} from "next";
+import { st } from "@clover/public/utils/locale.server";
 
 export async function generateMetadata(): Promise<Metadata> {
   return {
-    title: title(t("快捷登录 - 错误")),
-    keywords: keywords(),
+    title: await title(await st("快捷登录 - 错误")),
+    keywords: await keywords(),
   }
 }
 

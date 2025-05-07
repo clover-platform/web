@@ -1,4 +1,4 @@
-import {t, tt} from "@clover/public/utils/i18next";
+import {t} from "@clover/public/utils/locale.client";
 import {
   Button,
   Card, Form, FormItem, Input, Separator, Space
@@ -12,6 +12,7 @@ import {change, PasswordData} from "@/rest/profile/security/password";
 import {encrypt} from "@clover/public/utils/crypto";
 import bus from "@clover/public/events";
 import {UNAUTHORIZED} from "@clover/public/events/auth";
+import { useTranslation } from "react-i18next";
 
 export const SCHEMA = () => z.object({
   originPassword: z.string()
@@ -35,6 +36,7 @@ export const SCHEMA = () => z.object({
 
 
 export const Password = () => {
+  const { t } = useTranslation();
   const ref = useRef<UseFormReturn>(null);
   const formResult = useFormResult<any>({
     ref,
@@ -59,13 +61,13 @@ export const Password = () => {
     setLoading(false);
   }, [])
 
-  return <Card title={tt("更改密码")}>
+  return <Card title={t("更改密码")}>
     <div className={"space-y-4"}>
-      <p>{tt("当您更改密码后，我们会使您在此设备上保持已登录状态，但可能会将您从其他设备注销。")}</p>
+      <p>{t("当您更改密码后，我们会使您在此设备上保持已登录状态，但可能会将您从其他设备注销。")}</p>
       <Separator />
       {
         state === "normal" ? <p>
-          <a onClick={() => setState("change")} className={"cursor-pointer"}>{tt("修改密码")}</a>
+          <a onClick={() => setState("change")} className={"cursor-pointer"}>{t("修改密码")}</a>
         </p>: null
       }
       {
@@ -85,7 +87,7 @@ export const Password = () => {
           </FormItem>
           <Space>
             <Button loading={loading} type={"submit"}>{t("提交")}</Button>
-            <Button variant={"outline"} onClick={cancel}>{tt("取消")}</Button>
+            <Button variant={"outline"} onClick={cancel}>{t("取消")}</Button>
           </Space>
         </Form>: null
       }

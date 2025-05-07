@@ -2,7 +2,7 @@ import {FormItem, useMessage} from "@easykit/design";
 import {FC, PropsWithChildren, useCallback, useEffect, useState} from "react";
 import {otpSecret} from "@/rest/auth";
 import {OtpInfo} from "@/components/common/account/otp-info";
-import {t} from '@clover/public/utils/i18next';
+import { useTranslation } from "react-i18next";
 
 export type SecretItemProps = PropsWithChildren;
 
@@ -10,6 +10,7 @@ const SecretItem: FC<SecretItemProps> = () => {
   const msg = useMessage();
   const [loading, setLoading] = useState(false);
   const [otpData, setOtpData] = useState({} as any);
+  const { t } = useTranslation();
 
   const loadSecret = useCallback(async () => {
     setLoading(true);

@@ -1,13 +1,13 @@
 import * as z from "zod";
 import {useCallback, useState} from "react";
 import {init, TeamInitData} from "@clover/public/rest/team";
-import {t, tt} from '@clover/public/utils/i18next';
+import {t} from '@clover/public/utils/locale.client';
 import { IconCreateTeam } from "@arco-iconbox/react-clover";
 import { IconTitle } from "@clover/public/components/common/icon-title";
 import {Alert, Button, Form, FormItem, Input, Space, useMessage} from "@easykit/design";
 import {useStateLoader} from "@clover/public/components/layout/hooks/use.state.loader";
 import {USERNAME} from "@clover/public/utils/regular";
-
+import { useTranslation } from "react-i18next";
 const SCHEMA = () => z.object({
   name: z.string()
     .min(1, t("团队名称不能为空"))
@@ -23,6 +23,8 @@ export const Guide = () => {
   const [loading, setLoading] = useState(false);
   const msg = useMessage();
   const loader = useStateLoader();
+  const { t } = useTranslation();
+
   const onSubmit = useCallback(async (data: TeamInitData) => {
     setLoading(true);
     const { success, message } = await init(data);
@@ -55,7 +57,7 @@ export const Guide = () => {
       <FormItem name="key" label={t("唯一标识")}>
         <Input placeholder={t("请输入")} />
       </FormItem>
-      <Alert className={"bg-secondary text-secondary-foreground"}>{tt(`将会同时创建名为“默认项目”的初始项目。`)}</Alert>
+      <Alert className={"bg-secondary text-secondary-foreground"}>{t(`将会同时创建名为“默认项目”的初始项目。`)}</Alert>
       <Space className={"justify-start"}>
         <Button loading={loading} type={"submit"}>{t("创建团队")}</Button>
       </Space>

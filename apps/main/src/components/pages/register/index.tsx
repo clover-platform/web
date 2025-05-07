@@ -8,15 +8,15 @@ import {setToken} from "@clover/public/utils/token";
 import {encrypt} from "@clover/public/utils/crypto";
 import LoginLink from "@/components/common/login/link";
 import {getFormSchema} from "@/config/pages/register/form";
-import {t} from '@clover/public/utils/i18next';
 import {useSearchParams} from "next/navigation";
-
+import { useTranslation } from "react-i18next";
 const RegisterPage = () => {
   const msg = useMessage();
   const params = useSearchParams();
   const redirect = params.get("redirect");
   const [formData, setFormData] = useState<any>({});
   const [submitting, setSubmitting] = useState(false);
+  const { t } = useTranslation();
 
   const onSubmit = async (data: any) => {
     setSubmitting(true);

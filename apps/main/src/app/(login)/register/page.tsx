@@ -1,12 +1,12 @@
 import {keywords, title} from "@clover/public/utils/seo";
 import RegisterPage from "@/components/pages/register";
-import {t} from '@clover/public/utils/i18next';
 import {Metadata} from "next";
+import { st } from "@clover/public/utils/locale.server";
 
 export async function generateMetadata(): Promise<Metadata> {
   return {
-    title: title(t("注册")),
-    keywords: keywords(),
+    title: await title(await st("注册")),
+    keywords: await keywords(),
   }
 }
 

@@ -1,5 +1,4 @@
 import {Action, Button, Separator} from "@easykit/design";
-import {tt} from "@clover/public/utils/i18next";
 import Link from "next/link";
 import {useAtom} from "jotai/index";
 import {isLoginState} from "@clover/public/state/account";
@@ -10,6 +9,7 @@ import {Notice} from "@clover/public/components/layout/main/header/notice";
 import {IconHelpFill, IconSettingFill} from "@arco-iconbox/react-clover";
 import {ProfileMenu} from "@clover/public/components/layout/main/header/profile-menu";
 import classNames from "classnames";
+import { useTranslation } from "react-i18next";
 
 export type HeaderProps = {
   extra?: ReactNode;
@@ -25,6 +25,7 @@ export const Header: FC<HeaderProps> = (props) => {
     extra, appName, profileExtra, className
   } = props;
   const [isLogin] = useAtom(isLoginState);
+  const { t } = useTranslation();
 
   const logo = useMemo(() => {
     return <>
@@ -46,7 +47,7 @@ export const Header: FC<HeaderProps> = (props) => {
       {
         isLogin ? <>
           <Link href={"/dashboard"}>
-            <Button size={"sm"}>{tt("控制台")}</Button>
+            <Button size={"sm"}>{t("控制台")}</Button>
           </Link>
           <Notice />
           <Action className={"!outline-none"}>
@@ -58,10 +59,10 @@ export const Header: FC<HeaderProps> = (props) => {
           <ProfileMenu extra={profileExtra} />
         </> : <>
           <Link href={"/login"}>
-            <Button size={"sm"}>{tt("登录")}</Button>
+            <Button size={"sm"}>{t("登录")}</Button>
           </Link>
           <Link href={"/register"}>
-            <Button size={"sm"} variant={"outline"}>{tt("注册")}</Button>
+            <Button size={"sm"} variant={"outline"}>{t("注册")}</Button>
           </Link>
         </>
       }

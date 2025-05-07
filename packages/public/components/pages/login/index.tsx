@@ -1,9 +1,9 @@
 'use client';
 
-import {t} from '@clover/public/utils/i18next';
 import {LoginForm} from "@clover/public/components/pages/login/form";
-
+import { useTranslation } from "react-i18next";
 export const PublicLoginPage = () => {
+  const { t } = useTranslation();
   return <div className={"w-[360px]"}>
     <div className={"flex justify-center items-center"}>
       <div className={"text-[24px] font-bold flex-1"}>{t("登录")}</div>

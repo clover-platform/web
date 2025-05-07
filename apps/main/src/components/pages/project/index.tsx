@@ -1,7 +1,6 @@
 'use client';
 
 import {useLayoutConfig} from "@clover/public/components/layout/hooks/use.layout.config";
-import {t, tt} from '@clover/public/utils/i18next';
 import {TitleBar} from "@clover/public/components/common/title-bar";
 import {useCallback, useEffect, useMemo, useState} from "react";
 import {
@@ -24,6 +23,7 @@ import {deleteProject, addCollect, cancelCollect} from "@/rest/project";
 import {useCurrentProject} from "@clover/public/components/layout/hooks/main";
 import {useCollectProject} from "@/hooks/use.collect.project";
 import {AppBreadcrumb} from "@/components/common/app-breadcrumb";
+import { useTranslation } from "react-i18next";
 
 const initialParams = {
   teamId: '',
@@ -34,6 +34,7 @@ const initialParams = {
 }
 
 const ProjectPage = () => {
+  const { t } = useTranslation();
   useLayoutConfig<MainLayoutProps>({
     active: "project",
   })
@@ -66,12 +67,12 @@ const ProjectPage = () => {
         <Button>{t("新建")}</Button>
       </Link>
     </div>
-  }, [])
+  }, [t])
 
   return <MainPage>
     <AppBreadcrumb>
       <BreadcrumbItem>
-        <BreadcrumbPage>{tt("项目")}</BreadcrumbPage>
+        <BreadcrumbPage>{t("项目")}</BreadcrumbPage>
       </BreadcrumbItem>
     </AppBreadcrumb>
     <TitleBar

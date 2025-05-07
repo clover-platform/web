@@ -1,6 +1,5 @@
-import {Badge, DropdownMenuItemProps, FilterItemProps, Input} from "@easykit/design";
-import {t, tt} from "@clover/public/utils/i18next";
-import {DataTableColumn} from "@easykit/design/components/uix/data-table";
+import {Badge, DropdownMenuItemProps, FilterItemProps, Input, DataTableColumn} from "@easykit/design";
+import {t} from "@clover/public/utils/locale.client";
 import {TabsTitleItem} from "@clover/public/components/common/tabs-title";
 import {Team} from "@clover/public/types/team";
 import {UserItem} from "@clover/public/components/common/user-item";

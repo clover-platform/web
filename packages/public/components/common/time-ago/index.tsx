@@ -1,12 +1,12 @@
 import {FC} from "react";
 import JTimeAgo from "javascript-time-ago";
-import {t} from '@clover/public/utils/i18next';
+import i18next from "i18next";
 
 export type TimeAgoProps = {
   time: number | string | Date;
 }
 
 export const TimeAgo: FC<TimeAgoProps> = (props) => {
-  const timeAgo = new JTimeAgo(t("LANG"))
+  const timeAgo = new JTimeAgo(i18next.language)
   return timeAgo.format(new Date(props.time))
 }

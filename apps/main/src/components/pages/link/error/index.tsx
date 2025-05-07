@@ -3,9 +3,9 @@
 import {Button, Result, Space} from "@easykit/design";
 import React from "react";
 import Link from "next/link";
-import {t} from '@clover/public/utils/i18next';
-
+import { useTranslation } from "react-i18next";
 const LinkErrorPage = () => {
+  const { t } = useTranslation();
   const buttons = <Space>
     <Link href={`/login`}>
       <Button>{t("返回登录")}</Button>

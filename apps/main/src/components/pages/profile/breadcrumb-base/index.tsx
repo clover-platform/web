@@ -4,7 +4,6 @@ import {
   BreadcrumbSeparator
 } from "@easykit/design";
 import Link from "next/link";
-import {tt} from "@clover/public/utils/i18next";
 import {FC, PropsWithChildren} from "react";
 import {useAtomValue} from "jotai/index";
 import {accountInfoState} from "@clover/public/state/account";

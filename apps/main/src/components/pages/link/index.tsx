@@ -9,8 +9,7 @@ import {encrypt} from "@clover/public/utils/crypto";
 import {setToken} from "@clover/public/utils/token";
 import {getSupportWay} from "@/config/pages/login/quick";
 import {getSchema} from "@/config/pages/link/form";
-import {t} from '@clover/public/utils/i18next';
-
+import { useTranslation } from "react-i18next";
 export interface LinkPageProps extends PropsWithChildren {
   type: string
 }
@@ -19,7 +18,7 @@ const LinkPage = (props: LinkPageProps) => {
   const {
     type
   } = props;
-
+  const { t } = useTranslation();
   const msg = useMessage();
   const params = useSearchParams();
   const code = params.get('code') as string;

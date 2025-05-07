@@ -3,7 +3,7 @@ import { cloneDeep, pick } from "es-toolkit";
 import {usePathname, useRouter, useSearchParams} from "next/navigation";
 import {useMessage} from "@easykit/design";
 import {RestResult, CancellablePromise} from "@clover/public/types/rest";
-import {t} from '@clover/public/utils/i18next';
+import { useTranslation } from "react-i18next";
 
 export interface TableLoaderOptions {
   initialParams: any;
@@ -55,6 +55,7 @@ export const useTableLoader = <D>(options: TableLoaderOptions) => {
   } = options;
 
   const msg = useMessage();
+  const { t } = useTranslation();
   const [loading, setLoading] = useState(true);
   const [result, setResult] = useState<RestResult<{
     total: number;
@@ -98,7 +99,7 @@ export const useTableLoader = <D>(options: TableLoaderOptions) => {
     } finally {
       setLoading(false);
     }
-  }, [withURL, encodeParamsRef, action, router, path, msg]);
+  }, [withURL, action, router, path, msg, t]);
 
   const reset = useCallback(() => {
     setLoading(true);

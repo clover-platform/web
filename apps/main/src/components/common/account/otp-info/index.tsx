@@ -3,7 +3,8 @@ import {Image, PopoverContent, PopoverTrigger, useMessage} from "@easykit/design
 import {CopyToClipboard} from "react-copy-to-clipboard";
 import {CopyIcon, InfoCircledIcon} from "@radix-ui/react-icons";
 import {Popover} from "@easykit/design";
-import {t} from '@clover/public/utils/i18next';
+import {t} from '@clover/public/utils/locale.client';
+import { useTranslation } from "react-i18next";
 
 export interface OtpInfoProps extends PropsWithChildren {
   secret: string;
@@ -30,6 +31,7 @@ export const OtpInfo: FC<OtpInfoProps> = (props) => {
   const {secret, qrcode} = props;
   const msg = useMessage();
   const [qrcodeImage, setQrcodeImage] = useState("");
+  const { t } = useTranslation();
 
   useEffect(() => {
     // eslint-disable-next-line @typescript-eslint/no-unused-expressions

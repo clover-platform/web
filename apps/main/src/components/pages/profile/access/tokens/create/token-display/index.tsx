@@ -1,9 +1,9 @@
 import {FC, useCallback, useMemo, useState} from "react";
 import {Alert, AlertDescription, AlertTitle, useMessage} from "@easykit/design";
 import {CheckCircledIcon, CopyIcon, EyeClosedIcon, EyeOpenIcon} from "@radix-ui/react-icons";
-import {t} from "@clover/public/utils/i18next";
 import {Action} from "@clover/public/components/common/action";
 import {CopyToClipboard} from 'react-copy-to-clipboard';
+import { useTranslation } from "react-i18next";
 
 export type TokenDisplayProps = {
   token: string;
@@ -13,6 +13,7 @@ export const TokenDisplay: FC<TokenDisplayProps> = (props) => {
   const {token} = props;
   const [visible, setVisible] = useState(false);
   const msg = useMessage();
+  const { t } = useTranslation();
 
   const content = useMemo(() => {
     if (visible) return token;

@@ -9,7 +9,7 @@ import {
 import classNames from "classnames";
 import "./index.scss";
 import {htmlEscape} from "@clover/public/components/common/editor/mentions/tools";
-import {t} from '@clover/public/utils/i18next';
+import { useTranslation } from "react-i18next";
 
 export type CommentEditorProps = {
   className?: string;
@@ -25,6 +25,7 @@ export const MentionsEditor: FC<CommentEditorProps> = ({ref, ...props}) => {
     value,
     onChange,
   } = props;
+  const { t } = useTranslation();
   const [atList] = useState([
     {
       key: "1",

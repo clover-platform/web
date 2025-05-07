@@ -1,12 +1,10 @@
-import {Badge, DropdownMenuItemProps, FilterItemProps, Input} from "@easykit/design";
-import {t, tt} from "@clover/public/utils/i18next";
-import {DataTableColumn} from "@easykit/design/components/uix/data-table";
+import {Badge, DropdownMenuItemProps, FilterItemProps, Input, DataTableColumn} from "@easykit/design";
+import {t} from "@clover/public/utils/locale.client";
 import {TabsTitleItem} from "@clover/public/components/common/tabs-title";
 import {Project} from "@clover/public/types/project";
 import {TeamSelector} from "@clover/public/components/common/selector/team";
 import {UserItem} from "@clover/public/components/common/user-item";
-import {Team} from "@clover/public/types/team";
-import {IconProject, IconTeam} from "@arco-iconbox/react-clover";
+import {IconProject} from "@arco-iconbox/react-clover";
 import React from "react";
 
 export const getTabs = (): TabsTitleItem[] => [

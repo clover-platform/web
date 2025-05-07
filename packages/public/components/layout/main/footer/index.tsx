@@ -1,4 +1,3 @@
-import {tt} from "@clover/public/utils/i18next";
 import {Button, Input, Separator} from "@easykit/design";
 import {IconX, IconGithubCircle} from "@arco-iconbox/react-clover";
 import {LayoutLogo} from "@clover/public/components/layout/main/logo";
@@ -6,6 +5,7 @@ import {getNavGroups} from "@clover/public/components/layout/main/footer/config"
 import {FC} from "react";
 import {LangSelect} from "@clover/public/components/common/select/lang";
 import {ThemeSwitcher} from "@clover/public/components/common/theme-switcher";
+import { useTranslation } from "react-i18next";
 
 export type FooterProps = {
   simple?: boolean;
@@ -13,11 +13,12 @@ export type FooterProps = {
 
 export const Footer: FC<FooterProps> = (props) => {
   const { simple = false } = props;
+  const { t } = useTranslation();
   return simple ? <div className={"container pb-lg flex flex-col justify-center items-center"}>
     <Separator className={"mb-lg"} />
     <div className={"flex w-full"}>
       <div className={"flex justify-start items-center space-x-lg flex-1"}>
-        <div>© 2024 {tt("Easy Kit")}</div>
+        <div>© 2024 {t("Easy Kit")}</div>
         <div className={"flex justify-start items-center space-x-sm"}>
           <IconGithubCircle className={"text-2xl text-secondary-foreground/50"}/>
           <Separator orientation={"vertical"} className={"h-4"}/>
@@ -54,13 +55,13 @@ export const Footer: FC<FooterProps> = (props) => {
           }
         </ul>
         <div className={"space-y-xs w-96"}>
-          <div className={"text-base"}>{tt("订阅")}</div>
+          <div className={"text-base"}>{t("订阅")}</div>
           <div className={"space-y-2xs"}>
-            <div className={"text-secondary-foreground/50"}>{tt("了解新版本、新功能、指南和案例研究。")}</div>
+            <div className={"text-secondary-foreground/50"}>{t("了解新版本、新功能、指南和案例研究。")}</div>
             <div className={"relative"}>
               <Input className={"bg-secondary"}/>
               <div className={"absolute right-0 top-0 bottom-0 p-0.5"}>
-                <Button variant={"outline"} size={"sm"}>{tt("订阅")}</Button>
+                <Button variant={"outline"} size={"sm"}>{t("订阅")}</Button>
               </div>
             </div>
           </div>
@@ -68,7 +69,7 @@ export const Footer: FC<FooterProps> = (props) => {
       </div>
       <div className={"mt-2xl flex justify-center items-end"}>
         <div className={"space-y-sm flex-1"}>
-          <div>© 2024 {tt("Easy Kit")}</div>
+          <div>© 2024 {t("Easy Kit")}</div>
           <div className={"flex justify-start items-center space-x-sm"}>
             <IconGithubCircle className={"text-2xl text-secondary-foreground/50"}/>
             <Separator orientation={"vertical"} className={"h-4"}/>

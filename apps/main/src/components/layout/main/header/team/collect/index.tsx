@@ -1,11 +1,11 @@
-import {t} from "@clover/public/utils/i18next";
 import {Empty} from "@easykit/design";
 import {CollectTeamItem} from "@/components/layout/main/header/team/collect/item";
 import {useCollectTeam} from "@/hooks/use.collect.team";
 import {CollectLoadingItem} from "@/components/layout/main/header/collect-loading";
-
+import { useTranslation } from "react-i18next";
 export const TeamCollect = () => {
   const { loading, collect } = useCollectTeam();
+  const { t } = useTranslation();
   return <div>
     {
       loading ? [0, 1, 2].map((k) => <CollectLoadingItem key={k} />) :

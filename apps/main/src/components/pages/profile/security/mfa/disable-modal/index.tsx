@@ -1,4 +1,4 @@
-import {tt} from "@clover/public/utils/i18next";
+import {t} from "@clover/public/utils/locale.client";
 import {FC, useState} from "react";
 import {Button, Dialog, Form, FormItem} from "@easykit/design";
 import {EmailCodeInput} from "@clover/public/components/common/input/email-code";
@@ -9,11 +9,12 @@ import {useFormSubmit} from "@clover/public/hooks/use.form.submit";
 import {otpDisable} from "@/rest/auth";
 import * as z from "zod";
 import {CODE} from "@clover/public/utils/regular";
+import { useTranslation } from "react-i18next";
 
 const getSchema = () => z.object({
   code: z.string()
-    .min(1, tt("请输入邮箱验证码"))
-    .regex(CODE, tt("请输入6位数字验证码")),
+    .min(1, t("请输入邮箱验证码"))
+    .regex(CODE, t("请输入6位数字验证码")),
 });
 
 export type DisableModalProps = {
@@ -21,8 +22,9 @@ export type DisableModalProps = {
 }
 
 export const DisableModal: FC<DisableModalProps> = (props) => {
+  const { t } = useTranslation();
   const [visible, setVisible] = useState(false);
-  const title = tt("禁用二次验证");
+  const title = t("禁用二次验证");
   const account = useAtomValue(accountInfoState);
   const {ref, submitting, onSubmit} = useFormSubmit<any,{code: string}>({
     action: otpDisable,
@@ -53,12 +55,12 @@ export const DisableModal: FC<DisableModalProps> = (props) => {
         onSubmit={onSubmit}
         schema={getSchema()}
       >
-        <FormItem name={"code"} label={tt("邮箱验证码（{{email}}）", {
+        <FormItem name={"code"} label={t("邮箱验证码（{{email}}）", {
           email: account.email
         })}>
-          <EmailCodeInput placeholder={tt("请输入邮箱验证码")} api={sendEmailCode} data={{action: "otp-disable"}}/>
+          <EmailCodeInput placeholder={t("请输入邮箱验证码")} api={sendEmailCode} data={{action: "otp-disable"}}/>
         </FormItem>
-        <Button loading={submitting} type={"submit"} long>{tt("禁用")}</Button>
+        <Button loading={submitting} type={"submit"} long>{t("禁用")}</Button>
       </Form>
     </Dialog>
   </p>

@@ -1,4 +1,4 @@
-import {tt} from "@clover/public/utils/i18next";
+import {t} from "@clover/public/utils/locale.client";
 import {Button, Dialog, Form, FormItem} from "@easykit/design";
 import {FC, useState} from "react";
 import {EmailCodeInput} from "@clover/public/components/common/input/email-code";
@@ -11,14 +11,15 @@ import {CODE} from "@clover/public/utils/regular";
 import {sendEmailCode} from "@clover/public/rest/common";
 import {otpBind, OTPBindData} from "@/rest/auth";
 import {useFormSubmit} from "@clover/public/hooks/use.form.submit";
+import { useTranslation } from "react-i18next";
 
 const getSchema = () => z.object({
   code: z.string()
-    .min(1, tt("请输入邮箱验证码"))
-    .regex(CODE, tt("请输入6位数字验证码")),
+    .min(1, t("请输入邮箱验证码"))
+    .regex(CODE, t("请输入6位数字验证码")),
   otpCode: z.string()
-    .min(1, tt("请输入身份验证 App 验证码"))
-    .regex(CODE, tt("请输入6位数字验证码")),
+    .min(1, t("请输入身份验证 App 验证码"))
+    .regex(CODE, t("请输入6位数字验证码")),
 });
 
 export type EnableModalProps = {
@@ -27,7 +28,8 @@ export type EnableModalProps = {
 
 export const EnableModal: FC<EnableModalProps> = (props) => {
   const [visible, setVisible] = useState(false);
-  const title = tt("启用二次验证");
+  const { t } = useTranslation();
+  const title = t("启用二次验证");
   const account = useAtomValue(accountInfoState);
   const {ref, submitting, onSubmit} = useFormSubmit<any,OTPBindData>({
     action: otpBind,
@@ -59,15 +61,15 @@ export const EnableModal: FC<EnableModalProps> = (props) => {
         schema={getSchema()}
       >
         <SecretItem />
-        <FormItem name={"code"} label={tt("邮箱验证码（{{email}}）", {
+        <FormItem name={"code"} label={t("邮箱验证码（{{email}}）", {
           email: account.email
         })}>
-          <EmailCodeInput placeholder={tt("请输入邮箱验证码")} api={sendEmailCode} data={{action: "otp-enable"}}/>
+          <EmailCodeInput placeholder={t("请输入邮箱验证码")} api={sendEmailCode} data={{action: "otp-enable"}}/>
         </FormItem>
-        <FormItem name="otpCode" label={tt("验证码")}>
-          <CodeInput placeholder={tt("请输入身份验证 App 验证码")}/>
+        <FormItem name="otpCode" label={t("验证码")}>
+          <CodeInput placeholder={t("请输入身份验证 App 验证码")}/>
         </FormItem>
-        <Button loading={submitting} type={"submit"} long>{tt("启用")}</Button>
+        <Button loading={submitting} type={"submit"} long>{t("启用")}</Button>
       </Form>
     </Dialog>
   </p>

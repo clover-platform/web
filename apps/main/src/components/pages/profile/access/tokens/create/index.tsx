@@ -1,6 +1,5 @@
 'use client';
 
-import {t, tt} from "@clover/public/utils/i18next";
 import {useLayoutConfig} from "@clover/public/components/layout/hooks/use.layout.config";
 import {TitleBar} from "@clover/public/components/common/title-bar";
 import {TokenDisplay} from "@/components/pages/profile/access/tokens/create/token-display";

@@ -1,6 +1,5 @@
 'use client';
 
-import {tt} from "@clover/public/utils/i18next";
 import {useLayoutConfig} from "@clover/public/components/layout/hooks/use.layout.config";
 import {MainLayoutProps} from "@/components/layout/main";
 import {ProfileBreadcrumbBase} from "@/components/pages/profile/breadcrumb-base";
@@ -21,9 +20,11 @@ import {OTPStatus, otpStatus} from "@/rest/auth";
 import {useCallback, useEffect} from "react";
 import {DisableModal} from "@/components/pages/profile/security/mfa/disable-modal";
 import {EnableModal} from "@/components/pages/profile/security/mfa/enable-modal";
+import { useTranslation } from "react-i18next";
 
 export const MFAPage = () => {
-  const title = tt("二次验证");
+  const { t } = useTranslation();
+  const title = t("二次验证");
   useLayoutConfig<MainLayoutProps>({
     active: "profile",
   })
@@ -42,7 +43,7 @@ export const MFAPage = () => {
       loading ?
         <Skeleton className={"w-16 h-6"} /> :
         <Badge variant={result?.enable ? "default" : "outline"}>
-          { result?.enable ? tt("已启用") : tt("未启用") }
+          { result?.enable ? t("已启用") : t("未启用") }
         </Badge>
     }
   </div>
@@ -51,7 +52,7 @@ export const MFAPage = () => {
     <ProfileBreadcrumbBase>
       <BreadcrumbItem>
         <BreadcrumbLink asChild={true}>
-          <Link href="/profile/security">{tt("安全设置")}</Link>
+          <Link href="/profile/security">{t("安全设置")}</Link>
         </BreadcrumbLink>
       </BreadcrumbItem>
       <BreadcrumbSeparator />
@@ -65,11 +66,11 @@ export const MFAPage = () => {
         <div>
           {
             result?.enable ? <>
-              <p>{tt("您已通过增加第二个登录步骤确保您的帐户更加安全，起始时间：")}</p>
+              <p>{t("您已通过增加第二个登录步骤确保您的帐户更加安全，起始时间：")}</p>
               <p className={"font-bold mb-sm"}>{time(result?.enableTime)}</p>
             </> : null
           }
-          <p>{tt("如果您使用 Google、Microsoft 或 SAML 单一登录进行登录，则不会采用双重验证。我们建议您使用 Google 或身份提供程序的双重验证。")}</p>
+          <p>{t("如果您使用 Google、Microsoft 或 SAML 单一登录进行登录，则不会采用双重验证。我们建议您使用 Google 或身份提供程序的双重验证。")}</p>
         </div>
         <Separator />
         {

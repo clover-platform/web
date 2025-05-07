@@ -1,12 +1,11 @@
 import {DatePicker, Form, FormItem, Input} from "@easykit/design";
-import {t} from "@clover/public/utils/i18next";
 import {FC, PropsWithChildren, useRef} from "react";
 import {getSchema} from "@/config/pages/profile/access/form";
 import {FormResult, useFormResult} from "@clover/public/hooks/use.form.result";
 import {CreateData} from "@/rest/profile/access/token";
 import {ScopesSelect} from "@/components/pages/profile/access/tokens/scopes-select";
 import {UseFormReturn} from "react-hook-form";
-
+import { useTranslation } from "react-i18next";
 export type AccessTokenFormProps = PropsWithChildren<{
   onSubmit?: (data: CreateData, call: FormResult<string>) => void | Promise<void>;
   onSuccess: (result?: string) => void;
@@ -15,6 +14,7 @@ export type AccessTokenFormProps = PropsWithChildren<{
 export const AccessTokenForm: FC<AccessTokenFormProps> = (props) => {
   const {onSuccess, onSubmit} = props;
   const ref = useRef<UseFormReturn>(null);
+  const { t } = useTranslation();
   const formResult = useFormResult<string>({
     ref,
     onSuccess

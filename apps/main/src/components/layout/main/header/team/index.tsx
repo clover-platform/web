@@ -4,11 +4,12 @@ import {
   DropdownMenuSeparator,
 } from "@easykit/design";
 import React from "react";
-import {t} from "@clover/public/utils/i18next";
 import Link from "next/link";
 import {TeamCollect} from "@/components/layout/main/header/team/collect";
+import { useTranslation } from "react-i18next";
 
 export const Team = () => {
+  const { t } = useTranslation();
   return <DropdownMenuContent className="w-96" align={"start"}>
     <TeamCollect />
     <DropdownMenuSeparator />

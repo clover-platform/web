@@ -23,6 +23,7 @@ import {MainLayoutProps} from "@/components/layout/main";
 import {Page} from "@clover/public/components/common/page";
 import {ProfileBreadcrumbBase} from "@/components/pages/profile/breadcrumb-base";
 import { useTranslation } from 'react-i18next';
+
 const initialParams = {};
 
 export const AccessTokensPage = () => {

@@ -7,7 +7,6 @@ import {
   Button, Card, DataTable, useAlert, useMessage
 } from "@easykit/design";
 import Link from "next/link";
-import {t, tt} from "@clover/public/utils/i18next";
 import {TitleBar} from "@clover/public/components/common/title-bar";
 import {TabsTitle} from "@clover/public/components/common/tabs-title";
 import {getColumns, getFilters, getRowActions, getTabs} from "@/config/pages/team/table";
@@ -21,6 +20,7 @@ import {Team} from "@clover/public/types/team";
 import {useCollectTeam} from "@/hooks/use.collect.team";
 import {useCurrentTeam} from "@clover/public/components/layout/hooks/main";
 import {AppBreadcrumb} from "@/components/common/app-breadcrumb";
+import { useTranslation } from "react-i18next";
 
 const initialParams = {
   keyword: '',
@@ -30,7 +30,8 @@ const initialParams = {
 }
 
 export const TeamPage = () => {
-  const title = tt("团队");
+  const { t } = useTranslation();
+  const title = t("团队");
   useLayoutConfig<MainLayoutProps>({
     active: "team",
   })
@@ -50,7 +51,7 @@ export const TeamPage = () => {
         <Button>{t("新建")}</Button>
       </Link>
     </div>
-  }, [])
+  }, [t])
   const { load: loadCollect } = useCollectTeam();
   const team = useCurrentTeam();
   const msg = useMessage();
@@ -104,7 +105,7 @@ export const TeamPage = () => {
             alert.confirm({
               title: t("删除团队"),
               description: <>
-                {tt("团队下的所有项目将会被删除。")}<br/>
+                {t("团队下的所有项目将会被删除。")}<br/>
                 {t("确定删除团队吗？")}
               </>,
               onOk: async () => {

@@ -2,7 +2,7 @@ import {RootLayout as PublicRootLayout} from "@/components/layout/root";
 import {PropsWithChildren, FC} from "react";
 import {loadState} from "@clover/public/components/layout/root/utils.server";
 import {HTMLLayout} from "@clover/public/components/layout/html";
-import {getLocale} from "@clover/public/utils/locale";
+import {getLocale} from "@clover/public/utils/locale.server";
 import { Metadata } from "next";
 
 export type RootLayoutProps = PropsWithChildren;

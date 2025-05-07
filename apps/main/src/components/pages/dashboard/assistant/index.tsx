@@ -2,7 +2,7 @@ import {Action, Card, Input} from "@easykit/design";
 import {IconQA, IconSend, IconWiki} from "@arco-iconbox/react-clover";
 import {ReactNode} from "react";
 import { useTranslation } from 'react-i18next';
-import {t} from "@clover/public/utils/i18next";
+import {t} from "@clover/public/utils/locale.client";
 
 type Suggestion = {
   title: string;

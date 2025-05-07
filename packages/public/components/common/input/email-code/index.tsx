@@ -1,10 +1,9 @@
 import {Button, Input, useMessage, InputProps} from "@easykit/design";
 import {useMemo, useState, useCallback, useRef, useEffect, ChangeEvent, FC} from "react";
 import {isEmail} from "@clover/public/utils";
-import {i18n} from '@clover/public/utils/i18next';
-import {t} from '@clover/public/utils/i18next';
 import {CancellablePromise, RestResult} from "@clover/public/types/rest";
-
+import { useTranslation } from "react-i18next";
+import { i18n } from "@clover/public/utils/locale.client";
 interface EmailCodeInputProps extends InputProps {
   api: (params: any) => CancellablePromise<RestResult<any>>;
   placeholder: string;
@@ -27,6 +26,7 @@ export const EmailCodeInput: FC<EmailCodeInputProps> = (props: EmailCodeInputPro
   const [time, setTime] = useState(60);
   const timeRef = useRef(60);
   const timerRef = useRef(0);
+  const { t } = useTranslation();
 
   useEffect(() => {
     return () => {
@@ -69,7 +69,7 @@ export const EmailCodeInput: FC<EmailCodeInputProps> = (props: EmailCodeInputPro
 
   const buttonText = useMemo(() => {
     return waiting ? i18n(t("%time秒后重发"), {time}) : t("发送验证码");
-  }, [waiting, time])
+  }, [waiting, t, time])
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     let v = e.target.value;

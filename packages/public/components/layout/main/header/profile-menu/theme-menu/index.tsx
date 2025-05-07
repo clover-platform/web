@@ -6,20 +6,21 @@ import {
   DropdownMenuSubTrigger
 } from "@easykit/design";
 import {useTheme} from "next-themes";
-import {tt} from "@clover/public/utils/i18next";
+import { useTranslation } from "react-i18next";
 
 export const ThemeMenu = () => {
   const {theme, setTheme} = useTheme();
+  const { t } = useTranslation();
   return <DropdownMenuSub>
-    <DropdownMenuSubTrigger>{tt("主题设置")}</DropdownMenuSubTrigger>
+    <DropdownMenuSubTrigger>{t("主题设置")}</DropdownMenuSubTrigger>
     <DropdownMenuPortal>
       <DropdownMenuSubContent>
-        <DropdownMenuLabel className={"text-secondary-foreground/50"}>{tt("主题设置")}</DropdownMenuLabel>
+        <DropdownMenuLabel className={"text-secondary-foreground/50"}>{t("主题设置")}</DropdownMenuLabel>
         <DropdownMenuSeparator />
         <DropdownMenuRadioGroup value={theme} onValueChange={setTheme}>
-          <DropdownMenuRadioItem value="light">{tt("浅色")}</DropdownMenuRadioItem>
-          <DropdownMenuRadioItem value="dark">{tt("深色")}</DropdownMenuRadioItem>
-          <DropdownMenuRadioItem value="system">{tt("跟随系统")}</DropdownMenuRadioItem>
+          <DropdownMenuRadioItem value="light">{t("浅色")}</DropdownMenuRadioItem>
+          <DropdownMenuRadioItem value="dark">{t("深色")}</DropdownMenuRadioItem>
+          <DropdownMenuRadioItem value="system">{t("跟随系统")}</DropdownMenuRadioItem>
         </DropdownMenuRadioGroup>
       </DropdownMenuSubContent>
     </DropdownMenuPortal>

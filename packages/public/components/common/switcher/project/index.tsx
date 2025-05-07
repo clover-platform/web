@@ -1,6 +1,6 @@
 import {FC, PropsWithChildren, useState} from "react";
 import {Button, Dialog, Form, FormItem} from "@easykit/design";
-import {tt} from "@clover/public/utils/i18next";
+import {t} from "@clover/public/utils/locale.client";
 import {TeamSelector} from "@clover/public/components/common/selector/team";
 import * as z from "zod";
 import {ProjectSelector} from "@clover/public/components/common/selector/project";
@@ -8,12 +8,13 @@ import classNames from "classnames";
 import {change} from "@clover/public/rest/team";
 import {useFormSubmit} from "@clover/public/hooks/use.form.submit";
 import {useStateLoader} from "@clover/public/components/layout/hooks/use.state.loader";
+import { useTranslation } from "react-i18next";
 
 export const getSchema = () => z.object({
   teamId: z.string()
-    .min(1, tt("请选择团队")),
+    .min(1, t("请选择团队")),
   projectId: z.string()
-    .min(1, tt("请选择项目")),
+    .min(1, t("请选择项目")),
 })
 
 export type ProjectSwitcherProps = PropsWithChildren<{
@@ -33,6 +34,7 @@ export const ProjectSwitcher: FC<ProjectSwitcherProps> = (props) => {
     teamId,
     onSuccess
   } = props;
+  const { t } = useTranslation();
   const [open, setOpen] = useState(false);
   const [teamIdValue, setTeamIdValue] = useState<string|number|undefined>(teamId);
   const loader = useStateLoader();
@@ -68,7 +70,7 @@ export const ProjectSwitcher: FC<ProjectSwitcherProps> = (props) => {
           teamId: teamId ? `${teamId}` : "",
         }}
       >
-        <FormItem name="teamId" label={tt("团队")}>
+        <FormItem name="teamId" label={t("团队")}>
           <TeamSelector
             onChange={(v) => {
               ref.current?.setValue("projectId", "");
@@ -77,7 +79,7 @@ export const ProjectSwitcher: FC<ProjectSwitcherProps> = (props) => {
             className={"w-full"}
           />
         </FormItem>
-        <FormItem name="projectId" label={tt("项目")}>
+        <FormItem name="projectId" label={t("项目")}>
           <ProjectSelector
             teamId={teamIdValue!}
             className={"w-full"}
@@ -88,7 +90,7 @@ export const ProjectSwitcher: FC<ProjectSwitcherProps> = (props) => {
           type={"submit"}
           className={"w-full"}
         >
-          {tt("切换")}
+          {t("切换")}
         </Button>
       </Form>
     </Dialog>

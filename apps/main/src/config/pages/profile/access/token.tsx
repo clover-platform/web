@@ -1,7 +1,6 @@
 import {AccessToken} from "@/types/profile/access/token";
-import {t} from "@clover/public/utils/i18next";
-import {DataTableColumn} from "@easykit/design/components/uix/data-table";
-import {DropdownMenuItemProps} from "@easykit/design";
+import {t} from "@clover/public/utils/locale.client";
+import {DataTableColumn, DropdownMenuItemProps} from "@easykit/design";
 
 export const getColumns = (): DataTableColumn<AccessToken>[] => [
   {

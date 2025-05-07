@@ -1,4 +1,4 @@
-import {tt} from "@clover/public/utils/i18next";
+import {t} from "@clover/public/utils/locale.client";
 
 export type FooterNavItem = {
   title: string;
@@ -13,64 +13,64 @@ export type FooterNavGroup = {
 export const getNavGroups = (): FooterNavGroup[] => {
   return [
     {
-      title: tt("资源"),
+      title: t("资源"),
       items: [
         {
-          title: tt("文档"),
+          title: t("文档"),
           href: "#"
         },
         {
-          title: tt("API"),
+          title: t("API"),
           href: "#"
         },
         {
-          title: tt("SDK"),
+          title: t("SDK"),
           href: "#"
         },
         {
-          title: tt("案例"),
+          title: t("案例"),
           href: "#"
         },
         {
-          title: tt("博客"),
+          title: t("博客"),
           href: "#"
         }
       ]
     },
     {
-      title: tt("更多"),
+      title: t("更多"),
       items: [
         {
-          title: tt("产品"),
+          title: t("产品"),
           href: "#"
         },
         {
-          title: tt("价格"),
+          title: t("价格"),
           href: "#"
         },
         {
-          title: tt("Github"),
+          title: t("Github"),
           href: "#"
         },
         {
-          title: tt("发布日志"),
+          title: t("发布日志"),
           href: "#"
         },
       ]
     },
     {
-      title: tt("关于"),
+      title: t("关于"),
       items: [
         {
-          title: tt("Easy Kit"),
+          title: t("Easy Kit"),
           href: "#"
         },
         {
-          title: tt("幸运草"),
+          title: t("幸运草"),
           href: "#"
         },
         {
-          title: tt("隐私政策"),
+          title: t("隐私政策"),
           href: "#"
         },
       ]
