@@ -2,7 +2,7 @@ import {Select, SelectProps} from "@easykit/design";
 import {FC, useMemo} from "react";
 import {useAtomValue} from "jotai";
 import {teamsState} from "@clover/public/state/public";
-import {tt} from "@clover/public/locale";
+import {tt} from "@clover/public/utils/i18next";
 
 export type TeamSelectorProps = Omit<SelectProps, "options">;
 

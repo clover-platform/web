@@ -1,5 +1,5 @@
 import {Alert, Button, Form, FormItem, Input, Space} from "@easykit/design";
-import {t, tt} from "@clover/public/locale";
+import {t, tt} from "@clover/public/utils/i18next";
 import {getSchema} from "@/config/pages/team/form";
 import BackButton from "@clover/public/components/common/button/back";
 import {useFormSubmit} from "@clover/public/hooks/use.form.submit";

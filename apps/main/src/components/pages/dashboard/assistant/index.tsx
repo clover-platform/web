@@ -1,7 +1,8 @@
 import {Action, Card, Input} from "@easykit/design";
-import {tt} from "@clover/public/locale";
 import {IconQA, IconSend, IconWiki} from "@arco-iconbox/react-clover";
 import {ReactNode} from "react";
+import { useTranslation } from 'react-i18next';
+import {t} from "@clover/public/utils/i18next";
 
 type Suggestion = {
   title: string;
@@ -11,22 +12,23 @@ type Suggestion = {
 
 const getSuggestion = (): Suggestion[] => [
   {
-    title: tt("知识库"),
-    description: tt("请确认用户需求变动记录"),
+    title: t("知识库"),
+    description: t("请确认用户需求变动记录"),
     icon: <IconWiki />
   },
   {
-    title: tt("Agent"),
-    description: tt("请创建一条权限数据，并分配给管理员。"),
+    title: t("Agent"),
+    description: t("请创建一条权限数据，并分配给管理员。"),
     icon: <IconQA />
   },
 ]
 
 export const Assistant = () => {
+  const { t } = useTranslation();
   return <Card>
     <div className={"space-y-md"}>
       <div className={"relative"}>
-        <Input placeholder={tt("你好，需要什么帮助吗？")} className={"h-10"} />
+        <Input placeholder={t("你好，需要什么帮助吗？")} className={"h-10"} />
         <div className={"absolute top-0 bottom-0 right-0 p-[5px]"}>
           <Action className={"!p-1.5"}>
             <IconSend />

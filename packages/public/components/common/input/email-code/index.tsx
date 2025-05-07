@@ -1,8 +1,8 @@
 import {Button, Input, useMessage, InputProps} from "@easykit/design";
 import {useMemo, useState, useCallback, useRef, useEffect, ChangeEvent, FC} from "react";
 import {isEmail} from "@clover/public/utils";
-import {i18n} from '@clover/public/locale';
-import {t} from '@clover/public/locale';
+import {i18n} from '@clover/public/utils/i18next';
+import {t} from '@clover/public/utils/i18next';
 import {CancellablePromise, RestResult} from "@clover/public/types/rest";
 
 interface EmailCodeInputProps extends InputProps {

@@ -11,7 +11,7 @@ import {
   getEmailFormSchema,
   getPasswordFormSchema,
 } from "@/config/pages/reset-password/form";
-import {t} from '@clover/public/locale';
+import {t} from '@clover/public/utils/i18next';
 
 const ResetPasswordPage = () => {
   const msg = useMessage();

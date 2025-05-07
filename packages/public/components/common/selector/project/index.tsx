@@ -1,6 +1,6 @@
 import {Loading, Select, SelectProps} from "@easykit/design";
 import {FC, useEffect, useMemo} from "react";
-import {tt} from "@clover/public/locale";
+import {tt} from "@clover/public/utils/i18next";
 import {Project} from "@clover/public/types/project";
 import {useFetch} from "@clover/public/hooks";
 import {myByTeamId} from "@clover/public/rest/team";

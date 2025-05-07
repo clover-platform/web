@@ -1,7 +1,7 @@
 import {Button} from "@easykit/design";
 import {FC, PropsWithChildren} from "react";
 import {useRouter} from "next/navigation";
-import {t} from '@clover/public/locale';
+import {t} from '@clover/public/utils/i18next';
 
 export interface BackButtonProps extends PropsWithChildren {
   text?: string;

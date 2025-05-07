@@ -8,7 +8,7 @@ import {setToken} from "@clover/public/utils/token";
 import {encrypt} from "@clover/public/utils/crypto";
 import LoginLink from "@/components/common/login/link";
 import {getFormSchema} from "@/config/pages/register/form";
-import {t} from '@clover/public/locale';
+import {t} from '@clover/public/utils/i18next';
 import {useSearchParams} from "next/navigation";
 
 const RegisterPage = () => {

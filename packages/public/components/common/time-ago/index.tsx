@@ -1,6 +1,6 @@
 import {FC} from "react";
 import JTimeAgo from "javascript-time-ago";
-import {t} from '@clover/public/locale';
+import {t} from '@clover/public/utils/i18next';
 
 export type TimeAgoProps = {
   time: number | string | Date;

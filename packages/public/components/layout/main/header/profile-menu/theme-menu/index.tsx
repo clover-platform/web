@@ -6,7 +6,7 @@ import {
   DropdownMenuSubTrigger
 } from "@easykit/design";
 import {useTheme} from "next-themes";
-import {tt} from "@clover/public/locale";
+import {tt} from "@clover/public/utils/i18next";
 
 export const ThemeMenu = () => {
   const {theme, setTheme} = useTheme();

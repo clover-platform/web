@@ -1,6 +1,6 @@
 import * as z from "zod";
 import {CODE, EMAIL, PASSWORD, USERNAME} from "@clover/public/utils/regular";
-import {t} from '@clover/public/locale';
+import {t} from '@clover/public/utils/i18next';
 
 const code = t("请输入6位数字验证码");
 

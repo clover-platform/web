@@ -1,11 +1,11 @@
 import {IconSwitch, IconTeam} from "@arco-iconbox/react-clover";
 import {Action, Badge, Tooltip} from "@easykit/design";
-import {tt} from "@clover/public/locale";
 import React, {FC, useCallback} from "react";
 import {Team} from "@clover/public/types/team";
 import {useCurrent} from "@clover/public/components/layout/hooks/main";
 import {useRouter} from "next/navigation";
 import {ProjectSwitcher} from "@clover/public/components/common/switcher/project";
+import { useTranslation } from 'react-i18next';
 
 export type CollectTeamItemProps = {
   team: Team;
@@ -15,6 +15,7 @@ export const CollectTeamItem: FC<CollectTeamItemProps> = (props) => {
   const {team} = props;
   const { teamId } = useCurrent();
   const router = useRouter();
+  const { t } = useTranslation();
 
   const onClick = useCallback(() => {
     router.push(`/team/${team.teamKey}?tab=info`)
@@ -33,11 +34,11 @@ export const CollectTeamItem: FC<CollectTeamItemProps> = (props) => {
     </div>
     {
       team.id === teamId ? <div>
-        <Badge>{tt("当前")}</Badge>
+        <Badge>{t("当前")}</Badge>
       </div> : <div className={"hidden group-hover:flex"}>
-        <Tooltip content={tt("切换到此团队")}>
+        <Tooltip content={t("切换到此团队")}>
           <ProjectSwitcher
-            title={tt("切换团队")}
+            title={t("切换团队")}
             teamId={team.id}
           >
             <Action className={"!p-1.5"}>

@@ -1,5 +1,5 @@
 import {Button, Form, FormItem, Input, Space} from "@easykit/design";
-import {t} from "@clover/public/locale";
+import {t} from "@clover/public/utils/i18next";
 import {getSchema} from "@/config/pages/project/form";
 import {TeamSelector} from "@clover/public/components/common/selector/team";
 import {ImageCropper} from "@clover/public/components/common/cropper";

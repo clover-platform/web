@@ -1,4 +1,4 @@
-declare module '@clover/public/locale/data' {
+declare module '@clover/public/utils/i18next/data' {
   export const getPath: (path: string) => string;
   export const dataLoader: (config: any) => Promise<any>;
   const langData: any;

@@ -1,6 +1,6 @@
 import {FC, PropsWithChildren, useState} from "react";
 import {Button, Dialog, Form, FormItem} from "@easykit/design";
-import {tt} from "@clover/public/locale";
+import {tt} from "@clover/public/utils/i18next";
 import {TeamSelector} from "@clover/public/components/common/selector/team";
 import * as z from "zod";
 import {ProjectSelector} from "@clover/public/components/common/selector/project";

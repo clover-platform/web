@@ -1,4 +1,4 @@
-import {tt} from "@clover/public/locale";
+import {tt} from "@clover/public/utils/i18next";
 import {Button, Input, Separator} from "@easykit/design";
 import {IconX, IconGithubCircle} from "@arco-iconbox/react-clover";
 import {LayoutLogo} from "@clover/public/components/layout/main/logo";

@@ -3,7 +3,7 @@ import { cloneDeep, pick } from "es-toolkit";
 import {usePathname, useRouter, useSearchParams} from "next/navigation";
 import {useMessage} from "@easykit/design";
 import {RestResult, CancellablePromise} from "@clover/public/types/rest";
-import {t} from '@clover/public/locale';
+import {t} from '@clover/public/utils/i18next';
 
 export interface TableLoaderOptions {
   initialParams: any;

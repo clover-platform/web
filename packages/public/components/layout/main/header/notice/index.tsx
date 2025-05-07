@@ -4,7 +4,7 @@ import {
   Action, DropdownMenu, DropdownMenuContent, DropdownMenuTrigger, Empty
 } from "@easykit/design";
 import {useState} from "react";
-import {tt} from "@clover/public/locale";
+import {tt} from "@clover/public/utils/i18next";
 
 export const Notice = () => {
   const [open, setOpen] = useState(false);

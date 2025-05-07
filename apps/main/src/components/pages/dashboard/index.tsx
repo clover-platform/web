@@ -8,17 +8,18 @@ import {Activity} from "@/components/pages/dashboard/activity";
 import {Collect} from "@/components/pages/dashboard/collect";
 import {AppBreadcrumb} from "@/components/common/app-breadcrumb";
 import {BreadcrumbItem, BreadcrumbPage} from "@easykit/design";
-import {tt} from "@clover/public/locale";
+import { useTranslation } from 'react-i18next';
 
 export const DashboardPage = () => {
   useLayoutConfig<MainLayoutProps>({
     active: "dashboard",
   })
+  const { t } = useTranslation();
 
   return <MainPage>
     <AppBreadcrumb>
       <BreadcrumbItem>
-        <BreadcrumbPage>{tt("概览")}</BreadcrumbPage>
+        <BreadcrumbPage>{t("概览")}</BreadcrumbPage>
       </BreadcrumbItem>
     </AppBreadcrumb>
     <div className={"flex justify-start items-start space-x-md"}>

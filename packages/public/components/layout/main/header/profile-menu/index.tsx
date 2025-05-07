@@ -9,7 +9,7 @@ import {
   useMessage,
 } from "@easykit/design";
 import {FC, ReactNode, useCallback, useState} from "react";
-import {t, tt} from "@clover/public/locale";
+import {t, tt} from "@clover/public/utils/i18next";
 import {AccountInfo} from "@clover/public/components/layout/main/header/profile-menu/account-info";
 import Link from "next/link";
 import {logout} from "@clover/public/rest/auth";

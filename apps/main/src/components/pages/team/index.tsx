@@ -7,7 +7,7 @@ import {
   Button, Card, DataTable, useAlert, useMessage
 } from "@easykit/design";
 import Link from "next/link";
-import {t, tt} from "@clover/public/locale";
+import {t, tt} from "@clover/public/utils/i18next";
 import {TitleBar} from "@clover/public/components/common/title-bar";
 import {TabsTitle} from "@clover/public/components/common/tabs-title";
 import {getColumns, getFilters, getRowActions, getTabs} from "@/config/pages/team/table";

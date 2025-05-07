@@ -1,5 +1,5 @@
 import {Action, Button, Separator} from "@easykit/design";
-import {tt} from "@clover/public/locale";
+import {tt} from "@clover/public/utils/i18next";
 import Link from "next/link";
 import {useAtom} from "jotai/index";
 import {isLoginState} from "@clover/public/state/account";

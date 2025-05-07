@@ -1,7 +1,7 @@
 'use client';
 
 import {useLayoutConfig} from "@clover/public/components/layout/hooks/use.layout.config";
-import {t, tt} from '@clover/public/locale';
+import {t, tt} from '@clover/public/utils/i18next';
 import {TitleBar} from "@clover/public/components/common/title-bar";
 import {useCallback, useEffect, useMemo, useState} from "react";
 import {

@@ -4,7 +4,7 @@ import {
   DropdownMenu,
   DropdownMenuTrigger,
 } from "@easykit/design";
-import {tt} from "@clover/public/locale";
+import {t} from "@clover/public/utils/i18next";
 import {ChevronDownIcon} from "@radix-ui/react-icons";
 import {Team} from "@/components/layout/main/header/team";
 import {Profile} from "@/components/layout/main/header/profile";
@@ -25,17 +25,17 @@ export const getNavs = ():NavItemConfig[]  => {
   return [
     {
       id: "team",
-      title: tt("团队"),
+      title: t("团队"),
       component: <Team />
     },
     {
       id: "project",
-      title: tt("项目"),
+      title: t("项目"),
       component: <Project />
     },
     {
       id: "profile",
-      title: tt("账号"),
+      title: t("账号"),
       component: <Profile />
     }
   ]

@@ -1,4 +1,4 @@
-import {tt} from "@clover/public/locale";
+import {tt} from "@clover/public/utils/i18next";
 
 export type FooterNavItem = {
   title: string;

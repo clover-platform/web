@@ -1,6 +1,6 @@
 import * as z from "zod";
 import {PASSWORD} from "@clover/public/utils/regular";
-import {t} from '@clover/public/locale';
+import {t} from '@clover/public/utils/i18next';
 
 export const getSchema = () => z.object({
   account: z.string()

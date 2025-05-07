@@ -1,6 +1,6 @@
 import {SCHEMA} from "@clover/public/config/pages/login/form";
 import {Button, Dialog, Form, FormItem, Input, useMessage} from "@easykit/design";
-import {t, tt} from "@clover/public/locale";
+import {t, tt} from "@clover/public/utils/i18next";
 import {FC, ReactNode, useCallback, useState} from "react";
 import {useSearchParams} from "next/navigation";
 import {encrypt} from "@clover/public/utils/crypto";

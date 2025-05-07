@@ -1,7 +1,7 @@
 import * as z from "zod";
 import {useCallback, useState} from "react";
 import {init, TeamInitData} from "@clover/public/rest/team";
-import {t, tt} from '@clover/public/locale';
+import {t, tt} from '@clover/public/utils/i18next';
 import { IconCreateTeam } from "@arco-iconbox/react-clover";
 import { IconTitle } from "@clover/public/components/common/icon-title";
 import {Alert, Button, Form, FormItem, Input, Space, useMessage} from "@easykit/design";

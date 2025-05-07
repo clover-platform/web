@@ -3,10 +3,10 @@
 import {Divider} from "@easykit/design";
 import Quick from "@/components/pages/login/quick";
 import LoginLink from "@/components/common/login/link";
-import {t} from '@clover/public/locale';
 import {LoginForm} from "@clover/public/components/pages/login/form";
-
+import { useTranslation } from 'react-i18next';
 const LoginPage = () => {
+  const { t } = useTranslation();
   const passwordLabel = <div className={"flex justify-center items-center"}>
     <div className={"flex-1"}>{t("密码")}</div>
     <div className={"ml-[10px]"}>

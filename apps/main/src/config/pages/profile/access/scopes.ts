@@ -1,4 +1,4 @@
-import {t} from "@clover/public/locale";
+import {t} from "@clover/public/utils/i18next";
 
 export type Scope = {
   key: string;

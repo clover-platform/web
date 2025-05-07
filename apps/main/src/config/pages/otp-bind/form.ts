@@ -1,6 +1,6 @@
 import * as z from "zod";
 import {CODE} from "@clover/public/utils/regular";
-import {t} from '@clover/public/locale';
+import {t} from '@clover/public/utils/i18next';
 
 export const getFormSchema = () => z.object({
   code: z.string()

@@ -1,6 +1,6 @@
 'use client';
 
-import {t} from '@clover/public/locale';
+import {t} from '@clover/public/utils/i18next';
 import {LoginForm} from "@clover/public/components/pages/login/form";
 
 export const PublicLoginPage = () => {

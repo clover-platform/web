@@ -9,7 +9,7 @@ import {
 import classNames from "classnames";
 import "./index.scss";
 import {htmlEscape} from "@clover/public/components/common/editor/mentions/tools";
-import {t} from '@clover/public/locale';
+import {t} from '@clover/public/utils/i18next';
 
 export type CommentEditorProps = {
   className?: string;

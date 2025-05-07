@@ -1,6 +1,6 @@
 'use client';
 
-import {t, tt} from "@clover/public/locale";
+import {t, tt} from "@clover/public/utils/i18next";
 import {useLayoutConfig} from "@clover/public/components/layout/hooks/use.layout.config";
 import {TitleBar} from "@clover/public/components/common/title-bar";
 import {TokenDisplay} from "@/components/pages/profile/access/tokens/create/token-display";
@@ -23,12 +23,14 @@ import {MainLayoutProps} from "@/components/layout/main";
 import {Page} from "@clover/public/components/common/page";
 import Link from "next/link";
 import {ProfileBreadcrumbBase} from "@/components/pages/profile/breadcrumb-base";
+import { useTranslation } from 'react-i18next';
 
 export const AccessTokensCreatePage = () => {
-  const title = t("创建访问令牌");
   useLayoutConfig<MainLayoutProps>({
     active: "profile",
   })
+  const { t } = useTranslation();
+  const title = t("创建访问令牌");
 
   const [loading, setLoading] = useState(false);
   const [token, setToken] = useState<string>();
@@ -48,13 +50,13 @@ export const AccessTokensCreatePage = () => {
     <ProfileBreadcrumbBase>
       <BreadcrumbItem>
         <BreadcrumbLink asChild={true}>
-          <Link href="/profile/security">{tt("安全设置")}</Link>
+          <Link href="/profile/security">{t("安全设置")}</Link>
         </BreadcrumbLink>
       </BreadcrumbItem>
       <BreadcrumbSeparator />
       <BreadcrumbItem>
         <BreadcrumbLink asChild={true}>
-          <Link href="/profile/security/access/tokens">{tt("访问令牌")}</Link>
+          <Link href="/profile/security/access/tokens">{t("访问令牌")}</Link>
         </BreadcrumbLink>
       </BreadcrumbItem>
       <BreadcrumbSeparator />

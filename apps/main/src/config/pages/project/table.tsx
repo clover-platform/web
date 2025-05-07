@@ -1,5 +1,5 @@
 import {Badge, DropdownMenuItemProps, FilterItemProps, Input} from "@easykit/design";
-import {t, tt} from "@clover/public/locale";
+import {t, tt} from "@clover/public/utils/i18next";
 import {DataTableColumn} from "@easykit/design/components/uix/data-table";
 import {TabsTitleItem} from "@clover/public/components/common/tabs-title";
 import {Project} from "@clover/public/types/project";

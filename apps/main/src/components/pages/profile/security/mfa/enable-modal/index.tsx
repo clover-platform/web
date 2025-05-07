@@ -1,4 +1,4 @@
-import {tt} from "@clover/public/locale";
+import {tt} from "@clover/public/utils/i18next";
 import {Button, Dialog, Form, FormItem} from "@easykit/design";
 import {FC, useState} from "react";
 import {EmailCodeInput} from "@clover/public/components/common/input/email-code";

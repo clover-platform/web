@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unsafe-function-type */
 import {EMAIL, USERNAME} from "../utils/regular";
 import {isPassword} from "../utils/account";
-import {t} from '@clover/public/locale';
+import {t} from '@clover/public/utils/i18next';
 
 export const email = (value: any, callback: Function) => {
   if (!value) return callback();

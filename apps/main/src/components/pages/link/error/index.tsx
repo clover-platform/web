@@ -3,7 +3,7 @@
 import {Button, Result, Space} from "@easykit/design";
 import React from "react";
 import Link from "next/link";
-import {t} from '@clover/public/locale';
+import {t} from '@clover/public/utils/i18next';
 
 const LinkErrorPage = () => {
   const buttons = <Space>

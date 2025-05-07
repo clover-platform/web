@@ -2,7 +2,7 @@ import {FormItem, useMessage} from "@easykit/design";
 import {FC, PropsWithChildren, useCallback, useEffect, useState} from "react";
 import {otpSecret} from "@/rest/auth";
 import {OtpInfo} from "@/components/common/account/otp-info";
-import {t} from '@clover/public/locale';
+import {t} from '@clover/public/utils/i18next';
 
 export type SecretItemProps = PropsWithChildren;
 

@@ -4,9 +4,9 @@ import classNames from "classnames";
 import Link from "@clover/public/components/common/link";
 import {LangSelect} from "@clover/public/components/common/select/lang";
 import {useLayoutProps} from "@clover/public/components/layout/hooks/use.layout.props";
-import {t} from '@clover/public/locale';
 import {ThemeSwitcher} from "@clover/public/components/common/theme-switcher";
 import {Card} from "@easykit/design";
+import { useTranslation } from 'react-i18next';
 
 export type LoginLayoutProps = PropsWithChildren<{
   title?: string;
@@ -15,6 +15,7 @@ export type LoginLayoutProps = PropsWithChildren<{
 
 export const LoginLayout: FC<LoginLayoutProps> = (originProps) => {
   const props = useLayoutProps<LoginLayoutProps>(originProps);
+  const { t } = useTranslation();
   const {
     title = t("幸运草"),
     showLogo = true

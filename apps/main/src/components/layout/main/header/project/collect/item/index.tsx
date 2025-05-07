@@ -1,6 +1,6 @@
 import {IconProject, IconSwitch} from "@arco-iconbox/react-clover";
 import {Action, Badge, Tooltip} from "@easykit/design";
-import {tt} from "@clover/public/locale";
+import {t} from "@clover/public/utils/i18next";
 import React, {FC, useCallback} from "react";
 import {useCurrent} from "@clover/public/components/layout/hooks/main";
 import {useRouter} from "next/navigation";
@@ -33,11 +33,11 @@ export const CollectProjectItem: FC<CollectProjectItemProps> = (props) => {
     </div>
     {
       project.id === projectId ? <div>
-        <Badge>{tt("当前")}</Badge>
+        <Badge>{t("当前")}</Badge>
       </div> : <div className={"hidden group-hover:flex"}>
-        <Tooltip content={tt("切换到此项目")}>
+        <Tooltip content={t("切换到此项目")}>
           <ProjectSwitcher
-            title={tt("切换项目")}
+            title={t("切换项目")}
             teamId={project.teamId}
             projectId={project.id}
           >
