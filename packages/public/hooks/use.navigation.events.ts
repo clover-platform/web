@@ -1,5 +1,4 @@
-import {usePathname, useSearchParams} from "next/navigation";
-import {useEffect, useLayoutEffect} from "react";
+import {useEffect, useCallback} from "react";
 
 export type UseNavigationEventsProps = {
   start?: () => void;
@@ -8,20 +7,18 @@ export type UseNavigationEventsProps = {
 
 export const useNavigationEvents = (props: UseNavigationEventsProps) => {
   const {start, done} = props;
-  const pathname = usePathname();
-  const query = useSearchParams();
 
   // Convert the url to Absolute URL based on the current window location.
-  const toAbsoluteURL = (url: string): string => {
+  const toAbsoluteURL = useCallback((url: string): string => {
     return new URL(url, window.location.href).href;
-  };
+  }, []);
 
   // Check if it is hash anchor or same page anchor
-  const isHashAnchor = (currentUrl: string, newUrl: string): boolean => {
+  const isHashAnchor = useCallback((currentUrl: string, newUrl: string): boolean => {
     const current = new URL(toAbsoluteURL(currentUrl));
     const next = new URL(toAbsoluteURL(newUrl));
     return current.href.split('#')[0] === next.href.split('#')[0];
-  };
+  }, [toAbsoluteURL]);
 
   function isAnchorOfCurrentUrl(currentUrl: string, newUrl: string) {
     const currentUrlObj = new URL(currentUrl);
@@ -49,14 +46,13 @@ export const useNavigationEvents = (props: UseNavigationEventsProps) => {
     return element as HTMLAnchorElement;
   }
 
-  function handleClick(event: MouseEvent) {
+  const handleClick = useCallback((event: MouseEvent) => {
     try {
       const target = event.target as HTMLElement;
       const anchor = findClosestAnchor(target);
       const newUrl = anchor?.href;
       if (newUrl) {
         const currentUrl = window.location.href;
-        // const newUrl = (anchor as HTMLAnchorElement).href;
         const isExternalLink = (anchor as HTMLAnchorElement).target === '_blank';
 
         // Check for Special Schemes
@@ -87,13 +83,13 @@ export const useNavigationEvents = (props: UseNavigationEventsProps) => {
           })(window.history);
         }
       }
-    } catch (err) {
+    } catch {
       // Log the error in development only!
       // console.log('NextTopLoader error: ', err);
       start?.();
       done?.();
     }
-  }
+  }, [start, done, isHashAnchor]);
 
   useEffect(() => {
     // Add the global click event listener
@@ -103,5 +99,5 @@ export const useNavigationEvents = (props: UseNavigationEventsProps) => {
     return () => {
       document.removeEventListener('click', handleClick);
     };
-  }, []);
+  }, [handleClick]);
 }

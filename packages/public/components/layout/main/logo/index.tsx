@@ -1,6 +1,5 @@
 import Logo from "@clover/public/components/common/logo";
 import {tt} from "@clover/public/locale";
-import Link from "next/link";
 
 export const LayoutLogo = () => {
   return <div className={"flex justify-start items-center space-x-xs"}>

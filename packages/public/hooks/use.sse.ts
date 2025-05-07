@@ -61,14 +61,14 @@ export const useSse = (props: SseProps): SseResult => {
     let buffer = '';
 
     while (true) {
-      const {done, value} = await reader?.read()!;
+      const {done, value} = await reader?.read() ?? { done: true, value: undefined };
       if (done) break;
 
       buffer += decoder.decode(value, {stream: true});
 
       // 处理 SSE 数据块
-      let lines = buffer.split('\n');
-      buffer = lines.pop()!; // 保留未完成的数据块
+      const lines = buffer.split('\n');
+      buffer = lines.pop() ?? ''; // 保留未完成的数据块
 
       for (const line of lines) {
         if (line.startsWith('data:')) {
@@ -78,13 +78,13 @@ export const useSse = (props: SseProps): SseResult => {
     }
     setLoading(false);
     onClose?.();
-  }, [controllerRef]);
+  }, [props.url]);
 
   const abort = useCallback(() => {
     controllerRef.current?.abort();
     setLoading(false);
     setSending(false);
-  }, [controllerRef]);
+  }, []);
 
   return {send, abort, sending, loading};
 }

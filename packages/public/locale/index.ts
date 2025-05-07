@@ -6,7 +6,9 @@ export type LangItem = {
 }
 
 export const changeLanguage = async (locale: string) => {
-  i18next.isInitialized && await i18next?.changeLanguage(locale);
+  if (i18next.isInitialized) {
+    await i18next?.changeLanguage(locale);
+  }
 }
 
 export const t = (key: string, vars?: Record<string, string>) => {

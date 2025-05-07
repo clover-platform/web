@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unsafe-function-type */
 import {EMAIL, USERNAME} from "../utils/regular";
 import {isPassword} from "../utils/account";
 import {t} from '@clover/public/locale';
