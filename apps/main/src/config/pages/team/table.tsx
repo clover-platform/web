@@ -37,7 +37,7 @@ export const getColumns = (currentTeamId?: number): DataTableColumn<Team>[] => [
           <span>{original.name}</span>
           <span className={"ml-1 text-secondary-foreground/60"}>@{original.teamKey}</span>
         </div>
-        { original.id === currentTeamId ? <Badge>{tt("当前")}</Badge> : null }
+        { original.id === currentTeamId ? <Badge>{t("当前")}</Badge> : null }
       </div>
     }
   },

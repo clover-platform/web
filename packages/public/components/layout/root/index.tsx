@@ -51,7 +51,6 @@ export const RootLayout: FC<RootLayoutProps> = (props) => {
     atomValues = [],
   } = props;
 
-  console.log("RootLayout locale", locale);
   i18next.changeLanguage(locale);
 
   return <I18nextProvider i18n={i18next} defaultNS="translation">
