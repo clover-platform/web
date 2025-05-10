@@ -39,8 +39,8 @@ importers:
         specifier: workspace:*
         version: link:packages/public
       '@easykit/design':
-        specifier: 0.0.93
-        version: 0.0.93(@types/react-dom@19.1.2(@types/react@19.1.2))(@types/react@19.1.2)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
+        specifier: 0.0.94
+        version: 0.0.94(@types/react-dom@19.1.2(@types/react@19.1.2))(@types/react@19.1.2)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
       '@easykit/page-imports':
         specifier: workspace:*
         version: link:packages/page-imports
@@ -468,8 +468,8 @@ packages:
     resolution: {integrity: sha512-Pqwr3+Doby9fH0FECbGJLo997heWop7QDnklbRM9gPM+dHVdRN8SzOXiCp0RyAhN01OPgFIP3+w7xsHXfptIsw==}
     engines: {node: '>=12.9.0'}
 
-  '@easykit/design@0.0.93':
-    resolution: {integrity: sha512-f+AMIZVGzo0dq+QoVfdfEXNsK5mb7+C9Qo9eYqTyAXHOGa/avs5oQoYMZntpA3Zy9nso0V4VFyFVQehTu0cv/g==}
+  '@easykit/design@0.0.94':
+    resolution: {integrity: sha512-mV88/h5tFv23H+/qXnY3t/umyf2Tv9GLqTIt3uYBrB/0t6F1Wcc3YOuDHjr9dyEsPcQkM4yYVouoSVLWINQg/Q==}
 
   '@easykit/editor@0.0.20':
     resolution: {integrity: sha512-w4O5tk/Jb6HnpS0+Jzsx7kzzByeHKF4vmidvylroI6uwEHjXDJUGiZLZFi6NdoMAXlVxlOBB8GJFa6wUsRaHVg==}
@@ -3808,6 +3808,7 @@ packages:
 
   glob@7.2.3:
     resolution: {integrity: sha512-nFR0zLpU2YCaRxwoCJvL6UvCH2JFyFVIvwTLsIf21AuHlMskA1hhTdk+LlYJtOlYt9v6dvszD2BGRqBL+iQK9Q==}
+    deprecated: Glob versions prior to v9 are no longer supported
 
   global-modules@1.0.0:
     resolution: {integrity: sha512-sKzpEkf11GpOFuw0Zzjzmt4B4UZwjOcG757PPvrfhxcLFbq0wpsgpOqxpxtxFiCG4DtG93M6XRVbF2oGdev7bg==}
@@ -5282,6 +5283,12 @@ packages:
   slate@0.103.0:
     resolution: {integrity: sha512-eCUOVqUpADYMZ59O37QQvUdnFG+8rin0OGQAXNHvHbQeVJ67Bu0spQbcy621vtf8GQUXTEQBlk6OP9atwwob4w==}
 
+  sonner@2.0.3:
+    resolution: {integrity: sha512-njQ4Hht92m0sMqqHVDL32V2Oun9W1+PHO9NDv9FHfJjT3JT22IG4Jpo3FPQy+mouRKCXFWO+r67v6MrHX2zeIA==}
+    peerDependencies:
+      react: 19.1.0
+      react-dom: 19.1.0
+
   sortablejs@1.15.2:
     resolution: {integrity: sha512-FJF5jgdfvoKn1MAKSdGs33bIqLi3LmsgVTliuX6iITj834F+JRQZN90Z93yql8h0K2t0RwDPBmxwlbZfDcxNZA==}
 
@@ -6003,7 +6010,7 @@ snapshots:
     transitivePeerDependencies:
       - debug
 
-  '@easykit/design@0.0.93(@types/react-dom@19.1.2(@types/react@19.1.2))(@types/react@19.1.2)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)':
+  '@easykit/design@0.0.94(@types/react-dom@19.1.2(@types/react@19.1.2))(@types/react@19.1.2)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)':
     dependencies:
       '@arco-iconbox/react-atom-ui': 0.0.4
       '@emotion/react': 11.11.4(@types/react@19.1.2)(react@19.1.0)
@@ -6040,6 +6047,7 @@ snapshots:
       is-hotkey: 0.2.0
       lodash: 4.17.21
       lucide-react: 0.400.0(react@19.1.0)
+      next-themes: 0.4.4(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
       rc-tree: 5.12.4(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
       react-day-picker: 8.10.1(date-fns@3.6.0)(react@19.1.0)
       react-dropzone: 14.2.3(react@19.1.0)
@@ -6049,7 +6057,9 @@ snapshots:
       slate: 0.103.0
       slate-history: 0.100.0(slate@0.103.0)
       slate-react: 0.106.0(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(slate@0.103.0)
+      sonner: 2.0.3(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
       uuid: 10.0.0
+      zod: 3.23.8
     transitivePeerDependencies:
       - '@types/react'
       - '@types/react-dom'
@@ -11232,6 +11242,11 @@ snapshots:
       immer: 10.1.1
       is-plain-object: 5.0.0
       tiny-warning: 1.0.3
+
+  sonner@2.0.3(react-dom@19.1.0(react@19.1.0))(react@19.1.0):
+    dependencies:
+      react: 19.1.0
+      react-dom: 19.1.0(react@19.1.0)
 
   sortablejs@1.15.2: {}
 

@@ -25,7 +25,7 @@
     "@clover/public": "workspace:*",
     "@easykit/page-imports": "workspace:*",
     "@arco-iconbox/react-clover": "0.0.35",
-    "@easykit/design": "0.0.93",
+    "@easykit/design": "0.0.94",
     "@radix-ui/react-checkbox": "1.1.1",
     "@radix-ui/react-icons": "1.3.0",
     "@radix-ui/react-popper": "1.2.1",
