@@ -1,16 +1,8 @@
 import publicConfig from "@clover/public/config/next";
-import withPageImports from "@easykit/page-imports";
 
-const configWrapper = withPageImports({
-  imports: [
-    "@clover/public/plugin/rest.server",
-    "@clover/public/plugin/locales",
-    "@/plugin/locales",
-    "@/assets/style/index.css"
-  ]
-})
-
-export default configWrapper({
+const config = {
   ...publicConfig,
   assetPrefix: "/assets/main/static",
-})
+}
+
+export default config;

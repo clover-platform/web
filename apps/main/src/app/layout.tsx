@@ -4,6 +4,10 @@ import {loadState} from "@clover/public/components/layout/root/utils.server";
 import {HTMLLayout} from "@clover/public/components/layout/html";
 import {getLocale} from "@clover/public/utils/locale.server";
 import { Metadata } from "next";
+import "@clover/public/plugin/rest.server";
+import "@clover/public/plugin/locales";
+import "@/plugin/locales";
+import "@/assets/style/index.css";
 
 export type RootLayoutProps = PropsWithChildren;
 

@@ -80,7 +80,7 @@ export const EditPage: FC<EditPageProps> = (props) => {
                 <div className={"flex justify-center items-center space-x-1"}>
                     <div
                         className={classNames(
-                            "w-6 h-6 rounded-full bg-[url(~@clover/public/assets/image/default/avatar.png)] bg-contain bg-center",
+                            "w-6 h-6 rounded-full bg-[url(@clover/public/assets/image/default/avatar.png)] bg-contain bg-center",
                         )}
                     />
                     <div className={"bg-green-500 h-2 w-2 rounded-full"}/>

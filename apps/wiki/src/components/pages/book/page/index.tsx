@@ -71,7 +71,7 @@ export const DetailPage: FC<DetailPageProps> = (props) => {
                 <div className={"flex justify-center items-center space-x-2"}>
                     <div
                         className={classNames(
-                            "w-6 h-6 rounded-full bg-[url(~@clover/public/assets/image/default/avatar.png)] bg-contain bg-center",
+                            "w-6 h-6 rounded-full bg-[url(@clover/public/assets/image/default/avatar.png)] bg-contain bg-center",
                         )}
                     />
                     <div className={"text-secondary-foreground/70"}>

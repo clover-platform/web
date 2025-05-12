@@ -1,5 +1,4 @@
 import Cropper, { ReactCropperElement } from "react-cropper";
-import "cropperjs/dist/cropper.css";
 import {FC, useState, useEffect, useRef} from "react";
 import classNames from "classnames";
 import {Button, Dialog, Spin, Uploader, useMessage} from "@easykit/design";
