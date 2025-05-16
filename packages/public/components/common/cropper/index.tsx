@@ -81,7 +81,6 @@ export const ImageCropper: FC<ImageCropperProps> = (props) => {
           className
         )}
       >
-        {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           className={"w-full h-full"}
           src={result}
