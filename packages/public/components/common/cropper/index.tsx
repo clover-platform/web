@@ -7,6 +7,7 @@ import {IconDelete} from "@arco-iconbox/react-clover";
 import {dataURLToFile, fileToDataURL} from "@clover/public/utils/file";
 import {upload} from "@clover/public/utils/file";
 import { useTranslation } from "react-i18next";
+import "cropperjs/dist/cropper.css";
 
 export type ImageCropperProps = {
   className?: string;
