@@ -1,40 +1,18 @@
-import { MainLayout as PublicMainLayout, PathProps } from "@clover/public/components/layout/main";
-import { FC, PropsWithChildren, useMemo } from "react";
-import { getNavMenus } from "@/config/layout/module";
-import {useParams} from "next/navigation";
-import {useLayoutProps} from "@clover/public/components/layout/hooks/use.layout.props";
-import { t } from '@clover/public/locale';
+import { MainLayout as PublicMainLayout } from "@clover/public/components/layout/main";
+import { FC, PropsWithChildren } from "react";
+import { useLayoutProps } from "@clover/public/components/layout/hooks/use.layout.props";
 
 export type ModuleLayoutProps = {
-    active?: string;
-    path?: PathProps[];
-    className?: string;
+  active?: string;
+  className?: string;
 } & PropsWithChildren;
 
 export const ModuleLayout: FC<ModuleLayoutProps> = (origin) => {
-    const props = useLayoutProps<ModuleLayoutProps>(origin);
-    const { module } = useParams();
+  const props = useLayoutProps<ModuleLayoutProps>(origin);
 
-    const menus = useMemo(() => {
-        return getNavMenus(module as string);
-    }, [getNavMenus, module])
-
-    return <PublicMainLayout
-        {...props}
-        path={[
-            {
-                title: t("国际化"),
-                type: "link",
-                href: "/i18n"
-            },
-            ...(props.path || [])
-        ]}
-        sidebarProps={{
-            menus: menus,
-            title: t("国际化"),
-            active: props.active
-        }}
-    >
-        { props.children }
-    </PublicMainLayout>
+  return <PublicMainLayout
+    {...props}
+  >
+    {props.children}
+  </PublicMainLayout>
 }

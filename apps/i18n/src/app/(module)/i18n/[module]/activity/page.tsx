@@ -1,13 +1,13 @@
-import {keywords, title} from "@clover/public/utils/seo";
-import {ActivityPage} from "@/components/pages/activity";
-import { t } from '@clover/public/locale';
-import {Metadata} from "next";
+import { keywords, title } from "@clover/public/utils/seo";
+import { ActivityPage } from "@/components/pages/activity";
+import { st } from '@clover/public/utils/locale.server';
+import { Metadata } from "next";
 
 export async function generateMetadata(): Promise<Metadata> {
-    return {
-        title: title(t("动态")),
-        keywords: keywords(),
-    }
+  return {
+    title: await title(await st("动态")),
+    keywords: await keywords(),
+  }
 }
 
 const Page = () => <ActivityPage />

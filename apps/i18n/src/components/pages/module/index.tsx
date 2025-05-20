@@ -2,9 +2,8 @@
 
 import {TitleBar} from "@clover/public/components/common/title-bar";
 import {
-  Breadcrumb,
   BreadcrumbItem,
-  BreadcrumbList, BreadcrumbPage,
+  BreadcrumbPage,
   Button,
   Card,
   DataTable,
@@ -22,15 +21,15 @@ import {Module} from "@/types/pages/module";
 import {useProfile} from "@clover/public/hooks/use.profile";
 import {useLayoutConfig} from "@clover/public/components/layout/hooks/use.layout.config";
 import {MainLayoutProps} from "@/components/layout/main";
-import {tt} from '@clover/public/locale';
 import {MainPage} from "@clover/public/components/common/page";
 import {AppBreadcrumb} from "@/components/common/app-breadcrumb";
-
+import { useTranslation } from "react-i18next";
 const initialParams = {
   keyword: '',
 }
 
 export const ModulePage = () => {
+  const { t } = useTranslation();
   useLayoutConfig<MainLayoutProps>({
     active: "module"
   })
@@ -39,7 +38,7 @@ export const ModulePage = () => {
   const search = useSearchParams();
   const type = search.get('type') || 'all';
   const [active, setActive] = useState(type);
-  const title = tt("模块");
+  const title = t("模块");
   const [loading, result, query, load] = useTableLoader<Module>({
     initialParams,
     action: list,
@@ -55,7 +54,7 @@ export const ModulePage = () => {
 
   const actions = <Space>
     <Link href={"/module/create"}>
-      <Button>{tt("创建模块")}</Button>
+      <Button>{t("创建模块")}</Button>
     </Link>
   </Space>;
 

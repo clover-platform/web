@@ -4,7 +4,7 @@ import {
   DropdownMenu,
   DropdownMenuTrigger,
 } from "@easykit/design";
-import {tt} from "@clover/public/locale";
+import {t} from '@clover/public/utils/locale.client'; 
 import {ChevronDownIcon} from "@radix-ui/react-icons";
 
 export type HeaderProps = {
@@ -22,17 +22,17 @@ export const getNavs = ():NavItemConfig[]  => {
   return [
     {
       id: "team",
-      title: tt("团队"),
+      title: t("团队"),
       component: <div/>
     },
     {
       id: "project",
-      title: tt("项目"),
+      title: t("项目"),
       component: <div />
     },
     {
       id: "profile",
-      title: tt("账号"),
+      title: t("账号"),
       component: <div />
     }
   ]

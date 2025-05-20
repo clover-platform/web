@@ -3,8 +3,7 @@ import {FC, PropsWithChildren} from "react";
 import {getSchema} from "@/config/pages/module/form";
 import {LanguageSelect} from "@/components/common/select/language";
 import {MultiLanguageSelect} from "@/components/common/select/multi-language";
-import {t} from '@clover/public/locale';
-
+import { useTranslation } from "react-i18next";
 export interface ModuleFormProps extends PropsWithChildren {
   onSubmit?: (data: any) => void;
   defaultValues?: any;
@@ -14,6 +13,7 @@ const ModuleForm: FC<ModuleFormProps> = (props) => {
   const {
     defaultValues = {}
   } = props;
+  const { t } = useTranslation();
 
   return <Form
     schema={getSchema()}

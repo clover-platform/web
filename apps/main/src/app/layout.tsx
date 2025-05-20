@@ -22,7 +22,7 @@ export const metadata: Metadata = {
     ],
     other: [
       { url: '/site.webmanifest', rel: 'manifest' }
-    ]
+    ] 
   }
 };
 

@@ -3,17 +3,19 @@ import { FC } from "react";
 import { IconBranch } from "@arco-iconbox/react-clover";
 import { useAtom } from "jotai";
 import { branchesState, currentBranchState } from "@/state/worktop";
-import { t } from '@clover/public/locale';
+import { useTranslation } from "react-i18next";
 
 export type BranchActionProps = {
-    onClick: () => void;
+  onClick: () => void;
 };
 
 export const BranchAction: FC<BranchActionProps> = (props) => {
-    const [branches] = useAtom(branchesState);
-    const [current] = useAtom(currentBranchState);
-    const branch = branches.find(item => item.name === current);
-    return <Action className={"!px-1.5 h-8"} onClick={props.onClick}>
-        <IconBranch className={"mr-1"} /> { branch ? branch.name : t("所有分支") }
-    </Action>
+  const { t } = useTranslation();
+  const [branches] = useAtom(branchesState);
+  const [current] = useAtom(currentBranchState);
+  const branch = branches.find(item => item.name === current);
+  
+  return <Action className={"!px-1.5 h-8"} onClick={props.onClick}>
+    <IconBranch className={"mr-1"} /> {branch ? branch.name : t("所有分支")}
+  </Action>
 }

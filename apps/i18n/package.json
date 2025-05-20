@@ -4,9 +4,9 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "next dev -p 3702",
-    "start": "next start -p 3702",
-    "build": "next build",
+    "dev": "next dev -p 3702 --turbopack",
+    "start": "next start -p 3702 --turbopack",
+    "build": "next build --turbopack",
     "lint": "next lint",
     "i18n": "i18n-cli"
   },
@@ -15,11 +15,5 @@
   },
   "devDependencies": {
     "@types/react-flag-icon-css": "1.0.10"
-  },
-  "postcss": {
-    "plugins": {
-      "tailwindcss": {},
-      "autoprefixer": {}
-    }
   }
 }

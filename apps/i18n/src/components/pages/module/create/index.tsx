@@ -2,10 +2,9 @@
 
 import {TitleBar} from "@clover/public/components/common/title-bar";
 import {
-  Breadcrumb,
   BreadcrumbItem,
   BreadcrumbLink,
-  BreadcrumbList, BreadcrumbPage,
+  BreadcrumbPage,
   BreadcrumbSeparator,
   Button, Card,
   Space,
@@ -18,12 +17,13 @@ import {create} from "@/rest/module";
 import {useRouter} from "next/navigation";
 import {useLayoutConfig} from "@clover/public/components/layout/hooks/use.layout.config";
 import {MainLayoutProps} from "@/components/layout/main";
-import {t, tt} from '@clover/public/locale';
 import {MainPage} from "@clover/public/components/common/page";
 import Link from "next/link";
 import {AppBreadcrumb} from "@/components/common/app-breadcrumb";
+import { useTranslation } from "react-i18next";
 
 export const CreateModulePage = () => {
+  const { t } = useTranslation();
   useLayoutConfig<MainLayoutProps>({
     active: "module",
   })
@@ -46,12 +46,12 @@ export const CreateModulePage = () => {
     <AppBreadcrumb>
       <BreadcrumbItem>
         <BreadcrumbLink asChild={true}>
-          <Link href={"/"}>{tt("模块")}</Link>
+          <Link href={"/"}>{t("模块")}</Link>
         </BreadcrumbLink>
       </BreadcrumbItem>
       <BreadcrumbSeparator/>
       <BreadcrumbItem>
-        <BreadcrumbPage>{tt("创建模块")}</BreadcrumbPage>
+        <BreadcrumbPage>{t("创建模块")}</BreadcrumbPage>
       </BreadcrumbItem>
     </AppBreadcrumb>
     <TitleBar title={t("创建模块")}/>

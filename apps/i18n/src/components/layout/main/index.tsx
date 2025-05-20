@@ -19,9 +19,6 @@ export const MainLayout: FC<MainLayoutProps> = (origin) => {
       className: "bg-background dark:bg-black/50",
       extra: <Header active={props.active}/>
     }}
-    footerProps={{
-      simple: true,
-    }}
   >
     {props.children}
   </PublicMainLayout>

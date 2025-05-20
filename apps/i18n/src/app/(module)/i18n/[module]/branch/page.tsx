@@ -1,15 +1,15 @@
-import {keywords, title} from "@clover/public/utils/seo";
+import { keywords, title } from "@clover/public/utils/seo";
 import { ModuleBranchPage } from "@/components/pages/branch";
-import { t } from '@clover/public/locale';
-import {Metadata} from "next";
+import { st } from '@clover/public/utils/locale.server';
+import { Metadata } from "next";
 
 export async function generateMetadata(): Promise<Metadata> {
-    return {
-        title: title(t("分支")),
-        keywords: keywords(),
-    }
+  return {
+    title: await title(await st("分支")),
+    keywords: await keywords(),
+  }
 }
 
 export default function Page() {
-    return <ModuleBranchPage />
+  return <ModuleBranchPage />
 }

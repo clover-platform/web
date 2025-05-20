@@ -1,67 +1,67 @@
-import { DataTableColumn } from "@easykit/design/components/uix/data-table";
+import { DataTableColumn } from "@easykit/design";
 import { Badge, DropdownMenuItemProps, FilterItemProps, Input } from "@easykit/design";
 import { Branch } from "@/types/pages/branch";
-import { t } from '@clover/public/locale';
+import { t } from "@clover/public/utils/locale.client";
 
 export const getColumns = (): DataTableColumn<Branch>[] => [
-    {
-        accessorKey: "name",
-        header: t("名称"),
-        enableHiding: false,
-        className: "min-w-[200px]",
-    },
-    {
-        accessorKey: "isDefault",
-        header: t("默认分支"),
-        enableHiding: false,
-        className: "!w-[200px]",
-        cell: (cell) => {
-            const branch = cell.row.original;
-            return branch.isDefault ? <Badge>{t("是")}</Badge> : null;
-        }
-    },
-    {
-        accessorKey: "updateTime",
-        header: t("最后更新"),
-        enableHiding: false,
-        formatters: ["time"],
-        className: "!w-[200px]",
-    },
+  {
+    accessorKey: "name",
+    header: t("名称"),
+    enableHiding: false,
+    className: "min-w-[200px]",
+  },
+  {
+    accessorKey: "isDefault",
+    header: t("默认分支"),
+    enableHiding: false,
+    className: "!w-[200px]",
+    cell: (cell) => {
+      const branch = cell.row.original;
+      return branch.isDefault ? <Badge>{t("是")}</Badge> : null;
+    }
+  },
+  {
+    accessorKey: "updateTime",
+    header: t("最后更新"),
+    enableHiding: false,
+    formatters: ["time"],
+    className: "!w-[200px]",
+  },
 ]
 
 export const getFilters = (): FilterItemProps[] => [
-    {
-        field: 'keyword',
-        render: () => <Input placeholder={t("请输入关键词")}/>,
-    },
+  {
+    field: 'keyword',
+    render: () => <Input placeholder={t("请输入关键词")} />,
+  },
 ]
 
 export const ROW_ACTIONS = (cell: Branch): DropdownMenuItemProps[] => {
-    const { isDefault  = false} = cell;
-    const items: DropdownMenuItemProps[] = [
-        {
-            id: "rename",
-            type: "item",
-            label: t("重命名")
-        },
-    ];
-    if(!isDefault) {
-        items.push({
-            id: "merge",
-            type: "item",
-            label: t("合并至默认分支")
-        })
-    }
-    if(!isDefault) {
-        items.push({
-            type: "separator",
-            id: 'separator.1'
-        });
-        items.push({
-            id: "delete",
-            type: "item",
-            label: t("删除")
-        })
-    }
-    return items;
+  const { isDefault = false } = cell;
+  const items: DropdownMenuItemProps[] = [
+    {
+      id: "rename",
+      type: "item",
+      label: t("重命名")
+    },
+  ];
+  if (!isDefault) {
+    items.push({
+      id: "merge",
+      type: "item",
+      label: t("合并至默认分支")
+    })
+  }
+  if (!isDefault) {
+    items.push({
+      type: "separator",
+      id: 'separator.1'
+    });
+    items.push({
+      id: "delete",
+      type: "item",
+      label: t("删除")
+    })
+  }
+  return items;
 }

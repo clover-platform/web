@@ -1,6 +1,5 @@
-import { RestResult } from "@clover/public/types/rest";
-import {AbortPromise, get} from "@clover/public/utils/rest";
-import {Language} from "@/types/pages/public";
+import { Language } from "@/types/pages/public";
+import { get } from "@clover/public/utils/rest";
 
-export const languages = (): AbortPromise<RestResult<Language[]>> =>
-    get(`@i18n/language/list`);
+export const languages = () =>
+  get<Language[], undefined>(`@i18n/language/list`);

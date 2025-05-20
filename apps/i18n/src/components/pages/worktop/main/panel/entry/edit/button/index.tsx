@@ -4,32 +4,32 @@ import { EditEntryModal } from "@/components/pages/worktop/main/panel/entry/edit
 import { FC, useState } from "react";
 import { Entry } from "@/types/pages/entry";
 import { Tooltip } from "@easykit/design";
-import { t } from '@clover/public/locale';
+import { useTranslation } from "react-i18next";
 
 export type EditEntryButtonProps = {
-    entry: Entry;
-    onSuccess?: () => void;
+  entry: Entry;
+  onSuccess?: () => void;
 }
 
 export const EditEntryButton: FC<EditEntryButtonProps> = (props) => {
-    const { entry } = props;
-    const [visible, setVisible] = useState(false);
+  const { entry } = props;
+  const [visible, setVisible] = useState(false);
+  const { t } = useTranslation();
 
-    return <>
-        <Tooltip content={t("编辑")}>
-            <Action onClick={() => setVisible(true)}>
-                <Pencil1Icon />
-            </Action>
-        </Tooltip>
-        <EditEntryModal
-            entry={entry}
-            visible={visible}
-            onCancel={() => setVisible(false)}
-            onSuccess={() => {
-                setVisible(false);
-                props.onSuccess?.();
-
-            }}
-        />
-    </>
+  return <>
+    <Tooltip content={t("编辑")}>
+      <Action onClick={() => setVisible(true)}>
+        <Pencil1Icon />
+      </Action>
+    </Tooltip>
+    <EditEntryModal
+      entry={entry}
+      visible={visible}
+      onCancel={() => setVisible(false)}
+      onSuccess={() => {
+        setVisible(false);
+        props.onSuccess?.();
+      }}
+    />
+  </>
 }

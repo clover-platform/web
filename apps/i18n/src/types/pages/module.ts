@@ -1,74 +1,74 @@
 import { User } from "@clover/public/types/account";
 
 export type ModulePageProps = {
-    params: Promise<{
-        module: string;
-    }>
+  params: Promise<{
+    module: string;
+  }>
 }
 
 export type Module = {
-    id: number;
-    name: string;
-    owner: number;
-    projectId: number;
-    createTime: string;
-    updateTime?: string;
-    description?: string;
-    identifier?: string;
-    memberSize?: number;
-    targetSize?: number;
-    source: string;
-    wordSize?: number;
+  id: number;
+  name: string;
+  owner: number;
+  projectId: number;
+  createTime: string;
+  updateTime?: string;
+  description?: string;
+  identifier?: string;
+  memberSize?: number;
+  targetSize?: number;
+  source: string;
+  wordSize?: number;
 }
 
 export type ModuleCount = {
-    wordCount: number;
-    branchCount: number;
-    memberCount: number;
-    targetCount: number;
+  wordCount: number;
+  branchCount: number;
+  memberCount: number;
+  targetCount: number;
 }
 
 export type ModuleDetail = {
-    id?: number;
-    source?: string;
-    createTime?: string;
-    updateTime?: string;
+  id?: number;
+  source?: string;
+  createTime?: string;
+  updateTime?: string;
 }
 
 export type Member = {
-    id: number;
-    roles: number[];
-    user: User
+  id: number;
+  roles: number[];
+  user: User
 }
 
 export type Language = {
-    name: string;
-    code: string;
-    id: number;
+  name: string;
+  code: string;
+  id: number;
 }
 
 export type Branch = {
-    name: string;
-    id: number;
+  name: string;
+  id: number;
 }
 
 export type InviteDetail = {
-    identifier: string;
-    name: string;
-    description?: string;
-    source: string;
-    roles: string[];
-    targets: Language[];
+  identifier: string;
+  name: string;
+  description?: string;
+  source: string;
+  roles: string[];
+  targets: Language[];
 }
 
 export type BaseInfo = {
-    id?: number;
-    name?: string;
-    description?: string;
+  id?: number;
+  name?: string;
+  description?: string;
 }
 
 export type UpdateInfo = {
-    module?: string;
-    name?: string;
-    description?: string;
+  module?: string;
+  name?: string;
+  description?: string;
 }

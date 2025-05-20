@@ -1,53 +1,53 @@
 import { User } from "@clover/public/types/account";
 
 export type Entry = {
-    id: number;
-    identifier: string;
-    value: string;
-    moduleId: number;
-    branchId: number;
-    verified: boolean;
-    translated: boolean;
-    translation?: EntryResult;
+  id: number;
+  identifier: string;
+  value: string;
+  moduleId: number;
+  branchId: number;
+  verified: boolean;
+  translated: boolean;
+  translation?: EntryResult;
 }
 
 export type EntryResult = {
-    id: number;
-    entryId: number;
-    content: string;
-    language: string;
-    createTime: Date;
-    translatorId: number;
-    checkerId: number;
-    updateTime: Date;
-    verified: boolean;
-    translator?: User;
-    verifier?: User;
-    verifiedTime?: Date;
+  id: number;
+  entryId: number;
+  content: string;
+  language: string;
+  createTime: Date;
+  translatorId: number;
+  checkerId: number;
+  updateTime: Date;
+  verified: boolean;
+  translator?: User;
+  verifier?: User;
+  verifiedTime?: Date;
 }
 
 export type EntryResultPage = {
-    total: number;
-    data: EntryResult[];
+  total: number;
+  data: EntryResult[];
 }
 
 export type CountEntryQuery = {
-    module: string;
-    language: string;
-    branch?: string;
+  module: string;
+  language: string;
+  branch?: string;
 }
 
 export type CountEntryData = {
-    total: number;
-    translated: number;
-    verified: number;
+  total: number;
+  translated: number;
+  verified: number;
 }
 
 export type EntryComment = {
-    id: number;
-    entryId: number;
-    content: string;
-    createTime: Date;
-    createUserId: number;
-    user?: User;
+  id: number;
+  entryId: number;
+  content: string;
+  createTime: Date;
+  createUserId: number;
+  user?: User;
 }

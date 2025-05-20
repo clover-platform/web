@@ -1,5 +1,5 @@
 import { atom } from "jotai";
-import {Branch, Language} from "@/types/pages/module";
+import { Branch, Language } from "@/types/pages/module";
 import { CountEntryData, Entry } from "@/types/pages/entry";
 
 export const leftSideOpenState = atom(true)
@@ -23,7 +23,7 @@ export const currentEntryState = atom<number>(0)
 export const currentPageState = atom<number>(1)
 
 export const countState = atom<CountEntryData>({
-    total: 0,
-    translated: 0,
-    verified: 0
+  total: 0,
+  translated: 0,
+  verified: 0
 })

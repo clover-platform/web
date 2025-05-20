@@ -13,7 +13,11 @@ export type RestResult<T> = {
   data?: T;
 }
 
-export type PageResult<T> = RestResult<{
+export type PageData<T> = {
   total: number;
   data: T[];
-}>
+}
+
+export type PageResult<T> = RestResult<PageData<T>>
+
+
