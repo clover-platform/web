@@ -1,7 +1,7 @@
 'use client';
 
 import { TitleBar } from "@clover/public/components/common/title-bar";
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { list as listRest } from "@/rest/activity";
 import { Activity, ActivityGroup } from "@/types/pages/activity";
 import dayjs from 'dayjs';
@@ -23,7 +23,7 @@ export const ActivityPage = () => {
   const [total, setTotal] = useState(0);
   const pageRef = useRef(1);
 
-  const load = async (options?: { append?: boolean }) => {
+  const load = useCallback(async (options?: { append?: boolean }) => {
     const { append = false } = options || {};
     if (!append) setList([]);
     setLoading(true);
@@ -42,7 +42,7 @@ export const ActivityPage = () => {
       ]);
       setTotal(total);
     }
-  }
+  }, [list, m])
 
   const loadMore = async () => {
     pageRef.current += 1;
@@ -51,7 +51,7 @@ export const ActivityPage = () => {
 
   useEffect(() => {
     load().then();
-  }, [])
+  }, [load])
 
   const items = useMemo<ActivityGroup[]>(() => {
     // 分组逻辑
