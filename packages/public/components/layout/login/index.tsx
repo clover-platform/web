@@ -1,5 +1,4 @@
 import {FC, PropsWithChildren} from "react";
-import Logo from "@clover/public/components/common/logo";
 import classNames from "classnames";
 import Link from "@clover/public/components/common/link";
 import {LangSelect} from "@clover/public/components/common/select/lang";
@@ -7,29 +6,28 @@ import {useLayoutProps} from "@clover/public/components/layout/hooks/use.layout.
 import {ThemeSwitcher} from "@clover/public/components/common/theme-switcher";
 import {Card} from "@easykit/design";
 import { useTranslation } from 'react-i18next';
+import { LayoutLogo } from "../main/logo";
 
-export type LoginLayoutProps = PropsWithChildren<{
-  title?: string;
+export type LoginLayoutProps = PropsWithChildren<{  
   showLogo?: boolean;
+  appName?: string;
 }>;
 
 export const LoginLayout: FC<LoginLayoutProps> = (originProps) => {
   const props = useLayoutProps<LoginLayoutProps>(originProps);
   const { t } = useTranslation();
   const {
-    title = t("幸运草"),
-    showLogo = true
+    showLogo = true,
+    appName
   } = props;
 
   return <div className={"flex justify-center w-full min-h-[100vh] flex-col bg-secondary"}>
     <div className={"flex-1 flex justify-center items-center flex-col p-8 mb-[--login-footer-height]"}>
-      <Card className={"shadow-none px-8 py-6"}>
+      <Card className={"shadow-none px-8 py-10"}>
         {
-          showLogo ? <a href={"/"}>
-            <div className={"mb-6 flex justify-center items-center space-x-2"}>
-              <Logo size={48}/>
-              <div className={"text-center font-bold text-2xl"}>{title}</div>
-            </div>
+          showLogo ? <a href={"/"} className="flex justify-center items-center mb-6">
+            <LayoutLogo />
+            {appName ? <span className={"text-lg font-bold ml-1"}>· {appName}</span> : null}
           </a> : null
         }
         {props.children}

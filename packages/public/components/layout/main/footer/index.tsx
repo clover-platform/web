@@ -26,7 +26,7 @@ export const Footer: FC<FooterProps> = (props) => {
         </div>
       </div>
       <div className={"flex space-x-sm"}>
-        <ThemeSwitcher size={"sm"} activeClassName={"bg-white dark:bg-secondary"}/>
+        <ThemeSwitcher size={"sm"}/>
         <LangSelect className={"h-3xl"}/>
       </div>
     </div>

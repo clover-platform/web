@@ -38,7 +38,7 @@ export const Header: FC<HeaderProps> = (props) => {
     <div className={"flex-1 flex justify-start items-center space-x-2xl"}>
       <div className={"space-x-sm flex justify-center items-center"}>
         <Apps/>
-        <Separator orientation={"vertical"} className={"h-6"}/>
+        <Separator orientation={"vertical"} className={"!h-6"}/>
         { logoUrl ? <Link href={logoUrl}>{logo}</Link> : logo }
       </div>
       <div className={"flex-1"}>{extra}</div>
