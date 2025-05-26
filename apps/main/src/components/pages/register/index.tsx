@@ -1,75 +1,76 @@
-'use client';
-
-import {Form, Button, Input, useMessage, FormItem} from "@easykit/design";
-import {useState} from "react";
-import {EmailCodeInput} from "@clover/public/components/common/input/email-code";
-import {register, sendEmailCode} from "@/rest/auth";
-import {setToken} from "@clover/public/utils/token";
-import {encrypt} from "@clover/public/utils/crypto";
 import LoginLink from "@/components/common/login/link";
 import {getFormSchema} from "@/config/pages/register/form";
+import { register, sendEmailCode } from '@/rest/auth'
+import { EmailCodeInput } from '@clover/public/components/common/input/email-code'
+import { encrypt } from '@clover/public/utils/crypto'
+import { setToken } from '@clover/public/utils/token'
+import { Button, Form, FormItem, Input, useMessage } from '@easykit/design'
 import {useSearchParams} from "next/navigation";
+import { useState } from 'react'
 import { useTranslation } from "react-i18next";
 const RegisterPage = () => {
   const msg = useMessage();
   const params = useSearchParams();
   const redirect = params.get("redirect");
-  const [formData, setFormData] = useState<any>({});
+  // biome-ignore lint/suspicious/noExplicitAny: <explanation>
+  const [formData, setFormData] = useState<any>({})
   const [submitting, setSubmitting] = useState(false);
   const { t } = useTranslation();
 
+  // biome-ignore lint/suspicious/noExplicitAny: <explanation>
   const onSubmit = async (data: any) => {
-    setSubmitting(true);
-    data.password2 = undefined;
-    delete data.password2;
-    data.password = encrypt(data.password);
-    const {success, message, data: result} = await register(data);
-    setSubmitting(false);
+    setSubmitting(true)
+    data.password2 = undefined
+    data.password2 = undefined
+    data.password = encrypt(data.password)
+    const { success, message, data: result } = await register(data)
+    setSubmitting(false)
     if (success) {
-      setToken(result);
-      location.href = redirect || `/`;
+      setToken(result)
+      location.href = redirect || '/'
     } else {
-      msg.error(message);
+      msg.error(message)
     }
   }
 
-  return <div className={"w-[360px]"}>
-    <div className={"flex justify-center items-center"}>
-      <div className={"text-xl font-bold flex-1"}>{t("注册")}</div>
-      <div className={"ml-[10px] space-x-1"}>
-        <span>{t("已有账号？")}</span>
-        <LoginLink href={`/login`}>{t("登录")}</LoginLink>
+  return (
+    <div className="w-[360px]">
+      <div className="flex items-center justify-center">
+        <div className="flex-1 font-bold text-xl">{t('注册')}</div>
+        <div className="ml-[10px] space-x-1">
+          <span>{t('已有账号？')}</span>
+          <LoginLink href="/login">{t('登录')}</LoginLink>
+        </div>
+      </div>
+      <div className="mt-[30px]">
+        <Form onValuesChange={setFormData} onSubmit={onSubmit} schema={getFormSchema()}>
+          <FormItem name="username" label={t('用户名')}>
+            <Input placeholder={t('请输入用户名，字母数字或下划线，字母开头')} />
+          </FormItem>
+          <FormItem name="email" label={t('邮箱')}>
+            <Input placeholder={t('请输入正确的邮箱')} />
+          </FormItem>
+          <FormItem name="code" label={t('邮箱验证码')}>
+            <EmailCodeInput
+              needEmail={true}
+              placeholder={t('请输入邮箱验证码')}
+              api={sendEmailCode}
+              data={{ email: formData.email }}
+            />
+          </FormItem>
+          <FormItem name="password" label={t('密码')}>
+            <Input type="password" placeholder={t('请输入密码')} />
+          </FormItem>
+          <FormItem name="password2" label={t('确认密码')}>
+            <Input type="password" placeholder={t('请再次输入密码')} />
+          </FormItem>
+          <Button loading={submitting} type="submit" long>
+            {t('注册')}
+          </Button>
+        </Form>
       </div>
     </div>
-    <div className={"mt-[30px]"}>
-      <Form
-        onValuesChange={setFormData}
-        onSubmit={onSubmit}
-        schema={getFormSchema()}
-      >
-        <FormItem name={"username"} label={t("用户名")}>
-          <Input placeholder={t("请输入用户名，字母数字或下划线，字母开头")}/>
-        </FormItem>
-        <FormItem name={"email"} label={t("邮箱")}>
-          <Input placeholder={t("请输入正确的邮箱")}/>
-        </FormItem>
-        <FormItem name={"code"} label={t("邮箱验证码")}>
-          <EmailCodeInput
-            needEmail={true}
-            placeholder={t("请输入邮箱验证码")} api={sendEmailCode}
-            data={{email: formData.email}}
-          />
-        </FormItem>
-        <FormItem name="password" label={t("密码")}>
-          <Input type={"password"} placeholder={t("请输入密码")}/>
-        </FormItem>
-        <FormItem name="password2" label={t("确认密码")}>
-          <Input type={"password"} placeholder={t("请再次输入密码")}/>
-        </FormItem>
-        <Button loading={submitting} type={"submit"} long>{t("注册")}</Button>
-      </Form>
-    </div>
-  </div>
+  )
 };
 
 export default RegisterPage;

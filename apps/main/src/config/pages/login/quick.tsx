@@ -9,12 +9,12 @@ export const ICON_PROPS = {
 export const getSupportWay = () => [
   {
     id: 'wechat',
-    title: t("微信"),
-    icon: <IconWechat {...ICON_PROPS} />
+    title: t('微信'),
+    icon: <IconWechat {...ICON_PROPS} />,
   },
   {
     id: 'github',
-    title: t("Github"),
-    icon: <IconGithub {...ICON_PROPS} />
-  }
+    title: t('Github'),
+    icon: <IconGithub {...ICON_PROPS} />,
+  },
 ]

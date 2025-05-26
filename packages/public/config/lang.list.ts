@@ -1,4 +1,4 @@
-import {LangItem} from "@clover/public/utils/i18next";
+import type { LangItem } from '@clover/public/utils/i18next'
 
 export default [
   {

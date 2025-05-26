@@ -1,19 +1,20 @@
 'use client';
 
-import {Button, Result, Space} from "@easykit/design";
-import React from "react";
+import { Button, Result, Space } from '@easykit/design'
 import Link from "next/link";
 import { useTranslation } from "react-i18next";
 const LinkErrorPage = () => {
   const { t } = useTranslation();
-  const buttons = <Space>
-    <Link href={`/login`}>
-      <Button>{t("返回登录")}</Button>
-    </Link>
-    <Link href={`/`}>
-      <Button variant={"outline"}>{t("返回首页")}</Button>
-    </Link>
-  </Space>
+  const buttons = (
+    <Space>
+      <Link href="/login">
+        <Button>{t('返回登录')}</Button>
+      </Link>
+      <Link href="/">
+        <Button variant="outline">{t('返回首页')}</Button>
+      </Link>
+    </Space>
+  )
 
   return <Result
     status='error'
@@ -22,4 +23,4 @@ const LinkErrorPage = () => {
   />
 };
 
-export default LinkErrorPage;
+export default LinkErrorPage

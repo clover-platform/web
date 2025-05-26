@@ -37,6 +37,7 @@ const EditRolePage: FC<EditRolePageProps> = (props) => {
     const msg = useMessage();
     const router = useRouter();
 
+    // biome-ignore lint/suspicious/noExplicitAny: <explanation>
     const onSubmit = async (data: any) => {
         setSubmitting(true);
         data.id = roleId;

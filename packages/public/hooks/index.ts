@@ -1,10 +1,10 @@
-export * from './use.access';
-export * from './use.document.click';
-export * from './use.fetch.intercept';
-export * from './use.fetch';
-export * from './use.locale';
-export * from './use.navigation.events';
-export * from './use.table.loader';
-export * from './use.time.ago';
-export * from "./use.profile";
-export * from "./use.form.result";
+export { useAccess } from './use.access'
+export { useDocumentClick } from './use.document.click'
+export { useFetchIntercept } from './use.fetch.intercept'
+export { useFetch } from './use.fetch'
+export { useLocale } from './use.locale'
+export { useNavigationEvents } from './use.navigation.events'
+export { useTableLoader } from './use.table.loader'
+export { useTimeAgo } from './use.time.ago'
+export { useProfile } from './use.profile'
+export { useFormResult } from './use.form.result'

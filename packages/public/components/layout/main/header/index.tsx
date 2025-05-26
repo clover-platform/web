@@ -1,22 +1,22 @@
-import {Action, Button, Separator} from "@easykit/design";
-import Link from "next/link";
-import {useAtom} from "jotai/index";
-import {isLoginState} from "@clover/public/state/account";
-import {LayoutLogo} from "@clover/public/components/layout/main/logo";
-import {FC, ReactNode, useMemo} from "react";
+import { IconHelpFill, IconSettingFill } from '@arco-iconbox/react-clover'
 import {Apps} from "@clover/public/components/layout/main/header/apps";
-import {Notice} from "@clover/public/components/layout/main/header/notice";
-import {IconHelpFill, IconSettingFill} from "@arco-iconbox/react-clover";
+import { Notice } from '@clover/public/components/layout/main/header/notice'
 import {ProfileMenu} from "@clover/public/components/layout/main/header/profile-menu";
+import { LayoutLogo } from '@clover/public/components/layout/main/logo'
+import { isLoginState } from '@clover/public/state/account'
+import { Action, Button, Separator } from '@easykit/design'
 import classNames from "classnames";
+import { useAtom } from 'jotai/index'
+import Link from 'next/link'
+import { type FC, type ReactNode, useMemo } from 'react'
 import { useTranslation } from "react-i18next";
 
 export type HeaderProps = {
-  extra?: ReactNode;
-  appName?: string;
-  profileExtra?: ReactNode;
-  className?: string;
-  logoUrl?: string;
+  extra?: ReactNode
+  appName?: string
+  profileExtra?: ReactNode
+  className?: string
+  logoUrl?: string
 }
 
 export const Header: FC<HeaderProps> = (props) => {
@@ -28,44 +28,52 @@ export const Header: FC<HeaderProps> = (props) => {
   const { t } = useTranslation();
 
   const logo = useMemo(() => {
-    return <>
-      <LayoutLogo/>
-      {appName ? <span className={"text-lg font-bold"}> · {appName}</span> : null}
-    </>
+    return (
+      <>
+        <LayoutLogo />
+        {appName ? <span className="font-bold text-lg"> · {appName}</span> : null}
+      </>
+    )
   }, [appName])
 
-  return <div className={classNames("w-full h-[60px] p-sm flex justify-center items-center border-b", className)}>
-    <div className={"flex-1 flex justify-start items-center space-x-2xl"}>
-      <div className={"space-x-sm flex justify-center items-center"}>
-        <Apps/>
-        <Separator orientation={"vertical"} className={"!h-6"}/>
-        { logoUrl ? <Link href={logoUrl}>{logo}</Link> : logo }
+  return (
+    <div className={classNames('flex h-[60px] w-full items-center justify-center border-b p-sm', className)}>
+      <div className="flex flex-1 items-center justify-start space-x-2xl">
+        <div className="flex items-center justify-center space-x-sm">
+          <Apps />
+          <Separator orientation="vertical" className="!h-6" />
+          {logoUrl ? <Link href={logoUrl}>{logo}</Link> : logo}
+        </div>
+        <div className="flex-1">{extra}</div>
       </div>
-      <div className={"flex-1"}>{extra}</div>
+      <div className="flex items-center justify-center space-x-xs">
+        {isLogin ? (
+          <>
+            <Link href="/dashboard">
+              <Button size="sm">{t('控制台')}</Button>
+            </Link>
+            <Notice />
+            <Action className="!outline-none">
+              <IconHelpFill />
+            </Action>
+            <Action className="!outline-none">
+              <IconSettingFill />
+            </Action>
+            <ProfileMenu extra={profileExtra} />
+          </>
+        ) : (
+          <>
+            <Link href="/login">
+              <Button size="sm">{t('登录')}</Button>
+            </Link>
+            <Link href="/register">
+              <Button size="sm" variant="outline">
+                {t('注册')}
+              </Button>
+            </Link>
+          </>
+        )}
+      </div>
     </div>
-    <div className={"space-x-xs flex justify-center items-center"}>
-      {
-        isLogin ? <>
-          <Link href={"/dashboard"}>
-            <Button size={"sm"}>{t("控制台")}</Button>
-          </Link>
-          <Notice />
-          <Action className={"!outline-none"}>
-            <IconHelpFill />
-          </Action>
-          <Action className={"!outline-none"}>
-            <IconSettingFill />
-          </Action>
-          <ProfileMenu extra={profileExtra} />
-        </> : <>
-          <Link href={"/login"}>
-            <Button size={"sm"}>{t("登录")}</Button>
-          </Link>
-          <Link href={"/register"}>
-            <Button size={"sm"} variant={"outline"}>{t("注册")}</Button>
-          </Link>
-        </>
-      }
-    </div>
-  </div>
+  )
 }

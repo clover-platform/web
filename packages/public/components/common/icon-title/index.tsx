@@ -1,4 +1,4 @@
-import {FC, ReactNode} from "react";
+import type { FC, ReactNode } from 'react'
 
 export type IconTitleProps = {
   icon: ReactNode;
@@ -7,11 +7,13 @@ export type IconTitleProps = {
 }
 
 export const IconTitle: FC<IconTitleProps> = (props) => {
-  return <div className={"flex justify-start items-start"}>
-    <div className={"w-20 h-14 flex justify-center items-center"}>{props.icon}</div>
-    <div className={"flex-1"}>
-      <div className={"text-lg text-primary font-bold"}>{props.title}</div>
-      <div className={"mt-1 text-muted-foreground"}>{props.description}</div>
+  return (
+    <div className="flex items-start justify-start">
+      <div className="flex h-14 w-20 items-center justify-center">{props.icon}</div>
+      <div className="flex-1">
+        <div className="font-bold text-lg text-primary">{props.title}</div>
+        <div className="mt-1 text-muted-foreground">{props.description}</div>
+      </div>
     </div>
-  </div>
+  )
 }

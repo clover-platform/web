@@ -1,3 +1,4 @@
 import {atom} from "jotai";
 
-export const layoutConfigState = atom<any>()
+// biome-ignore lint/suspicious/noExplicitAny: <explanation>
+export const layoutConfigState = atom<any>() 

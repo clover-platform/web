@@ -18,6 +18,7 @@ export const RenameBranchModal: FC<RenameBranchModalProps> = (props) => {
   const { branch } = props;
   const { t } = useTranslation();
 
+  // biome-ignore lint/suspicious/noExplicitAny: <explanation>
   const onSubmit = async (data: any) => {
     setLoading(true);
     data.module = module;

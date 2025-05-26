@@ -1,13 +1,13 @@
-import {useEffect} from "react";
-import {useSetAtom} from "jotai";
 import {layoutConfigState} from "@clover/public/state/layout";
+import { useSetAtom } from 'jotai'
+import { useEffect } from 'react'
 
 export const useLayoutConfig = <T>(config: T) => {
   const setConfig = useSetAtom(layoutConfigState);
   useEffect(() => {
-    setConfig(config);
+    setConfig(config)
     return () => {
-      setConfig(null);
+      setConfig(null)
     }
-  }, [config, setConfig])
+  }, [config, setConfig]) 
 }

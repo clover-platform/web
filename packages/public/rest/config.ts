@@ -9,5 +9,4 @@ export type AppsItemProps = {
   iconUrl: string;
 }
 
-export const apps = () =>
-  get<AppsItemProps[]>(`@main/config/app/list`);
+export const apps = () => get<AppsItemProps[]>('@main/config/app/list')

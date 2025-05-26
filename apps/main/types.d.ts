@@ -1,1 +1,1 @@
-import "@clover/public/types/common";
+import '@clover/public/types/common'

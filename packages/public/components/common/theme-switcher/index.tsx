@@ -1,26 +1,27 @@
 import {IconDark, IconLight, IconSystem} from "@arco-iconbox/react-clover";
+import classNames from 'classnames'
 import {useTheme} from "next-themes";
-import classNames from "classnames";
-import {FC, useEffect, useState} from "react";
+import { type FC, useEffect, useState } from 'react'
 
 export type Theme = {
-  name: string;
-  icon: any;
+  name: string
+  // biome-ignore lint/suspicious/noExplicitAny: <explanation>
+  icon: any
 }
 
 const themes: Theme[] = [
   {
-    name: "light",
-    icon: IconLight
+    name: 'light',
+    icon: IconLight,
   },
   {
-    name: "system",
-    icon: IconSystem
+    name: 'system',
+    icon: IconSystem,
   },
   {
-    name: "dark",
-    icon: IconDark
-  }
+    name: 'dark',
+    icon: IconDark,
+  },
 ]
 
 const BUTTON_SIZE = {
@@ -56,19 +57,28 @@ export const ThemeSwitcher: FC<ThemeSwitcherProps> = (props) => {
     setMounted(true)
   }, [])
 
-  return <div className={classNames("border rounded-full px-1 flex items-center", CONTAINER_SIZE[size], props.className)}
-    key={`switcher-${mounted}`}>
-    {
-      themes.map((item) => {
-        const Icon = item.icon;
-        return <div key={item.name} className={classNames(
-          BUTTON_SIZE[size],
-          "flex justify-center items-center rounded-full cursor-pointer",
-          theme === item.name ? activeClassName : ""
-        )} onClick={() => setTheme(item.name)} suppressHydrationWarning={true}>
-          <Icon className={ICON_SIZE[size]}/>
-        </div>
-      })
-    }
-  </div>
+  return (
+    <div
+      className={classNames('flex items-center rounded-full border px-1', CONTAINER_SIZE[size], props.className)}
+      key={`switcher-${mounted}`}
+    >
+      {themes.map((item) => {
+        const Icon = item.icon
+        return (
+          <div
+            key={item.name}
+            className={classNames(
+              BUTTON_SIZE[size],
+              'flex cursor-pointer items-center justify-center rounded-full',
+              theme === item.name ? activeClassName : ''
+            )}
+            onClick={() => setTheme(item.name)}
+            suppressHydrationWarning={true}
+          >
+            <Icon className={ICON_SIZE[size]} />
+          </div>
+        )
+      })}
+    </div>
+  )
 }

@@ -1,7 +1,7 @@
 import "dhtmlx-gantt/codebase/dhtmlxgantt.css";
+import classNames from 'classnames'
 import {gantt} from "dhtmlx-gantt"
-import {useEffect} from "react";
-import classNames from "classnames";
+import { useEffect } from 'react'
 import "./style.scss";
 
 export const Gantt = () => {
@@ -25,13 +25,7 @@ export const Gantt = () => {
     });
   }, []);
 
-  return <div
-    className={classNames(
-      "w-full h-[calc(100vh-48px)]",
-      "gantt-chart"
-    )}
-    id={"gantt-chart"}
-  />
+  return <div className={classNames('h-[calc(100vh-48px)] w-full', 'gantt-chart')} id="gantt-chart" />
 }
 
 export default Gantt;

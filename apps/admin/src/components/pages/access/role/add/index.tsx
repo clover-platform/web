@@ -30,6 +30,7 @@ const AddRolePage = () => {
     const msg = useMessage();
     const router = useRouter();
 
+    // biome-ignore lint/suspicious/noExplicitAny: <explanation>
     const onSubmit = async (data: any) => {
         setLoading(true);
         const { success, message } = await addRole(data);

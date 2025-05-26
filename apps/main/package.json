@@ -7,7 +7,7 @@
     "dev": "next dev -p 3700 --turbopack",
     "start": "next start -p 3700 --turbopack",
     "build": "next build --turbopack",
-    "lint": "next lint",
+    "lint": "biome lint --config-path=biome.json ./src",
     "i18n": "i18n-cli"
   },
   "dependencies": {

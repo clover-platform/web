@@ -1,5 +1,5 @@
-import {PropsWithChildren, useMemo} from "react";
 import classNames from "classnames";
+import { type PropsWithChildren, useMemo } from 'react'
 
 interface LogoProps extends PropsWithChildren {
   type?: "normal" | "light" | "dark";
@@ -8,11 +8,7 @@ interface LogoProps extends PropsWithChildren {
 }
 
 const Logo = (props: LogoProps) => {
-  const {
-    type = "normal",
-    size = 32,
-    className,
-  } = props;
+  const { type = 'normal', size = 32, className } = props
 
   let bg = "bg-transparent";
   let image = "bg-[url(@clover/public/assets/image/logo/normal.png)]";
@@ -27,20 +23,18 @@ const Logo = (props: LogoProps) => {
   const margin = useMemo(() => Math.floor(size * 0.1), [size]);
   const imageSize = useMemo(() => size - (margin * 2), [size, margin]);
 
-  return <div className={classNames(
-    "flex justify-center items-center rounded-sm",
-    bg,
-    className
-  )}>
-    <div
-      className={`${image} bg-contain bg-no-repeat bg-center`}
-      style={{
-        width: imageSize,
-        height: imageSize,
-        margin
-      }}
-    />
-  </div>
+  return (
+    <div className={classNames('flex items-center justify-center rounded-sm', bg, className)}>
+      <div
+        className={`${image} bg-center bg-contain bg-no-repeat`}
+        style={{
+          width: imageSize,
+          height: imageSize,
+          margin,
+        }}
+      />
+    </div>
+  )
 };
 
 export default Logo;

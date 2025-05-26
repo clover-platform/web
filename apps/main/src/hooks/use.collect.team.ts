@@ -1,7 +1,7 @@
+import { myCollect } from '@/rest/team'
 import {loadedTeamCollectState, teamCollectState} from "@/state/collect";
 import { useAtom } from "jotai";
-import {useCallback, useEffect, useState} from "react";
-import {myCollect} from "@/rest/team";
+import { useCallback, useEffect, useState } from 'react'
 
 export const useCollectTeam = () => {
   const [loaded, setLoaded] = useAtom(loadedTeamCollectState);
@@ -19,8 +19,8 @@ export const useCollectTeam = () => {
   }, [setLoaded, setTeamCollect])
 
   useEffect(() => {
-    if(!loaded) {
-      load().then();
+    if (!loaded) {
+      load().then()
     }
   }, [loaded, load]);
 

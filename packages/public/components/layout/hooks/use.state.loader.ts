@@ -1,8 +1,8 @@
-import {useCallback} from "react";
-import {loadProfile} from "@clover/public/components/layout/root/utils";
-import {useSetAtom} from "jotai";
-import {projectsState, teamsState} from "@clover/public/state/public";
+import { loadProfile } from '@clover/public/components/layout/root/utils'
 import {accountInfoState, isLoginState} from "@clover/public/state/account";
+import { projectsState, teamsState } from '@clover/public/state/public'
+import { useSetAtom } from 'jotai'
+import { useCallback } from 'react'
 
 export const useStateLoader = () => {
   const setTeams = useSetAtom(teamsState);
@@ -14,6 +14,6 @@ export const useStateLoader = () => {
     setTeams(teams);
     setProjects(projects);
     setProfile(profile!);
-    setIsLogin(success!);
+    setIsLogin(success!)
   }, [setIsLogin, setProfile, setProjects, setTeams])
 }

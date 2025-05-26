@@ -7,4 +7,5 @@ export type PasswordData = {
 }
 
 export const change = (data: PasswordData) =>
-  post<any, PasswordData>(`@main/account/password/change`, data);
+  // biome-ignore lint/suspicious/noExplicitAny: <explanation>
+  post<any, PasswordData>('@main/account/password/change', data)

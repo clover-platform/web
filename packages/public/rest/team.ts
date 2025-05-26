@@ -1,24 +1,20 @@
-import {get, post, put} from "@clover/public/utils/rest";
-import {Project} from "@clover/public/types/project";
+import type { Project } from '@clover/public/types/project'
+import { get, post, put } from '@clover/public/utils/rest'
 
-export const my = () =>
-  get(`@main/team/my`);
-
+export const my = () => get('@main/team/my')
 
 export type TeamInitData = {
-  name: string;
-  projectName: number;
+  name: string
+  projectName: number
 }
-export const init = (data: TeamInitData) =>
-  post(`@main/team/init`, data);
+export const init = (data: TeamInitData) => post('@main/team/init', data)
 
-export const myByTeamId = (teamId: number|string) =>
-  get<Project[]>(`@main/team/${teamId}/projects`);
+export const myByTeamId = (teamId: number | string) => get<Project[]>(`@main/team/${teamId}/projects`)
 
 export type ChangeTeamData = {
-  teamId: number|string;
-  projectId: number|string;
+  teamId: number | string
+  projectId: number | string
 }
 
-export const change = (data?: ChangeTeamData) =>
-  put<any, ChangeTeamData>(`@main/team/change`, data);
+// biome-ignore lint/suspicious/noExplicitAny: <explanation>
+export const change = (data?: ChangeTeamData) => put<any, ChangeTeamData>('@main/team/change', data)

@@ -1,8 +1,8 @@
-import {Loading, Select, SelectProps} from "@easykit/design";
-import {FC, useEffect, useMemo} from "react";
-import {Project} from "@clover/public/types/project";
 import {useFetch} from "@clover/public/hooks";
 import {myByTeamId} from "@clover/public/rest/team";
+import type { Project } from '@clover/public/types/project'
+import { Loading, Select, type SelectProps } from '@easykit/design'
+import { type FC, useEffect, useMemo } from 'react'
 import { useTranslation } from "react-i18next";
 
 export type ProjectSelectorProps = Omit<SelectProps, "options"> & {
@@ -10,11 +10,8 @@ export type ProjectSelectorProps = Omit<SelectProps, "options"> & {
 };
 
 export const ProjectSelector: FC<ProjectSelectorProps> = (props) => {
-  const {
-    value,
-    teamId,
-    ...rest
-  } = props;
+  const { value, teamId, ...rest } = props
+  // biome-ignore lint/suspicious/noExplicitAny: <explanation>
   const { loading, load, result } = useFetch<Project[], any>(myByTeamId)
   const { t } = useTranslation();
   const options = useMemo(() => {

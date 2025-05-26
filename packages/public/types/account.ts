@@ -7,10 +7,10 @@ export type Account = {
   username: string;
   avatar?: string;
 }
-
+ 
 export type User = {
-  id: number;
-  email: string;
-  username: string;
-  avatar: string;
+  id: number
+  email: string
+  username: string
+  avatar: string
 }

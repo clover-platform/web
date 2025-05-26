@@ -1,5 +1,5 @@
-import {atom} from "jotai";
-import {Account} from "@clover/public/types/account";
+import type { Account } from '@clover/public/types/account'
+import { atom } from 'jotai'
 
 export const isLoginState = atom(false)
 

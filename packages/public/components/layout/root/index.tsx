@@ -2,21 +2,22 @@
 
 import "@clover/public/plugin/rest.client";
 import "@clover/public/plugin/locales";
-import "@clover/public/plugin/formatters";
-import { Provider, WritableAtom } from 'jotai';
-import { useHydrateAtoms } from 'jotai/utils'
-import { FC, PropsWithChildren, ReactNode } from "react";
-import { ConfigProvider } from "@easykit/design";
+import '@clover/public/plugin/formatters'
 import locales from "@clover/public/config/locale";
-import { accountInfoState, isLoginState } from "@clover/public/state/account";
-import { Account } from "@clover/public/types/account";
+import { accessState } from '@clover/public/state/access'
+import { accountInfoState, isLoginState } from '@clover/public/state/account'
 import { localeState, projectsState, teamsState } from "@clover/public/state/public";
-import { accessState } from "@clover/public/state/access";
+import type { Account } from '@clover/public/types/account'
+import { ConfigProvider } from '@easykit/design'
+import i18next from 'i18next'
+import { Provider, type WritableAtom } from 'jotai'
+import { useHydrateAtoms } from 'jotai/utils'
 import { ThemeProvider } from "next-themes";
-import { I18nextProvider } from 'react-i18next';
-import i18next from "i18next";
+import type { FC, PropsWithChildren, ReactNode } from 'react'
+import { I18nextProvider } from 'react-i18next'
 
 export type AtomValues = Iterable<
+  // biome-ignore lint/suspicious/noExplicitAny: <explanation>
   readonly [WritableAtom<unknown, [any], unknown>, unknown]
 >;
 
@@ -31,14 +32,16 @@ export const AtomsHydrate: FC<AtomsHydrateProps> = ({ atomValues, children }) =>
 }
 
 export type RootLayoutProps = PropsWithChildren<{
-  isLogin: boolean;
-  accountInfo?: Account;
-  teams: any[];
-  projects: any[];
-  sideOpen: boolean;
-  locale: string;
-  atomValues?: AtomValues;
-}>;
+  isLogin: boolean
+  accountInfo?: Account
+  // biome-ignore lint/suspicious/noExplicitAny: <explanation>
+  teams: any[]
+  // biome-ignore lint/suspicious/noExplicitAny: <explanation>
+  projects: any[]
+  sideOpen: boolean
+  locale: string
+  atomValues?: AtomValues
+}>
 
 export const RootLayout: FC<RootLayoutProps> = (props) => {
   const {

@@ -1,21 +1,20 @@
-import {FC, PropsWithChildren, useState} from "react";
-import {Button, Dialog, Form, FormItem} from "@easykit/design";
-import {t} from "@clover/public/utils/locale.client";
-import {TeamSelector} from "@clover/public/components/common/selector/team";
-import * as z from "zod";
 import {ProjectSelector} from "@clover/public/components/common/selector/project";
-import classNames from "classnames";
-import {change} from "@clover/public/rest/team";
-import {useFormSubmit} from "@clover/public/hooks/use.form.submit";
+import { TeamSelector } from '@clover/public/components/common/selector/team'
 import {useStateLoader} from "@clover/public/components/layout/hooks/use.state.loader";
+import { useFormSubmit } from '@clover/public/hooks/use.form.submit'
+import { change } from '@clover/public/rest/team'
+import { t } from '@clover/public/utils/locale.client'
+import { Button, Dialog, Form, FormItem } from '@easykit/design'
+import classNames from 'classnames'
+import { type FC, type PropsWithChildren, useState } from 'react'
 import { useTranslation } from "react-i18next";
+import { object, string } from 'zod'
 
-export const getSchema = () => z.object({
-  teamId: z.string()
-    .min(1, t("请选择团队")),
-  projectId: z.string()
-    .min(1, t("请选择项目")),
-})
+export const getSchema = () =>
+  object({
+    teamId: string().min(1, t('请选择团队')),
+    projectId: string().min(1, t('请选择项目')),
+  }) 
 
 export type ProjectSwitcherProps = PropsWithChildren<{
   className?: string;
@@ -47,52 +46,42 @@ export const ProjectSwitcher: FC<ProjectSwitcherProps> = (props) => {
     }
   })
 
-  return <div
-    className={classNames("w-full", className)}
-    onClick={(e) => {
-      e.stopPropagation();
-      setOpen(true);
-    }}
-  >
-    {children}
-    <Dialog
-      title={title}
-      visible={open}
-      onCancel={() => setOpen(false)}
-      className={"w-96"}
+  return (
+    <div
+      className={classNames('w-full', className)}
+      onClick={(e) => {
+        e.stopPropagation()
+        setOpen(true)
+      }}
     >
-      <Form
-        ref={ref}
-        schema={getSchema()}
-        onSubmit={onSubmit}
-        defaultValues={{
-          projectId: projectId ? `${projectId}` : "",
-          teamId: teamId ? `${teamId}` : "",
-        }}
-      >
-        <FormItem name="teamId" label={t("团队")}>
-          <TeamSelector
-            onChange={(v) => {
-              ref.current?.setValue("projectId", "");
-              setTeamIdValue(v);
-            }}
-            className={"w-full"}
-          />
-        </FormItem>
-        <FormItem name="projectId" label={t("项目")}>
-          <ProjectSelector
-            teamId={teamIdValue!}
-            className={"w-full"}
-          />
-        </FormItem>
-        <Button
-          loading={submitting}
-          type={"submit"}
-          className={"w-full"}
+      {children}
+      <Dialog title={title} visible={open} onCancel={() => setOpen(false)} className="w-96">
+        <Form
+          ref={ref}
+          schema={getSchema()}
+          onSubmit={onSubmit}
+          defaultValues={{
+            projectId: projectId ? `${projectId}` : '',
+            teamId: teamId ? `${teamId}` : '',
+          }}
         >
-          {t("切换")}
-        </Button>
-      </Form>
-    </Dialog>
-  </div>
+          <FormItem name="teamId" label={t('团队')}>
+            <TeamSelector
+              onChange={(v) => {
+                ref.current?.setValue('projectId', '')
+                setTeamIdValue(v)
+              }}
+              className="w-full"
+            />
+          </FormItem>
+          <FormItem name="projectId" label={t('项目')}>
+            <ProjectSelector teamId={teamIdValue!} className="w-full" />
+          </FormItem>
+          <Button loading={submitting} type="submit" className="w-full">
+            {t('切换')}
+          </Button>
+        </Form>
+      </Dialog>
+    </div>
+  )
 }

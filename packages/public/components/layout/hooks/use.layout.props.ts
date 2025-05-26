@@ -1,5 +1,5 @@
-import {useAtom} from "jotai";
 import {layoutConfigState} from "@clover/public/state/layout";
+import { useAtom } from 'jotai'
 import {useMemo} from "react";
 
 export const useLayoutProps = <T>(originProps: T): T => {
@@ -9,5 +9,5 @@ export const useLayoutProps = <T>(originProps: T): T => {
       ...originProps,
       ...config,
     }
-  }, [config, originProps]);
+  }, [config, originProps])
 }

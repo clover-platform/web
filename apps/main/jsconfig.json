@@ -4,9 +4,7 @@
       "@/*": [
         "./src/*"
       ],
-      "@clover/public/*": [
-        "../../packages/public/*"
-      ]
+      "@clover/public/*": ["../../packages/public/*"] 
     }
   }
 }

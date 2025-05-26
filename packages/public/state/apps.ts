@@ -1,6 +1,6 @@
-import {atom} from "jotai";
-import {AppsItemProps} from "@clover/public/rest/config";
+import type { AppsItemProps } from '@clover/public/rest/config'
+import { atom } from 'jotai'
 
-export const loadingState = atom<boolean>(true);
+export const loadingState = atom<boolean>(true)
 
-export const appsState = atom<AppsItemProps[]>([]);
+export const appsState = atom<AppsItemProps[]>([])

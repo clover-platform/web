@@ -1,21 +1,21 @@
-import {FC, PropsWithChildren, useEffect, useMemo} from "react";
-import {Header, HeaderProps} from "@clover/public/components/layout/main/header";
-import {Footer, FooterProps} from "@clover/public/components/layout/main/footer";
-import classNames from "classnames";
-import {projectsState, teamsState} from "@clover/public/state/public";
-import {useAtomValue} from "jotai";
 import {LoginLayout} from "@clover/public/components/layout/login";
+import { Footer, type FooterProps } from '@clover/public/components/layout/main/footer'
 import {Guide} from "@clover/public/components/layout/main/guide";
-import {isLoginState} from "@clover/public/state/account";
+import { Header, type HeaderProps } from '@clover/public/components/layout/main/header'
 import {useAppsLoader} from "@clover/public/hooks/use.apps.loader";
+import { isLoginState } from '@clover/public/state/account'
+import { projectsState, teamsState } from '@clover/public/state/public'
+import classNames from 'classnames'
+import { useAtomValue } from 'jotai'
+import { type FC, type PropsWithChildren, useEffect, useMemo } from 'react'
 
 export type MainLayoutProps = PropsWithChildren<{
-  headerProps?: HeaderProps;
-  footerProps?: FooterProps;
-  bodyClassName?: string;
-  className?: string;
-  container?: boolean;
-}>;
+  headerProps?: HeaderProps
+  footerProps?: FooterProps
+  bodyClassName?: string
+  className?: string
+  container?: boolean
+}>
 
 export const MainLayout: FC<MainLayoutProps> = (props) => {
   const {
@@ -29,20 +29,24 @@ export const MainLayout: FC<MainLayoutProps> = (props) => {
   const teams = useAtomValue(teamsState);
   const projects = useAtomValue(projectsState);
   const isLogin = useAtomValue(isLoginState);
-  const needInit = useMemo(() => isLogin && (!teams?.length || !projects.length), [teams, projects, isLogin])
+  const needInit = useMemo(() => isLogin && !(teams?.length && projects.length), [teams, projects, isLogin])
   const {load} = useAppsLoader();
 
   useEffect(() => {
     load().then();
   }, [load])
 
-  return needInit ? <LoginLayout showLogo={false}>
-    <Guide />
-  </LoginLayout> : <div className={classNames("flex justify-center items-center flex-col min-h-[100vh]", className)}>
-    <Header {...headerProps}/>
-    <div className={classNames("flex-1 w-full", bodyClassName)}>
-      {container ? <div className={"container py-4"}>{children}</div> : children}
+  return needInit ? (
+    <LoginLayout showLogo={false}>
+      <Guide />
+    </LoginLayout>
+  ) : (
+    <div className={classNames('flex min-h-[100vh] flex-col items-center justify-center', className)}>
+      <Header {...headerProps} />
+      <div className={classNames('w-full flex-1', bodyClassName)}>
+        {container ? <div className="container py-4">{children}</div> : children}
+      </div>
+      <Footer {...footerProps} />
     </div>
-    <Footer {...footerProps}/>
-  </div>
+  )
 }

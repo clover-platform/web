@@ -1,14 +1,14 @@
-import {FC, ReactNode, useCallback} from "react";
-import {AppsItemProps} from "@clover/public/rest/config";
 import {IconDashboard, IconHome, IconI18n, IconQA, IconWiki} from "@arco-iconbox/react-clover";
+import type { AppsItemProps } from '@clover/public/rest/config'
 import {useRouter} from "next/navigation";
+import { type FC, type ReactNode, useCallback } from 'react'
 
 const ICONS: Record<string, ReactNode> = {
-  "home": <IconHome/>,
-  "dashboard": <IconDashboard/>,
-  "wiki": <IconWiki/>,
-  "i18n": <IconI18n/>,
-  "qa": <IconQA/>,
+  home: <IconHome />,
+  dashboard: <IconDashboard />,
+  wiki: <IconWiki />,
+  i18n: <IconI18n />,
+  qa: <IconQA />,
 }
 
 export const AppsItem: FC<AppsItemProps> = (props) => {
@@ -23,12 +23,15 @@ export const AppsItem: FC<AppsItemProps> = (props) => {
     }
   }, [href, router])
 
-  return <div onClick={openApp} className={"flex items-start space-x-4 cursor-pointer hover:bg-secondary/80 p-2 rounded-md"}>
-    <div
-      className="h-10 w-10 bg-primary rounded-md flex justify-center items-center text-white text-2xl">{ICONS[appId]}</div>
-    <div className="space-y-1 flex-1">
-      <div className={"leading-5"}>{name}</div>
-      <div className={"leading-3 text-xs text-secondary-foreground/50"}>{description}</div>
+  return (
+    <div onClick={openApp} className="flex cursor-pointer items-start space-x-4 rounded-md p-2 hover:bg-secondary/80">
+      <div className="flex h-10 w-10 items-center justify-center rounded-md bg-primary text-2xl text-white">
+        {ICONS[appId]}
+      </div>
+      <div className="flex-1 space-y-1">
+        <div className="leading-5">{name}</div>
+        <div className="text-secondary-foreground/50 text-xs leading-3">{description}</div>
+      </div>
     </div>
-  </div>
+  )
 }

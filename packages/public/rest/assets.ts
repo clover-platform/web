@@ -8,10 +8,9 @@ export type PreSignData = {
 }
 
 export type PreSignResult = {
-  fileName: string;
-  signedUrl: string;
-  url: string;
+  fileName: string
+  signedUrl: string
+  url: string
 }
 
-export const preSign = (data: PreSignData) =>
-  post<PreSignResult, PreSignData>(`@assets/oss/file/pre-sign`, data);
+export const preSign = (data: PreSignData) => post<PreSignResult, PreSignData>('@assets/oss/file/pre-sign', data)

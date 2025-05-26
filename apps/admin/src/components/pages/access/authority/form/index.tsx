@@ -1,12 +1,12 @@
-import {FC, PropsWithChildren, useRef, useState} from "react";
-import {getSchema} from "@/config/pages/access/authority/form";
-import {Button, Form, FormItem, Input} from "@easykit/design";
 import {ApiSelector} from "@/components/pages/access/authority/form/api-selector";
 import {AuthoritySelector} from "@/components/pages/access/authority/form/authority-selector";
-import {addAuthority, editAuthority} from "@/rest/access";
-import { t } from '@clover/public/locale'
-import {UseFormReturn} from "react-hook-form"
+import { getSchema } from '@/config/pages/access/authority/form'
+import { addAuthority, editAuthority } from '@/rest/access'
 import {useFormResult} from "@clover/public/hooks/use.form.result";
+import { t } from '@clover/public/locale'
+import { Button, Form, FormItem, Input } from '@easykit/design'
+import { type FC, type PropsWithChildren, useRef, useState } from 'react'
+import type { UseFormReturn } from 'react-hook-form' 
 
 export interface AuthorityFormProps extends PropsWithChildren {
     onSuccess?: () => void;
@@ -29,14 +29,15 @@ const AuthorityForm: FC<AuthorityFormProps> = (props) => {
         onSuccess
     });
 
+    // biome-ignore lint/suspicious/noExplicitAny: <explanation>
     const onSubmit = async (data: any) => {
-        setSubmitting(true);
-        const api = type === 'add' ? addAuthority : editAuthority;
-        if(type === 'edit') {
-            data.id = authority.id;
-        }
-        formResult(await api(data));
-        setSubmitting(false);
+      setSubmitting(true)
+      const api = type === 'add' ? addAuthority : editAuthority
+      if (type === 'edit') {
+        data.id = authority.id
+      }
+      formResult(await api(data))
+      setSubmitting(false)
     }
 
     return <Form

@@ -1,16 +1,17 @@
-import {AxiosResponse} from "axios";
+import type { AxiosResponse } from 'axios'
 
 export type RestConfig = {
-  onResponse?: (data: RestResult<any>, response: AxiosResponse) => void;
+  // biome-ignore lint/suspicious/noExplicitAny: <explanation>
+  onResponse?: (data: RestResult<any>, response: AxiosResponse) => void
 }
 
 export type CancellablePromise<T> = Promise<T> & { cancel: () => void };
 
 export type RestResult<T> = {
-  success?: boolean;
-  code?: number;
-  message?: string;
-  data?: T;
+  success?: boolean
+  code?: number
+  message?: string
+  data?: T
 }
 
 export type PageData<T> = {

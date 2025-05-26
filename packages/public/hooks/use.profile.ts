@@ -3,5 +3,5 @@ import {useAtom} from "jotai";
 
 export const useProfile = () => {
   const [profile] = useAtom(accountInfoState);
-  return profile;
+  return profile
 }

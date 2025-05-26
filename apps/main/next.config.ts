@@ -4,4 +4,4 @@ const config = {
   ...publicConfig
 }
 
-export default config;
+export default config

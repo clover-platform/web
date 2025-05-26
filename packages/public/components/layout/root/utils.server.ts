@@ -1,15 +1,18 @@
+import { loadProfile } from '@clover/public/components/layout/root/utils'
 import {getCookie} from "cookies-next";
-import {cookies} from "next/headers";
-import {loadProfile} from "@clover/public/components/layout/root/utils";
+import { cookies } from 'next/headers'
 
 export const SIDEBAR_OPEN_KEY = "layout.sidebar.open";
 
 export type LoadStateResult = {
-  teams: any[];
-  projects: any[];
-  accountInfo?: any;
-  isLogin: boolean;
-  sideOpen: boolean;
+  // biome-ignore lint/suspicious/noExplicitAny: <explanation>
+  teams: any[]
+  // biome-ignore lint/suspicious/noExplicitAny: <explanation>
+  projects: any[]
+  // biome-ignore lint/suspicious/noExplicitAny: <explanation>
+  accountInfo?: any
+  isLogin: boolean
+  sideOpen: boolean
 }
 
 export const loadState = async (): Promise<LoadStateResult> => {
