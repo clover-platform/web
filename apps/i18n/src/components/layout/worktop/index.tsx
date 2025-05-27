@@ -1,8 +1,8 @@
-import { useGoLogin } from "@clover/public/components/layout/hooks/main";
-import Logo from "@clover/public/components/common/logo";
-import { FC, PropsWithChildren } from "react";
 import { useQuerySync, useWorktopState } from "@/components/layout/worktop/hooks";
+import Logo from '@clover/public/components/common/logo'
+import { useGoLogin } from '@clover/public/components/layout/hooks/main'
 import { useLayoutProps } from "@clover/public/components/layout/hooks/use.layout.props";
+import type { FC, PropsWithChildren } from 'react'
 
 export type WorktopLayoutProps = PropsWithChildren;
 
@@ -12,7 +12,11 @@ export const WorktopLayout: FC<WorktopLayoutProps> = (origin) => {
   useGoLogin();
   useQuerySync();
 
-  return loading ? <div className={"min-h-[100vh] flex justify-center items-center"}>
-    <Logo type={"light"} className={"bg-transparent animate-spin"} />
-  </div> : props.children;
+  return loading ? (
+    <div className="flex min-h-[100vh] items-center justify-center">
+      <Logo type="light" className="animate-spin bg-transparent" />
+    </div>
+  ) : (
+    props.children
+  )
 }

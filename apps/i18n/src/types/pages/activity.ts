@@ -1,4 +1,4 @@
-import { RestResult } from "@clover/public/types/rest";
+import type { RestResult } from '@clover/public/types/rest'
 
 export type ActivityQueryParams = {
   module: string;
@@ -7,16 +7,17 @@ export type ActivityQueryParams = {
 }
 
 export type Activity = {
-  id: number;
-  moduleId: number;
-  userId: number;
-  createTime: string;
-  type: number;
-  subType: number;
-  operate: number;
+  id: number
+  moduleId: number
+  userId: number
+  createTime: string
+  type: number
+  subType: number
+  operate: number
   detail: {
-    [key: string]: any;
-  };
+    // biome-ignore lint/suspicious/noExplicitAny: <explanation>
+    [key: string]: any
+  }
 }
 
 export type ActivityResult = RestResult<{

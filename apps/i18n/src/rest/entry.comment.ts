@@ -1,5 +1,5 @@
-import { del, get, post } from "@clover/public/utils/rest";
-import { EntryComment } from "@/types/pages/entry";
+import type { EntryComment } from '@/types/pages/entry'
+import { del, get, post } from '@clover/public/utils/rest'
 
 export type AddCommentData = {
   module: string;
@@ -10,15 +10,16 @@ export type AddCommentData = {
 }
 
 export const add = (data: AddCommentData) =>
+  // biome-ignore lint/suspicious/noExplicitAny: <explanation>
   post<any, AddCommentData>(`@i18n/${data.module}/branch/${data.branch}/entry/${data.entryId}/comment/add`, data);
-
+ 
 export type EntryCommentQuery = {
-  module: string;
-  entryId: number;
-  language: string;
-  page: number;
-  size: number;
-  branch: string;
+  module: string
+  entryId: number
+  language: string
+  page: number
+  size: number
+  branch: string
 }
 
 export type EntryCommentPage = {

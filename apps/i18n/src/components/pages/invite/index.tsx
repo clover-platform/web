@@ -1,15 +1,15 @@
 'use client';
 
-import { InvitePageLoading } from "@/components/pages/invite/loading";
-import { InvitePageBody } from "@/components/pages/invite/page";
-import { useEffect, useState, useCallback } from "react";
-import { useSearchParams } from "next/navigation";
-import { InviteDetail } from "@/types/pages/module";
 import { InvitePageExpired } from "@/components/pages/invite/expired";
 import { InvitePageJoined } from "@/components/pages/invite/joined";
+import { InvitePageLoading } from '@/components/pages/invite/loading'
+import { InvitePageBody } from '@/components/pages/invite/page'
 import { detail as detailRest } from "@/rest/member.invite";
-import { useAtom } from "jotai";
+import type { InviteDetail } from '@/types/pages/module'
 import { isLoginState } from "@clover/public/state/account";
+import { useAtom } from 'jotai'
+import { useSearchParams } from 'next/navigation'
+import { useCallback, useEffect, useState } from 'react'
 
 export const InvitePage = () => {
   const search = useSearchParams();
@@ -19,22 +19,21 @@ export const InvitePage = () => {
   const [expired, setExpired] = useState<boolean>(false);
   const [joined, setJoined] = useState<boolean>(false);
   const [module, setModule] = useState<string>();
-  const [isLogin] = useAtom(isLoginState);
+  const [isLogin] = useAtom(isLoginState)
 
   const load = useCallback(async () => {
     setLoading(true);
     const { success, data, code } = await detailRest(token!);
     if (success) {
-      setDetail(data as InviteDetail);
+      setDetail(data as InviteDetail)
+    } else if (code === 10033) {
+      setExpired(true)
+    } else if (code === 10032) {
+      setJoined(true)
+      setModule(data as string)
     } else {
-      if (code === 10033) {
-        setExpired(true);
-      } else if (code === 10032) {
-        setJoined(true);
-        setModule(data as string);
-      } else { // 其他情况
-        setExpired(true);
-      }
+      // 其他情况
+      setExpired(true)
     }
     setLoading(false);
   }, [token]);
@@ -43,11 +42,13 @@ export const InvitePage = () => {
     load().then();
   }, [load])
 
-  return loading ?
-    <InvitePageLoading /> :
+  return loading ? (
+    <InvitePageLoading />
+  ) : (
     <>
       {expired && <InvitePageExpired />}
       {joined && <InvitePageJoined module={module!} />}
-      {(!expired && !joined) && <InvitePageBody isLogin={isLogin} loading={loading} detail={detail} />}
+      {!(expired || joined) && <InvitePageBody isLogin={isLogin} loading={loading} detail={detail} />}
     </>
+  )
 }

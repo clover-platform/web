@@ -102,9 +102,10 @@ const ProjectPage = () => {
                   const { success, message } = await deleteProject(id)
                   if (success) {
                     reload()
-                  } else {
-                    msg.error(message)
+                    return true
                   }
+                  msg.error(message)
+                  return false
                 },
               })
             } else if (['info', 'member'].includes(key)) {
@@ -117,7 +118,9 @@ const ProjectPage = () => {
                   const { success } = await addCollect(id)
                   if (success) {
                     reload()
+                    return true
                   }
+                  return false
                 },
               })
             } else if (key === 'collect.cancel') {
@@ -128,7 +131,9 @@ const ProjectPage = () => {
                   const { success } = await cancelCollect(id)
                   if (success) {
                     reload()
+                    return true
                   }
+                  return false
                 },
               })
             }

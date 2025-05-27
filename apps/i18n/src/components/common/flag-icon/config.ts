@@ -1024,4 +1024,4 @@ export const COUNTRIES = [
     name: 'Zimbabwe',
     code: 'zw',
   },
-];
+]

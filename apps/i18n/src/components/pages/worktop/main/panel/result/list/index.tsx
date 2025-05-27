@@ -1,16 +1,16 @@
-import { useAtom } from "jotai";
-import { currentEntryState, currentLanguageState, entriesState } from "@/state/worktop";
-import { Button, Empty, ScrollArea } from "@easykit/design";
-import { useEffect, useRef, useState, useCallback } from "react";
-import { list as listRest } from "@/rest/entry.result";
 import { ResultItem } from "@/components/pages/worktop/main/panel/result/list/item";
-import bus from '@clover/public/events';
+import { ResultListLoading } from '@/components/pages/worktop/main/panel/result/list/loading'
 import { ENTRY_RESULT_RELOAD } from "@/events/worktop";
+import { useCurrentBranch } from '@/hooks/use.current.branch'
+import { list as listRest } from '@/rest/entry.result'
+import { currentEntryState, currentLanguageState, entriesState } from '@/state/worktop'
+import type { EntryResult } from '@/types/pages/entry'
+import bus from '@clover/public/events'
+import { Button, Empty, ScrollArea } from '@easykit/design'
 import { compact, uniq } from "es-toolkit";
-import { EntryResult } from "@/types/pages/entry";
-import { ResultListLoading } from "@/components/pages/worktop/main/panel/result/list/loading";
+import { useAtom } from 'jotai'
 import { useParams } from "next/navigation";
-import { useCurrentBranch } from "@/hooks/use.current.branch";
+import { useCallback, useEffect, useRef, useState } from 'react'
 import { useTranslation } from "react-i18next";
 
 export const ResultList = () => {
@@ -60,9 +60,9 @@ export const ResultList = () => {
   }
 
   useEffect(() => {
-    pageRef.current = 1;
-    load().then();
-  }, [entry, language, load]);
+    pageRef.current = 1
+    load().then()
+  }, [load])
 
   useEffect(() => {
     const handler = () => {
@@ -75,25 +75,24 @@ export const ResultList = () => {
     }
   }, [load]);
 
-  return <div className={"w-full flex-1 h-0 flex-shrink-0"}>
-    <ScrollArea className={"w-full h-full"}>
-      { !loading && list.length === 0 ? <Empty text={t("暂无翻译")} /> : null  }
-      <div className={"p-2 space-y-2"}>
-        {
-          list.map((item) => {
-            return <ResultItem
-              key={item.id}
-              item={item}
-            />
-          })
-        }
-        { loading ? <ResultListLoading /> : null }
-        {
-          !loading && total > list.length ? <div className={"w-full flex justify-center"}>
-            <Button onClick={loadMore} variant="link">{t("加载更多")}</Button>
-          </div> : null
-        }
-      </div>
-    </ScrollArea>
-  </div>
+  return (
+    <div className="h-0 w-full flex-1 flex-shrink-0">
+      <ScrollArea className="h-full w-full">
+        {!loading && list.length === 0 ? <Empty text={t('暂无翻译')} /> : null}
+        <div className="space-y-2 p-2">
+          {list.map((item) => {
+            return <ResultItem key={item.id} item={item} />
+          })}
+          {loading ? <ResultListLoading /> : null}
+          {!loading && total > list.length ? (
+            <div className="flex w-full justify-center">
+              <Button onClick={loadMore} variant="link">
+                {t('加载更多')}
+              </Button>
+            </div>
+          ) : null}
+        </div>
+      </ScrollArea>
+    </div>
+  )
 }

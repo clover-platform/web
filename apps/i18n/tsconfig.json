@@ -5,12 +5,8 @@
     "strict": true,
     "jsx": "preserve",
     "paths": {
-      "@/*": [
-        "./src/*"
-      ],
-      "@clover/public/*": [
-        "../../packages/public/*"
-      ]
+      "@/*": ["./src/*"],
+      "@clover/public/*": ["../../packages/public/*"]
     },
     "plugins": [
       {
@@ -18,11 +14,5 @@
       }
     ]
   },
-  "include": [
-    "next-env.d.ts",
-    "**/*.ts",
-    "**/*.tsx",
-    ".next/types/**/*.ts",
-    "types.d.ts"
-  ]
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "types.d.ts"]
 }

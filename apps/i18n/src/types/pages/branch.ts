@@ -8,7 +8,7 @@ export type Branch = {
 }
 
 export type BranchMergeOverview = {
-  deleted: number;
-  added: number;
-  changed: number;
+  deleted: number
+  added: number
+  changed: number
 }

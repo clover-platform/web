@@ -1,8 +1,8 @@
-import enUS from '@easykit/design/locales/en-US'
-import zhCN from "@easykit/design/locales/zh-CN";
-import zhTW from '@easykit/design/locales/zh-TW'
+import enUS from '@easykit/design/locales/en-us'
+import zhCN from '@easykit/design/locales/zh-cn'
+import zhTW from '@easykit/design/locales/zh-tw'
 
-export const FALLBACK = 'zh-CN';
+export const FALLBACK = 'zh-CN'
 
 export default {
   'zh-CN': zhCN,

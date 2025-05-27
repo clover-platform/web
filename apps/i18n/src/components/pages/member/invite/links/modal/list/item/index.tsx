@@ -1,18 +1,18 @@
-import { MemberInvite } from "@/types/pages/member";
-import { FC } from "react";
-import { Tooltip, useAlert, useMessage, ValueFormatter } from "@easykit/design";
 import { MemberRole } from "@/components/pages/member/role";
-import { CopyIcon } from "@radix-ui/react-icons";
+import { useModule } from '@/hooks/use.module'
+import { revoke } from '@/rest/member.invite'
+import type { MemberInvite } from '@/types/pages/member'
+import { IconDelete } from '@arco-iconbox/react-clover'
 import { Action } from "@clover/public/components/common/action";
-import { IconDelete } from "@arco-iconbox/react-clover";
+import { Tooltip, ValueFormatter, useAlert, useMessage } from '@easykit/design'
+import { CopyIcon } from '@radix-ui/react-icons'
 import copy from 'copy-to-clipboard';
-import { revoke } from "@/rest/member.invite";
-import { useModule } from "@/hooks/use.module";
+import type { FC } from 'react'
 import { useTranslation } from "react-i18next";
-
+ 
 export type InviteLinkItemProps = {
-  item: MemberInvite;
-  onRevoke?: () => void;
+  item: MemberInvite
+  onRevoke?: () => void
 }
 
 export const InviteLinkItem: FC<InviteLinkItemProps> = (props) => {
@@ -43,40 +43,41 @@ export const InviteLinkItem: FC<InviteLinkItemProps> = (props) => {
     });
   }
 
-  return <div className={"space-y-2"}>
-    <div className={"text-muted-foreground"}>
-      <ValueFormatter value={item.createTime} formatters={['time']} />
-    </div>
-    <div className={"flex justify-center items-stretch border rounded-md"}>
-      <div className={"flex-1 flex-shrink-0 w-0 truncate px-2 py-1 bg-muted flex items-center rounded-l-md text-muted-foreground"}>
-        {url}
+  return (
+    <div className="space-y-2">
+      <div className="text-muted-foreground">
+        <ValueFormatter value={item.createTime} formatters={['time']} />
       </div>
-      <div className={"p-1 border-l"}>
-        <Tooltip content={t("复制")}>
-          <Action
-            onClick={() => {
-              copy(url);
-              msg.success(t("复制成功"));
-            }}
-            className={"w-8 h-8 !p-0"}
-          >
-            <CopyIcon />
-          </Action>
-        </Tooltip>
+      <div className="flex items-stretch justify-center rounded-md border">
+        <div className="flex w-0 flex-1 flex-shrink-0 items-center truncate rounded-l-md bg-muted px-2 py-1 text-muted-foreground">
+          {url}
+        </div>
+        <div className="border-l p-1">
+          <Tooltip content={t('复制')}>
+            <Action
+              onClick={() => {
+                copy(url)
+                msg.success(t('复制成功'))
+              }}
+              className="!p-0 h-8 w-8"
+            >
+              <CopyIcon />
+            </Action>
+          </Tooltip>
+        </div>
+        <div className="border-l p-1">
+          <Tooltip content={t('撤销')}>
+            <Action onClick={doRevoke} className="!p-0 h-8 w-8">
+              <IconDelete />
+            </Action>
+          </Tooltip>
+        </div>
       </div>
-      <div className={"p-1 border-l"}>
-        <Tooltip content={t("撤销")}>
-          <Action
-            onClick={doRevoke}
-            className={"w-8 h-8 !p-0"}
-          >
-            <IconDelete />
-          </Action>
-        </Tooltip>
+      <div className="space-x-2">
+        {item.roles.map((role) => (
+          <MemberRole key={role} value={Number(role)} />
+        ))}
       </div>
     </div>
-    <div className={"space-x-2"}>
-      {item.roles.map((role) => <MemberRole key={role} value={Number(role)} />)}
-    </div>
-  </div>
+  )
 }

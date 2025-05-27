@@ -1,7 +1,7 @@
-import { keywords, title } from "@clover/public/utils/seo";
 import { InvitePage } from "@/components/pages/invite";
 import { st } from '@clover/public/utils/locale.server';
-import { Metadata } from "next";
+import { keywords, title } from '@clover/public/utils/seo'
+import type { Metadata } from 'next'
 
 export async function generateMetadata(): Promise<Metadata> {
   return {

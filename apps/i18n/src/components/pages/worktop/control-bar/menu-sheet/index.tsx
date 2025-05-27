@@ -1,24 +1,30 @@
-import { Separator, Sheet, SheetContent, SheetDescription, SheetTitle } from "@easykit/design";
-import { IconBranch, IconHelp, IconProject, IconTranslation } from "@arco-iconbox/react-clover";
-import { Action } from "@clover/public/components/common/action";
-import { FC, ReactNode, useEffect, useState } from "react";
-import { MenuProjectSheet } from "@/components/pages/worktop/control-bar/menu-sheet/project";
-import { MenuLanguageSheet } from "@/components/pages/worktop/control-bar/menu-sheet/language";
 import { MenuBranchSheet } from "@/components/pages/worktop/control-bar/menu-sheet/branch";
 import { MenuHelpSheet } from "@/components/pages/worktop/control-bar/menu-sheet/help";
+import { MenuLanguageSheet } from '@/components/pages/worktop/control-bar/menu-sheet/language'
+import { MenuProjectSheet } from '@/components/pages/worktop/control-bar/menu-sheet/project'
+import { IconBranch, IconHelp, IconProject, IconTranslation } from '@arco-iconbox/react-clover'
+import { Action } from '@clover/public/components/common/action'
+import { Separator, Sheet, SheetContent, SheetDescription, SheetTitle } from '@easykit/design'
+import { type FC, type ReactNode, useEffect, useState } from 'react'
 import { useTranslation } from "react-i18next";
 export type MenuItemProps = {
-  icon: ReactNode;
-  label: ReactNode;
-  active?: boolean;
-  onClick?: () => void;
+  icon: ReactNode
+  label: ReactNode
+  active?: boolean
+  onClick?: () => void
 }
 
 export const MenuItem: FC<MenuItemProps> = (props) => {
-  return <Action onClick={props.onClick} active={props.active} className={"flex !px-1 !py-0.5 w-full justify-start items-center"}>
-    <div className={"h-8 w-9 flex justify-center items-center"}>{props.icon}</div>
-    <div className={"flex-1 text-left"}>{props.label}</div>
-  </Action>
+  return (
+    <Action
+      onClick={props.onClick}
+      active={props.active}
+      className="!px-1 !py-0.5 flex w-full items-center justify-start"
+    >
+      <div className="flex h-8 w-9 items-center justify-center">{props.icon}</div>
+      <div className="flex-1 text-left">{props.label}</div>
+    </Action>
+  )
 }
 
 export type MenuSheetProps = {
@@ -35,44 +41,46 @@ export const MenuSheet: FC<MenuSheetProps> = (props) => {
     setActive(props.active);
   }, [props.active]);
 
-  return <Sheet {...props}>
-    <SheetContent side={"left"} className={"w-96 p-0 flex gap-0"}>
-      <SheetTitle />
-      <SheetDescription />
-      <button />
-      <div className={"w-36 border-r p-2 space-y-1 flex-shrink-0"}>
-        <MenuItem
-          active={active === "project"}
-          onClick={() => setActive("project")}
-          icon={<IconProject className={"text-lg"} />}
-          label={t("项目")}
-        />
-        <MenuItem
-          active={active === "language"}
-          onClick={() => setActive("language")}
-          icon={<IconTranslation className={"text-lg"} />}
-          label={t("语言")}
-        />
-        <MenuItem
-          active={active === "branch"}
-          onClick={() => setActive("branch")}
-          icon={<IconBranch className={"text-lg"} />}
-          label={t("分支")}
-        />
-        <Separator className={"my-1"} />
-        <MenuItem
-          active={active === "help"}
-          onClick={() => setActive("help")}
-          icon={<IconHelp className={"text-lg"} />}
-          label={t("帮助")}
-        />
-      </div>
-      <div className={"flex-grow p-3"}>
-        {active === "project" && <MenuProjectSheet />}
-        {active === "language" && <MenuLanguageSheet />}
-        {active === "branch" && <MenuBranchSheet />}
-        {active === "help" && <MenuHelpSheet />}
-      </div>
-    </SheetContent>
-  </Sheet>
+  return (
+    <Sheet {...props}>
+      <SheetContent side="left" className="flex w-96 gap-0 p-0">
+        <SheetTitle />
+        <SheetDescription />
+        <button type="button" />
+        <div className="w-36 flex-shrink-0 space-y-1 border-r p-2">
+          <MenuItem
+            active={active === 'project'}
+            onClick={() => setActive('project')}
+            icon={<IconProject className="text-lg" />}
+            label={t('项目')}
+          />
+          <MenuItem
+            active={active === 'language'}
+            onClick={() => setActive('language')}
+            icon={<IconTranslation className="text-lg" />}
+            label={t('语言')}
+          />
+          <MenuItem
+            active={active === 'branch'}
+            onClick={() => setActive('branch')}
+            icon={<IconBranch className="text-lg" />}
+            label={t('分支')}
+          />
+          <Separator className="my-1" />
+          <MenuItem
+            active={active === 'help'}
+            onClick={() => setActive('help')}
+            icon={<IconHelp className="text-lg" />}
+            label={t('帮助')}
+          />
+        </div>
+        <div className="flex-grow p-3">
+          {active === 'project' && <MenuProjectSheet />}
+          {active === 'language' && <MenuLanguageSheet />}
+          {active === 'branch' && <MenuBranchSheet />}
+          {active === 'help' && <MenuHelpSheet />}
+        </div>
+      </SheetContent>
+    </Sheet>
+  )
 }

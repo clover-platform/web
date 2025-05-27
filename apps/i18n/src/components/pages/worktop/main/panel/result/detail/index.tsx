@@ -1,16 +1,16 @@
-import { Badge, Dropdown, DropdownMenuItemProps, Tooltip, useAlert, useMessage } from "@easykit/design";
-import { Action } from "@clover/public/components/common/action";
-import { ArrowLeftIcon, ArrowRightIcon, CopyIcon, DotsHorizontalIcon } from "@radix-ui/react-icons";
+import { useEntriesUpdater } from '@/components/layout/worktop/hooks'
 import { EditEntryButton } from "@/components/pages/worktop/main/panel/entry/edit/button";
-import { useAtom } from "jotai";
+import { remove as removeRest } from '@/rest/entry'
 import { branchesState, currentEntryState, entriesState } from "@/state/worktop";
-import { useEntriesUpdater } from "@/components/layout/worktop/hooks";
-import { FC, ReactNode } from "react";
+import { Action } from '@clover/public/components/common/action'
+import { t } from '@clover/public/utils/locale.client'
+import { Badge, Dropdown, type DropdownMenuItemProps, Tooltip, useAlert, useMessage } from '@easykit/design'
+import { ArrowLeftIcon, ArrowRightIcon, CopyIcon, DotsHorizontalIcon } from '@radix-ui/react-icons'
 import copy from 'copy-to-clipboard';
-import { remove as removeRest } from "@/rest/entry";
-import { useParams } from "next/navigation";
-import { useTranslation } from "react-i18next";
-import { t } from "@clover/public/utils/locale.client";
+import { useAtom } from 'jotai'
+import { useParams } from 'next/navigation'
+import type { FC, ReactNode } from 'react'
+import { useTranslation } from 'react-i18next'
 
 type IconMenuItemProps = {
   icon?: ReactNode;
@@ -18,35 +18,35 @@ type IconMenuItemProps = {
 }
 
 export const IconMenuItem: FC<IconMenuItemProps> = (props) => {
-  return <div className={"flex justify-center items-center"}>
-    <div className={"w-4 h-4 flex justify-center items-center mr-2"}>
-      {props.icon}
+  return (
+    <div className="flex items-center justify-center">
+      <div className="mr-2 flex h-4 w-4 items-center justify-center">{props.icon}</div>
+      <div className="flex-1">{props.label}</div>
     </div>
-    <div className={"flex-1"}>{props.label}</div>
-  </div>;
+  )
 }
 
 const menus: DropdownMenuItemProps[] = [
   {
-    type: "item",
-    id: "copy.key",
-    label: <IconMenuItem icon={<CopyIcon className={"text-lg"} />} label={t("复制键值")} />,
+    type: 'item',
+    id: 'copy.key',
+    label: <IconMenuItem icon={<CopyIcon className="text-lg" />} label={t('复制键值')} />,
   },
   {
-    type: "item",
-    id: "copy.value",
-    label: <IconMenuItem icon={<CopyIcon className={"text-lg"} />} label={t("复制内容")} />
+    type: 'item',
+    id: 'copy.value',
+    label: <IconMenuItem icon={<CopyIcon className="text-lg" />} label={t('复制内容')} />,
   },
   {
-    type: "separator",
-    id: "separator.1",
+    type: 'separator',
+    id: 'separator.1',
   },
   {
-    type: "item",
-    id: "remove",
-    label: <IconMenuItem label={t("删除")} />,
+    type: 'item',
+    id: 'remove',
+    label: <IconMenuItem label={t('删除')} />,
   },
-];
+]
 
 export const Detail = () => {
   const [entries] = useAtom(entriesState);
@@ -95,45 +95,39 @@ export const Detail = () => {
     }
   }
 
-  return <div className={"w-full"}>
-    <div className={"flex justify-center items-center p-2 px-4"}>
-      <div className={"flex-1 text-base font-medium"}>{t("原始内容")}</div>
-      <div className={"flex"}>
-        <Tooltip content={t("上一个")}>
-          <Action disabled={current === 0} onClick={() => setCurrent(current - 1)}>
-            <ArrowLeftIcon />
-          </Action>
-        </Tooltip>
-        <Tooltip content={t("下一个")}>
-          <Action disabled={current === entries.length - 1} onClick={() => setCurrent(current + 1)}>
-            <ArrowRightIcon />
-          </Action>
-        </Tooltip>
-        <EditEntryButton
-          onSuccess={async () => {
-            await update(entry.id);
-          }}
-          entry={entry}
-        />
-        <Dropdown
-          items={menus}
-          onItemClick={onItemClick}
-          asChild={true}
-          align={"end"}
-        >
-          <Action>
-            <DotsHorizontalIcon />
-          </Action>
-        </Dropdown>
-
+  return (
+    <div className="w-full">
+      <div className="flex items-center justify-center p-2 px-4">
+        <div className="flex-1 font-medium text-base">{t('原始内容')}</div>
+        <div className="flex">
+          <Tooltip content={t('上一个')}>
+            <Action disabled={current === 0} onClick={() => setCurrent(current - 1)}>
+              <ArrowLeftIcon />
+            </Action>
+          </Tooltip>
+          <Tooltip content={t('下一个')}>
+            <Action disabled={current === entries.length - 1} onClick={() => setCurrent(current + 1)}>
+              <ArrowRightIcon />
+            </Action>
+          </Tooltip>
+          <EditEntryButton
+            onSuccess={async () => {
+              await update(entry.id)
+            }}
+            entry={entry}
+          />
+          <Dropdown items={menus} onItemClick={onItemClick} asChild={true} align="end">
+            <Action>
+              <DotsHorizontalIcon />
+            </Action>
+          </Dropdown>
+        </div>
+      </div>
+      <div className="mb-4 px-4">{entry?.value}</div>
+      <div className="mb-4 px-4">
+        <Badge className="mr-2">{branch?.name}</Badge>
+        <span className="text-muted-foreground">{entry?.identifier}</span>
       </div>
     </div>
-    <div className={"px-4 mb-4"}>
-      {entry?.value}
-    </div>
-    <div className={"px-4 mb-4"}>
-      <Badge className={"mr-2"}>{branch?.name}</Badge>
-      <span className={"text-muted-foreground"}>{entry?.identifier}</span>
-    </div>
-  </div>
+  )
 }

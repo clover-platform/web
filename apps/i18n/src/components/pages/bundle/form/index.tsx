@@ -1,14 +1,16 @@
-import { Checkbox, Form, FormItem, Input } from "@easykit/design";
-import { FC, PropsWithChildren } from "react";
-import { getSchema } from "@/config/pages/bundle/form";
 import { BranchPattern } from "@/components/pages/bundle/form/branch-pattern";
 import { ExportFormat } from "@/components/pages/bundle/form/export-format";
+import { getSchema } from '@/config/pages/bundle/form'
+import { Checkbox, Form, FormItem, Input } from '@easykit/design'
+import type { FC, PropsWithChildren } from 'react'
 import { useTranslation } from "react-i18next";
 
 export type BundleFormProps = PropsWithChildren<{
-  onSubmit?: (data: any) => void;
-  defaultValues?: any;
-}>;
+  // biome-ignore lint/suspicious/noExplicitAny: <explanation>
+  onSubmit?: (data: any) => void
+  // biome-ignore lint/suspicious/noExplicitAny: <explanation>
+  defaultValues?: any
+}>
 
 export const BundleForm: FC<BundleFormProps> = (props) => {
   const {

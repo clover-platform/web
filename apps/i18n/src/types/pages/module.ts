@@ -1,4 +1,4 @@
-import { User } from "@clover/public/types/account";
+import type { User } from '@clover/public/types/account'
 
 export type ModulePageProps = {
   params: Promise<{
@@ -7,19 +7,19 @@ export type ModulePageProps = {
 }
 
 export type Module = {
-  id: number;
-  name: string;
-  owner: number;
-  projectId: number;
-  createTime: string;
-  updateTime?: string;
-  description?: string;
-  identifier?: string;
-  memberSize?: number;
-  targetSize?: number;
-  source: string;
-  wordSize?: number;
-}
+  id: number
+  name: string
+  owner: number
+  projectId: number
+  createTime: string
+  updateTime?: string
+  description?: string
+  identifier?: string
+  memberSize?: number
+  targetSize?: number
+  source: string
+  wordSize?: number
+} 
 
 export type ModuleCount = {
   wordCount: number;

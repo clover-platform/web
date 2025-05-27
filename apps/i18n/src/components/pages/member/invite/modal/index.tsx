@@ -1,11 +1,11 @@
-import { Button, Dialog, DialogProps, useMessage } from "@easykit/design";
-import { FC, useState } from "react";
-import { MemberInviteForm } from "@/components/pages/member/invite/form";
-import { MemberInviteRequest } from "@/types/pages/member";
+import { MemberInviteForm } from '@/components/pages/member/invite/form'
 import { GetInviteLinkButton } from "@/components/pages/member/invite/links/button/get";
-import { InviteLinkListButton } from "@/components/pages/member/invite/links/button/list";
-import { MemberInviteData, send } from "@/rest/member.invite";
+import { InviteLinkListButton } from '@/components/pages/member/invite/links/button/list'
 import { useModule } from "@/hooks/use.module";
+import { type MemberInviteData, send } from '@/rest/member.invite'
+import type { MemberInviteRequest } from '@/types/pages/member'
+import { Button, Dialog, type DialogProps, useMessage } from '@easykit/design'
+import { type FC, useState } from 'react'
 import { useTranslation } from "react-i18next";
 
 export type InviteModalProps = {} & DialogProps;
@@ -15,7 +15,7 @@ export const InviteModal: FC<InviteModalProps> = (props) => {
     roles: ['3'],
     emails: '',
     content: '',
-  });
+  })
   const m = useModule();
   const [loading, setLoading] = useState(false);
   const msg = useMessage();
@@ -34,27 +34,21 @@ export const InviteModal: FC<InviteModalProps> = (props) => {
     }
   }
 
-  return <Dialog
-    {...props}
-    title={t("邀请成员")}
-    maskClosable={false}
-  >
-    <MemberInviteForm
-      onSubmit={onSubmit}
-      onValuesChange={setInvite}
-    >
-      <div className={"flex justify-center items-center"}>
-        <div className={"flex-1"}>
-          <GetInviteLinkButton
-            roles={invite.roles}
-            disabled={!invite.roles.length}
-          />
-          <InviteLinkListButton />
+  return (
+    <Dialog {...props} title={t('邀请成员')} maskClosable={false}>
+      <MemberInviteForm onSubmit={onSubmit} onValuesChange={setInvite}>
+        <div className="flex items-center justify-center">
+          <div className="flex-1">
+            <GetInviteLinkButton roles={invite.roles} disabled={!invite.roles.length} />
+            <InviteLinkListButton />
+          </div>
+          <div>
+            <Button loading={loading} type="submit">
+              {t('发送邀请')}
+            </Button>
+          </div>
         </div>
-        <div>
-          <Button loading={loading} type={"submit"}>{t("发送邀请")}</Button>
-        </div>
-      </div>
-    </MemberInviteForm>
-  </Dialog>
+      </MemberInviteForm>
+    </Dialog>
+  )
 }

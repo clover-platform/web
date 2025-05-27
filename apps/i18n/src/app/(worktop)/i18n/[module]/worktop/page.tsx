@@ -1,7 +1,7 @@
-import { keywords, title } from "@clover/public/utils/seo";
 import { ModuleWorktopPage } from "@/components/pages/worktop";
 import { st } from '@clover/public/utils/locale.server';
-import { Metadata } from "next";
+import { keywords, title } from '@clover/public/utils/seo'
+import type { Metadata } from 'next'
 
 export async function generateMetadata(): Promise<Metadata> {
   return {
@@ -11,5 +11,5 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default function Page() {
-  return <ModuleWorktopPage />;
+  return <ModuleWorktopPage />
 }

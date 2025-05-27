@@ -1,8 +1,8 @@
-import { Button, Dialog, DialogProps, Space, useMessage } from "@easykit/design";
-import { FC, useState } from "react";
 import { ModuleBranchForm } from "@/components/pages/branch/form";
-import { create, CreateBranchData } from "@/rest/branch";
+import { type CreateBranchData, create } from '@/rest/branch'
+import { Button, Dialog, type DialogProps, Space, useMessage } from '@easykit/design'
 import { useParams } from "next/navigation";
+import { type FC, useState } from 'react'
 import { useTranslation } from "react-i18next";
 
 export type NewBranchModalProps = {
@@ -16,7 +16,7 @@ export const NewBranchModal: FC<NewBranchModalProps> = (props) => {
   const { t } = useTranslation();
 
   const onSubmit = async (data: CreateBranchData) => {
-    setLoading(true);
+    setLoading(true)
     data.module = module as string;
     const { success, message } = await create(data);
     setLoading(false);
@@ -27,22 +27,18 @@ export const NewBranchModal: FC<NewBranchModalProps> = (props) => {
     }
   }
 
-  return <Dialog
-    {...props}
-    title={t("新建分支")}
-    maskClosable={false}
-  >
-    <ModuleBranchForm onSubmit={onSubmit}>
-      <Space className={"justify-end"}>
-        <Button loading={loading} type={"submit"}>{t("提交")}</Button>
-        <Button
-          variant={"outline"}
-          type={"button"}
-          onClick={() => props.onCancel?.()}
-        >
-          {t("取消")}
-        </Button>
-      </Space>
-    </ModuleBranchForm>
-  </Dialog>
+  return (
+    <Dialog {...props} title={t('新建分支')} maskClosable={false}>
+      <ModuleBranchForm onSubmit={onSubmit}>
+        <Space className="justify-end">
+          <Button loading={loading} type="submit">
+            {t('提交')}
+          </Button>
+          <Button variant="outline" type="button" onClick={() => props.onCancel?.()}>
+            {t('取消')}
+          </Button>
+        </Space>
+      </ModuleBranchForm>
+    </Dialog>
+  )
 }

@@ -6,11 +6,11 @@ export default {
   output: 'standalone',
   reactStrictMode: false,
   trailingSlash: false,
-  transpilePackages: ['@clover/public'],
+  transpilePackages: ['@clover/public', '@easykit/design'],
   compiler: {
     removeConsole: !isDev,
   },
   typescript: {
     // ignoreBuildErrors: true,
   },
-} as NextConfig;
+} as NextConfig

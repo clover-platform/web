@@ -1,13 +1,13 @@
-import { DropdownMenuItemProps, FilterItemProps, Input } from "@easykit/design";
-import { DataTableColumn } from "@easykit/design";
-import { Member } from "@/types/pages/member";
 import { MemberRole } from "@/components/pages/member/role";
+import type { Member } from '@/types/pages/member'
 import { t } from "@clover/public/utils/locale.client";
+import { type DropdownMenuItemProps, type FilterItemProps, Input } from '@easykit/design'
+import type { DataTableColumn } from '@easykit/design'
 
 export const getFilters = (): FilterItemProps[] => [
   {
     field: 'keyword',
-    render: () => <Input placeholder={t("请输入关键词")} />,
+    render: () => <Input placeholder={t('请输入关键词')} />,
   },
 ]
 
@@ -30,9 +30,13 @@ export const getColumns = (): DataTableColumn<Member>[] => [
     className: "w-[200px] min-w-[200px]",
     cell: (cell) => {
       const data = cell.row.original;
-      return <div className={"space-x-2"}>
-        {data.roles?.map((role) => <MemberRole key={role} value={role} />)}
-      </div>
+      return (
+        <div className="space-x-2">
+          {data.roles?.map((role) => (
+            <MemberRole key={role} value={role} />
+          ))}
+        </div>
+      )
     }
   },
 ];

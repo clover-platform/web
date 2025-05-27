@@ -6,5 +6,5 @@ export type MemberQuery = {
   type: string;
 }
 
-export const list = (params: MemberQuery) =>
-  get<any, MemberQuery>(`@i18n/${params.module}/member/list`, params);
+// biome-ignore lint/suspicious/noExplicitAny: <explanation>
+export const list = (params: MemberQuery) => get<any, MemberQuery>(`@i18n/${params.module}/member/list`, params)

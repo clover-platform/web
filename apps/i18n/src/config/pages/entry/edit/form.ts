@@ -1,7 +1,7 @@
 import { t } from "@clover/public/utils/locale.client";
-import * as z from "zod";
+import { object, string } from 'zod'
 
-export const getSchema = () => z.object({
-  value: z.string()
-    .min(1, t("名称不能为空")),
-});
+export const getSchema = () =>
+  object({
+    value: string().min(1, t('名称不能为空')),
+  })

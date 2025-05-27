@@ -1,16 +1,20 @@
-import { Separator, Skeleton } from "@easykit/design";
 import { ActivityListGroupItemLoading } from "@/components/pages/activity/list/group/item/loading";
+import { Separator, Skeleton } from '@easykit/design'
 
 export const ActivityListGroupLoading = () => {
-  return <div>
-    <div className={"relative h-8 flex justify-center items-center"}>
-      <Separator />
-      <div className={"border bg-white absolute top-1/2 -mt-3 h-6 rounded-full overflow-hidden"}>
-        <Skeleton className={"w-20 h-6"} />
+  return (
+    <div>
+      <div className="relative flex h-8 items-center justify-center">
+        <Separator />
+        <div className="-mt-3 absolute top-1/2 h-6 overflow-hidden rounded-full border bg-white">
+          <Skeleton className="h-6 w-20" />
+        </div>
+      </div>
+      <div className="space-y-4">
+        {[1, 2, 3].map((item) => (
+          <ActivityListGroupItemLoading key={item} />
+        ))}
       </div>
     </div>
-    <div className={"space-y-4"}>
-      {[1, 2, 3].map((item) => <ActivityListGroupItemLoading key={item} />)}
-    </div>
-  </div>
+  )
 }

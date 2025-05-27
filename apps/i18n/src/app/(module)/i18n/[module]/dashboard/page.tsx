@@ -1,9 +1,9 @@
-import { keywords, title } from "@clover/public/utils/seo";
 import { DashboardPage } from "@/components/pages/dashboard";
+import { dashboard } from '@/rest/module'
+import type { ModulePageProps } from '@/types/pages/module'
 import { st } from '@clover/public/utils/locale.server';
-import { Metadata } from "next";
-import { ModulePageProps } from "@/types/pages/module";
-import { dashboard } from "@/rest/module";
+import { keywords, title } from '@clover/public/utils/seo'
+import type { Metadata } from 'next'
 
 export async function generateMetadata(): Promise<Metadata> {
   return {
@@ -24,4 +24,4 @@ const Page = async (props: ModulePageProps) => {
   />
 }
 
-export default Page;
+export default Page

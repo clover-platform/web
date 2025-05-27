@@ -1,4 +1,4 @@
-import { User } from "@clover/public/types/account";
+import type { User } from '@clover/public/types/account'
 
 export type Member = {
   id: number;
@@ -17,7 +17,7 @@ export type MemberInvite = {
 }
 
 export type MemberInviteRequest = {
-  roles: string[];
-  emails: string;
-  content: string;
+  roles: string[]
+  emails: string
+  content: string
 }

@@ -1,4 +1,4 @@
-import { User } from "@clover/public/types/account";
+import type { User } from '@clover/public/types/account'
 
 export type Entry = {
   id: number;
@@ -12,18 +12,18 @@ export type Entry = {
 }
 
 export type EntryResult = {
-  id: number;
-  entryId: number;
-  content: string;
-  language: string;
-  createTime: Date;
-  translatorId: number;
-  checkerId: number;
-  updateTime: Date;
-  verified: boolean;
-  translator?: User;
-  verifier?: User;
-  verifiedTime?: Date;
+  id: number
+  entryId: number
+  content: string
+  language: string
+  createTime: Date
+  translatorId: number
+  checkerId: number
+  updateTime: Date
+  verified: boolean
+  translator?: User
+  verifier?: User
+  verifiedTime?: Date
 }
 
 export type EntryResultPage = {

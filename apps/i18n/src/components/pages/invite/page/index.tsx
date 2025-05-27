@@ -1,15 +1,15 @@
-import { Button, useMessage } from "@easykit/design";
-import { LanguageIcon } from "@/components/common/language-icon";
-import { FC, useState } from "react";
-import { InviteDetail } from "@/types/pages/module";
+import { LanguageIcon } from '@/components/common/language-icon'
 import { MemberRole } from "@/components/pages/member/role";
 import { accept } from "@/rest/member.invite";
+import type { InviteDetail } from '@/types/pages/module'
+import { Button, useMessage } from '@easykit/design'
 import { useRouter, useSearchParams } from "next/navigation";
+import { type FC, useState } from 'react'
 import { useTranslation } from "react-i18next";
 export type InvitePageBodyProps = {
-  loading: boolean;
-  isLogin: boolean;
-  detail?: InviteDetail;
+  loading: boolean
+  isLogin: boolean
+  detail?: InviteDetail
 }
 
 export const InvitePageBody: FC<InvitePageBodyProps> = (props) => {
@@ -40,53 +40,59 @@ export const InvitePageBody: FC<InvitePageBodyProps> = (props) => {
     }
   }
 
-  return <div className={"w-[360px] space-y-4 mt-8"}>
-    <div className={"text-base"}>
-      {t("邀请你加入翻译项目")}
-    </div>
-    <div className={"space-y-2"}>
-      <div className={"space-x-2 text-muted-foreground"}>
-        <span>作为</span>
-        {detail?.roles?.map((role) => <MemberRole key={role} value={Number(role)} />)}
-        <span>加入</span>
-      </div>
-      <div className={"flex justify-center items-start border shadow rounded-md p-3"}>
-        <div className={"mr-2"}>
-          <LanguageIcon className={"!w-12 !h-10"} code={detail?.source || ""} />
+  return (
+    <div className="mt-8 w-[360px] space-y-4">
+      <div className="text-base">{t('邀请你加入翻译项目')}</div>
+      <div className="space-y-2">
+        <div className="space-x-2 text-muted-foreground">
+          <span>作为</span>
+          {detail?.roles?.map((role) => (
+            <MemberRole key={role} value={Number(role)} />
+          ))}
+          <span>加入</span>
         </div>
-        <div className={"flex-1 space-y-1"}>
-          <div className={"text-base"}>{detail?.name}</div>
-          <div className={"text-muted-foreground"}>目标语言</div>
-          <div className={"bg-muted p-2 space-y-1 rounded-md"}>
-            {
-              detail?.targets.map((target, index) => {
+        <div className="flex items-start justify-center rounded-md border p-3 shadow">
+          <div className="mr-2">
+            <LanguageIcon className="!w-12 !h-10" code={detail?.source || ''} />
+          </div>
+          <div className="flex-1 space-y-1">
+            <div className="text-base">{detail?.name}</div>
+            <div className="text-muted-foreground">目标语言</div>
+            <div className="space-y-1 rounded-md bg-muted p-2">
+              {detail?.targets.map((target, index) => {
                 const items = [
-                  <div key={`${target.id}-item`} className={"flex justify-center items-center"}>
-                    <div className={"mr-2"}>
-                      <LanguageIcon className={"w-8 h-6 shadow"} code={target.code} />
+                  <div key={`${target.id}-item`} className="flex items-center justify-center">
+                    <div className="mr-2">
+                      <LanguageIcon className="h-6 w-8 shadow" code={target.code} />
                     </div>
-                    <div className={"text-md text-muted-foreground flex-1"}>
-                      {target.name}
-                    </div>
-                  </div>
+                    <div className="flex-1 text-md text-muted-foreground">{target.name}</div>
+                  </div>,
                 ]
                 if (index < detail.targets.length - 1) {
-                  items.push(<div key={`${target.id}-border`} className={"h-0.5 bg-white -mx-2"} />)
+                  items.push(<div key={`${target.id}-border`} className="-mx-2 h-0.5 bg-white" />)
                 }
-                return items;
-              })
-            }
+                return items
+              })}
+            </div>
           </div>
         </div>
       </div>
+      <div className="!mt-8 flex space-x-2">
+        {isLogin ? (
+          <Button loading={submitting} onClick={acceptInvite} className="w-full">
+            {t('加入')}
+          </Button>
+        ) : (
+          <>
+            <Button onClick={login} className="flex-1">
+              {t('登录')}
+            </Button>
+            <Button onClick={register} variant="outline" className="flex-1">
+              {t('注册')}
+            </Button>
+          </>
+        )}
+      </div>
     </div>
-    <div className={"!mt-8 flex space-x-2"}>
-      {
-        isLogin ? <Button loading={submitting} onClick={acceptInvite} className={"w-full"}>{t("加入")}</Button> : <>
-          <Button onClick={login} className={"flex-1"}>{t("登录")}</Button>
-          <Button onClick={register} variant={"outline"} className={"flex-1"}>{t("注册")}</Button>
-        </>
-      }
-    </div>
-  </div>;
+  )
 }

@@ -1,31 +1,31 @@
-import { DataTableColumn } from "@easykit/design";
-import { Badge, DropdownMenuItemProps, FilterItemProps, Input } from "@easykit/design";
-import { Branch } from "@/types/pages/branch";
+import type { Branch } from '@/types/pages/branch'
 import { t } from "@clover/public/utils/locale.client";
+import type { DataTableColumn } from '@easykit/design'
+import { Badge, type DropdownMenuItemProps, type FilterItemProps, Input } from '@easykit/design'
 
 export const getColumns = (): DataTableColumn<Branch>[] => [
   {
-    accessorKey: "name",
-    header: t("名称"),
+    accessorKey: 'name',
+    header: t('名称'),
     enableHiding: false,
-    className: "min-w-[200px]",
+    className: 'min-w-[200px]',
   },
   {
-    accessorKey: "isDefault",
-    header: t("默认分支"),
+    accessorKey: 'isDefault',
+    header: t('默认分支'),
     enableHiding: false,
-    className: "!w-[200px]",
+    className: '!w-[200px]',
     cell: (cell) => {
-      const branch = cell.row.original;
-      return branch.isDefault ? <Badge>{t("是")}</Badge> : null;
-    }
+      const branch = cell.row.original
+      return branch.isDefault ? <Badge>{t('是')}</Badge> : null
+    },
   },
   {
-    accessorKey: "updateTime",
-    header: t("最后更新"),
+    accessorKey: 'updateTime',
+    header: t('最后更新'),
     enableHiding: false,
-    formatters: ["time"],
-    className: "!w-[200px]",
+    formatters: ['time'],
+    className: '!w-[200px]',
   },
 ]
 

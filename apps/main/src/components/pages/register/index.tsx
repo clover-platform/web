@@ -1,3 +1,5 @@
+'use client'
+
 import LoginLink from "@/components/common/login/link";
 import {getFormSchema} from "@/config/pages/register/form";
 import { register, sendEmailCode } from '@/rest/auth'

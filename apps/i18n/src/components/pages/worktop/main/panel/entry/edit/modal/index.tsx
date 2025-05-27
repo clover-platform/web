@@ -1,11 +1,11 @@
-import { Button, Dialog, DialogProps, useMessage } from "@easykit/design";
-import { FC, useEffect, useState } from "react";
-import { edit, EditEntryData } from "@/rest/entry";
 import { EntryEditForm } from "@/components/pages/worktop/main/panel/entry/form/edit";
-import { Entry } from "@/types/pages/entry";
-import { useParams } from "next/navigation";
-import { useAtom } from "jotai/index";
+import { type EditEntryData, edit } from '@/rest/entry'
 import { branchesState } from "@/state/worktop";
+import type { Entry } from '@/types/pages/entry'
+import { Button, Dialog, type DialogProps, useMessage } from '@easykit/design'
+import { useAtom } from 'jotai/index'
+import { useParams } from 'next/navigation'
+import { type FC, useEffect, useState } from 'react'
 import { useTranslation } from "react-i18next";
 
 export type CreateEntryModalProps = {
@@ -16,7 +16,7 @@ export type CreateEntryModalProps = {
 export const EditEntryModal: FC<CreateEntryModalProps> = (props) => {
   const { entry } = props;
   const [loading, setLoading] = useState(false);
-  const msg = useMessage();
+  const msg = useMessage()
   const [formKey, setFormKey] = useState(Date.now());
   const { module } = useParams();
   const [branches] = useAtom(branchesState);
@@ -47,22 +47,18 @@ export const EditEntryModal: FC<CreateEntryModalProps> = (props) => {
     if (props.visible) setFormKey(Date.now());
   }, [props.visible])
 
-  return <Dialog
-    {...props}
-    title={t("编辑词条")}
-    maskClosable={false}
-  >
-    <EntryEditForm defaultValues={entry} key={formKey} onSubmit={onSubmit}>
-      <div className={"flex justify-end items-center space-x-2"}>
-        <Button loading={loading} type={"submit"}>{t("保存")}</Button>
-        <Button
-          variant={"outline"}
-          type={"button"}
-          onClick={() => props.onCancel?.()}
-        >
-          {t("取消")}
-        </Button>
-      </div>
-    </EntryEditForm>
-  </Dialog>
+  return (
+    <Dialog {...props} title={t('编辑词条')} maskClosable={false}>
+      <EntryEditForm defaultValues={entry} key={formKey} onSubmit={onSubmit}>
+        <div className="flex items-center justify-end space-x-2">
+          <Button loading={loading} type="submit">
+            {t('保存')}
+          </Button>
+          <Button variant="outline" type="button" onClick={() => props.onCancel?.()}>
+            {t('取消')}
+          </Button>
+        </div>
+      </EntryEditForm>
+    </Dialog>
+  )
 }

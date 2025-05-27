@@ -1,6 +1,6 @@
-import { FC } from "react";
-import { Badge } from "@easykit/design";
 import { t } from "@clover/public/utils/locale.client";
+import { Badge } from '@easykit/design'
+import type { FC } from 'react'
 
 export type MemberRoleProps = {
   value: number;
@@ -13,25 +13,25 @@ type RoleItem = {
 
 const ROLE_MAP: Record<number, RoleItem> = {
   0: {
-    label: t("成员"),
-    variant: "outline",
+    label: t('成员'),
+    variant: 'outline',
   },
   1: {
-    label: t("管理员"),
-    variant: "default",
+    label: t('管理员'),
+    variant: 'default',
   },
   2: {
-    label: t("创建者"),
-    variant: "default",
+    label: t('创建者'),
+    variant: 'default',
   },
   3: {
-    label: t("翻译员"),
-    variant: "secondary",
+    label: t('翻译员'),
+    variant: 'secondary',
   },
   4: {
-    label: t("校验员"),
-    variant: "secondary",
-  }
+    label: t('校验员'),
+    variant: 'secondary',
+  },
 }
 
 export const MemberRole: FC<MemberRoleProps> = (props) => {

@@ -1,4 +1,4 @@
-import { atom } from "jotai";
-import { Language } from "@/types/pages/public";
+import type { Language } from '@/types/pages/public'
+import { atom } from 'jotai'
 
-export const languagesState = atom<Language[]>([])
+export const languagesState = atom<Language[]>([]) 

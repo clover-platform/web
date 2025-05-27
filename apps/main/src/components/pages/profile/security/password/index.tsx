@@ -1,7 +1,7 @@
 import { type PasswordData, change } from '@/rest/profile/security/password'
 import bus from '@clover/public/events'
 import { UNAUTHORIZED } from '@clover/public/events/auth'
-import { type FormResult, useFormResult } from '@clover/public/hooks'
+import { type FormResult, useFormResult } from '@clover/public/hooks/use.form.result'
 import { encrypt } from '@clover/public/utils/crypto'
 import { t } from '@clover/public/utils/locale.client'
 import { PASSWORD } from '@clover/public/utils/regular'

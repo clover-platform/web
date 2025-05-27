@@ -45,4 +45,4 @@
 //   },
 // ]
 
-export const getNavMenus = (module: string) => [];
+export const getNavMenus = (_module: string) => []

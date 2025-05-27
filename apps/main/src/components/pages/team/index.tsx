@@ -106,9 +106,10 @@ export const TeamPage = () => {
                   const { success, message } = await deleteTeam(id)
                   if (success) {
                     reload()
-                  } else {
-                    msg.error(message)
+                    return true
                   }
+                  msg.error(message)
+                  return false
                 },
               })
             } else if (['info', 'member'].includes(key)) {

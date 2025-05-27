@@ -1,17 +1,17 @@
-import { Activity } from "@/types/pages/activity";
-import { FC, ReactNode, useMemo } from "react";
-import { Avatar } from "@easykit/design";
-import dayjs from "dayjs";
+import type { Activity } from '@/types/pages/activity'
 import { IconAdd, IconDelete } from "@arco-iconbox/react-clover";
+import { i18n, t } from '@clover/public/utils/locale.client'
+import { Avatar } from '@easykit/design'
 import { CheckIcon, Cross2Icon, Pencil1Icon } from "@radix-ui/react-icons";
-import { i18n, t } from "@clover/public/utils/locale.client";
+import dayjs from 'dayjs'
+import { type FC, type ReactNode, useMemo } from 'react'
 
 const ICONS: Record<number, ReactNode> = {
   1: <IconAdd />,
   2: <Pencil1Icon />,
   3: <IconDelete />,
   4: <CheckIcon />,
-  5: <Cross2Icon />
+  5: <Cross2Icon />,
 }
 
 const LABELS: Record<number, string> = {
@@ -57,48 +57,40 @@ export const ActivityListGroupItem: FC<ActivityListGroupItemProps> = (props) => 
     return TYPES[type];
   }, [type, subType])
 
+  // biome-ignore lint/complexity/noExcessiveCognitiveComplexity: <explanation>
   const content = useMemo(() => {
-    if (type === 1) {
-      return detail?.name;
-    } else if (type === 2) {
-      return detail?.name;
-    } else if (type === 3) {
-      return detail?.name;
-    } else if (type === 4) {
-      return detail?.name;
-    } else if (type === 5) {
-      return detail?.name;
-    } else if (type === 6) {
-      if (subType === 1) {
-        return detail?.value;
-      } else if (subType === 2) {
-        return detail?.content;
-      } else if (subType === 3) {
-        return detail?.content;
-      }
-      return "--"
+    if (type === 1) return detail?.name
+    if (type === 2) return detail?.name
+    if (type === 3) return detail?.name
+    if (type === 4) return detail?.name
+    if (type === 5) return detail?.name
+    if (type === 6) {
+      if (subType === 1) return detail?.value
+      if (subType === 2) return detail?.content
+      if (subType === 3) return detail?.content
+      return '--'
     }
-    return "--";
+    return '--'
   }, [detail, type, subType])
 
-  return <div className={"flex justify-center items-start"}>
-    <div className={"relative"}>
-      <Avatar className={"w-10 h-10"} src={""} fallback={"S"} />
-      <div className={"absolute bottom-0 -right-2 h-6 w-6 bg-white border rounded-full flex justify-center items-center"}>
-        {ICONS[operate]}
+  return (
+    <div className="flex items-start justify-center">
+      <div className="relative">
+        <Avatar className="h-10 w-10" src="" fallback="S" />
+        <div className="-right-2 absolute bottom-0 flex h-6 w-6 items-center justify-center rounded-full border bg-white">
+          {ICONS[operate]}
+        </div>
       </div>
-    </div>
-    <div className={"flex-1 mx-4 min-h-10 flex justify-start items-center"}>
-      {
-        i18n(t("%operate%type：%content"), {
+      <div className="mx-4 flex min-h-10 flex-1 items-center justify-start">
+        {i18n(t('%operate%type：%content'), {
           operate: LABELS[operate],
           type: typeText,
           content: content || '--',
-        })
-      }
+        })}
+      </div>
+      <div className="flex min-h-10 items-center justify-start text-muted-foreground">
+        {dayjs(item.createTime).format('HH:mm')}
+      </div>
     </div>
-    <div className={"text-muted-foreground min-h-10 flex justify-start items-center"}>
-      {dayjs(item.createTime).format('HH:mm')}
-    </div>
-  </div>
+  )
 }
