@@ -40,6 +40,8 @@ COPY ./apps/${APP}/package.json ./
 COPY ./apps/${APP}/.next/static ./apps/${APP}/.next/static
 COPY ./apps/${APP}/public ./apps/${APP}/public
 
+RUN npm install -g pm2
+
 USER nextjs
 
 # Uncomment the following line in case you want to disable telemetry during runtime.
@@ -50,8 +52,6 @@ ENV PORT 3000
 EXPOSE 3000
 
 WORKDIR /app/apps/${APP}
-
-RUN npm install -g pm2
 
 # 用 standalone 模式打包后，生成的 `standalone/node_modules` 目录下缺少 `.bin` 目录
 # 导致无法用 `next` 命令启动项目，但可以用 `node server.js` 启动
