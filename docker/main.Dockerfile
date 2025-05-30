@@ -26,7 +26,7 @@ RUN adduser --system --uid 1001 nextjs
 ENV LANG=en_US.UTF-8 LANGUAGE=en_US:en LC_ALL=en_US.UTF-8 TZ=Asia/Shanghai
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 
-RUN npm install -g pm2
+RUN npm install -g pm2 pnpm
 
 WORKDIR /app
 COPY ./ ./
