@@ -36,7 +36,7 @@ WORKDIR /app
 # `standalone` 模式打包，默认包含服务端代码，没有客户端代码
 # 因为官方建议通过 CDN 托管，但也可以手动复制 `public`、`.next/static` 目录
 COPY ./apps/${APP}/.next/standalone ./
-COPY ./apps/${APP}/package.json ./
+# COPY ./apps/${APP}/package.json ./
 COPY ./apps/${APP}/.next/static ./apps/${APP}/.next/static
 COPY ./apps/${APP}/public ./apps/${APP}/public
 
