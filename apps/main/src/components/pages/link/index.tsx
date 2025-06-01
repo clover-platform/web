@@ -3,9 +3,12 @@
 import { getSchema } from '@/config/pages/link/form'
 import { getSupportWay } from '@/config/pages/login/quick'
 import { linkCode, loginAndLink } from '@/rest/auth'
+import { MFADialog } from '@clover/public/components/pages/login/mfa-dialog'
 import { encrypt } from '@clover/public/utils/crypto'
 import { setToken } from '@clover/public/utils/token'
 import { Button, Form, FormItem, Image, Input, Result, Space, Spin, useMessage } from '@easykit/design'
+import { Link1Icon } from '@radix-ui/react-icons'
+import { cloneDeep, isUndefined } from 'es-toolkit'
 import Link from 'next/link'
 import { useSearchParams } from 'next/navigation'
 import { type PropsWithChildren, useCallback, useEffect, useState } from 'react'
@@ -25,6 +28,9 @@ const LinkPage = (props: LinkPageProps) => {
   // biome-ignore lint/suspicious/noExplicitAny: <explanation>
   const [user, setUser] = useState(null as any)
   const [submitting, setSubmitting] = useState(false)
+  // biome-ignore lint/suspicious/noExplicitAny: <explanation>
+  const [formData, setFormData] = useState<any>()
+  const [visible, setVisible] = useState(false)
 
   const load = useCallback(async () => {
     setLoading(true)
@@ -52,27 +58,44 @@ const LinkPage = (props: LinkPageProps) => {
 
   const onSubmit = useCallback(
     // biome-ignore lint/suspicious/noExplicitAny: <explanation>
-    async (data: any) => {
-      setSubmitting(true)
+    async (data: any, submitting?: boolean) => {
+      const isSubmitting = isUndefined(submitting) ? true : submitting
+      console.log('onSubmit isSubmitting', isSubmitting)
+      if (isSubmitting) {
+        setSubmitting(true)
+      }
+      const originData = cloneDeep(data)
       data.password = encrypt(data.password)
       const {
         success,
         message,
         data: result,
+        code,
       } = await loginAndLink({
         ...data,
         token: user.token,
       })
-      setSubmitting(false)
+      if (isSubmitting) {
+        setSubmitting(false)
+      }
       if (success) {
         setToken(result)
         location.href = '/'
+      } else if (code === 10009) {
+        // 需要二次验证
+        setFormData(originData)
+        setVisible(true)
       } else {
         msg.error(message)
       }
     },
-    [msg, user.token]
+    [msg, user?.token]
   )
+
+  const onCancel = useCallback(() => {
+    setVisible(false)
+    setFormData(null)
+  }, [])
 
   const buttons = (
     <Space>
@@ -88,7 +111,9 @@ const LinkPage = (props: LinkPageProps) => {
   const icon = getSupportWay().find((item) => item.id === type)?.icon
 
   return loading ? (
-    <Spin />
+    <div className="flex items-center justify-center">
+      <Spin />
+    </div>
   ) : (
     <>
       {error ? (
@@ -97,7 +122,7 @@ const LinkPage = (props: LinkPageProps) => {
         <div className="w-[360px]">
           <div className="flex items-center justify-center space-x-2">
             <div className="flex h-[28px] w-[28px] items-center justify-center rounded-full bg-[#2E3340]">{icon}</div>
-            <div>X</div>
+            <Link1Icon />
             {user ? (
               <>
                 <div className="overflow-hidden rounded-[50%]">
@@ -117,7 +142,7 @@ const LinkPage = (props: LinkPageProps) => {
             ) : null}
           </div>
           <div className="mt-[30px]">
-            <Form schema={getSchema()} onSubmit={onSubmit}>
+            <Form schema={getSchema()} onSubmit={(data) => onSubmit(data)}>
               <FormItem name="account" label={t('邮箱或用户名')}>
                 <Input placeholder={t('请输入邮箱或用户名')} />
               </FormItem>
@@ -131,6 +156,7 @@ const LinkPage = (props: LinkPageProps) => {
           </div>
         </div>
       )}
+      <MFADialog visible={visible} onCancel={onCancel} formData={formData} onSubmit={onSubmit} />
     </>
   )
 }

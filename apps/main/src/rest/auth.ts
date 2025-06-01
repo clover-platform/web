@@ -46,7 +46,7 @@ type LoginAndLinkData = {
   token: string;
 }
 // biome-ignore lint/suspicious/noExplicitAny: <explanation>
-export const loginAndLink = (data: LoginAndLinkData) => post<any, LoginAndLinkData>('@account/auth/link/bind', data)
+export const loginAndLink = (data: LoginAndLinkData) => post<any, LoginAndLinkData>('@main/account/link/bind', data)
 
 // biome-ignore lint/suspicious/noExplicitAny: <explanation>
 export const otpSecret = () => get<any>('@main/account/otp/secret')
