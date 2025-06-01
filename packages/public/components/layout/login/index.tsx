@@ -46,7 +46,7 @@ export const LoginLayout: FC<LoginLayoutProps> = (originProps) => {
           </div>
           <div className="flex flex-1 justify-end space-x-2 py-2">
             <ThemeSwitcher size="sm" />
-            <LangSelect />
+            <LangSelect className="!h-3xl" />
           </div>
         </div>
       </div>
