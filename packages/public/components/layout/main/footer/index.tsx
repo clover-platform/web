@@ -28,7 +28,7 @@ export const Footer: FC<FooterProps> = (props) => {
         </div>
         <div className="flex space-x-sm">
           <ThemeSwitcher size="sm" />
-          <LangSelect className="h-3xl" />
+          <LangSelect className="!h-3xl" />
         </div>
       </div>
     </div>
