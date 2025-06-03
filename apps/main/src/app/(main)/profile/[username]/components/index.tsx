@@ -5,14 +5,23 @@ import type { MainLayoutProps } from '@/components/layout/main'
 import { IconMember } from '@arco-iconbox/react-clover'
 import { MainPage } from '@clover/public/components/common/page'
 import { useLayoutConfig } from '@clover/public/components/layout/hooks/use.layout.config'
+import type { Account } from '@clover/public/types/account'
 import { Avatar, BreadcrumbItem, BreadcrumbPage, Button, Card } from '@easykit/design'
+import type { FC } from 'react'
 import { useTranslation } from 'react-i18next'
+import { ReadMe } from './readme'
 
-export const ProfilePage = () => {
+export type ProfilePageProps = {
+  account: Account
+}
+
+export const ProfilePage: FC<ProfilePageProps> = (props) => {
   useLayoutConfig<MainLayoutProps>({
     active: 'profile',
   })
+  const { account } = props
   const { t } = useTranslation()
+
   return (
     <MainPage>
       <AppBreadcrumb>
@@ -22,12 +31,17 @@ export const ProfilePage = () => {
       </AppBreadcrumb>
       <div className="flex flex-row gap-4">
         <div className="flex w-[300px] flex-col gap-4">
-          <Avatar className="h-[300px] w-full" src="https://github.com/shadcn.png" />
+          <Avatar
+            fallbackClassName="text-2xl bg-black/5 dark:bg-white/5"
+            className="h-[300px] w-full"
+            src={account.avatar!}
+            fallback={account.username}
+          />
           <div>
-            <div className="font-bold text-2xl">Grant</div>
-            <div className="text-base text-gray-500">su</div>
+            <div className="font-bold text-2xl">{account.username}</div>
+            <div className="text-base text-gray-500">{account.email}</div>
           </div>
-          <div className="text-base text-gray-500">Managers are a group of unreliable AI agents</div>
+          {account.memo ? <div className="text-base text-gray-500">{account.memo}</div> : null}
           <Button variant="outline">{t('编辑资料')}</Button>
           <div className="flex flex-row items-center gap-2">
             <IconMember />
@@ -36,7 +50,7 @@ export const ProfilePage = () => {
           </div>
         </div>
         <div className="flex flex-1 flex-col gap-4">
-          <Card title={t('个人资料')}>test</Card>
+          <ReadMe readme={account.readme} />
           <Card title={t('我的收藏')}>test</Card>
         </div>
       </div>

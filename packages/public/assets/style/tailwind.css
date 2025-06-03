@@ -23,11 +23,14 @@
   --spacing-5xl: 40px;
   --spacing-6xl: 48px;
   --spacing-7xl: 56px;
+
+  --container-max-width: 1440px;
 }
 
 @utility container {
   margin-inline: auto;
   padding-inline: 2rem;
+  max-width: var(--container-max-width);
 }
 
 @layer base {
