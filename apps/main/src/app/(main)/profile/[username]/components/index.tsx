@@ -6,7 +6,17 @@ import { IconMember } from '@arco-iconbox/react-clover'
 import { MainPage } from '@clover/public/components/common/page'
 import { useLayoutConfig } from '@clover/public/components/layout/hooks/use.layout.config'
 import type { Account } from '@clover/public/types/account'
-import { Avatar, BreadcrumbItem, BreadcrumbPage, Button, Card } from '@easykit/design'
+import {
+  Avatar,
+  BreadcrumbItem,
+  BreadcrumbPage,
+  Button,
+  Empty,
+  Tabs,
+  TabsContent,
+  TabsList,
+  TabsTrigger,
+} from '@easykit/design'
 import type { FC } from 'react'
 import { useTranslation } from 'react-i18next'
 import { ReadMe } from './readme'
@@ -33,7 +43,7 @@ export const ProfilePage: FC<ProfilePageProps> = (props) => {
         <div className="flex w-[300px] flex-col gap-4">
           <Avatar
             fallbackClassName="text-2xl bg-black/5 dark:bg-white/5"
-            className="h-[300px] w-full"
+            className="!h-[300px] w-full"
             src={account.avatar!}
             fallback={account.username}
           />
@@ -50,8 +60,22 @@ export const ProfilePage: FC<ProfilePageProps> = (props) => {
           </div>
         </div>
         <div className="flex flex-1 flex-col gap-4">
-          <ReadMe readme={account.readme} />
-          <Card title={t('我的收藏')}>test</Card>
+          <ReadMe id={account.id} readme={account.readme} />
+          <div className="flex flex-col gap-2">
+            <div className="font-bold text-lg">{t('收藏')}</div>
+            <Tabs defaultValue="team">
+              <TabsList className="grid w-full grid-cols-2 bg-black/5 dark:bg-white/5">
+                <TabsTrigger value="team">{t('团队')}</TabsTrigger>
+                <TabsTrigger value="project">{t('项目')}</TabsTrigger>
+              </TabsList>
+              <TabsContent value="team">
+                <Empty text={t('暂无关注团队')} />
+              </TabsContent>
+              <TabsContent value="project">
+                <Empty text={t('暂无关注项目')} />
+              </TabsContent>
+            </Tabs>
+          </div>
         </div>
       </div>
     </MainPage>

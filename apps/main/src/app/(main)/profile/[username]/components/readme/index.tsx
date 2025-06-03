@@ -1,28 +1,53 @@
 
-import { Action, Card } from '@easykit/design'
+import { useProfile } from '@clover/public/hooks'
+import { Action, Alert, Card } from '@easykit/design'
 import { Pencil2Icon } from '@radix-ui/react-icons'
-import type { FC } from 'react'
+import { type FC, useState } from 'react'
 import { useTranslation } from 'react-i18next'
+import { EditCard } from './edit-card'
 
 export type ReadMeProps = {
   readme?: string
+  id: number
 }
 
 export const ReadMe: FC<ReadMeProps> = (props) => {
-  const { readme } = props
+  const { readme, id } = props
   const { t } = useTranslation()
+  const profile = useProfile()
+  const isOwner = profile.id === id
+  const [isEdit, setIsEdit] = useState(false)
 
   const readmeTitle = (
-    <div>
+    <div className="flex items-center justify-between">
       <div>{t('关于我')}</div>
       <div>
-        <Action>
-          <Pencil2Icon />
-        </Action>
+        {isOwner ? (
+          <Action>
+            <Pencil2Icon />
+          </Action>
+        ) : null}
       </div>
     </div>
   )
 
-  return <Card title={readmeTitle}>{readme ?? t('暂无自我介绍')}</Card>
+  const handleEdit = () => {
+    setIsEdit(true)
+  }
+
+  return isEdit ? (
+    <EditCard readme={readme} id={id} onCancel={() => setIsEdit(false)} />
+  ) : readme ? (
+    <Card title={readmeTitle}>{readme}</Card>
+  ) : isOwner ? (
+    <Alert>
+      <div>
+        <span>{t('你可以编辑一份说明文案，让更多人了解你')}</span>
+        <span className="ml-2 cursor-pointer text-primary" onClick={handleEdit}>
+          {t('编辑')}
+        </span>
+      </div>
+    </Alert>
+  ) : null
 }
 
