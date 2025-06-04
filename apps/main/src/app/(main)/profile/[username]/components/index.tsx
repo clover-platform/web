@@ -2,10 +2,10 @@
 
 import { AppBreadcrumb } from '@/components/common/app-breadcrumb'
 import type { MainLayoutProps } from '@/components/layout/main'
+import { profile } from '@/rest/profile'
 import { IconMember } from '@arco-iconbox/react-clover'
 import { MainPage } from '@clover/public/components/common/page'
 import { useLayoutConfig } from '@clover/public/components/layout/hooks/use.layout.config'
-import type { Account } from '@clover/public/types/account'
 import {
   Avatar,
   BreadcrumbItem,
@@ -17,20 +17,29 @@ import {
   TabsList,
   TabsTrigger,
 } from '@easykit/design'
-import type { FC } from 'react'
+import { useQuery } from '@tanstack/react-query'
+import { useParams } from 'next/navigation'
 import { useTranslation } from 'react-i18next'
 import { ReadMe } from './readme'
 
-export type ProfilePageProps = {
-  account: Account
-}
-
-export const ProfilePage: FC<ProfilePageProps> = (props) => {
+export const ProfilePage = () => {
   useLayoutConfig<MainLayoutProps>({
     active: 'profile',
   })
-  const { account } = props
   const { t } = useTranslation()
+  const { username } = useParams()
+  const { data } = useQuery({
+    queryKey: ['profile', username],
+    queryFn: ({ queryKey }) => profile(queryKey[1] as string),
+  })
+  const account = data?.data ?? {
+    id: 0,
+    username: '',
+    email: '',
+    avatar: '',
+    memo: '',
+    readme: '',
+  }
 
   return (
     <MainPage>

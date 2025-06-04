@@ -1,8 +1,9 @@
+
 import { profile } from '@/rest/profile'
-import { ServerPageLoader } from '@clover/public/components/common/loader/server-page'
-import type { Account } from '@clover/public/types/account'
 import { st } from '@clover/public/utils/locale.server'
+import { getQueryClient } from '@clover/public/utils/query'
 import { keywords, title } from '@clover/public/utils/seo'
+import { HydrationBoundary, dehydrate } from '@tanstack/react-query'
 import type { Metadata } from 'next'
 import { ProfilePage } from './components'
 
@@ -17,10 +18,18 @@ type Params = {
   username: string
 }
 
-const Page = ({ params }: { params: Promise<Params> }) => (
-  <ServerPageLoader<Params, Account> loader={(params) => profile(params.username)} params={params}>
-    {({ data }) => <ProfilePage account={data} />}
-  </ServerPageLoader>
-)
+const Page = async ({ params }: { params: Promise<Params> }) => {
+  const client = getQueryClient()
+  const { username } = await params
+  await client.prefetchQuery({
+    queryKey: ['profile', username],
+    queryFn: ({ queryKey }) => profile(queryKey[1]),
+  })
+  return (
+    <HydrationBoundary state={dehydrate(client)}>
+      <ProfilePage />
+    </HydrationBoundary>
+  )
+}
 
 export default Page

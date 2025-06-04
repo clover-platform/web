@@ -75,16 +75,12 @@ const handleHeaders = async (url: string, headers?: AxiosHeaders) => {
 export function request<T>(config: AxiosRequestConfig): CancellablePromise<RestResult<T>> {
   const { url, headers, ...rest } = config
   const source = CancelToken.source()
-  const promise = new Promise<RestResult<T>>((resolve) => {
+  const promise = new Promise<RestResult<T>>((resolve, reject) => {
     handleHeaders(url as string, headers as AxiosHeaders).then((headers) => {
       const _url = handleUrl(url) || ''
       if (_url.startsWith('@')) {
         // 没有处理别名的不请求
-        resolve({
-          code: 500,
-          message: 'Network Error',
-          success: false,
-        })
+        reject(new RestError('Network Error', 500))
         return
       }
       instance
@@ -98,11 +94,7 @@ export function request<T>(config: AxiosRequestConfig): CancellablePromise<RestR
           resolve(handleResponse(response.data, response))
         })
         .catch((error) => {
-          resolve({
-            code: error?.status || 500,
-            message: error?.message || 'Network Error',
-            success: false,
-          })
+          reject(new RestError(error?.message || 'Network Error', error?.status || 500, error?.data))
         })
     })
   }) as CancellablePromise<RestResult<T>>
@@ -189,4 +181,15 @@ export const alias = (map: Record<string, any>) => {
 
 export const config = (config: RestConfig) => {
   _config = config
+}
+
+export class RestError extends Error {
+  code?: number
+  data?: unknown
+  constructor(message: string, code?: number, data?: unknown) {
+    super(message)
+    this.name = 'RestError'
+    this.code = code
+    this.data = data
+  }
 }

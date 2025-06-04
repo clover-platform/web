@@ -1,18 +1,21 @@
-import type { RestResult } from '@clover/public/types/rest'
+
+import { getQueryClient } from '@clover/public/utils/query'
+import { HydrationBoundary, type QueryClient, dehydrate } from '@tanstack/react-query'
 import type { ReactElement } from 'react'
 
-export type ServerPageLoaderProps<P, D> = {
-  loader: (params: P) => Promise<RestResult<D>>
+export type ServerPageLoaderProps<P> = {
+  loader: (client: QueryClient, params: P) => Promise<boolean>
   params: Promise<P>
-  children: (props: { data: D }) => ReactElement
+  children: ReactElement
 }
 
-export const ServerPageLoader = async <P, D>(props: ServerPageLoaderProps<P, D>) => {
+export const ServerPageLoader = async <P,>(props: ServerPageLoaderProps<P>) => {
   const { loader, params, children } = props
   const p = await params
-  const { success, data: d } = await loader(p)
+  const queryClient = getQueryClient()
+  const success = await loader(queryClient, p)
   if (!success) {
     return <div>error</div>
   }
-  return children({ data: d as D })
+  return <HydrationBoundary state={dehydrate(queryClient)}>{children}</HydrationBoundary>
 }

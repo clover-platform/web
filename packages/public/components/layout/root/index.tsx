@@ -8,7 +8,10 @@ import { accessState } from '@clover/public/state/access'
 import { accountInfoState, isLoginState } from '@clover/public/state/account'
 import { localeState, projectsState, teamsState } from "@clover/public/state/public";
 import type { Account } from '@clover/public/types/account'
+import { getQueryClient } from '@clover/public/utils/query'
 import { ConfigProvider } from '@easykit/design'
+import { QueryClientProvider } from '@tanstack/react-query'
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 import i18next from 'i18next'
 import { Provider, type WritableAtom } from 'jotai'
 import { useHydrateAtoms } from 'jotai/utils'
@@ -55,36 +58,42 @@ export const RootLayout: FC<RootLayoutProps> = (props) => {
   } = props;
 
   i18next.changeLanguage(locale);
+  const queryClient = getQueryClient()
 
-  return <I18nextProvider i18n={i18next} defaultNS="translation">
-    <Provider>
-      <AtomsHydrate atomValues={[
-        [isLoginState, isLogin],
-        [teamsState, teams],
-        [projectsState, projects],
-        [accountInfoState, accountInfo || {
-          id: 0,
-          username: '',
-          authorities: [],
-          otpStatus: 0,
-          currentProjectId: 0,
-          currentTeamId: 0,
-        }],
-        [accessState, accountInfo?.authorities || []],
-        [localeState, locale],
-        ...atomValues,
-      ]}>
-        <ConfigProvider locale={locales[locale]}>
-          <ThemeProvider
-            attribute="class"
-            defaultTheme="system"
-            enableSystem
-            disableTransitionOnChange
-          >
-            {children}
-          </ThemeProvider>
-        </ConfigProvider>
-      </AtomsHydrate>
-    </Provider>
-  </I18nextProvider>
+  return (
+    <I18nextProvider i18n={i18next} defaultNS="translation">
+      <Provider>
+        <AtomsHydrate
+          atomValues={[
+            [isLoginState, isLogin],
+            [teamsState, teams],
+            [projectsState, projects],
+            [
+              accountInfoState,
+              accountInfo || {
+                id: 0,
+                username: '',
+                authorities: [],
+                otpStatus: 0,
+                currentProjectId: 0,
+                currentTeamId: 0,
+              },
+            ],
+            [accessState, accountInfo?.authorities || []],
+            [localeState, locale],
+            ...atomValues,
+          ]}
+        >
+          <ConfigProvider locale={locales[locale]}>
+            <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
+              <QueryClientProvider client={queryClient}>
+                {children}
+                <ReactQueryDevtools initialIsOpen={false} />
+              </QueryClientProvider>
+            </ThemeProvider>
+          </ConfigProvider>
+        </AtomsHydrate>
+      </Provider>
+    </I18nextProvider>
+  )
 };
