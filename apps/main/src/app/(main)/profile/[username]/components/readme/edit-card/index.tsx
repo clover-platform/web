@@ -1,7 +1,10 @@
 import { Button, Card } from '@easykit/design'
 import '@easykit/editor/style.css'
+import { updateReadme } from '@/rest/profile'
 import { useProfile } from '@clover/public/hooks'
 import { Editor } from '@easykit/editor'
+import { useMutation, useQueryClient } from '@tanstack/react-query'
+import { useParams } from 'next/navigation'
 import { type FC, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 
@@ -17,9 +20,21 @@ export const EditCard: FC<EditCardProps> = (props) => {
   const [value, setValue] = useState(readme)
   const profile = useProfile()
   const isOwner = profile.id === id
+  const queryClient = useQueryClient()
+  const { username } = useParams()
+
+  const { mutate, isPending } = useMutation({
+    mutationFn: updateReadme, // 你的保存 API
+    onSuccess: async () => {
+      await queryClient.invalidateQueries({ queryKey: ['profile', username] })
+      onCancel()
+    },
+  })
 
   const handleSave = () => {
-    console.log(value)
+    mutate({
+      content: value ?? '',
+    })
   }
 
   const editTitle = (
@@ -28,10 +43,10 @@ export const EditCard: FC<EditCardProps> = (props) => {
       <div className="flex items-center gap-2">
         {isOwner ? (
           <>
-            <Button size="sm" onClick={handleSave}>
+            <Button loading={isPending} size="sm" onClick={handleSave}>
               {t('保存')}
             </Button>
-            <Button size="sm" variant="outline" onClick={onCancel}>
+            <Button disabled={isPending} size="sm" variant="outline" onClick={onCancel}>
               {t('取消')}
             </Button>
           </>

@@ -17,6 +17,7 @@ import { Provider, type WritableAtom } from 'jotai'
 import { useHydrateAtoms } from 'jotai/utils'
 import { ThemeProvider } from "next-themes";
 import type { FC, PropsWithChildren, ReactNode } from 'react'
+import { useEffect } from 'react'
 import { I18nextProvider } from 'react-i18next'
 
 export type AtomValues = Iterable<
@@ -57,7 +58,10 @@ export const RootLayout: FC<RootLayoutProps> = (props) => {
     atomValues = [],
   } = props;
 
-  i18next.changeLanguage(locale);
+  useEffect(() => {
+    i18next.changeLanguage(locale)
+  }, [locale])
+
   const queryClient = getQueryClient()
 
   return (

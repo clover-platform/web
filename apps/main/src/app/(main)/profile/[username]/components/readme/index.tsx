@@ -1,6 +1,7 @@
 
 import { useProfile } from '@clover/public/hooks'
 import { Action, Alert, Card } from '@easykit/design'
+import { ContentViewer } from '@easykit/editor'
 import { Pencil2Icon } from '@radix-ui/react-icons'
 import { type FC, useState } from 'react'
 import { useTranslation } from 'react-i18next'
@@ -18,12 +19,16 @@ export const ReadMe: FC<ReadMeProps> = (props) => {
   const isOwner = profile.id === id
   const [isEdit, setIsEdit] = useState(false)
 
+  const handleEdit = () => {
+    setIsEdit(true)
+  }
+
   const readmeTitle = (
     <div className="flex items-center justify-between">
       <div>{t('关于我')}</div>
       <div>
         {isOwner ? (
-          <Action>
+          <Action onClick={handleEdit}>
             <Pencil2Icon />
           </Action>
         ) : null}
@@ -31,14 +36,12 @@ export const ReadMe: FC<ReadMeProps> = (props) => {
     </div>
   )
 
-  const handleEdit = () => {
-    setIsEdit(true)
-  }
-
   return isEdit ? (
     <EditCard readme={readme} id={id} onCancel={() => setIsEdit(false)} />
   ) : readme ? (
-    <Card title={readmeTitle}>{readme}</Card>
+    <Card title={readmeTitle}>
+      <ContentViewer value={readme} />
+    </Card>
   ) : isOwner ? (
     <Alert>
       <div>

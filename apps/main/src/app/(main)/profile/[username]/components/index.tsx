@@ -6,6 +6,8 @@ import { profile } from '@/rest/profile'
 import { IconMember } from '@arco-iconbox/react-clover'
 import { MainPage } from '@clover/public/components/common/page'
 import { useLayoutConfig } from '@clover/public/components/layout/hooks/use.layout.config'
+import { useResultData } from '@clover/public/hooks'
+import type { Account } from '@clover/public/types/account'
 import {
   Avatar,
   BreadcrumbItem,
@@ -28,18 +30,15 @@ export const ProfilePage = () => {
   })
   const { t } = useTranslation()
   const { username } = useParams()
-  const { data } = useQuery({
+  const { data, isError, isLoading } = useQuery({
     queryKey: ['profile', username],
     queryFn: ({ queryKey }) => profile(queryKey[1] as string),
   })
-  const account = data?.data ?? {
-    id: 0,
-    username: '',
-    email: '',
-    avatar: '',
-    memo: '',
-    readme: '',
-  }
+  const account = useResultData<Account>({
+    data,
+    isError,
+    isLoading,
+  })
 
   return (
     <MainPage>
@@ -53,14 +52,14 @@ export const ProfilePage = () => {
           <Avatar
             fallbackClassName="text-2xl bg-black/5 dark:bg-white/5"
             className="!h-[300px] w-full"
-            src={account.avatar!}
-            fallback={account.username}
+            src={account?.avatar!}
+            fallback={account?.username}
           />
           <div>
-            <div className="font-bold text-2xl">{account.username}</div>
-            <div className="text-base text-gray-500">{account.email}</div>
+            <div className="font-bold text-2xl">{account?.username}</div>
+            <div className="text-base text-gray-500">{account?.email}</div>
           </div>
-          {account.memo ? <div className="text-base text-gray-500">{account.memo}</div> : null}
+          {account?.memo ? <div className="text-base text-gray-500">{account.memo}</div> : null}
           <Button variant="outline">{t('编辑资料')}</Button>
           <div className="flex flex-row items-center gap-2">
             <IconMember />
@@ -69,7 +68,7 @@ export const ProfilePage = () => {
           </div>
         </div>
         <div className="flex flex-1 flex-col gap-4">
-          <ReadMe id={account.id} readme={account.readme} />
+          <ReadMe id={account?.id!} readme={account?.readme} />
           <div className="flex flex-col gap-2">
             <div className="font-bold text-lg">{t('收藏')}</div>
             <Tabs defaultValue="team">
