@@ -24,7 +24,7 @@ export const EditCard: FC<EditCardProps> = (props) => {
   const { username } = useParams()
 
   const { mutate, isPending } = useMutation({
-    mutationFn: updateReadme, // 你的保存 API
+    mutationFn: updateReadme,
     onSuccess: async () => {
       await queryClient.invalidateQueries({ queryKey: ['profile', username] })
       onCancel()

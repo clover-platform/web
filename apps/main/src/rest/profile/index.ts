@@ -8,3 +8,9 @@ export type UpdateReadmeData = {
 }
 export const updateReadme = (data: UpdateReadmeData) =>
   put<undefined, UpdateReadmeData>('@main/account/readme/update', data)
+
+export type UpdateAvatarData = {
+  url: string
+}
+export const updateAvatar = (data: UpdateAvatarData) =>
+  put<undefined, UpdateAvatarData>('@main/account/profile/avatar', data)

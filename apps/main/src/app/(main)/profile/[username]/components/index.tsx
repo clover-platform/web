@@ -9,7 +9,6 @@ import { useLayoutConfig } from '@clover/public/components/layout/hooks/use.layo
 import { useResultData } from '@clover/public/hooks'
 import type { Account } from '@clover/public/types/account'
 import {
-  Avatar,
   BreadcrumbItem,
   BreadcrumbPage,
   Button,
@@ -22,6 +21,7 @@ import {
 import { useQuery } from '@tanstack/react-query'
 import { useParams } from 'next/navigation'
 import { useTranslation } from 'react-i18next'
+import { Avatar } from './avatar'
 import { ReadMe } from './readme'
 
 export const ProfilePage = () => {
@@ -49,12 +49,7 @@ export const ProfilePage = () => {
       </AppBreadcrumb>
       <div className="flex flex-row gap-4">
         <div className="flex w-[300px] flex-col gap-4">
-          <Avatar
-            fallbackClassName="text-2xl bg-black/5 dark:bg-white/5"
-            className="!h-[300px] w-full"
-            src={account?.avatar!}
-            fallback={account?.username}
-          />
+          <Avatar id={account?.id!} src={account?.avatar!} fallback={account?.username!} />
           <div>
             <div className="font-bold text-2xl">{account?.username}</div>
             <div className="text-base text-gray-500">{account?.email}</div>
