@@ -1,6 +1,7 @@
 import { Button, Card } from '@easykit/design'
 import '@easykit/editor/style.css'
 import { updateReadme } from '@/rest/profile'
+import { useStateLoader } from '@clover/public/components/layout/hooks/use.state.loader'
 import { useProfile } from '@clover/public/hooks'
 import { Editor } from '@easykit/editor'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
@@ -22,11 +23,13 @@ export const EditCard: FC<EditCardProps> = (props) => {
   const isOwner = profile.id === id
   const queryClient = useQueryClient()
   const { username } = useParams()
+  const load = useStateLoader()
 
   const { mutate, isPending } = useMutation({
     mutationFn: updateReadme,
     onSuccess: async () => {
       await queryClient.invalidateQueries({ queryKey: ['profile', username] })
+      await load()
       onCancel()
     },
   })
