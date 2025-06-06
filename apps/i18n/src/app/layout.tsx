@@ -5,6 +5,7 @@ import {loadState} from "@clover/public/components/layout/root/utils.server";
 import type { Metadata } from 'next'
 import type { FC, PropsWithChildren } from 'react'
 import "@clover/public/plugin/rest.server";
+import '@/plugin/rest.server'
 import "@clover/public/plugin/locales";
 import '@/plugin/locales'
 import "@/assets/style/index.css";

@@ -8,6 +8,8 @@ import { accessState } from '@clover/public/state/access'
 import { accountInfoState, isLoginState } from '@clover/public/state/account'
 import { localeState, projectsState, teamsState } from "@clover/public/state/public";
 import type { Account } from '@clover/public/types/account'
+import type { Project } from '@clover/public/types/project'
+import type { Team } from '@clover/public/types/team'
 import { getQueryClient } from '@clover/public/utils/query'
 import { ConfigProvider } from '@easykit/design'
 import { QueryClientProvider } from '@tanstack/react-query'
@@ -37,11 +39,8 @@ export const AtomsHydrate: FC<AtomsHydrateProps> = ({ atomValues, children }) =>
 export type RootLayoutProps = PropsWithChildren<{
   isLogin: boolean
   accountInfo?: Account
-  // biome-ignore lint/suspicious/noExplicitAny: <explanation>
-  teams: any[]
-  // biome-ignore lint/suspicious/noExplicitAny: <explanation>
-  projects: any[]
-  sideOpen: boolean
+  teams: Team[]
+  projects: Project[]
   locale: string
   atomValues?: AtomValues
 }>

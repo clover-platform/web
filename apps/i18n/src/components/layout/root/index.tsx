@@ -9,6 +9,7 @@ import "@/plugin/rest.client";
 import '@/plugin/locales'
 import {languagesState} from "@/state/public";
 import type { Language } from '@/types/pages/public'
+import '@/plugin/rest.client'
 
 export type RootLayoutProps = PublicRootLayoutProps & {
   languages: Language[];

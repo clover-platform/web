@@ -1,20 +1,18 @@
 import { profile } from '@clover/public/rest/auth'
 import {my as myProjects} from "@clover/public/rest/project";
 import { my as myTeams } from '@clover/public/rest/team'
+import type { Project } from '@clover/public/types/project'
+import type { Team } from '@clover/public/types/team'
 
 export const loadProfile = async () => {
   const {success, data} = await profile();
-  // biome-ignore lint/suspicious/noExplicitAny: <explanation>
-  let teams: any[] = []
-  // biome-ignore lint/suspicious/noExplicitAny: <explanation>
-  let projects: any[] = []
+  let teams: Team[] = []
+  let projects: Project[] = []
   if (success) {
     const teamsResult = await myTeams()
-    // biome-ignore lint/suspicious/noExplicitAny: <explanation>
-    teams = teamsResult.success ? (teamsResult.data as any[]) : []
+    teams = teamsResult.success ? teamsResult.data! : [] 
     const projectsResult = await myProjects()
-    // biome-ignore lint/suspicious/noExplicitAny: <explanation>
-    projects = projectsResult.success ? (projectsResult.data as any[]) : []
+    projects = projectsResult.success ? projectsResult.data! : []
   } 
   return {
     profile: data, teams, projects, success

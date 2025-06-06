@@ -1,7 +1,8 @@
 import type { Project } from '@clover/public/types/project'
 import { get, post, put } from '@clover/public/utils/rest'
+import type { Team } from '../types/team'
 
-export const my = () => get('@main/team/my')
+export const my = () => get<Team[]>('@main/team/my')
 
 export type TeamInitData = {
   name: string
