@@ -80,7 +80,13 @@ export const LoginForm: FC<LoginFormProps> = (props) => {
           </Button>
         </div>
       </Form>
-      <MFADialog isPending={isPending} visible={visible} onCancel={onCancel} formData={formData} onSubmit={onSubmit} />
+      <MFADialog<LoginRestData>
+        isPending={isPending}
+        visible={visible}
+        onCancel={onCancel}
+        formData={formData}
+        onSubmit={onSubmit}
+      />
     </>
   )
 }

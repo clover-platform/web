@@ -1,9 +1,8 @@
 import { CodeInput } from '@clover/public/components/common/input/code'
-import type { LoginRestData } from '@clover/public/rest/auth'
 import { t } from '@clover/public/utils/locale.client'
 import { CODE } from '@clover/public/utils/regular'
 import { Button, Dialog, type DialogProps, Form, FormItem } from '@easykit/design'
-import { type FC, useCallback } from 'react'
+import { useCallback } from 'react'
 import { object, string, type z } from 'zod'
 
 const getSchema = () =>
@@ -12,13 +11,13 @@ const getSchema = () =>
   })
 type FormData = z.infer<ReturnType<typeof getSchema>>
 
-export type MFADialogProps = DialogProps & {
-  onSubmit: (values: LoginRestData, submitting?: boolean) => void
-  formData: LoginRestData | null
+export type MFADialogProps<T> = DialogProps & {
+  onSubmit: (values: T, submitting?: boolean) => void
+  formData: T | null
   isPending: boolean
 }
 
-export const MFADialog: FC<MFADialogProps> = (props) => {
+export const MFADialog = <T = unknown>(props: MFADialogProps<T>) => {
   const { visible, onCancel, formData, onSubmit, isPending, ...rest } = props
 
   const onSubmitWrapper = useCallback(

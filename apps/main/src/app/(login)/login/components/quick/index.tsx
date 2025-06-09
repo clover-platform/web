@@ -1,4 +1,4 @@
-import {getSupportWay} from "@/config/pages/login/quick";
+import { getSupportWay } from '../config'
 
 const QuickLogin = () => {
   return (
@@ -19,6 +19,6 @@ const QuickLogin = () => {
       })}
     </div>
   )
-};
+}
 
-export default QuickLogin;
+export default QuickLogin

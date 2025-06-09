@@ -1,5 +1,5 @@
 import { t } from '@clover/public/utils/locale.client'
-import {PASSWORD} from "@clover/public/utils/regular";
+import { PASSWORD } from '@clover/public/utils/regular'
 import { object, string } from 'zod'
 
 export const getSchema = () =>

@@ -1,13 +1,13 @@
-'use client';
+'use client'
 
-import LoginLink from "@/components/common/login/link";
-import Quick from '@/components/pages/login/quick'
-import {LoginForm} from "@clover/public/components/pages/login/form";
+import LoginLink from '@/components/common/login/link'
+import { LoginForm } from '@clover/public/components/pages/login/form'
 import { Divider } from '@easykit/design'
-import { useTranslation } from 'react-i18next';
+import { useTranslation } from 'react-i18next'
+import Quick from './quick'
 
 const LoginPage = () => {
-  const { t } = useTranslation();
+  const { t } = useTranslation()
   const passwordLabel = (
     <div className="flex items-center justify-center">
       <div className="flex-1">{t('密码')}</div>
@@ -34,6 +34,6 @@ const LoginPage = () => {
       <Quick />
     </div>
   )
-};
+}
 
-export default LoginPage;
+export default LoginPage
