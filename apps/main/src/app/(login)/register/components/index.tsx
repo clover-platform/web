@@ -1,38 +1,40 @@
 'use client'
 
-import LoginLink from "@/components/common/login/link";
-import {getFormSchema} from "@/config/pages/register/form";
+import LoginLink from '@/components/common/login/link'
+import { type RegisterFormData, getFormSchema } from '@/config/schema/register'
 import { register, sendEmailCode } from '@/rest/auth'
 import { EmailCodeInput } from '@clover/public/components/common/input/email-code'
 import { encrypt } from '@clover/public/utils/crypto'
 import { setToken } from '@clover/public/utils/token'
 import { Button, Form, FormItem, Input, useMessage } from '@easykit/design'
-import {useSearchParams} from "next/navigation";
+import { useMutation } from '@tanstack/react-query'
+import { useSearchParams } from 'next/navigation'
 import { useState } from 'react'
-import { useTranslation } from "react-i18next";
-const RegisterPage = () => {
-  const msg = useMessage();
-  const params = useSearchParams();
-  const redirect = params.get("redirect");
-  // biome-ignore lint/suspicious/noExplicitAny: <explanation>
-  const [formData, setFormData] = useState<any>({})
-  const [submitting, setSubmitting] = useState(false);
-  const { t } = useTranslation();
+import { useTranslation } from 'react-i18next'
 
-  // biome-ignore lint/suspicious/noExplicitAny: <explanation>
-  const onSubmit = async (data: any) => {
-    setSubmitting(true)
-    data.password2 = undefined
-    data.password2 = undefined
+const RegisterPage = () => {
+  const msg = useMessage()
+  const params = useSearchParams()
+  const redirect = params.get('redirect')
+  const [formData, setFormData] = useState<RegisterFormData | undefined>()
+  const { t } = useTranslation()
+
+  const { mutate, isPending } = useMutation({
+    mutationFn: register,
+    onSuccess: (data) => {
+      if (data) {
+        setToken(data)
+        location.href = redirect || '/'
+      }
+    },
+    onError: (error) => {
+      msg.error(error.message)
+    },
+  })
+
+  const onSubmit = (data: RegisterFormData) => {
     data.password = encrypt(data.password)
-    const { success, message, data: result } = await register(data)
-    setSubmitting(false)
-    if (success) {
-      setToken(result)
-      location.href = redirect || '/'
-    } else {
-      msg.error(message)
-    }
+    mutate(data)
   }
 
   return (
@@ -45,7 +47,11 @@ const RegisterPage = () => {
         </div>
       </div>
       <div className="mt-[30px]">
-        <Form onValuesChange={setFormData} onSubmit={onSubmit} schema={getFormSchema()}>
+        <Form<RegisterFormData>
+          onValuesChange={(data) => setFormData(data as RegisterFormData)}
+          onSubmit={onSubmit}
+          schema={getFormSchema()}
+        >
           <FormItem name="username" label={t('用户名')}>
             <Input placeholder={t('请输入用户名，字母数字或下划线，字母开头')} />
           </FormItem>
@@ -57,7 +63,7 @@ const RegisterPage = () => {
               needEmail={true}
               placeholder={t('请输入邮箱验证码')}
               api={sendEmailCode}
-              data={{ email: formData.email }}
+              data={{ email: formData?.email }}
             />
           </FormItem>
           <FormItem name="password" label={t('密码')}>
@@ -66,13 +72,13 @@ const RegisterPage = () => {
           <FormItem name="password2" label={t('确认密码')}>
             <Input type="password" placeholder={t('请再次输入密码')} />
           </FormItem>
-          <Button loading={submitting} type="submit" long>
+          <Button loading={isPending} type="submit" long>
             {t('注册')}
           </Button>
         </Form>
       </div>
     </div>
   )
-};
+}
 
-export default RegisterPage;
+export default RegisterPage

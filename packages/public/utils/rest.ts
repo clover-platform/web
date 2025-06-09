@@ -1,8 +1,6 @@
-import type { CancellablePromise, RestConfig, RestResult } from '@clover/public/types/rest'
+import type { RestConfig, RestResult } from '@clover/public/types/rest'
 import Axios, { type AxiosHeaders, type AxiosResponse } from 'axios'
 import type { AxiosRequestConfig } from 'axios'
-
-const CancelToken = Axios.CancelToken
 
 let _config: RestConfig = {}
 const instance = Axios.create({
@@ -72,15 +70,17 @@ const handleHeaders = async (url: string, headers?: AxiosHeaders) => {
   return result
 }
 
-export function request<T>(config: AxiosRequestConfig): CancellablePromise<RestResult<T>> {
+export function request<T>(config: AxiosRequestConfig): Promise<RestResult<T>> {
   const { url, headers, ...rest } = config
-  const source = CancelToken.source()
-  const promise = new Promise<RestResult<T>>((resolve, reject) => {
+  return new Promise<RestResult<T>>((resolve) => {
     handleHeaders(url as string, headers as AxiosHeaders).then((headers) => {
       const _url = handleUrl(url) || ''
       if (_url.startsWith('@')) {
         // 没有处理别名的不请求
-        reject(new RestError('Network Error', 500))
+        resolve({
+          code: 500,
+          message: 'Network Error',
+        })
         return
       }
       instance
@@ -88,27 +88,22 @@ export function request<T>(config: AxiosRequestConfig): CancellablePromise<RestR
           ...rest,
           url: _url,
           headers,
-          cancelToken: source.token,
         })
         .then((response) => {
           resolve(handleResponse(response.data, response))
         })
         .catch((error) => {
-          reject(new RestError(error?.message || 'Network Error', error?.status || 500, error?.data))
+          resolve({
+            code: 500,
+            message: 'Network Error',
+            data: error,
+          })
         })
     })
-  }) as CancellablePromise<RestResult<T>>
-  promise.cancel = () => {
-    source.cancel('Operation canceled by the user.')
-  }
-  return promise
+  })
 }
 
-export function get<T, P = undefined>(
-  url: string,
-  params?: P,
-  config?: AxiosRequestConfig
-): CancellablePromise<RestResult<T>> {
+export function get<T, P = undefined>(url: string, params?: P, config?: AxiosRequestConfig): Promise<RestResult<T>> {
   return request({
     ...config,
     url,
@@ -117,11 +112,7 @@ export function get<T, P = undefined>(
   })
 }
 
-export function post<T, D = undefined>(
-  url: string,
-  data?: D,
-  config?: AxiosRequestConfig
-): CancellablePromise<RestResult<T>> {
+export function post<T, D = undefined>(url: string, data?: D, config?: AxiosRequestConfig): Promise<RestResult<T>> {
   return request({
     ...config,
     url,
@@ -130,11 +121,7 @@ export function post<T, D = undefined>(
   })
 }
 
-export function put<T, D = undefined>(
-  url: string,
-  data?: D,
-  config?: AxiosRequestConfig
-): CancellablePromise<RestResult<T>> {
+export function put<T, D = undefined>(url: string, data?: D, config?: AxiosRequestConfig): Promise<RestResult<T>> {
   return request({
     ...config,
     url,
@@ -143,11 +130,7 @@ export function put<T, D = undefined>(
   })
 }
 
-export function del<T, D = undefined>(
-  url: string,
-  data?: D,
-  config?: AxiosRequestConfig
-): CancellablePromise<RestResult<T>> {
+export function del<T, D = undefined>(url: string, data?: D, config?: AxiosRequestConfig): Promise<RestResult<T>> {
   return request({
     ...config,
     url,
@@ -160,7 +143,7 @@ export function download<T, P = undefined>(
   url: string,
   params?: P,
   config?: AxiosRequestConfig
-): CancellablePromise<RestResult<T>> {
+): Promise<RestResult<T>> {
   return request({
     ...config,
     url,
@@ -169,6 +152,14 @@ export function download<T, P = undefined>(
     responseType: 'blob',
     timeout: 0,
   })
+}
+
+export const resultWrapper = async <T>(data: Promise<RestResult<T>>) => {
+  const result = await data
+  if (result.success) {
+    return result.data
+  }
+  throw new RestError(result.message, result.code, result.data)
 }
 
 // biome-ignore lint/suspicious/noExplicitAny: <explanation>
@@ -186,7 +177,7 @@ export const config = (config: RestConfig) => {
 export class RestError extends Error {
   code?: number
   data?: unknown
-  constructor(message: string, code?: number, data?: unknown) {
+  constructor(message?: string, code?: number, data?: unknown) {
     super(message)
     this.name = 'RestError'
     this.code = code

@@ -1,8 +1,8 @@
 import { t } from '@clover/public/utils/locale.client'
-import {CODE, EMAIL, PASSWORD, USERNAME} from "@clover/public/utils/regular";
-import { object, string } from 'zod'
+import { CODE, EMAIL, PASSWORD, USERNAME } from '@clover/public/utils/regular'
+import { object, string, type z } from 'zod'
 
-const code = t("请输入6位数字验证码");
+const code = t('请输入6位数字验证码')
 
 export const getFormSchema = () =>
   object({
@@ -20,3 +20,5 @@ export const getFormSchema = () =>
       })
     }
   })
+
+export type RegisterFormData = z.infer<ReturnType<typeof getFormSchema>>

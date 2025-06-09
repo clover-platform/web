@@ -5,8 +5,6 @@ export type RestConfig = {
   onResponse?: (data: RestResult<any>, response: AxiosResponse) => void
 }
 
-export type CancellablePromise<T> = Promise<T> & { cancel: () => void };
-
 export type RestResult<T> = {
   success?: boolean
   code?: number

@@ -1,11 +1,14 @@
 import type { Account } from '@clover/public/types/account'
-import { get, post } from '@clover/public/utils/rest'
+import { get, post, resultWrapper } from '@clover/public/utils/rest'
+import type { LoginFormData } from '../config/schema/login'
+import type { Token } from '../utils/token'
 
-export const login = (data: {
-  account: string
-  password: string
-  code: string
-}) => post('@main/account/login', data)
+export type LoginRestData = {
+  code?: string
+} & LoginFormData
+
+export const login = (data: LoginRestData) =>
+  resultWrapper<Token>(post<Token, LoginRestData>('@main/account/login', data))
 
 // 获取个人信息
 export const profile = () => get<Account, null>('@main/account/profile', null)

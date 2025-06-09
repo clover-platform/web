@@ -1,13 +1,14 @@
-import {RootLayout as PublicRootLayout} from "@/components/layout/root";
+import { RootLayout as PublicRootLayout } from '@/components/layout/root'
 import { HTMLLayout } from '@clover/public/components/layout/html'
 import { loadState } from '@clover/public/components/layout/root/utils.server'
-import {getLocale} from "@clover/public/utils/locale.server";
+import { getLocale } from '@clover/public/utils/locale.server'
 import type { Metadata } from 'next'
 import type { FC, PropsWithChildren } from 'react'
-import "@clover/public/plugin/rest.server";
-import "@clover/public/plugin/locales";
-import "@/plugin/locales";
-import "@/assets/style/index.css";
+import '@clover/public/plugin/rest.server'
+import '@clover/public/plugin/locales'
+import '@/plugin/locales'
+import '@/assets/style/index.css'
+import i18next from 'i18next'
 
 export type RootLayoutProps = PropsWithChildren;
 
@@ -23,17 +24,17 @@ export const metadata: Metadata = {
 }
 
 const RootLayout: FC<RootLayoutProps> = async (props) => {
-  const locale = await getLocale();
-  const initState = await loadState();
+  const locale = await getLocale()
+  const initState = await loadState()
+  i18next.changeLanguage(locale)
 
-  return <HTMLLayout>
-    <PublicRootLayout
-      {...initState}
-      locale={locale}
-    >
-      {props.children}
-    </PublicRootLayout>
-  </HTMLLayout>
+  return (
+    <HTMLLayout>
+      <PublicRootLayout {...initState} locale={locale}>
+        {props.children}
+      </PublicRootLayout>
+    </HTMLLayout>
+  )
 }
 
 export default RootLayout;
