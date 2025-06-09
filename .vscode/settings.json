@@ -20,7 +20,7 @@
   "[css]": {
     "editor.defaultFormatter": "biomejs.biome"
   },
-  "cSpell.words": ["Easykit"],
+  "cSpell.words": ["Easykit", "qrcode"],
   "css.customData": [".vscode/tailwind.json"],
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": "never",

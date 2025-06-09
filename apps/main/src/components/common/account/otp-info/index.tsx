@@ -7,9 +7,9 @@ import { CopyToClipboard } from 'react-copy-to-clipboard'
 import { useTranslation } from "react-i18next";
 
 export interface OtpInfoProps extends PropsWithChildren {
-  secret: string;
-  qrcode: string;
-  loading?: boolean;
+  secret?: string
+  qrcode?: string
+  loading?: boolean
 }
 
 const getApps = () => [
@@ -57,7 +57,7 @@ export const OtpInfo: FC<OtpInfoProps> = (props) => {
       </div>
       <div className="my-2 flex items-center justify-center bg-secondary px-3 py-1 text-sm">
         {secret || '--'}
-        <CopyToClipboard text={secret} onCopy={onCopy}>
+        <CopyToClipboard text={secret || ''} onCopy={onCopy}>
           <CopyIcon className="ml-[10px]" />
         </CopyToClipboard>
       </div>

@@ -1,6 +1,5 @@
-import { Button, Card } from '@easykit/design'
+import { Button, Card, useMessage } from '@easykit/design'
 import '@easykit/editor/style.css'
-import { updateReadme } from '@/rest/profile'
 import { useStateLoader } from '@clover/public/components/layout/hooks/use.state.loader'
 import { useProfile } from '@clover/public/hooks'
 import { Editor } from '@easykit/editor'
@@ -8,6 +7,7 @@ import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { useParams } from 'next/navigation'
 import { type FC, useState } from 'react'
 import { useTranslation } from 'react-i18next'
+import { updateReadme } from './rest'
 
 export type EditCardProps = {
   readme?: string
@@ -24,6 +24,7 @@ export const EditCard: FC<EditCardProps> = (props) => {
   const queryClient = useQueryClient()
   const { username } = useParams()
   const load = useStateLoader()
+  const m = useMessage()
 
   const { mutate, isPending } = useMutation({
     mutationFn: updateReadme,
@@ -31,6 +32,9 @@ export const EditCard: FC<EditCardProps> = (props) => {
       await queryClient.invalidateQueries({ queryKey: ['profile', username] })
       await load()
       onCancel()
+    },
+    onError: (error) => {
+      m.error(error.message)
     },
   })
 

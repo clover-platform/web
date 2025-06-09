@@ -2,12 +2,9 @@
 
 import { AppBreadcrumb } from '@/components/common/app-breadcrumb'
 import type { MainLayoutProps } from '@/components/layout/main'
-import { profile } from '@/rest/profile'
 import { IconMember } from '@arco-iconbox/react-clover'
 import { MainPage } from '@clover/public/components/common/page'
 import { useLayoutConfig } from '@clover/public/components/layout/hooks/use.layout.config'
-import { useResultData } from '@clover/public/hooks'
-import type { Account } from '@clover/public/types/account'
 import {
   BreadcrumbItem,
   BreadcrumbPage,
@@ -23,6 +20,7 @@ import { useParams } from 'next/navigation'
 import { useTranslation } from 'react-i18next'
 import { Avatar } from './avatar'
 import { ReadMe } from './readme'
+import { profile } from './rest'
 
 export const ProfilePage = () => {
   useLayoutConfig<MainLayoutProps>({
@@ -30,14 +28,9 @@ export const ProfilePage = () => {
   })
   const { t } = useTranslation()
   const { username } = useParams()
-  const { data, isError, isLoading } = useQuery({
+  const { data: account } = useQuery({
     queryKey: ['profile', username],
     queryFn: ({ queryKey }) => profile(queryKey[1] as string),
-  })
-  const account = useResultData<Account>({
-    data,
-    isError,
-    isLoading,
   })
 
   return (

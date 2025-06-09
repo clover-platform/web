@@ -1,14 +1,10 @@
-'use client';
+'use client'
 
 import type { MainLayoutProps } from '@/components/layout/main'
 import { ProfileBreadcrumbBase } from '@/components/pages/profile/breadcrumb-base'
-import { DisableModal } from '@/components/pages/profile/security/mfa/disable-modal'
-import { EnableModal } from '@/components/pages/profile/security/mfa/enable-modal'
-import { type OTPStatus, otpStatus } from '@/rest/auth'
 import { Page } from '@clover/public/components/common/page'
 import { TitleBar } from '@clover/public/components/common/title-bar'
 import { useLayoutConfig } from '@clover/public/components/layout/hooks/use.layout.config'
-import { useFetch } from '@clover/public/hooks'
 import {
   Badge,
   BreadcrumbItem,
@@ -20,9 +16,12 @@ import {
   Skeleton,
   time,
 } from '@easykit/design'
+import { useQuery, useQueryClient } from '@tanstack/react-query'
 import Link from 'next/link'
-import { useCallback, useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
+import { DisableModal } from './disable-modal'
+import { EnableModal } from './enable-modal'
+import { otpStatus } from './rest'
 
 export const MFAPage = () => {
   const { t } = useTranslation()
@@ -30,19 +29,18 @@ export const MFAPage = () => {
   useLayoutConfig<MainLayoutProps>({
     active: 'profile',
   })
-  const { loading, load, result } = useFetch<OTPStatus>(otpStatus, { initLoading: true })
-  useEffect(() => {
-    load().then()
-  }, [load])
+  const client = useQueryClient()
+  const { data: result, isLoading } = useQuery({
+    queryFn: otpStatus,
+    queryKey: ['profile:mfa'],
+  })
 
-  const onSuccess = useCallback(() => {
-    load().then()
-  }, [load])
+  const onSuccess = () => client.invalidateQueries({ queryKey: ['profile:mfa'] })
 
   const statusTitle = (
     <div className="flex items-center justify-start space-x-sm">
       <span>{title}</span>
-      {loading ? (
+      {isLoading ? (
         <Skeleton className="h-6 w-16" />
       ) : (
         <Badge variant={result?.enable ? 'default' : 'outline'}>{result?.enable ? t('已启用') : t('未启用')}</Badge>
@@ -80,7 +78,7 @@ export const MFAPage = () => {
             </p>
           </div>
           <Separator />
-          {loading ? (
+          {isLoading ? (
             <Skeleton className="h-6 w-28" />
           ) : result?.enable ? (
             <DisableModal onSuccess={onSuccess} />

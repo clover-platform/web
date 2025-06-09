@@ -1,11 +1,11 @@
 
-import { profile } from '@/rest/profile'
 import { st } from '@clover/public/utils/locale.server'
 import { getQueryClient } from '@clover/public/utils/query'
 import { keywords, title } from '@clover/public/utils/seo'
 import { HydrationBoundary, dehydrate } from '@tanstack/react-query'
 import type { Metadata } from 'next'
 import { ProfilePage } from './components'
+import { profile } from './components/rest'
 
 export async function generateMetadata(): Promise<Metadata> {
   return {

@@ -1,14 +1,16 @@
 import { t } from '@clover/public/utils/locale.client'
-import {CODE, EMAIL, PASSWORD} from "@clover/public/utils/regular";
-import { object, string } from 'zod'
+import { CODE, EMAIL, PASSWORD } from '@clover/public/utils/regular'
+import { object, string, type z } from 'zod'
 
-const code = t("请输入6位数字验证码");
+const code = t('请输入6位数字验证码')
 
 export const getEmailFormSchema = () =>
   object({
     email: string().min(1, t('请输入正确的邮箱')).regex(EMAIL, t('邮箱格式不正确')),
     code: string().min(1, t('请输入验证码')).regex(CODE, code),
   })
+
+export type EmailFormData = z.infer<ReturnType<typeof getEmailFormSchema>>
 
 export const getPasswordFormSchema = () =>
   object({
@@ -23,3 +25,5 @@ export const getPasswordFormSchema = () =>
       })
     }
   })
+
+export type PasswordFormData = z.infer<ReturnType<typeof getPasswordFormSchema>>

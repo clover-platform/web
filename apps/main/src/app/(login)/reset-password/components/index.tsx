@@ -1,60 +1,60 @@
-'use client';
+'use client'
 
-import {
-  getEmailFormSchema,
-  getPasswordFormSchema,
-} from "@/config/pages/reset-password/form";
-import { passwordReset, resetEmailCheck, sendResetEmailCode } from '@/rest/auth'
 import { EmailCodeInput } from '@clover/public/components/common/input/email-code'
 import { encrypt } from '@clover/public/utils/crypto'
 import { setToken } from '@clover/public/utils/token'
 import { Button, Form, FormItem, Input, Steps, StepsItem, useMessage } from '@easykit/design'
+import { useMutation } from '@tanstack/react-query'
+import { cloneDeep } from 'es-toolkit'
 import { useSearchParams } from 'next/navigation'
 import { useState } from 'react'
-import { useTranslation } from "react-i18next";
+import { useTranslation } from 'react-i18next'
+import { passwordReset, resetEmailCheck, sendResetEmailCode } from './rest'
+import { type EmailFormData, type PasswordFormData, getEmailFormSchema, getPasswordFormSchema } from './schema'
+
 const ResetPasswordPage = () => {
-  const msg = useMessage();
-  const params = useSearchParams();
-  const redirect = params.get("redirect");
-  const [step, setStep] = useState(0);
-  // biome-ignore lint/suspicious/noExplicitAny: <explanation>
-  const [formData1, setFormData1] = useState<any>({})
-  const [step1Submitting, setStep1Submitting] = useState(false);
-  const [formKey, setFormKey] = useState(Date.now());
-  const [step2Submitting, setStep2Submitting] = useState(false);
-  const { t } = useTranslation();
+  const msg = useMessage()
+  const params = useSearchParams()
+  const redirect = params.get('redirect')
+  const [step, setStep] = useState(0)
+  const [formData1, setFormData1] = useState<EmailFormData>()
+  const [formKey, setFormKey] = useState(Date.now())
+  const { t } = useTranslation()
+  const { mutate: checkMutate, isPending: step1Submitting } = useMutation({
+    mutationFn: resetEmailCheck,
+    onError: (error) => {
+      msg.error(error.message)
+    },
+    onSuccess: (data) => {
+      if (data) {
+        setToken(data)
+        setFormKey(Date.now())
+        setStep(1)
+      }
+    },
+  })
+  const { mutate: submitMutate, isPending: step2Submitting } = useMutation({
+    mutationFn: passwordReset,
+    onError: (error) => {
+      msg.error(error.message)
+    },
+    onSuccess: (data) => {
+      if (data) {
+        setToken(data)
+        location.href = redirect || '/'
+      }
+    },
+  })
 
-  // biome-ignore lint/suspicious/noExplicitAny: <explanation>
-  const onStep1Submit = async (data: any) => {
-    setStep1Submitting(true)
-    const { success, message, data: result } = await resetEmailCheck(data)
-    setStep1Submitting(false)
-    if (success) {
-      setToken(result)
-      setFormKey(Date.now())
-      setStep(1)
-    } else {
-      msg.error(message)
-    }
-  }
+  const onStep1Submit = (data: EmailFormData) => checkMutate(data)
 
-  const onPrev = () => {
-    setStep(0);
-  }
+  const onPrev = () => setStep(0)
 
-  // biome-ignore lint/suspicious/noExplicitAny: <explanation>
-  const onStep2Submit = async (data: any) => {
-    data.password2 = undefined
-    data.password = encrypt(data.password)
-    setStep2Submitting(true)
-    const { success, message, data: result } = await passwordReset(data)
-    setStep2Submitting(false)
-    if (success) {
-      setToken(result)
-      location.href = redirect || '/'
-    } else {
-      msg.error(message)
-    }
+  const onStep2Submit = (data: PasswordFormData) => {
+    const cloneData = cloneDeep(data)
+    cloneData.password2 = ''
+    cloneData.password = encrypt(cloneData.password)
+    submitMutate(cloneData)
   }
 
   return (
@@ -67,8 +67,8 @@ const ResetPasswordPage = () => {
           <StepsItem title={t('邮箱验证')} />
           <StepsItem title={t('设置密码')} />
         </Steps>
-        <Form
-          onValuesChange={setFormData1}
+        <Form<EmailFormData>
+          onValuesChange={(data) => setFormData1(data as EmailFormData)}
           onSubmit={onStep1Submit}
           schema={getEmailFormSchema()}
           style={{ display: step === 0 ? 'block' : 'none' }}
@@ -81,14 +81,14 @@ const ResetPasswordPage = () => {
               needEmail={true}
               placeholder={t('请输入邮箱验证码')}
               api={sendResetEmailCode}
-              data={{ email: formData1.email }}
+              data={{ email: formData1?.email || '' }}
             />
           </FormItem>
           <Button loading={step1Submitting} type="submit" long>
             {t('下一步')}
           </Button>
         </Form>
-        <Form
+        <Form<PasswordFormData>
           style={{ display: step === 1 ? 'block' : 'none' }}
           key={formKey}
           onSubmit={onStep2Submit}
@@ -100,11 +100,11 @@ const ResetPasswordPage = () => {
           <FormItem name="password2" label={t('确认密码')}>
             <Input type="password" placeholder={t('请再次输入密码')} />
           </FormItem>
-          <div className="mx-[-10px] flex">
-            <Button disabled={step2Submitting} onClick={onPrev} className="mx-[10px]" variant="outline" long>
+          <div className="flex gap-2">
+            <Button disabled={step2Submitting} className="flex-1" onClick={onPrev} variant="outline" long>
               {t('上一步')}
             </Button>
-            <Button loading={step2Submitting} className="mx-[10px]" long type="submit">
+            <Button loading={step2Submitting} className="flex-1" long type="submit">
               {t('修改密码')}
             </Button>
           </div>
@@ -112,6 +112,6 @@ const ResetPasswordPage = () => {
       </div>
     </div>
   )
-};
+}
 
-export default ResetPasswordPage;
+export default ResetPasswordPage

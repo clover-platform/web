@@ -1,33 +1,26 @@
-import type { CancellablePromise, RestResult } from '@clover/public/types/rest'
+
 import { isEmail } from '@clover/public/utils'
 import { i18n } from '@clover/public/utils/locale.client'
 import { Button, Input, useMessage } from '@easykit/design'
-import {
-  type ChangeEvent,
-  type ComponentProps,
-  type FC,
-  useCallback,
-  useEffect,
-  useMemo,
-  useRef,
-  useState,
-} from 'react'
+import { useMutation } from '@tanstack/react-query'
+import { type ChangeEvent, type ComponentProps, useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 
-interface EmailCodeInputProps extends ComponentProps<typeof Input> {
-  // biome-ignore lint/suspicious/noExplicitAny: <explanation>
-  api: (params: any) => CancellablePromise<RestResult<any>>
+export type BaseData = {
+  email: string
+}
+
+interface EmailCodeInputProps<T extends BaseData> extends ComponentProps<typeof Input> {
+  api: (params: T) => Promise<unknown>
   placeholder: string
-  // biome-ignore lint/suspicious/noExplicitAny: <explanation>
-  data?: any
+  data: T
   needEmail?: boolean
 }
 
-export const EmailCodeInput: FC<EmailCodeInputProps> = (props: EmailCodeInputProps) => {
+export const EmailCodeInput = <T extends BaseData>(props: EmailCodeInputProps<T>) => {
   const { api, data, needEmail = false, onChange, ...rest } = props
 
   const Message = useMessage()
-  const [loading, setLoading] = useState(false)
   const [waiting, setWaiting] = useState(false)
   const [time, setTime] = useState(60)
   const timeRef = useRef(60)
@@ -56,22 +49,25 @@ export const EmailCodeInput: FC<EmailCodeInputProps> = (props: EmailCodeInputPro
     }, 1000)
   }, [])
 
-  const sendCode = useCallback(async () => {
-    setLoading(true)
-    const { success, message } = await api(data)
-    setLoading(false)
-    if (success) {
+  const { mutate, isPending } = useMutation({
+    mutationFn: api,
+    onSuccess: () => {
       startTimer()
-    } else {
-      Message.error(message)
-    }
-  }, [Message, api, data, startTimer])
+    },
+    onError: (error) => {
+      Message.error(error.message)
+    },
+  })
+
+  const sendCode = useCallback(() => {
+    mutate(data)
+  }, [data, mutate])
 
   const buttonDisabled = useMemo(() => {
     if (!needEmail) return false
-    const { email } = data || {}
-    return !isEmail(email) || loading || waiting
-  }, [needEmail, data, loading, waiting])
+    const { email } = data as BaseData
+    return !isEmail(email) || isPending || waiting
+  }, [needEmail, data, isPending, waiting])
 
   const buttonText = useMemo(() => {
     return waiting ? i18n(t('%time秒后重发'), { time }) : t('发送验证码')
@@ -87,7 +83,14 @@ export const EmailCodeInput: FC<EmailCodeInputProps> = (props: EmailCodeInputPro
   return (
     <div className="flex items-center justify-center">
       <Input className="flex-1" {...rest} onChange={handleChange} maxLength={6} />
-      <Button loading={loading} disabled={buttonDisabled} className="ml-[10px]" onClick={sendCode} variant="secondary">
+      <Button
+        type="button"
+        loading={isPending}
+        disabled={buttonDisabled}
+        className="ml-[10px]"
+        onClick={sendCode}
+        variant="secondary"
+      >
         {buttonText}
       </Button>
     </div>

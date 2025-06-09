@@ -1,11 +1,11 @@
 import { type UseFormResultProps, useFormResult } from '@clover/public/hooks/use.form.result'
-import type { CancellablePromise, RestResult } from '@clover/public/types/rest'
+import type { RestResult } from '@clover/public/types/rest'
 import { type RefObject, useCallback, useRef, useState } from 'react'
 import type { FieldValues, SubmitHandler, UseFormReturn } from 'react-hook-form'
 
 export type UseFormSubmitProps<T, P> = UseFormResultProps<T> & {
   // biome-ignore lint/suspicious/noExplicitAny: <explanation>
-  action: ((data: P) => CancellablePromise<RestResult<any>>) | ((data?: P) => CancellablePromise<RestResult<any>>)
+  action: ((data: P) => Promise<RestResult<any>>) | ((data?: P) => Promise<RestResult<any>>)
 }
 
 export const useFormSubmit = <T, P = void>(

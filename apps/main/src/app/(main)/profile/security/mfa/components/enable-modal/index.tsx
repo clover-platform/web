@@ -1,17 +1,17 @@
-import SecretItem from "@/components/pages/otp-bind/secret";
-import { type OTPBindData, otpBind } from '@/rest/auth'
-import {CodeInput} from "@clover/public/components/common/input/code";
+import { CodeInput } from '@clover/public/components/common/input/code'
 import { EmailCodeInput } from '@clover/public/components/common/input/email-code'
-import { useFormSubmit } from '@clover/public/hooks/use.form.submit'
-import { sendEmailCode } from '@clover/public/rest/common'
-import {accountInfoState} from "@clover/public/state/account";
+import { type SendEmailCodeData, sendEmailCode } from '@clover/public/rest/common'
+import { accountInfoState } from '@clover/public/state/account'
 import { t } from '@clover/public/utils/locale.client'
-import {CODE} from "@clover/public/utils/regular";
-import { Button, Dialog, Form, FormItem } from '@easykit/design'
+import { CODE } from '@clover/public/utils/regular'
+import { Button, Dialog, Form, FormItem, useMessage } from '@easykit/design'
+import { useMutation } from '@tanstack/react-query'
 import { useAtomValue } from 'jotai'
 import { type FC, useState } from 'react'
-import { useTranslation } from "react-i18next";
+import { useTranslation } from 'react-i18next'
 import { object, string } from 'zod'
+import { type OTPBindData, otpBind } from '../rest'
+import SecretItem from '../secret'
 
 const getSchema = () =>
   object({
@@ -20,21 +20,22 @@ const getSchema = () =>
   })
 
 export type EnableModalProps = {
-  onSuccess?: () => void;
+  onSuccess?: () => void
 }
 
 export const EnableModal: FC<EnableModalProps> = (props) => {
-  const [visible, setVisible] = useState(false);
-  const { t } = useTranslation();
-  const title = t("启用二次验证");
-  const account = useAtomValue(accountInfoState);
-  // biome-ignore lint/suspicious/noExplicitAny: <explanation>
-  const { ref, submitting, onSubmit } = useFormSubmit<any, OTPBindData>({
-    action: otpBind,
+  const [visible, setVisible] = useState(false)
+  const { t } = useTranslation()
+  const title = t('启用二次验证')
+  const account = useAtomValue(accountInfoState)
+  const m = useMessage()
+  const { mutate, isPending } = useMutation({
+    mutationFn: otpBind,
     onSuccess: () => {
       setVisible(false)
       props.onSuccess?.()
     },
+    onError: (error) => m.error(error.message),
   })
 
   return (
@@ -43,14 +44,7 @@ export const EnableModal: FC<EnableModalProps> = (props) => {
         {title}
       </button>
       <Dialog visible={visible} title={title} maskClosable={false} onCancel={() => setVisible(false)}>
-        <Form
-          ref={ref}
-          defaultValues={{
-            email: account.email,
-          }}
-          onSubmit={onSubmit}
-          schema={getSchema()}
-        >
+        <Form<OTPBindData> onSubmit={(data) => mutate(data)} schema={getSchema()}>
           <SecretItem />
           <FormItem
             name="code"
@@ -58,12 +52,16 @@ export const EnableModal: FC<EnableModalProps> = (props) => {
               email: account.email,
             })}
           >
-            <EmailCodeInput placeholder={t('请输入邮箱验证码')} api={sendEmailCode} data={{ action: 'otp-enable' }} />
+            <EmailCodeInput<SendEmailCodeData>
+              placeholder={t('请输入邮箱验证码')}
+              api={sendEmailCode}
+              data={{ action: 'otp-enable', email: account.email }}
+            />
           </FormItem>
           <FormItem name="otpCode" label={t('验证码')}>
             <CodeInput placeholder={t('请输入身份验证 App 验证码')} />
           </FormItem>
-          <Button loading={submitting} type="submit" long>
+          <Button loading={isPending} type="submit" long>
             {t('启用')}
           </Button>
         </Form>

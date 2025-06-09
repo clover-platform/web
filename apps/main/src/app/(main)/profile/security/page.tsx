@@ -1,7 +1,7 @@
-import {SecurityPage} from "@/components/pages/profile/security";
 import { st } from "@clover/public/utils/locale.server";
 import { keywords, title } from '@clover/public/utils/seo'
 import type { Metadata } from 'next'
+import { SecurityPage } from './components'
 
 export async function generateMetadata(): Promise<Metadata> {
   return {

@@ -1,5 +1,9 @@
-import {post} from "@clover/public/utils/rest";
+import { post, resultWrapper } from '@clover/public/utils/rest'
 
-export const sendEmailCode = (data: { action: string }) =>
-  // biome-ignore lint/suspicious/noExplicitAny: <explanation>
-  post<any, { action: string }>('@main/account/email/code/send', data)
+export type SendEmailCodeData = {
+  action: string
+  email: string
+}
+
+export const sendEmailCode = (data: SendEmailCodeData) =>
+  resultWrapper<unknown>(post<unknown, SendEmailCodeData>('@main/account/email/code/send', data))

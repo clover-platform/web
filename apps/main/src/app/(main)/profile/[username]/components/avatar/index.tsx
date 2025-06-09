@@ -1,4 +1,3 @@
-import { updateAvatar } from '@/rest/profile'
 import { CropperDialog } from '@clover/public/components/common/cropper/dialog'
 import { useStateLoader } from '@clover/public/components/layout/hooks/use.state.loader'
 import { useProfile } from '@clover/public/hooks'
@@ -9,6 +8,7 @@ import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { useParams } from 'next/navigation'
 import { type FC, useState } from 'react'
 import { useTranslation } from 'react-i18next'
+import { updateAvatar } from './rest'
 
 export type AvatarProps = {
   src: string
@@ -28,6 +28,7 @@ export const Avatar: FC<AvatarProps> = (props) => {
   const { username } = useParams()
   const load = useStateLoader()
   const { t } = useTranslation()
+  const m = useMessage()
 
   const onDropAccepted = (files: File[]) => {
     fileToDataURL(files[0]).then((src) => {
@@ -45,6 +46,9 @@ export const Avatar: FC<AvatarProps> = (props) => {
     onSuccess: async () => {
       await queryClient.invalidateQueries({ queryKey: ['profile', username] })
       await load()
+    },
+    onError: (error) => {
+      m.error(error.message)
     },
   })
 

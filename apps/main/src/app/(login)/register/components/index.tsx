@@ -1,16 +1,17 @@
 'use client'
 
 import LoginLink from '@/components/common/login/link'
-import { type RegisterFormData, getFormSchema } from '@/config/schema/register'
-import { register, sendEmailCode } from '@/rest/auth'
 import { EmailCodeInput } from '@clover/public/components/common/input/email-code'
 import { encrypt } from '@clover/public/utils/crypto'
 import { setToken } from '@clover/public/utils/token'
 import { Button, Form, FormItem, Input, useMessage } from '@easykit/design'
 import { useMutation } from '@tanstack/react-query'
+import { cloneDeep } from 'es-toolkit'
 import { useSearchParams } from 'next/navigation'
 import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
+import { register, sendEmailCode } from './rest'
+import { type RegisterFormData, getFormSchema } from './schema'
 
 const RegisterPage = () => {
   const msg = useMessage()
@@ -33,8 +34,10 @@ const RegisterPage = () => {
   })
 
   const onSubmit = (data: RegisterFormData) => {
-    data.password = encrypt(data.password)
-    mutate(data)
+    const cloneData = cloneDeep(data)
+    cloneData.password2 = ''
+    cloneData.password = encrypt(cloneData.password)
+    mutate(cloneData)
   }
 
   return (
@@ -63,7 +66,7 @@ const RegisterPage = () => {
               needEmail={true}
               placeholder={t('请输入邮箱验证码')}
               api={sendEmailCode}
-              data={{ email: formData?.email }}
+              data={{ email: formData?.email || '' }}
             />
           </FormItem>
           <FormItem name="password" label={t('密码')}>

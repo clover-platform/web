@@ -1,14 +1,11 @@
 import type { Project } from '@clover/public/types/project'
-import { get, post, put } from '@clover/public/utils/rest'
+import { get, post, put, resultWrapper } from '@clover/public/utils/rest'
+import type { TeamInitFormData } from '../config/schema/layout/guide'
 import type { Team } from '../types/team'
 
 export const my = () => get<Team[]>('@main/team/my')
 
-export type TeamInitData = {
-  name: string
-  projectName: number
-}
-export const init = (data: TeamInitData) => post('@main/team/init', data)
+export const init = (data: TeamInitFormData) => resultWrapper(post('@main/team/init', data))
 
 export const myByTeamId = (teamId: number | string) => get<Project[]>(`@main/team/${teamId}/projects`)
 
