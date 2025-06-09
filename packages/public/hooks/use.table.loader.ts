@@ -1,4 +1,4 @@
-import type { CancellablePromise, RestResult } from '@clover/public/types/rest'
+import type { RestResult } from '@clover/public/types/rest'
 import { useMessage } from '@easykit/design'
 import { cloneDeep, pick } from 'es-toolkit'
 import { usePathname, useRouter, useSearchParams } from 'next/navigation'
@@ -8,7 +8,7 @@ export interface TableLoaderOptions {
   // biome-ignore lint/suspicious/noExplicitAny: <explanation>
   initialParams: any
   // biome-ignore lint/suspicious/noExplicitAny: <explanation>
-  action: (data: any) => CancellablePromise<RestResult<any>>
+  action: (data: any) => Promise<RestResult<any>>
   withURL?: boolean
   encodeParams?: string[]
   keys?: string[]

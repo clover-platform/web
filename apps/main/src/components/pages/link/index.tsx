@@ -13,6 +13,7 @@ import Link from 'next/link'
 import { useSearchParams } from 'next/navigation'
 import { type PropsWithChildren, useCallback, useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
+
 export interface LinkPageProps extends PropsWithChildren {
   type: string
 }
@@ -156,7 +157,7 @@ const LinkPage = (props: LinkPageProps) => {
           </div>
         </div>
       )}
-      <MFADialog visible={visible} onCancel={onCancel} formData={formData} onSubmit={onSubmit} />
+      <MFADialog visible={visible} onCancel={onCancel} formData={formData} onSubmit={onSubmit} isPending={false} />
     </>
   )
 }

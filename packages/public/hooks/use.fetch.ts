@@ -1,10 +1,10 @@
-import type { CancellablePromise, RestResult } from '@clover/public/types/rest'
+import type { RestResult } from '@clover/public/types/rest'
 import { useMessage } from '@easykit/design'
 import { useCallback, useState } from 'react'
 
 // biome-ignore lint/suspicious/noExplicitAny: <explanation>
 export const useFetch = <T, P = any>(
-  api: (params?: P) => CancellablePromise<RestResult<T>>,
+  api: (params?: P) => Promise<RestResult<T>>,
   options?: {
     showMessage?: boolean
     initLoading?: boolean
