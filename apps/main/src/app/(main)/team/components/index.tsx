@@ -1,22 +1,23 @@
-'use client';
+'use client'
 
 import { AppBreadcrumb } from '@/components/common/app-breadcrumb'
 import type { MainLayoutProps } from '@/components/layout/main'
-import { getColumns, getFilters, getRowActions, getTabs } from '@/config/pages/team/table'
 import { useCollectTeam } from '@/hooks/use.collect.team'
-import { addCollect, cancelCollect, deleteTeam, list } from '@/rest/team'
 import { MainPage } from '@clover/public/components/common/page'
 import { TabsTitle } from '@clover/public/components/common/tabs-title'
 import { TitleBar } from '@clover/public/components/common/title-bar'
 import { useCurrentTeam } from '@clover/public/components/layout/hooks/main'
 import { useLayoutConfig } from '@clover/public/components/layout/hooks/use.layout.config'
-import { useTableLoader } from '@clover/public/hooks'
+import { useListQuery } from '@clover/public/hooks'
 import type { Team } from '@clover/public/types/team'
 import { BreadcrumbItem, BreadcrumbPage, Button, Card, DataTable, useAlert, useMessage } from '@easykit/design'
+import { useMutation } from '@tanstack/react-query'
 import Link from 'next/link'
 import { useRouter, useSearchParams } from 'next/navigation'
-import { useCallback, useEffect, useMemo, useState } from 'react'
+import { useCallback, useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
+import { getColumns, getFilters, getRowActions, getTabs } from '../config/table'
+import { type ListParams, addCollect, cancelCollect, deleteTeam, list } from './rest'
 
 const initialParams = {
   keyword: '',
@@ -30,11 +31,6 @@ export const TeamPage = () => {
   const title = t('团队')
   useLayoutConfig<MainLayoutProps>({
     active: 'team',
-  })
-  const [loading, result, query, load] = useTableLoader<Team>({
-    initialParams,
-    action: list,
-    keys: ['type'],
   })
   const searchParams = useSearchParams()
   const type = searchParams.get('type')
@@ -53,15 +49,46 @@ export const TeamPage = () => {
   const { load: loadCollect } = useCollectTeam()
   const team = useCurrentTeam()
   const msg = useMessage()
-
-  useEffect(() => {
-    load({ type: active }).then()
-  }, [active, load])
+  const { loading, data, pagination, load, query, refetch } = useListQuery<Team, ListParams>({
+    params: {
+      type: active,
+    },
+    action: list,
+    key: 'team:list',
+  })
 
   const reload = useCallback(() => {
-    load().then()
+    refetch().then()
     loadCollect().then()
-  }, [load, loadCollect])
+  }, [refetch, loadCollect])
+
+  const { mutate: addCollectMutation, isPending: isAddingCollect } = useMutation({
+    mutationFn: addCollect,
+    onSuccess: () => {
+      reload()
+    },
+    onError: (error) => {
+      msg.error(error.message)
+    },
+  })
+  const { mutate: cancelCollectMutation, isPending: isCancellingCollect } = useMutation({
+    mutationFn: cancelCollect,
+    onSuccess: () => {
+      reload()
+    },
+    onError: (error) => {
+      msg.error(error.message)
+    },
+  })
+  const { mutate: deleteTeamMutation, isPending: isDeletingTeam } = useMutation({
+    mutationFn: deleteTeam,
+    onSuccess: () => {
+      reload()
+    },
+    onError: (error) => {
+      msg.error(error.message)
+    },
+  })
 
   return (
     <MainPage>
@@ -81,15 +108,11 @@ export const TeamPage = () => {
             query: query,
           }}
           load={load}
-          pagination={{
-            total: result?.total || 0,
-            page: query.page,
-            size: query.size,
-          }}
+          pagination={pagination}
           columns={getColumns(team?.id)}
           rowActions={(t) => getRowActions(t, team?.id)}
-          data={result?.data || []}
-          loading={loading}
+          data={data}
+          loading={loading || isAddingCollect || isCancellingCollect || isDeletingTeam}
           onRowActionClick={({ id: key }, { original }) => {
             const { id, teamKey } = original
             if (key === 'delete') {
@@ -102,15 +125,7 @@ export const TeamPage = () => {
                     {t('确定删除团队吗？')}
                   </>
                 ),
-                onOk: async () => {
-                  const { success, message } = await deleteTeam(id)
-                  if (success) {
-                    reload()
-                    return true
-                  }
-                  msg.error(message)
-                  return false
-                },
+                onOk: () => deleteTeamMutation(id),
               })
             } else if (['info', 'member'].includes(key)) {
               router.push(`/team/${teamKey}?tab=${key}`)
@@ -118,23 +133,13 @@ export const TeamPage = () => {
               alert.confirm({
                 title: t('收藏团队'),
                 description: t('确定收藏团队吗？'),
-                onOk: async () => {
-                  const { success } = await addCollect(id)
-                  if (success) {
-                    reload()
-                  }
-                },
+                onOk: () => addCollectMutation(id),
               })
             } else if (key === 'collect.cancel') {
               alert.confirm({
                 title: t('取消收藏团队'),
                 description: t('确定取消收藏团队吗？'),
-                onOk: async () => {
-                  const { success } = await cancelCollect(id)
-                  if (success) {
-                    reload()
-                  }
-                },
+                onOk: () => cancelCollectMutation(id),
               })
             }
           }}

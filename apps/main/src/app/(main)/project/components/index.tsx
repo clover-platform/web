@@ -1,7 +1,6 @@
 'use client'
 import { AppBreadcrumb } from '@/components/common/app-breadcrumb'
 import type { MainLayoutProps } from '@/components/layout/main'
-import { getColumns, getFilters, getRowActions, getTabs } from '@/config/pages/project/table'
 import { useCollectProject } from '@/hooks/use.collect.project'
 import { MainPage } from '@clover/public/components/common/page'
 import { TabsTitle } from '@clover/public/components/common/tabs-title'
@@ -16,6 +15,7 @@ import Link from 'next/link'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { useCallback, useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
+import { getColumns, getFilters, getRowActions, getTabs } from '../config/table'
 import { type ProjectListParams, addCollect, cancelCollect, deleteProject, list } from './rest'
 
 const initialParams = {

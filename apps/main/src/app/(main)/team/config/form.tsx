@@ -1,6 +1,7 @@
-import {t} from "@clover/public/utils/locale.client";
-import {USERNAME} from "@clover/public/utils/regular";
+import { t } from '@clover/public/utils/locale.client'
+import { USERNAME } from '@clover/public/utils/regular'
 import { object, string } from 'zod'
+import type { z } from 'zod'
 
 export const getSchema = () =>
   object({
@@ -11,3 +12,5 @@ export const getSchema = () =>
       .max(20, t('4-20个字符'))
       .regex(USERNAME, t('只能包含字母、数字、下划线，字母开头。')),
   })
+
+export type TeamFormData = z.infer<ReturnType<typeof getSchema>>

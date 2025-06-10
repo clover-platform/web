@@ -2,7 +2,6 @@
 
 import { ProfileBreadcrumbBase } from '@/components/common/breadcrumb/profile'
 import type { MainLayoutProps } from '@/components/layout/main'
-import { getColumns, getRowActions } from '@/config/pages/profile/access/token'
 import type { AccessToken } from '@/types/profile/access/token'
 import { Page } from '@clover/public/components/common/page'
 import { TitleBar } from '@clover/public/components/common/title-bar'
@@ -22,6 +21,7 @@ import {
 import { useMutation } from '@tanstack/react-query'
 import Link from 'next/link'
 import { useTranslation } from 'react-i18next'
+import { getColumns, getRowActions } from '../config/token'
 import { type ListParams, list, revoke } from './rest'
 
 export const AccessTokensPage = () => {

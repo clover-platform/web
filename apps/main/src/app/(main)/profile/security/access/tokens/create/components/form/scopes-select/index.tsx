@@ -1,6 +1,6 @@
-import {getScopes} from "@/config/pages/profile/access/scopes";
 import { CheckboxGroup, type CheckboxGroupOptionProps } from '@easykit/design'
 import { type FC, useMemo } from 'react'
+import { getScopes } from '../../../../config/scopes'
 
 export type ScopesSelectProps = {
   value?: string[];
