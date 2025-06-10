@@ -1,5 +1,4 @@
-import {getSchema} from "@/config/pages/project/form";
-import { type CreateProjectData, create } from '@/rest/project'
+import { getSchema } from '@/config/pages/project/form'
 import BackButton from '@clover/public/components/common/button/back'
 import { ImageCropper } from '@clover/public/components/common/cropper'
 import {TeamSelector} from "@clover/public/components/common/selector/team";
@@ -9,6 +8,7 @@ import {useFormSubmit} from "@clover/public/hooks/use.form.submit";
 import { Button, Form, FormItem, Input, Space } from '@easykit/design'
 import { useRouter } from 'next/navigation'
 import { useTranslation } from "react-i18next";
+import { type CreateProjectData, create } from '../rest'
 
 export const ProjectForm = () => {
   const router = useRouter();
