@@ -1,7 +1,7 @@
 'use client'
 
+import { ProfileBreadcrumbBase } from '@/components/common/breadcrumb/profile'
 import type { MainLayoutProps } from '@/components/layout/main'
-import { ProfileBreadcrumbBase } from '@/components/pages/profile/breadcrumb-base'
 import { Page } from '@clover/public/components/common/page'
 import { TitleBar } from '@clover/public/components/common/title-bar'
 import { useLayoutConfig } from '@clover/public/components/layout/hooks/use.layout.config'

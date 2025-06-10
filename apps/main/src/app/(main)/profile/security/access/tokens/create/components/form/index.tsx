@@ -1,26 +1,20 @@
-import {ScopesSelect} from "@/components/pages/profile/access/tokens/scopes-select";
 import { getSchema } from '@/config/pages/profile/access/form'
-import type { CreateData } from '@/rest/profile/access/token'
-import { type FormResult, useFormResult } from '@clover/public/hooks/use.form.result'
 import { DatePicker, Form, FormItem, Input } from '@easykit/design'
-import { type FC, type PropsWithChildren, useRef } from 'react'
-import type { UseFormReturn } from 'react-hook-form'
-import { useTranslation } from "react-i18next";
+import type { FC, PropsWithChildren } from 'react'
+import { useTranslation } from 'react-i18next'
+import type { CreateData } from '../../../components/rest'
+import { ScopesSelect } from './scopes-select'
+
 export type AccessTokenFormProps = PropsWithChildren<{
-  onSubmit?: (data: CreateData, call: FormResult<string>) => void | Promise<void>;
-  onSuccess: (result?: string) => void;
-}>;
+  onSubmit?: (data: CreateData) => void | Promise<void>
+}>
 
 export const AccessTokenForm: FC<AccessTokenFormProps> = (props) => {
-  const {onSuccess, onSubmit} = props;
-  const ref = useRef<UseFormReturn>(null);
-  const { t } = useTranslation();
-  const formResult = useFormResult<string>({
-    ref,
-    onSuccess,
-  })
+  const { onSubmit } = props
+  const { t } = useTranslation()
+
   return (
-    <Form ref={ref} schema={getSchema()} onSubmit={(data) => onSubmit?.(data as CreateData, formResult)}>
+    <Form schema={getSchema()} onSubmit={(data) => onSubmit?.(data as CreateData)}>
       <FormItem name="name" label={t('令牌名称')}>
         <Input placeholder={t('请输入')} className="w-input-md" />
       </FormItem>

@@ -8,7 +8,6 @@ import '@clover/public/plugin/rest.server'
 import '@clover/public/plugin/locales'
 import '@/plugin/locales'
 import '@/assets/style/index.css'
-import i18next from 'i18next'
 
 export type RootLayoutProps = PropsWithChildren;
 
@@ -26,8 +25,7 @@ export const metadata: Metadata = {
 const RootLayout: FC<RootLayoutProps> = async (props) => {
   const locale = await getLocale()
   const initState = await loadState()
-  i18next.changeLanguage(locale)
-
+ 
   return (
     <HTMLLayout>
       <PublicRootLayout {...initState} locale={locale}>

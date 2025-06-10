@@ -1,23 +1,22 @@
-'use client';
-
+'use client'
 import { AppBreadcrumb } from '@/components/common/app-breadcrumb'
 import type { MainLayoutProps } from '@/components/layout/main'
 import { getColumns, getFilters, getRowActions, getTabs } from '@/config/pages/project/table'
 import { useCollectProject } from '@/hooks/use.collect.project'
-import { list } from '@/rest/project'
-import { addCollect, cancelCollect, deleteProject } from '@/rest/project'
 import { MainPage } from '@clover/public/components/common/page'
 import { TabsTitle } from '@clover/public/components/common/tabs-title'
 import { TitleBar } from '@clover/public/components/common/title-bar'
 import { useCurrentProject } from '@clover/public/components/layout/hooks/main'
 import { useLayoutConfig } from '@clover/public/components/layout/hooks/use.layout.config'
-import { useTableLoader } from '@clover/public/hooks'
+import { useListQuery } from '@clover/public/hooks'
 import type { Project } from '@clover/public/types/project'
 import { BreadcrumbItem, BreadcrumbPage, Button, Card, DataTable, useAlert, useMessage } from '@easykit/design'
+import { useMutation } from '@tanstack/react-query'
 import Link from 'next/link'
 import { useRouter, useSearchParams } from 'next/navigation'
-import { useCallback, useEffect, useMemo, useState } from 'react'
+import { useCallback, useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
+import { type ProjectListParams, addCollect, cancelCollect, deleteProject, list } from './rest'
 
 const initialParams = {
   teamId: '',
@@ -33,11 +32,6 @@ const ProjectPage = () => {
     active: 'project',
   })
   const router = useRouter()
-  const [loading, result, query, load] = useTableLoader<Project>({
-    initialParams,
-    action: list,
-    keys: ['type'],
-  })
   const searchParams = useSearchParams()
   const type = searchParams.get('type')
   const [active, setActive] = useState(type || 'all')
@@ -45,15 +39,45 @@ const ProjectPage = () => {
   const project = useCurrentProject()
   const msg = useMessage()
   const { load: loadCollect } = useCollectProject()
-
-  useEffect(() => {
-    load({ type: active }).then()
-  }, [active, load])
+  const { loading, data, pagination, load, query, refetch } = useListQuery<Project, ProjectListParams>({
+    params: {
+      type: active,
+    },
+    key: 'project:list',
+    action: list,
+  })
+  const { mutate: deleteProjectMutation, isPending: isDeleting } = useMutation({
+    mutationFn: deleteProject,
+    onSuccess: () => {
+      reload()
+    },
+    onError: (error) => {
+      msg.error(error.message)
+    },
+  })
+  const { mutate: addCollectMutation, isPending: isAddingCollect } = useMutation({
+    mutationFn: addCollect,
+    onSuccess: () => {
+      reload()
+    },
+    onError: (error) => {
+      msg.error(error.message)
+    },
+  })
+  const { mutate: cancelCollectMutation, isPending: isCancellingCollect } = useMutation({
+    mutationFn: cancelCollect,
+    onSuccess: () => {
+      reload()
+    },
+    onError: (error) => {
+      msg.error(error.message)
+    },
+  })
 
   const reload = useCallback(() => {
-    load().then()
+    refetch().then()
     loadCollect().then()
-  }, [load, loadCollect])
+  }, [refetch, loadCollect])
 
   const actions = useMemo(() => {
     return (
@@ -83,30 +107,18 @@ const ProjectPage = () => {
             query: query,
           }}
           load={load}
-          pagination={{
-            total: result?.total || 0,
-            page: query.page,
-            size: query.size,
-          }}
+          pagination={pagination}
           columns={getColumns(project?.id)}
           rowActions={(row) => getRowActions(row, project?.id)}
-          data={result?.data || []}
-          loading={loading}
+          data={data}
+          loading={loading || isDeleting || isAddingCollect || isCancellingCollect}
           onRowActionClick={({ id: key }, { original }) => {
             const { id, projectKey } = original
             if (key === 'delete') {
               alert.confirm({
                 title: t('删除项目'),
                 description: <>{t('确定删除项目吗？')}</>,
-                onOk: async () => {
-                  const { success, message } = await deleteProject(id)
-                  if (success) {
-                    reload()
-                    return true
-                  }
-                  msg.error(message)
-                  return false
-                },
+                onOk: () => deleteProjectMutation(id),
               })
             } else if (['info', 'member'].includes(key)) {
               router.push(`/project/${projectKey}?tab=${key}`)
@@ -114,27 +126,13 @@ const ProjectPage = () => {
               alert.confirm({
                 title: t('收藏项目'),
                 description: t('确定收藏项目吗？'),
-                onOk: async () => {
-                  const { success } = await addCollect(id)
-                  if (success) {
-                    reload()
-                    return true
-                  }
-                  return false
-                },
+                onOk: () => addCollectMutation(id),
               })
             } else if (key === 'collect.cancel') {
               alert.confirm({
                 title: t('取消收藏项目'),
                 description: t('确定取消收藏项目吗？'),
-                onOk: async () => {
-                  const { success } = await cancelCollect(id)
-                  if (success) {
-                    reload()
-                    return true
-                  }
-                  return false
-                },
+                onOk: () => cancelCollectMutation(id),
               })
             }
           }}

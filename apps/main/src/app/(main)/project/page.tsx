@@ -1,7 +1,7 @@
-import ProjectPage from '@/components/pages/project'
 import { st } from "@clover/public/utils/locale.server";
 import { keywords, title } from '@clover/public/utils/seo'
 import type { Metadata } from 'next'
+import ProjectPage from './components'
 
 export async function generateMetadata(): Promise<Metadata> {
   return {
@@ -10,6 +10,6 @@ export async function generateMetadata(): Promise<Metadata> {
   }
 }
 
-const Page = () => <ProjectPage/>;
+const Page = () => <ProjectPage />
 
 export default Page

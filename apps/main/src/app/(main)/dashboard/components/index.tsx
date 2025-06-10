@@ -1,14 +1,14 @@
-"use client";
+'use client'
 
 import { AppBreadcrumb } from '@/components/common/app-breadcrumb'
 import type { MainLayoutProps } from '@/components/layout/main'
-import { Activity } from '@/components/pages/dashboard/activity'
-import { Assistant } from '@/components/pages/dashboard/assistant'
-import { Collect } from '@/components/pages/dashboard/collect'
 import { MainPage } from '@clover/public/components/common/page'
 import { useLayoutConfig } from '@clover/public/components/layout/hooks/use.layout.config'
 import { BreadcrumbItem, BreadcrumbPage } from '@easykit/design'
 import { useTranslation } from 'react-i18next'
+import { Activity } from './activity'
+import { Assistant } from './assistant'
+import { Collect } from './collect'
 
 export const DashboardPage = () => {
   useLayoutConfig<MainLayoutProps>({

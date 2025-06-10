@@ -17,9 +17,5 @@ export const TeamSelector: FC<TeamSelectorProps> = (props) =>{
       }
     })
   }, [teams])
-  return <Select
-    placeholder={t("请选择")}
-    {...props}
-    options={options}
-  />
+  return <Select placeholder={t('请选择')} options={options} className="min-w-[180px]" allowClear {...props} />
 }

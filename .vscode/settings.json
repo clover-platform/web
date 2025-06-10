@@ -20,7 +20,17 @@
   "[css]": {
     "editor.defaultFormatter": "biomejs.biome"
   },
-  "cSpell.words": ["Easykit", "qrcode"],
+  "cSpell.words": [
+    "Easykit",
+    "qrcode",
+    "Gantt",
+    "iconbox",
+    "bowser",
+    "languagedetector",
+    "jsencrypt",
+    "tributejs",
+    "msgpackr"
+  ],
   "css.customData": [".vscode/tailwind.json"],
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": "never",

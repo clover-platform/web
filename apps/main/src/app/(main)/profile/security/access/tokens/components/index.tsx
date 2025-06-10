@@ -1,14 +1,13 @@
-'use client';
+'use client'
 
+import { ProfileBreadcrumbBase } from '@/components/common/breadcrumb/profile'
 import type { MainLayoutProps } from '@/components/layout/main'
-import { ProfileBreadcrumbBase } from '@/components/pages/profile/breadcrumb-base'
 import { getColumns, getRowActions } from '@/config/pages/profile/access/token'
-import { list, revoke } from '@/rest/profile/access/token'
 import type { AccessToken } from '@/types/profile/access/token'
 import { Page } from '@clover/public/components/common/page'
 import { TitleBar } from '@clover/public/components/common/title-bar'
 import { useLayoutConfig } from '@clover/public/components/layout/hooks/use.layout.config'
-import { useTableLoader } from '@clover/public/hooks'
+import { useListQuery } from '@clover/public/hooks'
 import {
   BreadcrumbItem,
   BreadcrumbLink,
@@ -20,11 +19,10 @@ import {
   useAlert,
   useMessage,
 } from '@easykit/design'
+import { useMutation } from '@tanstack/react-query'
 import Link from 'next/link'
-import { useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
-
-const initialParams = {}
+import { type ListParams, list, revoke } from './rest'
 
 export const AccessTokensPage = () => {
   useLayoutConfig<MainLayoutProps>({
@@ -32,18 +30,21 @@ export const AccessTokensPage = () => {
   })
   const { t } = useTranslation()
   const title = t('访问令牌')
-
-  const [loading, result, query, load] = useTableLoader<AccessToken>({
-    initialParams,
-    action: list,
-    keys: ['type'],
-  })
   const alert = useAlert()
   const msg = useMessage()
-
-  useEffect(() => {
-    load().then()
-  }, [load])
+  const { loading, data, load, pagination, refetch } = useListQuery<AccessToken, ListParams>({
+    key: 'profile:access:tokens',
+    action: list,
+  })
+  const { mutate: revokeToken, isPending: revoking } = useMutation({
+    mutationFn: revoke,
+    onSuccess: () => {
+      refetch()
+    },
+    onError: (error) => {
+      msg.error(error.message)
+    },
+  })
 
   const actions = (
     <div className="space-x-2">
@@ -71,30 +72,18 @@ export const AccessTokensPage = () => {
         <DataTable<AccessToken>
           inCard={true}
           load={load}
-          pagination={{
-            total: result?.total || 0,
-            page: query.page,
-            size: query.size,
-          }}
+          pagination={pagination}
           columns={getColumns()}
           rowActions={(row) => getRowActions(row)}
-          data={result?.data || []}
-          loading={loading}
+          data={data}
+          loading={loading || revoking}
           onRowActionClick={({ id: key }, { original }) => {
             const { id } = original
             if (key === 'revoke') {
               alert.confirm({
                 title: t('撤销令牌'),
                 description: t('撤销后将无法再使用该令牌，且该操作无法恢复。'),
-                onOk: async () => {
-                  const { success, message } = await revoke(id)
-                  if (success) {
-                    load().then()
-                  } else {
-                    msg.error(message)
-                  }
-                  return success
-                },
+                onOk: () => revokeToken(id),
               })
             }
           }}

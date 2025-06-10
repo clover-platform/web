@@ -25,13 +25,12 @@ export const getColumns = (): DataTableColumn<AccessToken>[] => [
   },
 ]
 
-export const getRowActions = (row: AccessToken): DropdownMenuItemProps[] => {
-  console.log(row);
+export const getRowActions = (_row: AccessToken): DropdownMenuItemProps[] => {
   return [
     {
-      id: "revoke",
-      type: "item",
-      label: t("撤销"),
+      id: 'revoke',
+      type: 'item',
+      label: t('撤销'),
     },
-  ];
-};
+  ]
+}
