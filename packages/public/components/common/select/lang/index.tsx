@@ -22,7 +22,8 @@ export const LangSelect: FC<LangSelectProps> = (props) => {
     <Select
       value={locale}
       options={options}
-      className={classNames('h-8 w-auto px-2 py-1', className)}
+      className="h-8 w-auto"
+      triggerClassName={classNames('px-2 py-1', className)}
       align="end"
       onChange={async (value) => {
         if (locale !== value) {
