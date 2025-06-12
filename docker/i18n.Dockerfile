@@ -2,6 +2,7 @@
 FROM node:20.17-alpine
 
 ARG APP=i18n
+ENV APP=${APP}
 
 RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories
 
@@ -25,22 +26,13 @@ RUN adduser --system --uid 1001 nextjs
 ENV LANG=en_US.UTF-8 LANGUAGE=en_US:en LC_ALL=en_US.UTF-8 TZ=Asia/Shanghai
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 
+RUN npm install -g pm2 pnpm
+
 WORKDIR /app
+COPY ./ ./
 
-# PNPM 有一个全局 store，项目中的 node_modules 实际上是全局 store 的 symlink
-# 正常需要从上一阶段同时复制 `node_modules` 和全局 store，这样才能正常运行
-# 但是由于 `standalone` 目录里面包含所有运行时依赖，且都是独立目录
-# 因此可以直接复制该目录，无需复制全局 store（如果复制还会增加镜像体积）
-# 另外运行需要的配置文件、dotfile 也都在 `standalone` 目录里面，无需单独复制
-
-# `standalone` 模式打包，默认包含服务端代码，没有客户端代码
-# 因为官方建议通过 CDN 托管，但也可以手动复制 `public`、`.next/static` 目录
-COPY ./apps/${APP}/.next/standalone ./
-COPY ./apps/${APP}/package.json ./
-COPY ./apps/${APP}/.next/static ./apps/${APP}/.next/static
-COPY ./apps/${APP}/public ./apps/${APP}/public
-
-RUN npm install -g pm2
+RUN pnpm install
+RUN pnpm build:${APP}
 
 USER nextjs
 
@@ -51,9 +43,4 @@ ENV PORT 3000
 # 默认暴露 80 端口
 EXPOSE 3000
 
-WORKDIR /app/apps/${APP}
-
-# 用 standalone 模式打包后，生成的 `standalone/node_modules` 目录下缺少 `.bin` 目录
-# 导致无法用 `next` 命令启动项目，但可以用 `node server.js` 启动
-# 参考：https://nextjs.org/docs/advanced-features/output-file-tracing
-CMD ["pm2-runtime", "server.js"]
+CMD ["sh", "-c", "pm2-runtime pnpm -- start:${APP}"]
