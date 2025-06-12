@@ -5,6 +5,7 @@ import {
 } from '@clover/public/components/layout/main'
 import {useUnauthorizedHandle} from "@clover/public/hooks/use.unauthorized.handle";
 import type { FC } from 'react'
+import { useTranslation } from 'react-i18next'
 import { Header } from './header'
 
 export type MainLayoutProps = PublicMainLayoutProps & {
@@ -13,7 +14,7 @@ export type MainLayoutProps = PublicMainLayoutProps & {
 
 export const MainLayout: FC<MainLayoutProps> = (origin) => {
   const props = useLayoutProps<MainLayoutProps>(origin);
-
+  const { t } = useTranslation()
   useUnauthorizedHandle();
 
   return (
@@ -21,6 +22,7 @@ export const MainLayout: FC<MainLayoutProps> = (origin) => {
       className="bg-secondary dark:bg-background"
       headerProps={{
         logoUrl: '/dashboard',
+        appName: t('控制台'),
         className: 'bg-background dark:bg-black/50',
         extra: <Header active={props.active} />,
       }}

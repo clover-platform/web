@@ -1,6 +1,7 @@
 import { ProjectSwitcher } from '@clover/public/components/common/switcher/project'
 import { useCurrentProject, useCurrentTeam } from '@clover/public/components/layout/hooks/main'
 import { AccountInfo } from '@clover/public/components/layout/main/header/profile-menu/account-info'
+import { useApps } from '@clover/public/hooks'
 import { logout } from '@clover/public/rest/auth'
 import { accountInfoState } from '@clover/public/state/account'
 import {
@@ -17,7 +18,7 @@ import {
 } from '@easykit/design'
 import { useAtomValue } from 'jotai'
 import Link from 'next/link'
-import { type FC, type ReactNode, useCallback, useState } from 'react'
+import { type FC, type ReactNode, useCallback, useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 
 export type ProfileMenuProps = {
@@ -33,6 +34,7 @@ export const ProfileMenu: FC<ProfileMenuProps> = (props) => {
   const team = useCurrentTeam()
   const project = useCurrentProject()
   const { t } = useTranslation()
+  const [apps] = useApps()
 
   const exit = useCallback(() => {
     alert.confirm({
@@ -50,6 +52,27 @@ export const ProfileMenu: FC<ProfileMenuProps> = (props) => {
     })
   }, [alert, msg, t])
 
+  const dashboard = useMemo(() => {
+    return apps.find((app) => app.appId === 'dashboard')
+  }, [apps])
+
+  const isDashboardSameOrigin = useMemo(() => {
+    if (!dashboard?.href) return false
+    try {
+      const dashboardUrl = new URL(dashboard.href, window.location.origin)
+      return dashboardUrl.origin === window.location.origin
+    } catch {
+      return false
+    }
+  }, [dashboard?.href])
+
+  const baseUrl = useMemo(() => {
+    if (!isDashboardSameOrigin) {
+      return `${dashboard?.href.split('/')[0]}//${dashboard?.href.split('/')[2]}/`
+    }
+    return '/'
+  }, [isDashboardSameOrigin, dashboard?.href])
+
   return (
     <DropdownMenu open={open} onOpenChange={setOpen}>
       <DropdownMenuTrigger asChild>
@@ -61,9 +84,15 @@ export const ProfileMenu: FC<ProfileMenuProps> = (props) => {
         <DropdownMenuLabel className="text-secondary-foreground/50">{t('账户')}</DropdownMenuLabel>
         <AccountInfo />
         <DropdownMenuSeparator />
-        <Link href={`/profile/${account.username}`}>
-          <DropdownMenuItem>{t('个人资料')}</DropdownMenuItem>
-        </Link>
+        {isDashboardSameOrigin ? (
+          <Link href={`${baseUrl}profile/${account.username}`}>
+            <DropdownMenuItem>{t('个人资料')}</DropdownMenuItem>
+          </Link>
+        ) : (
+          <Link href={`${baseUrl}profile/${account.username}`} target="_blank" rel="noopener noreferrer">
+            <DropdownMenuItem>{t('个人资料')}</DropdownMenuItem>
+          </Link>
+        )}
         <DropdownMenuItem className="p-0">
           <ProjectSwitcher title={t('切换团队')} teamId={team?.id} projectId={project?.id}>
             <div className="flex w-full items-center justify-start space-x-1 px-2 py-1.5">

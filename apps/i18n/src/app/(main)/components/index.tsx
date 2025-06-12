@@ -1,21 +1,21 @@
-'use client';
+'use client'
 
 import { AppBreadcrumb } from '@/components/common/app-breadcrumb'
 import type { MainLayoutProps } from '@/components/layout/main'
 import { ROW_ACTIONS, getColumns, getFilters } from '@/config/pages/module/table'
 import { getTabs } from '@/config/pages/module/tabs'
-import { list } from '@/rest/module'
+import { type ModuleListParams, list } from '@/rest/module'
 import type { Module } from '@/types/pages/module'
 import { MainPage } from '@clover/public/components/common/page'
 import { TabsTitle } from '@clover/public/components/common/tabs-title'
 import { TitleBar } from '@clover/public/components/common/title-bar'
 import { useLayoutConfig } from '@clover/public/components/layout/hooks/use.layout.config'
-import { useTableLoader } from '@clover/public/hooks'
+import { useListQuery } from '@clover/public/hooks'
 import { useProfile } from '@clover/public/hooks/use.profile'
 import { BreadcrumbItem, BreadcrumbPage, Button, Card, DataTable, Space } from '@easykit/design'
 import Link from 'next/link'
 import { useRouter, useSearchParams } from 'next/navigation'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 const initialParams = {
   keyword: '',
@@ -32,18 +32,13 @@ export const ModulePage = () => {
   const type = search.get('type') || 'all'
   const [active, setActive] = useState(type)
   const title = t('模块')
-  const [loading, result, query, load] = useTableLoader<Module>({
-    initialParams,
-    action: list,
-    keys: ['type'],
-  })
-
-  useEffect(() => {
-    load({
+  const { loading, data, pagination, load, query } = useListQuery<Module, ModuleListParams>({
+    params: {
       type: active,
-      page: 1,
-    }).then()
-  }, [active, load])
+    },
+    key: 'module:list',
+    action: list,
+  })
 
   const actions = (
     <Space>
@@ -71,14 +66,10 @@ export const ModulePage = () => {
             query: query,
           }}
           load={load}
-          pagination={{
-            total: result?.total || 0,
-            page: query.page,
-            size: query.size,
-          }}
+          pagination={pagination}
           columns={getColumns()}
           rowActions={(row) => ROW_ACTIONS(profile, row)}
-          data={result?.data || []}
+          data={data}
           loading={loading}
           onRowActionClick={({ id: key }, { original }) => {
             const { id } = original

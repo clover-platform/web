@@ -35,8 +35,8 @@ importers:
         specifier: workspace:*
         version: link:packages/public
       '@easykit/design':
-        specifier: 0.0.111
-        version: 0.0.111(@types/react-dom@19.1.2(@types/react@19.1.2))(@types/react@19.1.2)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
+        specifier: 0.0.113
+        version: 0.0.113(@types/react-dom@19.1.2(@types/react@19.1.2))(@types/react@19.1.2)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
       '@easykit/editor':
         specifier: 0.0.25
         version: 0.0.25(@babel/core@7.26.10)(@types/react-dom@19.1.2(@types/react@19.1.2))(@types/react@19.1.2)(highlight.js@11.9.0)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
@@ -512,8 +512,8 @@ packages:
     resolution: {integrity: sha512-Pqwr3+Doby9fH0FECbGJLo997heWop7QDnklbRM9gPM+dHVdRN8SzOXiCp0RyAhN01OPgFIP3+w7xsHXfptIsw==}
     engines: {node: '>=12.9.0'}
 
-  '@easykit/design@0.0.111':
-    resolution: {integrity: sha512-TGeBBokf99OoRt13qEIvDrvgP083byeOMz1xCbu9T0+/RaHPR+XRjlmgUHzzi9hevySMJmh+xcPzJO+hSXCkPQ==}
+  '@easykit/design@0.0.113':
+    resolution: {integrity: sha512-cszvxPakloxy4HfSyuG+UOCMWP1377/XkHr4d+lLduHiMT4NJQVbfpt9fAl8h0nCOCR13owdvQvyt6H+ReXifw==}
 
   '@easykit/editor@0.0.25':
     resolution: {integrity: sha512-+kIUspaFEV3on+Mh8y2wzyTyeVD0LTtSCpm3uARS0kqzD5lFaFI2OTIWwcOaBnxKFMS56STgp38YocwZuLPGyg==}
@@ -3379,7 +3379,6 @@ packages:
 
   glob@7.2.3:
     resolution: {integrity: sha512-nFR0zLpU2YCaRxwoCJvL6UvCH2JFyFVIvwTLsIf21AuHlMskA1hhTdk+LlYJtOlYt9v6dvszD2BGRqBL+iQK9Q==}
-    deprecated: Glob versions prior to v9 are no longer supported
 
   global-modules@1.0.0:
     resolution: {integrity: sha512-sKzpEkf11GpOFuw0Zzjzmt4B4UZwjOcG757PPvrfhxcLFbq0wpsgpOqxpxtxFiCG4DtG93M6XRVbF2oGdev7bg==}
@@ -3529,8 +3528,7 @@ packages:
     engines: {node: '>=8'}
 
   inflight@1.0.6:
-    resolution: {integrity: sha512-k92I/b08q4wvFscXCLvqfsHCrjrF7yiXsQuIVvVE7N82W3+aqpzuUdBbfhWcy/FZR3/4IgflMgKLOsvPDrGCJA==}
-    deprecated: This module is not supported, and leaks memory. Do not use it. Check out lru-cache if you want a good and tested way to coalesce async requests by a key value, which is much more comprehensive and powerful.
+    resolution: {integrity: sha1-Sb1jMdfQLQwJvJEKEHW6gWW1bfk=}
 
   inherits@2.0.3:
     resolution: {integrity: sha512-x00IRNXNy63jwGkJmzPigoySHbaqpNuzKbBOmzK+g2OdZpQ9w+sxCN+VSB3ja7IAge2OP2qpfxTjeNcyjmW1uw==}
@@ -3703,7 +3701,7 @@ packages:
     hasBin: true
 
   jsonfile@4.0.0:
-    resolution: {integrity: sha1-h3Gq4HmbZAdrdmQPygWPnBDjPss=}
+    resolution: {integrity: sha512-m6F1R3z8jjlf2imQHS2Qez5sjKWQzbuuhuJ/FKYFRZvPE3PuHcSMVZzfsLhGVOkfd20obL5SWEBew5ShlquNxg==}
 
   jsonfile@6.1.0:
     resolution: {integrity: sha512-5dgndWOriYSm5cnYaJNhalLNDKOqFwyDB/rr1E9ZsGciGvKPs8R2xYGCacuf3z6K1YKDz182fd+fY3cn3pMqXQ==}
@@ -5353,7 +5351,7 @@ snapshots:
     transitivePeerDependencies:
       - debug
 
-  '@easykit/design@0.0.111(@types/react-dom@19.1.2(@types/react@19.1.2))(@types/react@19.1.2)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)':
+  '@easykit/design@0.0.113(@types/react-dom@19.1.2(@types/react@19.1.2))(@types/react@19.1.2)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)':
     dependencies:
       '@arco-iconbox/react-atom-ui': 0.0.4
       '@emotion/react': 11.11.4(@types/react@19.1.2)(react@19.1.0)

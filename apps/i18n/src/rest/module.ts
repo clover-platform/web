@@ -1,10 +1,16 @@
-import type { BaseInfo, Language, UpdateInfo } from '@/types/pages/module'
-import { del, get, post, put } from '@clover/public/utils/rest'
+import type { BaseInfo, Language, Module, UpdateInfo } from '@/types/pages/module'
+import type { PageData } from '@clover/public/types/rest'
+import { del, get, post, put, resultWrapper } from '@clover/public/utils/rest'
 
-// biome-ignore lint/suspicious/noExplicitAny: <explanation>
-export const list = (params: any) =>
-  // biome-ignore lint/suspicious/noExplicitAny: <explanation>
-  get<any, any>('@i18n/module/list', params)
+export type ModuleListParams = {
+  page?: number
+  size?: number
+  keyword?: string
+  type?: string
+}
+
+export const list = (params: ModuleListParams) =>
+  resultWrapper(get<PageData<Module>, ModuleListParams>('@i18n/module/list', params))
 
 // biome-ignore lint/suspicious/noExplicitAny: <explanation>
 export const all = (params: any) =>

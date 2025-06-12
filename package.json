@@ -23,7 +23,7 @@
   "dependencies": {
     "@clover/i18n-cli": "workspace:*",
     "@clover/public": "workspace:*",
-    "@easykit/design": "0.0.111",
+    "@easykit/design": "0.0.113",
     "@easykit/editor": "0.0.25",
     "@arco-iconbox/react-clover": "0.0.35",
     "@radix-ui/react-checkbox": "1.1.1",

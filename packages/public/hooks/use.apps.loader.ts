@@ -1,7 +1,8 @@
 import { type AppsItemProps, apps as appsRest } from '@clover/public/rest/config'
-import {appsState, loadingState} from "@clover/public/state/apps";
+import { loadingState } from '@clover/public/state/apps'
 import { useAtom } from 'jotai'
 import { useCallback } from 'react'
+import { useApps } from './use.apps'
 
 export const useAppsLoader = (): {
   loading: boolean;
@@ -9,7 +10,7 @@ export const useAppsLoader = (): {
   load: () => Promise<void>;
 } => {
   const [loading, setLoading] = useAtom(loadingState);
-  const [apps, setApps] = useAtom(appsState);
+  const [apps, setApps] = useApps()
 
   const load = useCallback(async () => {
     const {success, data} = await appsRest();
