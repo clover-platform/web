@@ -1,3 +1,5 @@
+import { type TeamFormData, getSchema } from '@/config/schema/team'
+import { create } from '@/rest/team'
 import BackButton from '@clover/public/components/common/button/back'
 import { ImageCropper } from '@clover/public/components/common/cropper'
 import { useStateLoader } from '@clover/public/components/layout/hooks/use.state.loader'
@@ -5,8 +7,6 @@ import { Alert, Button, Form, FormItem, Input, Space, useMessage } from '@easyki
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { useRouter } from 'next/navigation'
 import { useTranslation } from 'react-i18next'
-import { type TeamFormData, getSchema } from '../../config/form'
-import { create } from '../rest'
 
 export const TeamForm = () => {
   const { t } = useTranslation()

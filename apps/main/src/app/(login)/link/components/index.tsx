@@ -1,5 +1,7 @@
 'use client'
 
+import { type LinkFormData, getSchema } from '@/config/schema/login/link'
+import { type LinkCodeResult, linkCode, loginAndLink } from '@/rest/login/link'
 import { MFADialog } from '@clover/public/components/pages/login/mfa-dialog'
 import { encrypt } from '@clover/public/utils/crypto'
 import { RestError } from '@clover/public/utils/rest'
@@ -13,9 +15,6 @@ import { useSearchParams } from 'next/navigation'
 import { type PropsWithChildren, useCallback, useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { getSupportWay } from '../../login/components/config'
-import { type LinkCodeResult, linkCode, loginAndLink } from './rest'
-import { getSchema } from './schema'
-import type { LinkFormData } from './types'
 
 export interface LinkPageProps extends PropsWithChildren {
   type: string

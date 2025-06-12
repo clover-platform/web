@@ -1,6 +1,6 @@
+import type { EmailFormData, PasswordFormData } from '@/config/schema/login/reset-password'
 import { post, resultWrapper } from '@clover/public/utils/rest'
 import type { Token } from '@clover/public/utils/token'
-import type { EmailFormData, PasswordFormData } from './schema'
 
 export const sendResetEmailCode = (data: { email: string }) =>
   resultWrapper<void>(post<void, { email: string }>('@main/account/reset/email/send', data))

@@ -1,7 +1,7 @@
+import type { CreateData } from '@/rest/profile/security/access/tokens'
 import { DatePicker, Form, FormItem, Input } from '@easykit/design'
 import type { FC, PropsWithChildren } from 'react'
 import { useTranslation } from 'react-i18next'
-import type { CreateData } from '../../../components/rest'
 import { getSchema } from '../../../config/form'
 import { ScopesSelect } from './scopes-select'
 

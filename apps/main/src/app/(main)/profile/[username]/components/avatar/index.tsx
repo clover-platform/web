@@ -1,3 +1,4 @@
+import { updateAvatar } from '@/rest/profile'
 import { CropperDialog } from '@clover/public/components/common/cropper/dialog'
 import { useStateLoader } from '@clover/public/components/layout/hooks/use.state.loader'
 import { useProfile } from '@clover/public/hooks'
@@ -8,7 +9,6 @@ import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { useParams } from 'next/navigation'
 import { type FC, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { updateAvatar } from './rest'
 
 export type AvatarProps = {
   src: string

@@ -3,6 +3,7 @@
 import { AppBreadcrumb } from '@/components/common/app-breadcrumb'
 import type { MainLayoutProps } from '@/components/layout/main'
 import { useCollectTeam } from '@/hooks/use.collect.team'
+import { type ListParams, addCollect, cancelCollect, deleteTeam, list } from '@/rest/team'
 import { MainPage } from '@clover/public/components/common/page'
 import { TabsTitle } from '@clover/public/components/common/tabs-title'
 import { TitleBar } from '@clover/public/components/common/title-bar'
@@ -17,7 +18,6 @@ import { useRouter, useSearchParams } from 'next/navigation'
 import { useCallback, useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { getColumns, getFilters, getRowActions, getTabs } from '../config/table'
-import { type ListParams, addCollect, cancelCollect, deleteTeam, list } from './rest'
 
 const initialParams = {
   keyword: '',

@@ -1,5 +1,12 @@
 'use client'
 
+import {
+  type EmailFormData,
+  type PasswordFormData,
+  getEmailFormSchema,
+  getPasswordFormSchema,
+} from '@/config/schema/login/reset-password'
+import { passwordReset, resetEmailCheck, sendResetEmailCode } from '@/rest/login/reset-password'
 import { EmailCodeInput } from '@clover/public/components/common/input/email-code'
 import { encrypt } from '@clover/public/utils/crypto'
 import { setToken } from '@clover/public/utils/token'
@@ -9,8 +16,6 @@ import { cloneDeep } from 'es-toolkit'
 import { useSearchParams } from 'next/navigation'
 import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { passwordReset, resetEmailCheck, sendResetEmailCode } from './rest'
-import { type EmailFormData, type PasswordFormData, getEmailFormSchema, getPasswordFormSchema } from './schema'
 
 const ResetPasswordPage = () => {
   const msg = useMessage()

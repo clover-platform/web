@@ -1,5 +1,6 @@
 import { Button, Card, useMessage } from '@easykit/design'
 import '@easykit/editor/style.css'
+import { updateReadme } from '@/rest/profile'
 import { useStateLoader } from '@clover/public/components/layout/hooks/use.state.loader'
 import { useProfile } from '@clover/public/hooks'
 import { Editor } from '@easykit/editor'
@@ -7,7 +8,6 @@ import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { useParams } from 'next/navigation'
 import { type FC, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { updateReadme } from './rest'
 
 export type EditCardProps = {
   readme?: string

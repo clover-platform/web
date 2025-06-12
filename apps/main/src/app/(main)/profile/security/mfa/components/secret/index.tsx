@@ -1,9 +1,9 @@
 import { OtpInfo } from '@/components/common/account/otp-info'
+import { otpSecret } from '@/rest/profile/security/mfa'
 import { FormItem } from '@easykit/design'
 import { useQuery } from '@tanstack/react-query'
 import type { FC, PropsWithChildren } from 'react'
 import { useTranslation } from 'react-i18next'
-import { otpSecret } from '../rest'
 
 export type SecretItemProps = PropsWithChildren
 

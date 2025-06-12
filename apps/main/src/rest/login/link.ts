@@ -1,6 +1,6 @@
+import type { OpenUser } from '@/types/login/link'
 import { get, post, resultWrapper } from '@clover/public/utils/rest'
 import type { Token } from '@clover/public/utils/token'
-import type { OpenUser } from './types'
 
 export type LinkCodeData = {
   type?: string

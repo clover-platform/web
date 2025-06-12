@@ -2,6 +2,7 @@
 
 import { ProfileBreadcrumbBase } from '@/components/common/breadcrumb/profile'
 import type { MainLayoutProps } from '@/components/layout/main'
+import { otpStatus } from '@/rest/profile/security/mfa'
 import { Page } from '@clover/public/components/common/page'
 import { TitleBar } from '@clover/public/components/common/title-bar'
 import { useLayoutConfig } from '@clover/public/components/layout/hooks/use.layout.config'
@@ -21,7 +22,6 @@ import Link from 'next/link'
 import { useTranslation } from 'react-i18next'
 import { DisableModal } from './disable-modal'
 import { EnableModal } from './enable-modal'
-import { otpStatus } from './rest'
 
 export const MFAPage = () => {
   const { t } = useTranslation()

@@ -1,3 +1,5 @@
+import { type PasswordFormData, getSchema } from '@/config/schema/security/password'
+import { change } from '@/rest/profile/security/password'
 import bus from '@clover/public/events'
 import { UNAUTHORIZED } from '@clover/public/events/auth'
 import { encrypt } from '@clover/public/utils/crypto'
@@ -7,8 +9,6 @@ import { cloneDeep } from 'es-toolkit'
 import { useCallback, useRef, useState } from 'react'
 import type { UseFormReturn } from 'react-hook-form'
 import { useTranslation } from 'react-i18next'
-import { change } from './rest'
-import { type PasswordFormData, getSchema } from './schema'
 
 export const Password = () => {
   const { t } = useTranslation()

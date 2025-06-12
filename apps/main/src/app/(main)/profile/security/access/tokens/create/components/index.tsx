@@ -2,6 +2,7 @@
 
 import { ProfileBreadcrumbBase } from '@/components/common/breadcrumb/profile'
 import type { MainLayoutProps } from '@/components/layout/main'
+import { create } from '@/rest/profile/security/access/tokens'
 import BackButton from '@clover/public/components/common/button/back'
 import { Page } from '@clover/public/components/common/page'
 import { TitleBar } from '@clover/public/components/common/title-bar'
@@ -21,7 +22,6 @@ import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { create } from '../../components/rest'
 import { AccessTokenForm } from './form'
 import { TokenDisplay } from './token-display'
 

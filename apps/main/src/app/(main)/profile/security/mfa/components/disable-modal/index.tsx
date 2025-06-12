@@ -1,3 +1,4 @@
+import { otpDisable } from '@/rest/profile/security/mfa'
 import { EmailCodeInput } from '@clover/public/components/common/input/email-code'
 import { type SendEmailCodeData, sendEmailCode } from '@clover/public/rest/common'
 import { accountInfoState } from '@clover/public/state/account'
@@ -9,7 +10,6 @@ import { useAtomValue } from 'jotai/index'
 import { type FC, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { object, string } from 'zod'
-import { otpDisable } from '../rest'
 
 const getSchema = () =>
   object({

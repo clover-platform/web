@@ -1,3 +1,4 @@
+import { type OTPBindData, otpBind } from '@/rest/profile/security/mfa'
 import { CodeInput } from '@clover/public/components/common/input/code'
 import { EmailCodeInput } from '@clover/public/components/common/input/email-code'
 import { type SendEmailCodeData, sendEmailCode } from '@clover/public/rest/common'
@@ -10,7 +11,6 @@ import { useAtomValue } from 'jotai'
 import { type FC, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { object, string } from 'zod'
-import { type OTPBindData, otpBind } from '../rest'
 import SecretItem from '../secret'
 
 const getSchema = () =>

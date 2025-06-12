@@ -1,3 +1,4 @@
+import { create } from '@/rest/project'
 import BackButton from '@clover/public/components/common/button/back'
 import { ImageCropper } from '@clover/public/components/common/cropper'
 import {TeamSelector} from "@clover/public/components/common/selector/team";
@@ -8,7 +9,6 @@ import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { useRouter } from 'next/navigation'
 import { useTranslation } from "react-i18next";
 import { getSchema } from '../../config/form'
-import { create } from '../rest'
 
 export const ProjectForm = () => {
   const router = useRouter();

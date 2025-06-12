@@ -1,6 +1,3 @@
-import type { z } from 'zod'
-import type { getSchema } from './schema'
-
 export type OpenUser = {
   id: number
   openId: string
@@ -11,5 +8,3 @@ export type OpenUser = {
   accessToken: string
   tokenType: string
 }
-
-export type LinkFormData = z.infer<ReturnType<typeof getSchema>>
