@@ -31,7 +31,7 @@ RUN npm install -g pm2 pnpm
 WORKDIR /app
 COPY ./ ./
 
-RUN pnpm install --force
+RUN pnpm install
 RUN pnpm build:${APP}
 
 USER nextjs
