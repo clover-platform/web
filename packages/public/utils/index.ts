@@ -1,4 +1,5 @@
-import {EMAIL, URL as URL_REG} from "./regular";
+import { EMAIL, URL as URL_REG } from './regular'
+const isProd = process.env.NODE_ENV === 'production'
 
 const langList = [
   {
@@ -18,7 +19,7 @@ const langList = [
   },
 ]
 
-const isServer = typeof window === 'undefined';
+const isServer = typeof window === 'undefined'
 
 const mobileRegex =
   /(Metalpha|Antalpha|phone|pad|pod|iPhone|iPod|ios|iPad|Android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i
@@ -30,36 +31,36 @@ const androidRegex = /(Android)/i
 const wechatRegex = /(micromessenger|wxwork)/i
 
 export const isEmail = (text: string) => {
-  return EMAIL.test(text);
+  return EMAIL.test(text)
 }
 
 export const isUrl = (text: string) => {
-  return URL_REG.test(text);
+  return URL_REG.test(text)
 }
 
 // 容错'0'
 export const failover = (v: string) => {
-  if (v === '0') return '';
-  return v;
+  if (v === '0') return ''
+  return v
 }
 
 function isMobile() {
-  if (isServer) return false;
+  if (isServer) return false
   return !!window.navigator.userAgent.match(mobileRegex)
 }
 
 function isIOS() {
-  if (isServer) return false;
+  if (isServer) return false
   return !!window.navigator.userAgent.match(iosRegex)
 }
 
 function isAndroid() {
-  if (isServer) return false;
+  if (isServer) return false
   return !!window.navigator.userAgent.match(androidRegex)
 }
 
 function isWeChat() {
-  if (isServer) return false;
+  if (isServer) return false
   return !!window.navigator.userAgent.match(wechatRegex)
 }
 
@@ -81,22 +82,22 @@ function uuid() {
 }
 
 function loadScript(id: string, url: string) {
-  return new Promise(resolve => {
+  return new Promise((resolve) => {
     // biome-ignore lint/suspicious/noExplicitAny: <explanation>
     let script = document.getElementById(id) as any
     if (!script) {
-      script = document.createElement('script');
-      script.id = id;
-      script.type = 'text/javascript';
-      script.src = url;
-      document.body.appendChild(script);
+      script = document.createElement('script')
+      script.id = id
+      script.type = 'text/javascript'
+      script.src = url
+      document.body.appendChild(script)
     }
     if (script.loaded) {
-      resolve(id);
-      return;
+      resolve(id)
+      return
     }
     if (script.readyState) {
-      const originEvent = script.onreadystatechange;
+      const originEvent = script.onreadystatechange
       // biome-ignore lint/suspicious/noExplicitAny: <explanation>
       script.onreadystatechange = function (event: any) {
         script.loaded = true
@@ -109,7 +110,7 @@ function loadScript(id: string, url: string) {
         }
       }
     } else {
-      const originEvent = script.onload;
+      const originEvent = script.onload
       // biome-ignore lint/suspicious/noExplicitAny: <explanation>
       script.onload = (event: any) => {
         script.loaded = true
@@ -120,11 +121,11 @@ function loadScript(id: string, url: string) {
         resolve(id)
       }
     }
-  });
+  })
 }
 
 function loadStyle(id: string, url: string) {
-  return new Promise(resolve => {
+  return new Promise((resolve) => {
     // biome-ignore lint/suspicious/noExplicitAny: <explanation>
     let link = document.getElementById(id) as any
     if (!link) {
@@ -148,7 +149,18 @@ function loadStyle(id: string, url: string) {
       link.loaded = true
       resolve(id)
     }
-  });
+  })
 }
 
-export { uuid, isServer, isMobile, loadScript, loadStyle, isIOS, isAndroid, isWeChat }
+function getRootDomain(hostname: string) {
+  if (!isProd) {
+    return undefined
+  }
+  const parts = hostname.split('.')
+  if (parts.length >= 2) {
+    return `.${parts.slice(-2).join('.')}`
+  }
+  return hostname
+}
+
+export { getRootDomain, uuid, isServer, isMobile, loadScript, loadStyle, isIOS, isAndroid, isWeChat }

@@ -1,5 +1,6 @@
 import {COOKIE_MAX_AGE} from "@clover/public/config/app";
 import { deleteCookie, getCookie, setCookie } from 'cookies-next'
+import { getRootDomain } from '.'
 
 export interface Token {
   token: string,
@@ -7,8 +8,9 @@ export interface Token {
 }
 
 export const setToken = (data: Token) => {
-  setCookie("token", JSON.stringify(data), {
+  setCookie('token', JSON.stringify(data), {
     maxAge: COOKIE_MAX_AGE,
+    domain: getRootDomain(window.location.hostname),
   })
 }
 
