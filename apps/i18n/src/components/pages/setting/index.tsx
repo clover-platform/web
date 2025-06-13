@@ -2,7 +2,7 @@
 
 import type { ModuleLayoutProps } from '@/components/layout/module'
 import { SettingTabsTitle } from "@/components/pages/setting/tabs-title";
-import { getInfoSchema } from '@/config/pages/module/form'
+import { getInfoSchema } from '@/config/schema/module'
 import { useModule } from '@/hooks/use.module'
 import { deleteModule, detail, update } from '@/rest/module'
 import type { BaseInfo, UpdateInfo } from '@/types/pages/module'
