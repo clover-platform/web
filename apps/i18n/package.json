@@ -5,8 +5,8 @@
   "type": "module",
   "scripts": {
     "dev": "next dev -p 3702 --turbopack",
-    "start": "next start -p 3702",
     "build": "next build --turbopack",
+    "start": "next start",
     "lint": "biome lint --config-path=biome.json",
     "i18n": "i18n-cli"
   },

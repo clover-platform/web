@@ -29,7 +29,8 @@
     "languagedetector",
     "jsencrypt",
     "tributejs",
-    "msgpackr"
+    "msgpackr",
+    "turbopack"
   ],
   "css.customData": [".vscode/tailwind.json"],
   "editor.codeActionsOnSave": {
