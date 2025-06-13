@@ -69,7 +69,7 @@ export const MultiLanguageSelect: FC<MultiLanguageSelectProps> = (props) => {
   )
 
   return (
-    <div className={classNames('relative', props.className)}>
+    <div className={classNames('relative overflow-hidden', props.className)}>
       <div className="flex items-start justify-start rounded-md border">
         <div className="flex h-96 flex-1 flex-col items-start justify-start border-r">
           <div className="w-full border-b p-2">

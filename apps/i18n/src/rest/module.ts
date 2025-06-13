@@ -1,3 +1,4 @@
+import type { ModuleFormData } from '@/config/schema/module'
 import type { BaseInfo, Language, Module, UpdateInfo } from '@/types/pages/module'
 import type { PageData } from '@clover/public/types/rest'
 import { del, get, post, put, resultWrapper } from '@clover/public/utils/rest'
@@ -17,8 +18,7 @@ export const all = (params: any) =>
   // biome-ignore lint/suspicious/noExplicitAny: <explanation>
   get<any, any>('@i18n/module/all', params)
 
-// biome-ignore lint/suspicious/noExplicitAny: <explanation>
-export const create = (data: any) => post<any, any>('@i18n/module/new', data)
+export const create = (data: ModuleFormData) => resultWrapper(post<unknown, ModuleFormData>('@i18n/module/new', data))
 
 // biome-ignore lint/suspicious/noExplicitAny: <explanation>
 export const dashboard = (path: string) => get<any, any>(`@i18n/${path}/dashboard`)

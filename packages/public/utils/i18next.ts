@@ -10,6 +10,8 @@ import enUSZod from 'zod-i18n-map/locales/en/zod.json'
 import zhCNZod from 'zod-i18n-map/locales/zh-CN/zod.json'
 import zhTWZod from 'zod-i18n-map/locales/zh-TW/zod.json'
 
+const languageDetector = new LanguageDetector()
+
 export type LangItem = {
   name: string
   locale: string
@@ -19,7 +21,7 @@ export type LangItem = {
 export const initI18next = (map: Record<string, any>) => {
   i18next
     .use(new ReactPostprocessor())
-    .use(LanguageDetector)
+    .use(languageDetector)
     .init({
       ns: ['zod', 'translation'],
       postProcess: ['reactPostprocessor'],
@@ -44,8 +46,17 @@ export const initI18next = (map: Record<string, any>) => {
         escapeValue: false,
       },
       detection: {
-        caches: ['localStorage', 'cookie'],
-        order: ['cookie', 'querystring', 'localStorage', 'sessionStorage', 'navigator', 'htmlTag', 'path', 'subdomain'],
+        caches: ['localStorage', 'cookieCrossDomain'],
+        order: [
+          'cookieCrossDomain',
+          'querystring',
+          'localStorage',
+          'sessionStorage',
+          'navigator',
+          'htmlTag',
+          'path',
+          'subdomain',
+        ],
       },
     })
     .then()

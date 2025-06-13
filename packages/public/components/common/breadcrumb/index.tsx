@@ -46,7 +46,7 @@ export const PublicAppBreadcrumb: FC<PublicAppBreadcrumbProps> = (props) => {
           <DropdownMenu>
             <DropdownMenuTrigger className="flex items-center gap-1">
               {loading ? (
-                <Skeleton className="h-5 w-20 bg-black/10 dark:bg-white/10" />
+                <Skeleton className="h-5 w-20 bg-black/8 dark:bg-white/10" />
               ) : (
                 <span className="flex items-center justify-center space-x-1">
                   <IconHome /> <span>{current}</span>

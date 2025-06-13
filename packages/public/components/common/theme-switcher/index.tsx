@@ -51,7 +51,7 @@ export type ThemeSwitcherProps = {
 export const ThemeSwitcher: FC<ThemeSwitcherProps> = (props) => {
   const [mounted, setMounted] = useState(false)
   const {theme, setTheme} = useTheme();
-  const {size = "md", activeClassName = "bg-secondary"} = props;
+  const { size = 'md', activeClassName = 'bg-black/8 dark:bg-white/10' } = props
 
   useEffect(() => {
     setMounted(true)

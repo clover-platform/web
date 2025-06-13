@@ -1,8 +1,8 @@
-'use client';
+'use client'
 
 import { AppBreadcrumb } from '@/components/common/app-breadcrumb'
 import type { MainLayoutProps } from '@/components/layout/main'
-import ModuleForm from '@/components/pages/module/form'
+import type { ModuleFormData } from '@/config/schema/module'
 import { create } from '@/rest/module'
 import BackButton from '@clover/public/components/common/button/back'
 import { MainPage } from '@clover/public/components/common/page'
@@ -18,30 +18,33 @@ import {
   Space,
   useMessage,
 } from '@easykit/design'
+import { useMutation, useQueryClient } from '@tanstack/react-query'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
-import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
+import ModuleForm from './form'
 
 export const CreateModulePage = () => {
   const { t } = useTranslation()
   useLayoutConfig<MainLayoutProps>({
     active: 'module',
   })
-  const [loading, setLoading] = useState(false)
   const msg = useMessage()
   const router = useRouter()
-
-  // biome-ignore lint/suspicious/noExplicitAny: <explanation>
-  const onSubmit = async (data: any) => {
-    setLoading(true)
-    const { success, message } = await create(data)
-    setLoading(false)
-    if (success) {
+  const queryClient = useQueryClient()
+  const { mutate: createModule, isPending } = useMutation({
+    mutationFn: create,
+    onSuccess: async () => {
+      await queryClient.invalidateQueries({ queryKey: ['module:list'] })
       router.push('/')
-    } else {
-      msg.error(message)
-    }
+    },
+    onError: (error) => {
+      msg.error(error.message)
+    },
+  })
+
+  const onSubmit = (data: ModuleFormData) => {
+    createModule(data)
   }
 
   return (
@@ -61,7 +64,7 @@ export const CreateModulePage = () => {
       <Card>
         <ModuleForm onSubmit={onSubmit}>
           <Space>
-            <Button loading={loading} type="submit">
+            <Button loading={isPending} type="submit">
               {t('提交')}
             </Button>
             <BackButton />
