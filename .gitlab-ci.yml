@@ -27,10 +27,6 @@ package-i18n:
     - /^i18n-.*$/
   tags:
     - dev
-  cache:
-    paths:
-      - apps/i18n/.next/cache/
-    policy: pull-push
   script:
     - docker login -u $DOCKER_USER --password $DOCKER_TOKEN $CI_REGISTRY
     - docker build -t $CI_REGISTRY/clover/web/i18n:$CI_PIPELINE_ID -f ./docker/i18n.Dockerfile .
@@ -46,10 +42,6 @@ package-admin:
     - /^admin-.*$/
   tags:
     - dev
-  cache:
-    paths:
-      - apps/admin/.next/cache/
-    policy: pull-push
   script:
     - docker login -u $DOCKER_USER --password $DOCKER_TOKEN $CI_REGISTRY
     - docker build -t $CI_REGISTRY/clover/web/admin:$CI_PIPELINE_ID -f ./docker/admin.Dockerfile .
@@ -65,10 +57,6 @@ package-wiki:
     - /^wiki-.*$/
   tags:
     - dev
-  cache:
-    paths:
-      - apps/wiki/.next/cache/
-    policy: pull-push
   script:
     - docker login -u $DOCKER_USER --password $DOCKER_TOKEN $CI_REGISTRY
     - docker build -t $CI_REGISTRY/clover/web/wiki:$CI_PIPELINE_ID -f ./docker/wiki.Dockerfile .
