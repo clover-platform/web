@@ -8,10 +8,6 @@ package-main:
     - /^main-.*$/
   tags:
     - dev
-  cache:
-    paths:
-      - apps/main/.next/cache/
-    policy: pull-push
   script:
     - docker login -u $DOCKER_USER --password $DOCKER_TOKEN $CI_REGISTRY
     - docker build -t $CI_REGISTRY/clover/web/main:$CI_PIPELINE_ID -f ./docker/main.Dockerfile .
