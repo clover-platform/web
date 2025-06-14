@@ -1,5 +1,5 @@
+import type { Branch, Language } from '@/types/module'
 import type { CountEntryData, Entry } from '@/types/pages/entry'
-import type { Branch, Language } from '@/types/pages/module'
 import { atom } from 'jotai'
 
 export const leftSideOpenState = atom(true)

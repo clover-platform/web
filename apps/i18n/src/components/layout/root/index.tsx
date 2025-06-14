@@ -7,9 +7,9 @@ import {
 import type { FC } from 'react'
 import "@/plugin/rest.client";
 import '@/plugin/locales'
-import {languagesState} from "@/state/public";
-import type { Language } from '@/types/pages/public'
+import { languagesState } from '@/state/public'
 import '@/plugin/rest.client'
+import type { Language } from '@/types/public'
 
 export type RootLayoutProps = PublicRootLayoutProps & {
   languages: Language[];

@@ -1,5 +1,5 @@
 import { LanguageIcon } from '@/components/common/language-icon'
-import type { LanguageWithCount } from '@/types/pages/public'
+import type { LanguageWithCount } from '@/types/public'
 import { Progress, TableCell, TableRow, Tooltip } from '@easykit/design'
 import type { FC, PropsWithChildren } from 'react'
 import { useTranslation } from 'react-i18next'

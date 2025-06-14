@@ -5,7 +5,7 @@ import { SettingTabsTitle } from "@/components/pages/setting/tabs-title";
 import { getInfoSchema } from '@/config/schema/module'
 import { useModule } from '@/hooks/use.module'
 import { deleteModule, detail, update } from '@/rest/module'
-import type { BaseInfo, UpdateInfo } from '@/types/pages/module'
+import type { BaseInfo, UpdateInfo } from '@/types/module'
 import { TitleBar } from "@clover/public/components/common/title-bar";
 import { useLayoutConfig } from '@clover/public/components/layout/hooks/use.layout.config'
 import {
@@ -41,14 +41,14 @@ export const ModuleSettingPage = () => {
   const { t } = useTranslation();
 
   const load = useCallback(async () => {
-    setLoading(true);
-    const { success, data } = await detail(m);
-    if (success) {
-      setInfo(data!);
-      setValues(data!);
-      setFormKey(Date.now());
-    }
-    setLoading(false);
+    setLoading(true)
+    const data = await detail(m)
+    // if (success) {
+    setInfo(data!)
+    setValues(data!)
+    setFormKey(Date.now())
+    // }
+    setLoading(false)
   }, [m]);
 
   useEffect(() => {

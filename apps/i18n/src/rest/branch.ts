@@ -1,5 +1,5 @@
 import type { BranchMergeOverview } from '@/types/pages/branch'
-import type { Branch } from '@/types/pages/module'
+import type { Branch } from '@/types/module'
 import { del, get, post, put } from '@clover/public/utils/rest'
 
 export type ListBranchQuery = {

@@ -5,7 +5,7 @@ import { InvitePageJoined } from "@/components/pages/invite/joined";
 import { InvitePageLoading } from '@/components/pages/invite/loading'
 import { InvitePageBody } from '@/components/pages/invite/page'
 import { detail as detailRest } from "@/rest/member.invite";
-import type { InviteDetail } from '@/types/pages/module'
+import type { InviteDetail } from '@/types/module'
 import { isLoginState } from "@clover/public/state/account";
 import { useAtom } from 'jotai'
 import { useSearchParams } from 'next/navigation'

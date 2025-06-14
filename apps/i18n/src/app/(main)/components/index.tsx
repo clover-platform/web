@@ -1,11 +1,11 @@
 'use client'
 
-import { AppBreadcrumb } from '@/components/common/app-breadcrumb'
+import { AppBreadcrumb } from '@/components/common/breadcrumb/app'
 import type { MainLayoutProps } from '@/components/layout/main'
 import { ROW_ACTIONS, getColumns, getFilters } from '@/config/pages/module/table'
 import { getTabs } from '@/config/pages/module/tabs'
 import { type ModuleListParams, list } from '@/rest/module'
-import type { Module } from '@/types/pages/module'
+import type { Module } from '@/types/module'
 import { MainPage } from '@clover/public/components/common/page'
 import { TabsTitle } from '@clover/public/components/common/tabs-title'
 import { TitleBar } from '@clover/public/components/common/title-bar'
@@ -75,16 +75,16 @@ export const ModulePage = () => {
             const { id } = original
             console.log(id)
             if (key === 'detail') {
-              router.push(`/i18n/${original.identifier}/dashboard`)
+              router.push(`/${original.identifier}/dashboard`)
             } else if (key === 'activity') {
-              router.push(`/i18n/${original.identifier}/activity`)
+              router.push(`/${original.identifier}/activity`)
             } else if (key === 'delete') {
               console.log(id)
             }
           }}
           onRowClick={(row) => {
             const { identifier } = row.original
-            router.push(`/i18n/${identifier}/dashboard`)
+            router.push(`/${identifier}/dashboard`)
           }}
         />
       </Card>

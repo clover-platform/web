@@ -1,18 +1,18 @@
-import type { Member } from '@/types/pages/module'
-import { Avatar, Badge } from "@easykit/design";
+import type { Member } from '@/types/module'
+import { Avatar, Badge } from '@easykit/design'
 import type { FC } from 'react'
-import { useTranslation } from "react-i18next";
+import { useTranslation } from 'react-i18next'
 
-export type MemberItemProps = {} & Member;
+export type MemberItemProps = {} & Member
 
 export const MemberItem: FC<MemberItemProps> = (props) => {
-  const { t } = useTranslation();
+  const { t } = useTranslation()
   const TYPE_MAP: Record<number, string> = {
-    2: t("所有者"),
-    1: t("管理员"),
+    2: t('所有者'),
+    1: t('管理员'),
   }
 
-  const { user, roles } = props;
+  const { user, roles } = props
   return (
     <div className="flex items-center justify-start">
       <Avatar

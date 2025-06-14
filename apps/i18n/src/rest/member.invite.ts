@@ -1,5 +1,5 @@
 import type { MemberInvite } from '@/types/pages/member'
-import type { InviteDetail } from '@/types/pages/module'
+import type { InviteDetail } from '@/types/module'
 import { del, get, post } from '@clover/public/utils/rest'
 
 export type InviteGenerateData = {

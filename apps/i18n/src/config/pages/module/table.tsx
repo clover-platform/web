@@ -1,4 +1,4 @@
-import type { Module } from '@/types/pages/module'
+import type { Module } from '@/types/module'
 import type { Account } from '@clover/public/types/account'
 import { i18n, t } from '@clover/public/utils/locale.client'
 import type { DataTableColumn } from '@easykit/design'

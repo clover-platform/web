@@ -1,11 +1,10 @@
-import {getToken} from "@clover/public/utils/token";
-import i18next from "i18next";
+import { getToken } from '@clover/public/utils/token'
 import { cookies } from 'next/headers'
+import { getLocale } from './locale.server'
 
 export const get = async () => {
-  // biome-ignore lint/suspicious/noExplicitAny: <explanation>
-  const headers: any = {
-    'Accept-Language': i18next.language,
+  const headers: Record<string, unknown> = {
+    'Accept-Language': await getLocale(),
     'CLIENT-PLATFORM-TYPE': 'SSR',
     'CLIENT-BUNDLE-ID': '',
     'CLIENT-DEVICE-MODEL': '',

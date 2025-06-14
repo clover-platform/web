@@ -1,19 +1,12 @@
+import { Module } from '@/components/common/header/module'
+import { NavItem, type NavItemConfig } from '@/components/common/header/nav-item'
 import { t } from '@clover/public/utils/locale.client'
-import { Action, DropdownMenu, DropdownMenuTrigger } from '@easykit/design'
-import { ChevronDownIcon } from '@radix-ui/react-icons'
+import { Action } from '@easykit/design'
 import Link from 'next/link'
-import { type FC, type ReactNode, useMemo, useState } from 'react'
-import { Module } from './module'
+import { type FC, useMemo } from 'react'
 
 export type HeaderProps = {
   active?: string
-}
-
-export type NavItemConfig = {
-  id: string
-  title: string
-  component?: ReactNode
-  href?: string
 }
 
 export const getNavs = (): NavItemConfig[] => {
@@ -24,29 +17,6 @@ export const getNavs = (): NavItemConfig[] => {
       component: <Module />,
     },
   ]
-}
-
-export type NavItemProps = {
-  config: NavItemConfig
-  active?: string
-}
-
-export const NavItem: FC<NavItemProps> = (props) => {
-  const { config, active } = props
-  const [open, setOpen] = useState(false)
-  return (
-    <li>
-      <DropdownMenu open={open} onOpenChange={setOpen}>
-        <DropdownMenuTrigger asChild>
-          <Action className="!py-1 !outline-none space-x-1" active={config.id === active}>
-            <span>{config.title}</span>
-            <ChevronDownIcon className={open ? 'rotate-180' : ''} />
-          </Action>
-        </DropdownMenuTrigger>
-        <div onClick={() => setOpen(false)}>{config.component}</div>
-      </DropdownMenu>
-    </li>
-  )
 }
 
 export const Header: FC<HeaderProps> = (props) => {

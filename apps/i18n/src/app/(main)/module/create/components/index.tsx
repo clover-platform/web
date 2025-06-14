@@ -1,6 +1,6 @@
 'use client'
 
-import { AppBreadcrumb } from '@/components/common/app-breadcrumb'
+import { AppBreadcrumb } from '@/components/common/breadcrumb/app'
 import type { MainLayoutProps } from '@/components/layout/main'
 import type { ModuleFormData } from '@/config/schema/module'
 import { create } from '@/rest/module'

@@ -1,7 +1,7 @@
 import { LanguageIcon } from '@/components/common/language-icon'
 import { MemberRole } from "@/components/pages/member/role";
 import { accept } from "@/rest/member.invite";
-import type { InviteDetail } from '@/types/pages/module'
+import type { InviteDetail } from '@/types/module'
 import { Button, useMessage } from '@easykit/design'
 import { useRouter, useSearchParams } from "next/navigation";
 import { type FC, useState } from 'react'
