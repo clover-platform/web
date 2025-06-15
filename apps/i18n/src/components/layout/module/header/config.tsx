@@ -6,9 +6,9 @@ export const getNavs = () => {
       href: 'dashboard',
     },
     {
-      id: 'branch',
-      title: '分支',
-      href: 'branch',
+      id: 'files',
+      title: '文件',
+      href: 'files',
     },
     {
       id: 'download',

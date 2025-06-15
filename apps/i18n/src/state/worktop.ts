@@ -1,4 +1,5 @@
-import type { Branch, Language } from '@/types/module'
+import type { Language } from '@/types/module'
+import type { Branch } from '@/types/pages/branch'
 import type { CountEntryData, Entry } from '@/types/pages/entry'
 import { atom } from 'jotai'
 

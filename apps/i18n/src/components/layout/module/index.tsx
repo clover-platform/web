@@ -22,7 +22,7 @@ export const ModuleLayout: FC<ModuleLayoutProps> = (origin) => {
   const [_, setBaseInfo] = useModuleInfo()
 
   const { data, isFetched } = useQuery({
-    queryKey: ['baseInfo', module],
+    queryKey: ['module:base:info', module],
     queryFn: ({ queryKey }) => detail(queryKey[1] as string),
   })
 

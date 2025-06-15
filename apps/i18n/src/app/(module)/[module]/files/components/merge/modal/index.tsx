@@ -39,7 +39,7 @@ export const MergeBranchModal: FC<MergeBranchModalProps> = (props) => {
     const { success, data } = await mergeOverview(module as string, branch.id)
     setLoading(false)
     if (success) setOverview(data)
-  }, [module, branch.id])
+  }, [module, branch?.id])
 
   useEffect(() => {
     if (props.visible) {
@@ -62,7 +62,7 @@ export const MergeBranchModal: FC<MergeBranchModalProps> = (props) => {
     } else {
       msg.error(message)
     }
-  }, [branch.id, module, deleteAfterMerge, onSuccess, msg])
+  }, [branch?.id, module, deleteAfterMerge, onSuccess, msg])
 
   return (
     <Dialog {...props} title={t('合并分支')} maskClosable={false}>

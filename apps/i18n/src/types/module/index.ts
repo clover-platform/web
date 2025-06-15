@@ -38,11 +38,6 @@ export type Member = {
 
 export type Language = LanguageType
 
-export type Branch = {
-  name: string
-  id: number
-}
-
 export type InviteDetail = {
   identifier: string
   name: string

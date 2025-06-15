@@ -1,29 +1,29 @@
-import { ModuleBranchForm } from "@/components/pages/branch/form";
 import { type CreateBranchData, create } from '@/rest/branch'
 import { Button, Dialog, type DialogProps, Space, useMessage } from '@easykit/design'
-import { useParams } from "next/navigation";
+import { useParams } from 'next/navigation'
 import { type FC, useState } from 'react'
-import { useTranslation } from "react-i18next";
+import { useTranslation } from 'react-i18next'
+import { ModuleBranchForm } from '../../form'
 
 export type NewBranchModalProps = {
-  onSuccess?: () => void;
-} & DialogProps;
+  onSuccess?: () => void
+} & DialogProps
 
 export const NewBranchModal: FC<NewBranchModalProps> = (props) => {
-  const { module } = useParams();
-  const [loading, setLoading] = useState(false);
-  const msg = useMessage();
-  const { t } = useTranslation();
+  const { module } = useParams()
+  const [loading, setLoading] = useState(false)
+  const msg = useMessage()
+  const { t } = useTranslation()
 
   const onSubmit = async (data: CreateBranchData) => {
     setLoading(true)
-    data.module = module as string;
-    const { success, message } = await create(data);
-    setLoading(false);
+    data.module = module as string
+    const { success, message } = await create(data)
+    setLoading(false)
     if (success) {
-      props.onSuccess?.();
+      props.onSuccess?.()
     } else {
-      msg.error(message);
+      msg.error(message)
     }
   }
 

@@ -9,7 +9,7 @@ export type ListQueryOptions<T, P> = {
   params?: P
   withURL?: boolean
   encodeParams?: string[]
-  action: (params: P) => Promise<PageData<T> | undefined>
+  action: (params: P) => Promise<PageData<T> | T[] | undefined>
 }
 
 export type ListQueryPagination = {
@@ -23,7 +23,7 @@ export type ListQueryResult<T> = {
   data: T[]
   load: (params?: unknown) => Promise<unknown> | unknown
   pagination: ListQueryPagination
-  refetch: (options?: RefetchOptions) => Promise<QueryObserverResult<PageData<T> | undefined, Error>>
+  refetch: (options?: RefetchOptions) => Promise<QueryObserverResult<PageData<T> | T[] | undefined, Error>>
   query: Record<string, unknown>
 }
 
@@ -114,7 +114,7 @@ export const useListQuery = <T, P extends Record<string, unknown> = Record<strin
 
   const pagination = useMemo<ListQueryPagination>(() => {
     return {
-      total: data?.total || 0,
+      total: Array.isArray(data) ? data.length : data?.total || 0,
       page: (queryKeyParams?.page as number) || 1,
       size: (queryKeyParams?.size as number) || 10,
     }
@@ -123,7 +123,7 @@ export const useListQuery = <T, P extends Record<string, unknown> = Record<strin
   return {
     loading: isLoading,
     load,
-    data: data?.data || [],
+    data: Array.isArray(data) ? data : data?.data || [],
     pagination,
     refetch,
     query: queryKeyParams,

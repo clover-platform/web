@@ -1,14 +1,13 @@
-import type { BranchMergeOverview } from '@/types/pages/branch'
-import type { Branch } from '@/types/module'
-import { del, get, post, put } from '@clover/public/utils/rest'
+import type { Branch, BranchMergeOverview } from '@/types/pages/branch'
+import { del, get, post, put, resultWrapper } from '@clover/public/utils/rest'
 
 export type ListBranchQuery = {
-  module: string
+  module?: string
   keyword?: string
 }
 
 export const list = (params: ListBranchQuery) =>
-  get<Branch[], ListBranchQuery>(`@i18n/${params.module}/branch/list`, params)
+  resultWrapper(get<Branch[], ListBranchQuery>(`@i18n/${params.module}/branch/list`, params))
 
 export const all = (module: string) => get<Branch[], undefined>(`@i18n/${module}/branch/all`)
 
