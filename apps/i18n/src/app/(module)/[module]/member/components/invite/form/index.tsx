@@ -1,16 +1,13 @@
-import { getSchema } from '@/config/schema/module/member'
-import type { MemberInviteRequest } from '@/types/module/member'
+import { type MemberInviteFormData, getSchema } from '@/config/schema/module/member'
 import { Form, FormItem, Textarea } from '@easykit/design'
 import type { FC, PropsWithChildren } from 'react'
 import { useTranslation } from 'react-i18next'
 import { RoleSelect } from './role-select'
 
 export type MemberInviteFormProps = PropsWithChildren<{
-  // biome-ignore lint/suspicious/noExplicitAny: <explanation>
-  onSubmit?: (data: any) => void
-  // biome-ignore lint/suspicious/noExplicitAny: <explanation>
-  defaultValues?: any
-  onValuesChange?: (values: MemberInviteRequest) => void
+  onSubmit?: (data: MemberInviteFormData) => void
+  defaultValues?: MemberInviteFormData
+  onValuesChange?: (values: MemberInviteFormData) => void
 }>
 
 export const MemberInviteForm: FC<MemberInviteFormProps> = (props) => {
@@ -22,11 +19,11 @@ export const MemberInviteForm: FC<MemberInviteFormProps> = (props) => {
   const { t } = useTranslation()
 
   return (
-    <Form
+    <Form<MemberInviteFormData>
       schema={getSchema()}
       onSubmit={props.onSubmit}
       defaultValues={defaultValues}
-      onValuesChange={(e) => props.onValuesChange?.(e as MemberInviteRequest)}
+      onValuesChange={(e) => props.onValuesChange?.(e as MemberInviteFormData)}
     >
       <FormItem name="roles" label={t('角色')}>
         <RoleSelect />

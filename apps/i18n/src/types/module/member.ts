@@ -8,16 +8,10 @@ export type Member = {
 }
 
 export type MemberInvite = {
-  id: number;
-  moduleId: number;
-  roles: string[];
-  createTime: Date;
-  token: string;
-  creatorId: number;
-}
-
-export type MemberInviteRequest = {
+  id: number
+  moduleId: number
   roles: string[]
-  emails: string
-  content: string
+  createTime: Date
+  token: string
+  creatorId: number
 }

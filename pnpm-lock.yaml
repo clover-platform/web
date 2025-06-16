@@ -36,8 +36,8 @@ importers:
         specifier: workspace:*
         version: link:packages/public
       '@easykit/design':
-        specifier: 0.0.118
-        version: 0.0.118(@types/react-dom@19.1.2(@types/react@19.1.2))(@types/react@19.1.2)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
+        specifier: 0.0.120
+        version: 0.0.120(@types/react-dom@19.1.2(@types/react@19.1.2))(@types/react@19.1.2)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
       '@easykit/editor':
         specifier: 0.0.25
         version: 0.0.25(@babel/core@7.26.10)(@types/react-dom@19.1.2(@types/react@19.1.2))(@types/react@19.1.2)(highlight.js@11.9.0)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
@@ -509,8 +509,8 @@ packages:
     resolution: {integrity: sha512-Pqwr3+Doby9fH0FECbGJLo997heWop7QDnklbRM9gPM+dHVdRN8SzOXiCp0RyAhN01OPgFIP3+w7xsHXfptIsw==}
     engines: {node: '>=12.9.0'}
 
-  '@easykit/design@0.0.118':
-    resolution: {integrity: sha512-lko6mY9JZ77ZLQfHuLJOnX/uv/fFxWA7v2n9kEzU0PTOH2QD/Oj0MRImX6x2UlbmvKV6OSe0Dj8ykV7SBUMT7w==}
+  '@easykit/design@0.0.120':
+    resolution: {integrity: sha512-E/duyNcx+pwSxjoFW3yxS3rJ2hpeSvfkMF1ulrOEWyz9qg2G3IOlxM+TOO/XZ9La/o0nM4Iy8IEan9V8oO8yGg==}
 
   '@easykit/editor@0.0.25':
     resolution: {integrity: sha512-+kIUspaFEV3on+Mh8y2wzyTyeVD0LTtSCpm3uARS0kqzD5lFaFI2OTIWwcOaBnxKFMS56STgp38YocwZuLPGyg==}
@@ -3304,7 +3304,7 @@ packages:
     engines: {node: '>=10.13.0'}
 
   fs.realpath@1.0.0:
-    resolution: {integrity: sha512-OO0pH2lK6a0hZnAdau5ItzHPI6pUlvI7jMVnxUQRtw4owF2wk8lOSabtGDCTP4Ggrg2MbGnWO9X8K1t4+fGMDw==}
+    resolution: {integrity: sha1-FQStJSMVjKpA20onh8sBQRmU6k8=}
 
   fsevents@2.3.3:
     resolution: {integrity: sha512-5xoDfX+fL7faATnagmWPpbFtwh/R77WmMMqqHGS65C3vvB0YHrgF+B1YmZ3441tMj5n63k0212XNoJwzlhffQw==}
@@ -3544,7 +3544,7 @@ packages:
     engines: {node: '>= 0.4'}
 
   is-arrayish@0.2.1:
-    resolution: {integrity: sha512-zz06S8t0ozoDXMG+ube26zeCTNXcKIPJZJi8hBrF4idCLms4CG9QtK7qBl1boi5ODzFpjswb5JPmHCbMpjaYzg==}
+    resolution: {integrity: sha1-d8mYQFJ6qOyxqLppe4BkWnqSap0=}
 
   is-arrayish@0.3.2:
     resolution: {integrity: sha512-eVRqCvVlZbuw3GrM63ovNSNAeA1K16kaR/LRY/92w0zxQ5/1YzwblUX652i4Xs9RwAGjW9d9y6X88t8OaAJfWQ==}
@@ -4067,7 +4067,7 @@ packages:
     engines: {node: '>=8'}
 
   path-is-absolute@1.0.1:
-    resolution: {integrity: sha1-F0uSaHNVNP+8es5r9TpanhtcX18=}
+    resolution: {integrity: sha512-AVbw3UJ2e9bq64vSaS9Am0fje1Pa8pbGqTTsmXfaIiMpnr5DlDhfJOuLj9Sf95ZPVDAUerDfEk88MPmPe7UCQg==}
     engines: {node: '>=0.10.0'}
 
   path-key@3.1.1:
@@ -5333,7 +5333,7 @@ snapshots:
     transitivePeerDependencies:
       - debug
 
-  '@easykit/design@0.0.118(@types/react-dom@19.1.2(@types/react@19.1.2))(@types/react@19.1.2)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)':
+  '@easykit/design@0.0.120(@types/react-dom@19.1.2(@types/react@19.1.2))(@types/react@19.1.2)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)':
     dependencies:
       '@arco-iconbox/react-atom-ui': 0.0.4
       '@emotion/react': 11.11.4(@types/react@19.1.2)(react@19.1.0)

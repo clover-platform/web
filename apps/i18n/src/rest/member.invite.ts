@@ -1,6 +1,7 @@
+import type { MemberInviteFormData } from '@/config/schema/module/member'
 import type { InviteDetail } from '@/types/module'
 import type { MemberInvite } from '@/types/module/member'
-import { del, get, post } from '@clover/public/utils/rest'
+import { del, get, post, resultWrapper } from '@clover/public/utils/rest'
 
 export type InviteGenerateData = {
   module: string
@@ -8,29 +9,28 @@ export type InviteGenerateData = {
 }
 
 export const generate = (data: InviteGenerateData) =>
-  post<string, InviteGenerateData>(`@i18n/${data.module}/member/invite/generate`, data)
+  resultWrapper(post<string, InviteGenerateData>(`@i18n/${data.module}/member/invite/generate`, data))
 
 export type InviteGenerateParams = {
   module: string
 }
 
-export const list = (params: InviteGenerateParams) =>
-  get<MemberInvite[], InviteGenerateParams>(`@i18n/${params.module}/member/invite/list`, params)
+export const list = (module: string) =>
+  resultWrapper(get<MemberInvite[], unknown>(`@i18n/${module}/member/invite/list`))
 
-export const revoke = (params: { module: string; id: number }) =>
-  // biome-ignore lint/suspicious/noExplicitAny: <explanation>
-  del<any, any>(`@i18n/${params.module}/member/invite/revoke`, params)
+export type RevokeInviteParams = {
+  module: string
+  id: number
+}
+export const revoke = (params: RevokeInviteParams) =>
+  resultWrapper(del<unknown, RevokeInviteParams>(`@i18n/${params.module}/member/invite/revoke`, params))
 
 export type MemberInviteData = {
   module: string
-  roles: string[]
-  emails: string
-  content: string
-}
+} & MemberInviteFormData
 
 export const send = (data: MemberInviteData) =>
-  // biome-ignore lint/suspicious/noExplicitAny: <explanation>
-  post<any, MemberInviteData>(`@i18n/${data.module}/member/invite/send`, data)
+  resultWrapper(post<unknown, MemberInviteData>(`@i18n/${data.module}/member/invite/send`, data))
 
 export type AcceptInviteData = {
   token: string

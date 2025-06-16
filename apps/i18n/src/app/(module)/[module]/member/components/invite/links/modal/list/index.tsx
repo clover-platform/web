@@ -1,8 +1,8 @@
 import { useModule } from '@/hooks/use.module'
 import { list } from '@/rest/member.invite'
-import type { MemberInvite } from '@/types/module/member'
 import { Dialog, type DialogProps, Empty, ScrollArea } from '@easykit/design'
-import { type FC, useCallback, useEffect, useState } from 'react'
+import { useQuery } from '@tanstack/react-query'
+import { type FC, useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
 import { InviteLinkItem } from './item'
 import { InviteLinkItemLoading } from './item/loading'
@@ -10,32 +10,27 @@ import { InviteLinkItemLoading } from './item/loading'
 export type InviteLinkListModalProps = {} & DialogProps
 
 export const InviteLinkListModal: FC<InviteLinkListModalProps> = (props) => {
-  const [loading, setLoading] = useState(false)
   const m = useModule()
-  const [listData, setListData] = useState<MemberInvite[]>([])
   const { t } = useTranslation()
+  const {
+    data,
+    isLoading: loading,
+    refetch,
+  } = useQuery({
+    queryKey: ['member:invite:list', m],
+    queryFn: ({ queryKey }) => list(queryKey[1] as string),
+    enabled: props.visible,
+  })
 
-  const load = useCallback(async () => {
-    setLoading(true)
-    const { success, data } = await list({
-      module: m,
-    })
-    setLoading(false)
-    if (success) {
-      setListData(data!)
+  const listData = useMemo(() => {
+    if (loading) {
+      return []
     }
-  }, [m])
-
-  useEffect(() => {
-    if (props.visible) {
-      load().then()
-    } else {
-      setListData([])
-    }
-  }, [load, props.visible])
+    return data || []
+  }, [loading, data])
 
   const onRevoke = () => {
-    load().then()
+    refetch().then()
   }
 
   return (

@@ -1,6 +1,6 @@
 import { isEmail } from '@clover/public/utils'
 import { t } from '@clover/public/utils/locale.client'
-import { array, object, string } from 'zod'
+import { array, object, string, type z } from 'zod'
 
 export const getSchema = () =>
   object({
@@ -19,3 +19,5 @@ export const getSchema = () =>
       })
     }
   })
+
+export type MemberInviteFormData = z.infer<ReturnType<typeof getSchema>>

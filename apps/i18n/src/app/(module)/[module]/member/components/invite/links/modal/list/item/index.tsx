@@ -5,6 +5,7 @@ import { IconDelete } from '@arco-iconbox/react-clover'
 import { Action } from '@clover/public/components/common/action'
 import { Tooltip, ValueFormatter, useAlert, useMessage } from '@easykit/design'
 import { CopyIcon } from '@radix-ui/react-icons'
+import { useMutation } from '@tanstack/react-query'
 import copy from 'copy-to-clipboard'
 import type { FC } from 'react'
 import { useTranslation } from 'react-i18next'
@@ -22,23 +23,28 @@ export const InviteLinkItem: FC<InviteLinkItemProps> = (props) => {
   const msg = useMessage()
   const alert = useAlert()
   const { t } = useTranslation()
+  const { mutateAsync } = useMutation({
+    mutationFn: () =>
+      revoke({
+        module: m,
+        id: item.id,
+      }),
+    onSuccess: () => {
+      msg.success(t('撤销成功'))
+      props.onRevoke?.()
+    },
+    onError: (error) => {
+      msg.error(error.message)
+    },
+  })
 
   const doRevoke = () => {
     alert.confirm({
       title: t('确认撤销'),
       description: t('撤销后，该邀请链接将失效，是否继续？'),
       onOk: async () => {
-        const { success, message } = await revoke({
-          module: m,
-          id: item.id,
-        })
-        if (success) {
-          msg.success(t('撤销成功'))
-          props.onRevoke?.()
-        } else {
-          msg.error(message)
-        }
-        return success
+        await mutateAsync()
+        return true
       },
     })
   }
