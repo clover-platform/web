@@ -1,9 +1,9 @@
-import {keywords, title} from "@clover/public/utils/seo";
 import {EditPage} from "@/components/pages/book/page/edit";
+import { detail } from '@/rest/page'
+import {} from '@/types/module/page'
 import { t } from '@clover/public/locale';
-import {PageProps, PromisePageProps} from "@/types/pages/page";
-import {detail} from "@/rest/page";
-import {Metadata} from "next";
+import { keywords, title } from '@clover/public/utils/seo'
+import type { Metadata } from 'next'
 
 export async function generateMetadata(props: PromisePageProps): Promise<Metadata> {
     const {bookPath, pageId} = await props.params;

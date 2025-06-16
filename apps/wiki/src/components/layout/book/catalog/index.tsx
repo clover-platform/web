@@ -1,23 +1,23 @@
-import {useCallback, useEffect, useMemo, useRef, useState, useImperativeHandle, FC, Ref} from "react";
-import {changeCatalogParent} from "@/rest/page";
-import {useParams} from "next/navigation";
-import {Catalog} from "@/types/pages/book";
-import {TreeData, Tree} from "@easykit/design";
+import { CatalogLoading } from '@/components/layout/book/catalog/loading'
 import {
-  updateItem,
+  type UpdateData,
   addChild,
+  allParent,
+  getAllExpandedKeys,
   moveToAfter,
   moveToChild,
   toTreeItemProps,
-  allParent,
-  UpdateData,
-  getAllExpandedKeys
-} from "@/components/layout/book/catalog/utils";
-import {useMessage} from "@easykit/design";
-import bus from "@clover/public/events";
+  updateItem,
+} from '@/components/layout/book/catalog/utils'
 import {ADD_PAGE, UPDATE_COLLECTED, UPDATE_TITLE} from "@/events/book";
-import { uniq, cloneDeep } from "es-toolkit";
-import {CatalogLoading} from "@/components/layout/book/catalog/loading";
+import { changeCatalogParent } from '@/rest/page'
+import type { Catalog } from '@/types/module/book'
+import bus from '@clover/public/events'
+import { Tree, type TreeData } from '@easykit/design'
+import { useMessage } from '@easykit/design'
+import { cloneDeep, uniq } from 'es-toolkit'
+import { useParams } from 'next/navigation'
+import { type FC, type Ref, useCallback, useEffect, useImperativeHandle, useMemo, useRef, useState } from 'react'
 import "./style.css";
 import {useCatalogLoader} from "@/hooks/use.catalog.loader";
 

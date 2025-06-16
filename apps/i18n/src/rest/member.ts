@@ -1,10 +1,12 @@
-import { get } from "@clover/public/utils/rest";
+import type { Member } from '@/types/module/member'
+import type { PageData } from '@clover/public/types/rest'
+import { get, resultWrapper } from '@clover/public/utils/rest'
 
 export type MemberQuery = {
-  module: string;
-  keyword?: string;
-  type: string;
+  module?: string
+  keyword?: string
+  type: string
 }
 
-// biome-ignore lint/suspicious/noExplicitAny: <explanation>
-export const list = (params: MemberQuery) => get<any, MemberQuery>(`@i18n/${params.module}/member/list`, params)
+export const list = (params: MemberQuery) =>
+  resultWrapper(get<PageData<Member>, MemberQuery>(`@i18n/${params.module}/member/list`, params))

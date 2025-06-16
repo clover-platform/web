@@ -1,4 +1,4 @@
-import type { ActivityQueryParams, ActivityResult } from '@/types/pages/activity'
+import type { ActivityQueryParams, ActivityResult } from '@/types/module/activity'
 import type { PageData } from '@clover/public/types/rest'
 import { get } from '@clover/public/utils/rest'
 

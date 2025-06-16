@@ -1,4 +1,4 @@
-import type { Branch } from '@/types/pages/branch'
+import type { Branch } from '@/types/module/branch'
 import { t } from '@clover/public/utils/locale.client'
 import type { DataTableColumn } from '@easykit/design'
 import { Badge, type DropdownMenuItemProps, type FilterItemProps, Input } from '@easykit/design'

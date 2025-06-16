@@ -1,4 +1,4 @@
-import { getSchema } from '@/config/pages/bundle/form'
+import { type BundleFormData, getSchema } from '@/config/schema/module/bundle'
 import { Checkbox, Form, FormItem, Input } from '@easykit/design'
 import type { FC, PropsWithChildren } from 'react'
 import { useTranslation } from 'react-i18next'
@@ -6,10 +6,8 @@ import { BranchPattern } from './branch-pattern'
 import { ExportFormat } from './export-format'
 
 export type BundleFormProps = PropsWithChildren<{
-  // biome-ignore lint/suspicious/noExplicitAny: <explanation>
-  onSubmit?: (data: any) => void
-  // biome-ignore lint/suspicious/noExplicitAny: <explanation>
-  defaultValues?: any
+  onSubmit?: (data: BundleFormData) => void
+  defaultValues?: BundleFormData
 }>
 
 export const BundleForm: FC<BundleFormProps> = (props) => {
@@ -17,7 +15,7 @@ export const BundleForm: FC<BundleFormProps> = (props) => {
   const { t } = useTranslation()
 
   return (
-    <Form schema={getSchema()} onSubmit={props.onSubmit} defaultValues={defaultValues}>
+    <Form<BundleFormData> schema={getSchema()} onSubmit={props.onSubmit} defaultValues={defaultValues}>
       <FormItem name="name" label={t('文件名')}>
         <Input placeholder={t('请输入文件名')} />
       </FormItem>

@@ -13,7 +13,7 @@ import {
   entriesState,
   languagesState,
 } from '@/state/worktop'
-import type { Entry } from '@/types/pages/entry'
+import type { Entry } from '@/types/module/entry'
 import { useAtom } from 'jotai'
 import { useParams, useRouter, useSearchParams } from 'next/navigation'
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'

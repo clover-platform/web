@@ -1,5 +1,5 @@
-import {atom} from "jotai";
-import {Catalog} from "@/types/pages/book";
+import type { Catalog } from '@/types/module/book'
+import { atom } from 'jotai'
 
 export const catalogLoadingState = atom<string[]>([])
 

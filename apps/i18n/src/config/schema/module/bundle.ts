@@ -1,6 +1,6 @@
 import type { ExportFormatValue } from '@/app/(module)/[module]/bundle/add/components/form/export-format'
 import { t } from '@clover/public/utils/locale.client'
-import { any, array, boolean, object, string } from 'zod'
+import { any, array, boolean, object, string, type z } from 'zod'
 
 const NAME_REGEX = /^[a-z0-9][0-9a-z.-]*$/
 
@@ -41,3 +41,5 @@ export const getSchema = () =>
       }
     }
   })
+
+export type BundleFormData = z.infer<ReturnType<typeof getSchema>>

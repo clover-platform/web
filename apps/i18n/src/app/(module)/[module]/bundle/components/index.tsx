@@ -3,7 +3,7 @@
 import { ModuleBreadcrumb } from '@/components/common/breadcrumb/module'
 import type { ModuleLayoutProps } from '@/components/layout/module'
 import { type BundleQuery, list } from '@/rest/bundle'
-import type { Bundle } from '@/types/pages/bundle'
+import type { Bundle } from '@/types/module/bundle'
 import { IconAdd } from '@arco-iconbox/react-clover'
 import { MainPage } from '@clover/public/components/common/page'
 import { TitleBar } from '@clover/public/components/common/title-bar'
@@ -34,13 +34,13 @@ export const BundlePage = () => {
       <Link href={`/${module}/bundle/add`}>
         <Button variant="outline" type="button">
           <IconAdd />
-          <span>{t('添加文件')}</span>
+          <span>{t('添加产物')}</span>
         </Button>
       </Link>
     </div>
   )
 
-  const title = t('下载')
+  const title = t('产物')
 
   return (
     <MainPage>

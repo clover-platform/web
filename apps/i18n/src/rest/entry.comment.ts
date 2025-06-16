@@ -1,4 +1,4 @@
-import type { EntryComment } from '@/types/pages/entry'
+import type { EntryComment } from '@/types/module/entry'
 import { del, get, post } from '@clover/public/utils/rest'
 
 export type AddCommentData = {

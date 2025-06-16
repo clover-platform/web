@@ -1,6 +1,6 @@
 import { getSchema } from '@/config/schema/module/branch.rename'
 import { rename } from "@/rest/branch";
-import type { Branch } from '@/types/pages/branch'
+import type { Branch } from '@/types/module/branch'
 import { Button, Dialog, type DialogProps, Form, FormItem, Input, Space, useMessage } from '@easykit/design'
 import { useParams } from "next/navigation";
 import { type FC, useState } from 'react'

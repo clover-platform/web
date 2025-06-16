@@ -1,9 +1,9 @@
-import {TreeData, TreeSelect, TreeSelectProps} from "@easykit/design";
-import {FC, useMemo} from "react";
 import {useCatalogLoader} from "@/hooks/use.catalog.loader";
+import type { Catalog } from '@/types/module/book'
 import { t } from "@clover/public/locale";
-import {Catalog} from "@/types/pages/book";
+import { type TreeData, TreeSelect, type TreeSelectProps } from '@easykit/design'
 import { uniq } from "es-toolkit";
+import { type FC, useMemo } from 'react'
 
 export type CatalogSelectorProps = Omit<TreeSelectProps, "treeData"> & {
     disabledKeys?: string[];

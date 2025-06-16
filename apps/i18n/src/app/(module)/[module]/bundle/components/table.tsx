@@ -1,4 +1,4 @@
-import type { Bundle } from '@/types/pages/bundle'
+import type { Bundle } from '@/types/module/bundle'
 import { t } from '@clover/public/utils/locale.client'
 import type { DataTableColumn } from '@easykit/design'
 import type { DropdownMenuItemProps } from '@easykit/design'
@@ -7,7 +7,7 @@ import { BundleFormat } from './format'
 export const getColumns = (): DataTableColumn<Bundle>[] => [
   {
     accessorKey: 'name',
-    header: t('文件名'),
+    header: t('产物名'),
     enableHiding: false,
     className: 'min-w-[200px]',
   },

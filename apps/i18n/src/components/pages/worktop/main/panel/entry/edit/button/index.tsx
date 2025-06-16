@@ -1,5 +1,5 @@
 import { EditEntryModal } from "@/components/pages/worktop/main/panel/entry/edit/modal";
-import type { Entry } from '@/types/pages/entry'
+import type { Entry } from '@/types/module/entry'
 import { Action } from '@clover/public/components/common/action'
 import { Tooltip } from "@easykit/design";
 import { Pencil1Icon } from '@radix-ui/react-icons'

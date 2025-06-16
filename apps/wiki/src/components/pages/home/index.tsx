@@ -1,24 +1,22 @@
 'use client';
 
-import {useLayoutConfig} from "@clover/public/components/layout/hooks/use.layout.config";
-import {MainLayoutProps} from "@/components/layout/main";
-import {FC, PropsWithChildren, useEffect, useState} from "react";
-import {TabsTitle} from "@clover/public/components/common/tabs-title";
-import {useRouter, useSearchParams} from "next/navigation";
-import {HomeStart, StartItem} from "@/components/pages/home/start";
+import type { MainLayoutProps } from '@/components/layout/main'
 import {CreateBookModal} from "@/components/pages/home/create/modal";
+import { CreatePageModal } from '@/components/pages/home/create/page/modal'
+import { HomeStart, type StartItem } from '@/components/pages/home/start'
 import {getColumns, getFilters, getRowActions, getTabs} from "@/config/pages/book";
-import {DataTable, useAlert, useMessage} from "@easykit/design";
-import {useTableLoader} from "@clover/public/hooks";
-import {deleteBook, list} from "@/rest/book";
-import {Book} from "@/types/pages/book";
+import { deleteBook, list } from '@/rest/book'
+import type { Book } from '@/types/module/book'
+import { TabsTitle } from '@clover/public/components/common/tabs-title'
+import { useLayoutConfig } from '@clover/public/components/layout/hooks/use.layout.config'
+import { useTableLoader } from '@clover/public/hooks'
 import { t } from '@clover/public/locale';
-import {CreatePageModal} from "@/components/pages/home/create/page/modal";
+import { DataTable, useAlert, useMessage } from '@easykit/design'
+import { useRouter, useSearchParams } from 'next/navigation'
+import { type FC, type PropsWithChildren, useEffect, useState } from 'react'
 
 export const SectionTitle: FC<PropsWithChildren> = (props) => {
-    return <div className={"text-lg font-medium"}>
-        { props.children }
-    </div>
+    return <div className={'font-medium text-lg'}>{props.children}</div>
 }
 
 const initialParams = {

@@ -1,10 +1,10 @@
-import {keywords, title} from "@clover/public/utils/seo";
 import {BookPage} from "@/components/pages/book";
+import { detail } from '@/rest/book'
+import {} from '@/types/module/page'
 import { t } from '@clover/public/locale';
-import {Metadata} from "next";
-import {FC} from "react";
-import {PageProps, PromisePageProps} from "@/types/pages/page";
-import {detail} from "@/rest/book";
+import { keywords, title } from '@clover/public/utils/seo'
+import type { Metadata } from 'next'
+import type { FC } from 'react'
 
 export async function generateMetadata(): Promise<Metadata> {
     return {

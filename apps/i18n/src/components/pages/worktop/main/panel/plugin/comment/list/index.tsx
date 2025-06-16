@@ -3,7 +3,7 @@ import { CommentListItemLoading } from '@/components/pages/worktop/main/panel/pl
 import { ENTRY_COMMENT_RELOAD } from '@/events/worktop'
 import { list as listRest } from '@/rest/entry.comment'
 import { branchesState, currentEntryState, currentLanguageState, entriesState } from '@/state/worktop'
-import type { EntryComment } from '@/types/pages/entry'
+import type { EntryComment } from '@/types/module/entry'
 import bus from '@clover/public/events'
 import { Button, Empty, ScrollArea } from '@easykit/design'
 import { useAtom } from 'jotai'

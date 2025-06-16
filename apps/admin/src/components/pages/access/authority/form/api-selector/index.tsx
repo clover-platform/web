@@ -1,9 +1,9 @@
-import {cn, ComboSelect, ComboSelectProps} from "@easykit/design";
-import {FC, useEffect, useState} from "react";
-import { ComboSelectOptionProps } from "@easykit/design/components/uix/combo-select";
 import { apiList } from "@/rest/access";
+import type { AccessApi } from '@/types/module/access/api'
 import { t } from '@clover/public/locale'
-import {AccessApi} from "@/types/pages/access/api";
+import { ComboSelect, type ComboSelectProps, cn } from '@easykit/design'
+import type { ComboSelectOptionProps } from '@easykit/design/components/uix/combo-select'
+import { type FC, useEffect, useState } from 'react'
 
 type COLOR_MAP_TYPE = {
     [key: string]: string;
@@ -17,17 +17,14 @@ const COLOR_MAP: COLOR_MAP_TYPE = {
 }
 
 export const ApiItem = (item: AccessApi) => {
-    return <div className={"flex justify-start items-center"}>
-        <div className={cn(
-            "py-0.5 px-2 rounded text-white mr-1 text-[12px]",
-            COLOR_MAP[item.method.toLowerCase()]
-        )}>
-            {item.method}
+    return (
+      <div className={'flex items-center justify-start'}>
+        <div className={cn('mr-1 rounded px-2 py-0.5 text-[12px] text-white', COLOR_MAP[item.method.toLowerCase()])}>
+          {item.method}
         </div>
-        <div className={"flex-1"}>
-            {item.path}
-        </div>
-    </div>
+        <div className={'flex-1'}>{item.path}</div>
+      </div>
+    )
 }
 
 export const ApiSelector: FC<ComboSelectProps> = ({ref, ...props}) => {
@@ -53,21 +50,26 @@ export const ApiSelector: FC<ComboSelectProps> = ({ref, ...props}) => {
         load().then();
     }, []);
 
-    return <ComboSelect
+    return (
+      <ComboSelect
         {...props}
         ref={ref}
         search={true}
-        className={"w-full max-h-[150px] overflow-auto"}
-        placeholder={t("请选择")}
-        searchPlaceholder={t("关键词")}
+        className={'max-h-[150px] w-full overflow-auto'}
+        placeholder={t('请选择')}
+        searchPlaceholder={t('关键词')}
         options={options}
         loading={loading}
         multiple={true}
-        title={t("接口")}
-        clearText={t("清空选择")}
+        title={t('接口')}
+        clearText={t('清空选择')}
         filter={(value: string, search: string) => {
-            const result = options.filter((option) => (value === option.value && (option.raw?.path.includes(search) || option.raw?.method.includes(search))));
-            return result.length;
+          const result = options.filter(
+            (option) =>
+              value === option.value && (option.raw?.path.includes(search) || option.raw?.method.includes(search))
+          )
+          return result.length
         }}
-    />
+      />
+    )
 };

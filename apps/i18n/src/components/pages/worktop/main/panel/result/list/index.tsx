@@ -4,7 +4,7 @@ import { ENTRY_RESULT_RELOAD } from "@/events/worktop";
 import { useCurrentBranch } from '@/hooks/use.current.branch'
 import { list as listRest } from '@/rest/entry.result'
 import { currentEntryState, currentLanguageState, entriesState } from '@/state/worktop'
-import type { EntryResult } from '@/types/pages/entry'
+import type { EntryResult } from '@/types/module/entry'
 import bus from '@clover/public/events'
 import { Button, Empty, ScrollArea } from '@easykit/design'
 import { compact, uniq } from "es-toolkit";

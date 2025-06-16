@@ -1,6 +1,7 @@
 import type { ModuleFormData } from '@/config/schema/module'
-import type { BaseInfo, Language, Module, UpdateInfo } from '@/types/module'
+import type { BaseInfo, Module, UpdateInfo } from '@/types/module'
 import type { ModuleDashboard } from '@/types/module/dashboard'
+import type { Language } from '@/types/public'
 import type { PageData } from '@clover/public/types/rest'
 import { del, get, post, put, resultWrapper } from '@clover/public/utils/rest'
 

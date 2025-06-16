@@ -1,4 +1,4 @@
-import {AuthorityTreeNode} from "@/types/pages/access/authority";
+import type { AuthorityTreeNode } from '@/types/module/access/authority'
 
 export type AccessRole = {
     id: number;

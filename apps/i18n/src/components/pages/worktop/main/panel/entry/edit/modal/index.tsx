@@ -1,7 +1,7 @@
 import { EntryEditForm } from "@/components/pages/worktop/main/panel/entry/form/edit";
 import { type EditEntryData, edit } from '@/rest/entry'
 import { branchesState } from "@/state/worktop";
-import type { Entry } from '@/types/pages/entry'
+import type { Entry } from '@/types/module/entry'
 import { Button, Dialog, type DialogProps, useMessage } from '@easykit/design'
 import { useAtom } from 'jotai/index'
 import { useParams } from 'next/navigation'

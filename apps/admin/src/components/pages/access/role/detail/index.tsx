@@ -1,17 +1,14 @@
 'use client';
 
-import {
-    FormItem,
-    Form, ValueFormatter, Tree
-} from "@easykit/design";
-import {toItems} from "@/components/pages/access/authority/form/utils";
-import {FC} from "react";
+import type { MainLayoutProps } from '@/components/layout/main'
+import { toItems } from '@/components/pages/access/authority/form/utils'
 import {RoleStatus} from "@/components/pages/access/role/status";
-import { t } from '@clover/public/locale';
+import type { AccessRole } from '@/types/module/access/role'
+import { TitleBar } from '@clover/public/components/common/title-bar'
 import {useLayoutConfig} from "@clover/public/components/layout/hooks/use.layout.config";
-import {MainLayoutProps} from "@/components/layout/main";
-import {AccessRole} from "@/types/pages/access/role";
-import {TitleBar} from "@clover/public/components/common/title-bar";
+import { t } from '@clover/public/locale'
+import { Form, FormItem, Tree, ValueFormatter } from '@easykit/design'
+import type { FC } from 'react'
 
 export type RoleDetailPageProps = {
     data: AccessRole;

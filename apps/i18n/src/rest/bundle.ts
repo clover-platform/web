@@ -1,4 +1,5 @@
-import type { Bundle } from '@/types/pages/bundle'
+import type { BundleFormData } from '@/config/schema/module/bundle'
+import type { Bundle } from '@/types/module/bundle'
 import type { PageData } from '@clover/public/types/rest'
 import { get, post, resultWrapper } from '@clover/public/utils/rest'
 
@@ -16,13 +17,8 @@ export type AddBundleDataExport = {
 }
 
 export type AddBundleData = {
-  name: string
-  sources: string[]
-  export: AddBundleDataExport
-  includeSource: boolean
   module: string
-}
+} & BundleFormData
 
 export const create = (data: AddBundleData) =>
-  // biome-ignore lint/suspicious/noExplicitAny: <explanation>
-  post<any, AddBundleData>(`@i18n/${data.module}/bundle/create`, data)
+  resultWrapper(post<unknown, AddBundleData>(`@i18n/${data.module}/bundle/create`, data))

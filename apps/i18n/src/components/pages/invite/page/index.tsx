@@ -1,5 +1,5 @@
+import { MemberRole } from '@/app/(module)/[module]/member/components/role'
 import { LanguageIcon } from '@/components/common/language-icon'
-import { MemberRole } from "@/components/pages/member/role";
 import { accept } from "@/rest/member.invite";
 import type { InviteDetail } from '@/types/module'
 import { Button, useMessage } from '@easykit/design'

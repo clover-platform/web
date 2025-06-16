@@ -1,4 +1,4 @@
-import type { CountEntryData, CountEntryQuery, Entry } from '@/types/pages/entry'
+import type { CountEntryData, CountEntryQuery, Entry } from '@/types/module/entry'
 import { del, get, post, put } from '@clover/public/utils/rest'
 
 export type EntryQueryParams = {

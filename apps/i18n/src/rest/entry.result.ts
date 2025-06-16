@@ -1,4 +1,4 @@
-import type { EntryResultPage } from '@/types/pages/entry'
+import type { EntryResultPage } from '@/types/module/entry'
 import { del, get, post, put } from '@clover/public/utils/rest'
 
 export type SaveEntryResultData = {

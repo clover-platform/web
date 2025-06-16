@@ -1,10 +1,10 @@
-import {CatalogLoading} from "@/components/layout/book/catalog/loading";
-import {Tree, TreeData, useMessage} from "@easykit/design";
+import { CatalogLoading } from '@/components/layout/book/catalog/loading'
 import {useCatalogLoader} from "@/hooks/use.catalog.loader";
-import {FC, useMemo, useState} from "react";
-import {Catalog} from "@/types/pages/book";
+import type { Catalog } from '@/types/module/book'
 import {useTimeAgo} from "@clover/public/hooks";
+import { Tree, type TreeData, useMessage } from '@easykit/design'
 import {useParams, useRouter} from "next/navigation";
+import { type FC, useMemo, useState } from 'react'
 
 type CatalogItemProps = Omit<Catalog, "children">;
 
@@ -14,14 +14,16 @@ const CatalogItem: FC<CatalogItemProps> = (props) => {
     const router = useRouter();
     const { bookPath } = useParams();
 
-    return <div
+    return (
+      <div
         onClick={() => router.push(`/wiki/book/${bookPath}/page/${id}`)}
-        className={"flex space-x-4 justify-center items-center text-sm"}
-    >
+        className={'flex items-center justify-center space-x-4 text-sm'}
+      >
         <div>{title}</div>
-        <div className={"flex-1 h-0 border-b border-dashed"}/>
-        <div className={"text-secondary-foreground/50"}>{ago.format(new Date(createTime))}</div>
-    </div>
+        <div className={'h-0 flex-1 border-b border-dashed'} />
+        <div className={'text-secondary-foreground/50'}>{ago.format(new Date(createTime))}</div>
+      </div>
+    )
 }
 
 export const toTreeItemProps = (data: Catalog[]): TreeData[] => {

@@ -3,7 +3,7 @@ import { ModuleBreadcrumb } from '@/components/common/breadcrumb/module'
 import type { ModuleLayoutProps } from '@/components/layout/module'
 import { dashboard } from '@/rest/module'
 import { languagesState } from '@/state/public'
-import type { Language } from '@/types/module'
+import type { Language } from '@/types/public'
 import { MainPage } from '@clover/public/components/common/page'
 import { TitleBar } from '@clover/public/components/common/title-bar'
 import { useLayoutConfig } from '@clover/public/components/layout/hooks/use.layout.config'
@@ -11,7 +11,6 @@ import { i18n } from '@clover/public/utils/locale.client'
 import {
   BreadcrumbItem,
   BreadcrumbPage,
-  Button,
   Card,
   Empty,
   Loading,
@@ -29,7 +28,6 @@ import {
 } from '@easykit/design'
 import { useQuery } from '@tanstack/react-query'
 import { useAtom } from 'jotai'
-import Link from 'next/link'
 import { useParams, useRouter } from 'next/navigation'
 import { useTranslation } from 'react-i18next'
 import { DetailInfoItem } from './detail/info-item'

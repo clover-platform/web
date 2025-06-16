@@ -1,4 +1,4 @@
-import type { Member } from '@/types/module'
+import type { Member } from '@/types/module/member'
 import { Avatar, Badge } from '@easykit/design'
 import type { FC } from 'react'
 import { useTranslation } from 'react-i18next'

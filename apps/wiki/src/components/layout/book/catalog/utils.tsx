@@ -1,10 +1,10 @@
-import {Catalog} from "@/types/pages/book";
-import {TreeData} from "@easykit/design";
-import {FC, useState} from "react";
-import classNames from "classnames";
 import {AddPageAction} from "@/components/layout/book/page-actions/add";
 import {MorePageAction} from "@/components/layout/book/page-actions/more";
+import type { Catalog } from '@/types/module/book'
+import type { TreeData } from '@easykit/design'
+import classNames from 'classnames'
 import {useParams, useRouter} from "next/navigation";
+import { type FC, useState } from 'react'
 
 type MenuTitleProps = {
     title: string;
@@ -26,22 +26,24 @@ const MenuTitle: FC<MenuTitleProps> = (props) => {
   const [moreOpen, setMoreOpen] = useState(false);
   const router = useRouter();
 
-  return <div
-    onClick={() => router.push(`/wiki/book/${bookPath}/page/${id}`)}
-    className={"flex justify-start items-center group w-full text-sm"}
-  >
-    <div className={"flex-1 w-0 flex-shrink-0 truncate"}>{title}</div>
-    <div className={classNames(
-      "hidden group-hover:flex text-foreground",
-      moreOpen ? "!flex" : ""
-    )}>
-      <AddPageAction parent={id} className={"w-6 h-6 !p-0 ml-1"}/>
-      <MorePageAction
-        hasChildren={hasChildren}
-        onOpenChange={setMoreOpen} id={id} collected={collected} className={"w-6 h-6 !p-0 ml-1"}
-      />
+  return (
+    <div
+      onClick={() => router.push(`/wiki/book/${bookPath}/page/${id}`)}
+      className={'group flex w-full items-center justify-start text-sm'}
+    >
+      <div className={'w-0 flex-1 flex-shrink-0 truncate'}>{title}</div>
+      <div className={classNames('hidden text-foreground group-hover:flex', moreOpen ? '!flex' : '')}>
+        <AddPageAction parent={id} className={'!p-0 ml-1 h-6 w-6'} />
+        <MorePageAction
+          hasChildren={hasChildren}
+          onOpenChange={setMoreOpen}
+          id={id}
+          collected={collected}
+          className={'!p-0 ml-1 h-6 w-6'}
+        />
+      </div>
     </div>
-  </div>
+  )
 }
 
 export const toTreeItemProps = (data: Catalog[]): TreeData[] => {

@@ -1,7 +1,7 @@
 import { ENTRY_COMMENT_RELOAD } from '@/events/worktop'
 import { useCurrentBranch } from '@/hooks/use.current.branch'
 import { deleteComment } from '@/rest/entry.comment'
-import type { EntryComment } from '@/types/pages/entry'
+import type { EntryComment } from '@/types/module/entry'
 import { IconDelete } from '@arco-iconbox/react-clover'
 import { Action } from '@clover/public/components/common/action'
 import { TimeAgo } from '@clover/public/components/common/time-ago'

@@ -3,7 +3,7 @@
 import { ModuleBreadcrumb } from '@/components/common/breadcrumb/module'
 import type { ModuleLayoutProps } from '@/components/layout/module'
 import { type ListBranchQuery, deleteBranch, list } from '@/rest/branch'
-import type { Branch } from '@/types/pages/branch'
+import type { Branch } from '@/types/module/branch'
 import { MainPage } from '@clover/public/components/common/page'
 import { TitleBar } from '@clover/public/components/common/title-bar'
 import { useLayoutConfig } from '@clover/public/components/layout/hooks/use.layout.config'

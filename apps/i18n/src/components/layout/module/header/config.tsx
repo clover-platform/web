@@ -12,13 +12,23 @@ export const getNavs = () => {
     },
     {
       id: 'bundle',
-      title: '下载',
+      title: '产物',
       href: 'bundle',
+    },
+    {
+      id: 'member',
+      title: '成员',
+      href: 'member',
     },
     {
       id: 'activity',
       title: '动态',
       href: 'activity',
+    },
+    {
+      id: 'setting',
+      title: '设置',
+      href: 'setting',
     },
   ]
 }

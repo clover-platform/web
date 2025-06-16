@@ -1,5 +1,5 @@
 import { mergeOverview, merge as mergeRest } from '@/rest/branch'
-import type { Branch, BranchMergeOverview } from '@/types/pages/branch'
+import type { Branch, BranchMergeOverview } from '@/types/module/branch'
 import { IconBranch } from '@arco-iconbox/react-clover'
 import { i18n } from '@clover/public/utils/locale.client'
 import {

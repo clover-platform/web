@@ -1,16 +1,16 @@
 'use client';
 
-import {Button, Space, useMessage} from "@easykit/design";
-import RoleForm from "@/components/pages/access/role/form";
-import {FC, useState} from "react";
+import type { MainLayoutProps } from '@/components/layout/main'
+import RoleForm from '@/components/pages/access/role/form'
 import { editRole } from "@/rest/access";
-import {useParams, useRouter, useSearchParams} from "next/navigation";
+import type { AccessRole } from '@/types/module/access/role'
 import BackButton from "@clover/public/components/common/button/back";
-import { t } from '@clover/public/locale';
-import {AccessRole} from "@/types/pages/access/role";
+import { TitleBar } from '@clover/public/components/common/title-bar'
 import {useLayoutConfig} from "@clover/public/components/layout/hooks/use.layout.config";
-import {MainLayoutProps} from "@/components/layout/main";
-import {TitleBar} from "@clover/public/components/common/title-bar";
+import { t } from '@clover/public/locale'
+import { Button, Space, useMessage } from '@easykit/design'
+import { useParams, useRouter } from 'next/navigation'
+import { type FC, useState } from 'react'
 
 export type EditRolePageProps = {
     data: AccessRole;

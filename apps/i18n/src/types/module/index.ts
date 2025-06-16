@@ -1,5 +1,4 @@
-import type { User } from '@clover/public/types/account'
-import type { Language as LanguageType } from '../public'
+import type { Language } from '../public'
 
 export type Module = {
   id: number
@@ -29,14 +28,6 @@ export type ModuleDetail = {
   createTime?: string
   updateTime?: string
 }
-
-export type Member = {
-  id: number
-  roles: number[]
-  user: User
-}
-
-export type Language = LanguageType
 
 export type InviteDetail = {
   identifier: string

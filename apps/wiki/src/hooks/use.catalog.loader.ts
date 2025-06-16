@@ -1,10 +1,10 @@
-import {useParams} from "next/navigation";
-import {useCallback} from "react";
-import {Catalog} from "@/types/pages/book";
-import {catalog} from "@/rest/page";
-import {catalogLoadingState, catalogState} from "@/state/page";
 import {useGlobalLoading} from "@/hooks/use.global.loading";
 import {useRecordState} from "@/hooks/use.record.state";
+import { catalog } from '@/rest/page'
+import { catalogLoadingState, catalogState } from '@/state/page'
+import type { Catalog } from '@/types/module/book'
+import { useParams } from 'next/navigation'
+import { useCallback } from 'react'
 
 export const useCatalogLoader = (): [boolean, (showLoading?: boolean) => Promise<void>, Catalog[], (data: Catalog[]) => void] => {
     const params = useParams();
