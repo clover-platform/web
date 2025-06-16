@@ -1,3 +1,4 @@
+import { IconAdd } from '@arco-iconbox/react-clover'
 import { Button } from '@easykit/design'
 import { type FC, useState } from 'react'
 import { useTranslation } from 'react-i18next'
@@ -11,7 +12,10 @@ export const NewBranchButton: FC<NewBranchButtonProps> = (props) => {
   const { t } = useTranslation()
   return (
     <>
-      <Button onClick={() => setVisible(true)}>{t('新分支')}</Button>
+      <Button variant="outline" onClick={() => setVisible(true)}>
+        <IconAdd />
+        {t('新分支')}
+      </Button>
       <NewBranchModal
         onSuccess={() => {
           setVisible(false)

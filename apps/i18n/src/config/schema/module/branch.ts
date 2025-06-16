@@ -1,4 +1,4 @@
-import { t } from "@clover/public/utils/locale.client";
+import { t } from '@clover/public/utils/locale.client'
 import type { SimpleRadioGroupOptionProps } from '@easykit/design'
 import { object, string } from 'zod'
 
@@ -20,11 +20,11 @@ export const getSchema = () =>
 
 export const getTypeOptions = (): SimpleRadioGroupOptionProps[] => [
   {
-    label: t("从主分支克隆"),
-    value: "clone"
+    label: t('从主分支克隆'),
+    value: 'clone',
   },
   {
-    label: t("空分支"),
-    value: "empty"
-  }
+    label: t('空分支'),
+    value: 'empty',
+  },
 ]

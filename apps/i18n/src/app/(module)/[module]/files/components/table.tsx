@@ -1,5 +1,5 @@
 import type { Branch } from '@/types/pages/branch'
-import { t } from "@clover/public/utils/locale.client";
+import { t } from '@clover/public/utils/locale.client'
 import type { DataTableColumn } from '@easykit/design'
 import { Badge, type DropdownMenuItemProps, type FilterItemProps, Input } from '@easykit/design'
 
@@ -32,36 +32,36 @@ export const getColumns = (): DataTableColumn<Branch>[] => [
 export const getFilters = (): FilterItemProps[] => [
   {
     field: 'keyword',
-    render: () => <Input placeholder={t("请输入关键词")} />,
+    render: () => <Input placeholder={t('请输入关键词')} />,
   },
 ]
 
 export const ROW_ACTIONS = (cell: Branch): DropdownMenuItemProps[] => {
-  const { isDefault = false } = cell;
+  const { isDefault = false } = cell
   const items: DropdownMenuItemProps[] = [
     {
-      id: "rename",
-      type: "item",
-      label: t("重命名")
+      id: 'rename',
+      type: 'item',
+      label: t('重命名'),
     },
-  ];
+  ]
   if (!isDefault) {
     items.push({
-      id: "merge",
-      type: "item",
-      label: t("合并至默认分支")
+      id: 'merge',
+      type: 'item',
+      label: t('合并至默认分支'),
     })
   }
   if (!isDefault) {
     items.push({
-      type: "separator",
-      id: 'separator.1'
-    });
+      type: 'separator',
+      id: 'separator.1',
+    })
     items.push({
-      id: "delete",
-      type: "item",
-      label: t("删除")
+      id: 'delete',
+      type: 'item',
+      label: t('删除'),
     })
   }
-  return items;
+  return items
 }

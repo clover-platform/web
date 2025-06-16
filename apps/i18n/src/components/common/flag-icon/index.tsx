@@ -1,6 +1,12 @@
-import React from 'react'
-import FlagIconFactory from 'react-flag-icon-css';
+import 'flag-icons/css/flag-icons.min.css'
+import type { FC } from 'react'
 
-export const FlagIcon = FlagIconFactory(React, {
-  useCssModules: false,
-})
+export type FlagIconProps = {
+  code: string
+  className?: string
+}
+
+export const FlagIcon: FC<FlagIconProps> = (props) => {
+  const { code, className } = props
+  return <i className={`fi fi-${code} ${className}`} />
+}

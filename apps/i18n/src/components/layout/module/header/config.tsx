@@ -11,9 +11,9 @@ export const getNavs = () => {
       href: 'files',
     },
     {
-      id: 'download',
+      id: 'bundle',
       title: '下载',
-      href: 'download',
+      href: 'bundle',
     },
     {
       id: 'activity',

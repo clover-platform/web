@@ -1,8 +1,8 @@
-import { ARBConfigForm } from "@/components/pages/bundle/form/export-format/config/form/arb";
-import { JSONConfigForm } from "@/components/pages/bundle/form/export-format/config/form/json";
 import { IconAndroid, IconFlutter, IconIOS, IconJSON } from '@arco-iconbox/react-clover'
-import { t } from "@clover/public/utils/locale.client";
+import { t } from '@clover/public/utils/locale.client'
 import type { ReactElement, ReactNode } from 'react'
+import { ARBConfigForm } from '../add/components/form/export-format/config/form/arb'
+import { JSONConfigForm } from '../add/components/form/export-format/config/form/json'
 
 export type ExportFormatConfig = {
   id: string
@@ -13,7 +13,7 @@ export type ExportFormatConfig = {
   configDefault?: any
   // biome-ignore lint/suspicious/noExplicitAny: <explanation>
   config?: any
-} 
+}
 
 export const getSupportedFormats = (): ExportFormatConfig[] => [
   {

@@ -1,8 +1,8 @@
-import { BundleFormat } from "@/components/pages/bundle/format";
 import type { Bundle } from '@/types/pages/bundle'
-import { t } from "@clover/public/utils/locale.client";
+import { t } from '@clover/public/utils/locale.client'
 import type { DataTableColumn } from '@easykit/design'
 import type { DropdownMenuItemProps } from '@easykit/design'
+import { BundleFormat } from './format'
 
 export const getColumns = (): DataTableColumn<Bundle>[] => [
   {
@@ -39,13 +39,13 @@ export const getColumns = (): DataTableColumn<Bundle>[] => [
 
 export const getRowActions = (): DropdownMenuItemProps[] => [
   {
-    id: "download",
-    type: "item",
-    label: t("下载")
+    id: 'download',
+    type: 'item',
+    label: t('下载'),
   },
   {
-    id: "delete",
-    type: "item",
-    label: t("删除")
+    id: 'delete',
+    type: 'item',
+    label: t('删除'),
   },
-];
+]

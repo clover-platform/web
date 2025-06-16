@@ -1,4 +1,4 @@
-import { getSchema } from '@/config/pages/module/branch/rename/form'
+import { getSchema } from '@/config/schema/module/branch.rename'
 import { rename } from "@/rest/branch";
 import type { Branch } from '@/types/pages/branch'
 import { Button, Dialog, type DialogProps, Form, FormItem, Input, Space, useMessage } from '@easykit/design'

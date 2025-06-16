@@ -1,8 +1,8 @@
-import { FormatConfigButton } from '@/components/pages/bundle/form/export-format/config/button'
-import { type ExportFormatConfig, getSupportedFormats } from '@/config/pages/bundle/config'
 import { RadioGroup, RadioGroupItem } from '@easykit/design'
 import classNames from 'classnames'
 import { type FC, useState } from 'react'
+import { type ExportFormatConfig, getSupportedFormats } from '../../../../components/config'
+import { FormatConfigButton } from './config/button'
 
 export type ExportFormatValue = {
   format: string

@@ -1,4 +1,4 @@
-import { getSchema, getTypeOptions } from "@/config/pages/module/branch/form";
+import { getSchema, getTypeOptions } from '@/config/schema/module/branch'
 import { Form, FormItem, Input, SimpleRadioGroup } from '@easykit/design'
 import type { FC, PropsWithChildren } from 'react'
 import { useTranslation } from "react-i18next";

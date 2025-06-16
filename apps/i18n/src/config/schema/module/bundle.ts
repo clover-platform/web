@@ -1,4 +1,4 @@
-import type { ExportFormatValue } from '@/components/pages/bundle/form/export-format'
+import type { ExportFormatValue } from '@/app/(module)/[module]/bundle/add/components/form/export-format'
 import { t } from '@clover/public/utils/locale.client'
 import { any, array, boolean, object, string } from 'zod'
 

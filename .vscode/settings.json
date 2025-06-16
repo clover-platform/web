@@ -30,7 +30,8 @@
     "jsencrypt",
     "tributejs",
     "msgpackr",
-    "turbopack"
+    "turbopack",
+    "navs"
   ],
   "css.customData": [".vscode/tailwind.json"],
   "editor.codeActionsOnSave": {

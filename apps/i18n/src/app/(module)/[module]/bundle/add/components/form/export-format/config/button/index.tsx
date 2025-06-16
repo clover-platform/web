@@ -1,8 +1,8 @@
-import { FormatConfigModal } from "@/components/pages/bundle/form/export-format/config/modal";
-import type { ExportFormatConfig } from '@/config/pages/bundle/config'
+import type { ExportFormatConfig } from '@/app/(module)/[module]/bundle/components/config'
 import { IconSetting } from '@arco-iconbox/react-clover'
 import { Action } from '@clover/public/components/common/action'
 import { type FC, useState } from 'react'
+import { FormatConfigModal } from '../modal'
 
 export type FormatConfigButtonProps = {
   config: ExportFormatConfig
@@ -11,8 +11,8 @@ export type FormatConfigButtonProps = {
 }
 
 export const FormatConfigButton: FC<FormatConfigButtonProps> = (props) => {
-  const { config } = props;
-  const [visible, setVisible] = useState(false);
+  const { config } = props
+  const [visible, setVisible] = useState(false)
   return (
     <>
       <Action onClick={() => setVisible(true)}>

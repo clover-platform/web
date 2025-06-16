@@ -1,11 +1,11 @@
-import { AddBundlePage } from "@/components/pages/bundle/add";
-import { st } from '@clover/public/utils/locale.server';
+import { st } from '@clover/public/utils/locale.server'
 import { keywords, title } from '@clover/public/utils/seo'
 import type { Metadata } from 'next'
+import { AddBundlePage } from './components'
 
 export async function generateMetadata(): Promise<Metadata> {
   return {
-    title: await title(await st("添加文件")),
+    title: await title(await st('添加文件')),
     keywords: await keywords(),
   }
 }

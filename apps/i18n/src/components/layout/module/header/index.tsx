@@ -1,5 +1,5 @@
 import { NavItem } from '@/components/common/header/nav-item'
-import { Action, Separator } from '@easykit/design'
+import { Action, Button, Separator } from '@easykit/design'
 import Link from 'next/link'
 import { useParams } from 'next/navigation'
 import { type FC, useMemo } from 'react'
@@ -32,6 +32,11 @@ export const Header: FC<HeaderProps> = (props) => {
           </Link>
         </li>
       ))}
+      <li>
+        <Link href={`/i18n/${module}/worktop`}>
+          <Button variant="outline">{t('工作台')}</Button>
+        </Link>
+      </li>
     </ul>
   )
 }

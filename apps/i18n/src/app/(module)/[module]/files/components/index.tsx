@@ -2,7 +2,6 @@
 
 import { ModuleBreadcrumb } from '@/components/common/breadcrumb/module'
 import type { ModuleLayoutProps } from '@/components/layout/module'
-import { ROW_ACTIONS, getColumns, getFilters } from '@/config/pages/module/branch/table'
 import { type ListBranchQuery, deleteBranch, list } from '@/rest/branch'
 import type { Branch } from '@/types/pages/branch'
 import { MainPage } from '@clover/public/components/common/page'
@@ -16,6 +15,7 @@ import { useTranslation } from 'react-i18next'
 import { MergeBranchModal } from './merge/modal'
 import { NewBranchButton } from './new/button'
 import { RenameBranchModal } from './rename/modal'
+import { ROW_ACTIONS, getColumns, getFilters } from './table'
 const initialParams = {
   keyword: '',
 }

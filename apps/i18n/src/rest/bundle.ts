@@ -1,21 +1,13 @@
 import type { Bundle } from '@/types/pages/bundle'
-import { get, post } from '@clover/public/utils/rest'
+import type { PageData } from '@clover/public/types/rest'
+import { get, post, resultWrapper } from '@clover/public/utils/rest'
 
 export type BundleQuery = {
-  page: number
-  size: number
-  module: string
-  keyword?: string
+  module?: string
 }
 
 export const list = (query: BundleQuery) =>
-  get<
-    {
-      total: number
-      data: Bundle[]
-    },
-    BundleQuery
-  >(`@i18n/${query.module}/bundle/list`, query)
+  resultWrapper(get<PageData<Bundle>, BundleQuery>(`@i18n/${query.module}/bundle/list`, query))
 
 export type AddBundleDataExport = {
   // biome-ignore lint/suspicious/noExplicitAny: <explanation>

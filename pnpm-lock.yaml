@@ -35,8 +35,8 @@ importers:
         specifier: workspace:*
         version: link:packages/public
       '@easykit/design':
-        specifier: 0.0.114
-        version: 0.0.114(@types/react-dom@19.1.2(@types/react@19.1.2))(@types/react@19.1.2)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
+        specifier: 0.0.117
+        version: 0.0.117(@types/react-dom@19.1.2(@types/react@19.1.2))(@types/react@19.1.2)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
       '@easykit/editor':
         specifier: 0.0.25
         version: 0.0.25(@babel/core@7.26.10)(@types/react-dom@19.1.2(@types/react@19.1.2))(@types/react@19.1.2)(highlight.js@11.9.0)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
@@ -53,11 +53,11 @@ importers:
         specifier: 4.1.4
         version: 4.1.4
       '@tanstack/react-query':
-        specifier: ^5.80.2
-        version: 5.80.2(react@19.1.0)
+        specifier: 5.80.3
+        version: 5.80.3(react@19.1.0)
       '@tanstack/react-query-devtools':
-        specifier: ^5.80.3
-        version: 5.80.3(@tanstack/react-query@5.80.2(react@19.1.0))(react@19.1.0)
+        specifier: 5.80.3
+        version: 5.80.3(@tanstack/react-query@5.80.3(react@19.1.0))(react@19.1.0)
       '@types/sortablejs':
         specifier: ^1.15.8
         version: 1.15.8
@@ -253,13 +253,9 @@ importers:
 
   apps/i18n:
     dependencies:
-      react-flag-icon-css:
-        specifier: 1.0.25
-        version: 1.0.25(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
-    devDependencies:
-      '@types/react-flag-icon-css':
-        specifier: 1.0.10
-        version: 1.0.10
+      flag-icons:
+        specifier: 7.5.0
+        version: 7.5.0
 
   apps/main:
     dependencies:
@@ -512,8 +508,8 @@ packages:
     resolution: {integrity: sha512-Pqwr3+Doby9fH0FECbGJLo997heWop7QDnklbRM9gPM+dHVdRN8SzOXiCp0RyAhN01OPgFIP3+w7xsHXfptIsw==}
     engines: {node: '>=12.9.0'}
 
-  '@easykit/design@0.0.114':
-    resolution: {integrity: sha512-2fC+hNfSoiVnqHpfIpvOyBdC91hazK6n5XDkkM0BoDoJ7yKdlbHtT39CekEadLMiQN8qfVorwEyfWPzO/UjvPA==}
+  '@easykit/design@0.0.117':
+    resolution: {integrity: sha512-+xySDXoeyQpAVaUDUHLT3jplfdkBLfTqbMDl+vK3ecnSvfzYK2GKmYDhWzCH48mhMIsllES3Z06qHQobD5fYHw==}
 
   '@easykit/editor@0.0.25':
     resolution: {integrity: sha512-+kIUspaFEV3on+Mh8y2wzyTyeVD0LTtSCpm3uARS0kqzD5lFaFI2OTIWwcOaBnxKFMS56STgp38YocwZuLPGyg==}
@@ -2215,8 +2211,8 @@ packages:
       '@tanstack/react-query': ^5.80.3
       react: 19.1.0
 
-  '@tanstack/react-query@5.80.2':
-    resolution: {integrity: sha512-LfA0SVheJBOqC8RfJw/JbOW3yh2zuONQeWU5Prjm7yjUGUONeOedky1Bj39Cfj8MRdXrZV+DxNT7/DN/M907lQ==}
+  '@tanstack/react-query@5.80.3':
+    resolution: {integrity: sha512-psqr/QRzYfqJvgD8F2teMO6mL4hN4gzkOra9BlPplNhwByviZIhHUrWTXQEMmUdPWHNkGjA1SP6xG2+brhmIoQ==}
     peerDependencies:
       react: 19.1.0
 
@@ -2549,9 +2545,6 @@ packages:
     resolution: {integrity: sha512-XGJkWF41Qq305SKWEILa1O8vzhb3aOo3ogBlSmiqNko/WmRb6QIaweuZCXjKygVDXpzXb5wyxKTSOsmkuqj+Qw==}
     peerDependencies:
       '@types/react': 19.1.2
-
-  '@types/react-flag-icon-css@1.0.10':
-    resolution: {integrity: sha512-UhHNOIxVc3PCqaW7RRAjmx0FZuXxOr3C0e124ypPboeNJ3xAP+lsT7s+yt1+zuMDXhyCDtyU16d3gQp+9xcH2w==}
 
   '@types/react@19.1.2':
     resolution: {integrity: sha512-oxLPMytKchWGbnQM9O7D67uPa9paTNxO7jVoNMXgkkErULBPhPARCfkKL9ytcIJJRGjbsVwW4ugJzyFFvm/Tiw==}
@@ -3255,9 +3248,8 @@ packages:
     resolution: {integrity: sha512-OFRzsL6ZMHz5s0JrsEr+TpdGNCtrVtnuG3x1yzGNiQHT0yaDnXAj8V/lWcpJVrnoDpcwXcASxAZYbuXda2Y82A==}
     engines: {node: '>= 10.13.0'}
 
-  flag-icon-css@3.5.0:
-    resolution: {integrity: sha512-pgJnJLrtb0tcDgU1fzGaQXmR8h++nXvILJ+r5SmOXaaL/2pocunQo2a8TAXhjQnBpRLPtZ1KCz/TYpqeNuE2ew==}
-    deprecated: The project has been renamed to flag-icons
+  flag-icons@7.5.0:
+    resolution: {integrity: sha512-kd+MNXviFIg5hijH766tt+3x76ele1AXlo4zDdCxIvqWZhKt4T83bOtxUOOMlTx/EcFdUMH5yvQgYlFh1EqqFg==}
 
   flagged-respawn@2.0.0:
     resolution: {integrity: sha512-Gq/a6YCi8zexmGHMuJwahTGzXlAZAOsbCVKduWXC6TlLCjjFRlExMJc4GC2NYPYZ0r/brw9P7CpRgQmlPVeOoA==}
@@ -3528,7 +3520,8 @@ packages:
     engines: {node: '>=8'}
 
   inflight@1.0.6:
-    resolution: {integrity: sha1-Sb1jMdfQLQwJvJEKEHW6gWW1bfk=}
+    resolution: {integrity: sha512-k92I/b08q4wvFscXCLvqfsHCrjrF7yiXsQuIVvVE7N82W3+aqpzuUdBbfhWcy/FZR3/4IgflMgKLOsvPDrGCJA==}
+    deprecated: This module is not supported, and leaks memory. Do not use it. Check out lru-cache if you want a good and tested way to coalesce async requests by a key value, which is much more comprehensive and powerful.
 
   inherits@2.0.3:
     resolution: {integrity: sha512-x00IRNXNy63jwGkJmzPigoySHbaqpNuzKbBOmzK+g2OdZpQ9w+sxCN+VSB3ja7IAge2OP2qpfxTjeNcyjmW1uw==}
@@ -3701,7 +3694,7 @@ packages:
     hasBin: true
 
   jsonfile@4.0.0:
-    resolution: {integrity: sha512-m6F1R3z8jjlf2imQHS2Qez5sjKWQzbuuhuJ/FKYFRZvPE3PuHcSMVZzfsLhGVOkfd20obL5SWEBew5ShlquNxg==}
+    resolution: {integrity: sha1-h3Gq4HmbZAdrdmQPygWPnBDjPss=}
 
   jsonfile@6.1.0:
     resolution: {integrity: sha512-5dgndWOriYSm5cnYaJNhalLNDKOqFwyDB/rr1E9ZsGciGvKPs8R2xYGCacuf3z6K1YKDz182fd+fY3cn3pMqXQ==}
@@ -4078,7 +4071,7 @@ packages:
     engines: {node: '>=8'}
 
   path-is-absolute@1.0.1:
-    resolution: {integrity: sha512-AVbw3UJ2e9bq64vSaS9Am0fje1Pa8pbGqTTsmXfaIiMpnr5DlDhfJOuLj9Sf95ZPVDAUerDfEk88MPmPe7UCQg==}
+    resolution: {integrity: sha1-F0uSaHNVNP+8es5r9TpanhtcX18=}
     engines: {node: '>=0.10.0'}
 
   path-key@3.1.1:
@@ -4359,13 +4352,6 @@ packages:
     resolution: {integrity: sha512-gdlJjD7NWr0IfkPlaREN2d9uUZUlksrfOx7SX62VRerwXbMY6ftGCIZua1VG1aXFNOimhISsTq+Owp725b9SiA==}
     peerDependencies:
       react: 19.1.0
-
-  react-flag-icon-css@1.0.25:
-    resolution: {integrity: sha512-UJll3zpmbZvkwZvu4HI00iGF8ya4OdFzMR5k3cAluIwdHn8l5cB3CPYt+hw0tt7fLKaYIfncxNEO/qTtvBw2qw==}
-    engines: {node: '>=6'}
-    peerDependencies:
-      react: 19.1.0
-      react-dom: 19.1.0
 
   react-hook-form@7.52.1:
     resolution: {integrity: sha512-uNKIhaoICJ5KQALYZ4TOaOLElyM+xipord+Ha3crEFhTntdLvWZqVY49Wqd/0GiVCA/f9NjemLeiNPjG7Hpurg==}
@@ -5351,7 +5337,7 @@ snapshots:
     transitivePeerDependencies:
       - debug
 
-  '@easykit/design@0.0.114(@types/react-dom@19.1.2(@types/react@19.1.2))(@types/react@19.1.2)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)':
+  '@easykit/design@0.0.117(@types/react-dom@19.1.2(@types/react@19.1.2))(@types/react@19.1.2)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)':
     dependencies:
       '@arco-iconbox/react-atom-ui': 0.0.4
       '@emotion/react': 11.11.4(@types/react@19.1.2)(react@19.1.0)
@@ -7001,13 +6987,13 @@ snapshots:
 
   '@tanstack/query-devtools@5.80.0': {}
 
-  '@tanstack/react-query-devtools@5.80.3(@tanstack/react-query@5.80.2(react@19.1.0))(react@19.1.0)':
+  '@tanstack/react-query-devtools@5.80.3(@tanstack/react-query@5.80.3(react@19.1.0))(react@19.1.0)':
     dependencies:
       '@tanstack/query-devtools': 5.80.0
-      '@tanstack/react-query': 5.80.2(react@19.1.0)
+      '@tanstack/react-query': 5.80.3(react@19.1.0)
       react: 19.1.0
 
-  '@tanstack/react-query@5.80.2(react@19.1.0)':
+  '@tanstack/react-query@5.80.3(react@19.1.0)':
     dependencies:
       '@tanstack/query-core': 5.80.2
       react: 19.1.0
@@ -7358,11 +7344,6 @@ snapshots:
   '@types/react-dom@19.1.2(@types/react@19.1.2)':
     dependencies:
       '@types/react': 19.1.2
-
-  '@types/react-flag-icon-css@1.0.10':
-    dependencies:
-      '@types/react': 19.1.2
-      csstype: 3.1.3
 
   '@types/react@19.1.2':
     dependencies:
@@ -8176,7 +8157,7 @@ snapshots:
       object.pick: 1.3.0
       parse-filepath: 1.0.2
 
-  flag-icon-css@3.5.0: {}
+  flag-icons@7.5.0: {}
 
   flagged-respawn@2.0.0: {}
 
@@ -9330,14 +9311,6 @@ snapshots:
     dependencies:
       '@babel/runtime': 7.26.10
       react: 19.1.0
-
-  react-flag-icon-css@1.0.25(react-dom@19.1.0(react@19.1.0))(react@19.1.0):
-    dependencies:
-      classnames: 2.5.1
-      flag-icon-css: 3.5.0
-      prop-types: 15.8.1
-      react: 19.1.0
-      react-dom: 19.1.0(react@19.1.0)
 
   react-hook-form@7.52.1(react@19.1.0):
     dependencies:

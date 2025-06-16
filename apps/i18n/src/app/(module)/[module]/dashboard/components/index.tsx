@@ -57,9 +57,7 @@ export const DashboardPage = () => {
 
   const actions = (
     <Space>
-      <Link href={`/i18n/${module}/worktop`}>
-        <Button>{t('工作台')}</Button>
-      </Link>
+      
     </Space>
   )
 
