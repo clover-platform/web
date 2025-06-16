@@ -1,5 +1,3 @@
-import type { RestResult } from '@clover/public/types/rest'
-
 export type ActivityQueryParams = {
   module: string;
   page: number;
@@ -19,11 +17,6 @@ export type Activity = {
     [key: string]: any
   }
 }
-
-export type ActivityResult = RestResult<{
-  data: Activity[];
-  total: number;
-}>;
 
 export type ActivityGroup = {
   time: string;

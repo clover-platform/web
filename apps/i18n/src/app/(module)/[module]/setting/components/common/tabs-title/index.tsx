@@ -12,7 +12,7 @@ export const SettingTabsTitle: FC<SettingTabsTitleProps> = (props) => {
   const m = useModule();
   const router = useRouter();
   const onChange = useCallback((id: string) => {
-    router.push(`/i18n/${m}/setting${id === 'general' ? '' : `/${id}`}`)
+    router.push(`/${m}/setting${id === 'general' ? '' : `/${id}`}`)
   }, [m, router])
 
   return <TabsTitle

@@ -1,10 +1,9 @@
 'use client'
 
 import type { ModuleLayoutProps } from '@/components/layout/module'
-import { TitleBar } from '@clover/public/components/common/title-bar'
 import { useLayoutConfig } from '@clover/public/components/layout/hooks/use.layout.config'
 import { useTranslation } from 'react-i18next'
-import { SettingTabsTitle } from '../tabs-title'
+import { SettingBasePage } from '../../components/common/base-page'
 
 export const ModuleSettingLanguagesPage = () => {
   const { t } = useTranslation()
@@ -12,9 +11,8 @@ export const ModuleSettingLanguagesPage = () => {
     active: 'setting',
   })
   return (
-    <>
-      <TitleBar title={t('设置')} border={false} />
-      <SettingTabsTitle active="languages" />
-    </>
+    <SettingBasePage title={t('语言')} active="languages">
+      <div>coming soon</div>
+    </SettingBasePage>
   )
 }

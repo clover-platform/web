@@ -97,7 +97,6 @@ export const Avatar: FC<AvatarProps> = (props) => {
             }}
           >
             <Button
-              wrapper={false}
               disabled={uploading || isPending}
               variant="outline"
               className="-translate-x-1/2 absolute bottom-0 left-1/2 translate-y-1/2"

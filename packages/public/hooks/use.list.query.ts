@@ -28,9 +28,11 @@ export type ListQueryResult<T> = {
 }
 
 const defaultParams = {
-  page: 1,
-  size: 10,
+  page: '1',
+  size: '10',
 }
+
+const STRING_KEYS = ['page', 'size']
 
 export const useListQuery = <T, P extends Record<string, unknown> = Record<string, unknown>>(
   options: ListQueryOptions<T, P>
@@ -54,12 +56,19 @@ export const useListQuery = <T, P extends Record<string, unknown> = Record<strin
   }, [searchParams, withURL])
 
   // 合并参数，优先级：defaultParams < urlParams < params < loadParams
+  // biome-ignore lint/complexity/noExcessiveCognitiveComplexity: <explanation>
   const queryKeyParams = useMemo(() => {
     const all = {
       ...defaultParams,
       ...(withURL ? urlParams : {}),
       ...(params || {}),
       ...(loadParams || {}),
+    }
+    for (const key of STRING_KEYS) {
+      const value = (all as Record<string, unknown>)[key]
+      if (typeof value === 'number') {
+        ;(all as Record<string, unknown>)[key] = String(value)
+      }
     }
     if (encodeParams) {
       for (const key of encodeParams) {
@@ -115,8 +124,8 @@ export const useListQuery = <T, P extends Record<string, unknown> = Record<strin
   const pagination = useMemo<ListQueryPagination>(() => {
     return {
       total: Array.isArray(data) ? data.length : data?.total || 0,
-      page: (queryKeyParams?.page as number) || 1,
-      size: (queryKeyParams?.size as number) || 10,
+      page: Number(queryKeyParams?.page) || 1,
+      size: Number(queryKeyParams?.size) || 10,
     }
   }, [data, queryKeyParams])
 

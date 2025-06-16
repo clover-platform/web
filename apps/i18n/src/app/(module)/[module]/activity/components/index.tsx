@@ -1,14 +1,17 @@
 'use client'
 
+import { ModuleBreadcrumb } from '@/components/common/breadcrumb/module'
 import type { ModuleLayoutProps } from '@/components/layout/module'
 import { useModule } from '@/hooks/use.module'
 import { list as listRest } from '@/rest/activity'
 import type { Activity, ActivityGroup } from '@/types/module/activity'
+import { MainPage } from '@clover/public/components/common/page'
 import { TitleBar } from '@clover/public/components/common/title-bar'
 import { useLayoutConfig } from '@clover/public/components/layout/hooks/use.layout.config'
-import { Button } from '@easykit/design'
+import { BreadcrumbItem, BreadcrumbPage, Button, Card } from '@easykit/design'
+import { useInfiniteQuery } from '@tanstack/react-query'
 import dayjs from 'dayjs'
-import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
+import { useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
 import { ActivityList } from './list'
 
@@ -18,40 +21,22 @@ export const ActivityPage = () => {
     active: 'activity',
   })
   const m = useModule()
-  const [loading, setLoading] = useState(false)
-  const [list, setList] = useState<Activity[]>([])
-  const [total, setTotal] = useState(0)
-  const pageRef = useRef(1)
 
-  const load = useCallback(
-    async (options?: { append?: boolean }) => {
-      const { append = false } = options || {}
-      if (!append) setList([])
-      setLoading(true)
-      const { success, data: result } = await listRest({
-        page: pageRef.current,
-        size: 10,
-        module: m,
-      })
+  const {
+    data,
+    fetchNextPage,
+    hasNextPage,
+    isLoading: loading,
+  } = useInfiniteQuery({
+    queryKey: ['module: activity', m],
+    queryFn: ({ pageParam = 1 }) => listRest({ page: pageParam, size: 10, module: m }),
+    getNextPageParam: (lastPage, pages) => ((lastPage?.total || 0) > pages.length * 10 ? pages.length + 1 : undefined),
+    initialPageParam: 1,
+  })
 
-      setLoading(false)
-      if (success && result) {
-        const { data, total } = result
-        setList([...(append ? list : []), ...((data || []) as Activity[])])
-        setTotal(total)
-      }
-    },
-    [list, m]
-  )
-
-  const loadMore = () => {
-    pageRef.current += 1
-    load({ append: true }).then()
-  }
-
-  useEffect(() => {
-    load().then()
-  }, [load])
+  const list = useMemo(() => {
+    return data?.pages.flatMap((page) => page?.data || []) || []
+  }, [data])
 
   const items = useMemo<ActivityGroup[]>(() => {
     // 分组逻辑
@@ -77,17 +62,26 @@ export const ActivityPage = () => {
     }))
   }, [list])
 
+  const title = t('动态')
+
   return (
-    <>
-      <TitleBar title={t('动态')} border={false} />
-      <ActivityList loading={loading} items={items} />
-      {!loading && total > list.length ? (
-        <div className="flex w-full justify-center">
-          <Button onClick={loadMore} variant="link">
-            {t('加载更多')}
-          </Button>
-        </div>
-      ) : null}
-    </>
+    <MainPage>
+      <ModuleBreadcrumb>
+        <BreadcrumbItem>
+          <BreadcrumbPage>{title}</BreadcrumbPage>
+        </BreadcrumbItem>
+      </ModuleBreadcrumb>
+      <TitleBar title={title} border={false} />
+      <Card>
+        <ActivityList loading={loading} items={items} />
+        {!loading && hasNextPage ? (
+          <div className="flex w-full justify-center">
+            <Button onClick={() => fetchNextPage()} variant="link">
+              {t('加载更多')}
+            </Button>
+          </div>
+        ) : null}
+      </Card>
+    </MainPage>
   )
 }

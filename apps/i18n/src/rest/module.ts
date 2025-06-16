@@ -26,7 +26,7 @@ export const dashboard = (path: string) => resultWrapper(get<ModuleDashboard, un
 
 export const languages = (path: string) => get<Language[]>(`@i18n/${path}/languages`)
 
-export const deleteModule = (module: string) => del(`@i18n/${module}`)
+export const deleteModule = (module: string) => resultWrapper(del(`@i18n/${module}`))
 
 export const detail = (module: string) => resultWrapper(get<BaseInfo>(`@i18n/${module}`))
 
