@@ -20,6 +20,7 @@ overrides:
   '@babel/runtime': 7.26.10
   '@babel/helpers': 7.26.10
   axios: 1.8.2
+  brace-expansion: 2.0.2
 
 importers:
 
@@ -63,7 +64,7 @@ importers:
         version: 1.15.8
       '@vitejs/plugin-react':
         specifier: 4.3.2
-        version: 4.3.2(vite@5.4.16(@types/node@20.14.9)(lightningcss@1.29.2)(sass@1.77.6))
+        version: 4.3.2(vite@5.4.19(@types/node@20.14.9)(lightningcss@1.29.2)(sass@1.77.6))
       axios:
         specifier: 1.8.2
         version: 1.8.2
@@ -164,17 +165,17 @@ importers:
         specifier: 1.2.5
         version: 1.2.5
       vite:
-        specifier: 5.4.16
-        version: 5.4.16(@types/node@20.14.9)(lightningcss@1.29.2)(sass@1.77.6)
+        specifier: 5.4.19
+        version: 5.4.19(@types/node@20.14.9)(lightningcss@1.29.2)(sass@1.77.6)
       vite-plugin-dts:
         specifier: 4.4.0
-        version: 4.4.0(@types/node@20.14.9)(rollup@4.40.0)(typescript@5.5.3)(vite@5.4.16(@types/node@20.14.9)(lightningcss@1.29.2)(sass@1.77.6))
+        version: 4.4.0(@types/node@20.14.9)(rollup@4.40.0)(typescript@5.5.3)(vite@5.4.19(@types/node@20.14.9)(lightningcss@1.29.2)(sass@1.77.6))
       vite-plugin-node-polyfills:
         specifier: 0.22.0
-        version: 0.22.0(rollup@4.40.0)(vite@5.4.16(@types/node@20.14.9)(lightningcss@1.29.2)(sass@1.77.6))
+        version: 0.22.0(rollup@4.40.0)(vite@5.4.19(@types/node@20.14.9)(lightningcss@1.29.2)(sass@1.77.6))
       vite-plugin-static-copy:
         specifier: 2.2.0
-        version: 2.2.0(vite@5.4.16(@types/node@20.14.9)(lightningcss@1.29.2)(sass@1.77.6))
+        version: 2.2.0(vite@5.4.19(@types/node@20.14.9)(lightningcss@1.29.2)(sass@1.77.6))
       zod:
         specifier: 3.23.8
         version: 3.23.8
@@ -356,6 +357,8 @@ packages:
 
   '@arco-iconbox/react-atom-ui@0.0.4':
     resolution: {integrity: sha512-gYBxZRGfVNcGrJu3MGYK6Xtgf9m+oobn/OL8QnqmI6/2zv6JmWwccI+4fMtvDfeh5U7sgfyK9wYh1ftn95Wlpg==}
+    peerDependencies:
+      react: 19.1.0
 
   '@arco-iconbox/react-clover@0.0.35':
     resolution: {integrity: sha512-VIqUX33Vn9p5RsTKXPc0w++EIhpQHb89MSRET4WxytVnASO/KUUhro0baPf9FAyo0HmeyVPWAt9frp+SsugOuw==}
@@ -2757,11 +2760,8 @@ packages:
   bowser@2.11.0:
     resolution: {integrity: sha512-AlcaJBi/pqqJBIQ8U9Mcpc9i8Aqxn88Skv5d+xBX006BY5u8N3mGLHa5Lgppa7L/HfwgwLgZ6NYs+Ag6uUmJRA==}
 
-  brace-expansion@1.1.11:
-    resolution: {integrity: sha512-iCuPHDFgrHX7H2vEI/5xpz07zSHB00TpugqhmYtVmMO6518mCuRMoOYFldEBl0g187ufozdaHgWKcYFb61qGiA==}
-
-  brace-expansion@2.0.1:
-    resolution: {integrity: sha512-XnAIvQ8eM+kC6aULx6wuQiwVsnzsi9d3WxzV3FpWTGA19F621kwdbsAcFKXgKUHZWsy+mY6iL1sHTxWEFCytDA==}
+  brace-expansion@2.0.2:
+    resolution: {integrity: sha512-Jt0vHyM+jmUBqojB7E1NIYadt0vI0Qxjxd2TErW94wDz+E2LAm5vKMXXwg6ZZBTHPuUlDgQHKXvjGBdfcF1ZDQ==}
 
   braces@3.0.3:
     resolution: {integrity: sha512-yQbXgO/OSZVD2IsiLlro+7Hf6Q18EJrKSEsdoMzKePKXct3gvD8oLcOQdIzGupr5Fj+EDe8gO/lxc1BzfMpxvA==}
@@ -2946,9 +2946,6 @@ packages:
 
   compute-scroll-into-view@3.1.1:
     resolution: {integrity: sha512-VRhuHOLoKYOy4UbilLbUzbYg93XLjv2PncJC50EuTWPA3gaja1UjBsUP/D/9/juV3vQFr6XBEzn9KCAHdUvOHw==}
-
-  concat-map@0.0.1:
-    resolution: {integrity: sha1-2Klr13/Wjfd5OnMDajug1UBdR3s=}
 
   confbox@0.1.8:
     resolution: {integrity: sha512-RMtmw0iFkeR4YV+fUOSucriAQNb9g8zFR52MWCtl+cCZOFRNL6zeB395vPzFhEjjn4fMxXudmELnl/KF/WrK6w==}
@@ -5016,8 +5013,8 @@ packages:
     peerDependencies:
       vite: ^5.0.0 || ^6.0.0
 
-  vite@5.4.16:
-    resolution: {integrity: sha512-Y5gnfp4NemVfgOTDQAunSD4346fal44L9mszGGY/e+qxsRT5y1sMlS/8tiQ8AFAp+MFgYNSINdfEchJiPm41vQ==}
+  vite@5.4.19:
+    resolution: {integrity: sha512-qO3aKv3HoQC8QKiNSTuUM1l9o/XX3+c+VTgLHbJWHZGeTPVAg2XwazI9UWzoxjIJCGCV2zU60uqMzjeLZuULqA==}
     engines: {node: ^18.0.0 || >=20.0.0}
     hasBin: true
     peerDependencies:
@@ -5171,7 +5168,9 @@ snapshots:
       '@jridgewell/gen-mapping': 0.3.8
       '@jridgewell/trace-mapping': 0.3.25
 
-  '@arco-iconbox/react-atom-ui@0.0.4': {}
+  '@arco-iconbox/react-atom-ui@0.0.4(react@19.1.0)':
+    dependencies:
+      react: 19.1.0
 
   '@arco-iconbox/react-clover@0.0.35(react@19.1.0)':
     dependencies:
@@ -5339,7 +5338,7 @@ snapshots:
 
   '@easykit/design@0.0.117(@types/react-dom@19.1.2(@types/react@19.1.2))(@types/react@19.1.2)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)':
     dependencies:
-      '@arco-iconbox/react-atom-ui': 0.0.4
+      '@arco-iconbox/react-atom-ui': 0.0.4(react@19.1.0)
       '@emotion/react': 11.11.4(@types/react@19.1.2)(react@19.1.0)
       '@hookform/resolvers': 3.7.0(react-hook-form@7.52.1(react@19.1.0))
       '@radix-ui/react-alert-dialog': 1.1.2(@types/react-dom@19.1.2(@types/react@19.1.2))(@types/react@19.1.2)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
@@ -7380,14 +7379,14 @@ snapshots:
       '@types/expect': 1.20.4
       '@types/node': 20.14.9
 
-  '@vitejs/plugin-react@4.3.2(vite@5.4.16(@types/node@20.14.9)(lightningcss@1.29.2)(sass@1.77.6))':
+  '@vitejs/plugin-react@4.3.2(vite@5.4.19(@types/node@20.14.9)(lightningcss@1.29.2)(sass@1.77.6))':
     dependencies:
       '@babel/core': 7.26.10
       '@babel/plugin-transform-react-jsx-self': 7.25.9(@babel/core@7.26.10)
       '@babel/plugin-transform-react-jsx-source': 7.25.9(@babel/core@7.26.10)
       '@types/babel__core': 7.20.5
       react-refresh: 0.14.2
-      vite: 5.4.16(@types/node@20.14.9)(lightningcss@1.29.2)(sass@1.77.6)
+      vite: 5.4.19(@types/node@20.14.9)(lightningcss@1.29.2)(sass@1.77.6)
     transitivePeerDependencies:
       - supports-color
 
@@ -7588,12 +7587,7 @@ snapshots:
 
   bowser@2.11.0: {}
 
-  brace-expansion@1.1.11:
-    dependencies:
-      balanced-match: 1.0.2
-      concat-map: 0.0.1
-
-  brace-expansion@2.0.1:
+  brace-expansion@2.0.2:
     dependencies:
       balanced-match: 1.0.2
 
@@ -7828,8 +7822,6 @@ snapshots:
       yazl: 2.5.1
 
   compute-scroll-into-view@3.1.1: {}
-
-  concat-map@0.0.1: {}
 
   confbox@0.1.8: {}
 
@@ -8773,19 +8765,19 @@ snapshots:
 
   minimatch@3.0.8:
     dependencies:
-      brace-expansion: 1.1.11
+      brace-expansion: 2.0.2
 
   minimatch@3.1.2:
     dependencies:
-      brace-expansion: 1.1.11
+      brace-expansion: 2.0.2
 
   minimatch@5.1.6:
     dependencies:
-      brace-expansion: 2.0.1
+      brace-expansion: 2.0.2
 
   minimatch@9.0.5:
     dependencies:
-      brace-expansion: 2.0.1
+      brace-expansion: 2.0.2
 
   minimist@1.2.8: {}
 
@@ -9985,7 +9977,7 @@ snapshots:
       replace-ext: 2.0.0
       teex: 1.0.1
 
-  vite-plugin-dts@4.4.0(@types/node@20.14.9)(rollup@4.40.0)(typescript@5.5.3)(vite@5.4.16(@types/node@20.14.9)(lightningcss@1.29.2)(sass@1.77.6)):
+  vite-plugin-dts@4.4.0(@types/node@20.14.9)(rollup@4.40.0)(typescript@5.5.3)(vite@5.4.19(@types/node@20.14.9)(lightningcss@1.29.2)(sass@1.77.6)):
     dependencies:
       '@microsoft/api-extractor': 7.52.4(@types/node@20.14.9)
       '@rollup/pluginutils': 5.1.4(rollup@4.40.0)
@@ -9998,29 +9990,29 @@ snapshots:
       magic-string: 0.30.17
       typescript: 5.5.3
     optionalDependencies:
-      vite: 5.4.16(@types/node@20.14.9)(lightningcss@1.29.2)(sass@1.77.6)
+      vite: 5.4.19(@types/node@20.14.9)(lightningcss@1.29.2)(sass@1.77.6)
     transitivePeerDependencies:
       - '@types/node'
       - rollup
       - supports-color
 
-  vite-plugin-node-polyfills@0.22.0(rollup@4.40.0)(vite@5.4.16(@types/node@20.14.9)(lightningcss@1.29.2)(sass@1.77.6)):
+  vite-plugin-node-polyfills@0.22.0(rollup@4.40.0)(vite@5.4.19(@types/node@20.14.9)(lightningcss@1.29.2)(sass@1.77.6)):
     dependencies:
       '@rollup/plugin-inject': 5.0.5(rollup@4.40.0)
       node-stdlib-browser: 1.3.1
-      vite: 5.4.16(@types/node@20.14.9)(lightningcss@1.29.2)(sass@1.77.6)
+      vite: 5.4.19(@types/node@20.14.9)(lightningcss@1.29.2)(sass@1.77.6)
     transitivePeerDependencies:
       - rollup
 
-  vite-plugin-static-copy@2.2.0(vite@5.4.16(@types/node@20.14.9)(lightningcss@1.29.2)(sass@1.77.6)):
+  vite-plugin-static-copy@2.2.0(vite@5.4.19(@types/node@20.14.9)(lightningcss@1.29.2)(sass@1.77.6)):
     dependencies:
       chokidar: 3.6.0
       fast-glob: 3.3.3
       fs-extra: 11.3.0
       picocolors: 1.1.1
-      vite: 5.4.16(@types/node@20.14.9)(lightningcss@1.29.2)(sass@1.77.6)
+      vite: 5.4.19(@types/node@20.14.9)(lightningcss@1.29.2)(sass@1.77.6)
 
-  vite@5.4.16(@types/node@20.14.9)(lightningcss@1.29.2)(sass@1.77.6):
+  vite@5.4.19(@types/node@20.14.9)(lightningcss@1.29.2)(sass@1.77.6):
     dependencies:
       esbuild: 0.25.0
       postcss: 8.5.3
