@@ -58,7 +58,7 @@ export const Avatar: FC<AvatarProps> = (props) => {
       file,
       name: file.name,
       contentType: file.type,
-      type: 0,
+      type: 1,
     })
     setUploading(false)
     if (success) {

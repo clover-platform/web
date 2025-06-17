@@ -43,12 +43,12 @@ export const ImageCropper: FC<ImageCropperProps> = (props) => {
 
   const preSignFile = async (file: File) => {
     setUploading(true);
-    const {success, data, error} = await upload({
+    const { success, data, error } = await upload({
       file,
       name: file.name,
       contentType: file.type,
-      type: 0,
-    });
+      type: 1,
+    })
     setUploading(false);
     if (success) {
       setResult(data!);

@@ -1,10 +1,9 @@
 import {post} from "@clover/public/utils/rest";
 
 export type PreSignData = {
-  fileName: string;
-  type: 0 | 1;
-  length?: number;
-  contentType?: string;
+  fileName: string
+  type: 0 | 1
+  headers?: Record<string, string>
 }
 
 export type PreSignResult = {

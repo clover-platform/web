@@ -43,16 +43,18 @@ export type UploadResult = {
 
 export const upload = async (options: UploadOptions) => {
   const {onProgress, file, type} = options;
-  return new Promise<UploadResult>((resolve, reject) => {
+  return new Promise<UploadResult>((resolve) => {
     preSign({
       fileName: options.name,
-      contentType: options.contentType,
-      length: file?.size,
-      type
-    }).then(({success, data, message}) => {
+      headers: {
+        'Content-Type': options.contentType || 'application/octet-stream',
+        'Content-Length': file?.size?.toString() || '0',
+      },
+      type,
+    }).then(({ success, data, message }) => {
       if (success) {
-        const {signedUrl, url} = data!;
-        const xhr = new XMLHttpRequest();
+        const { signedUrl, url } = data!
+        const xhr = new XMLHttpRequest()
         if (xhr.upload) {
           xhr.upload.onprogress = (event) => {
             let percent: number | undefined
@@ -62,30 +64,34 @@ export const upload = async (options: UploadOptions) => {
             onProgress?.(Number.parseInt(`${percent}`, 10), event)
           }
         }
-        xhr.onerror = function error(e) {
-          reject({
+        // biome-ignore lint/suspicious/noExplicitAny: <explanation>
+        xhr.onerror = function error(e: any) {
+          resolve({
             success: false,
-            error: e.toString()
-          });
-        };
+            error: e.message || 'Failed to upload',
+          })
+        }
         xhr.onload = function onload() {
           if (xhr.status < 200 || xhr.status >= 300) {
-            return reject(new Error(`Failed to upload: ${xhr.status}`));
+            return resolve({
+              success: false,
+              error: `Failed to upload: ${xhr.status}`,
+            })
           }
           resolve({
             success: true,
-            data: url
-          });
-        };
-        xhr.open('put', signedUrl, true);
-        xhr.send(file);
+            data: url,
+          })
+        }
+        xhr.open('put', signedUrl, true)
+        xhr.send(file)
       } else {
-        reject({
+        resolve({
           success: false,
-          error: message
-        });
+          error: message,
+        })
       }
-    });
-  });
+    })
+  })
 
 }

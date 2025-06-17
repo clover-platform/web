@@ -110,6 +110,9 @@ importers:
       jsencrypt:
         specifier: ^3.3.2
         version: 3.3.2
+      lucide-react:
+        specifier: 0.516.0
+        version: 0.516.0(react@19.1.0)
       next:
         specifier: 15.3.2
         version: 15.3.2(@babel/core@7.26.10)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(sass@1.77.6)
@@ -357,6 +360,8 @@ packages:
 
   '@arco-iconbox/react-atom-ui@0.0.4':
     resolution: {integrity: sha512-gYBxZRGfVNcGrJu3MGYK6Xtgf9m+oobn/OL8QnqmI6/2zv6JmWwccI+4fMtvDfeh5U7sgfyK9wYh1ftn95Wlpg==}
+    peerDependencies:
+      react: 19.1.0
 
   '@arco-iconbox/react-clover@0.0.35':
     resolution: {integrity: sha512-VIqUX33Vn9p5RsTKXPc0w++EIhpQHb89MSRET4WxytVnASO/KUUhro0baPf9FAyo0HmeyVPWAt9frp+SsugOuw==}
@@ -3828,6 +3833,11 @@ packages:
     peerDependencies:
       react: 19.1.0
 
+  lucide-react@0.516.0:
+    resolution: {integrity: sha512-aybBJzLHcw1CIn3rUcRkztB37dsJATtpffLNX+0/w+ws2p21nYIlOwX/B5fqxq8F/BjqVemnJX8chKwRidvROg==}
+    peerDependencies:
+      react: 19.1.0
+
   magic-string@0.30.17:
     resolution: {integrity: sha512-sNPKHvyjVf7gyjwS4xGTaW/mCnF8wnjtifKBEhxfZ7E/S8tQ0rssrwGNn6q8JH/ohItJfSQp9mBtQYuTlH5QnA==}
 
@@ -5167,7 +5177,9 @@ snapshots:
       '@jridgewell/gen-mapping': 0.3.8
       '@jridgewell/trace-mapping': 0.3.25
 
-  '@arco-iconbox/react-atom-ui@0.0.4': {}
+  '@arco-iconbox/react-atom-ui@0.0.4(react@19.1.0)':
+    dependencies:
+      react: 19.1.0
 
   '@arco-iconbox/react-clover@0.0.35(react@19.1.0)':
     dependencies:
@@ -5335,7 +5347,7 @@ snapshots:
 
   '@easykit/design@0.0.120(@types/react-dom@19.1.2(@types/react@19.1.2))(@types/react@19.1.2)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)':
     dependencies:
-      '@arco-iconbox/react-atom-ui': 0.0.4
+      '@arco-iconbox/react-atom-ui': 0.0.4(react@19.1.0)
       '@emotion/react': 11.11.4(@types/react@19.1.2)(react@19.1.0)
       '@hookform/resolvers': 3.7.0(react-hook-form@7.52.1(react@19.1.0))
       '@radix-ui/react-alert-dialog': 1.1.2(@types/react-dom@19.1.2(@types/react@19.1.2))(@types/react@19.1.2)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
@@ -8704,6 +8716,10 @@ snapshots:
       yallist: 4.0.0
 
   lucide-react@0.400.0(react@19.1.0):
+    dependencies:
+      react: 19.1.0
+
+  lucide-react@0.516.0(react@19.1.0):
     dependencies:
       react: 19.1.0
 

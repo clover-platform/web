@@ -1,5 +1,5 @@
 import { getSchema, getTypeOptions } from '@/config/schema/module/branch'
-import { Form, FormItem, Input, SimpleRadioGroup } from '@easykit/design'
+import { Form, FormItem, Input, SimpleRadioGroup, Uploader } from '@easykit/design'
 import type { FC, PropsWithChildren } from 'react'
 import { useTranslation } from "react-i18next";
 
@@ -20,6 +20,9 @@ export const ModuleBranchForm: FC<ModuleBranchFormProps> = (props) => {
 
   return (
     <Form schema={getSchema()} onSubmit={props.onSubmit} defaultValues={defaultValues}>
+      <FormItem name="file" label={t('文件')}>
+        <Uploader />
+      </FormItem>
       <FormItem name="type" label="">
         <SimpleRadioGroup options={getTypeOptions()} />
       </FormItem>

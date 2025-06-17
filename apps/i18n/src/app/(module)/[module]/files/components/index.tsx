@@ -13,8 +13,8 @@ import { BreadcrumbItem, BreadcrumbPage, Card, DataTable, Space, useAlert, useMe
 import { useParams } from 'next/navigation'
 import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { NewBranchButton } from './new/button'
 import { ROW_ACTIONS, getColumns, getFilters } from './table'
+import { UploadButton } from './upload/button'
 
 const initialParams = {
   keyword: '',
@@ -41,7 +41,7 @@ export const ModuleBranchPage = () => {
 
   const actions = (
     <Space>
-      <NewBranchButton onSuccess={load} />
+      <UploadButton />
     </Space>
   )
 
