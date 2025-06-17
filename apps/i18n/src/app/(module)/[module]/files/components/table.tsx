@@ -1,24 +1,14 @@
-import type { Branch } from '@/types/module/branch'
+import type { File } from '@/types/module/file'
 import { t } from '@clover/public/utils/locale.client'
 import type { DataTableColumn } from '@easykit/design'
-import { Badge, type DropdownMenuItemProps, type FilterItemProps, Input } from '@easykit/design'
+import { type DropdownMenuItemProps, type FilterItemProps, Input } from '@easykit/design'
 
-export const getColumns = (): DataTableColumn<Branch>[] => [
+export const getColumns = (): DataTableColumn<File>[] => [
   {
     accessorKey: 'name',
     header: t('名称'),
     enableHiding: false,
     className: 'min-w-[200px]',
-  },
-  {
-    accessorKey: 'isDefault',
-    header: t('默认分支'),
-    enableHiding: false,
-    className: '!w-[200px]',
-    cell: (cell) => {
-      const branch = cell.row.original
-      return branch.isDefault ? <Badge>{t('是')}</Badge> : null
-    },
   },
   {
     accessorKey: 'updateTime',
@@ -36,8 +26,7 @@ export const getFilters = (): FilterItemProps[] => [
   },
 ]
 
-export const ROW_ACTIONS = (cell: Branch): DropdownMenuItemProps[] => {
-  const { isDefault = false } = cell
+export const ROW_ACTIONS = (_cell: File): DropdownMenuItemProps[] => {
   const items: DropdownMenuItemProps[] = [
     {
       id: 'rename',
@@ -45,23 +34,10 @@ export const ROW_ACTIONS = (cell: Branch): DropdownMenuItemProps[] => {
       label: t('重命名'),
     },
   ]
-  if (!isDefault) {
-    items.push({
-      id: 'merge',
-      type: 'item',
-      label: t('合并至默认分支'),
-    })
-  }
-  if (!isDefault) {
-    items.push({
-      type: 'separator',
-      id: 'separator.1',
-    })
-    items.push({
-      id: 'delete',
-      type: 'item',
-      label: t('删除'),
-    })
-  }
+  items.push({
+    id: 'delete',
+    type: 'item',
+    label: t('删除'),
+  })
   return items
 }

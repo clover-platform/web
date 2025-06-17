@@ -2,8 +2,9 @@
 
 import { ModuleBreadcrumb } from '@/components/common/breadcrumb/module'
 import type { ModuleLayoutProps } from '@/components/layout/module'
-import { type ListBranchQuery, deleteBranch, list } from '@/rest/branch'
-import type { Branch } from '@/types/module/branch'
+import { deleteBranch } from '@/rest/branch'
+import { type ListFileQuery, list } from '@/rest/file'
+import type { File } from '@/types/module/file'
 import { MainPage } from '@clover/public/components/common/page'
 import { TitleBar } from '@clover/public/components/common/title-bar'
 import { useLayoutConfig } from '@clover/public/components/layout/hooks/use.layout.config'
@@ -12,10 +13,9 @@ import { BreadcrumbItem, BreadcrumbPage, Card, DataTable, Space, useAlert, useMe
 import { useParams } from 'next/navigation'
 import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { MergeBranchModal } from './merge/modal'
 import { NewBranchButton } from './new/button'
-import { RenameBranchModal } from './rename/modal'
 import { ROW_ACTIONS, getColumns, getFilters } from './table'
+
 const initialParams = {
   keyword: '',
 }
@@ -28,10 +28,10 @@ export const ModuleBranchPage = () => {
   const alert = useAlert()
   const msg = useMessage()
   const [renameVisible, setRenameVisible] = useState(false)
-  const [branch, setBranch] = useState<Branch | null>(null)
+  const [file, setFile] = useState<File | null>(null)
   const [mergeVisible, setMergeVisible] = useState(false)
   const { t } = useTranslation()
-  const { loading, data, pagination, load, query, refetch } = useListQuery<Branch, ListBranchQuery>({
+  const { loading, data, pagination, load, query, refetch } = useListQuery<File, ListFileQuery>({
     params: {
       module: module as string,
     },
@@ -56,7 +56,7 @@ export const ModuleBranchPage = () => {
       </ModuleBreadcrumb>
       <TitleBar title={title} actions={actions} border={false} />
       <Card>
-        <DataTable<Branch>
+        <DataTable<File>
           filter={{
             items: getFilters(),
             defaultValues: initialParams,
@@ -87,41 +87,15 @@ export const ModuleBranchPage = () => {
                 },
               })
             } else if (key === 'rename') {
-              setBranch(original)
+              setFile(original)
               setRenameVisible(true)
             } else if (key === 'merge') {
-              setBranch(original)
+              setFile(original)
               setMergeVisible(true)
             }
           }}
         />
       </Card>
-      <RenameBranchModal
-        visible={renameVisible}
-        branch={branch!}
-        onCancel={() => {
-          setRenameVisible(false)
-          setBranch(null)
-        }}
-        onSuccess={() => {
-          setRenameVisible(false)
-          setBranch(null)
-          refetch().then()
-        }}
-      />
-      <MergeBranchModal
-        visible={mergeVisible}
-        branch={branch!}
-        onCancel={() => {
-          setMergeVisible(false)
-          setBranch(null)
-        }}
-        onSuccess={() => {
-          setMergeVisible(false)
-          setBranch(null)
-          refetch().then()
-        }}
-      />
     </MainPage>
   )
 }
