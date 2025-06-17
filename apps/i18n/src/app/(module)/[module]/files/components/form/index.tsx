@@ -21,7 +21,13 @@ export const ModuleBranchForm: FC<ModuleBranchFormProps> = (props) => {
   return (
     <Form schema={getSchema()} onSubmit={props.onSubmit} defaultValues={defaultValues}>
       <FormItem name="file" label={t('文件')}>
-        <Uploader />
+        <Uploader
+          accept={{
+            'application/json': ['.json'],
+            'application/vnd.ms-excel': ['.xls'],
+            'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet': ['.xlsx'],
+          }}
+        />
       </FormItem>
       <FormItem name="type" label="">
         <SimpleRadioGroup options={getTypeOptions()} />

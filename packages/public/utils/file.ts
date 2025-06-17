@@ -28,11 +28,13 @@ export function dataURLToFile(dataUrl: string, filename: string) {
 }
 
 export type UploadOptions = {
-  name: string;
-  file: File; // 文件
-  type: 0 | 1; // 0: 公开 1: 私有
-  contentType?: string, // 文件类型
-  onProgress?: (percent: number, event: ProgressEvent) => void, // 进度回调,
+  name: string
+  file: File // 文件
+  type: 0 | 1 // 0: 公开 1: 私有
+  contentType?: string // 文件类型
+  onProgress?: (percent: number, event: ProgressEvent) => void // 进度回调,
+  onError?: (error: string) => void // 错误回调
+  onSuccess?: (data: string) => void // 成功回调
 }
 
 export type UploadResult = {
