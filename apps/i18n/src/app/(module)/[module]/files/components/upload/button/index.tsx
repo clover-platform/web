@@ -2,7 +2,7 @@ import { Button } from '@easykit/design'
 import { FileUp } from 'lucide-react'
 import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { NewBranchModal } from '../model'
+import { UploadModal } from '../model'
 
 export const UploadButton = () => {
   const [visible, setVisible] = useState(false)
@@ -13,7 +13,7 @@ export const UploadButton = () => {
         <FileUp />
         {t('上传文件')}
       </Button>
-      <NewBranchModal
+      <UploadModal
         onSuccess={() => {
           setVisible(false)
         }}
