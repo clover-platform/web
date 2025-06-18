@@ -1,7 +1,7 @@
 import { type FileFormData, getSchema } from '@/config/schema/module/file'
 import { type CreateBranchData, create } from '@/rest/branch'
-import { uploadHandle } from '@clover/public/utils/file'
-import { Alert, Button, Dialog, type DialogProps, Form, FormItem, Space, Uploader, useMessage } from '@easykit/design'
+import { Uploader } from '@clover/public/components/common/uploader'
+import { Alert, Button, Dialog, type DialogProps, Form, FormItem, Space, useMessage } from '@easykit/design'
 import { useMutation } from '@tanstack/react-query'
 import { Info } from 'lucide-react'
 import { useParams } from 'next/navigation'
@@ -55,7 +55,6 @@ export const UploadModal: FC<UploadModalProps> = (props) => {
             data={{
               type: 1, // 私有
             }}
-            uploadHandle={uploadHandle}
           />
         </FormItem>
         <Space className="justify-end">

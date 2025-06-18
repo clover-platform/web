@@ -61,6 +61,7 @@ export const upload = async (options: UploadOptions) => {
       headers: allHeaders,
       type,
       ...(data || {}),
+      // biome-ignore lint/complexity/noExcessiveCognitiveComplexity: <explanation>
     }).then(({ success, data, message }) => {
       if (success) {
         const { signedUrl, url } = data!
