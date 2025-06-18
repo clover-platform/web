@@ -1,5 +1,5 @@
 import { type FileFormData, getSchema } from '@/config/schema/module/file'
-import { type CreateBranchData, create } from '@/rest/branch'
+import { type UploadFileData, upload } from '@/rest/source'
 import { Uploader } from '@clover/public/components/common/uploader'
 import { Alert, Button, Dialog, type DialogProps, Form, FormItem, Space, useMessage } from '@easykit/design'
 import { useMutation } from '@tanstack/react-query'
@@ -17,7 +17,7 @@ export const UploadModal: FC<UploadModalProps> = (props) => {
   const msg = useMessage()
   const { t } = useTranslation()
   const { mutate, isPending: loading } = useMutation({
-    mutationFn: create,
+    mutationFn: upload,
     onSuccess: () => {
       props.onSuccess?.()
     },
@@ -26,7 +26,7 @@ export const UploadModal: FC<UploadModalProps> = (props) => {
     },
   })
 
-  const onSubmit = (data: CreateBranchData) => {
+  const onSubmit = (data: UploadFileData) => {
     data.module = module as string
     mutate(data)
   }
@@ -44,7 +44,7 @@ export const UploadModal: FC<UploadModalProps> = (props) => {
           <li>{t('上传文件数量不能超过 3 个。')}</li>
         </ul>
       </Alert>
-      <Form<FileFormData> schema={getSchema()} onSubmit={(data) => onSubmit(data as CreateBranchData)}>
+      <Form<FileFormData> schema={getSchema()} onSubmit={(data) => onSubmit(data as UploadFileData)}>
         <FormItem name="files">
           <Uploader
             maxFiles={3}
