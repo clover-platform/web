@@ -1,4 +1,5 @@
 import {preSign} from "@clover/public/rest/assets";
+import type { HandleProps } from '@easykit/design'
 
 const mimeTypeRegex = /:(.*?);/
 
@@ -30,8 +31,10 @@ export function dataURLToFile(dataUrl: string, filename: string) {
 export type UploadOptions = {
   name: string
   file: File // 文件
-  type: 0 | 1 // 0: 公开 1: 私有
+  type?: 0 | 1 // 0: 公开 1: 私有
   contentType?: string // 文件类型
+  data?: unknown
+  headers?: Record<string, string>
   onProgress?: (percent: number, event: ProgressEvent) => void // 进度回调,
   onError?: (error: string) => void // 错误回调
   onSuccess?: (data: string) => void // 成功回调
@@ -43,16 +46,21 @@ export type UploadResult = {
   error?: string;
 }
 
+const ERROR_MESSAGE = 'Failed to upload'
+
 export const upload = async (options: UploadOptions) => {
-  const {onProgress, file, type} = options;
+  const { onProgress, file, type = 0, data, headers, onError, onSuccess } = options
   return new Promise<UploadResult>((resolve) => {
+    const allHeaders = {
+      'Content-Type': options.contentType || 'application/octet-stream',
+      'Content-Length': file?.size?.toString() || '0',
+      ...(headers || {}),
+    }
     preSign({
       fileName: options.name,
-      headers: {
-        'Content-Type': options.contentType || 'application/octet-stream',
-        'Content-Length': file?.size?.toString() || '0',
-      },
+      headers: allHeaders,
       type,
+      ...(data || {}),
     }).then(({ success, data, message }) => {
       if (success) {
         const { signedUrl, url } = data!
@@ -68,26 +76,46 @@ export const upload = async (options: UploadOptions) => {
         }
         // biome-ignore lint/suspicious/noExplicitAny: <explanation>
         xhr.onerror = function error(e: any) {
+          onError?.(e.message || ERROR_MESSAGE)
           resolve({
             success: false,
-            error: e.message || 'Failed to upload',
+            error: e.message || ERROR_MESSAGE,
           })
         }
         xhr.onload = function onload() {
           if (xhr.status < 200 || xhr.status >= 300) {
+            onError?.(`${ERROR_MESSAGE}: ${xhr.status}`)
             return resolve({
               success: false,
-              error: `Failed to upload: ${xhr.status}`,
+              error: `${ERROR_MESSAGE}: ${xhr.status}`,
             })
           }
+          onSuccess?.(url)
           resolve({
             success: true,
             data: url,
           })
         }
         xhr.open('put', signedUrl, true)
-        xhr.send(file)
+        for (const [key, value] of Object.entries(allHeaders)) {
+          if (key === 'Content-Length') {
+            // unsafe header
+            continue
+          }
+          xhr.setRequestHeader(key, value)
+        }
+        try {
+          xhr.send(file)
+          // biome-ignore lint/suspicious/noExplicitAny: <explanation>
+        } catch (error: any) {
+          onError?.(error?.message || ERROR_MESSAGE)
+          resolve({
+            success: false,
+            error: error?.message || ERROR_MESSAGE,
+          })
+        }
       } else {
+        onError?.(message || ERROR_MESSAGE)
         resolve({
           success: false,
           error: message,
@@ -96,4 +124,26 @@ export const upload = async (options: UploadOptions) => {
     })
   })
 
+}
+
+export const uploadHandle = (options: HandleProps) => {
+  const { file, headers, data, onError, onSuccess, onProgress } = options
+  upload({
+    name: file.name,
+    file,
+    data,
+    headers,
+    onError: (error) => {
+      file.error = { message: error }
+      onError?.(file)
+    },
+    onSuccess: (url) => {
+      file.response = url
+      onSuccess?.(file)
+    },
+    onProgress: (percent) => {
+      file.progress = percent
+      onProgress?.(file)
+    },
+  }).then()
 }

@@ -1,3 +1,4 @@
+import type { FileFormData } from '@/config/schema/module/file'
 import type { Branch, BranchMergeOverview } from '@/types/module/branch'
 import { del, get, post, put, resultWrapper } from '@clover/public/utils/rest'
 
@@ -13,13 +14,10 @@ export const all = (module: string) => get<Branch[], undefined>(`@i18n/${module}
 
 export type CreateBranchData = {
   module: string
-  name: string
-  type: string
-}
+} & FileFormData
 
 export const create = (data: CreateBranchData) =>
-  // biome-ignore lint/suspicious/noExplicitAny: <explanation>
-  post<any, CreateBranchData>(`@i18n/${data.module}/branch/create`, data)
+  resultWrapper(post<unknown, CreateBranchData>(`@i18n/${data.module}/branch/create`, data))
 
 export const deleteBranch = (params: {
   id: number

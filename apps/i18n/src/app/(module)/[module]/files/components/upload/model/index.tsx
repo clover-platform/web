@@ -1,9 +1,10 @@
 import { type CreateBranchData, create } from '@/rest/branch'
 import { Button, Dialog, type DialogProps, Space, useMessage } from '@easykit/design'
+import { useMutation } from '@tanstack/react-query'
 import { useParams } from 'next/navigation'
-import { type FC, useState } from 'react'
+import type { FC } from 'react'
 import { useTranslation } from 'react-i18next'
-import { ModuleBranchForm } from '../../form'
+import { ModuleFileForm } from '../../form'
 
 export type NewBranchModalProps = {
   onSuccess?: () => void
@@ -11,25 +12,26 @@ export type NewBranchModalProps = {
 
 export const NewBranchModal: FC<NewBranchModalProps> = (props) => {
   const { module } = useParams()
-  const [loading, setLoading] = useState(false)
   const msg = useMessage()
   const { t } = useTranslation()
-
-  const onSubmit = async (data: CreateBranchData) => {
-    setLoading(true)
-    data.module = module as string
-    const { success, message } = await create(data)
-    setLoading(false)
-    if (success) {
+  const { mutate, isPending: loading } = useMutation({
+    mutationFn: create,
+    onSuccess: () => {
       props.onSuccess?.()
-    } else {
-      msg.error(message)
-    }
+    },
+    onError: (error) => {
+      msg.error(error.message)
+    },
+  })
+
+  const onSubmit = (data: CreateBranchData) => {
+    data.module = module as string
+    mutate(data)
   }
 
   return (
-    <Dialog {...props} title={t('新建分支')} maskClosable={false}>
-      <ModuleBranchForm onSubmit={onSubmit}>
+    <Dialog {...props} title={t('上传文件')} maskClosable={false}>
+      <ModuleFileForm onSubmit={(data) => onSubmit(data as CreateBranchData)}>
         <Space className="justify-end">
           <Button loading={loading} type="submit">
             {t('提交')}
@@ -38,7 +40,7 @@ export const NewBranchModal: FC<NewBranchModalProps> = (props) => {
             {t('取消')}
           </Button>
         </Space>
-      </ModuleBranchForm>
+      </ModuleFileForm>
     </Dialog>
   )
 }

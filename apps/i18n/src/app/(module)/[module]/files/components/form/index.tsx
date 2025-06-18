@@ -1,43 +1,33 @@
-import { getSchema, getTypeOptions } from '@/config/schema/module/branch'
-import { Form, FormItem, Input, SimpleRadioGroup, Uploader } from '@easykit/design'
+import { getSchema } from '@/config/schema/module/file'
+import type { FileFormData } from '@/config/schema/module/file'
+import { uploadHandle } from '@clover/public/utils/file'
+import { Form, FormItem, Uploader } from '@easykit/design'
 import type { FC, PropsWithChildren } from 'react'
-import { useTranslation } from "react-i18next";
+import { useTranslation } from 'react-i18next'
 
-export type ModuleBranchFormProps = PropsWithChildren<{
-  // biome-ignore lint/suspicious/noExplicitAny: <explanation>
-  onSubmit?: (data: any) => void
-  // biome-ignore lint/suspicious/noExplicitAny: <explanation>
-  defaultValues?: any
+export type ModuleFileFormProps = PropsWithChildren<{
+  onSubmit?: (data: FileFormData) => void
+  defaultValues?: FileFormData
 }>
 
-export const ModuleBranchForm: FC<ModuleBranchFormProps> = (props) => {
-  const {
-    defaultValues = {
-      type: 'empty'
-    }
-  } = props;
-  const { t } = useTranslation();
+export const ModuleFileForm: FC<ModuleFileFormProps> = (props) => {
+  const { defaultValues = { files: [] } } = props
+  const { t } = useTranslation()
 
   return (
-    <Form schema={getSchema()} onSubmit={props.onSubmit} defaultValues={defaultValues}>
-      <FormItem name="file" label={t('文件')}>
+    <Form<FileFormData> schema={getSchema()} onSubmit={props.onSubmit} defaultValues={defaultValues}>
+      <FormItem name="files" label={t('文件')}>
         <Uploader
           accept={{
             'application/json': ['.json'],
             'application/vnd.ms-excel': ['.xls'],
             'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet': ['.xlsx'],
           }}
+          data={{
+            type: 1, // 私有
+          }}
+          uploadHandle={uploadHandle}
         />
-      </FormItem>
-      <FormItem name="type" label="">
-        <SimpleRadioGroup options={getTypeOptions()} />
-      </FormItem>
-      <FormItem
-        name="name"
-        label={t('分支名')}
-        description={t('使用分支控制，可以在不影响主分支的情况下，推进翻译的改进。')}
-      >
-        <Input placeholder={t('请输入分支名')} />
       </FormItem>
       {props.children}
     </Form>

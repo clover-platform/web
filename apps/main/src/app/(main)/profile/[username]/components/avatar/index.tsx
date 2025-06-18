@@ -52,7 +52,7 @@ export const Avatar: FC<AvatarProps> = (props) => {
     },
   })
 
-  const preSignFile = async (file: File) => {
+  const uploadFile = async (file: File) => {
     setUploading(true)
     const { success, data, error } = await upload({
       file,
@@ -74,7 +74,7 @@ export const Avatar: FC<AvatarProps> = (props) => {
   const onCrop = (dataURL: string) => {
     const file = dataURLToFile(dataURL!, 'cropped.png')
     setVisible(false)
-    preSignFile(file).then()
+    uploadFile(file).then()
   }
 
   return (
