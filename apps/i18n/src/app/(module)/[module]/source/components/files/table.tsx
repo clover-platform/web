@@ -1,8 +1,10 @@
-import type { File } from '@/types/module/file'
+import type { File } from '@/types/module/source'
 import { t } from '@clover/public/utils/locale.client'
 import type { DataTableColumn } from '@easykit/design'
 import { type DropdownMenuItemProps, type FilterItemProps, Input } from '@easykit/design'
+import { FileName } from './file-name'
 import { FileRevision } from './revision'
+import { WordCount } from './word-count'
 
 export const getColumns = (): DataTableColumn<File>[] => [
   {
@@ -10,20 +12,31 @@ export const getColumns = (): DataTableColumn<File>[] => [
     header: t('名称'),
     enableHiding: false,
     className: 'min-w-[200px]',
+    cell: ({ row }) => <FileName file={row.original} />,
   },
   {
     accessorKey: 'wordCount',
-    header: () => <div className="text-right">{t('字数')}</div>,
+    header: () => <div className="text-right">{t('词条')}</div>,
     className: 'w-[100px] min-w-[100px]',
-    cell: () => {
-      return <div className="text-right">{100}</div>
-    },
+    cell: ({ row }) => (
+      <WordCount
+        wordCount={row.original.wordCount}
+        fileId={row.original.id}
+        revisionVersion={row.original.revisionVersion}
+        importStatus={row.original.importStatus}
+      />
+    ),
   },
   {
     accessorKey: 'revision',
     header: () => <div className="text-center">{t('变更')}</div>,
     className: 'w-[100px] min-w-[100px]',
-    cell: ({ row }) => <FileRevision version={1} fileId={row.original.id} />,
+    cell: ({ row }) =>
+      row.original.importStatus === 1 ? (
+        <FileRevision version={row.original.revisionVersion} fileId={row.original.id} />
+      ) : (
+        <div className="text-center">--</div>
+      ),
   },
   {
     accessorKey: 'updateTime',

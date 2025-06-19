@@ -1,0 +1,26 @@
+
+import { type FC, useMemo } from 'react'
+import { ImportConfigButton } from '../import-config/button'
+
+export type WordCountProps = {
+  wordCount: number
+  fileId: number
+  revisionVersion: number
+  importStatus: number
+}
+
+export const WordCount: FC<WordCountProps> = (props) => {
+  const { wordCount, fileId, revisionVersion, importStatus } = props
+
+  const content = useMemo(() => {
+    if (importStatus === 0) {
+      return <ImportConfigButton fileId={fileId} />
+    }
+    if (revisionVersion === 0) {
+      return wordCount
+    }
+    return 0
+  }, [wordCount, revisionVersion, fileId, importStatus])
+
+  return <div className="text-right">{content}</div>
+}

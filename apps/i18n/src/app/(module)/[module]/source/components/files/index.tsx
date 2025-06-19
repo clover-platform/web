@@ -1,6 +1,6 @@
 
 import { type ListFileQuery, deleteFile, list } from '@/rest/source'
-import type { File } from '@/types/module/file'
+import type { File } from '@/types/module/source'
 import { useListQuery } from '@clover/public/hooks'
 import { Card, DataTable, useAlert, useMessage } from '@easykit/design'
 import { useMutation } from '@tanstack/react-query'
