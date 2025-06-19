@@ -24,7 +24,7 @@ export const Files = () => {
     params: {
       module: module as string,
     },
-    key: 'module:files',
+    key: 'module:source:files',
     action: list,
   })
 

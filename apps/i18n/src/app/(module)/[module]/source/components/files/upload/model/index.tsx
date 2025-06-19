@@ -2,7 +2,7 @@ import { type FileFormData, getSchema } from '@/config/schema/module/file'
 import { type UploadFileData, upload } from '@/rest/source'
 import { Uploader } from '@clover/public/components/common/uploader'
 import { Alert, Button, Dialog, type DialogProps, Form, FormItem, Space, useMessage } from '@easykit/design'
-import { useMutation } from '@tanstack/react-query'
+import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { Info } from 'lucide-react'
 import { useParams } from 'next/navigation'
 import type { FC } from 'react'
@@ -16,10 +16,12 @@ export const UploadModal: FC<UploadModalProps> = (props) => {
   const { module } = useParams()
   const msg = useMessage()
   const { t } = useTranslation()
+  const queryClient = useQueryClient()
   const { mutate, isPending: loading } = useMutation({
     mutationFn: upload,
     onSuccess: () => {
       props.onSuccess?.()
+      queryClient.invalidateQueries({ queryKey: ['module:source:files'] })
     },
     onError: (error) => {
       msg.error(error.message)
