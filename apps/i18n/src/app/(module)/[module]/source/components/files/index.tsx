@@ -1,10 +1,10 @@
-import { deleteBranch } from '@/rest/branch'
-import { type ListFileQuery, list } from '@/rest/source'
+
+import { type ListFileQuery, deleteFile, list } from '@/rest/source'
 import type { File } from '@/types/module/file'
 import { useListQuery } from '@clover/public/hooks'
 import { Card, DataTable, useAlert, useMessage } from '@easykit/design'
+import { useMutation } from '@tanstack/react-query'
 import { useParams } from 'next/navigation'
-import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { ROW_ACTIONS, getColumns, getFilters } from './table'
 
@@ -16,9 +16,6 @@ export const Files = () => {
   const { module } = useParams()
   const alert = useAlert()
   const msg = useMessage()
-  const [renameVisible, setRenameVisible] = useState(false)
-  const [file, setFile] = useState<File | null>(null)
-  const [mergeVisible, setMergeVisible] = useState(false)
   const { t } = useTranslation()
   const { loading, data, pagination, load, query, refetch } = useListQuery<File, ListFileQuery>({
     params: {
@@ -28,10 +25,21 @@ export const Files = () => {
     action: list,
   })
 
+  const { mutateAsync: deleteFileMutate } = useMutation({
+    mutationFn: deleteFile,
+    onSuccess: () => {
+      refetch().then()
+    },
+    onError: (error) => {
+      msg.error(error.message)
+    },
+  })
+
   return (
     <>
       <Card>
         <DataTable<File>
+          inCard={true}
           filter={{
             items: getFilters(),
             defaultValues: initialParams,
@@ -46,27 +54,16 @@ export const Files = () => {
           onRowActionClick={({ id: key }, { original }) => {
             if (key === 'delete') {
               alert.confirm({
-                title: t('删除分支'),
-                description: t('确认删除分支'),
+                title: t('删除'),
+                description: t('确认删除文件'),
                 onOk: async () => {
-                  const { success, message } = await deleteBranch({
-                    id: original.id,
+                  await deleteFileMutate({
                     module: module as string,
+                    fileId: original.id,
                   })
-                  if (success) {
-                    refetch().then()
-                  } else {
-                    msg.error(message)
-                  }
-                  return success
+                  return true
                 },
               })
-            } else if (key === 'rename') {
-              setFile(original)
-              setRenameVisible(true)
-            } else if (key === 'merge') {
-              setFile(original)
-              setMergeVisible(true)
             }
           }}
         />

@@ -60,6 +60,7 @@ export const ModulePage = () => {
         <TabsTitle active={active} items={getTabs()} onChange={setActive} />
         <DataTable<Module>
           showHeader={false}
+          inCard={true}
           filter={{
             items: getFilters(),
             defaultValues: initialParams,

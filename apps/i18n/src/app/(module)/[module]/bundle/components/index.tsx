@@ -52,6 +52,7 @@ export const BundlePage = () => {
       <TitleBar title={title} actions={actions} border={false} />
       <Card>
         <DataTable<Bundle>
+          inCard={true}
           load={load}
           pagination={pagination}
           columns={getColumns()}

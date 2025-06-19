@@ -59,6 +59,7 @@ export const MemberPage = () => {
       <Card>
         <TabsTitle active={active} items={getTabs()} onChange={setActive} />
         <DataTable<Member>
+          inCard={true}
           filter={{
             items: getFilters(),
             defaultValues: initialParams,

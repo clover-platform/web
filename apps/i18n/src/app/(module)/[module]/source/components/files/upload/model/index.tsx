@@ -39,7 +39,7 @@ export const UploadModal: FC<UploadModalProps> = (props) => {
 
   return (
     <Dialog {...props} title={t('上传文件')} maskClosable={false}>
-      <Alert className="mb-4" title={t('上传文件说明')} icon={<Info />}>
+      <Alert className="mb-4" title={t('文件说明')} icon={<Info />}>
         <ul className="ml-2 list-disc">
           <li>{t('JSON 文件需要使用 {{json}} 格式', { json: JSON.stringify(json) })}</li>
           <li>{t('Excel 上传成功后，你需要手动配置导入的数据列，你的工作表至少有两列。')}</li>
