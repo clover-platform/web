@@ -1,4 +1,4 @@
-import type { Language } from '../public'
+import type { Language, LanguageWithCount } from '../public'
 
 export type Module = {
   id: number
@@ -43,6 +43,7 @@ export type BaseInfo = {
   name?: string
   description?: string
   identifier?: string
+  languages?: LanguageWithCount[]
 }
 
 export type UpdateInfo = {

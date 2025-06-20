@@ -29,3 +29,11 @@ export type PreviewResponse = string[][]
 
 export const preview = (data: Params) =>
   resultWrapper(get<PreviewResponse, Params>(`@i18n/${data.module}/file/${data.fileId}/preview`))
+
+export type ImportFileData = Params & {
+  config: Record<number, string>
+  skipFirstRow: boolean
+}
+
+export const importFile = (data: ImportFileData) =>
+  resultWrapper(post<unknown, ImportFileData>(`@i18n/${data.module}/file/${data.fileId}/import`, data))
