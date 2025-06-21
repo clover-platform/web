@@ -17,7 +17,7 @@ import {
   TableRow,
   useMessage,
 } from '@easykit/design'
-import { useMutation, useQuery } from '@tanstack/react-query'
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import { type FC, useEffect, useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { HeaderSelect } from '../header-select'
@@ -33,14 +33,15 @@ export const ImportConfigDialog: FC<ImportConfigDialogProps> = (props) => {
   const msg = useMessage()
   const [selects, setSelects] = useState<Record<number, string>>({})
   const [skipFirstRow, setSkipFirstRow] = useState<boolean>(false)
+  const queryClient = useQueryClient()
   const { mutate: importFileMutate, isPending: isImporting } = useMutation({
     mutationFn: importFile,
     onSuccess: () => {
-      msg.success(t('导入成功'))
       props.onCancel?.()
+      queryClient.invalidateQueries({ queryKey: ['module:source:files'] })
     },
-    onError: () => {
-      msg.error(t('导入失败'))
+    onError: (error) => {
+      msg.error(error.message)
     },
   })
 
@@ -144,10 +145,10 @@ export const ImportConfigDialog: FC<ImportConfigDialogProps> = (props) => {
               {t('不导入第一行')}
             </Checkbox>
           </div>
-          <Card>
-            <ScrollArea className="relative w-[calc(90vw-100px)] duration-200">
+          <Card contentClassName="p-0" className="rounded-md p-0">
+            <ScrollArea className="relative w-[calc(90vw-50px)] duration-200">
               <Table className="w-max min-w-full">
-                <TableHeader>
+                <TableHeader className="bg-secondary/50">
                   <TableRow>
                     {Array.from({ length: columnSize }).map((_, index) => {
                       return (

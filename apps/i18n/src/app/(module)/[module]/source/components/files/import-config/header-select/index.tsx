@@ -29,7 +29,7 @@ export const HeaderSelect: FC<HeaderSelectProps> = (props) => {
       },
       ...languages.map((language) => ({
         label: t('翻译：{{language}}', { language: language.name }),
-        value: language.code,
+        value: `target:${language.code}`,
       })),
     ]
   }, [t, baseInfo])
@@ -46,6 +46,13 @@ export const HeaderSelect: FC<HeaderSelectProps> = (props) => {
   }, [props.value])
 
   return (
-    <Select allowClear className="min-w-48" placeholder={t('请选择')} {...rest} options={options} value={value || ''} />
+    <Select
+      allowClear
+      className="min-w-48 bg-background"
+      placeholder={t('请选择')}
+      {...rest}
+      options={options}
+      value={value || ''}
+    />
   )
 }
