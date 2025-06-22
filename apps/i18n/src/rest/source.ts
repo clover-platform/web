@@ -1,6 +1,6 @@
 import type { FileFormData } from '@/config/schema/module/file'
 import type { File } from '@/types/module/source'
-import { del, get, post, resultWrapper } from '@clover/public/utils/rest'
+import { del, get, post, put, resultWrapper } from '@clover/public/utils/rest'
 
 export type ListFileQuery = {
   module?: string
@@ -37,3 +37,10 @@ export type ImportFileData = Params & {
 
 export const importFile = (data: ImportFileData) =>
   resultWrapper(post<unknown, ImportFileData>(`@i18n/${data.module}/file/${data.fileId}/import`, data))
+
+export type RenameData = Params & {
+  name: string
+}
+
+export const rename = (data: RenameData) =>
+  resultWrapper(put<unknown, RenameData>(`@i18n/${data.module}/file/${data.fileId}/rename`, data))

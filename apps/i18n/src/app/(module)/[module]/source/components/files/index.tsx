@@ -5,7 +5,9 @@ import { useListQuery } from '@clover/public/hooks'
 import { Card, DataTable, useAlert, useMessage } from '@easykit/design'
 import { useMutation } from '@tanstack/react-query'
 import { useParams } from 'next/navigation'
+import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
+import { RenameDialog } from './rename-dialog'
 import { ROW_ACTIONS, getColumns, getFilters } from './table'
 
 const initialParams = {
@@ -24,6 +26,8 @@ export const Files = () => {
     key: 'module:source:files',
     action: list,
   })
+  const [renameVisible, setRenameVisible] = useState(false)
+  const [file, setFile] = useState<File | null>(null)
 
   const { mutateAsync: deleteFileMutate } = useMutation({
     mutationFn: deleteFile,
@@ -64,10 +68,22 @@ export const Files = () => {
                   return true
                 },
               })
+            } else if (key === 'rename') {
+              setRenameVisible(true)
+              setFile(original)
             }
           }}
         />
       </Card>
+      <RenameDialog
+        fileId={file?.id}
+        fileName={file?.name}
+        visible={renameVisible}
+        onCancel={() => {
+          setRenameVisible(false)
+          setFile(null)
+        }}
+      />
     </>
   )
 }
