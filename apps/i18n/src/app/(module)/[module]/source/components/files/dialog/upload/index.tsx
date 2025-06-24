@@ -22,9 +22,9 @@ export const UploadDialog: FC<UploadDialogProps> = (props) => {
     mutationFn: upload,
     onSuccess: (data) => {
       const { files = [] } = data || {}
-      const repeated = files.filter((file) => file.repeated)
-      if (repeated.length > 0) {
-        setFiles(repeated)
+      const errorFiles = files.filter((file) => !file.success)
+      if (errorFiles.length > 0) {
+        setFiles(errorFiles)
         setVisible(true)
       }
       props.onCancel?.()

@@ -9,7 +9,8 @@ export const getSchema = () =>
         url: z.string(),
         size: z.number().optional(),
         type: z.string().optional(),
-        repeated: z.boolean().optional(),
+        success: z.boolean().optional(),
+        error: z.string().optional(),
       })
     ).min(1, t('请上传文件')),
   })

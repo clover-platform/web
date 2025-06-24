@@ -36,8 +36,8 @@ importers:
         specifier: workspace:*
         version: link:packages/public
       '@easykit/design':
-        specifier: 0.0.133
-        version: 0.0.133(@types/react-dom@19.1.2(@types/react@19.1.2))(@types/react@19.1.2)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
+        specifier: 0.0.134
+        version: 0.0.134(@types/react-dom@19.1.2(@types/react@19.1.2))(@types/react@19.1.2)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
       '@easykit/editor':
         specifier: 0.0.25
         version: 0.0.25(@babel/core@7.26.10)(@types/react-dom@19.1.2(@types/react@19.1.2))(@types/react@19.1.2)(highlight.js@11.9.0)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
@@ -363,8 +363,6 @@ packages:
 
   '@arco-iconbox/react-atom-ui@0.0.4':
     resolution: {integrity: sha512-gYBxZRGfVNcGrJu3MGYK6Xtgf9m+oobn/OL8QnqmI6/2zv6JmWwccI+4fMtvDfeh5U7sgfyK9wYh1ftn95Wlpg==}
-    peerDependencies:
-      react: 19.1.0
 
   '@arco-iconbox/react-clover@0.0.36':
     resolution: {integrity: sha512-8pAY0J3vEx3KzC+mSDMLJElC+abiI+rxhfQyiWWIDmp6KZd7QmxyQUmVao+mqxkoFIi/mapI8ITpksu+qAVOBw==}
@@ -517,8 +515,8 @@ packages:
     resolution: {integrity: sha512-Pqwr3+Doby9fH0FECbGJLo997heWop7QDnklbRM9gPM+dHVdRN8SzOXiCp0RyAhN01OPgFIP3+w7xsHXfptIsw==}
     engines: {node: '>=12.9.0'}
 
-  '@easykit/design@0.0.133':
-    resolution: {integrity: sha512-I8p4N0y42FD4zgxqvY6R0E/j5HffwlIE0mzklPIX309anRLp9akTyZ/KLAZwUrC0h7fpzaz7Tt46RDAhziwgSw==}
+  '@easykit/design@0.0.134':
+    resolution: {integrity: sha512-xgPm1qgmf2gLjlFc+ZJUkiKLtoPpJX03WFEQh7a5nDMdTUez8nhjF7Z0Zqrrym8RSz51eLilwOdE4jQo3Dh5Lw==}
 
   '@easykit/editor@0.0.25':
     resolution: {integrity: sha512-+kIUspaFEV3on+Mh8y2wzyTyeVD0LTtSCpm3uARS0kqzD5lFaFI2OTIWwcOaBnxKFMS56STgp38YocwZuLPGyg==}
@@ -3374,6 +3372,7 @@ packages:
 
   glob@7.2.3:
     resolution: {integrity: sha512-nFR0zLpU2YCaRxwoCJvL6UvCH2JFyFVIvwTLsIf21AuHlMskA1hhTdk+LlYJtOlYt9v6dvszD2BGRqBL+iQK9Q==}
+    deprecated: Glob versions prior to v9 are no longer supported
 
   global-modules@1.0.0:
     resolution: {integrity: sha512-sKzpEkf11GpOFuw0Zzjzmt4B4UZwjOcG757PPvrfhxcLFbq0wpsgpOqxpxtxFiCG4DtG93M6XRVbF2oGdev7bg==}
@@ -4692,7 +4691,7 @@ packages:
     resolution: {integrity: sha512-uBHU3L3czsIyYXKX88fdrGovxdSCoTGDRZ6SYXtSRxLZUzHg5P/66Ht6uoUlHu9EZod+inXhKo3qQgwXUT/y1w==}
 
   source-map@0.5.7:
-    resolution: {integrity: sha512-LbrmJOMUSdEVxIKvdcJzQC+nQhe8FUZQTXQy6+I75skNgn3OoQ0DZA8YnFa7gp8tqtL3KPf1kmo0R5DoApeSGQ==}
+    resolution: {integrity: sha1-igOdLRAh0i0eoUyA2OpGi6LvP8w=}
     engines: {node: '>=0.10.0'}
 
   source-map@0.6.1:
@@ -5185,9 +5184,7 @@ snapshots:
       '@jridgewell/gen-mapping': 0.3.8
       '@jridgewell/trace-mapping': 0.3.25
 
-  '@arco-iconbox/react-atom-ui@0.0.4(react@19.1.0)':
-    dependencies:
-      react: 19.1.0
+  '@arco-iconbox/react-atom-ui@0.0.4': {}
 
   '@arco-iconbox/react-clover@0.0.36(react@19.1.0)':
     dependencies:
@@ -5353,9 +5350,9 @@ snapshots:
     transitivePeerDependencies:
       - debug
 
-  '@easykit/design@0.0.133(@types/react-dom@19.1.2(@types/react@19.1.2))(@types/react@19.1.2)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)':
+  '@easykit/design@0.0.134(@types/react-dom@19.1.2(@types/react@19.1.2))(@types/react@19.1.2)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)':
     dependencies:
-      '@arco-iconbox/react-atom-ui': 0.0.4(react@19.1.0)
+      '@arco-iconbox/react-atom-ui': 0.0.4
       '@emotion/react': 11.11.4(@types/react@19.1.2)(react@19.1.0)
       '@hookform/resolvers': 3.7.0(react-hook-form@7.52.1(react@19.1.0))
       '@radix-ui/react-alert-dialog': 1.1.2(@types/react-dom@19.1.2(@types/react@19.1.2))(@types/react@19.1.2)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)

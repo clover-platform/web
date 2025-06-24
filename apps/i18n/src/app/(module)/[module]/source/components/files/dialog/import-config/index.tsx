@@ -131,7 +131,7 @@ export const ImportConfigDialog: FC<ImportConfigDialogProps> = (props) => {
       footer={footer}
       title={t('导入配置')}
       visible={visible}
-      className="w-[90vw] max-w-full duration-200"
+      className="w-[90vw] max-w-[960px] duration-200"
       {...rest}
     >
       <Loading loading={isLoading || isImporting}>
@@ -146,7 +146,7 @@ export const ImportConfigDialog: FC<ImportConfigDialogProps> = (props) => {
             </Checkbox>
           </div>
           <Card contentClassName="p-0" className="rounded-md p-0">
-            <ScrollArea className="relative w-[calc(90vw-50px)] duration-200">
+            <ScrollArea className="relative w-[calc(90vw-50px)] max-w-[calc(960px-50px)] duration-200">
               <Table className="w-max min-w-full">
                 <TableHeader className="bg-secondary/50">
                   <TableRow>

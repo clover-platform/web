@@ -1,6 +1,6 @@
 import { useModuleInfo } from '@/hooks/use.module.info'
 import { Select, type SelectOptionProps, type SelectProps } from '@easykit/design'
-import { type FC, useEffect, useMemo } from 'react'
+import { type FC, useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
 
 export type HeaderSelectProps = Omit<SelectProps, 'options'> & {
@@ -40,10 +40,6 @@ export const HeaderSelect: FC<HeaderSelectProps> = (props) => {
       disabled: disabledKeys?.includes(option.value),
     }))
   }, [baseOptions, disabledKeys])
-
-  useEffect(() => {
-    console.log('value change', props.value)
-  }, [props.value])
 
   return (
     <Select
