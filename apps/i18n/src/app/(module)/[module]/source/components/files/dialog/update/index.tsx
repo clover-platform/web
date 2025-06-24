@@ -1,27 +1,29 @@
 import { type FileFormData, getSchema } from '@/config/schema/module/file'
-import { type UploadFileData, upload } from '@/rest/source'
+import { type UploadFileData, update } from '@/rest/source'
 import { Uploader } from '@clover/public/components/common/uploader'
 import { Alert, Button, Dialog, type DialogProps, Form, FormItem, Space, useMessage } from '@easykit/design'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { Info } from 'lucide-react'
 import { useParams } from 'next/navigation'
-import type { FC } from 'react'
+import { type FC, useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
 
-export type UploadModalProps = {
-  onSuccess?: () => void
+export type UpdateDialogProps = {
+  fileId?: number
+  fileName?: string
 } & DialogProps
 
-export const UploadModal: FC<UploadModalProps> = (props) => {
+export const UpdateDialog: FC<UpdateDialogProps> = (props) => {
+  const { fileId, fileName } = props
   const { module } = useParams()
   const msg = useMessage()
   const { t } = useTranslation()
   const queryClient = useQueryClient()
   const { mutate, isPending: loading } = useMutation({
-    mutationFn: upload,
+    mutationFn: update,
     onSuccess: () => {
-      props.onSuccess?.()
       queryClient.invalidateQueries({ queryKey: ['module:source:files'] })
+      props.onCancel?.()
     },
     onError: (error) => {
       msg.error(error.message)
@@ -30,30 +32,37 @@ export const UploadModal: FC<UploadModalProps> = (props) => {
 
   const onSubmit = (data: UploadFileData) => {
     data.module = module as string
+    data.fileId = fileId
     mutate(data)
   }
 
-  const json = {
-    key: 'value',
-  }
+  const accept = useMemo((): Record<string, string[]> | undefined => {
+    if (fileName?.endsWith('.json')) {
+      return {
+        'application/json': ['.json'],
+      }
+    }
+    if (fileName?.endsWith('.xls') || fileName?.endsWith('.xlsx')) {
+      return {
+        'application/vnd.*': ['.xls', '.xlsx'],
+      }
+    }
+    return undefined
+  }, [fileName])
 
   return (
-    <Dialog {...props} title={t('上传文件')} maskClosable={false}>
+    <Dialog {...props} title={t('更新文件')} maskClosable={false}>
       <Alert className="mb-4" title={t('文件说明')} icon={<Info />}>
         <ul className="ml-2 list-disc">
-          <li>{t('JSON 文件需要使用 {{json}} 格式', { json: JSON.stringify(json) })}</li>
-          <li>{t('Excel 上传成功后，你需要手动配置导入的数据列，你的工作表至少有两列。')}</li>
-          <li>{t('上传文件数量不能超过 3 个。')}</li>
+          <li>{t('你需要与原文件（{{fileName}}）格式保持一致。', { fileName: fileName || '' })}</li>
+          <li>{t('更新文件时，只能上传 1 个文件。')}</li>
         </ul>
       </Alert>
       <Form<FileFormData> schema={getSchema()} onSubmit={(data) => onSubmit(data as UploadFileData)}>
         <FormItem name="files">
           <Uploader
-            maxFiles={3}
-            accept={{
-              'application/json': ['.json'],
-              'application/vnd.*': ['.xls', '.xlsx'],
-            }}
+            maxFiles={1}
+            accept={accept}
             data={{
               type: 1, // 私有
             }}

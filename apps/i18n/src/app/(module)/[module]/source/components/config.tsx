@@ -3,7 +3,7 @@ import { Space } from '@easykit/design'
 import type { ReactNode } from 'react'
 import { Entries } from './entries'
 import { Files } from './files'
-import { UploadButton } from './files/upload/button'
+import { UploadButton } from './files/button/upload'
 
 export type TabItem = {
   id: string

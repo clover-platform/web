@@ -4,6 +4,8 @@ export const t = (key: string, vars?: Record<string, string>) => {
   return i18next?.t(key, { ns: "translation", ...(vars || {}) });
 }
 
+export const tk = (key: string) => key
+
 // biome-ignore lint/suspicious/noExplicitAny: <explanation>
 export const i18n = (input: string, params: any) => {
   if (!params) return input

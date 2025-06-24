@@ -2,9 +2,9 @@ import type { File } from '@/types/module/source'
 import { t } from '@clover/public/utils/locale.client'
 import type { DataTableColumn } from '@easykit/design'
 import { type DropdownMenuItemProps, type FilterItemProps, Input } from '@easykit/design'
-import { FileName } from './file-name'
-import { FileRevision } from './revision'
-import { WordCount } from './word-count'
+import { FileName } from './common/file-name'
+import { FileRevision } from './common/revision'
+import { WordCount } from './common/word-count'
 
 export const getColumns = (): DataTableColumn<File>[] => [
   {

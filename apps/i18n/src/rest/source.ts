@@ -12,10 +12,11 @@ export const list = (params: ListFileQuery) =>
 
 export type UploadFileData = {
   module: string
+  fileId?: number
 } & FileFormData
 
 export const upload = (data: UploadFileData) =>
-  resultWrapper(post<unknown, UploadFileData>(`@i18n/${data.module}/file/upload`, data))
+  resultWrapper(post<FileFormData, UploadFileData>(`@i18n/${data.module}/file/upload`, data))
 
 export type Params = {
   module: string
@@ -44,3 +45,9 @@ export type RenameData = Params & {
 
 export const rename = (data: RenameData) =>
   resultWrapper(put<unknown, RenameData>(`@i18n/${data.module}/file/${data.fileId}/rename`, data))
+
+export const update = (data: UploadFileData) =>
+  resultWrapper(post<unknown, UploadFileData>(`@i18n/${data.module}/file/${data.fileId}/update`, data))
+
+export const updateBatch = (data: UploadFileData) =>
+  resultWrapper(post<unknown, UploadFileData>(`@i18n/${data.module}/file/update`, data))

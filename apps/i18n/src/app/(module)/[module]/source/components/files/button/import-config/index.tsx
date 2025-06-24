@@ -1,7 +1,7 @@
 import { Button } from '@easykit/design'
 import { type FC, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { ImportConfigDialog } from '../dialog'
+import { ImportConfigDialog } from '../../dialog/import-config'
 
 export type ImportConfigButtonProps = {
   fileId: number

@@ -2,7 +2,7 @@ import { Button } from '@easykit/design'
 import { FileUp } from 'lucide-react'
 import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { UploadModal } from '../model'
+import { UploadDialog } from '../../dialog/upload'
 
 export const UploadButton = () => {
   const [visible, setVisible] = useState(false)
@@ -13,10 +13,7 @@ export const UploadButton = () => {
         <FileUp />
         {t('上传文件')}
       </Button>
-      <UploadModal
-        onSuccess={() => {
-          setVisible(false)
-        }}
+      <UploadDialog
         visible={visible}
         onCancel={() => setVisible(false)}
       />

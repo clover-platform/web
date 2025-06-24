@@ -20,7 +20,7 @@ import {
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import { type FC, useEffect, useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { HeaderSelect } from '../header-select'
+import { HeaderSelect } from './header-select'
 
 export type ImportConfigDialogProps = {
   fileId: number

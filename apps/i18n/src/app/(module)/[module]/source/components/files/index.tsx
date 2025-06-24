@@ -7,7 +7,8 @@ import { useMutation } from '@tanstack/react-query'
 import { useParams } from 'next/navigation'
 import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { RenameDialog } from './rename-dialog'
+import { RenameDialog } from './dialog/rename'
+import { UpdateDialog } from './dialog/update'
 import { ROW_ACTIONS, getColumns, getFilters } from './table'
 
 const initialParams = {
@@ -27,6 +28,7 @@ export const Files = () => {
     action: list,
   })
   const [renameVisible, setRenameVisible] = useState(false)
+  const [updateVisible, setUpdateVisible] = useState(false)
   const [file, setFile] = useState<File | null>(null)
 
   const { mutateAsync: deleteFileMutate } = useMutation({
@@ -71,6 +73,9 @@ export const Files = () => {
             } else if (key === 'rename') {
               setRenameVisible(true)
               setFile(original)
+            } else if (key === 'update') {
+              setUpdateVisible(true)
+              setFile(original)
             }
           }}
         />
@@ -81,6 +86,15 @@ export const Files = () => {
         visible={renameVisible}
         onCancel={() => {
           setRenameVisible(false)
+          setFile(null)
+        }}
+      />
+      <UpdateDialog
+        fileId={file?.id}
+        fileName={file?.name}
+        visible={updateVisible}
+        onCancel={() => {
+          setUpdateVisible(false)
           setFile(null)
         }}
       />
