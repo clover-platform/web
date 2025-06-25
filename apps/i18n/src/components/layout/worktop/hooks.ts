@@ -1,4 +1,4 @@
-import { SIZE } from '@/app/(worktop)/[module]/worktop/components/main/panel/entry'
+import { SIZE } from '@/app/(worktop)/[module]/[fileId]/worktop/components/main/panel/entry'
 import { all as allEntry, count, detail } from '@/rest/entry'
 import { languages as allLanguage } from '@/rest/module'
 import { all as allFile } from '@/rest/source'
@@ -24,19 +24,18 @@ import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 export const useWorktopState = () => {
   const search = useSearchParams()
   const [, setCurrentEntry] = useAtom(currentEntryState)
-  const file = search.get('file') || ''
   const target = search.get('target') || ''
-  const { module } = useParams()
+  const { module, fileId } = useParams()
   const [, setLanguages] = useAtom(languagesState)
   const [, setFiles] = useAtom(filesState)
   const [, setCurrentLanguage] = useAtom(currentLanguageState)
   const [, setCurrentBranch] = useAtom(currentFileState)
 
   useEffect(() => {
-    setCurrentBranch(file)
+    setCurrentBranch(fileId as string)
     setCurrentLanguage(target)
     setCurrentEntry(0)
-  }, [file, target, setCurrentBranch, setCurrentLanguage, setCurrentEntry])
+  }, [fileId, target, setCurrentBranch, setCurrentLanguage, setCurrentEntry])
 
   const { data: result, isLoading: loading } = useQuery({
     queryKey: ['worktop:state', module],
@@ -66,12 +65,13 @@ export const useWorktopState = () => {
 
 export const useQuerySync = () => {
   const router = useRouter()
+  const { module, fileId } = useParams()
+  console.log(module, fileId)
   const [currentLanguage] = useAtom(currentLanguageState)
-  const [currentFile] = useAtom(currentFileState)
-  const query = [`target=${currentLanguage}`, `file=${currentFile}`].join('&')
+  const query = [`target=${currentLanguage}`].join('&')
   useEffect(() => {
-    router.replace(`?${query}`)
-  }, [query, router])
+    router.replace(`/${module}/${fileId || 'all'}/worktop?${query}`)
+  }, [query, router, module, fileId])
 }
 
 export const useEntriesLoader = () => {
@@ -83,7 +83,7 @@ export const useEntriesLoader = () => {
   const [files] = useAtom(filesState)
   const [currentLanguage] = useAtom(currentLanguageState)
   const [, setCount] = useAtom(countState)
-  const file = files.find((b) => b.name === currentFile)
+  const file = files.find((b) => b.id === Number(currentFile))
   const [page, setPage] = useAtom(currentPageState)
   const [current, setCurrent] = useAtom(currentEntryState)
   const [keyword, setKeyword] = useState<string>('')

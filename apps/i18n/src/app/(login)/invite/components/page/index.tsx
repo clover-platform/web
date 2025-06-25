@@ -34,7 +34,7 @@ export const InvitePageBody: FC<InvitePageBodyProps> = (props) => {
     const { success, message, data } = await accept({ token: token! });
     setSubmitting(false);
     if (success) {
-      router.push(`/i18n/${data}/dashboard`);
+      router.push(`/${data}/dashboard`)
     } else {
       msg.error(message);
     }

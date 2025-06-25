@@ -5,15 +5,15 @@ import { useAtom } from 'jotai'
 import type { FC } from 'react'
 import { useTranslation } from 'react-i18next'
 
-export type BranchActionProps = {
+export type FileActionProps = {
   onClick: () => void
 }
 
-export const BranchAction: FC<BranchActionProps> = (props) => {
+export const FileAction: FC<FileActionProps> = (props) => {
   const { t } = useTranslation()
   const [files] = useAtom(filesState)
   const [current] = useAtom(currentFileState)
-  const file = files.find((item) => item.name === current)
+  const file = files.find((item) => item.id === Number(current))
 
   return (
     <Action className="!px-1.5 h-8" onClick={props.onClick}>

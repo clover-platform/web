@@ -19,7 +19,7 @@ export type InviteLinkItemProps = {
 export const InviteLinkItem: FC<InviteLinkItemProps> = (props) => {
   const { item } = props
   const m = useModule()
-  const url = `${window.location.origin}/i18n/invite/?t=${item.token}`
+  const url = `${window.location.origin}/invite/?t=${item.token}`
   const msg = useMessage()
   const alert = useAlert()
   const { t } = useTranslation()

@@ -18,7 +18,7 @@ export const GetInviteLinkButton: FC<GetInviteLinkButtonProps> = (props) => {
   const { mutate: doGenerate, isPending: loading } = useMutation({
     mutationFn: () => generate({ module: m, roles: props.roles }),
     onSuccess: (data) => {
-      const url = `${window.location.origin}/i18n/invite/?t=${data}`
+      const url = `${window.location.origin}/invite/?t=${data}`
       copy(url)
       msg.success(t('邀请链接已复制'))
       queryClient.invalidateQueries({ queryKey: ['member:invite:list', m] })

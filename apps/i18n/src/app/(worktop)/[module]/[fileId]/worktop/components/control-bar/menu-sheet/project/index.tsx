@@ -15,11 +15,11 @@ export const MenuProjectSheet = () => {
   const { t } = useTranslation()
 
   const switchProject = (identifier: string) => {
-    location.href = `/i18n/${identifier}/worktop`
+    location.href = `/${identifier}/all/worktop`
   }
 
   const open = (url: string) => {
-    window.open(`/i18n/${module}/${url}`, '_blank')
+    window.open(`/${module}/${url}`, '_blank')
   }
 
   const load = useCallback(async () => {

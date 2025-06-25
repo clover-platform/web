@@ -3,10 +3,11 @@ import { Action } from '@clover/public/components/common/action'
 import { Separator, Sheet, SheetContent, SheetDescription, SheetTitle } from '@easykit/design'
 import { type FC, type ReactNode, useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { MenuBranchSheet } from './branch'
+import { MenuFileSheet } from './file'
 import { MenuHelpSheet } from './help'
 import { MenuLanguageSheet } from './language'
 import { MenuProjectSheet } from './project'
+
 export type MenuItemProps = {
   icon: ReactNode
   label: ReactNode
@@ -43,7 +44,7 @@ export const MenuSheet: FC<MenuSheetProps> = (props) => {
 
   return (
     <Sheet {...props}>
-      <SheetContent side="left" className="flex w-96 gap-0 p-0">
+      <SheetContent side="left" className="flex w-96 flex-row gap-0 p-0">
         <SheetTitle />
         <SheetDescription />
         <button type="button" />
@@ -61,10 +62,10 @@ export const MenuSheet: FC<MenuSheetProps> = (props) => {
             label={t('语言')}
           />
           <MenuItem
-            active={active === 'branch'}
-            onClick={() => setActive('branch')}
+            active={active === 'file'}
+            onClick={() => setActive('file')}
             icon={<IconBranch className="text-lg" />}
-            label={t('分支')}
+            label={t('文件')}
           />
           <Separator className="my-1" />
           <MenuItem
@@ -77,7 +78,7 @@ export const MenuSheet: FC<MenuSheetProps> = (props) => {
         <div className="flex-grow p-3">
           {active === 'project' && <MenuProjectSheet />}
           {active === 'language' && <MenuLanguageSheet />}
-          {active === 'branch' && <MenuBranchSheet />}
+          {active === 'file' && <MenuFileSheet />}
           {active === 'help' && <MenuHelpSheet />}
         </div>
       </SheetContent>

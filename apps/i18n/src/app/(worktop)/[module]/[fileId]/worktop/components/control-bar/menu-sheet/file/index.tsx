@@ -1,13 +1,18 @@
-import { currentEntryState, currentFileState, filesState } from '@/state/worktop'
+import { currentEntryState, currentFileState, currentLanguageState, filesState } from '@/state/worktop'
 import { Command, CommandInput, CommandItem, CommandList, SheetClose } from '@easykit/design'
 import { CheckIcon } from '@radix-ui/react-icons'
 import { useAtom } from 'jotai'
+import { useParams, useRouter } from 'next/navigation'
 import { useTranslation } from 'react-i18next'
-export const MenuBranchSheet = () => {
+
+export const MenuFileSheet = () => {
   const [files] = useAtom(filesState)
-  const [current, setCurrent] = useAtom(currentFileState)
+  const [current] = useAtom(currentFileState)
   const [, setCurrentEntry] = useAtom(currentEntryState)
+  const [currentLanguage] = useAtom(currentLanguageState)
   const { t } = useTranslation()
+  const { module } = useParams()
+  const router = useRouter()
 
   return (
     <div className="space-y-2">
@@ -20,12 +25,12 @@ export const MenuBranchSheet = () => {
               key="all"
               onSelect={() => {
                 setCurrentEntry(0)
-                setCurrent('')
+                router.push(`/${module}/all/worktop?target=${currentLanguage}`)
               }}
             >
               <div className="flex w-full items-center justify-center">
-                <span className="flex-1">{t('所有分支')}</span>
-                {current === '' ? <CheckIcon /> : null}
+                <span className="flex-1">{t('所有文件')}</span>
+                {current === 'all' ? <CheckIcon /> : null}
               </div>
             </CommandItem>
             {/* biome-ignore lint/suspicious/noExplicitAny: <explanation> */}
@@ -35,12 +40,12 @@ export const MenuBranchSheet = () => {
                   key={item.id}
                   onSelect={() => {
                     setCurrentEntry(0)
-                    setCurrent(item.name)
+                    router.push(`/${module}/${item.id}/worktop?target=${currentLanguage}`)
                   }}
                 >
                   <div className="flex w-full items-center justify-center">
                     <span className="flex-1">{item.name}</span>
-                    {item.name === current ? <CheckIcon /> : null}
+                    {item.id === Number(current) ? <CheckIcon /> : null}
                   </div>
                 </CommandItem>
               )

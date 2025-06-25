@@ -50,7 +50,7 @@ export const DashboardPage = () => {
   const { detail, languages, members, count } = data || {}
 
   const onRowClick = (item: Language) => {
-    router.push(`/${module}/worktop?target=${item.code}`)
+    router.push(`/${module}/all/worktop?target=${item.code}`)
   }
 
   const actions = (

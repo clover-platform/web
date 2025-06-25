@@ -14,7 +14,7 @@ export const InvitePageJoined: FC<InvitePageJoinedProps> = (props) => {
   const { t } = useTranslation()
 
   const detail = () => {
-    router.push(`/i18n/${module}/dashboard`)
+    router.push(`/${module}/dashboard`)
   }
 
   return (

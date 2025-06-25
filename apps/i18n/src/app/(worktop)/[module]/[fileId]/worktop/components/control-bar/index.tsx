@@ -24,7 +24,7 @@ import { useAtom } from 'jotai'
 import { useParams, useRouter } from 'next/navigation'
 import { useCallback, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { BranchAction } from './action/branch'
+import { FileAction } from './action/file'
 import { LanguageAction } from './action/language'
 import { MenuSheet } from './menu-sheet'
 
@@ -52,8 +52,8 @@ export const ControlBar = () => {
     setMenuOpen(true)
   }
 
-  const showMenuByBranch = () => {
-    setMenuActive('branch')
+  const showMenuByFile = () => {
+    setMenuActive('file')
     setMenuOpen(true)
   }
 
@@ -94,7 +94,7 @@ export const ControlBar = () => {
           </Action>
           <Separator orientation="vertical" className="h-5" />
           <LanguageAction onClick={showMenuByLanguage} />
-          <BranchAction onClick={showMenuByBranch} />
+          <FileAction onClick={showMenuByFile} />
           <Separator orientation="vertical" className="h-5" />
           <Tooltip content={t('刷新')}>
             <Action className="!px-1.5 h-8 w-8" onClick={refresh}>
