@@ -10,7 +10,7 @@ export type ListFileQuery = {
 export const list = (params: ListFileQuery) =>
   resultWrapper(get<File[], ListFileQuery>(`@i18n/${params.module}/file/list`, params))
 
-export const all = (module: string) => get<File[], undefined>(`@i18n/${module}/file/all`)
+export const all = (module: string) => resultWrapper(get<File[], undefined>(`@i18n/${module}/file/all`))
 
 export type UploadFileData = {
   module: string

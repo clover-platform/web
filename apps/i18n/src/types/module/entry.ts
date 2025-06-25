@@ -32,9 +32,9 @@ export type EntryResultPage = {
 }
 
 export type CountEntryQuery = {
-  module: string;
-  language: string;
-  branch?: string;
+  module: string
+  language: string
+  fileId?: number
 }
 
 export type CountEntryData = {

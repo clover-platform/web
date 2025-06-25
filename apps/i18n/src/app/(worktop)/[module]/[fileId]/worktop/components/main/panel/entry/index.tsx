@@ -21,7 +21,7 @@ export const EntryPanel = () => {
     const handler = () => {
       setCurrent(0)
       setPage(1)
-      load().then()
+      load()
     }
     bus.on(ENTRY_RELOAD, handler)
     return () => {

@@ -24,7 +24,7 @@ export const create = (data: ModuleFormData) => resultWrapper(post<unknown, Modu
 
 export const dashboard = (path: string) => resultWrapper(get<ModuleDashboard, unknown>(`@i18n/${path}/dashboard`))
 
-export const languages = (module: string) => get<Language[]>(`@i18n/${module}/languages`)
+export const languages = (module: string) => resultWrapper(get<Language[]>(`@i18n/${module}/languages`))
 
 export const deleteModule = (module: string) => resultWrapper(del(`@i18n/${module}`))
 

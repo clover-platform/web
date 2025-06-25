@@ -1,12 +1,12 @@
 import { ENTRY_COMMENT_RELOAD } from '@/events/worktop'
 import { list as listRest } from '@/rest/entry.comment'
 import { currentEntryState, currentLanguageState, entriesState, filesState } from '@/state/worktop'
-import type { EntryComment } from '@/types/module/entry'
 import bus from '@clover/public/events'
 import { Button, Empty, ScrollArea } from '@easykit/design'
+import { useInfiniteQuery } from '@tanstack/react-query'
 import { useAtom } from 'jotai'
 import { useParams } from 'next/navigation'
-import { useCallback, useEffect, useRef, useState } from 'react'
+import { useEffect, useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
 import { CommentListItem } from './item'
 import { CommentListItemLoading } from './item/loading'
@@ -16,61 +16,51 @@ const CommentListLoading = () => {
 }
 
 export const CommentList = () => {
-  const [loading, setLoading] = useState(false)
   const [entries] = useAtom(entriesState)
   const [current] = useAtom(currentEntryState)
   const entry = entries[current]
   const [language] = useAtom(currentLanguageState)
-  const [list, setList] = useState<EntryComment[]>([])
-  const [total, setTotal] = useState(0)
-  const pageRef = useRef(1)
   const { module } = useParams()
   const [files] = useAtom(filesState)
   const file = files.find((item) => item.id === entry.fileId)
   const { t } = useTranslation()
 
-  const load = useCallback(
-    async (options?: { append?: boolean }) => {
-      const { append = false } = options || {}
-      if (!append) setList([])
-      setLoading(true)
-      const { success, data } = await listRest({
+  const SIZE = 50
+
+  const {
+    data,
+    fetchNextPage,
+    hasNextPage,
+    isLoading: loading,
+  } = useInfiniteQuery({
+    queryKey: ['worktop:entry:comment', module, file?.id, language, entry?.id],
+    queryFn: ({ pageParam = 1 }) =>
+      listRest({
         entryId: entry.id,
         language,
-        page: pageRef.current,
-        size: 50,
+        page: pageParam,
+        size: SIZE,
         module: module as string,
-        branch: file?.name || '',
-      })
-      setLoading(false)
-      if (success) {
-        setList([...(append ? list : []), ...(data?.data || [])])
-        setTotal(data?.total || 0)
-      }
-    },
-    [language, entry, list, module, file?.name]
-  )
+        fileId: file?.id,
+      }),
+    getNextPageParam: (lastPage, pages) =>
+      (lastPage?.total || 0) > pages.length * SIZE ? pages.length + 1 : undefined,
+    enabled: !!entry?.id && !!file?.id,
+    initialPageParam: 1,
+  })
 
-  useEffect(() => {
-    pageRef.current = 1
-    load().then()
-  }, [load])
+  const list = useMemo(() => data?.pages.flatMap((page) => page?.data || []) || [], [data])
 
+  // 刷新事件
   useEffect(() => {
     const handler = () => {
-      pageRef.current = 1
-      load().then()
+      fetchNextPage()
     }
     bus.on(ENTRY_COMMENT_RELOAD, handler)
     return () => {
       bus.off(ENTRY_COMMENT_RELOAD, handler)
     }
-  }, [load])
-
-  const loadMore = useCallback(async () => {
-    pageRef.current += 1
-    await load({ append: true })
-  }, [load])
+  }, [fetchNextPage])
 
   return (
     <div className="h-0 w-full flex-1 flex-shrink-0">
@@ -81,13 +71,13 @@ export const CommentList = () => {
           ))}
           {loading ? <CommentListLoading /> : null}
           {!loading && list.length === 0 ? <Empty text={t('暂无评论')} /> : null}
-          {!loading && total > list.length ? (
+          {!loading && hasNextPage && (
             <div className="flex w-full justify-center">
-              <Button onClick={loadMore} variant="link">
+              <Button onClick={() => fetchNextPage()} variant="link">
                 {t('加载更多')}
               </Button>
             </div>
-          ) : null}
+          )}
         </div>
       </ScrollArea>
     </div>

@@ -3,12 +3,12 @@ import classNames from 'classnames'
 
 export const ResultItemLoading = () => {
   return (
-    <div className={classNames('rounded-md border', 'hover:shadow-md')}>
-      <div className="flex items-start justify-center bg-muted px-3 py-2">
+    <div className={classNames('rounded-md border')}>
+      <div className="flex items-start justify-center rounded-t-md bg-muted px-3 py-2">
         <div className="mr-2 flex-1 py-1">
           <div className="space-y-2">
-            <Skeleton className="h-4 w-full" />
-            <Skeleton className="h-4 w-6/12" />
+            <Skeleton className="h-4 w-full bg-black/10" />
+            <Skeleton className="h-4 w-6/12 bg-black/10" />
           </div>
         </div>
         <div className="flex items-center justify-center space-x-1">

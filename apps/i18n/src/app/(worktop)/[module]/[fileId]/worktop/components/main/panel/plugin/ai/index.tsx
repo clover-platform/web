@@ -1,4 +1,4 @@
-import { useCurrentBranch } from '@/hooks/use.current.branch'
+import { useCurrentFile } from '@/hooks/use.current.file'
 import { ai } from '@/rest/entry.result'
 import { currentEntryState, currentLanguageState, entriesState } from '@/state/worktop'
 import { ScrollArea } from '@easykit/design'
@@ -20,7 +20,7 @@ export const AIPlugin = () => {
   const [loading, setLoading] = useState(true)
   const [results, setResults] = useState<string[]>([])
   const { module } = useParams()
-  const branch = useCurrentBranch()
+  const file = useCurrentFile()
 
   const load = useCallback(async () => {
     setLoading(true)
@@ -28,15 +28,15 @@ export const AIPlugin = () => {
       module: module as string,
       entryId: entry.id,
       language,
-      branch: branch?.name || '',
+      fileId: file?.id,
     })
     setLoading(false)
     if (success) {
-      setResults(data || [])
+      setResults((data as string[]) || [])
     } else {
       setResults([])
     }
-  }, [branch?.name, entry.id, language, module])
+  }, [file?.id, entry.id, language, module])
 
   useEffect(() => {
     setResults([])

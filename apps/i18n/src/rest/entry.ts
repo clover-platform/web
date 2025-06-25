@@ -1,26 +1,31 @@
 import type { CountEntryData, CountEntryQuery, Entry } from '@/types/module/entry'
-import { del, get, post, put } from '@clover/public/utils/rest'
+import type { PageData } from '@clover/public/types/rest'
+import { del, get, post, put, resultWrapper } from '@clover/public/utils/rest'
 
 export type EntryQueryParams = {
   module: string
   language: string
   keyword?: string
-  branch?: string
+  fileId?: number
   page?: number
   size?: number
 }
 
 export const list = (params: EntryQueryParams) =>
   // biome-ignore lint/suspicious/noExplicitAny: <explanation>
-  get<any, EntryQueryParams>(`@i18n/${params.module}/branch/${params.branch || '-'}/entry/list`, params)
+  get<any, EntryQueryParams>(`@i18n/${params.module}/branch/${params.fileId || '-'}/entry/list`, params)
 
 export const all = (params: EntryQueryParams) =>
-  // biome-ignore lint/suspicious/noExplicitAny: <explanation>
-  get<any, EntryQueryParams>(`@i18n/${params.module}/branch/${params.branch || '-'}/entry/all`, params)
+  resultWrapper(
+    get<PageData<Entry>, EntryQueryParams>(
+      `@i18n/${params.module}/file/${params.fileId ? `${params.fileId}/` : ''}entry/all`,
+      params
+    )
+  )
 
 export const sync = (params: EntryQueryParams) =>
   // biome-ignore lint/suspicious/noExplicitAny: <explanation>
-  get<any, EntryQueryParams>(`@i18n/${params.module}/branch/${params.branch || '-'}/entry/sync`, params)
+  get<any, EntryQueryParams>(`@i18n/${params.module}/branch/${params.fileId || '-'}/entry/sync`, params)
 
 export type CreateEntryData = {
   module: string
@@ -63,4 +68,9 @@ export type RemoveEntryData = {
 export const remove = (data: RemoveEntryData) => del<any>(`@i18n/${data.module}/branch/${data.branch}/entry/${data.id}`)
 
 export const count = (query: CountEntryQuery) =>
-  get<CountEntryData, CountEntryQuery>(`@i18n/${query.module}/branch/${query.branch || '-'}/entry/count`, query)
+  resultWrapper(
+    get<CountEntryData, CountEntryQuery>(
+      `@i18n/${query.module}/file/${query.fileId ? `${query.fileId}/` : ''}entry/count`,
+      query
+    )
+  )

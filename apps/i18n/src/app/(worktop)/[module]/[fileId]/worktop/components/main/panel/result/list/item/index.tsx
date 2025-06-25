@@ -1,6 +1,6 @@
 import { useEntriesUpdater } from '@/components/layout/worktop/hooks'
 import { ENTRY_RESULT_EDITOR_RESET, ENTRY_RESULT_RELOAD } from '@/events/worktop'
-import { useCurrentBranch } from '@/hooks/use.current.branch'
+import { useCurrentFile } from '@/hooks/use.current.file'
 import { approve as approveRest, deleteResult, removeApproval as removeApprovalRest } from '@/rest/entry.result'
 import type { EntryResult } from '@/types/module/entry'
 import { IconDelete } from '@arco-iconbox/react-clover'
@@ -26,7 +26,7 @@ export const ResultItem: FC<ResultItemProps> = (props) => {
   const msg = useMessage()
   const { update } = useEntriesUpdater()
   const { module } = useParams()
-  const branch = useCurrentBranch()
+  const file = useCurrentFile()
   const { t } = useTranslation()
 
   // biome-ignore lint/suspicious/noExplicitAny: <explanation>
@@ -52,7 +52,7 @@ export const ResultItem: FC<ResultItemProps> = (props) => {
             module: module as string,
             id: item.id,
             entryId: item.entryId,
-            branch: branch?.name || '',
+            fileId: file?.id,
           })
         )
       },
@@ -69,7 +69,7 @@ export const ResultItem: FC<ResultItemProps> = (props) => {
             module: module as string,
             id: item.id,
             entryId: item.entryId,
-            branch: branch?.name || '',
+            fileId: file?.id,
           })
         )
       },
@@ -86,7 +86,7 @@ export const ResultItem: FC<ResultItemProps> = (props) => {
             module: module as string,
             id: item.id,
             entryId: item.entryId,
-            branch: branch?.name || '',
+            fileId: file?.id,
           })
         )
       },

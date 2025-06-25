@@ -1,5 +1,5 @@
 import { ENTRY_COMMENT_RELOAD } from '@/events/worktop'
-import { useCurrentBranch } from '@/hooks/use.current.branch'
+import { useCurrentFile } from '@/hooks/use.current.file'
 import { deleteComment } from '@/rest/entry.comment'
 import type { EntryComment } from '@/types/module/entry'
 import { IconDelete } from '@arco-iconbox/react-clover'
@@ -23,7 +23,7 @@ export const CommentListItem: FC<CommentListItemProps> = (props) => {
   const msg = useMessage()
   const alert = useAlert()
   const { module } = useParams()
-  const branch = useCurrentBranch()
+  const file = useCurrentFile()
   const { t } = useTranslation()
 
   const del = () => {
@@ -35,7 +35,7 @@ export const CommentListItem: FC<CommentListItemProps> = (props) => {
           module: module as string,
           entryId: item.entryId,
           id: item.id,
-          branch: branch?.name || '',
+          fileId: file?.id,
         })
         if (success) {
           bus.emit(ENTRY_COMMENT_RELOAD)

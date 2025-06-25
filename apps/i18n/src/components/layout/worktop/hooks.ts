@@ -8,15 +8,11 @@ import {
   currentFileState,
   currentLanguageState,
   currentPageState,
-  entriesLoadingState,
   entriesState,
   filesState,
   languagesState,
 } from '@/state/worktop'
-import type { Entry } from '@/types/module/entry'
-import type { File } from '@/types/module/source'
-import type { Language } from '@/types/public'
-import { useQuery } from '@tanstack/react-query'
+import { useQuery, useQueryClient } from '@tanstack/react-query'
 import { useAtom } from 'jotai'
 import { useParams, useRouter, useSearchParams } from 'next/navigation'
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
@@ -28,37 +24,67 @@ export const useWorktopState = () => {
   const { module, fileId } = useParams()
   const [, setLanguages] = useAtom(languagesState)
   const [, setFiles] = useAtom(filesState)
-  const [, setCurrentLanguage] = useAtom(currentLanguageState)
-  const [, setCurrentBranch] = useAtom(currentFileState)
+  const [currentLanguage, setCurrentLanguage] = useAtom(currentLanguageState)
+  const [currentFile, setCurrentFile] = useAtom(currentFileState)
+  const [, setCount] = useAtom(countState)
+  const queryClient = useQueryClient()
 
   useEffect(() => {
-    setCurrentBranch(fileId as string)
+    setCurrentFile(fileId as string)
     setCurrentLanguage(target)
     setCurrentEntry(0)
-  }, [fileId, target, setCurrentBranch, setCurrentLanguage, setCurrentEntry])
+  }, [fileId, target, setCurrentFile, setCurrentLanguage, setCurrentEntry])
 
   const { data: result, isLoading: loading } = useQuery({
     queryKey: ['worktop:state', module],
     queryFn: async ({ queryKey }) => {
-      const languagesResult = await allLanguage(queryKey[1] as string)
-      const filesResult = await allFile(queryKey[1] as string)
-      let languages: Language[] = []
-      let files: File[] = []
-      if (languagesResult.success) languages = languagesResult.data || []
-      if (filesResult.success) files = filesResult.data || []
+      const languages = await allLanguage(queryKey[1] as string)
+      const files = await allFile(queryKey[1] as string)
       return {
         languages,
         files,
       }
     },
   })
+  const { data: countResult } = useQuery({
+    queryKey: ['worktop:count', module, currentFile || 'all', currentLanguage],
+    queryFn: () =>
+      count({
+        module: module as string,
+        language: currentLanguage,
+        fileId: currentFile === 'all' ? undefined : Number(currentFile),
+      }),
+    enabled: !!currentLanguage,
+  })
+
+  useEffect(() => {
+    if (countResult) setCount(countResult)
+  }, [countResult, setCount])
 
   useEffect(() => {
     if (result) {
-      setLanguages(result.languages)
-      setFiles(result.files)
+      setLanguages(result.languages || [])
+      setFiles(result.files || [])
     }
   }, [result, setLanguages, setFiles])
+
+  useEffect(() => {
+    return () => {
+      setLanguages([])
+      setFiles([])
+      setCount({
+        total: 0,
+        translated: 0,
+        verified: 0,
+      })
+      setCurrentFile('all')
+      setCurrentLanguage('')
+      setCurrentEntry(0)
+      queryClient.invalidateQueries({ queryKey: ['worktop:entries'], exact: false })
+      queryClient.invalidateQueries({ queryKey: ['worktop:count'], exact: false })
+      queryClient.invalidateQueries({ queryKey: ['worktop:state'], exact: false })
+    }
+  }, [setLanguages, setFiles, setCount, setCurrentFile, setCurrentLanguage, setCurrentEntry, queryClient])
 
   return loading
 }
@@ -66,7 +92,6 @@ export const useWorktopState = () => {
 export const useQuerySync = () => {
   const router = useRouter()
   const { module, fileId } = useParams()
-  console.log(module, fileId)
   const [currentLanguage] = useAtom(currentLanguageState)
   const query = [`target=${currentLanguage}`].join('&')
   useEffect(() => {
@@ -76,22 +101,36 @@ export const useQuerySync = () => {
 
 export const useEntriesLoader = () => {
   const { module } = useParams()
-  const [originEntries, setOriginEntries] = useState<Entry[]>([])
-  const [loading, setLoading] = useAtom(entriesLoadingState)
   const [entries, setEntries] = useAtom(entriesState)
   const [currentFile] = useAtom(currentFileState)
   const [files] = useAtom(filesState)
   const [currentLanguage] = useAtom(currentLanguageState)
-  const [, setCount] = useAtom(countState)
   const file = files.find((b) => b.id === Number(currentFile))
   const [page, setPage] = useAtom(currentPageState)
   const [current, setCurrent] = useAtom(currentEntryState)
   const [keyword, setKeyword] = useState<string>('')
   const paramsRef = useRef({})
+  const queryClient = useQueryClient()
+  const { data: originEntries, isLoading: loading } = useQuery({
+    queryKey: ['worktop:entries', module, file?.id || 'all', currentLanguage],
+    queryFn: () =>
+      allEntry({
+        ...paramsRef.current,
+        fileId: file?.id,
+        module: module as string,
+        language: currentLanguage,
+      }),
+    enabled: !!currentLanguage,
+  })
+
+  const load = useCallback(() => {
+    queryClient.invalidateQueries({ queryKey: ['worktop:entries'], exact: false })
+  }, [queryClient])
 
   const filteredEntries = useMemo(() => {
-    return originEntries?.filter((entry) => entry.value.includes(keyword)) || []
-  }, [originEntries, keyword])
+    if (!currentLanguage) return []
+    return originEntries?.data?.filter((entry) => entry.value.includes(keyword)) || []
+  }, [originEntries, keyword, currentLanguage])
 
   const pages = useMemo(() => {
     return Math.ceil((filteredEntries?.length || 0) / SIZE)
@@ -105,36 +144,6 @@ export const useEntriesLoader = () => {
   useEffect(() => {
     setEntries(pageEntries)
   }, [pageEntries, setEntries])
-
-  const load = useCallback(async () => {
-    setLoading(true)
-    const params = {
-      ...paramsRef.current,
-      branch: file?.name,
-      module: module as string,
-      language: currentLanguage,
-    }
-    paramsRef.current = params
-    const { success, data } = await allEntry(params)
-    if (success) {
-      setOriginEntries(data.data)
-    }
-    setLoading(false)
-  }, [file, module, currentLanguage, setLoading])
-
-  const loadCount = useCallback(async () => {
-    const countResult = await count({
-      module: module as string,
-      language: currentLanguage,
-      branch: currentFile,
-    })
-    if (countResult.success) setCount(countResult.data!)
-  }, [module, currentLanguage, currentFile, setCount])
-
-  useEffect(() => {
-    if (currentLanguage) load().then()
-    if (currentLanguage) loadCount().then()
-  }, [currentLanguage, load, loadCount])
 
   return {
     load,
@@ -154,9 +163,8 @@ export const useEntriesUpdater = () => {
   const { module } = useParams()
   const [entries, setEntries] = useAtom(entriesState)
   const [currentLanguage] = useAtom(currentLanguageState)
-  const [currentFile] = useAtom(currentFileState)
-  const [, setCount] = useAtom(countState)
   const [files] = useAtom(filesState)
+  const queryClient = useQueryClient()
 
   const update = async (id: number) => {
     const entry = entries.find((e) => e.id === id)
@@ -170,22 +178,13 @@ export const useEntriesUpdater = () => {
     })
     if (result.success) {
       setEntries(entries.map((entry) => (entry.id === id ? result.data! : entry)))
-      loadCount().then()
+      queryClient.invalidateQueries({ queryKey: ['worktop:count'], exact: false })
     }
   }
 
   const remove = async (id: number) => {
     setEntries(entries.filter((entry) => entry.id !== id))
-    loadCount().then()
-  }
-
-  const loadCount = async () => {
-    const countResult = await count({
-      module: module as string,
-      language: currentLanguage,
-      branch: currentFile,
-    })
-    if (countResult.success) setCount(countResult.data!)
+    queryClient.invalidateQueries({ queryKey: ['worktop:count'], exact: false })
   }
 
   return {

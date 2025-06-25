@@ -1,5 +1,5 @@
 import type { EntryComment } from '@/types/module/entry'
-import { del, get, post } from '@clover/public/utils/rest'
+import { del, get, post, resultWrapper } from '@clover/public/utils/rest'
 
 export type AddCommentData = {
   module: string;
@@ -19,7 +19,7 @@ export type EntryCommentQuery = {
   language: string
   page: number
   size: number
-  branch: string
+  fileId?: number
 }
 
 export type EntryCommentPage = {
@@ -28,13 +28,18 @@ export type EntryCommentPage = {
 }
 
 export const list = (data: EntryCommentQuery) =>
-  get<EntryCommentPage, EntryCommentQuery>(`@i18n/${data.module}/branch/${data.branch}/entry/${data.entryId}/comment/list`, data);
+  resultWrapper(
+    get<EntryCommentPage, EntryCommentQuery>(
+      `@i18n/${data.module}/file/${data.fileId}/entry/${data.entryId}/comment/list`,
+      data
+    )
+  )
 
 export type DeleteCommentData = {
-  module: string;
-  entryId: number;
-  branch: string;
-  id: number;
+  module: string
+  entryId: number
+  fileId?: number
+  id: number
 }
 export const deleteComment = (data: DeleteCommentData) =>
-  del<EntryCommentPage>(`@i18n/${data.module}/branch/${data.branch}/entry/${data.entryId}/comment/${data.id}`);
+  del<EntryCommentPage>(`@i18n/${data.module}/file/${data.fileId}/entry/${data.entryId}/comment/${data.id}`)

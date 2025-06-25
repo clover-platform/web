@@ -7,10 +7,10 @@ export const EntryLoading = () => {
     return (
       <div key={item} className="my-0.5 flex cursor-pointer items-center justify-center rounded-sm px-2 py-1">
         <div className="flex h-6 w-6 items-center justify-center">
-          <Skeleton className="h-5 w-5 rounded-full" />
+          <Skeleton className="h-5 w-5 rounded-full bg-black/10" />
         </div>
         <div className="flex-1">
-          <Skeleton className="h-5 w-8/12" />
+          <Skeleton className="h-5 w-8/12 bg-black/10" />
         </div>
       </div>
     )

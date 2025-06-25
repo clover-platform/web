@@ -1,17 +1,18 @@
 import { ENTRY_RESULT_RELOAD } from '@/events/worktop'
-import { useCurrentBranch } from '@/hooks/use.current.branch'
+import { useCurrentFile } from '@/hooks/use.current.file'
 import { list as listRest } from '@/rest/entry.result'
 import { currentEntryState, currentLanguageState, entriesState } from '@/state/worktop'
-import type { EntryResult } from '@/types/module/entry'
 import bus from '@clover/public/events'
 import { Button, Empty, ScrollArea } from '@easykit/design'
-import { compact, uniq } from 'es-toolkit'
+import { useInfiniteQuery } from '@tanstack/react-query'
 import { useAtom } from 'jotai'
 import { useParams } from 'next/navigation'
-import { useCallback, useEffect, useRef, useState } from 'react'
+import { useEffect, useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
 import { ResultItem } from './item'
 import { ResultListLoading } from './loading'
+
+const SIZE = 5
 
 export const ResultList = () => {
   const [language] = useAtom(currentLanguageState)
@@ -20,60 +21,42 @@ export const ResultList = () => {
   const entry = entries[current]
   const { t } = useTranslation()
 
-  const pageRef = useRef(1)
-  const [total, setTotal] = useState(0)
-  const [list, setList] = useState<EntryResult[]>([])
-  const [loading, setLoading] = useState(false)
   const { module } = useParams()
-  const branch = useCurrentBranch()
+  const file = useCurrentFile()
 
-  const load = useCallback(
-    async (options?: { append?: boolean }) => {
-      const { append = false } = options || {}
-      if (!append) setList([])
-      setLoading(true)
-      const { success, data } = await listRest({
+  const {
+    data,
+    fetchNextPage,
+    hasNextPage,
+    isLoading: loading,
+  } = useInfiniteQuery({
+    queryKey: ['worktop:entry:result', module, file?.id, language, entry?.id],
+    queryFn: ({ pageParam = 1 }) =>
+      listRest({
         module: module as string,
         entryId: entry?.id,
         language,
-        page: pageRef.current,
-        size: 5,
-        branch: branch?.name || '',
-      })
-      if (success) {
-        const { total, data: newList } = data!
-        const translatorIds = newList.map((item) => item.translatorId)
-        const verifierIds = newList.map((item) => item.checkerId)
-        const ids = uniq(compact([...translatorIds, ...verifierIds]))
-        console.log(ids)
-        setList([...(append ? list : []), ...newList])
-        setTotal(total)
-      }
-      setLoading(false)
-    },
-    [entry, language, module, branch, list]
-  )
+        page: pageParam,
+        size: SIZE,
+        fileId: file?.id,
+      }),
+    getNextPageParam: (lastPage, pages) =>
+      (lastPage?.total || 0) > pages.length * SIZE ? pages.length + 1 : undefined,
+    enabled: !!entry?.id && !!file?.id,
+    initialPageParam: 1,
+  })
 
-  const loadMore = () => {
-    pageRef.current += 1
-    load({ append: true }).then()
-  }
-
-  useEffect(() => {
-    pageRef.current = 1
-    load().then()
-  }, [load])
+  const list = useMemo(() => data?.pages.flatMap((page) => page?.data || []) || [], [data])
 
   useEffect(() => {
     const handler = () => {
-      pageRef.current = 1
-      load().then()
+      fetchNextPage()
     }
     bus.on(ENTRY_RESULT_RELOAD, handler)
     return () => {
       bus.off(ENTRY_RESULT_RELOAD, handler)
     }
-  }, [load])
+  }, [fetchNextPage])
 
   return (
     <div className="h-0 w-full flex-1 flex-shrink-0">
@@ -83,14 +66,14 @@ export const ResultList = () => {
           {list.map((item) => {
             return <ResultItem key={item.id} item={item} />
           })}
-          {loading ? <ResultListLoading /> : null}
-          {!loading && total > list.length ? (
+          {loading && <ResultListLoading />}
+          {!loading && hasNextPage && (
             <div className="flex w-full justify-center">
-              <Button onClick={loadMore} variant="link">
+              <Button onClick={() => fetchNextPage()} variant="link">
                 {t('加载更多')}
               </Button>
             </div>
-          ) : null}
+          )}
         </div>
       </ScrollArea>
     </div>

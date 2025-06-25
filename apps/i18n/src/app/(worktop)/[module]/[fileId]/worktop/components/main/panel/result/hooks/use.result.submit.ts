@@ -1,6 +1,6 @@
 import { useEntriesUpdater } from '@/components/layout/worktop/hooks'
 import { ENTRY_RESULT_RELOAD } from "@/events/worktop";
-import { useCurrentBranch } from '@/hooks/use.current.branch'
+import { useCurrentFile } from '@/hooks/use.current.file'
 import { save } from '@/rest/entry.result'
 import { currentEntryState, currentLanguageState, entriesState } from "@/state/worktop";
 import bus from '@clover/public/events'
@@ -19,7 +19,7 @@ export const useResultSubmit = (): [(content: string) => Promise<any>, boolean] 
   const msg = useMessage()
   const { update } = useEntriesUpdater()
   const { module } = useParams()
-  const branch = useCurrentBranch()
+  const file = useCurrentFile()
   const { t } = useTranslation()
 
   const next = () => {
@@ -38,7 +38,7 @@ export const useResultSubmit = (): [(content: string) => Promise<any>, boolean] 
       entryId: entry.id,
       content,
       language,
-      branch: branch?.name || '',
+      fileId: file?.id,
     })
     setLoading(false)
     if (success) {
