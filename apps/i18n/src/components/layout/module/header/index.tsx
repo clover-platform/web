@@ -33,7 +33,7 @@ export const Header: FC<HeaderProps> = (props) => {
         </li>
       ))}
       <li>
-        <Link href={`/i18n/${module}/worktop`}>
+        <Link href={`/${module}/worktop`}>
           <Button variant="outline">{t('工作台')}</Button>
         </Link>
       </li>

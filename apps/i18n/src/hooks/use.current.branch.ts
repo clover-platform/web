@@ -1,11 +1,11 @@
-import { branchesState, currentEntryState, entriesState } from "@/state/worktop";
+import { currentEntryState, entriesState, filesState } from '@/state/worktop'
 import { useAtom } from 'jotai/index'
 import { useMemo } from "react";
 
 export const useCurrentBranch = () => {
-  const [entries] = useAtom(entriesState);
-  const [current] = useAtom(currentEntryState);
-  const entry = entries[current];
-  const [branches] = useAtom(branchesState)
-  return useMemo(() => branches.find((i) => i.id === entry.branchId), [branches, entry]);
+  const [entries] = useAtom(entriesState)
+  const [current] = useAtom(currentEntryState)
+  const entry = entries[current]
+  const [files] = useAtom(filesState)
+  return useMemo(() => files.find((i) => i.id === entry.fileId), [files, entry])
 }

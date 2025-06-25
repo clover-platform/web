@@ -1,5 +1,5 @@
-import type { Branch } from '@/types/module/branch'
 import type { CountEntryData, Entry } from '@/types/module/entry'
+import type { File } from '@/types/module/source'
 import type { Language } from '@/types/public'
 import { atom } from 'jotai'
 
@@ -9,11 +9,11 @@ export const rightSideOpenState = atom(true)
 
 export const languagesState = atom<Language[]>([])
 
-export const branchesState = atom<Branch[]>([])
+export const filesState = atom<File[]>([])
 
 export const currentLanguageState = atom<string>('')
 
-export const currentBranchState = atom<string>('')
+export const currentFileState = atom<string>('')
 
 export const entriesState = atom<Entry[]>([])
 

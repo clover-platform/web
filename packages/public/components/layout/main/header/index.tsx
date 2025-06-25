@@ -3,7 +3,6 @@ import {Apps} from "@clover/public/components/layout/main/header/apps";
 import { Notice } from '@clover/public/components/layout/main/header/notice'
 import {ProfileMenu} from "@clover/public/components/layout/main/header/profile-menu";
 import { LayoutLogo } from '@clover/public/components/layout/main/logo'
-import { useApps } from '@clover/public/hooks'
 import { isLoginState } from '@clover/public/state/account'
 import { Action, Button, Separator } from '@easykit/design'
 import classNames from "classnames";
@@ -26,22 +25,7 @@ export const Header: FC<HeaderProps> = (props) => {
     extra, appName, profileExtra, className
   } = props;
   const [isLogin] = useAtom(isLoginState);
-  const { t } = useTranslation();
-  const [apps] = useApps()
-
-  const dashboard = useMemo(() => {
-    return apps.find((app) => app.appId === 'dashboard')
-  }, [apps])
-
-  const isDashboardSameOrigin = useMemo(() => {
-    if (!dashboard?.href) return false
-    try {
-      const dashboardUrl = new URL(dashboard.href, window.location.origin)
-      return dashboardUrl.origin === window.location.origin
-    } catch {
-      return false
-    }
-  }, [dashboard?.href])
+  const { t } = useTranslation()
 
   const logo = useMemo(() => {
     return (
@@ -65,21 +49,6 @@ export const Header: FC<HeaderProps> = (props) => {
       <div className="flex items-center justify-center space-x-xs">
         {isLogin ? (
           <>
-            {dashboard?.href ? (
-              isDashboardSameOrigin ? (
-                <Link href={dashboard.href}>
-                  <Button size="sm">{t('控制台')}</Button>
-                </Link>
-              ) : (
-                <Link href={dashboard.href} target="_blank" rel="noopener noreferrer">
-                  <Button size="sm">{t('控制台')}</Button>
-                </Link>
-              )
-            ) : (
-              <Link href="/">
-                <Button size="sm">{t('控制台')}</Button>
-              </Link>
-            )}
             <Notice />
             <Action className="!outline-none">
               <IconHelpFill />

@@ -1,14 +1,14 @@
 import type { User } from '@clover/public/types/account'
 
 export type Entry = {
-  id: number;
-  identifier: string;
-  value: string;
-  moduleId: number;
-  branchId: number;
-  verified: boolean;
-  translated: boolean;
-  translation?: EntryResult;
+  id: number
+  identifier: string
+  value: string
+  moduleId: number
+  fileId: number
+  verified: boolean
+  translated: boolean
+  translation?: EntryResult
 }
 
 export type EntryResult = {

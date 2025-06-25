@@ -12,6 +12,7 @@ import {
   ScrollBar,
   Table,
   TableBody,
+  TableCell,
   TableHead,
   TableHeader,
   TableRow,
@@ -173,9 +174,9 @@ export const ImportConfigDialog: FC<ImportConfigDialogProps> = (props) => {
                     >
                       {Array.from({ length: columnSize }).map((_, colIndex) => {
                         return (
-                          <TableHead key={`column-${colIndex + 1}`}>
+                          <TableCell key={`column-${colIndex + 1}`}>
                             <div className="mx-1.5">{row[colIndex] || '--'}</div>
-                          </TableHead>
+                          </TableCell>
                         )
                       })}
                     </TableRow>
