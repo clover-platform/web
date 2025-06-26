@@ -1,5 +1,6 @@
-import { type CreateEntryData, create } from '@/rest/entry'
+import { create } from '@/rest/entry'
 import { Button, Checkbox, Dialog, type DialogProps, useMessage } from '@easykit/design'
+import { useMutation } from '@tanstack/react-query'
 import { useParams } from 'next/navigation'
 import { type FC, useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
@@ -11,23 +12,19 @@ export type CreateEntryModalProps = {
 export const CreateEntryModal: FC<CreateEntryModalProps> = (props) => {
   const { t } = useTranslation()
   const { module } = useParams()
-  const [loading, setLoading] = useState(false)
   const [close, setClose] = useState(true)
   const msg = useMessage()
   const [formKey, setFormKey] = useState(Date.now())
-
-  const onSubmit = async (data: CreateEntryData) => {
-    setLoading(true)
-    data.module = module as string
-    const { success, message } = await create(data)
-    setLoading(false)
-    if (success) {
+  const { mutate: onSubmit, isPending: loading } = useMutation({
+    mutationFn: create,
+    onSuccess: () => {
       props.onSuccess?.(close)
       setFormKey(Date.now())
-    } else {
-      msg.error(message)
-    }
-  }
+    },
+    onError: (error) => {
+      msg.error(error.message)
+    },
+  })
 
   useEffect(() => {
     if (props.visible) setFormKey(Date.now())
@@ -35,7 +32,7 @@ export const CreateEntryModal: FC<CreateEntryModalProps> = (props) => {
 
   return (
     <Dialog {...props} title={t('新增词条')} maskClosable={false}>
-      <EntryForm key={formKey} onSubmit={onSubmit}>
+      <EntryForm key={formKey} onSubmit={(data) => onSubmit({ ...data, module: module as string })}>
         <div className="flex items-center justify-end space-x-2">
           <div className="flex items-center space-x-1">
             <Checkbox onCheckedChange={(checked) => setClose(!checked)} checked={!close} id="hold-entry-modal" />

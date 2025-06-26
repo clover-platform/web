@@ -125,7 +125,9 @@ export const Detail = () => {
       </div>
       <div className="mb-4 px-4">{entry?.value}</div>
       <div className="mb-4 px-4">
-        <Badge className="mr-2">{file?.name}</Badge>
+        <Badge variant="outline" className="mr-2">
+          {file?.name}
+        </Badge>
         <span className="text-muted-foreground">{entry?.identifier}</span>
       </div>
     </div>

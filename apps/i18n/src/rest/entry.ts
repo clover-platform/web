@@ -1,3 +1,4 @@
+import type { CreateEntryFormData } from '@/config/pages/entry/form'
 import type { CountEntryData, CountEntryQuery, Entry } from '@/types/module/entry'
 import type { PageData } from '@clover/public/types/rest'
 import { del, get, post, put, resultWrapper } from '@clover/public/utils/rest'
@@ -29,13 +30,9 @@ export const sync = (params: EntryQueryParams) =>
 
 export type CreateEntryData = {
   module: string
-  key: string
-  value: string
-  branches: string[]
-}
+} & CreateEntryFormData
 export const create = (data: CreateEntryData) =>
-  // biome-ignore lint/suspicious/noExplicitAny: <explanation>
-  post<any, CreateEntryData>(`@i18n/${data.module}/branch/-/entry/create`, data)
+  resultWrapper(post<unknown, CreateEntryData>(`@i18n/${data.module}/file/entry/create`, data))
 
 export type EntryDetailParams = {
   module: string

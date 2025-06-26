@@ -1,15 +1,15 @@
+import { FileName } from '@/components/common/file-name'
 import { filesState } from '@/state/worktop'
-import { IconBranch } from '@arco-iconbox/react-clover'
 import { Checkbox, ScrollArea } from '@easykit/design'
 import { useAtom } from 'jotai'
 import { type FC, useState } from 'react'
 
-export type MultiBranchSelectProps = {
-  value?: string[]
-  onChange?: (value: string[]) => void
+export type MultiFileSelectProps = {
+  value?: number[]
+  onChange?: (value: number[]) => void
 }
 
-export const MultiBranchSelect: FC<MultiBranchSelectProps> = (props) => {
+export const MultiFileSelect: FC<MultiFileSelectProps> = (props) => {
   const [files] = useAtom(filesState)
   const [selectId] = useState(Date.now())
   const [selected, setSelected] = useState(props.value || [])
@@ -22,9 +22,9 @@ export const MultiBranchSelect: FC<MultiBranchSelectProps> = (props) => {
           <div key={file.id} className="flex items-center space-x-1 px-2 py-1">
             <div className="flex h-6 w-6 items-center justify-center">
               <Checkbox
-                checked={selected.includes(file.name)}
+                checked={selected.includes(file.id)}
                 onCheckedChange={(checked) => {
-                  const newSelected = checked ? [...selected, file.name] : selected.filter((item) => item !== file.name)
+                  const newSelected = checked ? [...selected, file.id] : selected.filter((item) => item !== file.id)
                   setSelected(newSelected)
                   props.onChange?.(newSelected)
                 }}
@@ -35,7 +35,7 @@ export const MultiBranchSelect: FC<MultiBranchSelectProps> = (props) => {
               htmlFor={id}
               className="flex h-6 flex-1 items-center justify-start font-medium text-sm leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
             >
-              <IconBranch /> {file.name}
+              <FileName file={file} iconClassName="size-4" />
             </label>
           </div>
         )
