@@ -170,7 +170,6 @@ export const useEntriesUpdater = () => {
 
   const { mutateAsync } = useMutation({
     mutationFn: detail,
-    onSuccess: () => {},
     onError: (error) => {
       msg.error(error.message)
     },
