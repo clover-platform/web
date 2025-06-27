@@ -10,7 +10,12 @@ export type SaveEntryResultData = {
 }
 
 export const save = (data: SaveEntryResultData) =>
-  post<unknown, SaveEntryResultData>(`@i18n/${data.module}/file/${data.fileId}/entry/${data.entryId}/result/save`, data)
+  resultWrapper(
+    post<unknown, SaveEntryResultData>(
+      `@i18n/${data.module}/file/${data.fileId}/entry/${data.entryId}/result/save`,
+      data
+    )
+  )
 
 export type EntryResultQuery = {
   module: string

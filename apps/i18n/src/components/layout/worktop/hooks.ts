@@ -12,7 +12,8 @@ import {
   filesState,
   languagesState,
 } from '@/state/worktop'
-import { useQuery, useQueryClient } from '@tanstack/react-query'
+import { useMessage } from '@easykit/design'
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import { useAtom } from 'jotai'
 import { useParams, useRouter, useSearchParams } from 'next/navigation'
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
@@ -165,21 +166,28 @@ export const useEntriesUpdater = () => {
   const [currentLanguage] = useAtom(currentLanguageState)
   const [files] = useAtom(filesState)
   const queryClient = useQueryClient()
+  const msg = useMessage()
+
+  const { mutateAsync } = useMutation({
+    mutationFn: detail,
+    onSuccess: () => {},
+    onError: (error) => {
+      msg.error(error.message)
+    },
+  })
 
   const update = async (id: number) => {
     const entry = entries.find((e) => e.id === id)
     const file = files.find((b) => b.id === entry?.fileId)
-    if (!file?.name) return
-    const result = await detail({
+    if (!file?.id) return
+    const result = await mutateAsync({
       id,
       language: currentLanguage,
       module: module as string,
-      branch: file.name,
+      fileId: file.id,
     })
-    if (result.success) {
-      setEntries(entries.map((entry) => (entry.id === id ? result.data! : entry)))
-      queryClient.invalidateQueries({ queryKey: ['worktop:count'], exact: false })
-    }
+    setEntries(entries.map((entry) => (entry.id === id ? result! : entry)))
+    queryClient.invalidateQueries({ queryKey: ['worktop:count'], exact: false })
   }
 
   const remove = async (id: number) => {

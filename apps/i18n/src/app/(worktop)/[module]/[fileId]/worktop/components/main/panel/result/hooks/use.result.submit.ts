@@ -5,22 +5,32 @@ import { save } from '@/rest/entry.result'
 import { currentEntryState, currentLanguageState, entriesState } from "@/state/worktop";
 import bus from '@clover/public/events'
 import { useMessage } from "@easykit/design";
+import { useMutation } from '@tanstack/react-query'
 import { useAtom } from 'jotai'
-import { useParams } from "next/navigation";
-import { useState } from 'react'
+import { useParams } from 'next/navigation'
 import { useTranslation } from "react-i18next";
-// biome-ignore lint/suspicious/noExplicitAny: <explanation>
-export const useResultSubmit = (): [(content: string) => Promise<any>, boolean] => {
+
+export const useResultSubmit = (): [(content: string) => void, boolean] => {
   const [entries] = useAtom(entriesState)
   const [current, setCurrent] = useAtom(currentEntryState)
   const [language] = useAtom(currentLanguageState)
   const entry = entries[current]
-  const [loading, setLoading] = useState(false)
   const msg = useMessage()
   const { update } = useEntriesUpdater()
   const { module } = useParams()
   const file = useCurrentFile()
   const { t } = useTranslation()
+  const { mutate, isPending: loading } = useMutation({
+    mutationFn: save,
+    onSuccess: async () => {
+      bus.emit(ENTRY_RESULT_RELOAD)
+      await update(entry.id)
+      next()
+    },
+    onError: (error) => {
+      msg.error(error.message)
+    },
+  })
 
   const next = () => {
     if (current < entries.length - 1) {
@@ -28,26 +38,17 @@ export const useResultSubmit = (): [(content: string) => Promise<any>, boolean] 
     }
   }
 
-  const submit = async (content: string) => {
+  const submit = (content: string) => {
     if (!content) {
       return msg.error(t('请输入翻译结果'))
     }
-    setLoading(true)
-    const { success, message } = await save({
+    mutate({
       module: module as string,
       entryId: entry.id,
       content,
       language,
       fileId: file?.id,
     })
-    setLoading(false)
-    if (success) {
-      bus.emit(ENTRY_RESULT_RELOAD)
-      await update(entry.id)
-      next()
-    } else {
-      msg.error(message)
-    }
   }
 
   return [submit, loading]

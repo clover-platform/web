@@ -38,13 +38,15 @@ export type EntryDetailParams = {
   module: string
   id?: number
   language: string
-  branch: string
+  fileId: number
 }
 export const detail = (params: EntryDetailParams) =>
-  get<Entry, EntryDetailParams>(`@i18n/${params.module}/branch/${params.branch}/entry/${params.id}`, {
-    ...params,
-    id: undefined,
-  })
+  resultWrapper(
+    get<Entry, EntryDetailParams>(`@i18n/${params.module}/file/${params.fileId}/entry/${params.id}`, {
+      ...params,
+      id: undefined,
+    })
+  )
 
 export type EditEntryData = {
   module: string
