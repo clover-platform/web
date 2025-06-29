@@ -7,9 +7,9 @@ import { IconDelete } from '@arco-iconbox/react-clover'
 import { Action } from '@clover/public/components/common/action'
 import { TimeAgo } from '@clover/public/components/common/time-ago'
 import bus from '@clover/public/events'
-import type { RestResult } from '@clover/public/types/rest'
 import { Avatar, Badge, Tooltip, useAlert, useMessage } from '@easykit/design'
 import { CheckIcon } from '@radix-ui/react-icons'
+import { useMutation } from '@tanstack/react-query'
 import classNames from 'classnames'
 import { useParams } from 'next/navigation'
 import type { FC } from 'react'
@@ -29,32 +29,43 @@ export const ResultItem: FC<ResultItemProps> = (props) => {
   const file = useCurrentFile()
   const { t } = useTranslation()
 
-  // biome-ignore lint/suspicious/noExplicitAny: <explanation>
-  const resultWrapper = async (result: RestResult<any>) => {
-    const { success, message } = result
-    if (success) {
-      bus.emit(ENTRY_RESULT_RELOAD)
-      await update(item.entryId)
-      bus.emit(ENTRY_RESULT_EDITOR_RESET)
-    } else {
-      msg.error(message)
-    }
-    return success
+  const onSuccess = () => {
+    bus.emit(ENTRY_RESULT_RELOAD)
+    update(item.entryId)
+    bus.emit(ENTRY_RESULT_EDITOR_RESET)
   }
+
+  const onError = (error: Error) => {
+    msg.error(error.message)
+  }
+
+  const { mutateAsync: approveMutate } = useMutation({
+    mutationFn: approveRest,
+    onSuccess,
+    onError,
+  })
+  const { mutateAsync: removeApprovalMutate } = useMutation({
+    mutationFn: removeApprovalRest,
+    onSuccess,
+    onError,
+  })
+  const { mutateAsync: deleteMutate } = useMutation({
+    mutationFn: deleteResult,
+    onSuccess,
+    onError,
+  })
 
   const deleteItem = () => {
     alert.confirm({
       title: t('删除'),
       description: t('是否删除此翻译'),
       onOk: async () => {
-        return resultWrapper(
-          await deleteResult({
-            module: module as string,
-            id: item.id,
-            entryId: item.entryId,
-            fileId: file?.id,
-          })
-        )
+        await deleteMutate({
+          module: module as string,
+          id: item.id,
+          entryId: item.entryId,
+          fileId: file?.id,
+        })
       },
     })
   }
@@ -64,14 +75,12 @@ export const ResultItem: FC<ResultItemProps> = (props) => {
       title: t('批准'),
       description: t('是否批准改翻译作为有效结果'),
       onOk: async () => {
-        return resultWrapper(
-          await approveRest({
-            module: module as string,
-            id: item.id,
-            entryId: item.entryId,
-            fileId: file?.id,
-          })
-        )
+        await approveMutate({
+          module: module as string,
+          id: item.id,
+          entryId: item.entryId,
+          fileId: file?.id,
+        })
       },
     })
   }
@@ -81,14 +90,12 @@ export const ResultItem: FC<ResultItemProps> = (props) => {
       title: t('撤销批准'),
       description: t('是否撤销此翻译的有效结果'),
       onOk: async () => {
-        return resultWrapper(
-          await removeApprovalRest({
-            module: module as string,
-            id: item.id,
-            entryId: item.entryId,
-            fileId: file?.id,
-          })
-        )
+        await removeApprovalMutate({
+          module: module as string,
+          id: item.id,
+          entryId: item.entryId,
+          fileId: file?.id,
+        })
       },
     })
   }

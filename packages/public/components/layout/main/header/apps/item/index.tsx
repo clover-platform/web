@@ -11,17 +11,18 @@ const ICONS: Record<string, ReactNode> = {
   qa: <IconQA />,
 }
 
-export const AppsItem: FC<AppsItemProps> = (props) => {
-  const {name, description, appId, href} = props;
-  const router = useRouter();
+export const AppsItem: FC<AppsItemProps & { onClick: () => void }> = (props) => {
+  const { name, description, appId, href, onClick } = props
+  const router = useRouter()
 
   const openApp = useCallback(() => {
-    if(href.startsWith(location.origin)) {
-      router.push(href.replace(location.origin, ""))
-    }else{
+    if (href.startsWith(location.origin)) {
+      router.push(href.replace(location.origin, ''))
+    } else {
       window.open(href)
     }
-  }, [href, router])
+    onClick()
+  }, [href, router, onClick])
 
   return (
     <div onClick={openApp} className="flex cursor-pointer items-start space-x-4 rounded-md p-2 hover:bg-secondary/80">

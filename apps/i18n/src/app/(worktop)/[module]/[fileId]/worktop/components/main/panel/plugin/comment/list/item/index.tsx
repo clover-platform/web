@@ -8,6 +8,7 @@ import { TimeAgo } from '@clover/public/components/common/time-ago'
 import bus from '@clover/public/events'
 import { useProfile } from '@clover/public/hooks/use.profile'
 import { Avatar, useAlert, useMessage } from '@easykit/design'
+import { useMutation } from '@tanstack/react-query'
 import classNames from 'classnames'
 import { useParams } from 'next/navigation'
 import type { FC } from 'react'
@@ -25,24 +26,27 @@ export const CommentListItem: FC<CommentListItemProps> = (props) => {
   const { module } = useParams()
   const file = useCurrentFile()
   const { t } = useTranslation()
+  const { mutateAsync: deleteMutate } = useMutation({
+    mutationFn: deleteComment,
+    onSuccess: () => {
+      bus.emit(ENTRY_COMMENT_RELOAD)
+    },
+    onError: (error) => {
+      msg.error(error.message)
+    },
+  })
 
   const del = () => {
     alert.confirm({
       title: t('删除'),
       description: t('是否删除该评论？'),
       onOk: async () => {
-        const { success, message } = await deleteComment({
+        await deleteMutate({
           module: module as string,
           entryId: item.entryId,
           id: item.id,
           fileId: file?.id,
         })
-        if (success) {
-          bus.emit(ENTRY_COMMENT_RELOAD)
-        } else {
-          msg.error(message)
-        }
-        return success
       },
     })
   }

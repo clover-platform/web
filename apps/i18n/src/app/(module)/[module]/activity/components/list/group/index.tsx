@@ -14,7 +14,7 @@ export const ActivityListGroup: FC<ActivityListGroupProps> = (props) => {
     <div>
       <div className="relative flex h-8 items-center justify-center">
         <Separator />
-        <div className="-mt-3 absolute top-1/2 h-6 rounded-full border bg-white px-2">{title}</div>
+        <div className="-mt-3 absolute top-1/2 h-6 rounded-full border bg-white px-2 dark:bg-zinc-800">{title}</div>
       </div>
       <div className="space-y-4">
         {items.map((item) => (

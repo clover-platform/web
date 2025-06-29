@@ -126,6 +126,7 @@ export const useEntriesLoader = () => {
 
   const load = useCallback(() => {
     queryClient.invalidateQueries({ queryKey: ['worktop:entries'], exact: false })
+    queryClient.invalidateQueries({ queryKey: ['worktop:count'], exact: false })
   }, [queryClient])
 
   const filteredEntries = useMemo(() => {

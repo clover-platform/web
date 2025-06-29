@@ -3,20 +3,18 @@ import { add } from '@/rest/entry.comment'
 import { currentEntryState, currentLanguageState, entriesState, filesState } from '@/state/worktop'
 import { IconSend } from '@arco-iconbox/react-clover'
 import { Action } from '@clover/public/components/common/action'
-import { MentionsEditor } from '@clover/public/components/common/editor/mentions'
 import bus from '@clover/public/events'
 import { Spin, useMessage } from '@easykit/design'
+import { useMutation } from '@tanstack/react-query'
 import classNames from 'classnames'
 import { useAtom } from 'jotai'
 import { useParams } from 'next/navigation'
-import { useRef, useState } from 'react'
+import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
+import TextareaAutosize from 'react-textarea-autosize'
 
 export const CommentEditor = () => {
   const [value, setValue] = useState<string>('')
-  // biome-ignore lint/suspicious/noExplicitAny: <explanation>
-  const editorRef = useRef<any>(undefined)
-  const [loading, setLoading] = useState<boolean>(false)
   const msg = useMessage()
   const [entries] = useAtom(entriesState)
   const [current] = useAtom(currentEntryState)
@@ -26,33 +24,40 @@ export const CommentEditor = () => {
   const [files] = useAtom(filesState)
   const file = files.find((b) => b.id === entry.fileId)
   const { t } = useTranslation()
+  const { mutateAsync: addMutate, isPending: loading } = useMutation({
+    mutationFn: add,
+    onSuccess: () => {
+      setValue('')
+      bus.emit(ENTRY_COMMENT_RELOAD)
+    },
+    onError: (error) => {
+      msg.error(error.message)
+    },
+  })
 
   const send = async () => {
     if (!value) {
       msg.error(t('请输入评论内容'))
       return
     }
-    setLoading(true)
-    const { success, message } = await add({
+    await addMutate({
       content: value,
       entryId: entry.id,
       language,
       module: module as string,
-      branch: file?.name || '',
+      fileId: file?.id,
     })
-    if (success) {
-      setValue('')
-      editorRef.current.reset()
-      bus.emit(ENTRY_COMMENT_RELOAD)
-    } else {
-      msg.error(message)
-    }
-    setLoading(false)
   }
 
   return (
     <div className="relative w-full border-t">
-      <MentionsEditor ref={editorRef} value={value} onChange={setValue} />
+      <TextareaAutosize
+        minRows={3}
+        value={value}
+        onChange={(e) => setValue(e.target.value)}
+        placeholder={t('请输入评论内容')}
+        className="w-full resize-none rounded-none border-none px-4 py-2 shadow-none focus:outline-none focus-visible:ring-0"
+      />
       <div className="flex items-center justify-end p-2">
         <Action disabled={loading} onClick={send}>
           <IconSend className="text-lg" />

@@ -22,7 +22,7 @@ export const Apps = () => {
         ) : (
           <div className="space-y-2">
             {apps.map((app) => (
-              <AppsItem key={app.appId} {...app} />
+              <AppsItem onClick={() => setOpen(false)} key={app.appId} {...app} />
             ))}
           </div>
         )}

@@ -72,7 +72,7 @@ export const ActivityListGroupItem: FC<ActivityListGroupItemProps> = (props) => 
     <div className="flex items-start justify-center">
       <div className="relative">
         <Avatar className="h-10 w-10" src="" fallback="S" />
-        <div className="-right-2 absolute bottom-0 flex h-6 w-6 items-center justify-center rounded-full border bg-white">
+        <div className="-right-2 absolute bottom-0 flex h-6 w-6 items-center justify-center rounded-full border bg-white dark:bg-zinc-800">
           {ICONS[operate]}
         </div>
       </div>

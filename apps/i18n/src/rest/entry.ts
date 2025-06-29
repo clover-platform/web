@@ -1,3 +1,4 @@
+import type { EntryEditFormData } from '@/config/pages/entry/edit/form'
 import type { CreateEntryFormData } from '@/config/pages/entry/form'
 import type { CountEntryData, CountEntryQuery, Entry } from '@/types/module/entry'
 import type { PageData } from '@clover/public/types/rest'
@@ -51,20 +52,18 @@ export const detail = (params: EntryDetailParams) =>
 export type EditEntryData = {
   module: string
   id: number
-  value: string
-  branch: string
-}
+  fileId: number
+} & EntryEditFormData
 export const edit = (data: EditEntryData) =>
-  // biome-ignore lint/suspicious/noExplicitAny: <explanation>
-  put<any, EditEntryData>(`@i18n/${data.module}/branch/${data.branch}/entry/${data.id}`, data)
+  resultWrapper(put<unknown, EditEntryData>(`@i18n/${data.module}/file/${data.fileId}/entry/${data.id}`, data))
 
 export type RemoveEntryData = {
   module: string
   id: number
-  branch: string
+  fileId?: number
 }
-// biome-ignore lint/suspicious/noExplicitAny: <explanation>
-export const remove = (data: RemoveEntryData) => del<any>(`@i18n/${data.module}/branch/${data.branch}/entry/${data.id}`)
+export const remove = (data: RemoveEntryData) =>
+  resultWrapper(del<unknown>(`@i18n/${data.module}/file/${data.fileId}/entry/${data.id}`))
 
 export const count = (query: CountEntryQuery) =>
   resultWrapper(

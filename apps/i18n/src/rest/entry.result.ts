@@ -41,7 +41,7 @@ export type DeleteResultData = {
   fileId?: number
 }
 export const deleteResult = (data: DeleteResultData) =>
-  del<unknown>(`@i18n/${data.module}/file/${data.fileId}/entry/${data.entryId}/result/${data.id}`)
+  resultWrapper(del<unknown>(`@i18n/${data.module}/file/${data.fileId}/entry/${data.entryId}/result/${data.id}`)) 
 
 export type ApproveResultData = {
   module: string
@@ -50,8 +50,10 @@ export type ApproveResultData = {
   fileId?: number
 }
 export const approve = (data: ApproveResultData) =>
-  put<unknown, ApproveResultData>(
-    `@i18n/${data.module}/file/${data.fileId}/entry/${data.entryId}/result/${data.id}/approve`
+  resultWrapper(
+    put<unknown, ApproveResultData>(
+      `@i18n/${data.module}/file/${data.fileId}/entry/${data.entryId}/result/${data.id}/approve`
+    )
   )
 
 export type RemoveApproveResultData = {
@@ -61,8 +63,10 @@ export type RemoveApproveResultData = {
   fileId?: number
 }
 export const removeApproval = (data: RemoveApproveResultData) =>
-  put<unknown, RemoveApproveResultData>(
-    `@i18n/${data.module}/file/${data.fileId}/entry/${data.entryId}/result/${data.id}/remove/approval`
+  resultWrapper(
+    put<unknown, RemoveApproveResultData>(
+      `@i18n/${data.module}/file/${data.fileId}/entry/${data.entryId}/result/${data.id}/remove/approval`
+    )
   )
 
 export type AIData = {

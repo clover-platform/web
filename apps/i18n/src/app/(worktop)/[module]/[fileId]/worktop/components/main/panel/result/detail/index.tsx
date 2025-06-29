@@ -5,6 +5,7 @@ import { Action } from '@clover/public/components/common/action'
 import { t } from '@clover/public/utils/locale.client'
 import { Badge, Dropdown, type DropdownMenuItemProps, Tooltip, useAlert, useMessage } from '@easykit/design'
 import { ArrowLeftIcon, ArrowRightIcon, CopyIcon, DotsHorizontalIcon } from '@radix-ui/react-icons'
+import { useMutation } from '@tanstack/react-query'
 import copy from 'copy-to-clipboard'
 import { useAtom } from 'jotai'
 import { useParams } from 'next/navigation'
@@ -59,6 +60,16 @@ export const Detail = () => {
   const alert = useAlert()
   const { module } = useParams()
   const { t } = useTranslation()
+  const { mutateAsync: removeMutate } = useMutation({
+    mutationFn: removeRest,
+    onSuccess: () => {
+      prev()
+      remove(entry.id)
+    },
+    onError: (error) => {
+      msg.error(error.message)
+    },
+  })
 
   const prev = () => {
     if (current === entries.length - 1) {
@@ -78,18 +89,11 @@ export const Detail = () => {
         title: t('删除'),
         description: t('是否删除该词条'),
         onOk: async () => {
-          const { success, message } = await removeRest({
+          await removeMutate({
             module: module as string,
             id: entry.id,
-            branch: file?.name || '',
+            fileId: file?.id,
           })
-          if (success) {
-            prev()
-            await remove(entry.id)
-          } else {
-            msg.error(message)
-          }
-          return success
         },
       })
     }

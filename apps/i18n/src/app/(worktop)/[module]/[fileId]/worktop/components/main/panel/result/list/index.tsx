@@ -4,7 +4,7 @@ import { list as listRest } from '@/rest/entry.result'
 import { currentEntryState, currentLanguageState, entriesState } from '@/state/worktop'
 import bus from '@clover/public/events'
 import { Button, Empty, ScrollArea } from '@easykit/design'
-import { useInfiniteQuery } from '@tanstack/react-query'
+import { useInfiniteQuery, useQueryClient } from '@tanstack/react-query'
 import { useAtom } from 'jotai'
 import { useParams } from 'next/navigation'
 import { useEffect, useMemo } from 'react'
@@ -20,10 +20,9 @@ export const ResultList = () => {
   const [current] = useAtom(currentEntryState)
   const entry = entries[current]
   const { t } = useTranslation()
-
   const { module } = useParams()
   const file = useCurrentFile()
-
+  const queryClient = useQueryClient()
   const {
     data,
     fetchNextPage,
@@ -50,13 +49,13 @@ export const ResultList = () => {
 
   useEffect(() => {
     const handler = () => {
-      fetchNextPage()
+      queryClient.invalidateQueries({ queryKey: ['worktop:entry:result', module, file?.id, language, entry?.id] })
     }
     bus.on(ENTRY_RESULT_RELOAD, handler)
     return () => {
       bus.off(ENTRY_RESULT_RELOAD, handler)
     }
-  }, [fetchNextPage])
+  }, [queryClient, module, file?.id, language, entry?.id])
 
   return (
     <div className="h-0 w-full flex-1 flex-shrink-0">

@@ -3,7 +3,7 @@ import { list as listRest } from '@/rest/entry.comment'
 import { currentEntryState, currentLanguageState, entriesState, filesState } from '@/state/worktop'
 import bus from '@clover/public/events'
 import { Button, Empty, ScrollArea } from '@easykit/design'
-import { useInfiniteQuery } from '@tanstack/react-query'
+import { useInfiniteQuery, useQueryClient } from '@tanstack/react-query'
 import { useAtom } from 'jotai'
 import { useParams } from 'next/navigation'
 import { useEffect, useMemo } from 'react'
@@ -24,6 +24,7 @@ export const CommentList = () => {
   const [files] = useAtom(filesState)
   const file = files.find((item) => item.id === entry.fileId)
   const { t } = useTranslation()
+  const queryClient = useQueryClient()
 
   const SIZE = 50
 
@@ -54,13 +55,13 @@ export const CommentList = () => {
   // 刷新事件
   useEffect(() => {
     const handler = () => {
-      fetchNextPage()
+      queryClient.invalidateQueries({ queryKey: ['worktop:entry:comment', module, file?.id, language, entry?.id] })
     }
     bus.on(ENTRY_COMMENT_RELOAD, handler)
     return () => {
       bus.off(ENTRY_COMMENT_RELOAD, handler)
     }
-  }, [fetchNextPage])
+  }, [queryClient, module, file?.id, language, entry?.id])
 
   return (
     <div className="h-0 w-full flex-1 flex-shrink-0">
