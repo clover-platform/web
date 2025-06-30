@@ -60,7 +60,7 @@ export const ProfilePage = () => {
           <div className="flex flex-col gap-2">
             <div className="font-bold text-lg">{t('收藏')}</div>
             <Tabs defaultValue="team">
-              <TabsList className="grid w-full grid-cols-2 bg-black/5 dark:bg-white/5">
+              <TabsList className="grid grid-cols-2 bg-black/5 dark:bg-white/5">
                 <TabsTrigger value="team">{t('团队')}</TabsTrigger>
                 <TabsTrigger value="project">{t('项目')}</TabsTrigger>
               </TabsList>
