@@ -3,7 +3,7 @@ import { CropperDialog } from '@clover/public/components/common/cropper/dialog'
 import { useStateLoader } from '@clover/public/components/layout/hooks/use.state.loader'
 import { useProfile } from '@clover/public/hooks'
 import { dataURLToFile, fileToDataURL, upload } from '@clover/public/utils/file'
-import { Button, Avatar as EasykitAvatar, Spin, Uploader, useMessage } from '@easykit/design'
+import { Button, Avatar as EasykitAvatar, Spin, type UploadFile, Uploader, useMessage } from '@easykit/design'
 import { Pencil2Icon } from '@radix-ui/react-icons'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { useParams } from 'next/navigation'
@@ -29,6 +29,7 @@ export const Avatar: FC<AvatarProps> = (props) => {
   const load = useStateLoader()
   const { t } = useTranslation()
   const m = useMessage()
+  const [files, setFiles] = useState<UploadFile[]>([])
 
   const onDropAccepted = (files: File[]) => {
     fileToDataURL(files[0]).then((src) => {
@@ -44,11 +45,13 @@ export const Avatar: FC<AvatarProps> = (props) => {
   const { mutate, isPending } = useMutation({
     mutationFn: updateAvatar,
     onSuccess: async () => {
+      setFiles([])
       await queryClient.invalidateQueries({ queryKey: ['profile', username] })
       await load()
     },
     onError: (error) => {
       m.error(error.message)
+      setFiles([])
     },
   })
 
@@ -58,7 +61,7 @@ export const Avatar: FC<AvatarProps> = (props) => {
       file,
       name: file.name,
       contentType: file.type,
-      type: 1,
+      type: 0,
     })
     setUploading(false)
     if (success) {
@@ -92,6 +95,8 @@ export const Avatar: FC<AvatarProps> = (props) => {
             showFileList={false}
             showButton={false}
             maxFiles={1}
+            value={files}
+            onChange={setFiles}
             accept={{
               'image/*': ['.png', '.jpg', '.jpeg', '.gif', '.webp'],
             }}

@@ -34,9 +34,9 @@ export const Notice = () => {
           </div>
         </div>
         <Tabs defaultValue="all">
-          <TabsList className="grid w-full grid-cols-2">
+          <TabsList className="grid grid-cols-2">
             <TabsTrigger value="all">{t('全部')}</TabsTrigger>
-            <TabsTrigger value="follow">{t('已关注')}</TabsTrigger>
+            <TabsTrigger value="follow">{t('未读')}</TabsTrigger>
           </TabsList>
           <TabsContent value="all">
             <Empty text={t('暂无通知')} />

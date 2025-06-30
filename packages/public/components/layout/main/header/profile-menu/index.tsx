@@ -10,7 +10,6 @@ import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
-  DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
   useAlert,
@@ -81,7 +80,6 @@ export const ProfileMenu: FC<ProfileMenuProps> = (props) => {
         </Action>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end" className="w-64 p-0">
-        <DropdownMenuLabel className="text-secondary-foreground/50">{t('账户')}</DropdownMenuLabel>
         <AccountInfo />
         <DropdownMenuSeparator />
         {isDashboardSameOrigin ? (
