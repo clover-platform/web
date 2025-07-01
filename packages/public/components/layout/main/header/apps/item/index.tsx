@@ -1,5 +1,5 @@
 import {IconDashboard, IconHome, IconI18n, IconQA, IconWiki} from "@arco-iconbox/react-clover";
-import type { AppsItemProps } from '@clover/public/rest/config'
+import type { AppsItem as AppsItemProps } from '@clover/public/types/config'
 import {useRouter} from "next/navigation";
 import { type FC, type ReactNode, useCallback } from 'react'
 

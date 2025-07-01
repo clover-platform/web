@@ -4,7 +4,7 @@ import LoginLink from '@/components/common/login/link'
 import { type RegisterFormData, getFormSchema } from '@/config/schema/login/register'
 import { register, sendEmailCode } from '@/rest/login/register'
 import { EmailCodeInput } from '@clover/public/components/common/input/email-code'
-import { encrypt } from '@clover/public/utils/crypto'
+import { useEncrypt } from '@clover/public/hooks'
 import { setToken } from '@clover/public/utils/token'
 import { Button, Form, FormItem, Input, useMessage } from '@easykit/design'
 import { useMutation } from '@tanstack/react-query'
@@ -19,6 +19,7 @@ const RegisterPage = () => {
   const redirect = params.get('redirect')
   const [formData, setFormData] = useState<RegisterFormData | undefined>()
   const { t } = useTranslation()
+  const encrypt = useEncrypt()
 
   const { mutate, isPending } = useMutation({
     mutationFn: register,

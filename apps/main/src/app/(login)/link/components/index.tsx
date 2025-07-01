@@ -3,7 +3,7 @@
 import { type LinkFormData, getSchema } from '@/config/schema/login/link'
 import { type LinkCodeResult, linkCode, loginAndLink } from '@/rest/login/link'
 import { MFADialog } from '@clover/public/components/pages/login/mfa-dialog'
-import { encrypt } from '@clover/public/utils/crypto'
+import { useEncrypt } from '@clover/public/hooks'
 import { RestError } from '@clover/public/utils/rest'
 import { type Token, setToken } from '@clover/public/utils/token'
 import { Button, Form, FormItem, Image, Input, Result, Space, Spin, useMessage } from '@easykit/design'
@@ -31,6 +31,7 @@ const LinkPage = (props: LinkPageProps) => {
   const [formData, setFormData] = useState<LinkFormData | null>(null)
   const [visible, setVisible] = useState(false)
   const queryClient = useQueryClient()
+  const encrypt = useEncrypt()
   const { data, isLoading, isError, isFetched } = useQuery({
     queryKey: ['link', code, type],
     retry: false,
@@ -91,7 +92,7 @@ const LinkPage = (props: LinkPageProps) => {
         token: user?.token!,
       })
     },
-    [mutate, user]
+    [mutate, user, encrypt]
   )
 
   const onCancel = useCallback(() => {

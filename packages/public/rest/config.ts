@@ -1,12 +1,6 @@
-import {get} from "@clover/public/utils/rest";
+import { get } from '@clover/public/utils/rest'
+import type { AppsItem, CommonConfig } from '../types/config'
 
-export type AppsItemProps = {
-  appId: string;
-  name: string;
-  description: string;
-  href: string;
-  icon: string;
-  iconUrl: string;
-}
+export const apps = () => get<AppsItem[]>('@main/config/app/list')
 
-export const apps = () => get<AppsItemProps[]>('@main/config/app/list')
+export const common = () => get<CommonConfig>('@main/config/common')

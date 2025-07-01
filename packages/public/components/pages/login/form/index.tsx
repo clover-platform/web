@@ -1,6 +1,6 @@
 import { getSchema } from '@clover/public/config/schema/login'
+import { useEncrypt } from '@clover/public/hooks'
 import { type LoginRestData, login } from '@clover/public/rest/auth'
-import { encrypt } from '@clover/public/utils/crypto'
 import { RestError } from '@clover/public/utils/rest'
 import { setToken } from '@clover/public/utils/token'
 import { Button, Form, FormItem, Input, useMessage } from '@easykit/design'
@@ -24,6 +24,7 @@ export const LoginForm: FC<LoginFormProps> = (props) => {
   const [formData, setFormData] = useState<LoginRestData | null>(null)
   const [visible, setVisible] = useState(false)
   const { t } = useTranslation()
+  const encrypt = useEncrypt()
 
   const { mutate, isPending } = useMutation({
     mutationFn: login,
@@ -57,7 +58,7 @@ export const LoginForm: FC<LoginFormProps> = (props) => {
       cloneData.password = encrypt(cloneData.password)
       mutate(cloneData)
     },
-    [mutate]
+    [mutate, encrypt]
   )
 
   const onCancel = useCallback(() => {

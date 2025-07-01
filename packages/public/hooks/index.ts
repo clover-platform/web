@@ -1,6 +1,8 @@
 export { useAccess } from './use.access'
 export { useAppsLoader } from './use.apps.loader'
 export { useApps } from './use.apps'
+export { useCommonConfig } from './use.common.config'
+export { useEncrypt } from './use.encrypt'
 export { useDocumentClick } from './use.document.click'
 export { useFetchIntercept } from './use.fetch.intercept'
 export { useFetch } from './use.fetch'

@@ -8,7 +8,7 @@ import {
 } from '@/config/schema/login/reset-password'
 import { passwordReset, resetEmailCheck, sendResetEmailCode } from '@/rest/login/reset-password'
 import { EmailCodeInput } from '@clover/public/components/common/input/email-code'
-import { encrypt } from '@clover/public/utils/crypto'
+import { useEncrypt } from '@clover/public/hooks'
 import { setToken } from '@clover/public/utils/token'
 import { Button, Form, FormItem, Input, Steps, StepsItem, useMessage } from '@easykit/design'
 import { useMutation } from '@tanstack/react-query'
@@ -25,6 +25,7 @@ const ResetPasswordPage = () => {
   const [formData1, setFormData1] = useState<EmailFormData>()
   const [formKey, setFormKey] = useState(Date.now())
   const { t } = useTranslation()
+  const encrypt = useEncrypt()
   const { mutate: checkMutate, isPending: step1Submitting } = useMutation({
     mutationFn: resetEmailCheck,
     onError: (error) => {

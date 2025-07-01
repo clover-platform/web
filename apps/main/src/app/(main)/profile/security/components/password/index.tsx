@@ -2,7 +2,7 @@ import { type PasswordFormData, getSchema } from '@/config/schema/security/passw
 import { change } from '@/rest/profile/security/password'
 import bus from '@clover/public/events'
 import { UNAUTHORIZED } from '@clover/public/events/auth'
-import { encrypt } from '@clover/public/utils/crypto'
+import { useEncrypt } from '@clover/public/hooks'
 import { Button, Card, Form, FormItem, Input, Separator, Space, useMessage } from '@easykit/design'
 import { useMutation } from '@tanstack/react-query'
 import { cloneDeep } from 'es-toolkit'
@@ -15,6 +15,7 @@ export const Password = () => {
   const ref = useRef<UseFormReturn<PasswordFormData>>(null)
   const [state, setState] = useState<string>('normal')
   const m = useMessage()
+  const encrypt = useEncrypt()
   const { mutate, isPending } = useMutation({
     mutationFn: change,
     onSuccess: () => {
@@ -34,7 +35,7 @@ export const Password = () => {
       cloneData.passwordConfirm = ''
       mutate(cloneData)
     },
-    [mutate]
+    [mutate, encrypt]
   )
 
   const cancel = useCallback(() => {

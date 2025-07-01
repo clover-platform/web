@@ -1,6 +1,6 @@
-import type { AppsItemProps } from '@clover/public/rest/config'
+import type { AppsItem } from '@clover/public/types/config'
 import { atom } from 'jotai'
 
 export const loadingState = atom<boolean>(true)
 
-export const appsState = atom<AppsItemProps[]>([])
+export const appsState = atom<AppsItem[]>([])

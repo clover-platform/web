@@ -6,8 +6,10 @@ import '@clover/public/plugin/formatters'
 import locales from "@clover/public/config/locale";
 import { accessState } from '@clover/public/state/access'
 import { accountInfoState, isLoginState } from '@clover/public/state/account'
+import { commonConfigState } from '@clover/public/state/config'
 import { localeState, projectsState, teamsState } from "@clover/public/state/public";
 import type { Account } from '@clover/public/types/account'
+import type { CommonConfig } from '@clover/public/types/config'
 import type { Project } from '@clover/public/types/project'
 import type { Team } from '@clover/public/types/team'
 import { getQueryClient } from '@clover/public/utils/query'
@@ -42,19 +44,12 @@ export type RootLayoutProps = PropsWithChildren<{
   teams: Team[]
   projects: Project[]
   locale: string
+  config?: CommonConfig
   atomValues?: AtomValues
 }>
 
 export const RootLayout: FC<RootLayoutProps> = (props) => {
-  const {
-    children,
-    isLogin,
-    accountInfo,
-    teams,
-    projects,
-    locale,
-    atomValues = [],
-  } = props;
+  const { children, isLogin, accountInfo, teams, projects, locale, config, atomValues = [] } = props
 
   i18next.changeLanguage(locale)
   const queryClient = getQueryClient()
@@ -80,6 +75,7 @@ export const RootLayout: FC<RootLayoutProps> = (props) => {
             ],
             [accessState, accountInfo?.authorities || []],
             [localeState, locale],
+            [commonConfigState, config],
             ...atomValues,
           ]}
         >
