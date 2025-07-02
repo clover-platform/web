@@ -87,13 +87,13 @@ export const ROW_ACTIONS = (profile: Account, row: Module): DropdownMenuItemProp
     {
       type: 'separator',
       id: 'separator.1',
-      hidden: row.owner !== profile.id,
+      hidden: row.ownerId !== profile.id,
     },
     {
       id: 'delete',
       type: 'item',
       label: t('删除'),
-      hidden: row.owner !== profile.id,
+      hidden: row.ownerId !== profile.id,
     },
   ]
 }

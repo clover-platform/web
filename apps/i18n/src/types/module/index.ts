@@ -3,7 +3,7 @@ import type { Language, LanguageWithCount } from '../public'
 export type Module = {
   id: number
   name: string
-  owner: number
+  ownerId: number
   projectId: number
   createTime: string
   updateTime?: string
@@ -13,6 +13,7 @@ export type Module = {
   targetSize?: number
   source: string
   wordSize?: number
+  collected?: boolean
 }
 
 export type ModuleCount = {

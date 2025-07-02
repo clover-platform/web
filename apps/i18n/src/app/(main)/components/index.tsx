@@ -4,7 +4,7 @@ import { AppBreadcrumb } from '@/components/common/breadcrumb/app'
 import type { MainLayoutProps } from '@/components/layout/main'
 import { ROW_ACTIONS, getColumns, getFilters } from '@/config/pages/module/table'
 import { getTabs } from '@/config/pages/module/tabs'
-import { type ModuleListParams, list } from '@/rest/module'
+import { type ModuleListParams, deleteModule, list } from '@/rest/module'
 import type { Module } from '@/types/module'
 import { MainPage } from '@clover/public/components/common/page'
 import { TabsTitle } from '@clover/public/components/common/tabs-title'
@@ -12,7 +12,8 @@ import { TitleBar } from '@clover/public/components/common/title-bar'
 import { useLayoutConfig } from '@clover/public/components/layout/hooks/use.layout.config'
 import { useListQuery } from '@clover/public/hooks'
 import { useProfile } from '@clover/public/hooks/use.profile'
-import { BreadcrumbItem, BreadcrumbPage, Button, Card, DataTable, Space } from '@easykit/design'
+import { BreadcrumbItem, BreadcrumbPage, Button, Card, DataTable, Space, useAlert, useMessage } from '@easykit/design'
+import { useMutation, useQueryClient } from '@tanstack/react-query'
 import Link from 'next/link'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { useState } from 'react'
@@ -32,6 +33,9 @@ export const ModulePage = () => {
   const type = search.get('type') || 'all'
   const [active, setActive] = useState(type)
   const title = t('模块')
+  const queryClient = useQueryClient()
+  const msg = useMessage()
+  const alert = useAlert()
   const { loading, data, pagination, load, query } = useListQuery<Module, ModuleListParams>({
     params: {
       type: active,
@@ -39,6 +43,27 @@ export const ModulePage = () => {
     key: 'module:list',
     action: list,
   })
+  const { mutateAsync } = useMutation({
+    mutationFn: deleteModule,
+    onSuccess: () => {
+      router.push('/')
+      queryClient.invalidateQueries({ queryKey: ['module:list'], exact: false })
+    },
+    onError: (error) => {
+      msg.error(error.message)
+    },
+  })
+
+  const remove = (m: string) => {
+    alert.confirm({
+      title: t('删除'),
+      description: t('删除该翻译项目，所以的翻译数据将无法使用，是否继续？'),
+      onOk: async () => {
+        await mutateAsync(m)
+        return true
+      },
+    })
+  }
 
   const actions = (
     <Space>
@@ -73,14 +98,13 @@ export const ModulePage = () => {
           data={data}
           loading={loading}
           onRowActionClick={({ id: key }, { original }) => {
-            const { id } = original
-            console.log(id)
+            const { identifier } = original
             if (key === 'detail') {
-              router.push(`/${original.identifier}/dashboard`)
+              router.push(`/${identifier}/dashboard`)
             } else if (key === 'activity') {
-              router.push(`/${original.identifier}/activity`)
+              router.push(`/${identifier}/activity`)
             } else if (key === 'delete') {
-              console.log(id)
+              remove(identifier!)
             }
           }}
           onRowClick={(row) => {
