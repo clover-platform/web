@@ -14,7 +14,9 @@ export const useUnauthorizedHandle = () => {
   }, [apps])
 
   const onUnauthorized = useCallback(() => {
-    location.href = `${homeApp?.href}/login?redirect=${encodeURIComponent(location.href)}`
+    if (homeApp) {
+      location.href = `${homeApp?.href}/login?redirect=${encodeURIComponent(location.href)}`
+    }
   }, [homeApp])
 
   useEffect(() => {
