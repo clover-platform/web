@@ -76,7 +76,7 @@ export const ProfileMenu: FC<ProfileMenuProps> = (props) => {
     <DropdownMenu open={open} onOpenChange={setOpen}>
       <DropdownMenuTrigger asChild>
         <Action className="!outline-none !rounded-full !p-0.5" active={open}>
-          <Avatar className="h-7 w-7" src={account.avatar!} alt="cover" />
+          <Avatar className="h-7 w-7" src={account.avatar!} alt="cover" fallback={account.username.slice(0, 1)} />
         </Action>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end" className="w-64 p-0">

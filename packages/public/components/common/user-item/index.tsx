@@ -1,33 +1,10 @@
 import type { User } from '@clover/public/types/account'
-import { HoverCard, HoverCardContent, HoverCardTrigger } from '@easykit/design'
-import classNames from 'classnames'
+import { Avatar, HoverCard, HoverCardContent, HoverCardTrigger } from '@easykit/design'
 import { type FC, useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
 export type UserItemProps = {
   info: User
   className?: string
-}
-
-type AvatarProps = {
-  avatar: string
-  fallback: string
-  className?: string
-}
-
-const Avatar: FC<AvatarProps> = (props) => {
-  const { avatar, fallback, className } = props
-  return (
-    <div
-      className={classNames(
-        'flex h-8 w-8 items-center justify-center overflow-hidden rounded-full bg-secondary',
-        'cursor-default font-medium text-secondary-foreground',
-        className
-      )}
-    >
-      {/* biome-ignore lint/nursery/noImgElement: <explanation> */}
-      {avatar ? <img src={avatar} alt="avatar" /> : fallback}
-    </div>
-  )
 }
 
 export const UserItem: FC<UserItemProps> = (props) => {
@@ -36,7 +13,7 @@ export const UserItem: FC<UserItemProps> = (props) => {
   const { t } = useTranslation()
 
   const avatar = useMemo(() => {
-    return <Avatar className={className} avatar={info.avatar} fallback={firstLetter} />
+    return <Avatar className={className} src={info.avatar} fallback={firstLetter} />
   }, [info, className, firstLetter])
 
   return (
@@ -44,7 +21,7 @@ export const UserItem: FC<UserItemProps> = (props) => {
       <HoverCardTrigger>{avatar}</HoverCardTrigger>
       <HoverCardContent side="top" className="border-none p-0">
         <div className="flex items-center justify-center space-x-4 rounded-t-md bg-primary p-4 text-white">
-          <Avatar avatar={info.avatar} fallback={firstLetter} />
+          <Avatar src={info.avatar} fallback={firstLetter} fallbackClassName="text-secondary-foreground" />
           <div className="flex-1 font-medium text-lg">{info.username}</div>
         </div>
         <div className="flex flex-wrap space-x-3 p-3">
