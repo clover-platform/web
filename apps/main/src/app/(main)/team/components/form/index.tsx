@@ -20,6 +20,7 @@ export const TeamForm = () => {
       router.push('/team')
       load().then()
       queryClient.invalidateQueries({ queryKey: ['team:list'], exact: false })
+      queryClient.invalidateQueries({ queryKey: ['project:list'], exact: false })
     },
     onError: (error) => {
       msg.error(error.message)

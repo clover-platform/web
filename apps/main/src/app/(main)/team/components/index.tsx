@@ -12,7 +12,7 @@ import { useLayoutConfig } from '@clover/public/components/layout/hooks/use.layo
 import { useListQuery } from '@clover/public/hooks'
 import type { Team } from '@clover/public/types/team'
 import { BreadcrumbItem, BreadcrumbPage, Button, Card, DataTable, useAlert, useMessage } from '@easykit/design'
-import { useMutation } from '@tanstack/react-query'
+import { useMutation, useQueryClient } from '@tanstack/react-query'
 import Link from 'next/link'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { useCallback, useMemo, useState } from 'react'
@@ -49,6 +49,7 @@ export const TeamPage = () => {
   const { load: loadCollect } = useCollectTeam()
   const team = useCurrentTeam()
   const msg = useMessage()
+  const queryClient = useQueryClient()
   const { loading, data, pagination, load, query, refetch } = useListQuery<Team, ListParams>({
     params: {
       type: active,
@@ -60,7 +61,8 @@ export const TeamPage = () => {
   const reload = useCallback(() => {
     refetch().then()
     loadCollect().then()
-  }, [refetch, loadCollect])
+    queryClient.invalidateQueries({ queryKey: ['project:list'], exact: false })
+  }, [refetch, loadCollect, queryClient])
 
   const { mutate: addCollectMutation, isPending: isAddingCollect } = useMutation({
     mutationFn: addCollect,

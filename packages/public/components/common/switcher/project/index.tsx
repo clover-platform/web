@@ -5,6 +5,7 @@ import { useFormSubmit } from '@clover/public/hooks/use.form.submit'
 import { change } from '@clover/public/rest/team'
 import { t } from '@clover/public/utils/locale.client'
 import { Button, Dialog, Form, FormItem } from '@easykit/design'
+import { useQueryClient } from '@tanstack/react-query'
 import classNames from 'classnames'
 import { type FC, type PropsWithChildren, useState } from 'react'
 import { useTranslation } from "react-i18next";
@@ -37,9 +38,11 @@ export const ProjectSwitcher: FC<ProjectSwitcherProps> = (props) => {
   const [open, setOpen] = useState(false);
   const [teamIdValue, setTeamIdValue] = useState<string|number|undefined>(teamId);
   const loader = useStateLoader();
+  const queryClient = useQueryClient()
   const {ref, onSubmit, submitting} = useFormSubmit({
     action: change,
     onSuccess: () => {
+      queryClient.resetQueries()
       onSuccess?.();
       setOpen(false);
       loader().then();
