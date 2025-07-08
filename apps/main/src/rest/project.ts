@@ -22,9 +22,12 @@ export type CreateProjectData = {
   teamId: string
 }
 
-export const create = (data: CreateProjectData) => post<unknown, CreateProjectData>('@main/project/create', data)
+export const create = (data: CreateProjectData) =>
+  resultWrapper(post<unknown, CreateProjectData>('@main/project/create', data))
 
 export const deleteProject = (id: number) => resultWrapper(del(`@main/project/${id}`))
+
+export const leaveProject = (id: number) => resultWrapper(del(`@main/project/${id}/leave`))
 
 export const addCollect = (id: number) => resultWrapper(post('@main/project/collect/add', { id }))
 

@@ -130,7 +130,7 @@ export const getRowActions = (project: Project, current?: number): DropdownMenuI
     },
     [MemberType.Member, MemberType.Admin].includes(project.memberType) &&
       project.id !== current && {
-        id: 'exit',
+        id: 'leave',
         type: 'item',
         label: t('退出'),
       },

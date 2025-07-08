@@ -2,8 +2,9 @@
 
 import { AppBreadcrumb } from '@/components/common/app-breadcrumb'
 import type { MainLayoutProps } from '@/components/layout/main'
+import { useCollectProject } from '@/hooks/use.collect.project'
 import { useCollectTeam } from '@/hooks/use.collect.team'
-import { type ListParams, addCollect, cancelCollect, deleteTeam, list } from '@/rest/team'
+import { type ListParams, addCollect, cancelCollect, deleteTeam, leaveTeam, list } from '@/rest/team'
 import { MainPage } from '@clover/public/components/common/page'
 import { TabsTitle } from '@clover/public/components/common/tabs-title'
 import { TitleBar } from '@clover/public/components/common/title-bar'
@@ -47,10 +48,18 @@ export const TeamPage = () => {
     )
   }, [t])
   const { load: loadCollect } = useCollectTeam()
+  const { load: loadProjectCollect } = useCollectProject()
   const team = useCurrentTeam()
   const msg = useMessage()
   const queryClient = useQueryClient()
-  const { loading, data, pagination, load, query, refetch } = useListQuery<Team, ListParams>({
+  const {
+    loading: isLoading,
+    data,
+    pagination,
+    load,
+    query,
+    refetch,
+  } = useListQuery<Team, ListParams>({
     params: {
       type: active,
     },
@@ -61,8 +70,9 @@ export const TeamPage = () => {
   const reload = useCallback(() => {
     refetch().then()
     loadCollect().then()
+    loadProjectCollect().then()
     queryClient.invalidateQueries({ queryKey: ['project:list'], exact: false })
-  }, [refetch, loadCollect, queryClient])
+  }, [refetch, loadCollect, loadProjectCollect, queryClient])
 
   const { mutate: addCollectMutation, isPending: isAddingCollect } = useMutation({
     mutationFn: addCollect,
@@ -91,6 +101,19 @@ export const TeamPage = () => {
       msg.error(error.message)
     },
   })
+  const { mutate: leaveTeamMutation, isPending: isLeavingTeam } = useMutation({
+    mutationFn: leaveTeam,
+    onSuccess: () => {
+      reload()
+    },
+    onError: (error) => {
+      msg.error(error.message)
+    },
+  })
+
+  const loading = useMemo(() => {
+    return isLoading || isAddingCollect || isCancellingCollect || isDeletingTeam || isLeavingTeam
+  }, [isLoading, isAddingCollect, isCancellingCollect, isDeletingTeam, isLeavingTeam])
 
   return (
     <MainPage>
@@ -114,7 +137,7 @@ export const TeamPage = () => {
           columns={getColumns(team?.id)}
           rowActions={(t) => getRowActions(t, team?.id)}
           data={data}
-          loading={loading || isAddingCollect || isCancellingCollect || isDeletingTeam}
+          loading={loading}
           onRowActionClick={({ id: key }, { original }) => {
             const { id, teamKey } = original
             if (key === 'delete') {
@@ -142,6 +165,12 @@ export const TeamPage = () => {
                 title: t('取消收藏团队'),
                 description: t('确定取消收藏团队吗？'),
                 onOk: () => cancelCollectMutation(id),
+              })
+            } else if (key === 'leave') {
+              alert.confirm({
+                title: t('退出团队'),
+                description: t('退出团队将会退出团队下的所有项目，确定退出团队吗？'),
+                onOk: () => leaveTeamMutation(id),
               })
             }
           }}

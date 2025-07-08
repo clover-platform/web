@@ -108,7 +108,7 @@ export const getRowActions = (team: Team, currentTeamId?: number): DropdownMenuI
     },
     [MemberType.Member, MemberType.Admin].includes(team.memberType) &&
       team.id !== currentTeamId && {
-        id: 'exit',
+        id: 'leave',
         type: 'item',
         label: t('退出'),
       },

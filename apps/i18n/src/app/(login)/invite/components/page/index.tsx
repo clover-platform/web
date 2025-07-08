@@ -57,7 +57,7 @@ export const InvitePageBody: FC<InvitePageBodyProps> = (props) => {
           </div>
           <div className="flex-1 space-y-1">
             <div className="text-base">{detail?.name}</div>
-            <div className="text-muted-foreground">目标语言</div>
+            <div className="text-muted-foreground">{t('目标语言')}</div>
             <div className="space-y-1 rounded-md bg-muted p-2">
               {detail?.targets.map((target, index) => {
                 const items = [
@@ -69,7 +69,7 @@ export const InvitePageBody: FC<InvitePageBodyProps> = (props) => {
                   </div>,
                 ]
                 if (index < detail.targets.length - 1) {
-                  items.push(<div key={`${target.id}-border`} className="-mx-2 h-0.5 bg-white" />)
+                  items.push(<div key={`${target.id}-border`} className="-mx-2 h-0.5 bg-white dark:bg-black" />)
                 }
                 return items
               })}

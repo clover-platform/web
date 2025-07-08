@@ -18,6 +18,8 @@ export const list = (params: ListParams) => resultWrapper(get<PageData<Team>, Li
 
 export const deleteTeam = (id: number) => resultWrapper(del(`@main/team/${id}`))
 
+export const leaveTeam = (id: number) => resultWrapper(del(`@main/team/${id}/leave`))
+
 export const addCollect = (id: number) => resultWrapper(post('@main/team/collect/add', { id }))
 
 export const cancelCollect = (id: number) => resultWrapper(del('@main/team/collect/cancel', { id }))

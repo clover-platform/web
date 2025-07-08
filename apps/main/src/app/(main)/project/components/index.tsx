@@ -2,7 +2,7 @@
 import { AppBreadcrumb } from '@/components/common/app-breadcrumb'
 import type { MainLayoutProps } from '@/components/layout/main'
 import { useCollectProject } from '@/hooks/use.collect.project'
-import { type ProjectListParams, addCollect, cancelCollect, deleteProject, list } from '@/rest/project'
+import { type ProjectListParams, addCollect, cancelCollect, deleteProject, leaveProject, list } from '@/rest/project'
 import { MainPage } from '@clover/public/components/common/page'
 import { TabsTitle } from '@clover/public/components/common/tabs-title'
 import { TitleBar } from '@clover/public/components/common/title-bar'
@@ -39,7 +39,14 @@ const ProjectPage = () => {
   const project = useCurrentProject()
   const msg = useMessage()
   const { load: loadCollect } = useCollectProject()
-  const { loading, data, pagination, load, query, refetch } = useListQuery<Project, ProjectListParams>({
+  const {
+    loading: loadingList,
+    data,
+    pagination,
+    load,
+    query,
+    refetch,
+  } = useListQuery<Project, ProjectListParams>({
     params: {
       type: active,
     },
@@ -73,6 +80,15 @@ const ProjectPage = () => {
       msg.error(error.message)
     },
   })
+  const { mutate: leaveProjectMutation, isPending: isLeavingProject } = useMutation({
+    mutationFn: leaveProject,
+    onSuccess: () => {
+      reload()
+    },
+    onError: (error) => {
+      msg.error(error.message)
+    },
+  })
 
   const reload = useCallback(() => {
     refetch().then()
@@ -88,6 +104,10 @@ const ProjectPage = () => {
       </div>
     )
   }, [t])
+
+  const loading = useMemo(() => {
+    return loadingList || isDeleting || isAddingCollect || isCancellingCollect || isLeavingProject
+  }, [loadingList, isDeleting, isAddingCollect, isCancellingCollect, isLeavingProject])
 
   return (
     <MainPage>
@@ -111,7 +131,7 @@ const ProjectPage = () => {
           columns={getColumns(project?.id)}
           rowActions={(row) => getRowActions(row, project?.id)}
           data={data}
-          loading={loading || isDeleting || isAddingCollect || isCancellingCollect}
+          loading={loading}
           onRowActionClick={({ id: key }, { original }) => {
             const { id, projectKey } = original
             if (key === 'delete') {
@@ -133,6 +153,12 @@ const ProjectPage = () => {
                 title: t('取消收藏项目'),
                 description: t('确定取消收藏项目吗？'),
                 onOk: () => cancelCollectMutation(id),
+              })
+            } else if (key === 'leave') {
+              alert.confirm({
+                title: t('退出项目'),
+                description: t('退出后将无法访问项目的所有内容，确定退出吗？'),
+                onOk: () => leaveProjectMutation(id),
               })
             }
           }}
