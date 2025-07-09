@@ -32,7 +32,7 @@ export const InvitePageLoading = () => {
                   <Skeleton className="h-4 w-16" />
                 </div>
               </div>
-              <div className="-mx-2 h-0.5 bg-white" />
+              <div className="-mx-2 h-0.5 bg-white dark:bg-black" />
               <div className="flex items-center justify-center">
                 <div className="mr-2">
                   <Skeleton className="h-6 w-8" />
