@@ -23,6 +23,7 @@ export const RenameDialog: FC<RenameDialogProps> = (props) => {
     onSuccess: () => {
       onCancel?.()
       queryClient.invalidateQueries({ queryKey: ['module:source:files'] })
+      queryClient.invalidateQueries({ queryKey: ['module:list'], exact: false })
     },
     onError: (error) => {
       msg.error(error.message)

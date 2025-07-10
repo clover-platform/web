@@ -59,8 +59,12 @@ export const ModulePage = () => {
       title: t('删除'),
       description: t('删除该翻译项目，所以的翻译数据将无法使用，是否继续？'),
       onOk: async () => {
-        await mutateAsync(m)
-        return true
+        try {
+          await mutateAsync(m)
+          return true
+        } catch (_) {
+          return false // 或者根据需要返回
+        }
       },
     })
   }

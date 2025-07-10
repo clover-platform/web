@@ -23,6 +23,7 @@ export const UpdateDialog: FC<UpdateDialogProps> = (props) => {
     mutationFn: update,
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['module:source:files'] })
+      queryClient.invalidateQueries({ queryKey: ['module:list'], exact: false })
       props.onCancel?.()
     },
     onError: (error) => {

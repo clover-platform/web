@@ -3,7 +3,7 @@ import { type ListFileQuery, deleteFile, list } from '@/rest/source'
 import type { File } from '@/types/module/source'
 import { useListQuery } from '@clover/public/hooks'
 import { Card, DataTable, useAlert, useMessage } from '@easykit/design'
-import { useMutation } from '@tanstack/react-query'
+import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { useParams } from 'next/navigation'
 import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
@@ -30,11 +30,13 @@ export const Files = () => {
   const [renameVisible, setRenameVisible] = useState(false)
   const [updateVisible, setUpdateVisible] = useState(false)
   const [file, setFile] = useState<File | null>(null)
+  const queryClient = useQueryClient()
 
   const { mutateAsync: deleteFileMutate } = useMutation({
     mutationFn: deleteFile,
     onSuccess: () => {
-      refetch().then()
+      refetch()
+      queryClient.invalidateQueries({ queryKey: ['module:list'], exact: false })
     },
     onError: (error) => {
       msg.error(error.message)
