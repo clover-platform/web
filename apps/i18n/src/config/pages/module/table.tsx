@@ -84,6 +84,17 @@ export const ROW_ACTIONS = (profile: Account, row: Module): DropdownMenuItemProp
       type: 'item',
       label: t('动态'),
     },
+    row.collected
+      ? {
+          id: 'collect.cancel',
+          type: 'item',
+          label: t('取消收藏'),
+        }
+      : {
+          id: 'collect',
+          type: 'item',
+          label: t('收藏'),
+        },
     {
       type: 'separator',
       id: 'separator.1',

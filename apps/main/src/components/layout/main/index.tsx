@@ -15,7 +15,7 @@ export type MainLayoutProps = PublicMainLayoutProps & {
 export const MainLayout: FC<MainLayoutProps> = (origin) => {
   const props = useLayoutProps<MainLayoutProps>(origin);
   const { t } = useTranslation()
-  useUnauthorizedHandle();
+  const { isLogin } = useUnauthorizedHandle()
 
   return (
     <PublicMainLayout
@@ -29,6 +29,7 @@ export const MainLayout: FC<MainLayoutProps> = (origin) => {
       footerProps={{
         simple: true,
       }}
+      loading={!isLogin}
     >
       {props.children}
     </PublicMainLayout>

@@ -4,7 +4,8 @@ import { AppBreadcrumb } from '@/components/common/breadcrumb/app'
 import type { MainLayoutProps } from '@/components/layout/main'
 import { ROW_ACTIONS, getColumns, getFilters } from '@/config/pages/module/table'
 import { getTabs } from '@/config/pages/module/tabs'
-import { type ModuleListParams, deleteModule, list } from '@/rest/module'
+import { useReloadCollectModule } from '@/hooks'
+import { type ModuleListParams, addCollect, cancelCollect, deleteModule, list } from '@/rest/module'
 import type { Module } from '@/types/module'
 import { MainPage } from '@clover/public/components/common/page'
 import { TabsTitle } from '@clover/public/components/common/tabs-title'
@@ -18,6 +19,7 @@ import Link from 'next/link'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
+
 const initialParams = {
   keyword: '',
 }
@@ -36,6 +38,7 @@ export const ModulePage = () => {
   const queryClient = useQueryClient()
   const msg = useMessage()
   const alert = useAlert()
+  const reloadCollect = useReloadCollectModule()
   const { loading, data, pagination, load, query } = useListQuery<Module, ModuleListParams>({
     params: {
       type: active,
@@ -46,8 +49,30 @@ export const ModulePage = () => {
   const { mutateAsync } = useMutation({
     mutationFn: deleteModule,
     onSuccess: () => {
-      router.push('/')
       queryClient.invalidateQueries({ queryKey: ['module:list'], exact: false })
+      reloadCollect()
+    },
+    onError: (error) => {
+      msg.error(error.message)
+    },
+  })
+
+  const { mutate: addCollectMutation } = useMutation({
+    mutationFn: addCollect,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['module:list'], exact: false })
+      reloadCollect()
+    },
+    onError: (error) => {
+      msg.error(error.message)
+    },
+  })
+
+  const { mutate: cancelCollectMutation } = useMutation({
+    mutationFn: cancelCollect,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['module:list'], exact: false })
+      reloadCollect()
     },
     onError: (error) => {
       msg.error(error.message)
@@ -109,6 +134,18 @@ export const ModulePage = () => {
               router.push(`/${identifier}/activity`)
             } else if (key === 'delete') {
               remove(identifier!)
+            } else if (key === 'collect') {
+              alert.confirm({
+                title: t('收藏模块'),
+                description: t('确定收藏模块吗？'),
+                onOk: () => addCollectMutation(identifier!),
+              })
+            } else if (key === 'collect.cancel') {
+              alert.confirm({
+                title: t('取消收藏模块'),
+                description: t('确定取消收藏模块吗？'),
+                onOk: () => cancelCollectMutation(identifier!),
+              })
             }
           }}
           onRowClick={(row) => {

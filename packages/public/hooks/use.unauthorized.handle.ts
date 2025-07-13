@@ -31,4 +31,8 @@ export const useUnauthorizedHandle = () => {
       bus.off(UNAUTHORIZED, onUnauthorized)
     }
   }, [onUnauthorized])
+
+  return {
+    isLogin,
+  }
 }

@@ -40,6 +40,7 @@ export const ImportConfigDialog: FC<ImportConfigDialogProps> = (props) => {
     onSuccess: () => {
       props.onCancel?.()
       queryClient.invalidateQueries({ queryKey: ['module:source:files'] })
+      queryClient.invalidateQueries({ queryKey: ['module:list'], exact: false })
     },
     onError: (error) => {
       msg.error(error.message)

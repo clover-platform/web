@@ -146,7 +146,7 @@ const ProjectPage = () => {
               alert.confirm({
                 title: t('收藏项目'),
                 description: t('确定收藏项目吗？'),
-                onOk: () => addCollectMutation(id),
+                onOk: () => addCollectMutation(id), 
               })
             } else if (key === 'collect.cancel') {
               alert.confirm({

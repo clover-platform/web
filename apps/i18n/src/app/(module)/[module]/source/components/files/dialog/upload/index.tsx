@@ -29,6 +29,7 @@ export const UploadDialog: FC<UploadDialogProps> = (props) => {
       }
       props.onCancel?.()
       queryClient.invalidateQueries({ queryKey: ['module:source:files'] })
+      queryClient.invalidateQueries({ queryKey: ['module:list'], exact: false })
     },
     onError: (error) => {
       msg.error(error.message)

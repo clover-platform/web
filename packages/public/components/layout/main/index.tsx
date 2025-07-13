@@ -8,6 +8,7 @@ import { projectsState, teamsState } from '@clover/public/state/public'
 import classNames from 'classnames'
 import { useAtomValue } from 'jotai'
 import { type FC, type PropsWithChildren, useEffect, useMemo } from 'react'
+import { LoadingLayout } from '../loading'
 
 export type MainLayoutProps = PropsWithChildren<{
   headerProps?: HeaderProps
@@ -15,6 +16,7 @@ export type MainLayoutProps = PropsWithChildren<{
   bodyClassName?: string
   className?: string
   container?: boolean
+  loading?: boolean
 }>
 
 export const MainLayout: FC<MainLayoutProps> = (props) => {
@@ -25,7 +27,8 @@ export const MainLayout: FC<MainLayoutProps> = (props) => {
     bodyClassName,
     children,
     container = true,
-  } = props;
+    loading = false,
+  } = props
   const teams = useAtomValue(teamsState);
   const projects = useAtomValue(projectsState);
   const isLogin = useAtomValue(isLoginState);
@@ -41,12 +44,15 @@ export const MainLayout: FC<MainLayoutProps> = (props) => {
       <Guide />
     </LoginLayout>
   ) : (
-    <div className={classNames('flex min-h-[100vh] flex-col items-center justify-center', className)}>
-      <Header {...headerProps} />
-      <div className={classNames('w-full flex-1', bodyClassName)}>
-        {container ? <div className="container py-4">{children}</div> : children}
+    <>
+      <div className={classNames('flex min-h-[100vh] flex-col items-center justify-center', className)}>
+        <Header {...headerProps} />
+        <div className={classNames('w-full flex-1', bodyClassName)}>
+          {container ? <div className="container py-4">{children}</div> : children}
+        </div>
+        <Footer {...footerProps} />
       </div>
-      <Footer {...footerProps} />
-    </div>
+      {loading ? <LoadingLayout /> : null}
+    </>
   )
 }

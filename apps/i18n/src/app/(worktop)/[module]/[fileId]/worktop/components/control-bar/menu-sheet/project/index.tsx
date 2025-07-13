@@ -1,4 +1,5 @@
 import { all } from '@/rest/module'
+import type { Module } from '@/types/module'
 import { IconShare } from '@arco-iconbox/react-clover'
 import { Command, CommandInput, CommandItem, CommandList, Separator, Spin } from '@easykit/design'
 import { CheckIcon } from '@radix-ui/react-icons'
@@ -10,8 +11,7 @@ export const MenuProjectSheet = () => {
   const params = useParams()
   const { module } = params
   const [loading, setLoading] = useState(true)
-  // biome-ignore lint/suspicious/noExplicitAny: <explanation>
-  const [projects, setProjects] = useState<any>([])
+  const [projects, setProjects] = useState<Module[]>([])
   const { t } = useTranslation()
 
   const switchProject = (identifier: string) => {
@@ -26,7 +26,7 @@ export const MenuProjectSheet = () => {
     setLoading(true)
     const { success, data } = await all({})
     setLoading(false)
-    setProjects(success ? data : [])
+    setProjects(success ? (data ?? []) : [])
   }, [])
 
   useEffect(() => {

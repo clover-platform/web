@@ -14,12 +14,12 @@ export const OTPInput: FC<OTPInputProps> = (props) => {
   return (
     <InputOTP value={value} onChange={onChange} maxLength={6} pattern={REGEXP_ONLY_DIGITS}>
       <InputOTPGroup>
-        <InputOTPSlot className="h-12 w-12" index={0} />
-        <InputOTPSlot className="h-12 w-12" index={1} />
-        <InputOTPSlot className="h-12 w-12" index={2} />
-        <InputOTPSlot className="h-12 w-12" index={3} />
-        <InputOTPSlot className="h-12 w-12" index={4} />
-        <InputOTPSlot className="h-12 w-12" index={5} />
+        <InputOTPSlot className="h-12 w-12 text-xl" index={0} />
+        <InputOTPSlot className="h-12 w-12 text-xl" index={1} />
+        <InputOTPSlot className="h-12 w-12 text-xl" index={2} />
+        <InputOTPSlot className="h-12 w-12 text-xl" index={3} />
+        <InputOTPSlot className="h-12 w-12 text-xl" index={4} />
+        <InputOTPSlot className="h-12 w-12 text-xl" index={5} />
       </InputOTPGroup>
     </InputOTP>
   )

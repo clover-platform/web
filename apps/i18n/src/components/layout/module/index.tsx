@@ -16,7 +16,7 @@ export type ModuleLayoutProps = {
 
 export const ModuleLayout: FC<ModuleLayoutProps> = (origin) => {
   const props = useLayoutProps<ModuleLayoutProps>(origin)
-  useUnauthorizedHandle()
+  const { isLogin } = useUnauthorizedHandle()
   const { t } = useTranslation()
   const { module } = useParams()
   const [_, setBaseInfo] = useModuleInfo()
@@ -42,6 +42,7 @@ export const ModuleLayout: FC<ModuleLayoutProps> = (origin) => {
         extra: <Header active={props.active} />,
       }}
       footerProps={{ simple: true }}
+      loading={!isLogin}
       {...props}
     >
       {props.children}

@@ -25,6 +25,7 @@ export const metadata: Metadata = {
 const RootLayout: FC<RootLayoutProps> = async (props) => {
   const locale = await getLocale()
   const initState = await loadState()
+  
   return (
     <HTMLLayout>
       <PublicRootLayout {...initState} locale={locale}>
