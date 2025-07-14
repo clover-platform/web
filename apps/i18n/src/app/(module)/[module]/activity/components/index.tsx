@@ -29,7 +29,7 @@ export const ActivityPage = () => {
     isLoading: loading,
   } = useInfiniteQuery({
     queryKey: ['module: activity', m],
-    queryFn: ({ pageParam = 1 }) => listRest({ page: pageParam, size: 10, module: m }),
+    queryFn: ({ pageParam = 1 }) => listRest({ page: pageParam, size: 10 }),
     getNextPageParam: (lastPage, pages) => ((lastPage?.total || 0) > pages.length * 10 ? pages.length + 1 : undefined),
     initialPageParam: 1,
   })
@@ -71,7 +71,7 @@ export const ActivityPage = () => {
           <BreadcrumbPage>{title}</BreadcrumbPage>
         </BreadcrumbItem>
       </ModuleBreadcrumb>
-      <TitleBar title={title} border={false} />
+      <TitleBar title={title} />
       <Card>
         <ActivityList loading={loading} items={items} />
         {!loading && hasNextPage ? (

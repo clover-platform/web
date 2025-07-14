@@ -1,7 +1,6 @@
 export type ActivityQueryParams = {
-  module: string;
-  page: number;
-  size: number;
+  page: number
+  size: number
 }
 
 export type Activity = {
@@ -19,6 +18,6 @@ export type Activity = {
 }
 
 export type ActivityGroup = {
-  time: string;
-  list: Activity[];
+  time: string
+  list: Activity[]
 }
