@@ -6,8 +6,8 @@ import { list } from '@/rest/activity'
 import { MainPage } from '@clover/public/components/common/page'
 import { TitleBar } from '@clover/public/components/common/title-bar'
 import { useLayoutConfig } from '@clover/public/components/layout/hooks/use.layout.config'
+import { ActivityList } from '@clover/public/components/pages/activity'
 import { BreadcrumbItem, BreadcrumbPage, Card } from '@easykit/design'
-import { useInfiniteQuery } from '@tanstack/react-query'
 import { useTranslation } from 'react-i18next'
 
 export const ActivityPage = () => {
@@ -16,20 +16,7 @@ export const ActivityPage = () => {
   })
   const { t } = useTranslation()
   const title = t('动态')
-  const {
-    data,
-    fetchNextPage,
-    hasNextPage,
-    isLoading: loading,
-  } = useInfiniteQuery({
-    queryKey: ['module: activity'],
-    queryFn: ({ pageParam = 1 }) => list({ page: pageParam, size: 10 }),
-    getNextPageParam: (lastPage, pages) => ((lastPage?.total || 0) > pages.length * 10 ? pages.length + 1 : undefined),
-    initialPageParam: 1,
-  })
-
-  console.log(data)
-
+  
   return (
     <MainPage>
       <AppBreadcrumb>
@@ -38,7 +25,9 @@ export const ActivityPage = () => {
         </BreadcrumbItem>
       </AppBreadcrumb>
       <TitleBar title={title} />
-      <Card>test</Card>
+      <Card>
+        <ActivityList queryFn={({ pageParam, size }) => list({ page: pageParam, size })} />
+      </Card>
     </MainPage>
   )
 }

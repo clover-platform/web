@@ -1,15 +1,8 @@
-import {IconDashboard, IconHome, IconI18n, IconQA, IconWiki} from "@arco-iconbox/react-clover";
+
+import { ICONS } from '@clover/public/config/icons'
 import type { AppsItem as AppsItemProps } from '@clover/public/types/config'
 import {useRouter} from "next/navigation";
-import { type FC, type ReactNode, useCallback } from 'react'
-
-const ICONS: Record<string, ReactNode> = {
-  home: <IconHome />,
-  dashboard: <IconDashboard />,
-  wiki: <IconWiki />,
-  i18n: <IconI18n />,
-  qa: <IconQA />,
-}
+import { type FC, useCallback } from 'react'
 
 export const AppsItem: FC<AppsItemProps & { onClick: () => void }> = (props) => {
   const { name, description, appId, href, onClick } = props
