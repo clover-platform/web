@@ -75,7 +75,7 @@ export const MenuSheet: FC<MenuSheetProps> = (props) => {
             label={t('帮助')}
           />
         </div>
-        <div className="flex-grow p-3">
+        <div className="flex-grow p-4">
           {active === 'project' && <MenuProjectSheet />}
           {active === 'language' && <MenuLanguageSheet />}
           {active === 'file' && <MenuFileSheet />}

@@ -32,7 +32,7 @@ export const ActivityItem: FC<ActivityItemProps> = (props) => {
       <div className="flex items-center gap-2 pt-1">
         <UserItem info={account} />
       </div>
-      <div>
+      <div className="flex flex-col gap-1">
         <div className="flex items-center gap-2">
           <span>{account.username}</span>
           <span>{t(getActionTitle(data.action))}</span>

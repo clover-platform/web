@@ -6,7 +6,7 @@ function makeQueryClient() {
       queries: {
         // With SSR, we usually want to set some default staleTime
         // above 0 to avoid refetching immediately on the client
-        staleTime: 60 * 1000,
+        staleTime: 5 * 1000, // 改为 5 秒，让缓存更快过期
         retry: false, // isServer ? false : 3, // 服务端重试3次，客户端不重试
       },
     },
