@@ -1,3 +1,9 @@
+import { Card } from '@easykit/design'
+
 export const Entries = () => {
-  return <div>Entries</div>
+  return (
+    <>
+      <Card>list</Card>
+    </>
+  )
 }

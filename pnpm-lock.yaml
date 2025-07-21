@@ -122,6 +122,9 @@ importers:
       next-themes:
         specifier: 0.4.4
         version: 0.4.4(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
+      nuqs:
+        specifier: 2.4.3
+        version: 2.4.3(next@15.3.3(@babel/core@7.26.10)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(sass@1.77.6))(react@19.1.0)
       qrcode:
         specifier: 1.5.3
         version: 1.5.3
@@ -363,6 +366,8 @@ packages:
 
   '@arco-iconbox/react-atom-ui@0.0.4':
     resolution: {integrity: sha512-gYBxZRGfVNcGrJu3MGYK6Xtgf9m+oobn/OL8QnqmI6/2zv6JmWwccI+4fMtvDfeh5U7sgfyK9wYh1ftn95Wlpg==}
+    peerDependencies:
+      react: 19.1.0
 
   '@arco-iconbox/react-clover@0.0.36':
     resolution: {integrity: sha512-8pAY0J3vEx3KzC+mSDMLJElC+abiI+rxhfQyiWWIDmp6KZd7QmxyQUmVao+mqxkoFIi/mapI8ITpksu+qAVOBw==}
@@ -3960,6 +3965,9 @@ packages:
   minimist@1.2.8:
     resolution: {integrity: sha512-2yyAR8qBkN3YuheJanUpWC5U3bb5osDywNB8RzDVlDwDHbocAJveqqj1u8+SVD7jkWT4yvsHCpWqqWqAxb0zCA==}
 
+  mitt@3.0.1:
+    resolution: {integrity: sha512-vKivATfr97l2/QBCYAkXYDbrIWPM2IIKEl7YPhjCvKlG3kE2gm+uBo6nEXK3M5/Ffh/FLpKExzOQ3JJoJGFKBw==}
+
   mkdirp@0.5.6:
     resolution: {integrity: sha512-FP+p8RB8OWpF3YZBCrP5gtADmtXApB5AMLn+vdyA+PyxCjrCs00mjyUozssO33cwDeT3wNGdLxJ5M//YqtHAJw==}
     hasBin: true
@@ -4031,6 +4039,24 @@ packages:
   now-and-later@3.0.0:
     resolution: {integrity: sha512-pGO4pzSdaxhWTGkfSfHx3hVzJVslFPwBp2Myq9MYN/ChfJZF87ochMAXnvz6/58RJSf5ik2q9tXprBBrk2cpcg==}
     engines: {node: '>= 10.13.0'}
+
+  nuqs@2.4.3:
+    resolution: {integrity: sha512-BgtlYpvRwLYiJuWzxt34q2bXu/AIS66sLU1QePIMr2LWkb+XH0vKXdbLSgn9t6p7QKzwI7f38rX3Wl9llTXQ8Q==}
+    peerDependencies:
+      '@remix-run/react': '>=2'
+      next: 15.3.3
+      react: 19.1.0
+      react-router: ^6 || ^7
+      react-router-dom: ^6 || ^7
+    peerDependenciesMeta:
+      '@remix-run/react':
+        optional: true
+      next:
+        optional: true
+      react-router:
+        optional: true
+      react-router-dom:
+        optional: true
 
   object-assign@4.1.1:
     resolution: {integrity: sha512-rJgTQnkUnH1sFw8yT6VSU3zD3sWmu6sZhIseY8VX+GRu3P6F7Fu+JNDoXfklElbLJSnc3FUQHVe4cU5hj+BcUg==}
@@ -5224,7 +5250,9 @@ snapshots:
       '@jridgewell/gen-mapping': 0.3.8
       '@jridgewell/trace-mapping': 0.3.25
 
-  '@arco-iconbox/react-atom-ui@0.0.4': {}
+  '@arco-iconbox/react-atom-ui@0.0.4(react@19.1.0)':
+    dependencies:
+      react: 19.1.0
 
   '@arco-iconbox/react-clover@0.0.36(react@19.1.0)':
     dependencies:
@@ -5392,7 +5420,7 @@ snapshots:
 
   '@easykit/design@0.0.135(@types/react-dom@19.1.2(@types/react@19.1.2))(@types/react@19.1.2)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)':
     dependencies:
-      '@arco-iconbox/react-atom-ui': 0.0.4
+      '@arco-iconbox/react-atom-ui': 0.0.4(react@19.1.0)
       '@emotion/react': 11.11.4(@types/react@19.1.2)(react@19.1.0)
       '@hookform/resolvers': 3.7.0(react-hook-form@7.52.1(react@19.1.0))
       '@radix-ui/react-alert-dialog': 1.1.2(@types/react-dom@19.1.2(@types/react@19.1.2))(@types/react@19.1.2)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
@@ -8845,6 +8873,8 @@ snapshots:
 
   minimist@1.2.8: {}
 
+  mitt@3.0.1: {}
+
   mkdirp@0.5.6:
     dependencies:
       minimist: 1.2.8
@@ -8936,6 +8966,13 @@ snapshots:
   now-and-later@3.0.0:
     dependencies:
       once: 1.4.0
+
+  nuqs@2.4.3(next@15.3.3(@babel/core@7.26.10)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(sass@1.77.6))(react@19.1.0):
+    dependencies:
+      mitt: 3.0.1
+      react: 19.1.0
+    optionalDependencies:
+      next: 15.3.3(@babel/core@7.26.10)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(sass@1.77.6)
 
   object-assign@4.1.1: {}
 

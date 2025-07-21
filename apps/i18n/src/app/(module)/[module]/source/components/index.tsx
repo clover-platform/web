@@ -6,7 +6,8 @@ import { MainPage } from '@clover/public/components/common/page'
 import { TitleBar } from '@clover/public/components/common/title-bar'
 import { useLayoutConfig } from '@clover/public/components/layout/hooks/use.layout.config'
 import { BreadcrumbItem, BreadcrumbPage, Tabs, TabsContent, TabsList, TabsTrigger } from '@easykit/design'
-import { useMemo, useState } from 'react'
+import { useQueryState } from 'nuqs'
+import { useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
 import { getTabs } from './config'
 
@@ -15,7 +16,9 @@ export const SourcePage = () => {
     active: 'source',
   })
   const { t } = useTranslation()
-  const [active, setActive] = useState('files')
+  const [active, setActive] = useQueryState('type', {
+    defaultValue: 'files',
+  })
 
   const actions = useMemo(() => {
     return getTabs().find((tab) => tab.id === active)?.actions

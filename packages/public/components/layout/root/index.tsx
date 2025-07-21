@@ -20,6 +20,7 @@ import i18next from 'i18next'
 import { Provider, type WritableAtom } from 'jotai'
 import { useHydrateAtoms } from 'jotai/utils'
 import { ThemeProvider } from "next-themes";
+import { NuqsAdapter } from 'nuqs/adapters/next/app'
 import type { FC, PropsWithChildren, ReactNode } from 'react'
 import { I18nextProvider } from 'react-i18next'
 
@@ -55,40 +56,42 @@ export const RootLayout: FC<RootLayoutProps> = (props) => {
   const queryClient = getQueryClient()
 
   return (
-    <I18nextProvider i18n={i18next} defaultNS="translation">
-      <Provider>
-        <AtomsHydrate
-          atomValues={[
-            [isLoginState, isLogin],
-            [teamsState, teams],
-            [projectsState, projects],
-            [
-              accountInfoState,
-              accountInfo || {
-                id: 0,
-                username: '',
-                authorities: [],
-                otpStatus: 0,
-                currentProjectId: 0,
-                currentTeamId: 0,
-              },
-            ],
-            [accessState, accountInfo?.authorities || []],
-            [localeState, locale],
-            [commonConfigState, config],
-            ...atomValues,
-          ]}
-        >
-          <ConfigProvider locale={locales[locale]}>
-            <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
-              <QueryClientProvider client={queryClient}>
-                {children}
-                <ReactQueryDevtools initialIsOpen={false} />
-              </QueryClientProvider>
-            </ThemeProvider>
-          </ConfigProvider>
-        </AtomsHydrate>
-      </Provider>
-    </I18nextProvider>
+    <NuqsAdapter>
+      <I18nextProvider i18n={i18next} defaultNS="translation">
+        <Provider>
+          <AtomsHydrate
+            atomValues={[
+              [isLoginState, isLogin],
+              [teamsState, teams],
+              [projectsState, projects],
+              [
+                accountInfoState,
+                accountInfo || {
+                  id: 0,
+                  username: '',
+                  authorities: [],
+                  otpStatus: 0,
+                  currentProjectId: 0,
+                  currentTeamId: 0,
+                },
+              ],
+              [accessState, accountInfo?.authorities || []],
+              [localeState, locale],
+              [commonConfigState, config],
+              ...atomValues,
+            ]}
+          >
+            <ConfigProvider locale={locales[locale]}>
+              <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
+                <QueryClientProvider client={queryClient}>
+                  {children}
+                  <ReactQueryDevtools initialIsOpen={false} />
+                </QueryClientProvider>
+              </ThemeProvider>
+            </ConfigProvider>
+          </AtomsHydrate>
+        </Provider>
+      </I18nextProvider>
+    </NuqsAdapter>
   )
 };
