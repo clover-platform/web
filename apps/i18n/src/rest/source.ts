@@ -1,5 +1,7 @@
 import type { FileFormData } from '@/config/schema/module/file'
+import type { Entry } from '@/types/module/entry'
 import type { File, FileRevision } from '@/types/module/source'
+import type { PageData } from '@clover/public/types/rest'
 import { del, get, post, put, resultWrapper } from '@clover/public/utils/rest'
 
 export type ListFileQuery = {
@@ -7,8 +9,10 @@ export type ListFileQuery = {
   keyword?: string
 }
 
-export const list = (params: ListFileQuery) =>
-  resultWrapper(get<File[], ListFileQuery>(`@i18n/${params.module}/file/list`, params))
+export const searchFile = (params: ListFileQuery) =>
+  get<PageData<File>, ListFileQuery>(`@i18n/${params.module}/file/list`, params)
+
+export const list = (params: ListFileQuery) => resultWrapper(searchFile(params))
 
 export const all = (module: string) => resultWrapper(get<File[], undefined>(`@i18n/${module}/file/all`))
 
@@ -61,3 +65,14 @@ export type RevisionListParams = {
 
 export const revisionList = (data: RevisionListParams) =>
   resultWrapper(get<FileRevision[], RevisionListParams>(`@i18n/${data.module}/file/${data.fileId}/revision/list`))
+
+export type EntryListQuery = {
+  module: string
+  page?: number
+  size?: number
+  fileId?: number
+  keyword?: string
+}
+
+export const entryList = (params: EntryListQuery) =>
+  resultWrapper(get<PageData<Entry>, EntryListQuery>(`@i18n/${params.module}/file/entry/list`, params))

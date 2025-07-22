@@ -1,4 +1,5 @@
 import type { User } from '@clover/public/types/account'
+import type { File } from './source'
 
 export type Entry = {
   id: number
@@ -6,9 +7,15 @@ export type Entry = {
   value: string
   moduleId: number
   fileId: number
-  verified: boolean
-  translated: boolean
+  context?: string
+  createTime?: Date
+  updateTime?: Date
+  createUserId?: number
+  updateUserId?: number
+  verified?: boolean
+  translated?: boolean
   translation?: EntryResult
+  file?: File
 }
 
 export type EntryResult = {

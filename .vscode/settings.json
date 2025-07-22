@@ -32,7 +32,8 @@
     "msgpackr",
     "turbopack",
     "navs",
-    "encryptor"
+    "encryptor",
+    "nuqs"
   ],
   "css.customData": [".vscode/tailwind.json"],
   "editor.codeActionsOnSave": {

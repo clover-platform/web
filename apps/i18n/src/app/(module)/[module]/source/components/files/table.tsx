@@ -53,7 +53,7 @@ export const getFilters = (): FilterItemProps[] => [
   },
 ]
 
-export const ROW_ACTIONS = (_cell: File): DropdownMenuItemProps[] => {
+export const getRowActions = (_cell: File): DropdownMenuItemProps[] => {
   const items: DropdownMenuItemProps[] = [
     {
       id: 'update',

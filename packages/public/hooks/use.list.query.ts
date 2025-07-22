@@ -1,7 +1,7 @@
 import { type QueryObserverResult, type RefetchOptions, keepPreviousData, useQuery } from '@tanstack/react-query'
-import { isEqual } from 'es-toolkit'
+import { uniq } from 'es-toolkit'
 import { usePathname, useRouter, useSearchParams } from 'next/navigation'
-import { useCallback, useEffect, useMemo, useState } from 'react'
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import type { PageData } from '../types/rest'
 
 export type ListQueryOptions<T, P> = {
@@ -10,6 +10,8 @@ export type ListQueryOptions<T, P> = {
   withURL?: boolean
   encodeParams?: string[]
   action: (params: P) => Promise<PageData<T> | T[] | undefined>
+  queryKeys?: string[]
+  initialParams?: Record<string, unknown>
 }
 
 export type ListQueryPagination = {
@@ -37,23 +39,41 @@ const STRING_KEYS = ['page', 'size']
 export const useListQuery = <T, P extends Record<string, unknown> = Record<string, unknown>>(
   options: ListQueryOptions<T, P>
 ): ListQueryResult<T> => {
-  const { params, key, action, encodeParams, withURL = true } = options
+  const { params, key, action, encodeParams, withURL = true, queryKeys: qks, initialParams } = options
   const [loadParams, setLoadParams] = useState<Record<string, unknown> | undefined>()
+  const [forceRefresh, setForceRefresh] = useState(0)
   const router = useRouter()
   const searchParams = useSearchParams()
   const pathname = usePathname()
+  const lastUrlParamsRef = useRef<string>('')
+
+  const queryKeys = useMemo(() => {
+    return uniq([...(qks || []), ...Object.keys(initialParams || {}), ...Object.keys(defaultParams)])
+  }, [qks, initialParams])
 
   // 解析 URL 参数
+  // biome-ignore lint/complexity/noExcessiveCognitiveComplexity: <explanation>
   const urlParams = useMemo(() => {
     if (!withURL) return {}
     const paramsObj: Record<string, unknown> = {}
     if (searchParams) {
-      for (const key of searchParams.keys()) {
-        paramsObj[key] = searchParams.get(key) || ''
+      // 如果设置了 queryKeys，只解析白名单中的参数
+      if (queryKeys && queryKeys.length > 0) {
+        for (const key of queryKeys) {
+          const value = searchParams.get(key)
+          if (value !== null) {
+            paramsObj[key] = value
+          }
+        }
+      } else {
+        // 如果没有设置 queryKeys，解析所有参数
+        for (const key of searchParams.keys()) {
+          paramsObj[key] = searchParams.get(key) || ''
+        }
       }
     }
     return paramsObj
-  }, [searchParams, withURL])
+  }, [searchParams, withURL, queryKeys])
 
   // 合并参数，优先级：defaultParams < urlParams < params < loadParams
   // biome-ignore lint/complexity/noExcessiveCognitiveComplexity: <explanation>
@@ -85,28 +105,55 @@ export const useListQuery = <T, P extends Record<string, unknown> = Record<strin
   // biome-ignore lint/complexity/noExcessiveCognitiveComplexity: <explanation>
   useEffect(() => {
     if (!withURL) return
-    // 当前 URL 参数
-    const currentParams: Record<string, string> = {}
+
+    // 获取当前URL中的所有参数
+    const currentAllParams: Record<string, string> = {}
     if (searchParams) {
       for (const key of searchParams.keys()) {
-        currentParams[key] = searchParams.get(key) || ''
+        currentAllParams[key] = searchParams.get(key) || ''
       }
     }
-    // 目标参数
-    const targetParams: Record<string, string> = {}
+
+    // 计算这个hook管理的参数
+    const managedParams: Record<string, string> = {}
+    const managedKeys = queryKeys && queryKeys.length > 0 ? queryKeys : Object.keys(queryKeyParams)
+
     for (const [k, v] of Object.entries(queryKeyParams)) {
-      targetParams[k] = v == null ? '' : String(v)
+      if (managedKeys.includes(k)) {
+        managedParams[k] = v == null ? '' : String(v)
+      }
     }
-    // 只有不一致时才 replace
-    if (!isEqual(currentParams, targetParams)) {
-      const queryString = new URLSearchParams(targetParams).toString()
-      router.replace(`${pathname}${queryString ? `?${queryString}` : ''}`)
+
+    // 保留不受此hook管理的其他参数
+    const otherParams: Record<string, string> = {}
+    for (const [key, value] of Object.entries(currentAllParams)) {
+      if (!managedKeys.includes(key)) {
+        otherParams[key] = value
+      }
     }
-  }, [queryKeyParams, withURL, router, pathname, searchParams])
+
+    // 合并其他参数和管理的参数
+    const finalParams = { ...otherParams, ...managedParams }
+    const newQueryString = new URLSearchParams(finalParams).toString()
+
+    // 比较当前URL参数和目标参数，如果相同则不更新
+    const currentUrlParams = searchParams?.toString() || ''
+    if (currentUrlParams === newQueryString) {
+      return
+    }
+
+    // 防止参数来回震荡
+    if (lastUrlParamsRef.current === newQueryString) {
+      return
+    }
+
+    lastUrlParamsRef.current = newQueryString
+    router.replace(`${pathname}${newQueryString ? `?${newQueryString}` : ''}`)
+  }, [queryKeyParams, withURL, router, pathname, searchParams, queryKeys])
 
   const queryKey = useMemo(() => {
-    return [key, queryKeyParams]
-  }, [key, queryKeyParams])
+    return [key, queryKeyParams, forceRefresh]
+  }, [key, queryKeyParams, forceRefresh])
 
   const { isLoading, data, refetch } = useQuery({
     queryKey,
@@ -119,6 +166,8 @@ export const useListQuery = <T, P extends Record<string, unknown> = Record<strin
       ...(prev || {}),
       ...(params || {}),
     }))
+    // 强制刷新，确保即使参数相同也会重新请求
+    setForceRefresh((prev) => prev + 1)
   }, [])
 
   const pagination = useMemo<ListQueryPagination>(() => {

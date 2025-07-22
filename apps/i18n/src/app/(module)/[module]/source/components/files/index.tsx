@@ -9,7 +9,7 @@ import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { RenameDialog } from './dialog/rename'
 import { UpdateDialog } from './dialog/update'
-import { ROW_ACTIONS, getColumns, getFilters } from './table'
+import { getColumns, getFilters, getRowActions } from './table'
 
 const initialParams = {
   keyword: '',
@@ -24,6 +24,7 @@ export const Files = () => {
     params: {
       module: module as string,
     },
+    initialParams,
     key: 'module:source:files',
     action: list,
   })
@@ -56,7 +57,7 @@ export const Files = () => {
           load={load}
           pagination={pagination}
           columns={getColumns()}
-          rowActions={(cell) => ROW_ACTIONS(cell)}
+          rowActions={(cell) => getRowActions(cell)}
           data={data}
           loading={loading}
           onRowActionClick={({ id: key }, { original }) => {

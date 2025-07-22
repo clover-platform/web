@@ -2,6 +2,7 @@ import { t } from '@clover/public/utils/locale.client'
 import { Space } from '@easykit/design'
 import type { ReactNode } from 'react'
 import { Entries } from './entries'
+import { AddButton } from './entries/button/add'
 import { Files } from './files'
 import { UploadButton } from './files/button/upload'
 
@@ -28,6 +29,11 @@ export const getTabs = (): TabItem[] => {
       id: 'entries',
       title: t('词条'),
       component: <Entries />,
+      actions: (
+        <Space>
+          <AddButton />
+        </Space>
+      ),
     },
   ]
 }
