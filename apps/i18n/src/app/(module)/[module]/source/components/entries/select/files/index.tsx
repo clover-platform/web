@@ -1,12 +1,13 @@
 import { FileName } from '@/components/common/file-name'
 import { useModule } from '@/hooks'
 import { searchFile } from '@/rest/source'
+import type { File } from '@/types/module/source'
 import { ComboSelect, type ComboSelectOptionProps, type ComboSelectProps } from '@easykit/design'
 import { debounce } from 'es-toolkit'
-import { type FC, useCallback, useMemo, useState } from 'react'
+import { type FC, useCallback, useEffect, useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 
-export type FilesSelectProps = ComboSelectProps
+export type FilesSelectProps = ComboSelectProps<File>
 
 export const FilesSelect: FC<FilesSelectProps> = (props) => {
   const { t } = useTranslation()
@@ -16,13 +17,13 @@ export const FilesSelect: FC<FilesSelectProps> = (props) => {
 
   const onSearch = useCallback(
     debounce(async (value: string) => {
-      console.log('onSearch', value)
       const { success, data } = await searchFile({ module: m, keyword: value })
       if (success) {
         setResult(
           data?.data?.map((item) => ({
-            label: <FileName file={item} />,
+            label: <FileName iconClassName="size-4" file={item} />,
             value: `${item.id}`,
+            raw: item,
           })) ?? []
         )
       } else {
@@ -32,6 +33,10 @@ export const FilesSelect: FC<FilesSelectProps> = (props) => {
     }, 500),
     []
   )
+
+  useEffect(() => {
+    onSearch('')
+  }, [onSearch])
 
   const options = useMemo(() => {
     return result
@@ -50,6 +55,9 @@ export const FilesSelect: FC<FilesSelectProps> = (props) => {
         setLoading(true)
         setResult([])
         onSearch(value)
+      }}
+      filter={(_value, search, option) => {
+        return option?.raw?.name.includes(search) ?? false
       }}
     />
   )
