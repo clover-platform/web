@@ -17,8 +17,5 @@
     "fetch-intercept": "2.4.0",
     "react-cropper": "2.3.3",
     "whatwg-fetch": "3.6.20"
-  },
-  "devDependencies": {
-    "next": "15.3.2"
   }
 }

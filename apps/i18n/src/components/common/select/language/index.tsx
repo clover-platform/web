@@ -24,7 +24,7 @@ export const LanguageSelect: FC<LanguageSelectProps> = ({ ...props }) => {
     <ComboSelect
       {...rest}
       search={true}
-      className={cn('max-h-[150px] w-full overflow-auto', className)}
+      className={cn('h-auto max-h-[150px] w-full overflow-auto', className)}
       searchPlaceholder={t('关键词')}
       options={options}
       clearText={t('清空选择')}
