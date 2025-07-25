@@ -14,11 +14,13 @@ export const FilesSelect: FC<FilesSelectProps> = (props) => {
   const m = useModule()
   const [result, setResult] = useState<ComboSelectOptionProps<File>[]>([])
   const [loading, setLoading] = useState<boolean>(false)
+  const [initLoading, setInitLoading] = useState<boolean>(true)
 
   const onSearch = useCallback(
     debounce(async (value: string) => {
       const { success, data } = await searchFile({ module: m, keyword: value })
       if (success) {
+        setInitLoading(false)
         setResult(
           data?.data?.map((item) => ({
             label: <FileName iconClassName="size-4" file={item} />,
@@ -45,6 +47,7 @@ export const FilesSelect: FC<FilesSelectProps> = (props) => {
   return (
     <ComboSelect
       {...props}
+      initLoading={initLoading}
       options={options}
       loading={loading}
       placeholder={t('请选择')}

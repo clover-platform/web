@@ -2,7 +2,7 @@ import { FileName } from '@/components/common/file-name'
 import type { Entry } from '@/types/module/entry'
 import { t } from '@clover/public/utils/locale.client'
 import { type DataTableColumn, type DropdownMenuItemProps, type FilterItemProps, Input } from '@easykit/design'
-import { FilesSelect } from './select/files'
+import { FilesSelectFilter } from './select/files/filter'
 
 export const getColumns = (): DataTableColumn<Entry>[] => [
   {
@@ -44,7 +44,7 @@ export const getFilters = (): FilterItemProps[] => [
   {
     field: 'fileId',
     label: t('所属文件'),
-    render: () => <FilesSelect />,
+    render: () => <FilesSelectFilter />,
   },
 ]
 
