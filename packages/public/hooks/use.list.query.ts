@@ -155,7 +155,7 @@ export const useListQuery = <T, P extends Record<string, unknown> = Record<strin
     return [key, queryKeyParams, forceRefresh]
   }, [key, queryKeyParams, forceRefresh])
 
-  const { isLoading, data, refetch } = useQuery({
+  const { isLoading, isFetching, data, refetch } = useQuery({
     queryKey,
     queryFn: ({ queryKey }) => action(queryKey[1] as unknown as P),
     placeholderData: keepPreviousData,
@@ -179,7 +179,7 @@ export const useListQuery = <T, P extends Record<string, unknown> = Record<strin
   }, [data, queryKeyParams])
 
   return {
-    loading: isLoading,
+    loading: isLoading || isFetching,
     load,
     data: Array.isArray(data) ? data : data?.data || [],
     pagination,

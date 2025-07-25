@@ -61,13 +61,13 @@ export const Password = () => {
             onSubmit={(data) => onSubmit?.(data as PasswordFormData)}
           >
             <FormItem name="originPassword" label={t('原密码')}>
-              <Input type="password" placeholder={t('请输入')} className="!w-input-md" />
+              <Input type="password" placeholder={t('请输入')} className="!w-md" />
             </FormItem>
             <FormItem name="password" label={t('新密码')}>
-              <Input type="password" placeholder={t('请输入')} className="!w-input-md" />
+              <Input type="password" placeholder={t('请输入')} className="!w-md" />
             </FormItem>
             <FormItem name="passwordConfirm" label={t('确认新密码')}>
-              <Input type="password" placeholder={t('请输入')} className="!w-input-md" />
+              <Input type="password" placeholder={t('请输入')} className="!w-md" />
             </FormItem>
             <Space>
               <Button loading={isPending} type="submit">

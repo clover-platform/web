@@ -1,4 +1,4 @@
-import { type FC, useState } from 'react'
+import { type FC, useEffect, useState } from 'react'
 import { FilesSelect } from '../index'
 
 export type FilesSelectFilterProps = {
@@ -9,6 +9,11 @@ export type FilesSelectFilterProps = {
 export const FilesSelectFilter: FC<FilesSelectFilterProps> = (props) => {
   const { value, onChange } = props
   const [v, setV] = useState<string[]>(value ? value.split(',') : [])
+
+  useEffect(() => {
+    setV(value ? value.split(',') : [])
+  }, [value])
+
   return (
     <FilesSelect
       value={v}

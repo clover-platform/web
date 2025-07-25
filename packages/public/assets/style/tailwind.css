@@ -1,29 +1,10 @@
 @import "@easykit/design/style.css";
 @import "@easykit/design/theme.css";
 
-@source "../../../../";
-@source not "../../../../node_modules";
+@source "../../../../apps/**/*.{ts,tsx,css}";
+@source "../../../../packages/**/*.{ts,tsx,css}";
 
 @theme {
-  --width-input-xl: 720px;
-  --width-input-lg: 560px;
-  --width-input-md: 400px;
-  --width-input-sm: 320px;
-  --width-input-xs: 240px;
-
-  --spacing-2xs: 4px;
-  --spacing-xs: 8px;
-  --spacing-sm: 12px;
-  --spacing-md: 16px;
-  --spacing-lg: 20px;
-  --spacing-xl: 24px;
-  --spacing-2xl: 28px;
-  --spacing-3xl: 32px;
-  --spacing-4xl: 36px;
-  --spacing-5xl: 40px;
-  --spacing-6xl: 48px;
-  --spacing-7xl: 56px;
-
   --container-max-width: 1440px;
 }
 

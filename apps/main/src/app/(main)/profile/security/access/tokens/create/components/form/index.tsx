@@ -16,14 +16,14 @@ export const AccessTokenForm: FC<AccessTokenFormProps> = (props) => {
   return (
     <Form schema={getSchema()} onSubmit={(data) => onSubmit?.(data as CreateData)}>
       <FormItem name="name" label={t('令牌名称')}>
-        <Input placeholder={t('请输入')} className="w-input-md" />
+        <Input placeholder={t('请输入')} className="w-md" />
       </FormItem>
       <FormItem
         name="expirationTime"
         label={t('过期时间')}
         description={t('不设置则不过期，不过期的令牌有一定危险，请确认。')}
       >
-        <DatePicker className="w-input-xs" format="yyyy-MM-dd" allowClear={true} placeholder={t('请选择')} />
+        <DatePicker className="w-xs" format="yyyy-MM-dd" allowClear={true} placeholder={t('请选择')} />
       </FormItem>
       <FormItem name="scopes" label={t('范围')}>
         <ScopesSelect />
