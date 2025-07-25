@@ -9,7 +9,7 @@ package-main:
   tags:
     - dev
   script:
-    - docker login -u $DOCKER_USER --password $DOCKER_TOKEN $CI_REGISTRY
+    - echo $CI_REGISTRY_PASSWORD | docker login -u $CI_REGISTRY_USER --password-stdin $CI_REGISTRY
     - docker build -t $CI_REGISTRY/clover/web/main:$CI_PIPELINE_ID -f ./docker/main.Dockerfile .
     - docker tag $CI_REGISTRY/clover/web/main:$CI_PIPELINE_ID $CI_REGISTRY/clover/web/main:latest
     - docker push $CI_REGISTRY/clover/web/main:$CI_PIPELINE_ID
@@ -24,7 +24,7 @@ package-i18n:
   tags:
     - dev
   script:
-    - docker login -u $DOCKER_USER --password $DOCKER_TOKEN $CI_REGISTRY
+    - echo $CI_REGISTRY_PASSWORD | docker login -u $CI_REGISTRY_USER --password-stdin $CI_REGISTRY
     - docker build -t $CI_REGISTRY/clover/web/i18n:$CI_PIPELINE_ID -f ./docker/i18n.Dockerfile .
     - docker tag $CI_REGISTRY/clover/web/i18n:$CI_PIPELINE_ID $CI_REGISTRY/clover/web/i18n:latest
     - docker push $CI_REGISTRY/clover/web/i18n:$CI_PIPELINE_ID
@@ -39,7 +39,7 @@ package-admin:
   tags:
     - dev
   script:
-    - docker login -u $DOCKER_USER --password $DOCKER_TOKEN $CI_REGISTRY
+    - echo $CI_REGISTRY_PASSWORD | docker login -u $CI_REGISTRY_USER --password-stdin $CI_REGISTRY
     - docker build -t $CI_REGISTRY/clover/web/admin:$CI_PIPELINE_ID -f ./docker/admin.Dockerfile .
     - docker tag $CI_REGISTRY/clover/web/admin:$CI_PIPELINE_ID $CI_REGISTRY/clover/web/admin:latest
     - docker push $CI_REGISTRY/clover/web/admin:$CI_PIPELINE_ID
@@ -54,7 +54,7 @@ package-wiki:
   tags:
     - dev
   script:
-    - docker login -u $DOCKER_USER --password $DOCKER_TOKEN $CI_REGISTRY
+    - echo $CI_REGISTRY_PASSWORD | docker login -u $CI_REGISTRY_USER --password-stdin $CI_REGISTRY
     - docker build -t $CI_REGISTRY/clover/web/wiki:$CI_PIPELINE_ID -f ./docker/wiki.Dockerfile .
     - docker tag $CI_REGISTRY/clover/web/wiki:$CI_PIPELINE_ID $CI_REGISTRY/clover/web/wiki:latest
     - docker push $CI_REGISTRY/clover/web/wiki:$CI_PIPELINE_ID
@@ -70,6 +70,7 @@ deploy-main:
     - dev
   script:
     - cd ~/server/clover/web-main
+    - echo $CI_REGISTRY_PASSWORD | docker login -u $CI_REGISTRY_USER --password-stdin $CI_REGISTRY
     - docker compose down
     - docker compose up -d
 
@@ -81,6 +82,7 @@ deploy-i18n:
     - dev
   script:
     - cd ~/server/clover/web-i18n
+    - echo $CI_REGISTRY_PASSWORD | docker login -u $CI_REGISTRY_USER --password-stdin $CI_REGISTRY
     - docker compose down
     - docker compose up -d
 
@@ -92,6 +94,7 @@ deploy-admin:
     - dev
   script:
     - cd ~/server/clover/web-admin
+    - echo $CI_REGISTRY_PASSWORD | docker login -u $CI_REGISTRY_USER --password-stdin $CI_REGISTRY
     - docker compose down
     - docker compose up -d
 
@@ -103,5 +106,6 @@ deploy-wiki:
     - dev
   script:
     - cd ~/server/clover/web-wiki
+    - echo $CI_REGISTRY_PASSWORD | docker login -u $CI_REGISTRY_USER --password-stdin $CI_REGISTRY
     - docker compose down
     - docker compose up -d
