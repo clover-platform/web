@@ -1,0 +1,16 @@
+{
+  "name": "@clover/www",
+  "version": "0.0.1",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "next dev -p 3701 --turbopack",
+    "build": "next build --turbopack",
+    "start": "next start",
+    "lint": "biome lint --config-path=biome.json ./src",
+    "i18n": "i18n-cli"
+  },
+  "dependencies": {
+    "dhtmlx-gantt": "^9.0.3"
+  }
+}

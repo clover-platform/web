@@ -290,6 +290,12 @@ importers:
         specifier: 14.1.2
         version: 14.1.2
 
+  apps/www:
+    dependencies:
+      dhtmlx-gantt:
+        specifier: ^9.0.3
+        version: 9.0.9
+
   packages/i18n-cli:
     dependencies:
       '@crowdin/crowdin-api-client':

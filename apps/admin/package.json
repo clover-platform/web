@@ -4,9 +4,9 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "next dev -p 3701 --turbopack",
-    "start": "next start -p 3701",
+    "dev": "next dev -p 3710 --turbopack",
     "build": "next build --turbopack",
+    "start": "next start",
     "lint": "biome lint --config-path=biome.json",
     "i18n": "i18n-cli"
   },
