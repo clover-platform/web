@@ -51,7 +51,12 @@ export const Header: FC<HeaderProps> = (props) => {
   }, [mainApp])
 
   return (
-    <div className={classNames('flex h-[60px] w-full items-center justify-center border-b p-sm', className)}>
+    <div
+      className={classNames(
+        'flex h-[var(--layout-header-height)] w-full items-center justify-center border-b p-sm',
+        className
+      )}
+    >
       <div className="flex flex-1 items-center justify-start space-x-2xl">
         <div className="flex items-center justify-center space-x-sm">
           <Apps />

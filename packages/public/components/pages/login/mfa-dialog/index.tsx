@@ -36,7 +36,7 @@ export const MFADialog = <T = unknown>(props: MFADialogProps<T>) => {
       onCancel={onCancel}
       title={t('二次验证')}
       maskClosable={false}
-      className="max-w-[340px]"
+      className="!max-w-[340px]"
       {...rest}
     >
       <Loading loading={isPending}>

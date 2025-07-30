@@ -8,12 +8,14 @@ import type { FC } from 'react'
 import { useTranslation } from "react-i18next";
 
 export type FooterProps = {
-  simple?: boolean;
+  simple?: boolean
+  enable?: boolean
 }
 
 export const Footer: FC<FooterProps> = (props) => {
-  const { simple = false } = props
+  const { simple = false, enable = true } = props
   const { t } = useTranslation()
+  if (!enable) return null
   return simple ? (
     <div className="container flex flex-col items-center justify-center pb-lg">
       <Separator className="mb-lg" />

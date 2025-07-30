@@ -6,7 +6,8 @@ import {
 import {useUnauthorizedHandle} from "@clover/public/hooks/use.unauthorized.handle";
 import type { FC } from 'react'
 import { useTranslation } from 'react-i18next'
-import { Header } from './header'
+import { Search } from './search'
+import { Sidebar } from './sidebar'
 
 export type MainLayoutProps = PublicMainLayoutProps & {
   active?: string;
@@ -21,17 +22,22 @@ export const MainLayout: FC<MainLayoutProps> = (origin) => {
     <PublicMainLayout
       className="bg-secondary dark:bg-background"
       headerProps={{
-        logoUrl: '/dashboard',
-        appName: t('控制台'),
+        logoUrl: '/',
+        appName: t('项目'),
         className: 'bg-background dark:bg-black/50',
-        extra: <Header active={props.active} />,
+        extra: <Search />,
       }}
       footerProps={{
-        simple: true,
+        enable: false,
       }}
       loading={!isLogin}
+      container={false}
+      bodyClassName="flex w-full"
     >
-      {props.children}
+      <div className="h-[calc(100vh-var(--layout-header-height))] w-64 border-border border-r bg-background dark:bg-black/50">
+        <Sidebar />
+      </div>
+      <div className="flex-1">{props.children}</div>
     </PublicMainLayout>
   )
 }
