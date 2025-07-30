@@ -4,13 +4,25 @@ import zhTWEditor from '@easykit/editor/locales/zh-tw'
 import i18next from 'i18next'
 import LanguageDetector from 'i18next-browser-languagedetector'
 import ReactPostprocessor from 'i18next-react-postprocessor'
+import Cookies from 'js-cookie'
 import { setErrorMap } from 'zod'
 import { zodI18nMap } from 'zod-i18n-map'
 import enUSZod from 'zod-i18n-map/locales/en/zod.json'
 import zhCNZod from 'zod-i18n-map/locales/zh-CN/zod.json'
 import zhTWZod from 'zod-i18n-map/locales/zh-TW/zod.json'
+import { FALLBACK } from '../config/locale'
 
 const languageDetector = new LanguageDetector()
+
+languageDetector.addDetector({
+  name: 'cookieCrossDomain',
+  lookup: () => {
+    return Cookies.get('i18next') || FALLBACK
+  },
+  cacheUserLanguage: (lng) => {
+    Cookies.set('i18next', lng)
+  },
+})
 
 export type LangItem = {
   name: string
@@ -46,7 +58,7 @@ export const initI18next = (map: Record<string, any>) => {
         escapeValue: false,
       },
       detection: {
-        caches: ['localStorage', 'cookieCrossDomain'],
+        caches: ['cookieCrossDomain'],
         order: [
           'cookieCrossDomain',
           'querystring',

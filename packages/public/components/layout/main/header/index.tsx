@@ -3,12 +3,13 @@ import {Apps} from "@clover/public/components/layout/main/header/apps";
 import { Notice } from '@clover/public/components/layout/main/header/notice'
 import {ProfileMenu} from "@clover/public/components/layout/main/header/profile-menu";
 import { LayoutLogo } from '@clover/public/components/layout/main/logo'
+import { useMainApp } from '@clover/public/hooks'
 import { isLoginState } from '@clover/public/state/account'
 import { Action, Button, Separator } from '@easykit/design'
 import classNames from "classnames";
 import { useAtom } from 'jotai/index'
 import Link from 'next/link'
-import { type FC, type ReactNode, useMemo } from 'react'
+import { type FC, type ReactNode, useCallback, useMemo } from 'react'
 import { useTranslation } from "react-i18next";
 
 export type HeaderProps = {
@@ -26,6 +27,7 @@ export const Header: FC<HeaderProps> = (props) => {
   } = props;
   const [isLogin] = useAtom(isLoginState);
   const { t } = useTranslation()
+  const mainApp = useMainApp()
 
   const logo = useMemo(() => {
     return (
@@ -35,6 +37,18 @@ export const Header: FC<HeaderProps> = (props) => {
       </div>
     )
   }, [appName])
+
+  const goLogin = useCallback(() => {
+    if (mainApp) {
+      location.href = `${mainApp?.href}/login?redirect=${encodeURIComponent(location.href)}`
+    }
+  }, [mainApp])
+
+  const goRegister = useCallback(() => {
+    if (mainApp) {
+      location.href = `${mainApp?.href}/register?redirect=${encodeURIComponent(location.href)}`
+    }
+  }, [mainApp])
 
   return (
     <div className={classNames('flex h-[60px] w-full items-center justify-center border-b p-sm', className)}>
@@ -60,14 +74,12 @@ export const Header: FC<HeaderProps> = (props) => {
           </>
         ) : (
           <>
-            <Link href="/login">
-              <Button size="sm">{t('登录')}</Button>
-            </Link>
-            <Link href="/register">
-              <Button size="sm" variant="outline">
-                {t('注册')}
-              </Button>
-            </Link>
+            <Button onClick={goLogin} size="sm">
+              {t('登录')}
+            </Button>
+            <Button onClick={goRegister} size="sm" variant="outline">
+              {t('注册')}
+            </Button>
           </>
         )}
       </div>

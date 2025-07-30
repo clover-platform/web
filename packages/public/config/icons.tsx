@@ -2,8 +2,8 @@ import { IconDashboard, IconHome, IconI18n, IconQA, IconWiki } from '@arco-iconb
 import type { ReactNode } from 'react'
 
 export const ICONS: Record<string, ReactNode> = {
-  home: <IconHome />,
-  dashboard: <IconDashboard />,
+  www: <IconHome />,
+  main: <IconDashboard />,
   wiki: <IconWiki />,
   i18n: <IconI18n />,
   qa: <IconQA />,

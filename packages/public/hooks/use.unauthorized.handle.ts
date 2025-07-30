@@ -2,22 +2,18 @@ import bus from '@clover/public/events'
 import { UNAUTHORIZED } from '@clover/public/events/auth'
 import { isLoginState } from '@clover/public/state/account'
 import { useAtomValue } from 'jotai'
-import { useCallback, useEffect, useMemo } from 'react'
-import { useApps } from './use.apps'
+import { useCallback, useEffect } from 'react'
+import { useMainApp } from './use.main.app'
 
 export const useUnauthorizedHandle = () => {
   const isLogin = useAtomValue(isLoginState)
-  const [apps] = useApps()
-
-  const homeApp = useMemo(() => {
-    return apps.find((app) => app.appId === 'home')
-  }, [apps])
+  const mainApp = useMainApp()
 
   const onUnauthorized = useCallback(() => {
-    if (homeApp) {
-      location.href = `${homeApp?.href}/login?redirect=${encodeURIComponent(location.href)}`
+    if (mainApp) {
+      location.href = `${mainApp?.href}/login?redirect=${encodeURIComponent(location.href)}`
     }
-  }, [homeApp])
+  }, [mainApp])
 
   useEffect(() => {
     if (!isLogin) {
