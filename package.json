@@ -25,15 +25,15 @@
     "start:wiki": "pnpm --filter @clover/wiki run start"
   },
   "dependencies": {
+    "@arco-iconbox/react-clover": "0.0.36",
     "@clover/i18n-cli": "workspace:*",
     "@clover/public": "workspace:*",
     "@easykit/design": "0.0.140",
     "@easykit/editor": "0.0.25",
-    "@arco-iconbox/react-clover": "0.0.36",
     "@radix-ui/react-checkbox": "1.1.1",
     "@radix-ui/react-icons": "1.3.0",
     "@radix-ui/react-popper": "1.2.1",
-    "@tailwindcss/postcss": "4.1.4",
+    "@tailwindcss/postcss": "4.1.11",
     "@tanstack/react-query": "5.80.3",
     "@tanstack/react-query-devtools": "5.80.3",
     "@types/sortablejs": "^1.15.8",
@@ -50,11 +50,14 @@
     "i18next": "23.16.5",
     "i18next-browser-languagedetector": "8.0.4",
     "i18next-react-postprocessor": "3.1.0",
+    "input-otp": "1.4.2",
     "javascript-time-ago": "2.5.10",
     "jotai": "2.10.2",
     "jsencrypt": "^3.3.2",
+    "lucide-react": "0.516.0",
     "next": "15.4.4",
     "next-themes": "0.4.4",
+    "nuqs": "2.4.3",
     "qrcode": "1.5.3",
     "rc-tree": "5.9.0",
     "react": "19.1.0",
@@ -68,7 +71,7 @@
     "sass": "1.77.6",
     "sortablejs": "1.15.2",
     "tailwind-merge": "3.2.0",
-    "tailwindcss": "4.1.4",
+    "tailwindcss": "4.1.11",
     "tributejs": "5.1.3",
     "tw-animate-css": "1.2.5",
     "vite": "5.4.19",
@@ -77,10 +80,7 @@
     "vite-plugin-static-copy": "2.2.0",
     "zod": "3.23.8",
     "zod-i18n-map": "2.27.0",
-    "zustand": "4.5.4",
-    "lucide-react": "0.516.0",
-    "input-otp": "1.4.2",
-    "nuqs": "2.4.3"
+    "zustand": "4.5.4"
   },
   "devDependencies": {
     "@biomejs/biome": "^1.9.4",
@@ -127,6 +127,7 @@
   "pnpm": {
     "onlyBuiltDependencies": [
       "@biomejs/biome",
+      "@tailwindcss/oxide",
       "esbuild",
       "sharp"
     ]
