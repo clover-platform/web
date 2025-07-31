@@ -1,4 +1,4 @@
-import { Action, Popover, PopoverContent, PopoverTrigger } from '@easykit/design'
+import { Action, Dropdown, Popover, PopoverContent, PopoverTrigger, Separator } from '@easykit/design'
 import classNames from 'classnames'
 import { ChevronDown, ChevronRight } from 'lucide-react'
 import Link from 'next/link'
@@ -10,8 +10,21 @@ export type SidebarItemProps = SidebarItemPropsConfig & {
 }
 
 export const SidebarItem: FC<SidebarItemProps> = (props) => {
-  const { active, id, icon, title, extra, panel, children, href } = props
-  const [isOpen, setIsOpen] = useState(false)
+  const {
+    active,
+    id,
+    icon,
+    title,
+    extra,
+    panel,
+    children,
+    href,
+    panelClassName,
+    opened = false,
+    dropdownItems,
+    separator,
+  } = props
+  const [isOpen, setIsOpen] = useState(opened)
 
   const iconContainer = 'size-6 items-center justify-center'
 
@@ -19,7 +32,7 @@ export const SidebarItem: FC<SidebarItemProps> = (props) => {
     return (
       <Action
         onClick={children ? () => setIsOpen(!isOpen) : undefined}
-        className="group flex w-full items-center justify-center gap-1 py-1.5"
+        className="group flex w-full items-center justify-center gap-1 py-1 text-sm"
         active={active === id}
       >
         <div className="flex size-6 items-center justify-center">
@@ -50,11 +63,20 @@ export const SidebarItem: FC<SidebarItemProps> = (props) => {
     return <Link href={href}>{action}</Link>
   }, [href, action])
 
+  if (separator) return <Separator className="my-1" />
+
+  if (dropdownItems?.length)
+    return (
+      <Dropdown items={dropdownItems} asChild side="right" align="start">
+        {action}
+      </Dropdown>
+    )
+
   if (panel)
     return (
       <Popover>
         <PopoverTrigger asChild>{action}</PopoverTrigger>
-        <PopoverContent side="right" align="start" className="w-[480px]">
+        <PopoverContent side="right" align="start" className={panelClassName}>
           {panel}
         </PopoverContent>
       </Popover>

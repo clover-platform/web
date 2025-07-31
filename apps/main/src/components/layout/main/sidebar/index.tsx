@@ -1,7 +1,8 @@
 
+import { LangSelect } from '@clover/public/components/common/select/lang'
+import { ThemeSwitcher } from '@clover/public/components/common/theme-switcher'
 import type { FC } from 'react'
-import { useTranslation } from 'react-i18next'
-import { getTopItems } from './config'
+import { useSidebarItems } from './config'
 import { SidebarItem } from './item'
 
 export type SidebarProps = {
@@ -10,20 +11,24 @@ export type SidebarProps = {
 
 export const Sidebar: FC<SidebarProps> = (props) => {
   const { active } = props
-  const { t } = useTranslation()
-  const topItems = getTopItems(t)
+  const items = useSidebarItems()
   return (
     <div className="flex h-full w-full flex-col">
       <div className="flex-1 p-sm">
         <ul className="flex flex-col gap-1">
-          {topItems.map((item) => (
+          {items.map((item) => (
             <li key={item.id}>
               <SidebarItem {...item} active={active} />
             </li>
           ))}
         </ul>
       </div>
-      <div className="border-border border-t p-sm">bottom</div>
+      <div className="flex border-border border-t p-sm">
+        <ThemeSwitcher size="sm" />
+        <div className="flex flex-1 justify-end">
+          <LangSelect className="!h-3xl" />
+        </div>
+      </div>
     </div>
   )
 }
