@@ -1,10 +1,10 @@
 'use client'
 
 import { ProfileBreadcrumbBase } from '@/components/common/breadcrumb/profile'
+import { Page } from '@/components/common/main-page'
 import type { MainLayoutProps } from '@/components/layout/main'
 import { type ListParams, list, revoke } from '@/rest/profile/security/access/tokens'
 import type { AccessToken } from '@/types/profile/access/token'
-import { Page } from '@clover/public/components/common/page'
 import { TitleBar } from '@clover/public/components/common/title-bar'
 import { useLayoutConfig } from '@clover/public/components/layout/hooks/use.layout.config'
 import { useListQuery } from '@clover/public/hooks'

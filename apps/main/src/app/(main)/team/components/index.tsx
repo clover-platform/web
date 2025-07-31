@@ -1,11 +1,11 @@
 'use client'
 
 import { AppBreadcrumb } from '@/components/common/app-breadcrumb'
+import { MainPage } from '@/components/common/main-page'
 import type { MainLayoutProps } from '@/components/layout/main'
 import { useCollectProject } from '@/hooks/use.collect.project'
 import { useCollectTeam } from '@/hooks/use.collect.team'
 import { type ListParams, addCollect, cancelCollect, deleteTeam, leaveTeam, list } from '@/rest/team'
-import { MainPage } from '@clover/public/components/common/page'
 import { TabsTitle } from '@clover/public/components/common/tabs-title'
 import { TitleBar } from '@clover/public/components/common/title-bar'
 import { useCurrentTeam } from '@clover/public/components/layout/hooks/main'
@@ -18,7 +18,7 @@ import Link from 'next/link'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { useCallback, useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { getColumns, getFilters, getRowActions, getTabs } from '../config/table'
+import { getColumns, getFilters, getRowActions, getTabs } from './config/table'
 
 const initialParams = {
   keyword: '',

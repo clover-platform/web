@@ -4,5 +4,5 @@ import type { FC, PropsWithChildren } from 'react'
 export type AppBreadcrumbProps = PropsWithChildren;
 
 export const AppBreadcrumb: FC<AppBreadcrumbProps> = (props) => {
-  return <PublicAppBreadcrumb appId="dashboard">{props.children}</PublicAppBreadcrumb> 
+  return <PublicAppBreadcrumb appId="main">{props.children}</PublicAppBreadcrumb> 
 }

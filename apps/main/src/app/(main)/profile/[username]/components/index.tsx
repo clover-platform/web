@@ -1,10 +1,10 @@
 'use client'
 
 import { AppBreadcrumb } from '@/components/common/app-breadcrumb'
+import { MainPage } from '@/components/common/main-page'
 import type { MainLayoutProps } from '@/components/layout/main'
 import { profile } from '@/rest/profile'
 import { IconMember } from '@arco-iconbox/react-clover'
-import { MainPage } from '@clover/public/components/common/page'
 import { useLayoutConfig } from '@clover/public/components/layout/hooks/use.layout.config'
 import {
   BreadcrumbItem,

@@ -8,7 +8,7 @@ import { Button, Form, FormItem, Input, Space, useMessage } from '@easykit/desig
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { useRouter } from 'next/navigation'
 import { useTranslation } from "react-i18next";
-import { getSchema } from '../../config/form'
+import { getSchema } from '../config/form'
 
 export const ProjectForm = () => {
   const router = useRouter();

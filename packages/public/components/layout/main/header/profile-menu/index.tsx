@@ -1,7 +1,7 @@
 import { ProjectSwitcher } from '@clover/public/components/common/switcher/project'
 import { useCurrentProject, useCurrentTeam } from '@clover/public/components/layout/hooks/main'
 import { AccountInfo } from '@clover/public/components/layout/main/header/profile-menu/account-info'
-import { useApps } from '@clover/public/hooks'
+import { useMainApp } from '@clover/public/hooks'
 import { logout } from '@clover/public/rest/auth'
 import { accountInfoState } from '@clover/public/state/account'
 import {
@@ -33,7 +33,7 @@ export const ProfileMenu: FC<ProfileMenuProps> = (props) => {
   const team = useCurrentTeam()
   const project = useCurrentProject()
   const { t } = useTranslation()
-  const [apps] = useApps()
+  const mainApp = useMainApp()
 
   const exit = useCallback(() => {
     alert.confirm({
@@ -51,26 +51,22 @@ export const ProfileMenu: FC<ProfileMenuProps> = (props) => {
     })
   }, [alert, msg, t])
 
-  const dashboard = useMemo(() => {
-    return apps.find((app) => app.appId === 'dashboard')
-  }, [apps])
-
-  const isDashboardSameOrigin = useMemo(() => {
-    if (!dashboard?.href) return false
+  const isMainAppSameOrigin = useMemo(() => {
+    if (!mainApp?.href) return false
     try {
-      const dashboardUrl = new URL(dashboard.href, window.location.origin)
-      return dashboardUrl.origin === window.location.origin
+      const mainAppUrl = new URL(mainApp.href, window.location.origin)
+      return mainAppUrl.origin === window.location.origin
     } catch {
       return false
     }
-  }, [dashboard?.href])
+  }, [mainApp?.href])
 
   const baseUrl = useMemo(() => {
-    if (!isDashboardSameOrigin) {
-      return `${dashboard?.href.split('/')[0]}//${dashboard?.href.split('/')[2]}/`
+    if (!isMainAppSameOrigin) {
+      return `${mainApp?.href.split('/')[0]}//${mainApp?.href.split('/')[2]}/`
     }
     return '/'
-  }, [isDashboardSameOrigin, dashboard?.href])
+  }, [isMainAppSameOrigin, mainApp?.href])
 
   return (
     <DropdownMenu open={open} onOpenChange={setOpen}>
@@ -82,7 +78,7 @@ export const ProfileMenu: FC<ProfileMenuProps> = (props) => {
       <DropdownMenuContent align="end" className="w-64 p-0">
         <AccountInfo />
         <DropdownMenuSeparator />
-        {isDashboardSameOrigin ? (
+        {isMainAppSameOrigin ? (
           <Link href={`${baseUrl}profile/${account.username}`}>
             <DropdownMenuItem>{t('个人资料')}</DropdownMenuItem>
           </Link>
