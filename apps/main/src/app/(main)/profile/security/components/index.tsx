@@ -1,7 +1,7 @@
 'use client'
 
 import { ProfileBreadcrumbBase } from '@/components/common/breadcrumb/profile'
-import { Page } from '@/components/common/main-page'
+import { MainPage } from '@/components/common/main-page'
 import type { MainLayoutProps } from '@/components/layout/main'
 import { TitleBar } from '@clover/public/components/common/title-bar'
 import { useLayoutConfig } from '@clover/public/components/layout/hooks/use.layout.config'
@@ -18,7 +18,7 @@ export const SecurityPage = () => {
   })
 
   return (
-    <Page>
+    <MainPage>
       <ProfileBreadcrumbBase>
         <BreadcrumbItem>
           <BreadcrumbPage>{title}</BreadcrumbPage>
@@ -46,6 +46,6 @@ export const SecurityPage = () => {
           </p>
         </div>
       </Card>
-    </Page>
+    </MainPage>
   )
 }

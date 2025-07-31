@@ -1,7 +1,7 @@
 'use client'
 
 import { ProfileBreadcrumbBase } from '@/components/common/breadcrumb/profile'
-import { Page } from '@/components/common/main-page'
+import { MainPage } from '@/components/common/main-page'
 import type { MainLayoutProps } from '@/components/layout/main'
 import { otpStatus } from '@/rest/profile/security/mfa'
 import { TitleBar } from '@clover/public/components/common/title-bar'
@@ -49,7 +49,7 @@ export const MFAPage = () => {
   )
 
   return (
-    <Page>
+    <MainPage>
       <ProfileBreadcrumbBase>
         <BreadcrumbItem>
           <BreadcrumbLink asChild={true}>
@@ -87,6 +87,6 @@ export const MFAPage = () => {
           )}
         </div>
       </Card>
-    </Page>
+    </MainPage>
   )
 }

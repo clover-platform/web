@@ -1,7 +1,7 @@
 'use client'
 
 import { ProfileBreadcrumbBase } from '@/components/common/breadcrumb/profile'
-import { Page } from '@/components/common/main-page'
+import { MainPage } from '@/components/common/main-page'
 import type { MainLayoutProps } from '@/components/layout/main'
 import { type ListParams, list, revoke } from '@/rest/profile/security/access/tokens'
 import type { AccessToken } from '@/types/profile/access/token'
@@ -55,7 +55,7 @@ export const AccessTokensPage = () => {
   )
 
   return (
-    <Page>
+    <MainPage>
       <ProfileBreadcrumbBase>
         <BreadcrumbItem>
           <BreadcrumbLink asChild={true}>
@@ -89,6 +89,6 @@ export const AccessTokensPage = () => {
           }}
         />
       </Card>
-    </Page>
+    </MainPage>
   )
 }

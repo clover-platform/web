@@ -1,7 +1,7 @@
 'use client'
 
 import { ProfileBreadcrumbBase } from '@/components/common/breadcrumb/profile'
-import { Page } from '@/components/common/main-page'
+import { MainPage } from '@/components/common/main-page'
 import type { MainLayoutProps } from '@/components/layout/main'
 import { create } from '@/rest/profile/security/access/tokens'
 import BackButton from '@clover/public/components/common/button/back'
@@ -47,7 +47,7 @@ export const AccessTokensCreatePage = () => {
   })
 
   return (
-    <Page>
+    <MainPage>
       <ProfileBreadcrumbBase>
         <BreadcrumbItem>
           <BreadcrumbLink asChild={true}>
@@ -85,6 +85,6 @@ export const AccessTokensCreatePage = () => {
           </AccessTokenForm>
         )}
       </Card>
-    </Page>
+    </MainPage>
   )
 }
