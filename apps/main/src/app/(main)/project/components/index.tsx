@@ -6,7 +6,6 @@ import { useCollectProject } from '@/hooks/use.collect.project'
 import { type ProjectListParams, addCollect, cancelCollect, deleteProject, leaveProject, list } from '@/rest/project'
 import { TabsTitle } from '@clover/public/components/common/tabs-title'
 import { TitleBar } from '@clover/public/components/common/title-bar'
-import { useCurrentProject } from '@clover/public/components/layout/hooks/main'
 import { useLayoutConfig } from '@clover/public/components/layout/hooks/use.layout.config'
 import { useListQuery } from '@clover/public/hooks'
 import type { Project } from '@clover/public/types/project'
@@ -36,7 +35,6 @@ const ProjectPage = () => {
   const type = searchParams.get('type')
   const [active, setActive] = useState(type || 'all')
   const alert = useAlert()
-  const project = useCurrentProject()
   const msg = useMessage()
   const { load: loadCollect } = useCollectProject()
   const {
@@ -128,8 +126,8 @@ const ProjectPage = () => {
           }}
           load={load}
           pagination={pagination}
-          columns={getColumns(project?.id)}
-          rowActions={(row) => getRowActions(row, project?.id)}
+          columns={getColumns()}
+          rowActions={(row) => getRowActions(row)}
           data={data}
           loading={loading}
           onRowActionClick={({ id: key }, { original }) => {

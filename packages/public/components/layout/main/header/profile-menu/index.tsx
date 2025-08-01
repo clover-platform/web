@@ -1,5 +1,5 @@
 import { ProjectSwitcher } from '@clover/public/components/common/switcher/project'
-import { useCurrentProject, useCurrentTeam } from '@clover/public/components/layout/hooks/main'
+import { useCurrentTeam } from '@clover/public/components/layout/hooks/main'
 import { AccountInfo } from '@clover/public/components/layout/main/header/profile-menu/account-info'
 import { useMainApp } from '@clover/public/hooks'
 import { logout } from '@clover/public/rest/auth'
@@ -31,7 +31,6 @@ export const ProfileMenu: FC<ProfileMenuProps> = (props) => {
   const msg = useMessage()
   const account = useAtomValue(accountInfoState)
   const team = useCurrentTeam()
-  const project = useCurrentProject()
   const { t } = useTranslation()
   const mainApp = useMainApp()
 
@@ -88,18 +87,10 @@ export const ProfileMenu: FC<ProfileMenuProps> = (props) => {
           </Link>
         )}
         <DropdownMenuItem className="p-0">
-          <ProjectSwitcher title={t('切换团队')} teamId={team?.id} projectId={project?.id}>
+          <ProjectSwitcher title={t('切换团队')} teamId={team?.id}>
             <div className="flex w-full items-center justify-start space-x-1 px-2 py-1.5">
               <span>{t('切换团队')}</span>
               <span className="text-secondary-foreground/60">{`@${team?.name}`}</span>
-            </div>
-          </ProjectSwitcher>
-        </DropdownMenuItem>
-        <DropdownMenuItem className="p-0">
-          <ProjectSwitcher title={t('切换项目')} teamId={team?.id} projectId={project?.id}>
-            <div className="flex w-full items-center justify-start space-x-1 px-2 py-1.5">
-              <span>{t('切换项目')}</span>
-              <span className="text-secondary-foreground/60">{`@${project?.name}`}</span>
             </div>
           </ProjectSwitcher>
         </DropdownMenuItem>

@@ -7,12 +7,16 @@
   max-width: var(--container-max) !important;
 }
 
+@utility link {
+  @apply text-primary/95 hover:text-primary hover:underline underline-offset-2 text-sm;
+}
+
 @layer base {
   :root {
     --login-footer-height: 3rem;
     --layout-header-height: 4rem;
   }
   html p a {
-    @apply text-primary/95 hover:text-primary hover:underline underline-offset-2;
+    @apply link;
   }
 }

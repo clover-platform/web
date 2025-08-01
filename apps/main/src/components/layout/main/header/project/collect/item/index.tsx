@@ -1,20 +1,14 @@
-import {IconProject, IconSwitch} from "@arco-iconbox/react-clover";
-import { ProjectSwitcher } from '@clover/public/components/common/switcher/project'
-import {useCurrent} from "@clover/public/components/layout/hooks/main";
+import { IconProject } from '@arco-iconbox/react-clover'
 import type { Project } from '@clover/public/types/project'
-import { Action, Badge, Tooltip } from '@easykit/design'
 import {useRouter} from "next/navigation";
 import { type FC, useCallback } from 'react'
-import { useTranslation } from "react-i18next";
 export type CollectProjectItemProps = {
   project: Project;
 }
 
 export const CollectProjectItem: FC<CollectProjectItemProps> = (props) => {
-  const { project } = props;
-  const { projectId } = useCurrent();
-  const router = useRouter();
-  const { t } = useTranslation();
+  const { project } = props
+  const router = useRouter()
 
   const onClick = useCallback(() => {
     router.push(`/team/${project.projectKey}?tab=info`)
@@ -34,21 +28,6 @@ export const CollectProjectItem: FC<CollectProjectItemProps> = (props) => {
         <span>{project.name}</span>
         <span className="ml-1 opacity-60">@{project.projectKey}</span>
       </div>
-      {project.id === projectId ? (
-        <div>
-          <Badge>{t('当前')}</Badge>
-        </div>
-      ) : (
-        <div className="hidden group-hover:flex">
-          <Tooltip content={t('切换到此项目')}>
-            <ProjectSwitcher title={t('切换项目')} teamId={project.teamId} projectId={project.id}>
-              <Action className="!p-1.5">
-                <IconSwitch />
-              </Action>
-            </ProjectSwitcher>
-          </Tooltip>
-        </div>
-      )}
     </div>
   )
 }

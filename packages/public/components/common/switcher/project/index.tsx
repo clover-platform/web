@@ -1,4 +1,4 @@
-import {ProjectSelector} from "@clover/public/components/common/selector/project";
+
 import { TeamSelector } from '@clover/public/components/common/selector/team'
 import {useStateLoader} from "@clover/public/components/layout/hooks/use.state.loader";
 import { useFormSubmit } from '@clover/public/hooks/use.form.submit'
@@ -14,29 +14,19 @@ import { object, string } from 'zod'
 export const getSchema = () =>
   object({
     teamId: string().min(1, t('请选择团队')),
-    projectId: string().min(1, t('请选择项目')),
   }) 
 
 export type ProjectSwitcherProps = PropsWithChildren<{
-  className?: string;
-  onSuccess?: () => void;
-  title: string;
-  teamId?: number;
-  projectId?: number;
+  className?: string
+  onSuccess?: () => void
+  title: string
+  teamId?: number
 }>
 
 export const ProjectSwitcher: FC<ProjectSwitcherProps> = (props) => {
-  const {
-    title,
-    children,
-    className,
-    projectId,
-    teamId,
-    onSuccess
-  } = props;
+  const { title, children, className, teamId, onSuccess } = props
   const { t } = useTranslation();
-  const [open, setOpen] = useState(false);
-  const [teamIdValue, setTeamIdValue] = useState<string|number|undefined>(teamId);
+  const [open, setOpen] = useState(false)
   const loader = useStateLoader();
   const queryClient = useQueryClient()
   const {ref, onSubmit, submitting} = useFormSubmit({
@@ -64,21 +54,11 @@ export const ProjectSwitcher: FC<ProjectSwitcherProps> = (props) => {
           schema={getSchema()}
           onSubmit={onSubmit}
           defaultValues={{
-            projectId: projectId ? `${projectId}` : '',
             teamId: teamId ? `${teamId}` : '',
           }}
         >
           <FormItem name="teamId" label={t('团队')}>
-            <TeamSelector
-              onChange={(v) => {
-                ref.current?.setValue('projectId', '')
-                setTeamIdValue(v)
-              }}
-              className="w-full"
-            />
-          </FormItem>
-          <FormItem name="projectId" label={t('项目')}>
-            <ProjectSelector teamId={teamIdValue!} className="w-full" />
+            <TeamSelector className="w-full" />
           </FormItem>
           <Button loading={submitting} type="submit" className="w-full">
             {t('切换')}

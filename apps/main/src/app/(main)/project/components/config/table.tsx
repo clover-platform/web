@@ -4,7 +4,7 @@ import type { TabsTitleItem } from '@clover/public/components/common/tabs-title'
 import {UserItem} from "@clover/public/components/common/user-item";
 import type { Project } from '@clover/public/types/project'
 import { t } from '@clover/public/utils/locale.client'
-import { Badge, type DataTableColumn, type DropdownMenuItemProps, type FilterItemProps, Input } from '@easykit/design'
+import { type DataTableColumn, type DropdownMenuItemProps, type FilterItemProps, Input } from '@easykit/design'
 
 export const getTabs = (): TabsTitleItem[] => [
   {
@@ -21,14 +21,14 @@ export const getTabs = (): TabsTitleItem[] => [
   },
 ]
 
-export const getColumns = (current?: number): DataTableColumn<Project>[] => [
+export const getColumns = (): DataTableColumn<Project>[] => [
   {
-    accessorKey: "name",
-    header: t("名称"),
+    accessorKey: 'name',
+    header: t('名称'),
     enableHiding: false,
-    className: "w-[300px] min-w-[300px]",
-    cell: ({row}) => {
-      const { original } = row;
+    className: 'w-[300px] min-w-[300px]',
+    cell: ({ row }) => {
+      const { original } = row
       return (
         <div className="flex items-center space-x-1">
           <div className="flex h-6 w-6 items-center justify-center rounded-md bg-secondary text-secondary-foreground">
@@ -43,44 +43,43 @@ export const getColumns = (current?: number): DataTableColumn<Project>[] => [
             <span>{original.name}</span>
             <span className="ml-1 text-secondary-foreground/60">@{original.projectKey}</span>
           </div>
-          {original.id === current ? <Badge>{t('当前')}</Badge> : null}
         </div>
       )
-    }
+    },
   },
   {
-    accessorKey: "teamName",
-    header: t("所属团队"),
+    accessorKey: 'teamName',
+    header: t('所属团队'),
     enableHiding: false,
-    className: "w-[200px] min-w-[200px]",
-    cell: ({row}) => {
-      const { original } = row;
-      const { team } = original;
+    className: 'w-[200px] min-w-[200px]',
+    cell: ({ row }) => {
+      const { original } = row
+      const { team } = original
       return (
         <span>
           <span>{team.name}</span>
           <span className="ml-1 text-secondary-foreground/60">@{team.teamKey}</span>
         </span>
       )
-    }
+    },
   },
   {
-    accessorKey: "owner",
-    header: t("所有者"),
+    accessorKey: 'owner',
+    header: t('所有者'),
     enableHiding: false,
-    className: "w-[150px] min-w-[150px]",
-    cell: ({row}) => {
-      const { original } = row;
+    className: 'w-[150px] min-w-[150px]',
+    cell: ({ row }) => {
+      const { original } = row
       return <UserItem info={original.owner} />
-    }
+    },
   },
   {
-    accessorKey: "createTime",
-    header: t("创建时间"),
+    accessorKey: 'createTime',
+    header: t('创建时间'),
     enableHiding: false,
-    formatters: ["time"],
-    className: "w-[200px] min-w-[200px]"
-  }
+    formatters: ['time'],
+    className: 'w-[200px] min-w-[200px]',
+  },
 ]
 
 export const getFilters = (): FilterItemProps[] => [
@@ -101,7 +100,7 @@ enum MemberType {
   Member = 0,
 }
 
-export const getRowActions = (project: Project, current?: number): DropdownMenuItemProps[] => {
+export const getRowActions = (project: Project): DropdownMenuItemProps[] => {
   return [
     {
       id: 'info',
@@ -124,21 +123,15 @@ export const getRowActions = (project: Project, current?: number): DropdownMenuI
           type: 'item',
           label: t('收藏'),
         },
-    project.id !== current && {
-      id: 'separator.1',
-      type: 'separator',
+    [MemberType.Member, MemberType.Admin].includes(project.memberType) && {
+      id: 'leave',
+      type: 'item',
+      label: t('退出'),
     },
-    [MemberType.Member, MemberType.Admin].includes(project.memberType) &&
-      project.id !== current && {
-        id: 'leave',
-        type: 'item',
-        label: t('退出'),
-      },
-    project.memberType === MemberType.Owner &&
-      project.id !== current && {
-        id: 'delete',
-        type: 'item',
-        label: t('删除'),
-      },
+    project.memberType === MemberType.Owner && {
+      id: 'delete',
+      type: 'item',
+      label: t('删除'),
+    },
   ].filter(Boolean) as DropdownMenuItemProps[]
-};
+}

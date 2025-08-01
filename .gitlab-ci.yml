@@ -2,6 +2,21 @@ stages:
   - package
   - deploy
 
+package-www:
+  stage: package
+  only:
+    - /^www-.*$/
+  tags:
+    - dev
+  script:
+    - echo $CI_REGISTRY_PASSWORD | docker login -u $CI_REGISTRY_USER --password-stdin $CI_REGISTRY
+    - docker build -t $CI_REGISTRY/clover/web/www:$CI_PIPELINE_ID -f ./docker/www.Dockerfile .
+    - docker tag $CI_REGISTRY/clover/web/www:$CI_PIPELINE_ID $CI_REGISTRY/clover/web/www:latest
+    - docker push $CI_REGISTRY/clover/web/www:$CI_PIPELINE_ID
+    - docker push $CI_REGISTRY/clover/web/www:latest
+    - docker rmi $CI_REGISTRY/clover/web/www:$CI_PIPELINE_ID
+    - docker rmi $CI_REGISTRY/clover/web/www:latest
+
 package-main:
   stage: package
   only:
@@ -61,6 +76,18 @@ package-wiki:
     - docker push $CI_REGISTRY/clover/web/wiki:latest
     - docker rmi $CI_REGISTRY/clover/web/wiki:$CI_PIPELINE_ID
     - docker rmi $CI_REGISTRY/clover/web/wiki:latest
+
+deploy-www:
+  stage: deploy
+  only:
+    - /^www-.*$/
+  tags:
+    - dev
+  script:
+    - cd ~/server/clover/web-www
+    - echo $CI_REGISTRY_PASSWORD | docker login -u $CI_REGISTRY_USER --password-stdin $CI_REGISTRY
+    - docker compose down
+    - docker compose up -d
 
 deploy-main:
   stage: deploy
