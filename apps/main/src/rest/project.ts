@@ -15,6 +15,15 @@ export type ProjectListParams = {
 export const list = (params: ProjectListParams) =>
   resultWrapper(get<PageData<Project>, ProjectListParams>('@main/project/list', params))
 
+export type RecentParams = {
+  keyword?: string
+  page?: number
+  size?: number
+}
+
+export const recent = (params: RecentParams) =>
+  resultWrapper(get<PageData<Project>, RecentParams>('@main/project/recent', params))
+
 export type CreateProjectData = {
   cover?: string
   name: string
