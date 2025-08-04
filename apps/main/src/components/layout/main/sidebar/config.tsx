@@ -5,6 +5,9 @@ import { Ellipsis, Folder, History, LayoutDashboard, Plus, Settings, Star, User,
 import { useRouter } from 'next/navigation'
 import type { ReactNode } from 'react'
 import { useTranslation } from 'react-i18next'
+import { CollectPanel } from './panel/collect'
+import { ProjectPanel } from './panel/project'
+import { RecentPanel } from './panel/recent'
 
 export type SidebarItemProps = {
   id: string
@@ -35,23 +38,23 @@ export const useSidebarItems = (): SidebarItemProps[] => {
     },
     {
       id: 'recent',
-      title: t('最近访问'),
+      title: t('最近'),
       icon: <History className={iconSize} />,
       panelClassName: 'w-[480px]',
-      panel: <div>recent</div>,
+      panel: <RecentPanel />,
     },
     {
       id: 'favorites',
       title: t('已收藏'),
       icon: <Star className={iconSize} />,
       panelClassName: 'w-[480px]',
-      panel: <div>favorites</div>,
+      panel: <CollectPanel />,
     },
     {
       id: 'project',
       title: t('项目'),
       icon: <Folder className={iconSize} />,
-      children: <div>projects</div>,
+      children: <ProjectPanel />,
       opened: true,
       extra: (
         <div className="flex items-center gap-1">
