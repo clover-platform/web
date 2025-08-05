@@ -21,6 +21,7 @@ export const SidebarItem: FC<SidebarItemProps> = (props) => {
     href,
     panelClassName,
     opened = false,
+    extraHold = false,
     dropdownItems,
     separator,
   } = props
@@ -48,7 +49,15 @@ export const SidebarItem: FC<SidebarItemProps> = (props) => {
           )}
         </div>
         <div className="min-h-6.5 flex-1 truncate text-left leading-6.5">{title}</div>
-        <div className="hidden group-hover:block">{extra}</div>
+        <div
+          className={classNames(extraHold ? '!visible' : 'invisible group-hover:visible')}
+          onClick={(e) => {
+            e.stopPropagation()
+            e.preventDefault()
+          }}
+        >
+          {extra}
+        </div>
         {panel ? (
           <div className="flex size-6 items-center justify-center">
             <ChevronRight className="size-4" />

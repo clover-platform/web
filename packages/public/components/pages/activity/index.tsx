@@ -21,7 +21,7 @@ export const ActivityList: FC<ActivityListProps> = (props) => {
   const { t } = useTranslation()
   const queryClient = useQueryClient()
   const { data, fetchNextPage, hasNextPage, isLoading, isFetching } = useInfiniteQuery({
-    queryKey: ['module: activity'],
+    queryKey: ['module:activity'],
     queryFn: ({ pageParam = 1 }) => queryFn({ pageParam, size: PAGE_SIZE }),
     getNextPageParam: (lastPage, pages) =>
       (lastPage?.total || 0) > pages.length * PAGE_SIZE ? pages.length + 1 : undefined,
@@ -53,7 +53,7 @@ export const ActivityList: FC<ActivityListProps> = (props) => {
   useEffect(() => {
     return () => {
       // 使用 removeQueries 完全清除缓存，而不是 invalidateQueries
-      queryClient.removeQueries({ queryKey: ['module: activity'] })
+      queryClient.removeQueries({ queryKey: ['module:activity'] })
     }
   }, [queryClient])
 

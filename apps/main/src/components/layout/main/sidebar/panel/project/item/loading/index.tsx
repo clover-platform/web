@@ -1,8 +1,8 @@
 import { Skeleton } from '@easykit/design'
 
-export const CollectItemLoading = () => {
+export const ProjectItemLoading = () => {
   return (
-    <div className="group flex cursor-pointer items-center justify-center space-x-2 rounded-md p-2">
+    <div className="group flex items-center justify-center space-x-2 rounded-md p-2">
       <Skeleton className="h-8 w-8 rounded-md" />
       <div className="flex flex-1 items-center justify-start">
         <span>

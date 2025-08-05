@@ -1,9 +1,9 @@
 import { accountInfoState } from '@clover/public/state/account'
-import { Action, type DropdownMenuItemProps } from '@easykit/design'
+import { Action, Dropdown, type DropdownMenuItemProps } from '@easykit/design'
 import { useAtomValue } from 'jotai'
 import { Ellipsis, Folder, History, LayoutDashboard, Plus, Settings, Star, User, Users } from 'lucide-react'
 import { useRouter } from 'next/navigation'
-import type { ReactNode } from 'react'
+import { type ReactNode, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { CollectPanel } from './panel/collect'
 import { ProjectPanel } from './panel/project'
@@ -19,6 +19,7 @@ export type SidebarItemProps = {
   children?: ReactNode
   opened?: boolean
   extra?: ReactNode
+  extraHold?: boolean
   dropdownItems?: DropdownMenuItemProps[]
   separator?: boolean
 }
@@ -28,6 +29,7 @@ export const useSidebarItems = (): SidebarItemProps[] => {
   const iconSize = 'size-4'
   const account = useAtomValue(accountInfoState)
   const router = useRouter()
+  const [projectDropdownOpen, setProjectDropdownOpen] = useState(false)
 
   return [
     {
@@ -56,14 +58,39 @@ export const useSidebarItems = (): SidebarItemProps[] => {
       icon: <Folder className={iconSize} />,
       children: <ProjectPanel />,
       opened: true,
+      extraHold: projectDropdownOpen,
       extra: (
         <div className="flex items-center gap-1">
-          <Action elType="span" className="!p-1">
+          <Action
+            elType="span"
+            className="!p-1"
+            onClick={() => {
+              router.push('/project/new')
+            }}
+          >
             <Plus className="size-4" />
           </Action>
-          <Action elType="span" className="!p-1">
-            <Ellipsis className="size-4" />
-          </Action>
+          <Dropdown
+            side="right"
+            align="start"
+            open={projectDropdownOpen}
+            onOpenChange={setProjectDropdownOpen}
+            items={[
+              {
+                id: 'list',
+                type: 'item',
+                label: t('管理项目'),
+                onItemClick: () => {
+                  router.push('/project')
+                },
+              },
+            ]}
+            asChild
+          >
+            <Action elType="span" className="!p-1">
+              <Ellipsis className="size-4" />
+            </Action>
+          </Dropdown>
         </div>
       ),
     },
@@ -74,11 +101,14 @@ export const useSidebarItems = (): SidebarItemProps[] => {
       href: '/team',
       extra: (
         <div className="flex items-center gap-1">
-          <Action elType="span" className="!p-1">
+          <Action
+            elType="span"
+            className="!p-1"
+            onClick={() => {
+              router.push('/team/new')
+            }}
+          >
             <Plus className="size-4" />
-          </Action>
-          <Action elType="span" className="!p-1">
-            <Ellipsis className="size-4" />
           </Action>
         </div>
       ),

@@ -2,11 +2,11 @@ import { IconProject } from '@arco-iconbox/react-clover'
 import type { Project } from '@clover/public/types/project'
 import { type FC, useCallback } from 'react'
 
-export type CollectItemProps = {
+export type ProjectItemProps = {
   project: Project
 }
 
-export const CollectItem: FC<CollectItemProps> = (props) => {
+export const ProjectItem: FC<ProjectItemProps> = (props) => {
   const { project } = props
 
   const onClick = useCallback(() => {
@@ -14,7 +14,7 @@ export const CollectItem: FC<CollectItemProps> = (props) => {
   }, [project])
 
   return (
-    <div className="group flex cursor-pointer items-center justify-center space-x-2 rounded-md p-1.5 hover:bg-secondary">
+    <div className="group flex cursor-default items-center justify-center space-x-2 rounded-md p-1.5 hover:bg-secondary">
       <div onClick={onClick} className="flex h-8 w-8 items-center justify-center rounded-md bg-primary text-white">
         {project.cover ? (
           // biome-ignore lint/nursery/noImgElement: <explanation>
