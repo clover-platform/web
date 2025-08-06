@@ -1,12 +1,11 @@
-import {IconDark, IconLight, IconSystem} from "@arco-iconbox/react-clover";
+import { IconDark, IconLight, type IconProps, IconSystem } from '@arco-iconbox/react-clover'
 import classNames from 'classnames'
 import {useTheme} from "next-themes";
 import { type FC, useEffect, useState } from 'react'
 
 export type Theme = {
   name: string
-  // biome-ignore lint/suspicious/noExplicitAny: <explanation>
-  icon: any
+  icon: IconProps
 }
 
 const themes: Theme[] = [

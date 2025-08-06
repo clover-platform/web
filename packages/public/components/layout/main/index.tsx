@@ -9,6 +9,7 @@ import classNames from 'classnames'
 import { useAtomValue } from 'jotai'
 import { type FC, type PropsWithChildren, useEffect, useMemo } from 'react'
 import { LoadingLayout } from '../loading'
+import { useRestoreSettings } from './hooks'
 
 export type MainLayoutProps = PropsWithChildren<{
   headerProps?: HeaderProps
@@ -34,6 +35,7 @@ export const MainLayout: FC<MainLayoutProps> = (props) => {
   const isLogin = useAtomValue(isLoginState);
   const needInit = useMemo(() => isLogin && !(teams?.length && projects.length), [teams, projects, isLogin])
   const {load} = useAppsLoader();
+  useRestoreSettings()
 
   useEffect(() => {
     load().then();

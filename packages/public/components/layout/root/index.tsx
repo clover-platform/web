@@ -19,9 +19,10 @@ import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 import i18next from 'i18next'
 import { Provider, type WritableAtom } from 'jotai'
 import { useHydrateAtoms } from 'jotai/utils'
-import { ThemeProvider } from "next-themes";
+import Cookies from 'js-cookie'
+import { ThemeProvider, useTheme } from 'next-themes'
 import { NuqsAdapter } from 'nuqs/adapters/next/app'
-import type { FC, PropsWithChildren, ReactNode } from 'react'
+import { type FC, type PropsWithChildren, type ReactNode, useEffect } from 'react'
 import { I18nextProvider } from 'react-i18next'
 
 export type AtomValues = Iterable<
@@ -37,6 +38,16 @@ export type AtomsHydrateProps = {
 export const AtomsHydrate: FC<AtomsHydrateProps> = ({ atomValues, children }) => {
   useHydrateAtoms(new Map(atomValues))
   return children;
+}
+
+export const ThemeSyncProvider = ({ children }: PropsWithChildren) => {
+  const { theme } = useTheme()
+  useEffect(() => {
+    if (theme) {
+      Cookies.set('theme', theme)
+    }
+  }, [theme])
+  return children
 }
 
 export type RootLayoutProps = PropsWithChildren<{
@@ -83,10 +94,12 @@ export const RootLayout: FC<RootLayoutProps> = (props) => {
           >
             <ConfigProvider locale={locales[locale]}>
               <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
-                <QueryClientProvider client={queryClient}>
-                  {children}
-                  <ReactQueryDevtools initialIsOpen={false} />
-                </QueryClientProvider>
+                <ThemeSyncProvider>
+                  <QueryClientProvider client={queryClient}>
+                    {children}
+                    <ReactQueryDevtools initialIsOpen={false} />
+                  </QueryClientProvider>
+                </ThemeSyncProvider>
               </ThemeProvider>
             </ConfigProvider>
           </AtomsHydrate>

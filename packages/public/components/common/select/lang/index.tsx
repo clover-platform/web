@@ -1,8 +1,8 @@
 import langList from '@clover/public/config/lang.list'
-import {useLocale} from "@clover/public/hooks/use.locale";
+import { useLocale } from '@clover/public/hooks'
 import { Select, type SelectOptionProps } from '@easykit/design'
 import classNames from "classnames";
-import i18next from "i18next";
+
 import type { FC } from 'react'
 
 const options: SelectOptionProps[] = langList.map((lang) => ({
@@ -25,10 +25,9 @@ export const LangSelect: FC<LangSelectProps> = (props) => {
       className="h-8 w-auto"
       triggerClassName={classNames('px-2 py-1', className)}
       align="end"
-      onChange={async (value) => {
+      onChange={(value) => {
         if (locale !== value) {
           setLocale(value)
-          await i18next?.changeLanguage(value)
         }
       }}
     />
