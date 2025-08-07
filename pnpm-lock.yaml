@@ -37,8 +37,8 @@ importers:
         specifier: workspace:*
         version: link:packages/public
       '@easykit/design':
-        specifier: 0.0.142
-        version: 0.0.142(@types/react-dom@19.1.2(@types/react@19.1.2))(@types/react@19.1.2)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
+        specifier: 0.0.144
+        version: 0.0.144(@types/react-dom@19.1.2(@types/react@19.1.2))(@types/react@19.1.2)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
       '@easykit/editor':
         specifier: 0.0.26
         version: 0.0.26(@babel/core@7.26.10)(@types/react-dom@19.1.2(@types/react@19.1.2))(@types/react@19.1.2)(highlight.js@11.9.0)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
@@ -375,8 +375,6 @@ packages:
 
   '@arco-iconbox/react-atom-ui@0.0.4':
     resolution: {integrity: sha512-gYBxZRGfVNcGrJu3MGYK6Xtgf9m+oobn/OL8QnqmI6/2zv6JmWwccI+4fMtvDfeh5U7sgfyK9wYh1ftn95Wlpg==}
-    peerDependencies:
-      react: 19.1.0
 
   '@arco-iconbox/react-clover@0.0.36':
     resolution: {integrity: sha512-8pAY0J3vEx3KzC+mSDMLJElC+abiI+rxhfQyiWWIDmp6KZd7QmxyQUmVao+mqxkoFIi/mapI8ITpksu+qAVOBw==}
@@ -533,8 +531,8 @@ packages:
     resolution: {integrity: sha512-Pqwr3+Doby9fH0FECbGJLo997heWop7QDnklbRM9gPM+dHVdRN8SzOXiCp0RyAhN01OPgFIP3+w7xsHXfptIsw==}
     engines: {node: '>=12.9.0'}
 
-  '@easykit/design@0.0.142':
-    resolution: {integrity: sha512-CPQwDUUcC1ywH7U7J7VrQ3qiYVpzlvlLAiwYgAHlwf9P5n4scHuyIqMQj8MYgK91GJZuKdjwynuJcFiIQ97/VA==}
+  '@easykit/design@0.0.144':
+    resolution: {integrity: sha512-Ob/ug3INomNZk+jquKltS3seNSQcQITsU+DbjL0I5CsuSeCoKBKiJUnnEGvG+39MEIJEUpx8Wv6n4QDJkOURuw==}
 
   '@easykit/editor@0.0.26':
     resolution: {integrity: sha512-QZmNLBidAc15qEU0tZ1oxcBkUfavEJTkCjvJbyVDFRjbIGCQr/PS3X1wqRg+sOHrvACs50Bc0zxa6C5onoiCwA==}
@@ -5321,9 +5319,7 @@ snapshots:
       '@jridgewell/gen-mapping': 0.3.8
       '@jridgewell/trace-mapping': 0.3.25
 
-  '@arco-iconbox/react-atom-ui@0.0.4(react@19.1.0)':
-    dependencies:
-      react: 19.1.0
+  '@arco-iconbox/react-atom-ui@0.0.4': {}
 
   '@arco-iconbox/react-clover@0.0.36(react@19.1.0)':
     dependencies:
@@ -5489,9 +5485,9 @@ snapshots:
     transitivePeerDependencies:
       - debug
 
-  '@easykit/design@0.0.142(@types/react-dom@19.1.2(@types/react@19.1.2))(@types/react@19.1.2)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)':
+  '@easykit/design@0.0.144(@types/react-dom@19.1.2(@types/react@19.1.2))(@types/react@19.1.2)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)':
     dependencies:
-      '@arco-iconbox/react-atom-ui': 0.0.4(react@19.1.0)
+      '@arco-iconbox/react-atom-ui': 0.0.4
       '@emotion/react': 11.11.4(@types/react@19.1.2)(react@19.1.0)
       '@hookform/resolvers': 3.7.0(react-hook-form@7.52.1(react@19.1.0))
       '@radix-ui/react-alert-dialog': 1.1.2(@types/react-dom@19.1.2(@types/react@19.1.2))(@types/react@19.1.2)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
