@@ -33,7 +33,8 @@
     "turbopack",
     "navs",
     "encryptor",
-    "nuqs"
+    "nuqs",
+    "dhtmlx"
   ],
   "css.customData": [".vscode/tailwind.json"],
   "editor.codeActionsOnSave": {
