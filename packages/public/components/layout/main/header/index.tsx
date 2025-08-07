@@ -1,16 +1,16 @@
+import { type FC, type ReactNode, useCallback, useMemo } from 'react'
 import { IconHelpFill, IconSettingFill } from '@arco-iconbox/react-clover'
-import {Apps} from "@clover/public/components/layout/main/header/apps";
+import { Action, Button, Separator } from '@easykit/design'
+import classNames from 'classnames'
+import { useAtom } from 'jotai/index'
+import Link from 'next/link'
+import { useTranslation } from 'react-i18next'
+import { Apps } from '@clover/public/components/layout/main/header/apps'
 import { Notice } from '@clover/public/components/layout/main/header/notice'
-import {ProfileMenu} from "@clover/public/components/layout/main/header/profile-menu";
+import { ProfileMenu } from '@clover/public/components/layout/main/header/profile-menu'
 import { LayoutLogo } from '@clover/public/components/layout/main/logo'
 import { useMainApp } from '@clover/public/hooks'
 import { isLoginState } from '@clover/public/state/account'
-import { Action, Button, Separator } from '@easykit/design'
-import classNames from "classnames";
-import { useAtom } from 'jotai/index'
-import Link from 'next/link'
-import { type FC, type ReactNode, useCallback, useMemo } from 'react'
-import { useTranslation } from "react-i18next";
 
 export type HeaderProps = {
   extra?: ReactNode
@@ -21,11 +21,8 @@ export type HeaderProps = {
 }
 
 export const Header: FC<HeaderProps> = (props) => {
-  const {
-    logoUrl,
-    extra, appName, profileExtra, className
-  } = props;
-  const [isLogin] = useAtom(isLoginState);
+  const { logoUrl, extra, appName, profileExtra, className } = props
+  const [isLogin] = useAtom(isLoginState)
   const { t } = useTranslation()
   const mainApp = useMainApp()
 
@@ -60,7 +57,7 @@ export const Header: FC<HeaderProps> = (props) => {
       <div className="flex flex-1 items-center justify-start space-x-2xl">
         <div className="flex items-center justify-center space-x-sm">
           <Apps />
-          <Separator orientation="vertical" className="!h-6" />
+          <Separator className="!h-6" orientation="vertical" />
           {logoUrl ? <Link href={logoUrl}>{logo}</Link> : logo}
         </div>
         <div className="flex-1">{extra}</div>

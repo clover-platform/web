@@ -1,30 +1,38 @@
+import type { FC } from 'react'
 import { IconGithubCircle, IconX } from '@arco-iconbox/react-clover'
-import {LangSelect} from "@clover/public/components/common/select/lang";
-import {ThemeSwitcher} from "@clover/public/components/common/theme-switcher";
+import { Button, Input, Separator } from '@easykit/design'
+import classNames from 'classnames'
+import { useTranslation } from 'react-i18next'
+import { LangSelect } from '@clover/public/components/common/select/lang'
+import { ThemeSwitcher } from '@clover/public/components/common/theme-switcher'
 import { getNavGroups } from '@clover/public/components/layout/main/footer/config'
 import { LayoutLogo } from '@clover/public/components/layout/main/logo'
-import { Button, Input, Separator } from '@easykit/design'
-import type { FC } from 'react'
-import { useTranslation } from "react-i18next";
 
 export type FooterProps = {
   simple?: boolean
   enable?: boolean
+  border?: boolean
+  className?: string
 }
 
 export const Footer: FC<FooterProps> = (props) => {
-  const { simple = false, enable = true } = props
+  const { simple = false, enable = true, className, border = true } = props
   const { t } = useTranslation()
   if (!enable) return null
   return simple ? (
-    <div className="container flex flex-col items-center justify-center pb-lg">
-      <Separator className="mb-lg" />
+    <div
+      className={classNames(
+        'container flex flex-col items-center justify-center pb-lg',
+        border ? 'border-white border-t pt-lg dark:border-secondary' : 'border-transparent',
+        className
+      )}
+    >
       <div className="flex w-full">
         <div className="flex flex-1 items-center justify-start space-x-lg">
           <div>© 2024 {t('Easy Kit')}</div>
           <div className="flex items-center justify-start space-x-sm">
             <IconGithubCircle className="text-2xl text-secondary-foreground/50" />
-            <Separator orientation="vertical" className="h-4" />
+            <Separator className="h-4" orientation="vertical" />
             <IconX className="text-secondary-foreground/50 text-xl" />
           </div>
         </div>
@@ -44,7 +52,7 @@ export const Footer: FC<FooterProps> = (props) => {
           <ul className="ml-4xl flex flex-1">
             {getNavGroups().map((group) => {
               return (
-                <li key={group.title} className="flex-1 space-y-xs">
+                <li className="flex-1 space-y-xs" key={group.title}>
                   <div className="text-base">{group.title}</div>
                   <ul className="space-y-2xs">
                     {group.items.map((item) => {
@@ -68,7 +76,7 @@ export const Footer: FC<FooterProps> = (props) => {
               <div className="relative">
                 <Input className="bg-secondary" />
                 <div className="absolute top-0 right-0 bottom-0 p-0.5">
-                  <Button variant="outline" size="sm">
+                  <Button size="sm" variant="outline">
                     {t('订阅')}
                   </Button>
                 </div>
@@ -81,7 +89,7 @@ export const Footer: FC<FooterProps> = (props) => {
             <div>© 2024 {t('Easy Kit')}</div>
             <div className="flex items-center justify-start space-x-sm">
               <IconGithubCircle className="text-2xl text-secondary-foreground/50" />
-              <Separator orientation="vertical" className="h-4" />
+              <Separator className="h-4" orientation="vertical" />
               <IconX className="text-secondary-foreground/50 text-xl" />
             </div>
           </div>
