@@ -41,3 +41,12 @@ export const leaveProject = (id: number) => resultWrapper(del(`@main/project/${i
 export const addCollect = (id: number) => resultWrapper(post('@main/project/collect/add', { id }))
 
 export const cancelCollect = (id: number) => resultWrapper(del('@main/project/collect/cancel', { id }))
+
+export const panel = () =>
+  resultWrapper(
+    get<{
+      projects: Project[]
+      recents: Project[]
+      collects: Project[]
+    }>('@main/project/panel')
+  )

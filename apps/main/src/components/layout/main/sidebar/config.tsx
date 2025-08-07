@@ -1,13 +1,14 @@
-import { accountInfoState } from '@clover/public/state/account'
+import { CollectPanel } from './panel/collect'
+import { ProjectPanel } from './panel/project'
+import { RecentPanel } from './panel/recent'
+
+import { type ReactNode, useState } from 'react'
 import { Action, Dropdown, type DropdownMenuItemProps } from '@easykit/design'
 import { useAtomValue } from 'jotai'
 import { Ellipsis, Folder, History, LayoutDashboard, Plus, Settings, Star, User, Users } from 'lucide-react'
 import { useRouter } from 'next/navigation'
-import { type ReactNode, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { CollectPanel } from './panel/collect'
-import { ProjectPanel } from './panel/project'
-import { RecentPanel } from './panel/recent'
+import { accountInfoState } from '@clover/public/state/account'
 
 export type SidebarItemProps = {
   id: string
@@ -62,8 +63,8 @@ export const useSidebarItems = (): SidebarItemProps[] => {
       extra: (
         <div className="flex items-center gap-1">
           <Action
-            elType="span"
             className="!p-1"
+            elType="span"
             onClick={() => {
               router.push('/project/new')
             }}
@@ -71,10 +72,8 @@ export const useSidebarItems = (): SidebarItemProps[] => {
             <Plus className="size-4" />
           </Action>
           <Dropdown
-            side="right"
             align="start"
-            open={projectDropdownOpen}
-            onOpenChange={setProjectDropdownOpen}
+            asChild
             items={[
               {
                 id: 'list',
@@ -85,9 +84,11 @@ export const useSidebarItems = (): SidebarItemProps[] => {
                 },
               },
             ]}
-            asChild
+            onOpenChange={setProjectDropdownOpen}
+            open={projectDropdownOpen}
+            side="right"
           >
-            <Action elType="span" className="!p-1">
+            <Action className="!p-1" elType="span">
               <Ellipsis className="size-4" />
             </Action>
           </Dropdown>
@@ -102,8 +103,8 @@ export const useSidebarItems = (): SidebarItemProps[] => {
       extra: (
         <div className="flex items-center gap-1">
           <Action
-            elType="span"
             className="!p-1"
+            elType="span"
             onClick={() => {
               router.push('/team/new')
             }}

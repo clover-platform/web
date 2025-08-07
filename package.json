@@ -25,10 +25,10 @@
     "start:wiki": "pnpm --filter @clover/wiki run start"
   },
   "dependencies": {
-    "@arco-iconbox/react-clover": "0.0.36",
     "@clover/i18n-cli": "workspace:*",
     "@clover/public": "workspace:*",
-    "@easykit/design": "0.0.144",
+    "@arco-iconbox/react-clover": "0.0.36",
+    "@easykit/design": "0.0.145",
     "@easykit/editor": "0.0.26",
     "@radix-ui/react-checkbox": "1.1.1",
     "@radix-ui/react-icons": "1.3.0",
