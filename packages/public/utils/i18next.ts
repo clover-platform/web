@@ -1,3 +1,6 @@
+import { FALLBACK } from '../config/locale'
+import { getRootDomain, isServer } from '.'
+
 import enUSEditor from '@easykit/editor/locales/en-us'
 import zhCNEditor from '@easykit/editor/locales/zh-cn'
 import zhTWEditor from '@easykit/editor/locales/zh-tw'
@@ -10,7 +13,6 @@ import { zodI18nMap } from 'zod-i18n-map'
 import enUSZod from 'zod-i18n-map/locales/en/zod.json'
 import zhCNZod from 'zod-i18n-map/locales/zh-CN/zod.json'
 import zhTWZod from 'zod-i18n-map/locales/zh-TW/zod.json'
-import { FALLBACK } from '../config/locale'
 
 const languageDetector = new LanguageDetector()
 
@@ -20,7 +22,9 @@ languageDetector.addDetector({
     return Cookies.get('i18next') || FALLBACK
   },
   cacheUserLanguage: (lng) => {
-    Cookies.set('i18next', lng)
+    Cookies.set('i18next', lng, {
+      domain: isServer ? undefined : getRootDomain(window.location.hostname),
+    })
   },
 })
 
@@ -29,7 +33,7 @@ export type LangItem = {
   locale: string
 }
 
-// biome-ignore lint/suspicious/noExplicitAny: <explanation>
+// biome-ignore lint/suspicious/noExplicitAny: initI18next Record
 export const initI18next = (map: Record<string, any>) => {
   i18next
     .use(new ReactPostprocessor())

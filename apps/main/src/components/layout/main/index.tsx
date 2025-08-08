@@ -31,12 +31,12 @@ export const MainLayout: FC<MainLayoutProps> = (origin) => {
       headerProps={{
         logoUrl: '/',
         appName: t('项目'),
-        className: 'bg-background dark:bg-black/50',
+        className: 'bg-background dark:bg-black/50 sticky top-0 z-100',
         extra: <Search />,
       }}
       loading={!isLogin}
     >
-      <div className="h-[calc(100vh-var(--layout-header-height))] w-72 border-border border-r bg-background dark:bg-black/50">
+      <div className="sticky top-[var(--layout-header-height)] h-[calc(100vh-var(--layout-header-height))] w-72 border-border border-r bg-background dark:bg-black/50">
         <Sidebar active={active} />
       </div>
       <div className="flex flex-1 flex-col">{props.children}</div>

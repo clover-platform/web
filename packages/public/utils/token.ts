@@ -1,10 +1,11 @@
-import {COOKIE_MAX_AGE} from "@clover/public/config/app";
-import { deleteCookie, getCookie, setCookie } from 'cookies-next'
 import { getRootDomain } from '.'
 
+import { deleteCookie, getCookie, setCookie } from 'cookies-next'
+import { COOKIE_MAX_AGE } from '@clover/public/config/app'
+
 export interface Token {
-  token: string,
-  expiresIn: number,
+  token: string
+  expiresIn: number
 }
 
 export const setToken = (data: Token) => {
@@ -15,12 +16,12 @@ export const setToken = (data: Token) => {
 }
 
 export const clearToken = () => {
-  deleteCookie("token");
+  deleteCookie('token')
 }
 
-// biome-ignore lint/suspicious/noExplicitAny: <explanation>
+// biome-ignore lint/suspicious/noExplicitAny: getToken
 export const getToken = async (cookies?: any): Promise<Token | null> => {
-  const token = await getCookie('token', {cookies});
+  const token = await getCookie('token', { cookies })
   let tokenData: Token | null = null
   if (token) {
     try {
@@ -28,6 +29,6 @@ export const getToken = async (cookies?: any): Promise<Token | null> => {
     } catch {
       // 忽略解析错误，tokenData 保持为 null
     }
-  } 
-  return tokenData;
+  }
+  return tokenData
 }
