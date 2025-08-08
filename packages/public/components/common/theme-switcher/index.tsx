@@ -4,6 +4,11 @@ import classNames from 'classnames'
 import { useTheme } from 'next-themes'
 import { flushSync } from 'react-dom'
 
+type HTMLViewTransition = { ready?: Promise<void> }
+type DocumentWithViewTransition = Document & {
+  startViewTransition?: (cb: () => void) => HTMLViewTransition
+}
+
 export type Theme = {
   name: string
   icon: IconProps
@@ -61,7 +66,12 @@ export const ThemeSwitcher: FC<ThemeSwitcherProps> = (props) => {
   // 主题切换动画函数
   const handleThemeChange = (newTheme: string, event: React.MouseEvent) => {
     // 防御性判断：SSR 或不支持 View Transition 时直接切换主题
-    if (typeof document === 'undefined' || !document.startViewTransition) {
+    if (typeof document === 'undefined') {
+      setTheme(newTheme)
+      return
+    }
+    const doc = document as DocumentWithViewTransition
+    if (!doc.startViewTransition) {
       setTheme(newTheme)
       return
     }
@@ -78,7 +88,7 @@ export const ThemeSwitcher: FC<ThemeSwitcherProps> = (props) => {
     const willBeDark = newTheme === 'system' ? prefersDark : newTheme === 'dark'
 
     // 开始视图过渡动画
-    const transition = document.startViewTransition(() => {
+    const transition = doc.startViewTransition(() => {
       // 确保主题切换的 DOM 变更在过渡回调内同步提交
       flushSync(() => setTheme(newTheme))
     })
