@@ -1,5 +1,5 @@
-import { t } from '@clover/public/utils/locale.client'
 import { any, array, object, string, type z } from 'zod'
+import { t } from '@clover/public/utils/locale.client'
 
 const IDENTIFIER_REGEX = /^[a-z][0-9a-z-]*$/
 

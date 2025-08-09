@@ -1,8 +1,8 @@
-import Logo from "@clover/public/components/common/logo";
-import { useTranslation } from 'react-i18next';
+import { useTranslation } from 'react-i18next'
+import Logo from '@clover/public/components/common/logo'
 
 export const LayoutLogo = () => {
-  const { t } = useTranslation();
+  const { t } = useTranslation()
   return (
     <div className="flex items-center justify-start space-x-xs">
       <Logo />

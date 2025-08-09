@@ -1,11 +1,11 @@
-import { isMobile } from '@clover/public/utils'
-import {getToken} from "@clover/public/utils/token";
 import Bowser from 'bowser'
-import i18next from "i18next";
+import i18next from 'i18next'
+import { isMobile } from '@clover/public/utils'
+import { getToken } from '@clover/public/utils/token'
 
 export const get = async () => {
   const browser = Bowser.parse(window.navigator.userAgent)
-  // biome-ignore lint/suspicious/noExplicitAny: <explanation>
+  // biome-ignore lint/suspicious/noExplicitAny: headers
   const headers: any = {
     'Accept-Language': i18next.language,
     'CLIENT-PLATFORM-TYPE': isMobile() ? 'H5' : 'PC',

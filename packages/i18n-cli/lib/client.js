@@ -1,8 +1,9 @@
 import fs from 'node:fs'
 import path from 'node:path'
-import axios from 'axios'
 import { defaultConfig } from './config.js'
 import { exists, getBranchName, mkdirsSync, readDirSync, writeJSON } from './utils.js'
+
+import axios from 'axios'
 
 export class I18nClient {
   constructor() {

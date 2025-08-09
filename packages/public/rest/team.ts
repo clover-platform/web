@@ -1,7 +1,8 @@
-import type { Project } from '@clover/public/types/project'
-import { get, post, put, resultWrapper } from '@clover/public/utils/rest'
 import type { TeamInitFormData } from '../config/schema/layout/guide'
 import type { Team } from '../types/team'
+
+import type { Project } from '@clover/public/types/project'
+import { get, post, put, resultWrapper } from '@clover/public/utils/rest'
 
 export const my = () => get<Team[]>('@main/team/my')
 
@@ -14,5 +15,5 @@ export type ChangeTeamData = {
   projectId: number | string
 }
 
-// biome-ignore lint/suspicious/noExplicitAny: <explanation>
+// biome-ignore lint/suspicious/noExplicitAny: result
 export const change = (data?: ChangeTeamData) => put<any, ChangeTeamData>('@main/team/change', data)

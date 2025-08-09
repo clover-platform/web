@@ -1,11 +1,12 @@
-import { useModule } from '@/hooks/use.module'
-import { list } from '@/rest/member.invite'
-import { Dialog, type DialogProps, Empty, ScrollArea } from '@easykit/design'
-import { useQuery } from '@tanstack/react-query'
-import { type FC, useMemo } from 'react'
-import { useTranslation } from 'react-i18next'
 import { InviteLinkItem } from './item'
 import { InviteLinkItemLoading } from './item/loading'
+
+import { type FC, useMemo } from 'react'
+import { Dialog, type DialogProps, Empty, ScrollArea } from '@easykit/design'
+import { useQuery } from '@tanstack/react-query'
+import { useTranslation } from 'react-i18next'
+import { useModule } from '@/hooks/use.module'
+import { list } from '@/rest/member.invite'
 
 export type InviteLinkListModalProps = {} & DialogProps
 
@@ -34,11 +35,11 @@ export const InviteLinkListModal: FC<InviteLinkListModalProps> = (props) => {
   }
 
   return (
-    <Dialog {...props} title={t('管理链接')} maskClosable={false}>
+    <Dialog {...props} maskClosable={false} title={t('管理链接')}>
       <div className="h-[380px] max-h-[80vh]">
         <ScrollArea className="h-full w-full">
           <div className="mr-2 space-y-6">
-            {!loading && listData.map((item) => <InviteLinkItem onRevoke={onRevoke} key={item.id} item={item} />)}
+            {!loading && listData.map((item) => <InviteLinkItem item={item} key={item.id} onRevoke={onRevoke} />)}
             {/* biome-ignore lint/suspicious/noArrayIndexKey: <explanation> */}
             {loading && Array.from({ length: 3 }).map((_, index) => <InviteLinkItemLoading key={index} />)}
             {!loading && listData.length === 0 && <Empty text={t('暂无链接')} />}

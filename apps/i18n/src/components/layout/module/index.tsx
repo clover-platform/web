@@ -1,13 +1,14 @@
-import { useModuleInfo } from '@/hooks/use.module.info'
-import { detail } from '@/rest/module'
+import { Header } from './header'
+
+import { type FC, type PropsWithChildren, useEffect } from 'react'
+import { useQuery } from '@tanstack/react-query'
+import { useParams } from 'next/navigation'
+import { useTranslation } from 'react-i18next'
 import { useLayoutProps } from '@clover/public/components/layout/hooks/use.layout.props'
 import { MainLayout as PublicMainLayout } from '@clover/public/components/layout/main'
 import { useUnauthorizedHandle } from '@clover/public/hooks'
-import { useQuery } from '@tanstack/react-query'
-import { useParams } from 'next/navigation'
-import { type FC, type PropsWithChildren, useEffect } from 'react'
-import { useTranslation } from 'react-i18next'
-import { Header } from './header'
+import { useModuleInfo } from '@/hooks/use.module.info'
+import { detail } from '@/rest/module'
 
 export type ModuleLayoutProps = {
   active?: string
@@ -35,13 +36,13 @@ export const ModuleLayout: FC<ModuleLayoutProps> = (origin) => {
   return (
     <PublicMainLayout
       className="bg-secondary dark:bg-background"
+      footerProps={{ simple: true }}
       headerProps={{
         logoUrl: '/',
         appName: t('国际化'),
         className: 'bg-background dark:bg-black/50',
         extra: <Header active={props.active} />,
       }}
-      footerProps={{ simple: true }}
       loading={!isLogin}
       {...props}
     >

@@ -9,7 +9,7 @@ export const SearchInput = () => {
       <div className="absolute top-0 bottom-0 left-0 flex items-center justify-center px-2">
         <Search size={16} />
       </div>
-      <Input placeholder={t('搜索')} className="pl-8" />
+      <Input className="pl-8" placeholder={t('搜索')} />
     </div>
   )
 }

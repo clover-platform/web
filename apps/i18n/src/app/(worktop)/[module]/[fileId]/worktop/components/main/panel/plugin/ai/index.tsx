@@ -1,12 +1,13 @@
-import { useCurrentFile } from '@/hooks/use.current.file'
-import { ai } from '@/rest/entry.result'
-import { currentEntryState, currentLanguageState, entriesState } from '@/state/worktop'
+import { AIItem } from './item'
+import { AIItemLoading } from './item/loading'
+
+import { useCallback, useEffect, useState } from 'react'
 import { ScrollArea } from '@easykit/design'
 import { useAtom } from 'jotai'
 import { useParams } from 'next/navigation'
-import { useCallback, useEffect, useState } from 'react'
-import { AIItem } from './item'
-import { AIItemLoading } from './item/loading'
+import { useCurrentFile } from '@/hooks/use.current.file'
+import { ai } from '@/rest/entry.result'
+import { currentEntryState, currentLanguageState, entriesState } from '@/state/worktop'
 
 const AIIListLoading = () => {
   return [0, 1, 2].map((index) => <AIItemLoading key={index} />)

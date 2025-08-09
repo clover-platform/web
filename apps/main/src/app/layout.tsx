@@ -1,15 +1,15 @@
-import { RootLayout as PublicRootLayout } from '@/components/layout/root'
+import type { FC, PropsWithChildren } from 'react'
+import type { Metadata } from 'next'
 import { HTMLLayout } from '@clover/public/components/layout/html'
 import { loadState } from '@clover/public/components/layout/root/utils.server'
 import { getLocale } from '@clover/public/utils/locale.server'
-import type { Metadata } from 'next'
-import type { FC, PropsWithChildren } from 'react'
+import { RootLayout as PublicRootLayout } from '@/components/layout/root'
 import '@clover/public/plugin/rest.server'
 import '@clover/public/plugin/locales'
 import '@/plugin/locales'
 import '@/assets/style/index.css'
 
-export type RootLayoutProps = PropsWithChildren;
+export type RootLayoutProps = PropsWithChildren
 
 export const metadata: Metadata = {
   icons: {
@@ -25,7 +25,7 @@ export const metadata: Metadata = {
 const RootLayout: FC<RootLayoutProps> = async (props) => {
   const locale = await getLocale()
   const initState = await loadState()
-  
+
   return (
     <HTMLLayout>
       <PublicRootLayout {...initState} locale={locale}>
@@ -35,4 +35,4 @@ const RootLayout: FC<RootLayoutProps> = async (props) => {
   )
 }
 
-export default RootLayout;
+export default RootLayout

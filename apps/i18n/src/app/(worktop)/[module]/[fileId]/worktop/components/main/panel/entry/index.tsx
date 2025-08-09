@@ -1,15 +1,16 @@
-import { useEntriesLoader } from '@/components/layout/worktop/hooks'
-import { ENTRY_RELOAD } from '@/events/worktop'
-import bus from '@clover/public/events'
-import { Empty, Input, ScrollArea } from '@easykit/design'
-import { CheckIcon } from '@radix-ui/react-icons'
-import classNames from 'classnames'
-import { useEffect } from 'react'
-import { useTranslation } from 'react-i18next'
 import { LanguageCheck } from '../../check/language'
 import { CreateEntryButton } from './create/button'
 import { EntryLoading } from './loading'
 import { Pagination } from './pagination'
+
+import { useEffect } from 'react'
+import { Empty, Input, ScrollArea } from '@easykit/design'
+import { CheckIcon } from '@radix-ui/react-icons'
+import classNames from 'classnames'
+import { useTranslation } from 'react-i18next'
+import bus from '@clover/public/events'
+import { useEntriesLoader } from '@/components/layout/worktop/hooks'
+import { ENTRY_RELOAD } from '@/events/worktop'
 
 export const SIZE = 50
 
@@ -43,14 +44,14 @@ export const EntryPanel = () => {
       <div className="flex h-full w-full flex-col items-center justify-center bg-muted">
         <div className="flex w-full items-center justify-center space-x-2 p-2">
           <Input
-            value={keyword}
+            className="flex-1"
             onChange={(e) => {
               setPage(1)
               setCurrent(0)
               setKeyword(e.target.value)
             }}
-            className="flex-1"
             placeholder={t('搜索词条')}
+            value={keyword}
           />
           <CreateEntryButton />
         </div>
@@ -63,12 +64,12 @@ export const EntryPanel = () => {
                 const { verified, translated } = entry
                 return (
                   <div
-                    key={entry.id}
                     className={classNames(
                       'm-1 flex cursor-pointer items-center justify-center rounded-sm px-2 py-1',
                       'action-effect action-effect-active',
                       current === index ? 'action-active' : 'bg-transparent text-muted-foreground'
                     )}
+                    key={entry.id}
                     onClick={() => setCurrent(index)}
                   >
                     <div className="flex h-6 w-6 items-center justify-center">
@@ -85,7 +86,7 @@ export const EntryPanel = () => {
             )}
           </ScrollArea>
           <div className="absolute right-2 bottom-2">
-            <Pagination page={page} pages={pages} onChange={changePage} />
+            <Pagination onChange={changePage} page={page} pages={pages} />
           </div>
         </div>
       </div>

@@ -1,11 +1,11 @@
-import { all } from '@/rest/module'
-import type { Module } from '@/types/module'
+import { useCallback, useEffect, useState } from 'react'
 import { IconShare } from '@arco-iconbox/react-clover'
 import { Command, CommandInput, CommandItem, CommandList, Separator, Spin } from '@easykit/design'
 import { CheckIcon } from '@radix-ui/react-icons'
 import { useParams } from 'next/navigation'
-import { useCallback, useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
+import { all } from '@/rest/module'
+import type { Module } from '@/types/module'
 
 export const MenuProjectSheet = () => {
   const params = useParams()
@@ -68,7 +68,7 @@ export const MenuProjectSheet = () => {
           </div>
         ) : (
           <CommandList className="mt-2 p-0">
-            {/* biome-ignore lint/suspicious/noExplicitAny: <explanation> */}
+            {/* biome-ignore lint/suspicious/noExplicitAny: item */}
             {projects.map((item: any) => {
               return (
                 <CommandItem key={item.id} onSelect={() => switchProject(item.identifier)}>

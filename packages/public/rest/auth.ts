@@ -1,7 +1,8 @@
-import type { Account } from '@clover/public/types/account'
-import { get, post, resultWrapper } from '@clover/public/utils/rest'
 import type { LoginFormData } from '../config/schema/login'
 import type { Token } from '../utils/token'
+
+import type { Account } from '@clover/public/types/account'
+import { get, post, resultWrapper } from '@clover/public/utils/rest'
 
 export type LoginRestData = {
   code?: string

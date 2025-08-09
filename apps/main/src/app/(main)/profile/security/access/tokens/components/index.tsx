@@ -1,13 +1,7 @@
 'use client'
 
-import { ProfileBreadcrumbBase } from '@/components/common/breadcrumb/profile'
-import { MainPage } from '@/components/common/main-page'
-import type { MainLayoutProps } from '@/components/layout/main'
-import { type ListParams, list, revoke } from '@/rest/profile/security/access/tokens'
-import type { AccessToken } from '@/types/profile/access/token'
-import { TitleBar } from '@clover/public/components/common/title-bar'
-import { useLayoutConfig } from '@clover/public/components/layout/hooks/use.layout.config'
-import { useListQuery } from '@clover/public/hooks'
+import { getColumns, getRowActions } from '../config/token'
+
 import {
   BreadcrumbItem,
   BreadcrumbLink,
@@ -22,7 +16,14 @@ import {
 import { useMutation } from '@tanstack/react-query'
 import Link from 'next/link'
 import { useTranslation } from 'react-i18next'
-import { getColumns, getRowActions } from '../config/token'
+import { TitleBar } from '@clover/public/components/common/title-bar'
+import { useLayoutConfig } from '@clover/public/components/layout/hooks/use.layout.config'
+import { useListQuery } from '@clover/public/hooks'
+import { ProfileBreadcrumbBase } from '@/components/common/breadcrumb/profile'
+import { MainPage } from '@/components/common/main-page'
+import type { MainLayoutProps } from '@/components/layout/main'
+import { type ListParams, list, revoke } from '@/rest/profile/security/access/tokens'
+import type { AccessToken } from '@/types/profile/access/token'
 
 export const AccessTokensPage = () => {
   useLayoutConfig<MainLayoutProps>({
@@ -67,15 +68,13 @@ export const AccessTokensPage = () => {
           <BreadcrumbPage>{title}</BreadcrumbPage>
         </BreadcrumbItem>
       </ProfileBreadcrumbBase>
-      <TitleBar title={title} actions={actions} />
+      <TitleBar actions={actions} title={title} />
       <Card>
         <DataTable<AccessToken>
+          columns={getColumns()}
+          data={data}
           inCard={true}
           load={load}
-          pagination={pagination}
-          columns={getColumns()}
-          rowActions={(row) => getRowActions(row)}
-          data={data}
           loading={loading || revoking}
           onRowActionClick={({ id: key }, { original }) => {
             const { id } = original
@@ -87,6 +86,8 @@ export const AccessTokensPage = () => {
               })
             }
           }}
+          pagination={pagination}
+          rowActions={(row) => getRowActions(row)}
         />
       </Card>
     </MainPage>

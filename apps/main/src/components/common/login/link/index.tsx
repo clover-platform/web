@@ -1,10 +1,10 @@
-import Link from '@clover/public/components/common/link'
-import {useSearchParams} from "next/navigation";
 import { type PropsWithChildren, useMemo } from 'react'
+import { useSearchParams } from 'next/navigation'
+import Link from '@clover/public/components/common/link'
 
 export interface LoginLinkProps extends PropsWithChildren {
-  href: string,
-  tabIndex?: number,
+  href: string
+  tabIndex?: number
 }
 
 const LoginLink = (props: LoginLinkProps) => {
@@ -25,4 +25,4 @@ const LoginLink = (props: LoginLinkProps) => {
   )
 }
 
-export default LoginLink;
+export default LoginLink

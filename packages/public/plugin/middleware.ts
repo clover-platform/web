@@ -1,6 +1,5 @@
 import type { NextRequest } from 'next/server'
 
-// biome-ignore lint/suspicious/useAwait: <explanation>
 export const middlewareHandler = async (request: NextRequest) => {
   const { pathname } = request.nextUrl
   // Pass the original URL to the redirected page
@@ -8,7 +7,7 @@ export const middlewareHandler = async (request: NextRequest) => {
   const origin = url.origin
   request.headers.append('next-url', request.url)
   request.headers.append('next-origin', origin)
-  request.headers.append('next-pathname', pathname)
+  request.headers.append('next-pathname', pathname) 
 
   // Check if there is any supported locale in the pathname
   // const pathnameHasLocale = locales.some(

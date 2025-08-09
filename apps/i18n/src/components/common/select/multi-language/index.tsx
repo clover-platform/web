@@ -1,11 +1,11 @@
-import { languagesState } from '@/state/public'
+import { type FC, type HTMLAttributes, useState } from 'react'
 import { IconDelete } from '@arco-iconbox/react-clover'
-import { Action } from '@clover/public/components/common/action'
 import { Checkbox, type CheckboxProps, Input, ScrollArea } from '@easykit/design'
 import classNames from 'classnames'
 import { useAtom } from 'jotai'
-import { type FC, type HTMLAttributes, useState } from 'react'
 import { useTranslation } from 'react-i18next'
+import { Action } from '@clover/public/components/common/action'
+import { languagesState } from '@/state/public'
 export type MultiLanguageSelectProps = {
   className?: string
   value?: string[]
@@ -18,14 +18,14 @@ export type OptionProps = {
   value: string
 }
 
-// biome-ignore lint/suspicious/noExplicitAny: <explanation>
+// biome-ignore lint/suspicious/noExplicitAny: LangItemProps
 type LangItemProps = OptionProps & Pick<CheckboxProps, any>
 
 const LangItem: FC<LangItemProps> = (props) => {
   return (
-    // biome-ignore lint/a11y/noLabelWithoutControl: <explanation>
+    // biome-ignore lint/a11y/noLabelWithoutControl: label
     <label className={classNames('flex h-8 items-center space-x-2 rounded-sm px-2', 'hover:bg-muted')}>
-      <Checkbox onCheckedChange={props.onCheckedChange} checked={props.checked} />
+      <Checkbox checked={props.checked} onCheckedChange={props.onCheckedChange} />
       <span className="flex-1 p-1 peer-disabled:cursor-not-allowed peer-disabled:opacity-70">{props.label}</span>
     </label>
   )
@@ -73,7 +73,7 @@ export const MultiLanguageSelect: FC<MultiLanguageSelectProps> = (props) => {
       <div className="flex items-start justify-start rounded-md border">
         <div className="flex h-96 flex-1 flex-col items-start justify-start border-r">
           <div className="w-full border-b p-2">
-            <Input value={keyword} onChange={(e) => setKeyword(e.target.value)} placeholder={t('请输入关键词')} />
+            <Input onChange={(e) => setKeyword(e.target.value)} placeholder={t('请输入关键词')} value={keyword} />
           </div>
           <div className="h-0 w-full flex-1 flex-shrink-0">
             <ScrollArea className="h-full w-full">
@@ -102,12 +102,12 @@ export const MultiLanguageSelect: FC<MultiLanguageSelectProps> = (props) => {
           <div className="flex w-full items-center justify-center border-b p-2">
             <div className="flex-1">{t('已选')}</div>
             <Action
+              className="h-9 w-9"
               onClick={() => {
                 setSelected([])
                 props.onChange?.([])
               }}
               theme="dark"
-              className="h-9 w-9"
             >
               <IconDelete />
             </Action>

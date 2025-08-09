@@ -1,10 +1,10 @@
+import { useCallback, useEffect } from 'react'
+import { useAtom, useAtomValue } from 'jotai'
+import { useRouter } from 'next/navigation'
 import bus from '@clover/public/events'
 import { UNAUTHORIZED } from '@clover/public/events/auth'
 import { accountInfoState, isLoginState } from '@clover/public/state/account'
 import { teamsState } from '@clover/public/state/public'
-import { useAtom, useAtomValue } from 'jotai'
-import { useRouter } from 'next/navigation'
-import { useCallback, useEffect } from 'react'
 
 export const useCurrent = () => {
   const [account] = useAtom(accountInfoState)

@@ -1,5 +1,5 @@
-import { t } from '@clover/public/utils/locale.client'
 import { object, string } from 'zod'
+import { t } from '@clover/public/utils/locale.client'
 
 const NAME_REGEX = /^[a-z0-9][0-9a-z.-]*$/
 

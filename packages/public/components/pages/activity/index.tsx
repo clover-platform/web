@@ -1,13 +1,14 @@
+import { ActivityGroupLoading } from './group/loading'
+
+import { type FC, useEffect, useMemo } from 'react'
+import { Button, Empty } from '@easykit/design'
+import { useInfiniteQuery, useQueryClient } from '@tanstack/react-query'
+import dayjs from 'dayjs'
+import { useTranslation } from 'react-i18next'
 import { ActivityGroupItem } from '@clover/public/components/pages/activity/group'
 import { useTimeAgo } from '@clover/public/hooks'
 import type { Activity, ActivityGroup } from '@clover/public/types/activity'
 import type { PageData } from '@clover/public/types/rest'
-import { Button, Empty } from '@easykit/design'
-import { useInfiniteQuery, useQueryClient } from '@tanstack/react-query'
-import dayjs from 'dayjs'
-import { type FC, useEffect, useMemo } from 'react'
-import { useTranslation } from 'react-i18next'
-import { ActivityGroupLoading } from './group/loading'
 
 export type ActivityListProps = {
   queryFn: (params: { pageParam: number; size: number }) => Promise<PageData<Activity> | undefined>
@@ -61,7 +62,7 @@ export const ActivityList: FC<ActivityListProps> = (props) => {
     <div className="flex flex-col gap-6">
       {!loading && items.length === 0 && <Empty text={t('暂无动态')} />}
       {items.map((item) => (
-        <ActivityGroupItem key={item.time} data={item} />
+        <ActivityGroupItem data={item} key={item.time} />
       ))}
       {loading && [1, 2, 3].map((item) => <ActivityGroupLoading key={item} />)}
       {!loading && hasNextPage ? (

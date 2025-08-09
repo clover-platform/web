@@ -1,15 +1,16 @@
-import { ENTRY_COMMENT_RELOAD } from '@/events/worktop'
-import { list as listRest } from '@/rest/entry.comment'
-import { currentEntryState, currentLanguageState, entriesState, filesState } from '@/state/worktop'
-import bus from '@clover/public/events'
+import { CommentListItem } from './item'
+import { CommentListItemLoading } from './item/loading'
+
+import { useEffect, useMemo } from 'react'
 import { Button, Empty, ScrollArea } from '@easykit/design'
 import { useInfiniteQuery, useQueryClient } from '@tanstack/react-query'
 import { useAtom } from 'jotai'
 import { useParams } from 'next/navigation'
-import { useEffect, useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
-import { CommentListItem } from './item'
-import { CommentListItemLoading } from './item/loading'
+import bus from '@clover/public/events'
+import { ENTRY_COMMENT_RELOAD } from '@/events/worktop'
+import { list as listRest } from '@/rest/entry.comment'
+import { currentEntryState, currentLanguageState, entriesState, filesState } from '@/state/worktop'
 
 const CommentListLoading = () => {
   return [0, 1, 2].map((index) => <CommentListItemLoading key={index} />)
@@ -68,7 +69,7 @@ export const CommentList = () => {
       <ScrollArea className="h-full w-full">
         <div className="space-y-3 pb-2">
           {list.map((item) => (
-            <CommentListItem key={item.id} item={item} />
+            <CommentListItem item={item} key={item.id} />
           ))}
           {loading ? <CommentListLoading /> : null}
           {!loading && list.length === 0 ? <Empty text={t('暂无评论')} /> : null}

@@ -1,6 +1,6 @@
+import { array, object, string, type z } from 'zod'
 import { isEmail } from '@clover/public/utils'
 import { t } from '@clover/public/utils/locale.client'
-import { array, object, string, type z } from 'zod'
 
 export const getSchema = () =>
   object({

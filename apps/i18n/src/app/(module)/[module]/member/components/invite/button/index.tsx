@@ -1,8 +1,9 @@
+import { InviteModal } from '../modal'
+
+import { useState } from 'react'
 import { IconAdd } from '@arco-iconbox/react-clover'
 import { Button } from '@easykit/design'
-import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { InviteModal } from '../modal'
 
 export const InviteButton = () => {
   const { t } = useTranslation()
@@ -13,7 +14,7 @@ export const InviteButton = () => {
       <Button onClick={() => setVisible(true)} variant="outline">
         <IconAdd /> {t('邀请成员')}
       </Button>
-      <InviteModal visible={visible} onCancel={() => setVisible(false)} />
+      <InviteModal onCancel={() => setVisible(false)} visible={visible} />
     </>
   )
 }

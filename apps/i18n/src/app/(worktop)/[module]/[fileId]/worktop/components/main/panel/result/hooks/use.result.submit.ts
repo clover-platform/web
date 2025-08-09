@@ -1,14 +1,14 @@
-import { useEntriesUpdater } from '@/components/layout/worktop/hooks'
-import { ENTRY_RESULT_RELOAD } from "@/events/worktop";
-import { useCurrentFile } from '@/hooks/use.current.file'
-import { save } from '@/rest/entry.result'
-import { currentEntryState, currentLanguageState, entriesState } from "@/state/worktop";
-import bus from '@clover/public/events'
-import { useMessage } from "@easykit/design";
+import { useMessage } from '@easykit/design'
 import { useMutation } from '@tanstack/react-query'
 import { useAtom } from 'jotai'
 import { useParams } from 'next/navigation'
-import { useTranslation } from "react-i18next";
+import { useTranslation } from 'react-i18next'
+import bus from '@clover/public/events'
+import { useEntriesUpdater } from '@/components/layout/worktop/hooks'
+import { ENTRY_RESULT_RELOAD } from '@/events/worktop'
+import { useCurrentFile } from '@/hooks/use.current.file'
+import { save } from '@/rest/entry.result'
+import { currentEntryState, currentLanguageState, entriesState } from '@/state/worktop'
 
 export const useResultSubmit = (): [(content: string) => void, boolean] => {
   const [entries] = useAtom(entriesState)

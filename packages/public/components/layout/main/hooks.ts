@@ -1,6 +1,6 @@
-import { useLocale, useVisibilityChange } from '@clover/public/hooks'
 import Cookies from 'js-cookie'
 import { useTheme } from 'next-themes'
+import { useLocale, useVisibilityChange } from '@clover/public/hooks'
 
 export const useRestoreSettings = () => {
   const { setTheme } = useTheme()

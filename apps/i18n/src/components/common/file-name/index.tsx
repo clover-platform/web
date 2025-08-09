@@ -1,7 +1,7 @@
-import type { File } from '@/types/module/source'
+import { type FC, useMemo } from 'react'
 import { IconEXCEL, IconJSON } from '@arco-iconbox/react-clover'
 import classNames from 'classnames'
-import { type FC, useMemo } from 'react'
+import type { File } from '@/types/module/source'
 
 export type FileNameProps = {
   file: File

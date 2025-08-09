@@ -1,13 +1,14 @@
-import { ENTRY_RESULT_EDITOR_RESET } from '@/events/worktop'
-import { currentEntryState } from '@/state/worktop'
-import bus from '@clover/public/events'
-import { Separator } from '@easykit/design'
-import { useAtom } from 'jotai'
-import { useEffect, useState } from 'react'
 import { EntryCheck } from '../../check/entry'
 import { Detail } from './detail'
 import { Editor } from './editor'
 import { ResultList } from './list'
+
+import { useEffect, useState } from 'react'
+import { Separator } from '@easykit/design'
+import { useAtom } from 'jotai'
+import bus from '@clover/public/events'
+import { ENTRY_RESULT_EDITOR_RESET } from '@/events/worktop'
+import { currentEntryState } from '@/state/worktop'
 
 export const ResultPanel = () => {
   const [editorKey, setEditorKey] = useState(Date.now())

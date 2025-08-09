@@ -1,15 +1,16 @@
 'use client'
+import { SettingBasePage } from './common/base-page'
+import { ModuleRemove } from './remove'
+
+import { useCallback, useEffect, useMemo, useState } from 'react'
+import { Button, Form, FormItem, Input, Loading, Separator, Textarea, useMessage } from '@easykit/design'
+import { useTranslation } from 'react-i18next'
+import { useLayoutConfig } from '@clover/public/components/layout/hooks/use.layout.config'
 import type { ModuleLayoutProps } from '@/components/layout/module'
 import { getInfoSchema } from '@/config/schema/module'
 import { useModule } from '@/hooks/use.module'
 import { detail, update } from '@/rest/module'
 import type { BaseInfo, UpdateInfo } from '@/types/module'
-import { useLayoutConfig } from '@clover/public/components/layout/hooks/use.layout.config'
-import { Button, Form, FormItem, Input, Loading, Separator, Textarea, useMessage } from '@easykit/design'
-import { useCallback, useEffect, useMemo, useState } from 'react'
-import { useTranslation } from 'react-i18next'
-import { SettingBasePage } from './common/base-page'
-import { ModuleRemove } from './remove'
 
 export const ModuleSettingPage = () => {
   const m = useModule()
@@ -58,24 +59,24 @@ export const ModuleSettingPage = () => {
   const title = t('常规设置')
 
   return (
-    <SettingBasePage title={title} active="general">
-      <Loading loading={loading} className="space-y-4">
+    <SettingBasePage active="general" title={title}>
+      <Loading className="space-y-4" loading={loading}>
         <div className="font-medium text-lg">{t('基本信息')}</div>
         <Form
-          key={formKey}
-          schema={getInfoSchema()}
-          onSubmit={onSubmit}
           defaultValues={info}
+          key={formKey}
+          onSubmit={onSubmit}
           onValuesChange={(vs) => setValues(vs)}
+          schema={getInfoSchema()}
         >
-          <FormItem name="name" label={t('名称')} description={t('唯一标识只能是小写字母和-，小写字母开头')}>
-            <Input placeholder={t('请输入模块名称')} className="max-w-96" />
+          <FormItem description={t('唯一标识只能是小写字母和-，小写字母开头')} label={t('名称')} name="name">
+            <Input className="max-w-96" placeholder={t('请输入模块名称')} />
           </FormItem>
-          <FormItem name="description" label={t('描述')}>
+          <FormItem label={t('描述')} name="description">
             <Textarea placeholder={t('请输入模块描述')} />
           </FormItem>
           <div>
-            <Button loading={submitting} disabled={!changed} variant="default">
+            <Button disabled={!changed} loading={submitting} variant="default">
               {t('保存')}
             </Button>
           </div>

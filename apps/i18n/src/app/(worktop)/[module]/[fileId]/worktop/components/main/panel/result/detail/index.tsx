@@ -1,17 +1,18 @@
-import { useEntriesUpdater } from '@/components/layout/worktop/hooks'
-import { remove as removeRest } from '@/rest/entry'
-import { currentEntryState, entriesState, filesState } from '@/state/worktop'
-import { Action } from '@clover/public/components/common/action'
-import { t } from '@clover/public/utils/locale.client'
+import { EditEntryButton } from '../../entry/edit/button'
+
+import type { FC, ReactNode } from 'react'
 import { Badge, Dropdown, type DropdownMenuItemProps, Tooltip, useAlert, useMessage } from '@easykit/design'
 import { ArrowLeftIcon, ArrowRightIcon, CopyIcon, DotsHorizontalIcon } from '@radix-ui/react-icons'
 import { useMutation } from '@tanstack/react-query'
 import copy from 'copy-to-clipboard'
 import { useAtom } from 'jotai'
 import { useParams } from 'next/navigation'
-import type { FC, ReactNode } from 'react'
 import { useTranslation } from 'react-i18next'
-import { EditEntryButton } from '../../entry/edit/button'
+import { Action } from '@clover/public/components/common/action'
+import { t } from '@clover/public/utils/locale.client'
+import { useEntriesUpdater } from '@/components/layout/worktop/hooks'
+import { remove as removeRest } from '@/rest/entry'
+import { currentEntryState, entriesState, filesState } from '@/state/worktop'
 
 type IconMenuItemProps = {
   icon?: ReactNode
@@ -115,12 +116,12 @@ export const Detail = () => {
             </Action>
           </Tooltip>
           <EditEntryButton
+            entry={entry}
             onSuccess={async () => {
               await update(entry.id)
             }}
-            entry={entry}
           />
-          <Dropdown items={menus} onItemClick={onItemClick} asChild={true} align="end">
+          <Dropdown align="end" asChild={true} items={menus} onItemClick={onItemClick}>
             <Action>
               <DotsHorizontalIcon />
             </Action>
@@ -129,7 +130,7 @@ export const Detail = () => {
       </div>
       <div className="mb-4 px-4">{entry?.value}</div>
       <div className="mb-4 px-4">
-        <Badge variant="outline" className="mr-2">
+        <Badge className="mr-2" variant="outline">
           {file?.name}
         </Badge>
         <span className="text-muted-foreground">{entry?.identifier}</span>

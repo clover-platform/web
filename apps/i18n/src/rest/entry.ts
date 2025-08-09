@@ -1,8 +1,8 @@
+import type { PageData } from '@clover/public/types/rest'
+import { del, get, post, put, resultWrapper } from '@clover/public/utils/rest'
 import type { EntryEditFormData } from '@/config/pages/entry/edit/form'
 import type { CreateEntryFormData } from '@/config/pages/entry/form'
 import type { CountEntryData, CountEntryQuery, Entry } from '@/types/module/entry'
-import type { PageData } from '@clover/public/types/rest'
-import { del, get, post, put, resultWrapper } from '@clover/public/utils/rest'
 
 export type EntryQueryParams = {
   module: string
@@ -14,7 +14,7 @@ export type EntryQueryParams = {
 }
 
 export const list = (params: EntryQueryParams) =>
-  // biome-ignore lint/suspicious/noExplicitAny: <explanation>
+  // biome-ignore lint/suspicious/noExplicitAny: EntryQueryParams
   get<any, EntryQueryParams>(`@i18n/${params.module}/branch/${params.fileId || '-'}/entry/list`, params)
 
 export const all = (params: EntryQueryParams) =>
@@ -26,7 +26,7 @@ export const all = (params: EntryQueryParams) =>
   )
 
 export const sync = (params: EntryQueryParams) =>
-  // biome-ignore lint/suspicious/noExplicitAny: <explanation>
+  // biome-ignore lint/suspicious/noExplicitAny: EntryQueryParams
   get<any, EntryQueryParams>(`@i18n/${params.module}/branch/${params.fileId || '-'}/entry/sync`, params)
 
 export type CreateEntryData = {

@@ -1,5 +1,5 @@
-import { getToken } from '@clover/public/utils/token'
 import { useCallback, useRef, useState } from 'react'
+import { getToken } from '@clover/public/utils/token'
 
 export type SseProps = {
   url: string
@@ -10,7 +10,7 @@ export type SendEvent = {
   onError?: (error: Error) => void
   onClose?: () => void
 }
-// biome-ignore lint/suspicious/noExplicitAny: <explanation>
+// biome-ignore lint/suspicious/noExplicitAny: data
 export type SendCallback = (data: any, events?: SendEvent) => void
 
 export type SseResult = {
@@ -32,7 +32,6 @@ export const useSse = (props: SseProps): SseResult => {
   const controllerRef = useRef<AbortController>(null)
 
   const send = useCallback<SendCallback>(
-    // biome-ignore lint/complexity/noExcessiveCognitiveComplexity: <explanation>
     async (params: ChatParams, events) => {
       const { onClose, onMessage, onError } = events || {}
       const token = await getToken()

@@ -1,20 +1,20 @@
-import type { RestResult } from '@clover/public/types/rest'
-import {useMessage} from "@easykit/design";
 import { type RefObject, useCallback } from 'react'
+import { useMessage } from '@easykit/design'
 import type { UseFormReturn } from 'react-hook-form'
+import type { RestResult } from '@clover/public/types/rest'
 
 export type ErrorItem = {
-  field: string;
-  message: string;
-  code: string;
+  field: string
+  message: string
+  code: string
 }
 
 export type UseFormResultProps<T> = {
-  ref?: RefObject<UseFormReturn | undefined | null>;
-  onSuccess?: (result?: T) => void;
+  ref?: RefObject<UseFormReturn | undefined | null>
+  onSuccess?: (result?: T) => void
 }
 
-export type FormResult<T> = (d: RestResult<T>) => RestResult<T>;
+export type FormResult<T> = (d: RestResult<T>) => RestResult<T>
 
 export const useFormResult = <T>(props: UseFormResultProps<T>) => {
   const { ref, onSuccess } = props

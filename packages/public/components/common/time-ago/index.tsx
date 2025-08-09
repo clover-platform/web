@@ -1,5 +1,5 @@
-import { useTimeAgo } from '@clover/public/hooks'
 import type { FC } from 'react'
+import { useTimeAgo } from '@clover/public/hooks'
 
 export type TimeAgoProps = {
   time: number | string | Date
@@ -8,4 +8,4 @@ export type TimeAgoProps = {
 export const TimeAgo: FC<TimeAgoProps> = (props) => {
   const timeAgo = useTimeAgo()
   return timeAgo.format(new Date(props.time))
-} 
+}

@@ -1,9 +1,9 @@
-import { useModule } from '@/hooks/use.module'
-import { deleteModule } from '@/rest/module'
 import { Alert, Badge, Button, useAlert, useMessage } from '@easykit/design'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { useRouter } from 'next/navigation'
 import { useTranslation } from 'react-i18next'
+import { useModule } from '@/hooks/use.module'
+import { deleteModule } from '@/rest/module'
 
 export const ModuleRemove = () => {
   const alert = useAlert()

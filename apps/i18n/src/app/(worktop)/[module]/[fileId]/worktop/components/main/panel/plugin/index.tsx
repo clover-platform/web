@@ -1,12 +1,13 @@
-import { IconChatGPT, IconComment, IconGoogleTranslate } from '@arco-iconbox/react-clover'
-import { Action } from '@clover/public/components/common/action'
-import { t } from '@clover/public/utils/locale.client'
-import { Tooltip } from '@easykit/design'
-import { type ReactNode, useMemo, useState } from 'react'
 import { EntryCheck } from '../../check/entry'
 import { AIPlugin } from './ai'
 import { ComingSoon } from './coming-soon'
 import { Comment } from './comment'
+
+import { type ReactNode, useMemo, useState } from 'react'
+import { IconChatGPT, IconComment, IconGoogleTranslate } from '@arco-iconbox/react-clover'
+import { Tooltip } from '@easykit/design'
+import { Action } from '@clover/public/components/common/action'
+import { t } from '@clover/public/utils/locale.client'
 
 export type Plugin = {
   id: string
@@ -53,11 +54,11 @@ export const PluginPanel = () => {
         <div className="border-l bg-muted p-2">
           {getPlugins().map((plugin, index) => {
             return (
-              <Tooltip content={plugin.name} side="left" key={plugin.name}>
+              <Tooltip content={plugin.name} key={plugin.name} side="left">
                 <Action
-                  onClick={() => setActivePlugin(plugin.id)}
                   active={activePlugin === plugin.id}
                   className={index < getPlugins().length - 1 ? 'mb-2' : ''}
+                  onClick={() => setActivePlugin(plugin.id)}
                 >
                   {plugin.icon}
                 </Action>

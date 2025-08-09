@@ -8,5 +8,5 @@ export default {
   'zh-CN': zhCN,
   'zh-TW': zhTW,
   'en-US': enUS,
-  // biome-ignore lint/suspicious/noExplicitAny: <explanation>
+  // biome-ignore lint/suspicious/noExplicitAny: locale
 } as any

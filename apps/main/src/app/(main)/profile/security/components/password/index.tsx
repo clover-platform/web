@@ -1,14 +1,14 @@
-import { type PasswordFormData, getSchema } from '@/config/schema/security/password'
-import { change } from '@/rest/profile/security/password'
-import bus from '@clover/public/events'
-import { UNAUTHORIZED } from '@clover/public/events/auth'
-import { useEncrypt } from '@clover/public/hooks'
+import { useCallback, useRef, useState } from 'react'
 import { Button, Card, Form, FormItem, Input, Separator, Space, useMessage } from '@easykit/design'
 import { useMutation } from '@tanstack/react-query'
 import { cloneDeep } from 'es-toolkit'
-import { useCallback, useRef, useState } from 'react'
 import type { UseFormReturn } from 'react-hook-form'
 import { useTranslation } from 'react-i18next'
+import bus from '@clover/public/events'
+import { UNAUTHORIZED } from '@clover/public/events/auth'
+import { useEncrypt } from '@clover/public/hooks'
+import { getSchema, type PasswordFormData } from '@/config/schema/security/password'
+import { change } from '@/rest/profile/security/password'
 
 export const Password = () => {
   const { t } = useTranslation()
@@ -49,31 +49,31 @@ export const Password = () => {
         <Separator />
         {state === 'normal' ? (
           <p>
-            <button type="button" onClick={() => setState('change')} className="cursor-pointer">
+            <button className="cursor-pointer" onClick={() => setState('change')} type="button">
               {t('修改密码')}
             </button>
           </p>
         ) : null}
         {state === 'change' ? (
           <Form<PasswordFormData>
+            onSubmit={(data) => onSubmit?.(data as PasswordFormData)}
             ref={ref}
             schema={getSchema()}
-            onSubmit={(data) => onSubmit?.(data as PasswordFormData)}
           >
-            <FormItem name="originPassword" label={t('原密码')}>
-              <Input type="password" placeholder={t('请输入')} className="!w-md" />
+            <FormItem label={t('原密码')} name="originPassword">
+              <Input className="!w-md" placeholder={t('请输入')} type="password" />
             </FormItem>
-            <FormItem name="password" label={t('新密码')}>
-              <Input type="password" placeholder={t('请输入')} className="!w-md" />
+            <FormItem label={t('新密码')} name="password">
+              <Input className="!w-md" placeholder={t('请输入')} type="password" />
             </FormItem>
-            <FormItem name="passwordConfirm" label={t('确认新密码')}>
-              <Input type="password" placeholder={t('请输入')} className="!w-md" />
+            <FormItem label={t('确认新密码')} name="passwordConfirm">
+              <Input className="!w-md" placeholder={t('请输入')} type="password" />
             </FormItem>
             <Space>
               <Button loading={isPending} type="submit">
                 {t('提交')}
               </Button>
-              <Button variant="outline" disabled={isPending} onClick={cancel}>
+              <Button disabled={isPending} onClick={cancel} variant="outline">
                 {t('取消')}
               </Button>
             </Space>

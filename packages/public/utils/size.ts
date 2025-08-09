@@ -1,4 +1,4 @@
-// biome-ignore lint/suspicious/noExplicitAny: <explanation>
+// biome-ignore lint/suspicious/noExplicitAny: bytes
 export const byteConvert = (bytes: any) => {
   if (Number.isNaN(bytes)) {
     return ''

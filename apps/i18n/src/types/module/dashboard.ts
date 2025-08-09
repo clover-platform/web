@@ -1,5 +1,5 @@
-import type { ModuleCount, ModuleDetail } from '.'
 import type { LanguageWithCount } from '../public'
+import type { ModuleCount, ModuleDetail } from '.'
 import type { Member } from './member'
 
 export type ModuleDashboard = {

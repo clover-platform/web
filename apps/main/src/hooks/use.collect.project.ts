@@ -1,24 +1,21 @@
-import { myCollect } from '@/rest/project'
-import {
-  loadedProjectCollectState,
-  projectCollectState,
-} from "@/state/collect";
-import { useAtom } from "jotai";
 import { useCallback, useEffect, useState } from 'react'
+import { useAtom } from 'jotai'
+import { myCollect } from '@/rest/project'
+import { loadedProjectCollectState, projectCollectState } from '@/state/collect'
 
 export const useCollectProject = () => {
-  const [loaded, setLoaded] = useAtom(loadedProjectCollectState);
-  const [projectCollect, setProjectCollect] = useAtom(projectCollectState);
-  const [loading, setLoading] = useState(false);
+  const [loaded, setLoaded] = useAtom(loadedProjectCollectState)
+  const [projectCollect, setProjectCollect] = useAtom(projectCollectState)
+  const [loading, setLoading] = useState(false)
 
   const load = useCallback(async () => {
-    setLoading(true);
-    setLoaded(true);
-    const { success, data } = await myCollect();
-    if(success) {
-      setProjectCollect(data!);
+    setLoading(true)
+    setLoaded(true)
+    const { success, data } = await myCollect()
+    if (success) {
+      setProjectCollect(data!)
     }
-    setLoading(false);
+    setLoading(false)
   }, [setLoaded, setProjectCollect])
 
   useEffect(() => {
@@ -27,5 +24,5 @@ export const useCollectProject = () => {
     }
   }, [loaded, load])
 
-  return { loaded, loading, load, collect: projectCollect };
+  return { loaded, loading, load, collect: projectCollect }
 }

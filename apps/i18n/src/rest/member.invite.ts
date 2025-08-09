@@ -1,7 +1,7 @@
+import { del, get, post, resultWrapper } from '@clover/public/utils/rest'
 import type { MemberInviteFormData } from '@/config/schema/module/member'
 import type { InviteDetail } from '@/types/module'
 import type { MemberInvite } from '@/types/module/member'
-import { del, get, post, resultWrapper } from '@clover/public/utils/rest'
 
 export type InviteGenerateData = {
   module: string
@@ -36,7 +36,7 @@ export type AcceptInviteData = {
   token: string
 }
 
-// biome-ignore lint/suspicious/noExplicitAny: <explanation>
+// biome-ignore lint/suspicious/noExplicitAny: AcceptInviteData
 export const accept = (data: AcceptInviteData) => post<any, AcceptInviteData>('@i18n/member/invite/accept', data)
 
 export const detail = (token: string) => get<InviteDetail | string>(`@i18n/member/invite/detail/${token}`)

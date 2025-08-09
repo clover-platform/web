@@ -1,5 +1,6 @@
-import { type FC, useMemo } from 'react'
 import { ImportConfigButton } from '../../button/import-config'
+
+import { type FC, useMemo } from 'react'
 
 export type WordCountProps = {
   wordCount: number

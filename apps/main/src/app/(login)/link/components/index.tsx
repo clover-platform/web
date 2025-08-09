@@ -1,20 +1,21 @@
 'use client'
 
-import { type LinkFormData, getSchema } from '@/config/schema/login/link'
-import { type LinkCodeResult, linkCode, loginAndLink } from '@/rest/login/link'
-import { MFADialog } from '@clover/public/components/pages/login/mfa-dialog'
-import { useEncrypt } from '@clover/public/hooks'
-import { RestError } from '@clover/public/utils/rest'
-import { type Token, setToken } from '@clover/public/utils/token'
+import { getSupportWay } from '../../login/components/config'
+
+import { type PropsWithChildren, useCallback, useEffect, useState } from 'react'
 import { Button, Form, FormItem, Image, Input, Result, Space, Spin, useMessage } from '@easykit/design'
 import { Link1Icon } from '@radix-ui/react-icons'
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import { cloneDeep, isUndefined } from 'es-toolkit'
 import Link from 'next/link'
 import { useSearchParams } from 'next/navigation'
-import { type PropsWithChildren, useCallback, useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { getSupportWay } from '../../login/components/config'
+import { MFADialog } from '@clover/public/components/pages/login/mfa-dialog'
+import { useEncrypt } from '@clover/public/hooks'
+import { RestError } from '@clover/public/utils/rest'
+import { setToken, type Token } from '@clover/public/utils/token'
+import { getSchema, type LinkFormData } from '@/config/schema/login/link'
+import { type LinkCodeResult, linkCode, loginAndLink } from '@/rest/login/link'
 
 export interface LinkPageProps extends PropsWithChildren {
   type: string
@@ -120,7 +121,7 @@ const LinkPage = (props: LinkPageProps) => {
   ) : (
     <>
       {isError ? (
-        <Result status="error" subTitle={t('第三方平台接口错误或链接已超时')} extra={buttons} />
+        <Result extra={buttons} status="error" subTitle={t('第三方平台接口错误或链接已超时')} />
       ) : (
         <div className="w-[360px]">
           <div className="flex items-center justify-center space-x-2">
@@ -130,11 +131,11 @@ const LinkPage = (props: LinkPageProps) => {
               <>
                 <div className="overflow-hidden rounded-[50%]">
                   <Image
-                    width={28}
+                    alt={t('头像')}
                     height={28}
                     // biome-ignore lint/suspicious/noExplicitAny: <explanation>
                     src={(user as any).avatar}
-                    alt={t('头像')}
+                    width={28}
                   />
                 </div>
                 <div className="ml-[5px]">
@@ -145,12 +146,12 @@ const LinkPage = (props: LinkPageProps) => {
             ) : null}
           </div>
           <div className="mt-[30px]">
-            <Form<LinkFormData> schema={getSchema()} onSubmit={(data) => onSubmit(data)}>
-              <FormItem name="account" label={t('邮箱或用户名')}>
+            <Form<LinkFormData> onSubmit={(data) => onSubmit(data)} schema={getSchema()}>
+              <FormItem label={t('邮箱或用户名')} name="account">
                 <Input placeholder={t('请输入邮箱或用户名')} />
               </FormItem>
-              <FormItem name="password" label={t('密码')}>
-                <Input type="password" placeholder={t('请输入密码')} />
+              <FormItem label={t('密码')} name="password">
+                <Input placeholder={t('请输入密码')} type="password" />
               </FormItem>
               <Button loading={submitting && showLoading} long type="submit">
                 {t('登录并绑定')}
@@ -160,11 +161,11 @@ const LinkPage = (props: LinkPageProps) => {
         </div>
       )}
       <MFADialog<LinkFormData>
-        visible={visible}
-        onCancel={onCancel}
         formData={formData}
-        onSubmit={onSubmit}
         isPending={submitting}
+        onCancel={onCancel}
+        onSubmit={onSubmit}
+        visible={visible}
       />
     </>
   )

@@ -1,15 +1,16 @@
 'use client'
 
-import { detail as detailRest } from '@/rest/member.invite'
-import type { InviteDetail } from '@/types/module'
-import { isLoginState } from '@clover/public/state/account'
-import { useAtom } from 'jotai'
-import { useSearchParams } from 'next/navigation'
-import { useCallback, useEffect, useState } from 'react'
 import { InvitePageExpired } from './expired'
 import { InvitePageJoined } from './joined'
 import { InvitePageLoading } from './loading'
 import { InvitePageBody } from './page'
+
+import { useCallback, useEffect, useState } from 'react'
+import { useAtom } from 'jotai'
+import { useSearchParams } from 'next/navigation'
+import { isLoginState } from '@clover/public/state/account'
+import { detail as detailRest } from '@/rest/member.invite'
+import type { InviteDetail } from '@/types/module'
 
 export const InvitePage = () => {
   const search = useSearchParams()
@@ -48,7 +49,7 @@ export const InvitePage = () => {
     <>
       {expired && <InvitePageExpired />}
       {joined && <InvitePageJoined module={module!} />}
-      {!(expired || joined) && <InvitePageBody isLogin={isLogin} loading={loading} detail={detail} />}
+      {!(expired || joined) && <InvitePageBody detail={detail} isLogin={isLogin} loading={loading} />}
     </>
   )
 }

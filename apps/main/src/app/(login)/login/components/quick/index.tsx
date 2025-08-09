@@ -6,9 +6,9 @@ const QuickLogin = () => {
       {getSupportWay().map((item) => {
         return (
           <a
+            className="mx-[15px] my-[10px] flex flex-col items-center justify-center"
             href={`${process.env.NEXT_PUBLIC_API_URL}/api/account/auth/link/${item.id}`}
             key={item.id}
-            className="mx-[15px] my-[10px] flex flex-col items-center justify-center"
           >
             <div className="flex h-[40px] w-[40px] items-center justify-center rounded-full bg-primary">
               {item.icon}

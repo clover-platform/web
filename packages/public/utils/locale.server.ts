@@ -1,8 +1,8 @@
-import langList from '@clover/public/config/lang.list'
-import { FALLBACK } from '@clover/public/config/locale'
 import { getCookie } from 'cookies-next'
 import i18next from 'i18next'
 import { cookies } from 'next/headers'
+import langList from '@clover/public/config/lang.list'
+import { FALLBACK } from '@clover/public/config/locale'
 
 export const getLocale = async (): Promise<string> => {
   const locale = await getCookie('i18next', { cookies })

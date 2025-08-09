@@ -1,14 +1,14 @@
-import { t } from "@clover/public/utils/locale.client";
-import { Badge } from '@easykit/design'
 import type { FC } from 'react'
+import { Badge } from '@easykit/design'
+import { t } from '@clover/public/utils/locale.client'
 
 export type MemberRoleProps = {
-  value: number;
+  value: number
 }
 
 type RoleItem = {
-  label: string;
-  variant: "outline" | "default" | "secondary" | "destructive" | null | undefined;
+  label: string
+  variant: 'outline' | 'default' | 'secondary' | 'destructive' | null | undefined
 }
 
 const ROLE_MAP: Record<number, RoleItem> = {
@@ -35,7 +35,7 @@ const ROLE_MAP: Record<number, RoleItem> = {
 }
 
 export const MemberRole: FC<MemberRoleProps> = (props) => {
-  const role = ROLE_MAP[props.value];
-  if (!role) return "--";
+  const role = ROLE_MAP[props.value]
+  if (!role) return '--'
   return <Badge variant={role.variant}>{role.label}</Badge>
 }

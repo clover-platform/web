@@ -1,5 +1,5 @@
-import { Input } from '@easykit/design'
 import type { ChangeEvent, ComponentProps, FC } from 'react'
+import { Input } from '@easykit/design'
 
 export const CodeInput: FC<ComponentProps<typeof Input>> = (props) => {
   const { onChange, ...rest } = props
@@ -11,5 +11,5 @@ export const CodeInput: FC<ComponentProps<typeof Input>> = (props) => {
     onChange?.(e)
   }
 
-  return <Input {...rest} onChange={handleChange} maxLength={6} />
+  return <Input {...rest} maxLength={6} onChange={handleChange} />
 }

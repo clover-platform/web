@@ -1,11 +1,11 @@
+import { type FC, useState } from 'react'
+import { Button, useMessage } from '@easykit/design'
+import { useRouter, useSearchParams } from 'next/navigation'
+import { useTranslation } from 'react-i18next'
 import { MemberRole } from '@/app/(module)/[module]/member/components/role'
 import { LanguageIcon } from '@/components/common/language-icon'
-import { accept } from "@/rest/member.invite";
+import { accept } from '@/rest/member.invite'
 import type { InviteDetail } from '@/types/module'
-import { Button, useMessage } from '@easykit/design'
-import { useRouter, useSearchParams } from "next/navigation";
-import { type FC, useState } from 'react'
-import { useTranslation } from "react-i18next";
 export type InvitePageBodyProps = {
   loading: boolean
   isLogin: boolean
@@ -13,13 +13,13 @@ export type InvitePageBodyProps = {
 }
 
 export const InvitePageBody: FC<InvitePageBodyProps> = (props) => {
-  const { isLogin, detail } = props;
-  const search = useSearchParams();
-  const token = search.get("t");
-  const [submitting, setSubmitting] = useState(false);
-  const msg = useMessage();
-  const router = useRouter();
-  const { t } = useTranslation();
+  const { isLogin, detail } = props
+  const search = useSearchParams()
+  const token = search.get('t')
+  const [submitting, setSubmitting] = useState(false)
+  const msg = useMessage()
+  const router = useRouter()
+  const { t } = useTranslation()
 
   const login = () => {
     location.href = `/login/?from=${encodeURIComponent(location.href)}`
@@ -30,13 +30,13 @@ export const InvitePageBody: FC<InvitePageBodyProps> = (props) => {
   }
 
   const acceptInvite = async () => {
-    setSubmitting(true);
-    const { success, message, data } = await accept({ token: token! });
-    setSubmitting(false);
+    setSubmitting(true)
+    const { success, message, data } = await accept({ token: token! })
+    setSubmitting(false)
     if (success) {
       router.push(`/${data}/dashboard`)
     } else {
-      msg.error(message);
+      msg.error(message)
     }
   }
 
@@ -61,7 +61,7 @@ export const InvitePageBody: FC<InvitePageBodyProps> = (props) => {
             <div className="space-y-1 rounded-md bg-muted p-2">
               {detail?.targets.map((target, index) => {
                 const items = [
-                  <div key={`${target.id}-item`} className="flex items-center justify-center">
+                  <div className="flex items-center justify-center" key={`${target.id}-item`}>
                     <div className="mr-2">
                       <LanguageIcon className="h-6 w-8 shadow" code={target.code} />
                     </div>
@@ -69,7 +69,7 @@ export const InvitePageBody: FC<InvitePageBodyProps> = (props) => {
                   </div>,
                 ]
                 if (index < detail.targets.length - 1) {
-                  items.push(<div key={`${target.id}-border`} className="-mx-2 h-0.5 bg-white dark:bg-black" />)
+                  items.push(<div className="-mx-2 h-0.5 bg-white dark:bg-black" key={`${target.id}-border`} />)
                 }
                 return items
               })}
@@ -79,15 +79,15 @@ export const InvitePageBody: FC<InvitePageBodyProps> = (props) => {
       </div>
       <div className="!mt-8 flex space-x-2">
         {isLogin ? (
-          <Button loading={submitting} onClick={acceptInvite} className="w-full">
+          <Button className="w-full" loading={submitting} onClick={acceptInvite}>
             {t('加入')}
           </Button>
         ) : (
           <>
-            <Button onClick={login} className="flex-1">
+            <Button className="flex-1" onClick={login}>
               {t('登录')}
             </Button>
-            <Button onClick={register} variant="outline" className="flex-1">
+            <Button className="flex-1" onClick={register} variant="outline">
               {t('注册')}
             </Button>
           </>

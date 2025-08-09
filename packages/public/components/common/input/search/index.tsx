@@ -1,7 +1,7 @@
-import {IconSearch} from "@arco-iconbox/react-clover";
-import { Input, cn } from '@easykit/design'
 import type { ComponentProps, FC } from 'react'
-import { useTranslation } from "react-i18next";
+import { IconSearch } from '@arco-iconbox/react-clover'
+import { cn, Input } from '@easykit/design'
+import { useTranslation } from 'react-i18next'
 
 export const SearchInput: FC<ComponentProps<typeof Input>> = (props) => {
   const { t } = useTranslation()
@@ -11,7 +11,7 @@ export const SearchInput: FC<ComponentProps<typeof Input>> = (props) => {
       <div className="absolute top-0 bottom-0 left-0 flex items-center justify-center px-3">
         <IconSearch />
       </div>
-      <Input {...rest} placeholder={placeholder} className="pl-8" />
+      <Input {...rest} className="pl-8" placeholder={placeholder} />
     </div>
   )
 }

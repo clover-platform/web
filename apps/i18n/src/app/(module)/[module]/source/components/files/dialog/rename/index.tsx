@@ -1,9 +1,9 @@
-import { useModule } from '@/hooks/use.module'
-import { rename } from '@/rest/source'
+import { type FC, useEffect, useMemo, useState } from 'react'
 import { Button, Dialog, type DialogProps, Input, useMessage } from '@easykit/design'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
-import { type FC, useEffect, useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
+import { useModule } from '@/hooks/use.module'
+import { rename } from '@/rest/source'
 
 export type RenameDialogProps = DialogProps & {
   fileId?: number
@@ -47,7 +47,7 @@ export const RenameDialog: FC<RenameDialogProps> = (props) => {
         >
           {t('确定')}
         </Button>
-        <Button variant="outline" onClick={onCancel}>
+        <Button onClick={onCancel} variant="outline">
           {t('取消')}
         </Button>
       </div>
@@ -55,9 +55,9 @@ export const RenameDialog: FC<RenameDialogProps> = (props) => {
   }, [t, onCancel, submitting, m, fileId, name, renameMutate, subfix])
 
   return (
-    <Dialog title="重命名" {...rest} onCancel={onCancel} footer={footer}>
+    <Dialog title="重命名" {...rest} footer={footer} onCancel={onCancel}>
       <div className="flex items-center gap-2">
-        <Input value={name} onChange={(e) => setName(e.target.value)} />
+        <Input onChange={(e) => setName(e.target.value)} value={name} />
         <div className="text-secondary-foreground">{subfix}</div>
       </div>
     </Dialog>

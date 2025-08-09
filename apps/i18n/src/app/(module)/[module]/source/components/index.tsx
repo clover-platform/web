@@ -1,16 +1,17 @@
 'use client'
 
-import { ModuleBreadcrumb } from '@/components/common/breadcrumb/module'
-import type { ModuleLayoutProps } from '@/components/layout/module'
-import { MainPage } from '@clover/public/components/common/page'
-import { TitleBar } from '@clover/public/components/common/title-bar'
-import { useLayoutConfig } from '@clover/public/components/layout/hooks/use.layout.config'
+import { getTabs } from './config'
+
+import { useMemo } from 'react'
 import { BreadcrumbItem, BreadcrumbPage, Tabs, TabsContent, TabsList, TabsTrigger } from '@easykit/design'
 import { usePathname, useRouter } from 'next/navigation'
 import { useQueryState } from 'nuqs'
-import { useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
-import { getTabs } from './config'
+import { MainPage } from '@clover/public/components/common/page'
+import { TitleBar } from '@clover/public/components/common/title-bar'
+import { useLayoutConfig } from '@clover/public/components/layout/hooks/use.layout.config'
+import { ModuleBreadcrumb } from '@/components/common/breadcrumb/module'
+import type { ModuleLayoutProps } from '@/components/layout/module'
 
 export const SourcePage = () => {
   useLayoutConfig<ModuleLayoutProps>({
@@ -36,12 +37,14 @@ export const SourcePage = () => {
         </BreadcrumbItem>
       </ModuleBreadcrumb>
       <Tabs
-        value={active}
         onValueChange={(v) => {
           router.replace(`${pathname}?type=${v}`)
         }}
+        value={active}
       >
         <TitleBar
+          actions={actions}
+          border={false}
           title={
             <TabsList className="bg-black/8 dark:bg-white/8">
               {getTabs().map((tab) => (
@@ -51,8 +54,6 @@ export const SourcePage = () => {
               ))}
             </TabsList>
           }
-          actions={actions}
-          border={false}
         />
         {getTabs().map((tab) => (
           <TabsContent key={tab.id} value={tab.id}>

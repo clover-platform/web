@@ -1,8 +1,9 @@
-import { type QueryObserverResult, type RefetchOptions, keepPreviousData, useQuery } from '@tanstack/react-query'
+import type { PageData } from '../types/rest'
+
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
+import { keepPreviousData, type QueryObserverResult, type RefetchOptions, useQuery } from '@tanstack/react-query'
 import { uniq } from 'es-toolkit'
 import { usePathname, useRouter, useSearchParams } from 'next/navigation'
-import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
-import type { PageData } from '../types/rest'
 
 export type ListQueryOptions<T, P> = {
   key: string

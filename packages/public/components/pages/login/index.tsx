@@ -1,9 +1,9 @@
-'use client';
+'use client'
 
-import {LoginForm} from "@clover/public/components/pages/login/form";
-import { useTranslation } from "react-i18next";
+import { useTranslation } from 'react-i18next'
+import { LoginForm } from '@clover/public/components/pages/login/form'
 export const PublicLoginPage = () => {
-  const { t } = useTranslation();
+  const { t } = useTranslation()
   return (
     <div className="w-[360px]">
       <div className="flex items-center justify-center">

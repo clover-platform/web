@@ -1,9 +1,9 @@
-import { currentFileState, filesState } from '@/state/worktop'
-import { IconBranch } from '@arco-iconbox/react-clover'
-import { Action } from '@clover/public/components/common/action'
-import { useAtom } from 'jotai'
 import type { FC } from 'react'
+import { IconBranch } from '@arco-iconbox/react-clover'
+import { useAtom } from 'jotai'
 import { useTranslation } from 'react-i18next'
+import { Action } from '@clover/public/components/common/action'
+import { currentFileState, filesState } from '@/state/worktop'
 
 export type FileActionProps = {
   onClick: () => void

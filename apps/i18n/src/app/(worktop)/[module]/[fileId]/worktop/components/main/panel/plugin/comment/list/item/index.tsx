@@ -1,18 +1,18 @@
-import { ENTRY_COMMENT_RELOAD } from '@/events/worktop'
-import { useCurrentFile } from '@/hooks/use.current.file'
-import { deleteComment } from '@/rest/entry.comment'
-import type { EntryComment } from '@/types/module/entry'
+import type { FC } from 'react'
 import { IconDelete } from '@arco-iconbox/react-clover'
-import { Action } from '@clover/public/components/common/action'
-import { TimeAgo } from '@clover/public/components/common/time-ago'
-import bus from '@clover/public/events'
-import { useProfile } from '@clover/public/hooks/use.profile'
 import { Avatar, useAlert, useMessage } from '@easykit/design'
 import { useMutation } from '@tanstack/react-query'
 import classNames from 'classnames'
 import { useParams } from 'next/navigation'
-import type { FC } from 'react'
 import { useTranslation } from 'react-i18next'
+import { Action } from '@clover/public/components/common/action'
+import { TimeAgo } from '@clover/public/components/common/time-ago'
+import bus from '@clover/public/events'
+import { useProfile } from '@clover/public/hooks/use.profile'
+import { ENTRY_COMMENT_RELOAD } from '@/events/worktop'
+import { useCurrentFile } from '@/hooks/use.current.file'
+import { deleteComment } from '@/rest/entry.comment'
+import type { EntryComment } from '@/types/module/entry'
 
 export type CommentListItemProps = {
   item: EntryComment
@@ -53,7 +53,7 @@ export const CommentListItem: FC<CommentListItemProps> = (props) => {
 
   return (
     <div className="group relative mx-3 flex items-start justify-center">
-      <Avatar className="h-10 w-10" src={item.user?.avatar || ''} fallback={item.user?.username || ''} />
+      <Avatar className="h-10 w-10" fallback={item.user?.username || ''} src={item.user?.avatar || ''} />
       <div className="ml-1 flex-1">
         <div className="rounded-md bg-muted p-2">
           <div className="text-muted-foreground text-xs">{item.user?.username || ''}</div>
@@ -70,7 +70,7 @@ export const CommentListItem: FC<CommentListItemProps> = (props) => {
             'hidden group-hover:flex'
           )}
         >
-          <Action onClick={del} className="!p-1">
+          <Action className="!p-1" onClick={del}>
             <IconDelete />
           </Action>
         </div>

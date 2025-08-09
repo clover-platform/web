@@ -1,9 +1,9 @@
-import type { Module } from '@/types/module'
-import type { Account } from '@clover/public/types/account'
-import { i18n, t } from '@clover/public/utils/locale.client'
 import type { DataTableColumn } from '@easykit/design'
 import { type DropdownMenuItemProps, type FilterItemProps, Input } from '@easykit/design'
 import TimeAgo from 'javascript-time-ago'
+import type { Account } from '@clover/public/types/account'
+import { i18n, t } from '@clover/public/utils/locale.client'
+import type { Module } from '@/types/module'
 
 export const getColumns = (): DataTableColumn<Module>[] => [
   {

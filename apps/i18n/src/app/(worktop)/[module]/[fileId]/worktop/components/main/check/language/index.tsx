@@ -1,13 +1,13 @@
-import { currentLanguageState } from "@/state/worktop";
-import { useAtom } from 'jotai'
 import type { FC, PropsWithChildren } from 'react'
-import { useTranslation } from "react-i18next";
+import { useAtom } from 'jotai'
+import { useTranslation } from 'react-i18next'
+import { currentLanguageState } from '@/state/worktop'
 
-export type LanguageCheckProps = PropsWithChildren;
+export type LanguageCheckProps = PropsWithChildren
 
 export const LanguageCheck: FC<LanguageCheckProps> = (props) => {
   const { t } = useTranslation()
-  const [current] = useAtom(currentLanguageState);
+  const [current] = useAtom(currentLanguageState)
   return current ? (
     props.children
   ) : (

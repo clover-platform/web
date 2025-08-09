@@ -1,5 +1,6 @@
-import type { User } from '@clover/public/types/account'
 import type { File } from './source'
+
+import type { User } from '@clover/public/types/account'
 
 export type Entry = {
   id: number
@@ -34,8 +35,8 @@ export type EntryResult = {
 }
 
 export type EntryResultPage = {
-  total: number;
-  data: EntryResult[];
+  total: number
+  data: EntryResult[]
 }
 
 export type CountEntryQuery = {
@@ -45,16 +46,16 @@ export type CountEntryQuery = {
 }
 
 export type CountEntryData = {
-  total: number;
-  translated: number;
-  verified: number;
+  total: number
+  translated: number
+  verified: number
 }
 
 export type EntryComment = {
-  id: number;
-  entryId: number;
-  content: string;
-  createTime: Date;
-  createUserId: number;
-  user?: User;
+  id: number
+  entryId: number
+  content: string
+  createTime: Date
+  createUserId: number
+  user?: User
 }

@@ -1,21 +1,22 @@
-import Link from "@clover/public/components/common/link";
-import {LangSelect} from "@clover/public/components/common/select/lang";
+import { LayoutLogo } from '../main/logo'
+
+import type { FC, PropsWithChildren } from 'react'
+import { Card } from '@easykit/design'
+import classNames from 'classnames'
+import { useTranslation } from 'react-i18next'
+import Link from '@clover/public/components/common/link'
+import { LangSelect } from '@clover/public/components/common/select/lang'
 import { ThemeSwitcher } from '@clover/public/components/common/theme-switcher'
 import { useLayoutProps } from '@clover/public/components/layout/hooks/use.layout.props'
-import {Card} from "@easykit/design";
-import classNames from 'classnames'
-import type { FC, PropsWithChildren } from 'react'
-import { useTranslation } from 'react-i18next';
-import { LayoutLogo } from "../main/logo";
 
-export type LoginLayoutProps = PropsWithChildren<{  
-  showLogo?: boolean;
-  appName?: string;
-}>;
+export type LoginLayoutProps = PropsWithChildren<{
+  showLogo?: boolean
+  appName?: string
+}>
 
 export const LoginLayout: FC<LoginLayoutProps> = (originProps) => {
-  const props = useLayoutProps<LoginLayoutProps>(originProps);
-  const { t } = useTranslation();
+  const props = useLayoutProps<LoginLayoutProps>(originProps)
+  const { t } = useTranslation()
   const { showLogo = true, appName } = props
 
   return (
@@ -23,7 +24,7 @@ export const LoginLayout: FC<LoginLayoutProps> = (originProps) => {
       <div className="mb-[--login-footer-height] flex flex-1 flex-col items-center justify-center p-8">
         <Card className="px-8 py-10 shadow-none">
           {showLogo ? (
-            <a href="/" className="mb-6 flex items-center justify-center">
+            <a className="mb-6 flex items-center justify-center" href="/">
               <LayoutLogo />
               {appName ? <span className="ml-1 font-bold text-lg">· {appName}</span> : null}
             </a>
@@ -52,4 +53,4 @@ export const LoginLayout: FC<LoginLayoutProps> = (originProps) => {
       </div>
     </div>
   )
-};
+}

@@ -1,10 +1,10 @@
 import { IconProject } from '@arco-iconbox/react-clover'
-import {TeamSelector} from "@clover/public/components/common/selector/team";
+import { type DataTableColumn, type DropdownMenuItemProps, type FilterItemProps, Input } from '@easykit/design'
+import { TeamSelector } from '@clover/public/components/common/selector/team'
 import type { TabsTitleItem } from '@clover/public/components/common/tabs-title'
-import {UserItem} from "@clover/public/components/common/user-item";
+import { UserItem } from '@clover/public/components/common/user-item'
 import type { Project } from '@clover/public/types/project'
 import { t } from '@clover/public/utils/locale.client'
-import { type DataTableColumn, type DropdownMenuItemProps, type FilterItemProps, Input } from '@easykit/design'
 
 export const getTabs = (): TabsTitleItem[] => [
   {
@@ -33,8 +33,8 @@ export const getColumns = (): DataTableColumn<Project>[] => [
         <div className="flex items-center space-x-1">
           <div className="flex h-6 w-6 items-center justify-center rounded-md bg-secondary text-secondary-foreground">
             {original.cover ? (
-              // biome-ignore lint/nursery/noImgElement: <explanation>
-              <img className="h-full w-full object-cover" alt="Cover" src={original.cover} />
+              // biome-ignore lint/performance/noImgElement: Cover
+              <img alt="Cover" className="h-full w-full object-cover" src={original.cover} />
             ) : (
               <IconProject />
             )}
@@ -85,11 +85,11 @@ export const getColumns = (): DataTableColumn<Project>[] => [
 export const getFilters = (): FilterItemProps[] => [
   {
     field: 'keyword',
-    render: () => <Input placeholder={t("请输入关键词")}/>,
+    render: () => <Input placeholder={t('请输入关键词')} />,
   },
   {
     field: 'teamId',
-    label: t("所属团队"),
+    label: t('所属团队'),
     render: () => <TeamSelector />,
   },
 ]

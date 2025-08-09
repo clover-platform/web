@@ -1,12 +1,12 @@
 'use client'
 
-import { ModuleBreadcrumb } from '@/components/common/breadcrumb/module'
-import type { ModuleLayoutProps } from '@/components/layout/module'
+import { BreadcrumbItem, BreadcrumbPage, Card } from '@easykit/design'
+import { useTranslation } from 'react-i18next'
 import { MainPage } from '@clover/public/components/common/page'
 import { TitleBar } from '@clover/public/components/common/title-bar'
 import { useLayoutConfig } from '@clover/public/components/layout/hooks/use.layout.config'
-import { BreadcrumbItem, BreadcrumbPage, Card } from '@easykit/design'
-import { useTranslation } from 'react-i18next'
+import { ModuleBreadcrumb } from '@/components/common/breadcrumb/module'
+import type { ModuleLayoutProps } from '@/components/layout/module'
 
 export const TranslationPage = () => {
   const { t } = useTranslation()

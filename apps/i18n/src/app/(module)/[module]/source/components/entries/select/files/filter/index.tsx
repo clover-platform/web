@@ -1,5 +1,6 @@
-import { type FC, useEffect, useState } from 'react'
 import { FilesSelect } from '../index'
+
+import { type FC, useEffect, useState } from 'react'
 
 export type FilesSelectFilterProps = {
   value?: string
@@ -16,12 +17,12 @@ export const FilesSelectFilter: FC<FilesSelectFilterProps> = (props) => {
 
   return (
     <FilesSelect
-      value={v}
       onChange={(v) => {
         const val = v as string[]
         setV(val)
         onChange?.(val.join(','))
       }}
+      value={v}
     />
   )
 }

@@ -1,15 +1,15 @@
-import { otpDisable } from '@/rest/profile/security/mfa'
+import { type FC, useState } from 'react'
+import { Button, Dialog, Form, FormItem, useMessage } from '@easykit/design'
+import { useMutation } from '@tanstack/react-query'
+import { useAtomValue } from 'jotai/index'
+import { useTranslation } from 'react-i18next'
+import { object, string } from 'zod'
 import { EmailCodeInput } from '@clover/public/components/common/input/email-code'
 import { type SendEmailCodeData, sendEmailCode } from '@clover/public/rest/common'
 import { accountInfoState } from '@clover/public/state/account'
 import { t } from '@clover/public/utils/locale.client'
 import { CODE } from '@clover/public/utils/regular'
-import { Button, Dialog, Form, FormItem, useMessage } from '@easykit/design'
-import { useMutation } from '@tanstack/react-query'
-import { useAtomValue } from 'jotai/index'
-import { type FC, useState } from 'react'
-import { useTranslation } from 'react-i18next'
-import { object, string } from 'zod'
+import { otpDisable } from '@/rest/profile/security/mfa'
 
 const getSchema = () =>
   object({
@@ -37,24 +37,24 @@ export const DisableModal: FC<DisableModalProps> = (props) => {
 
   return (
     <p>
-      <button type="button" onClick={() => setVisible(true)} className="cursor-pointer">
+      <button className="cursor-pointer" onClick={() => setVisible(true)} type="button">
         {title}
       </button>
-      <Dialog visible={visible} title={title} maskClosable={false} onCancel={() => setVisible(false)}>
+      <Dialog maskClosable={false} onCancel={() => setVisible(false)} title={title} visible={visible}>
         <Form onSubmit={(data) => mutate(data)} schema={getSchema()}>
           <FormItem
-            name="code"
             label={t('邮箱验证码（{{email}}）', {
               email: account.email,
             })}
+            name="code"
           >
             <EmailCodeInput<SendEmailCodeData>
-              placeholder={t('请输入邮箱验证码')}
               api={sendEmailCode}
               data={{ action: 'otp-disable', email: account.email }}
+              placeholder={t('请输入邮箱验证码')}
             />
           </FormItem>
-          <Button loading={isPending} type="submit" long>
+          <Button loading={isPending} long type="submit">
             {t('禁用')}
           </Button>
         </Form>

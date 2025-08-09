@@ -1,10 +1,11 @@
-import { create } from '@/rest/entry'
+import { EntryForm } from '../../form'
+
+import { type FC, useEffect, useState } from 'react'
 import { Button, Checkbox, Dialog, type DialogProps, useMessage } from '@easykit/design'
 import { useMutation } from '@tanstack/react-query'
 import { useParams } from 'next/navigation'
-import { type FC, useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { EntryForm } from '../../form'
+import { create } from '@/rest/entry'
 export type CreateEntryModalProps = {
   onSuccess?: (close?: boolean) => void
 } & DialogProps
@@ -31,14 +32,14 @@ export const CreateEntryModal: FC<CreateEntryModalProps> = (props) => {
   }, [props.visible])
 
   return (
-    <Dialog {...props} title={t('新增词条')} maskClosable={false}>
+    <Dialog {...props} maskClosable={false} title={t('新增词条')}>
       <EntryForm key={formKey} onSubmit={(data) => onSubmit({ ...data, module: module as string })}>
         <div className="flex items-center justify-end space-x-2">
           <div className="flex items-center space-x-1">
-            <Checkbox onCheckedChange={(checked) => setClose(!checked)} checked={!close} id="hold-entry-modal" />
+            <Checkbox checked={!close} id="hold-entry-modal" onCheckedChange={(checked) => setClose(!checked)} />
             <label
-              htmlFor="hold-entry-modal"
               className="font-medium text-sm leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+              htmlFor="hold-entry-modal"
             >
               {t('成功后不关闭窗口')}
             </label>
@@ -46,7 +47,7 @@ export const CreateEntryModal: FC<CreateEntryModalProps> = (props) => {
           <Button loading={loading} type="submit">
             {t('提交')}
           </Button>
-          <Button variant="outline" type="button" onClick={() => props.onCancel?.()}>
+          <Button onClick={() => props.onCancel?.()} type="button" variant="outline">
             {t('取消')}
           </Button>
         </div>

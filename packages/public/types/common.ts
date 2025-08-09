@@ -1,8 +1,8 @@
 declare module '@clover/public/utils/i18next/data' {
   export const getPath: (path: string) => string;
-  // biome-ignore lint/suspicious/noExplicitAny: <explanation>
+  // biome-ignore lint/suspicious/noExplicitAny: dataLoader
   export const dataLoader: (config: any) => Promise<any>
-  // biome-ignore lint/suspicious/noExplicitAny: <explanation>
+  // biome-ignore lint/suspicious/noExplicitAny: langData
   const langData: any
   export default langData;
 }

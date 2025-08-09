@@ -1,11 +1,8 @@
 'use client'
 
-import { ProfileBreadcrumbBase } from '@/components/common/breadcrumb/profile'
-import { MainPage } from '@/components/common/main-page'
-import type { MainLayoutProps } from '@/components/layout/main'
-import { otpStatus } from '@/rest/profile/security/mfa'
-import { TitleBar } from '@clover/public/components/common/title-bar'
-import { useLayoutConfig } from '@clover/public/components/layout/hooks/use.layout.config'
+import { DisableModal } from './disable-modal'
+import { EnableModal } from './enable-modal'
+
 import {
   Badge,
   BreadcrumbItem,
@@ -20,8 +17,12 @@ import {
 import { useQuery, useQueryClient } from '@tanstack/react-query'
 import Link from 'next/link'
 import { useTranslation } from 'react-i18next'
-import { DisableModal } from './disable-modal'
-import { EnableModal } from './enable-modal'
+import { TitleBar } from '@clover/public/components/common/title-bar'
+import { useLayoutConfig } from '@clover/public/components/layout/hooks/use.layout.config'
+import { ProfileBreadcrumbBase } from '@/components/common/breadcrumb/profile'
+import { MainPage } from '@/components/common/main-page'
+import type { MainLayoutProps } from '@/components/layout/main'
+import { otpStatus } from '@/rest/profile/security/mfa'
 
 export const MFAPage = () => {
   const { t } = useTranslation()

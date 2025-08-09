@@ -5,17 +5,13 @@
     "strict": true,
     "jsx": "preserve",
     "paths": {
-      "@/*": [
-        "./src/*"
-      ],
-      "@clover/public/*": [
-        "../../packages/public/*"
-      ]
+      "@/*": ["./src/*"],
+      "@clover/public/*": ["../../packages/public/*"]
     },
     "plugins": [
       {
         "name": "next"
-      } 
+      }
     ]
   },
   "include": [

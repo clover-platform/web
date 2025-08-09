@@ -1,10 +1,11 @@
+import { getActionTitle } from './config'
+
+import { type FC, useMemo } from 'react'
+import { useTranslation } from 'react-i18next'
 import { UserItem } from '@clover/public/components/common/user-item'
 import { ICONS } from '@clover/public/config/icons'
 import { useTimeAgo } from '@clover/public/hooks'
 import type { Activity } from '@clover/public/types/activity'
-import { type FC, useMemo } from 'react'
-import { useTranslation } from 'react-i18next'
-import { getActionTitle } from './config'
 
 export type ActivityItemProps = {
   data: Activity
@@ -18,9 +19,7 @@ export const ActivityItem: FC<ActivityItemProps> = (props) => {
 
   const href = useMemo(() => {
     if (url) {
-      // biome-ignore lint/performance/useTopLevelRegex: <explanation>
       const cleanBaseUrl = app.baseUrl.replace(/\/$/, '')
-      // biome-ignore lint/performance/useTopLevelRegex: <explanation>
       const cleanUrl = url.replace(/^\//, '')
       return [cleanBaseUrl, cleanUrl].join('/')
     }
@@ -43,7 +42,7 @@ export const ActivityItem: FC<ActivityItemProps> = (props) => {
             {ICONS[app.label]}
           </div>
           {href ? (
-            <a href={href} target="_blank" rel="noopener noreferrer" className="underline hover:text-primary">
+            <a className="underline hover:text-primary" href={href} rel="noopener noreferrer" target="_blank">
               {title}
             </a>
           ) : (

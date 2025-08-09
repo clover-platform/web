@@ -1,5 +1,5 @@
-import {preSign} from "@clover/public/rest/assets";
 import type { HandleProps } from '@easykit/design'
+import { preSign } from '@clover/public/rest/assets'
 
 const mimeTypeRegex = /:(.*?);/
 
@@ -14,7 +14,7 @@ export function fileToDataURL(file: File) {
       reject(error)
     }
   })
-} 
+}
 
 export function dataURLToFile(dataUrl: string, filename: string) {
   const arr = dataUrl.split(',')
@@ -41,9 +41,9 @@ export type UploadOptions = {
 }
 
 export type UploadResult = {
-  success: boolean;
-  data?: string;
-  error?: string;
+  success: boolean
+  data?: string
+  error?: string
 }
 
 const ERROR_MESSAGE = 'Failed to upload'
@@ -61,7 +61,6 @@ export const upload = async (options: UploadOptions) => {
       headers: allHeaders,
       type,
       ...(data || {}),
-      // biome-ignore lint/complexity/noExcessiveCognitiveComplexity: <explanation>
     }).then(({ success, data, message }) => {
       if (success) {
         const { signedUrl, url } = data!
@@ -75,7 +74,7 @@ export const upload = async (options: UploadOptions) => {
             onProgress?.(Number.parseInt(`${percent}`, 10), event)
           }
         }
-        // biome-ignore lint/suspicious/noExplicitAny: <explanation>
+        // biome-ignore lint/suspicious/noExplicitAny: error
         xhr.onerror = function error(e: any) {
           onError?.(e.message || ERROR_MESSAGE)
           resolve({
@@ -107,7 +106,7 @@ export const upload = async (options: UploadOptions) => {
         }
         try {
           xhr.send(file)
-          // biome-ignore lint/suspicious/noExplicitAny: <explanation>
+          // biome-ignore lint/suspicious/noExplicitAny: error
         } catch (error: any) {
           onError?.(error?.message || ERROR_MESSAGE)
           resolve({
@@ -124,7 +123,6 @@ export const upload = async (options: UploadOptions) => {
       }
     })
   })
-
 }
 
 export const uploadHandle = (options: HandleProps) => {

@@ -1,12 +1,12 @@
-import { TeamCollect } from '@/components/layout/main/header/team/collect'
 import { DropdownMenuContent, DropdownMenuItem, DropdownMenuSeparator } from '@easykit/design'
 import Link from 'next/link'
 import { useTranslation } from 'react-i18next'
+import { TeamCollect } from '@/components/layout/main/header/team/collect'
 
 export const Team = () => {
   const { t } = useTranslation()
   return (
-    <DropdownMenuContent className="w-96" align="start">
+    <DropdownMenuContent align="start" className="w-96">
       <TeamCollect />
       <DropdownMenuSeparator />
       <Link href="/team">

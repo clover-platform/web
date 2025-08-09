@@ -1,15 +1,16 @@
-import { ENTRY_RESULT_AI_INSERT } from '@/events/worktop'
-import { currentEntryState, entriesState } from '@/state/worktop'
+import { useResultSubmit } from '../hooks/use.result.submit'
+
+import { useCallback, useEffect, useState } from 'react'
 import { IconClear } from '@arco-iconbox/react-clover'
-import { Action } from '@clover/public/components/common/action'
-import bus from '@clover/public/events'
 import { Button, Tooltip } from '@easykit/design'
 import { CopyIcon } from '@radix-ui/react-icons'
 import { useAtom } from 'jotai'
-import { useCallback, useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import TextareaAutosize from 'react-textarea-autosize'
-import { useResultSubmit } from '../hooks/use.result.submit'
+import { Action } from '@clover/public/components/common/action'
+import bus from '@clover/public/events'
+import { ENTRY_RESULT_AI_INSERT } from '@/events/worktop'
+import { currentEntryState, entriesState } from '@/state/worktop'
 
 export const Editor = () => {
   const [entries] = useAtom(entriesState)
@@ -33,11 +34,11 @@ export const Editor = () => {
   return (
     <div className="w-full">
       <TextareaAutosize
+        className="w-full resize-none rounded-none border-none px-4 py-2 shadow-none focus:outline-none focus-visible:ring-0"
         minRows={3}
-        value={content}
         onChange={(e) => setContent(e.target.value)}
         placeholder={t('请输入翻译内容')}
-        className="w-full resize-none rounded-none border-none px-4 py-2 shadow-none focus:outline-none focus-visible:ring-0"
+        value={content}
       />
       <div className="flex items-center justify-center p-2 px-4">
         <div className="flex flex-1 items-center justify-start">
@@ -53,7 +54,7 @@ export const Editor = () => {
           </Tooltip>
         </div>
         <div>
-          <Button loading={loading} variant="outline" onClick={onSave}>
+          <Button loading={loading} onClick={onSave} variant="outline">
             {t('保存')}
           </Button>
         </div>

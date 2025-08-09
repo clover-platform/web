@@ -1,10 +1,8 @@
 {
   "compilerOptions": {
     "paths": {
-      "@/*": [
-        "./src/*"
-      ],
-      "@clover/public/*": ["../../packages/public/*"] 
+      "@/*": ["./src/*"],
+      "@clover/public/*": ["../../packages/public/*"]
     }
-  }
+  } 
 }

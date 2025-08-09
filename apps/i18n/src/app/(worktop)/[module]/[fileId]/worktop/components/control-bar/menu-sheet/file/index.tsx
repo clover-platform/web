@@ -1,9 +1,9 @@
-import { currentEntryState, currentFileState, currentLanguageState, filesState } from '@/state/worktop'
 import { Command, CommandInput, CommandItem, CommandList, SheetClose } from '@easykit/design'
 import { CheckIcon } from '@radix-ui/react-icons'
 import { useAtom } from 'jotai'
 import { useParams, useRouter } from 'next/navigation'
 import { useTranslation } from 'react-i18next'
+import { currentEntryState, currentFileState, currentLanguageState, filesState } from '@/state/worktop'
 
 export const MenuFileSheet = () => {
   const [files] = useAtom(filesState)
@@ -33,7 +33,7 @@ export const MenuFileSheet = () => {
                 {current === 'all' ? <CheckIcon /> : null}
               </div>
             </CommandItem>
-            {/* biome-ignore lint/suspicious/noExplicitAny: <explanation> */}
+            {/* biome-ignore lint/suspicious/noExplicitAny: item */}
             {files.map((item: any) => {
               return (
                 <CommandItem

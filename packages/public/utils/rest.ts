@@ -1,6 +1,6 @@
-import type { RestConfig, RestResult } from '@clover/public/types/rest'
-import Axios, { type AxiosHeaders, type AxiosResponse } from 'axios'
 import type { AxiosRequestConfig } from 'axios'
+import Axios, { type AxiosHeaders, type AxiosResponse } from 'axios'
+import type { RestConfig, RestResult } from '@clover/public/types/rest'
 
 let _config: RestConfig = {}
 const instance = Axios.create({
@@ -13,7 +13,7 @@ const instance = Axios.create({
   withCredentials: true,
   baseURL: process.env.NEXT_PUBLIC_API_URL || '',
 })
-// biome-ignore lint/suspicious/noExplicitAny: <explanation>
+// biome-ignore lint/suspicious/noExplicitAny: aliasMap
 let aliasMap: Record<string, any> = {}
 
 instance.interceptors.response.use((response) => {
@@ -23,14 +23,14 @@ instance.interceptors.response.use((response) => {
     const url = URL.createObjectURL(file)
     const a = document.createElement('a')
     a.href = url
-    // biome-ignore lint/suspicious/noExplicitAny: <explanation>
+    // biome-ignore lint/suspicious/noExplicitAny: config
     a.download = (config as any).fileName
     a.click()
   }
   return response
 })
 
-// biome-ignore lint/suspicious/noExplicitAny: <explanation>
+// biome-ignore lint/suspicious/noExplicitAny: data
 const handleResponse = (data: RestResult<any>, response: AxiosResponse) => {
   const { onResponse } = _config
   if (typeof onResponse === 'function') {
@@ -162,7 +162,7 @@ export const resultWrapper = async <T>(data: Promise<RestResult<T>>) => {
   throw new RestError(result.message, result.code, result.data)
 }
 
-// biome-ignore lint/suspicious/noExplicitAny: <explanation>
+// biome-ignore lint/suspicious/noExplicitAny: map
 export const alias = (map: Record<string, any>) => {
   aliasMap = {
     ...aliasMap,

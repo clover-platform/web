@@ -1,5 +1,6 @@
-import { useMemo } from 'react'
 import { useApps } from './use.apps'
+
+import { useMemo } from 'react'
 
 export const useMainApp = () => {
   const [apps] = useApps()

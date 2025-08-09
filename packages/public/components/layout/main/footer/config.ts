@@ -6,8 +6,8 @@ export type FooterNavItem = {
 }
 
 export type FooterNavGroup = {
-  title: string;
-  items: FooterNavItem[];
+  title: string
+  items: FooterNavItem[]
 }
 
 export const getNavGroups = (): FooterNavGroup[] => {

@@ -1,7 +1,7 @@
+import { atom } from 'jotai'
 import type { CountEntryData, Entry } from '@/types/module/entry'
 import type { File } from '@/types/module/source'
 import type { Language } from '@/types/public'
-import { atom } from 'jotai'
 
 export const leftSideOpenState = atom(true)
 

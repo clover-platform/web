@@ -1,8 +1,8 @@
+import type { PageData } from '@clover/public/types/rest'
+import { del, get, post, put, resultWrapper } from '@clover/public/utils/rest'
 import type { FileFormData } from '@/config/schema/module/file'
 import type { Entry } from '@/types/module/entry'
 import type { File, FileRevision } from '@/types/module/source'
-import type { PageData } from '@clover/public/types/rest'
-import { del, get, post, put, resultWrapper } from '@clover/public/utils/rest'
 
 export type ListFileQuery = {
   module?: string

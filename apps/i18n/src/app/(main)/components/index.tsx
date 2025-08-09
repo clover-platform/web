@@ -1,24 +1,24 @@
 'use client'
 
-import { AppBreadcrumb } from '@/components/common/breadcrumb/app'
-import type { MainLayoutProps } from '@/components/layout/main'
-import { ROW_ACTIONS, getColumns, getFilters } from '@/config/pages/module/table'
-import { getTabs } from '@/config/pages/module/tabs'
-import { useReloadCollectModule } from '@/hooks'
-import { type ModuleListParams, addCollect, cancelCollect, deleteModule, list } from '@/rest/module'
-import type { Module } from '@/types/module'
+import { useState } from 'react'
+import { BreadcrumbItem, BreadcrumbPage, Button, Card, DataTable, Space, useAlert, useMessage } from '@easykit/design'
+import { useMutation, useQueryClient } from '@tanstack/react-query'
+import Link from 'next/link'
+import { useRouter, useSearchParams } from 'next/navigation'
+import { useTranslation } from 'react-i18next'
 import { MainPage } from '@clover/public/components/common/page'
 import { TabsTitle } from '@clover/public/components/common/tabs-title'
 import { TitleBar } from '@clover/public/components/common/title-bar'
 import { useLayoutConfig } from '@clover/public/components/layout/hooks/use.layout.config'
 import { useListQuery } from '@clover/public/hooks'
 import { useProfile } from '@clover/public/hooks/use.profile'
-import { BreadcrumbItem, BreadcrumbPage, Button, Card, DataTable, Space, useAlert, useMessage } from '@easykit/design'
-import { useMutation, useQueryClient } from '@tanstack/react-query'
-import Link from 'next/link'
-import { useRouter, useSearchParams } from 'next/navigation'
-import { useState } from 'react'
-import { useTranslation } from 'react-i18next'
+import { AppBreadcrumb } from '@/components/common/breadcrumb/app'
+import type { MainLayoutProps } from '@/components/layout/main'
+import { getColumns, getFilters, ROW_ACTIONS } from '@/config/pages/module/table'
+import { getTabs } from '@/config/pages/module/tabs'
+import { useReloadCollectModule } from '@/hooks'
+import { addCollect, cancelCollect, deleteModule, list, type ModuleListParams } from '@/rest/module'
+import type { Module } from '@/types/module'
 
 const initialParams = {
   keyword: '',
@@ -109,22 +109,19 @@ export const ModulePage = () => {
           <BreadcrumbPage>{title}</BreadcrumbPage>
         </BreadcrumbItem>
       </AppBreadcrumb>
-      <TitleBar title={title} actions={actions} border={false} />
+      <TitleBar actions={actions} border={false} title={title} />
       <Card>
         <TabsTitle active={active} items={getTabs()} onChange={setActive} />
         <DataTable<Module>
-          showHeader={false}
-          inCard={true}
+          columns={getColumns()}
+          data={data}
           filter={{
             items: getFilters(),
             defaultValues: initialParams,
             query: query,
           }}
+          inCard={true}
           load={load}
-          pagination={pagination}
-          columns={getColumns()}
-          rowActions={(row) => ROW_ACTIONS(profile, row)}
-          data={data}
           loading={loading}
           onRowActionClick={({ id: key }, { original }) => {
             const { identifier } = original
@@ -152,6 +149,9 @@ export const ModulePage = () => {
             const { identifier } = row.original
             router.push(`/${identifier}/dashboard`)
           }}
+          pagination={pagination}
+          rowActions={(row) => ROW_ACTIONS(profile, row)}
+          showHeader={false}
         />
       </Card>
     </MainPage>

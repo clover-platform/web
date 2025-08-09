@@ -9,7 +9,7 @@ export const Recent = () => {
     <div className="flex flex-col gap-2">
       <div className="flex items-center justify-between">
         <span className="font-medium text-lg">{t('最近的项目')}</span>
-        <Link href="/project" className="link">
+        <Link className="link" href="/project">
           {t('查看全部')}
         </Link>
       </div>

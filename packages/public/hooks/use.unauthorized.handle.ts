@@ -1,9 +1,10 @@
+import { useMainApp } from './use.main.app'
+
+import { useCallback, useEffect } from 'react'
+import { useAtomValue } from 'jotai'
 import bus from '@clover/public/events'
 import { UNAUTHORIZED } from '@clover/public/events/auth'
 import { isLoginState } from '@clover/public/state/account'
-import { useAtomValue } from 'jotai'
-import { useCallback, useEffect } from 'react'
-import { useMainApp } from './use.main.app'
 
 export const useUnauthorizedHandle = () => {
   const isLogin = useAtomValue(isLoginState)

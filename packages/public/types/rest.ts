@@ -1,7 +1,7 @@
 import type { AxiosResponse } from 'axios'
 
 export type RestConfig = {
-  // biome-ignore lint/suspicious/noExplicitAny: <explanation>
+  // biome-ignore lint/suspicious/noExplicitAny: RestResult
   onResponse?: (data: RestResult<any>, response: AxiosResponse) => void
 }
 

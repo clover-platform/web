@@ -1,10 +1,9 @@
-import { t } from '@clover/public/utils/locale.client'
-import {Image, PopoverContent, PopoverTrigger, useMessage} from "@easykit/design";
-import { Popover } from '@easykit/design'
-import {CopyIcon, InfoCircledIcon} from "@radix-ui/react-icons";
 import { type FC, type PropsWithChildren, useEffect, useState } from 'react'
+import { Image, Popover, PopoverContent, PopoverTrigger, useMessage } from '@easykit/design'
+import { CopyIcon, InfoCircledIcon } from '@radix-ui/react-icons'
 import { CopyToClipboard } from 'react-copy-to-clipboard'
-import { useTranslation } from "react-i18next";
+import { useTranslation } from 'react-i18next'
+import { t } from '@clover/public/utils/locale.client'
 
 export interface OtpInfoProps extends PropsWithChildren {
   secret?: string
@@ -14,17 +13,17 @@ export interface OtpInfoProps extends PropsWithChildren {
 
 const getApps = () => [
   {
-    name: t("腾讯身份验证器"),
-    icon: "/assets/main/image/2fa/tencent.webp"
+    name: t('腾讯身份验证器'),
+    icon: '/assets/main/image/2fa/tencent.webp',
   },
   {
-    name: t("谷歌身份验证器"),
-    icon: "/assets/main/image/2fa/google.webp"
+    name: t('谷歌身份验证器'),
+    icon: '/assets/main/image/2fa/google.webp',
   },
   {
-    name: t("微软身份验证器"),
-    icon: "/assets/main/image/2fa/microsoft.webp"
-  }
+    name: t('微软身份验证器'),
+    icon: '/assets/main/image/2fa/microsoft.webp',
+  },
 ]
 
 export const OtpInfo: FC<OtpInfoProps> = (props) => {
@@ -50,14 +49,14 @@ export const OtpInfo: FC<OtpInfoProps> = (props) => {
     <div className="flex flex-col items-center">
       <div className="flex items-center justify-center">
         {qrcodeImage ? (
-          <Image src={qrcodeImage} alt="QRCode" width={150} height={150} />
+          <Image alt="QRCode" height={150} src={qrcodeImage} width={150} />
         ) : (
           <div className="h-[150px] w-[150px] bg-secondary" />
         )}
       </div>
       <div className="my-2 flex items-center justify-center bg-secondary px-3 py-1 text-sm">
         {secret || '--'}
-        <CopyToClipboard text={secret || ''} onCopy={onCopy}>
+        <CopyToClipboard onCopy={onCopy} text={secret || ''}>
           <CopyIcon className="ml-[10px]" />
         </CopyToClipboard>
       </div>
@@ -73,13 +72,13 @@ export const OtpInfo: FC<OtpInfoProps> = (props) => {
               <div className="space-y-2">
                 {getApps().map((app) => {
                   return (
-                    <div key={app.name} className="flex items-center space-x-2">
+                    <div className="flex items-center space-x-2" key={app.name}>
                       <Image
-                        width={32}
-                        height={32}
-                        src={app.icon}
                         alt={app.name}
                         className="overflow-hidden rounded-md shadow"
+                        height={32}
+                        src={app.icon}
+                        width={32}
                       />
                       <span>{app.name}</span>
                     </div>

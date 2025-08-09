@@ -1,10 +1,10 @@
-import { type UseFormResultProps, useFormResult } from '@clover/public/hooks/use.form.result'
-import type { RestResult } from '@clover/public/types/rest'
 import { type RefObject, useCallback, useRef, useState } from 'react'
 import type { FieldValues, SubmitHandler, UseFormReturn } from 'react-hook-form'
+import { type UseFormResultProps, useFormResult } from '@clover/public/hooks/use.form.result'
+import type { RestResult } from '@clover/public/types/rest'
 
 export type UseFormSubmitProps<T, P> = UseFormResultProps<T> & {
-  // biome-ignore lint/suspicious/noExplicitAny: <explanation>
+  // biome-ignore lint/suspicious/noExplicitAny: params
   action: ((data: P) => Promise<RestResult<any>>) | ((data?: P) => Promise<RestResult<any>>)
 }
 
@@ -13,7 +13,7 @@ export const useFormSubmit = <T, P = void>(
 ): { ref: RefObject<UseFormReturn | null>; submitting: boolean; onSubmit: SubmitHandler<FieldValues> } => {
   const { action, ...rest } = props
   const ref = useRef<UseFormReturn>(null)
-  // biome-ignore lint/suspicious/noExplicitAny: <explanation>
+  // biome-ignore lint/suspicious/noExplicitAny: params
   const formResult = useFormResult<any>({
     ...rest,
     ref,

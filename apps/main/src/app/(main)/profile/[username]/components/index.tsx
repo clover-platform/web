@@ -1,11 +1,9 @@
 'use client'
 
-import { AppBreadcrumb } from '@/components/common/app-breadcrumb'
-import { MainPage } from '@/components/common/main-page'
-import type { MainLayoutProps } from '@/components/layout/main'
-import { profile } from '@/rest/profile'
+import { Avatar } from './avatar'
+import { ReadMe } from './readme'
+
 import { IconMember } from '@arco-iconbox/react-clover'
-import { useLayoutConfig } from '@clover/public/components/layout/hooks/use.layout.config'
 import {
   BreadcrumbItem,
   BreadcrumbPage,
@@ -19,8 +17,11 @@ import {
 import { useQuery } from '@tanstack/react-query'
 import { useParams } from 'next/navigation'
 import { useTranslation } from 'react-i18next'
-import { Avatar } from './avatar'
-import { ReadMe } from './readme'
+import { useLayoutConfig } from '@clover/public/components/layout/hooks/use.layout.config'
+import { AppBreadcrumb } from '@/components/common/app-breadcrumb'
+import { MainPage } from '@/components/common/main-page'
+import type { MainLayoutProps } from '@/components/layout/main'
+import { profile } from '@/rest/profile'
 
 export const ProfilePage = () => {
   useLayoutConfig<MainLayoutProps>({
@@ -42,7 +43,7 @@ export const ProfilePage = () => {
       </AppBreadcrumb>
       <div className="flex flex-row gap-4">
         <div className="flex w-[300px] flex-col gap-4">
-          <Avatar id={account?.id!} src={account?.avatar!} fallback={account?.username!} />
+          <Avatar fallback={account?.username!} id={account?.id!} src={account?.avatar!} />
           <div>
             <div className="font-bold text-2xl">{account?.username}</div>
             <div className="text-base text-gray-500">{account?.email}</div>

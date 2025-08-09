@@ -52,5 +52,8 @@
   "editor.formatOnSave": true,
   "editor.formatOnSaveMode": "modificationsIfAvailable",
   "files.autoSave": "afterDelay",
-  "files.autoSaveDelay": 3000
+  "files.autoSaveDelay": 3000,
+  "[scss]": {
+    "editor.defaultFormatter": "vscode.css-language-features"
+  }
 }

@@ -1,8 +1,8 @@
-import { currentLanguageState, languagesState } from '@/state/worktop'
-import { Action } from '@clover/public/components/common/action'
-import { useAtom } from 'jotai'
 import type { FC } from 'react'
+import { useAtom } from 'jotai'
 import { useTranslation } from 'react-i18next'
+import { Action } from '@clover/public/components/common/action'
+import { currentLanguageState, languagesState } from '@/state/worktop'
 
 export type LanguageActionProps = {
   onClick: () => void

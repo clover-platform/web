@@ -1,10 +1,9 @@
-
-import { isEmail } from '@clover/public/utils'
-import { i18n } from '@clover/public/utils/locale.client'
+import { type ChangeEvent, type ComponentProps, useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { Button, Input, useMessage } from '@easykit/design'
 import { useMutation } from '@tanstack/react-query'
-import { type ChangeEvent, type ComponentProps, useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
+import { isEmail } from '@clover/public/utils'
+import { i18n } from '@clover/public/utils/locale.client'
 
 export type BaseData = {
   email: string
@@ -82,13 +81,13 @@ export const EmailCodeInput = <T extends BaseData>(props: EmailCodeInputProps<T>
 
   return (
     <div className="flex items-center justify-center">
-      <Input className="flex-1" {...rest} onChange={handleChange} maxLength={6} />
+      <Input className="flex-1" {...rest} maxLength={6} onChange={handleChange} />
       <Button
-        type="button"
-        loading={isPending}
-        disabled={buttonDisabled}
         className="ml-[10px]"
+        disabled={buttonDisabled}
+        loading={isPending}
         onClick={sendCode}
+        type="button"
         variant="secondary"
       >
         {buttonText}

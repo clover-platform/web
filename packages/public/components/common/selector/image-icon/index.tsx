@@ -1,28 +1,30 @@
-import { ImageCropper } from '@clover/public/components/common/cropper'
-import {Popover, PopoverContent, PopoverTrigger} from "@easykit/design";
-import classNames from 'classnames'
-import { cloneDeep } from "es-toolkit";
 import { type FC, type HTMLAttributes, type PropsWithChildren, useEffect, useMemo, useState } from 'react'
+import { Popover, PopoverContent, PopoverTrigger } from '@easykit/design'
+import classNames from 'classnames'
+import { cloneDeep } from 'es-toolkit'
+import { ImageCropper } from '@clover/public/components/common/cropper'
 
 export type ImageIconSelectorProps = {
-  options?: string[];
-  value?: string;
-  onChange?: (value?: string) => void;
+  options?: string[]
+  value?: string
+  onChange?: (value?: string) => void
 }
 
-type ImageIconItemProps = PropsWithChildren<HTMLAttributes<HTMLDivElement> & {
-  active?: boolean;
-}>
+type ImageIconItemProps = PropsWithChildren<
+  HTMLAttributes<HTMLDivElement> & {
+    active?: boolean
+  }
+>
 
 const ImageIconItem: FC<ImageIconItemProps> = (props) => {
-  const {active} = props;
+  const { active } = props
   return (
     <div
-      onClick={props.onClick}
       className={classNames(
         'm-1 h-9 w-9 cursor-pointer overflow-hidden rounded-sm',
         active ? 'outline outline-primary outline-offset-1' : ''
       )}
+      onClick={props.onClick}
     >
       {props.children}
     </div>
@@ -48,30 +50,31 @@ export const ImageIconSelector: FC<ImageIconSelectorProps> = (props) => {
     <Popover onOpenChange={setOpen} open={open}>
       <PopoverTrigger>
         <div className="h-9 w-9 overflow-hidden rounded-sm border bg-secondary">
-          {/* biome-ignore lint/nursery/noImgElement: <explanation> */}
-          {value ? <img className="h-full w-full bg-cover" src={value} alt={value} /> : null}
+          {/** biome-ignore lint/performance/noImgElement: img */}
+          {value ? <img alt={value} className="h-full w-full bg-cover" src={value} /> : null}
         </div>
       </PopoverTrigger>
-      <PopoverContent autoFocus={false} align="start" className="-m-1 m-1 flex flex-wrap">
+      <PopoverContent align="start" autoFocus={false} className="-m-1 m-1 flex flex-wrap">
         {allFiles?.map((option) => {
           return (
             <ImageIconItem
-              key={option}
               active={value === option}
+              key={option}
               onClick={() => {
                 setValue(option)
                 onChange?.(option)
                 setOpen(false)
               }}
             >
-              {/* biome-ignore lint/nursery/noImgElement: <explanation> */}
-              <img className="h-full w-full bg-cover" src={option} alt={option} />
+              {/** biome-ignore lint/performance/noImgElement: img */}
+              <img alt={option} className="h-full w-full bg-cover" src={option} />
             </ImageIconItem>
           )
         })}
         <ImageIconItem>
           <ImageCropper
-            value={file}
+            aspectRatio={1}
+            className="h-9 w-9"
             onChange={(file) => {
               setFile(undefined)
               if (file) {
@@ -84,8 +87,7 @@ export const ImageIconSelector: FC<ImageIconSelectorProps> = (props) => {
               }
               setOpen(false)
             }}
-            className="h-9 w-9"
-            aspectRatio={1}
+            value={file}
           />
         </ImageIconItem>
       </PopoverContent>

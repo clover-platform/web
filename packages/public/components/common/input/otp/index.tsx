@@ -1,7 +1,6 @@
-
+import type { FC } from 'react'
 import { InputOTP, InputOTPGroup, InputOTPSlot } from '@easykit/design'
 import { REGEXP_ONLY_DIGITS } from 'input-otp'
-import type { FC } from 'react'
 
 export type OTPInputProps = {
   value?: string
@@ -12,7 +11,7 @@ export const OTPInput: FC<OTPInputProps> = (props) => {
   const { value, onChange } = props
 
   return (
-    <InputOTP value={value} onChange={onChange} maxLength={6} pattern={REGEXP_ONLY_DIGITS}>
+    <InputOTP maxLength={6} onChange={onChange} pattern={REGEXP_ONLY_DIGITS} value={value}>
       <InputOTPGroup>
         <InputOTPSlot className="h-12 w-12 text-xl" index={0} />
         <InputOTPSlot className="h-12 w-12 text-xl" index={1} />

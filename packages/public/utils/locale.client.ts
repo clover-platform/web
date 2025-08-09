@@ -6,7 +6,7 @@ export const t = (key: string, vars?: Record<string, string>) => {
 
 export const tk = (key: string) => key
 
-// biome-ignore lint/suspicious/noExplicitAny: <explanation>
+// biome-ignore lint/suspicious/noExplicitAny: params
 export const i18n = (input: string, params: any) => {
   if (!params) return input
   let result = input

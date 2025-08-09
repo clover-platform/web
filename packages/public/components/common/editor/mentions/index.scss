@@ -1,17 +1,19 @@
 @import '@clover/public/assets/style/tailwind.css';
 
 .comment-editor {
-    &[contentEditable=true]:empty:before {
-        content: attr(data-tip);
-        opacity: 0.38;
+  &[contentEditable=true]:empty:before {
+      content: attr(data-tip);
+      opacity: 0.38;
     }
 }
+
 .tribute-container {
-    @apply border shadow-md rounded-md bg-white min-w-32;
-    ul {
-        li {
-            @apply px-3 py-2;
-            @apply hover:bg-muted;
-        }
+  @apply border shadow-md rounded-md bg-white min-w-32;
+
+  ul {
+      li {
+        @apply px-3 py-2;
+        @apply hover:bg-muted;
+      }
     }
 }

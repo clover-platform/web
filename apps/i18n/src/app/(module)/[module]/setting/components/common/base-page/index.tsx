@@ -1,12 +1,13 @@
-import { ModuleBreadcrumb } from '@/components/common/breadcrumb/module'
-import { useModule } from '@/hooks/use.module'
-import { MainPage } from '@clover/public/components/common/page'
-import { TitleBar } from '@clover/public/components/common/title-bar'
+import { SettingTabsTitle } from '../tabs-title'
+
+import type { FC, PropsWithChildren } from 'react'
 import { BreadcrumbItem, BreadcrumbLink, BreadcrumbPage, BreadcrumbSeparator, Card } from '@easykit/design'
 import Link from 'next/link'
-import type { FC, PropsWithChildren } from 'react'
 import { useTranslation } from 'react-i18next'
-import { SettingTabsTitle } from '../tabs-title'
+import { MainPage } from '@clover/public/components/common/page'
+import { TitleBar } from '@clover/public/components/common/title-bar'
+import { ModuleBreadcrumb } from '@/components/common/breadcrumb/module'
+import { useModule } from '@/hooks/use.module'
 
 export type SettingBasePageProps = PropsWithChildren<{
   title: string
@@ -31,7 +32,7 @@ export const SettingBasePage: FC<SettingBasePageProps> = (props) => {
           <BreadcrumbPage>{title}</BreadcrumbPage>
         </BreadcrumbItem>
       </ModuleBreadcrumb>
-      <TitleBar title={title} border={false} />
+      <TitleBar border={false} title={title} />
       <Card contentClassName="gap-2 flex flex-col">
         <SettingTabsTitle active={active} />
         {props.children}

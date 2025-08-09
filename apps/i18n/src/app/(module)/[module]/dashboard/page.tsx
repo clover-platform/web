@@ -1,10 +1,11 @@
-import { dashboard } from '@/rest/module'
+import { DashboardPage } from './components'
+
+import { dehydrate, HydrationBoundary } from '@tanstack/react-query'
+import type { Metadata } from 'next'
 import { st } from '@clover/public/utils/locale.server'
 import { getQueryClient } from '@clover/public/utils/query'
 import { keywords, title } from '@clover/public/utils/seo'
-import { HydrationBoundary, dehydrate } from '@tanstack/react-query'
-import type { Metadata } from 'next'
-import { DashboardPage } from './components'
+import { dashboard } from '@/rest/module'
 
 export async function generateMetadata(): Promise<Metadata> {
   return {

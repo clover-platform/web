@@ -1,7 +1,7 @@
-import type { TeamFormData } from '@/config/schema/team'
 import type { PageData } from '@clover/public/types/rest'
 import type { Team } from '@clover/public/types/team'
 import { del, get, post, resultWrapper } from '@clover/public/utils/rest'
+import type { TeamFormData } from '@/config/schema/team'
 
 export const myCollect = () => get<Team[]>('@main/team/collect/my')
 

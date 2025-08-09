@@ -1,17 +1,17 @@
 'use client'
 
-import LoginLink from '@/components/common/login/link'
-import { type RegisterFormData, getFormSchema } from '@/config/schema/login/register'
-import { register, sendEmailCode } from '@/rest/login/register'
-import { EmailCodeInput } from '@clover/public/components/common/input/email-code'
-import { useEncrypt } from '@clover/public/hooks'
-import { setToken } from '@clover/public/utils/token'
+import { useState } from 'react'
 import { Button, Form, FormItem, Input, useMessage } from '@easykit/design'
 import { useMutation } from '@tanstack/react-query'
 import { cloneDeep } from 'es-toolkit'
 import { useSearchParams } from 'next/navigation'
-import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
+import { EmailCodeInput } from '@clover/public/components/common/input/email-code'
+import { useEncrypt } from '@clover/public/hooks'
+import { setToken } from '@clover/public/utils/token'
+import LoginLink from '@/components/common/login/link'
+import { getFormSchema, type RegisterFormData } from '@/config/schema/login/register'
+import { register, sendEmailCode } from '@/rest/login/register'
 
 const RegisterPage = () => {
   const msg = useMessage()
@@ -52,31 +52,31 @@ const RegisterPage = () => {
       </div>
       <div className="mt-[30px]">
         <Form<RegisterFormData>
-          onValuesChange={(data) => setFormData(data as RegisterFormData)}
           onSubmit={onSubmit}
+          onValuesChange={(data) => setFormData(data as RegisterFormData)}
           schema={getFormSchema()}
         >
-          <FormItem name="username" label={t('用户名')}>
+          <FormItem label={t('用户名')} name="username">
             <Input placeholder={t('请输入用户名，字母数字或下划线，字母开头')} />
           </FormItem>
-          <FormItem name="email" label={t('邮箱')}>
+          <FormItem label={t('邮箱')} name="email">
             <Input placeholder={t('请输入正确的邮箱')} />
           </FormItem>
-          <FormItem name="code" label={t('邮箱验证码')}>
+          <FormItem label={t('邮箱验证码')} name="code">
             <EmailCodeInput
-              needEmail={true}
-              placeholder={t('请输入邮箱验证码')}
               api={sendEmailCode}
               data={{ email: formData?.email || '' }}
+              needEmail={true}
+              placeholder={t('请输入邮箱验证码')}
             />
           </FormItem>
-          <FormItem name="password" label={t('密码')}>
-            <Input type="password" placeholder={t('请输入密码')} />
+          <FormItem label={t('密码')} name="password">
+            <Input placeholder={t('请输入密码')} type="password" />
           </FormItem>
-          <FormItem name="password2" label={t('确认密码')}>
-            <Input type="password" placeholder={t('请再次输入密码')} />
+          <FormItem label={t('确认密码')} name="password2">
+            <Input placeholder={t('请再次输入密码')} type="password" />
           </FormItem>
-          <Button loading={isPending} type="submit" long>
+          <Button loading={isPending} long type="submit">
             {t('注册')}
           </Button>
         </Form>

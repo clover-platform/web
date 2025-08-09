@@ -1,5 +1,5 @@
-import {useAccess} from "@clover/public/hooks";
 import type { FC, PropsWithChildren } from 'react'
+import { useAccess } from '@clover/public/hooks'
 
 export type AccessProps = {
   value?: string | string[]
@@ -7,9 +7,9 @@ export type AccessProps = {
 } & PropsWithChildren
 
 const Access: FC<AccessProps> = (props) => {
-  const { value = '', every = true, children } = props;
-  const access = useAccess();
-  return access(value, every) ? children : null;
+  const { value = '', every = true, children } = props
+  const access = useAccess()
+  return access(value, every) ? children : null
 }
 
-export default Access;
+export default Access

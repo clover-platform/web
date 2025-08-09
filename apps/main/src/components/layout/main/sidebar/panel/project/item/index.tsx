@@ -1,6 +1,6 @@
+import { type FC, useCallback } from 'react'
 import { IconProject } from '@arco-iconbox/react-clover'
 import type { Project } from '@clover/public/types/project'
-import { type FC, useCallback } from 'react'
 
 export type ProjectItemProps = {
   project: Project
@@ -15,15 +15,15 @@ export const ProjectItem: FC<ProjectItemProps> = (props) => {
 
   return (
     <div className="group flex cursor-default items-center justify-center space-x-2 rounded-md p-1.5 hover:bg-secondary">
-      <div onClick={onClick} className="flex h-8 w-8 items-center justify-center rounded-md bg-primary text-white">
+      <div className="flex h-8 w-8 items-center justify-center rounded-md bg-primary text-white" onClick={onClick}>
         {project.cover ? (
-          // biome-ignore lint/nursery/noImgElement: <explanation>
-          <img className="h-full w-full object-cover" alt="Cover" src={project.cover} />
+          // biome-ignore lint/performance/noImgElement: Cover
+          <img alt="Cover" className="h-full w-full object-cover" src={project.cover} />
         ) : (
           <IconProject />
         )}
       </div>
-      <div onClick={onClick} className="flex-1">
+      <div className="flex-1" onClick={onClick}>
         <span>{project.name}</span>
         <span className="ml-1 opacity-60">@{project.projectKey}</span>
       </div>

@@ -21,7 +21,7 @@ export function useDocumentClick(refs: RefObject<HTMLElement>[], handler: EventH
 
     // 组件卸载时，清除事件监听
     return () => {
-      document.removeEventListener('click', listener);
+      document.removeEventListener('click', listener)
     };
   }, [refs, handler]); // 当refs或handler变化时，重新绑定
 }

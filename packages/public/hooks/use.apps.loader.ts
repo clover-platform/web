@@ -1,9 +1,10 @@
+import { useApps } from './use.apps'
+
+import { useCallback } from 'react'
+import { useAtom } from 'jotai'
 import { apps as appsRest } from '@clover/public/rest/config'
 import { loadingState } from '@clover/public/state/apps'
 import type { AppsItem } from '@clover/public/types/config'
-import { useAtom } from 'jotai'
-import { useCallback } from 'react'
-import { useApps } from './use.apps'
 
 export const useAppsLoader = (): {
   loading: boolean

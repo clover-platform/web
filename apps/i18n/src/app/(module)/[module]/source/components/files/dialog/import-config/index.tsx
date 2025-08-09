@@ -1,5 +1,6 @@
-import { useModule } from '@/hooks/use.module'
-import { importFile, preview } from '@/rest/source'
+import { HeaderSelect } from './header-select'
+
+import { type FC, useEffect, useMemo, useState } from 'react'
 import {
   Alert,
   Button,
@@ -19,9 +20,9 @@ import {
   useMessage,
 } from '@easykit/design'
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
-import { type FC, useEffect, useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { HeaderSelect } from './header-select'
+import { useModule } from '@/hooks/use.module'
+import { importFile, preview } from '@/rest/source'
 
 export type ImportConfigDialogProps = {
   fileId: number
@@ -94,10 +95,10 @@ export const ImportConfigDialog: FC<ImportConfigDialogProps> = (props) => {
 
   const footer = (
     <div className="flex gap-2">
-      <Button onClick={handleImport} loading={isImporting}>
+      <Button loading={isImporting} onClick={handleImport}>
         {t('导入')}
       </Button>
-      <Button variant="outline" onClick={props.onCancel} disabled={isImporting}>
+      <Button disabled={isImporting} onClick={props.onCancel} variant="outline">
         {t('取消')}
       </Button>
     </div>
@@ -129,25 +130,25 @@ export const ImportConfigDialog: FC<ImportConfigDialogProps> = (props) => {
 
   return (
     <Dialog
-      maskClosable={false}
+      className="w-[90vw] max-w-[960px] duration-200"
       footer={footer}
+      maskClosable={false}
       title={t('导入配置')}
       visible={visible}
-      className="w-[90vw] max-w-[960px] duration-200"
       {...rest}
     >
       <Loading loading={isLoading || isImporting}>
         <div className="flex w-full flex-col gap-4">
           <Alert>{t('我们将提供文件第一个工作簿的前5条数据进行预览')}</Alert>
           <div className="flex gap-2">
-            <Button variant="outline" onClick={reset} disabled={!hasSelections}>
+            <Button disabled={!hasSelections} onClick={reset} variant="outline">
               {t('重置')}
             </Button>
             <Checkbox checked={skipFirstRow} onCheckedChange={(v) => setSkipFirstRow(v as boolean)}>
               {t('不导入第一行')}
             </Checkbox>
           </div>
-          <Card contentClassName="p-0" className="rounded-md p-0">
+          <Card className="rounded-md p-0" contentClassName="p-0">
             <ScrollArea className="relative w-[calc(90vw-50px)] max-w-[calc(960px-50px)] duration-200">
               <Table className="w-max min-w-full">
                 <TableHeader className="bg-secondary/50">
@@ -157,9 +158,9 @@ export const ImportConfigDialog: FC<ImportConfigDialogProps> = (props) => {
                         <TableHead key={`col-${index + 1}`}>
                           <div className="my-1">
                             <HeaderSelect
-                              value={selects[index]}
-                              onChange={(value) => handleColumnSelect(index, value)}
                               disabledKeys={selectedValues.filter((v) => v !== selects[index])}
+                              onChange={(value) => handleColumnSelect(index, value)}
+                              value={selects[index]}
                             />
                           </div>
                         </TableHead>
@@ -170,8 +171,8 @@ export const ImportConfigDialog: FC<ImportConfigDialogProps> = (props) => {
                 <TableBody>
                   {data?.map((row, rowIndex) => (
                     <TableRow
-                      key={`row-${rowIndex + 1}`}
                       className={skipFirstRow && rowIndex === 0 ? 'opacity-40' : ''}
+                      key={`row-${rowIndex + 1}`}
                     >
                       {Array.from({ length: columnSize }).map((_, colIndex) => {
                         return (

@@ -1,8 +1,9 @@
-import { useCollectProject } from '@/hooks/use.collect.project'
-import { Empty, Input, ScrollArea } from '@easykit/design'
-import { useTranslation } from 'react-i18next'
 import { ProjectItem } from '../project/item'
 import { ProjectItemLoading } from '../project/item/loading'
+
+import { Empty, Input, ScrollArea } from '@easykit/design'
+import { useTranslation } from 'react-i18next'
+import { useCollectProject } from '@/hooks/use.collect.project'
 
 export const CollectPanel = () => {
   const { t } = useTranslation()

@@ -1,9 +1,9 @@
-import fetchIntercept from 'fetch-intercept';
 import { useCallback, useEffect, useRef } from 'react'
+import fetchIntercept from 'fetch-intercept'
 
 export type UseFetchInterceptProps = {
-  start?: () => void;
-  done?: () => void;
+  start?: () => void
+  done?: () => void
 }
 
 export const useFetchIntercept = (props: UseFetchInterceptProps) => {

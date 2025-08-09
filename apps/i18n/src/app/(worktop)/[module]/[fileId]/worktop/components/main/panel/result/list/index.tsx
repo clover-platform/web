@@ -1,16 +1,17 @@
-import { ENTRY_RESULT_RELOAD } from '@/events/worktop'
-import { useCurrentFile } from '@/hooks/use.current.file'
-import { list as listRest } from '@/rest/entry.result'
-import { currentEntryState, currentLanguageState, entriesState } from '@/state/worktop'
-import bus from '@clover/public/events'
+import { ResultItem } from './item'
+import { ResultListLoading } from './loading'
+
+import { useEffect, useMemo } from 'react'
 import { Button, Empty, ScrollArea } from '@easykit/design'
 import { useInfiniteQuery, useQueryClient } from '@tanstack/react-query'
 import { useAtom } from 'jotai'
 import { useParams } from 'next/navigation'
-import { useEffect, useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
-import { ResultItem } from './item'
-import { ResultListLoading } from './loading'
+import bus from '@clover/public/events'
+import { ENTRY_RESULT_RELOAD } from '@/events/worktop'
+import { useCurrentFile } from '@/hooks/use.current.file'
+import { list as listRest } from '@/rest/entry.result'
+import { currentEntryState, currentLanguageState, entriesState } from '@/state/worktop'
 
 const SIZE = 5
 
@@ -63,7 +64,7 @@ export const ResultList = () => {
         {!loading && list.length === 0 ? <Empty text={t('暂无翻译')} /> : null}
         <div className="space-y-2 p-2">
           {list.map((item) => {
-            return <ResultItem key={item.id} item={item} />
+            return <ResultItem item={item} key={item.id} />
           })}
           {loading && <ResultListLoading />}
           {!loading && hasNextPage && (

@@ -1,5 +1,5 @@
-import { t } from '@clover/public/utils/locale.client'
 import { array, object, z } from 'zod'
+import { t } from '@clover/public/utils/locale.client'
 
 export const getSchema = () =>
   object({

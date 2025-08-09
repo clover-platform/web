@@ -1,9 +1,10 @@
 'use client'
 
-import type { ModuleLayoutProps } from '@/components/layout/module'
-import { useLayoutConfig } from '@clover/public/components/layout/hooks/use.layout.config'
-import { useTranslation } from 'react-i18next'
 import { SettingBasePage } from '../../components/common/base-page'
+
+import { useTranslation } from 'react-i18next'
+import { useLayoutConfig } from '@clover/public/components/layout/hooks/use.layout.config'
+import type { ModuleLayoutProps } from '@/components/layout/module'
 
 export const ModuleSettingAPIPage = () => {
   useLayoutConfig<ModuleLayoutProps>({
@@ -11,7 +12,7 @@ export const ModuleSettingAPIPage = () => {
   })
   const { t } = useTranslation()
   return (
-    <SettingBasePage title={t('API')} active="api">
+    <SettingBasePage active="api" title={t('API')}>
       <div>coming soon</div>
     </SettingBasePage>
   )

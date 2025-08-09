@@ -1,6 +1,7 @@
-import classNames from 'classnames'
-import { type FC, useState } from 'react'
 import { RevisionDialog } from '../../dialog/revision'
+
+import { type FC, useState } from 'react'
+import classNames from 'classnames'
 
 export type FileRevisionProps = {
   version: number
@@ -21,7 +22,7 @@ export const FileRevision: FC<FileRevisionProps> = (props) => {
       >
         {version}
       </div>
-      <RevisionDialog visible={visible} fileId={fileId} onCancel={() => setVisible(false)} />
+      <RevisionDialog fileId={fileId} onCancel={() => setVisible(false)} visible={visible} />
     </>
   )
 }

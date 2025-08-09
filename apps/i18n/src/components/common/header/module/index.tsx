@@ -1,12 +1,13 @@
+import { ModuleCollect } from './collect'
+
 import { DropdownMenuContent, DropdownMenuItem, DropdownMenuSeparator } from '@easykit/design'
 import Link from 'next/link'
 import { useTranslation } from 'react-i18next'
-import { ModuleCollect } from './collect'
 
 export const Module = () => {
   const { t } = useTranslation()
   return (
-    <DropdownMenuContent className="w-96" align="start">
+    <DropdownMenuContent align="start" className="w-96">
       <ModuleCollect />
       <DropdownMenuSeparator />
       <Link href="/">

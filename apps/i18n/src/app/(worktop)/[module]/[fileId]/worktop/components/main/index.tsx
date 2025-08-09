@@ -1,12 +1,13 @@
-import { leftSideOpenState, rightSideOpenState } from '@/state/worktop'
-import { ResizableHandle, ResizablePanel, ResizablePanelGroup } from '@easykit/design'
-import classNames from 'classnames'
-import { useAtom } from 'jotai'
-import { useEffect, useRef } from 'react'
-import type { ImperativePanelHandle } from 'react-resizable-panels'
 import { EntryPanel } from './panel/entry'
 import { PluginPanel } from './panel/plugin'
 import { ResultPanel } from './panel/result'
+
+import { useEffect, useRef } from 'react'
+import { ResizableHandle, ResizablePanel, ResizablePanelGroup } from '@easykit/design'
+import classNames from 'classnames'
+import { useAtom } from 'jotai'
+import type { ImperativePanelHandle } from 'react-resizable-panels'
+import { leftSideOpenState, rightSideOpenState } from '@/state/worktop'
 
 export const MainPanel = () => {
   const [leftSideOpen, setLeftSideOpen] = useAtom(leftSideOpenState)
@@ -32,14 +33,14 @@ export const MainPanel = () => {
 
   return (
     <div className="h-0 w-full flex-1 flex-shrink-0">
-      <ResizablePanelGroup direction="horizontal" autoSaveId="module.worktop">
+      <ResizablePanelGroup autoSaveId="module.worktop" direction="horizontal">
         <ResizablePanel
           className={classNames(leftSideOpen ? 'shadow-md' : 'hidden')}
           collapsible={true}
-          ref={leftRef}
           defaultSize={30}
           onCollapse={() => setLeftSideOpen(false)}
           onExpand={() => setLeftSideOpen(true)}
+          ref={leftRef}
         >
           <EntryPanel />
         </ResizablePanel>
@@ -51,10 +52,10 @@ export const MainPanel = () => {
         <ResizablePanel
           className={classNames(rightSideOpen ? 'shadow-md' : 'hidden')}
           collapsible={true}
-          ref={rightRef}
           defaultSize={30}
           onCollapse={() => setRightSideOpen(false)}
           onExpand={() => setRightSideOpen(true)}
+          ref={rightRef}
         >
           <PluginPanel />
         </ResizablePanel>

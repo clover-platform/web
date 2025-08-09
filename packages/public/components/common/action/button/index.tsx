@@ -1,7 +1,7 @@
-import classNames from "classnames";
 import type { FC, HTMLAttributes, PropsWithChildren } from 'react'
+import classNames from 'classnames'
 
-export type ActionButtonProps = PropsWithChildren<HTMLAttributes<HTMLButtonElement>>;
+export type ActionButtonProps = PropsWithChildren<HTMLAttributes<HTMLButtonElement>>
 
 export const ActionButton: FC<ActionButtonProps> = (props) => {
   return (
@@ -18,5 +18,5 @@ export const ActionButton: FC<ActionButtonProps> = (props) => {
     >
       {props.children}
     </button>
-  ) 
+  )
 }

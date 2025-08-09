@@ -1,17 +1,15 @@
-import {Separator} from "@easykit/design";
-import classNames from "classnames";
 import type { FC, ReactNode } from 'react'
+import { Separator } from '@easykit/design'
+import classNames from 'classnames'
 
 export type TitleBarProps = {
-  title: ReactNode;
-  actions?: ReactNode;
-  border?: boolean;
+  title: ReactNode
+  actions?: ReactNode
+  border?: boolean
 }
 
 export const TitleBar: FC<TitleBarProps> = (props) => {
-  const {
-    border = false,
-  } = props;
+  const { border = false } = props
   return (
     <div>
       <div className={classNames('flex min-h-9 items-center justify-center px-1')}>

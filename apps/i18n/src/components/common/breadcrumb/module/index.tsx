@@ -1,9 +1,10 @@
-import { useModuleInfo } from '@/hooks/use.module.info'
+import { AppBreadcrumb } from '../app'
+
+import type { FC, PropsWithChildren } from 'react'
 import { BreadcrumbItem, BreadcrumbLink, BreadcrumbSeparator, Skeleton } from '@easykit/design'
 import Link from 'next/link'
-import type { FC, PropsWithChildren } from 'react'
 import { useTranslation } from 'react-i18next'
-import { AppBreadcrumb } from '../app'
+import { useModuleInfo } from '@/hooks/use.module.info'
 
 export type ModuleBreadcrumbProps = PropsWithChildren
 

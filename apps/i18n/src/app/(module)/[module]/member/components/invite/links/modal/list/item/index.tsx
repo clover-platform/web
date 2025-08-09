@@ -1,15 +1,16 @@
-import { useModule } from '@/hooks/use.module'
-import { revoke } from '@/rest/member.invite'
-import type { MemberInvite } from '@/types/module/member'
+import { MemberRole } from '../../../../../role'
+
+import type { FC } from 'react'
 import { IconDelete } from '@arco-iconbox/react-clover'
-import { Action } from '@clover/public/components/common/action'
-import { Tooltip, ValueFormatter, useAlert, useMessage } from '@easykit/design'
+import { Tooltip, useAlert, useMessage, ValueFormatter } from '@easykit/design'
 import { CopyIcon } from '@radix-ui/react-icons'
 import { useMutation } from '@tanstack/react-query'
 import copy from 'copy-to-clipboard'
-import type { FC } from 'react'
 import { useTranslation } from 'react-i18next'
-import { MemberRole } from '../../../../../role'
+import { Action } from '@clover/public/components/common/action'
+import { useModule } from '@/hooks/use.module'
+import { revoke } from '@/rest/member.invite'
+import type { MemberInvite } from '@/types/module/member'
 
 export type InviteLinkItemProps = {
   item: MemberInvite
@@ -52,7 +53,7 @@ export const InviteLinkItem: FC<InviteLinkItemProps> = (props) => {
   return (
     <div className="space-y-2">
       <div className="text-muted-foreground">
-        <ValueFormatter value={item.createTime} formatters={['time']} />
+        <ValueFormatter formatters={['time']} value={item.createTime} />
       </div>
       <div className="flex items-stretch justify-center rounded-md border">
         <div className="flex w-0 flex-1 flex-shrink-0 items-center truncate rounded-l-md bg-muted px-2 py-1 text-muted-foreground">
@@ -61,11 +62,11 @@ export const InviteLinkItem: FC<InviteLinkItemProps> = (props) => {
         <div className="border-l p-1">
           <Tooltip content={t('复制')}>
             <Action
+              className="!p-0 h-8 w-8"
               onClick={() => {
                 copy(url)
                 msg.success(t('复制成功'))
               }}
-              className="!p-0 h-8 w-8"
             >
               <CopyIcon />
             </Action>
@@ -73,7 +74,7 @@ export const InviteLinkItem: FC<InviteLinkItemProps> = (props) => {
         </div>
         <div className="border-l p-1">
           <Tooltip content={t('撤销')}>
-            <Action onClick={doRevoke} className="!p-0 h-8 w-8">
+            <Action className="!p-0 h-8 w-8" onClick={doRevoke}>
               <IconDelete />
             </Action>
           </Tooltip>

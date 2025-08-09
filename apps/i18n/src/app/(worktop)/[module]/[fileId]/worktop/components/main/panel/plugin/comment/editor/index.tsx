@@ -1,17 +1,17 @@
-import { ENTRY_COMMENT_RELOAD } from '@/events/worktop'
-import { add } from '@/rest/entry.comment'
-import { currentEntryState, currentLanguageState, entriesState, filesState } from '@/state/worktop'
+import { useState } from 'react'
 import { IconSend } from '@arco-iconbox/react-clover'
-import { Action } from '@clover/public/components/common/action'
-import bus from '@clover/public/events'
 import { Spin, useMessage } from '@easykit/design'
 import { useMutation } from '@tanstack/react-query'
 import classNames from 'classnames'
 import { useAtom } from 'jotai'
 import { useParams } from 'next/navigation'
-import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import TextareaAutosize from 'react-textarea-autosize'
+import { Action } from '@clover/public/components/common/action'
+import bus from '@clover/public/events'
+import { ENTRY_COMMENT_RELOAD } from '@/events/worktop'
+import { add } from '@/rest/entry.comment'
+import { currentEntryState, currentLanguageState, entriesState, filesState } from '@/state/worktop'
 
 export const CommentEditor = () => {
   const [value, setValue] = useState<string>('')
@@ -52,11 +52,11 @@ export const CommentEditor = () => {
   return (
     <div className="relative w-full border-t">
       <TextareaAutosize
+        className="w-full resize-none rounded-none border-none px-4 py-2 shadow-none focus:outline-none focus-visible:ring-0"
         minRows={3}
-        value={value}
         onChange={(e) => setValue(e.target.value)}
         placeholder={t('请输入评论内容')}
-        className="w-full resize-none rounded-none border-none px-4 py-2 shadow-none focus:outline-none focus-visible:ring-0"
+        value={value}
       />
       <div className="flex items-center justify-end p-2">
         <Action disabled={loading} onClick={send}>

@@ -1,14 +1,15 @@
 'use client'
 
-import { AppBreadcrumb } from '@/components/common/app-breadcrumb'
-import { MainPage } from '@/components/common/main-page'
-import type { MainLayoutProps } from '@/components/layout/main'
-import { TitleBar } from '@clover/public/components/common/title-bar'
-import { useLayoutConfig } from '@clover/public/components/layout/hooks/use.layout.config'
+import { TeamForm } from '../../components/form'
+
 import { BreadcrumbItem, BreadcrumbLink, BreadcrumbPage, BreadcrumbSeparator, Card } from '@easykit/design'
 import Link from 'next/link'
 import { useTranslation } from 'react-i18next'
-import { TeamForm } from '../../components/form'
+import { TitleBar } from '@clover/public/components/common/title-bar'
+import { useLayoutConfig } from '@clover/public/components/layout/hooks/use.layout.config'
+import { AppBreadcrumb } from '@/components/common/app-breadcrumb'
+import { MainPage } from '@/components/common/main-page'
+import type { MainLayoutProps } from '@/components/layout/main'
 
 export const NewTeamPage = () => {
   useLayoutConfig<MainLayoutProps>({

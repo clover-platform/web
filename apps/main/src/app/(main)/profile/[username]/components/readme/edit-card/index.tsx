@@ -1,13 +1,14 @@
 import { Button, Card, useMessage } from '@easykit/design'
 import '@easykit/editor/style.css'
-import { updateReadme } from '@/rest/profile'
-import { useStateLoader } from '@clover/public/components/layout/hooks/use.state.loader'
-import { useProfile } from '@clover/public/hooks'
+
+import { type FC, useState } from 'react'
 import { Editor } from '@easykit/editor'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { useParams } from 'next/navigation'
-import { type FC, useState } from 'react'
 import { useTranslation } from 'react-i18next'
+import { useStateLoader } from '@clover/public/components/layout/hooks/use.state.loader'
+import { useProfile } from '@clover/public/hooks'
+import { updateReadme } from '@/rest/profile'
 
 export type EditCardProps = {
   readme?: string
@@ -50,10 +51,10 @@ export const EditCard: FC<EditCardProps> = (props) => {
       <div className="flex items-center gap-2">
         {isOwner ? (
           <>
-            <Button loading={isPending} size="sm" onClick={handleSave}>
+            <Button loading={isPending} onClick={handleSave} size="sm">
               {t('保存')}
             </Button>
-            <Button disabled={isPending} size="sm" variant="outline" onClick={onCancel}>
+            <Button disabled={isPending} onClick={onCancel} size="sm" variant="outline">
               {t('取消')}
             </Button>
           </>
@@ -65,7 +66,7 @@ export const EditCard: FC<EditCardProps> = (props) => {
   return (
     <Card title={editTitle}>
       <div className="ml-[60px]">
-        <Editor value={value} onChange={setValue} />
+        <Editor onChange={setValue} value={value} />
       </div>
     </Card>
   )

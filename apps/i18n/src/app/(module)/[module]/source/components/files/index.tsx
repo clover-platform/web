@@ -1,15 +1,15 @@
-
-import { type ListFileQuery, deleteFile, list } from '@/rest/source'
-import type { File } from '@/types/module/source'
-import { useListQuery } from '@clover/public/hooks'
-import { Card, DataTable, useAlert, useMessage } from '@easykit/design'
-import { useMutation, useQueryClient } from '@tanstack/react-query'
-import { useParams } from 'next/navigation'
-import { useState } from 'react'
-import { useTranslation } from 'react-i18next'
 import { RenameDialog } from './dialog/rename'
 import { UpdateDialog } from './dialog/update'
 import { getColumns, getFilters, getRowActions } from './table'
+
+import { useState } from 'react'
+import { Card, DataTable, useAlert, useMessage } from '@easykit/design'
+import { useMutation, useQueryClient } from '@tanstack/react-query'
+import { useParams } from 'next/navigation'
+import { useTranslation } from 'react-i18next'
+import { useListQuery } from '@clover/public/hooks'
+import { deleteFile, type ListFileQuery, list } from '@/rest/source'
+import type { File } from '@/types/module/source'
 
 const initialParams = {
   keyword: '',
@@ -48,17 +48,15 @@ export const Files = () => {
     <>
       <Card>
         <DataTable<File>
-          inCard={true}
+          columns={getColumns()}
+          data={data}
           filter={{
             items: getFilters(),
             defaultValues: initialParams,
             query: query,
           }}
+          inCard={true}
           load={load}
-          pagination={pagination}
-          columns={getColumns()}
-          rowActions={(cell) => getRowActions(cell)}
-          data={data}
           loading={loading}
           onRowActionClick={({ id: key }, { original }) => {
             if (key === 'delete') {
@@ -81,25 +79,27 @@ export const Files = () => {
               setFile(original)
             }
           }}
+          pagination={pagination}
+          rowActions={(cell) => getRowActions(cell)}
         />
       </Card>
       <RenameDialog
         fileId={file?.id}
         fileName={file?.name}
-        visible={renameVisible}
         onCancel={() => {
           setRenameVisible(false)
           setFile(null)
         }}
+        visible={renameVisible}
       />
       <UpdateDialog
         fileId={file?.id}
         fileName={file?.name}
-        visible={updateVisible}
         onCancel={() => {
           setUpdateVisible(false)
           setFile(null)
         }}
+        visible={updateVisible}
       />
     </>
   )

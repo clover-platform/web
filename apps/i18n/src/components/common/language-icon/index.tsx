@@ -1,7 +1,7 @@
-import { FlagIcon } from '@/components/common/flag-icon'
-import { COUNTRIES } from "@/components/common/flag-icon/config";
-import classNames from "classnames";
 import type { FC } from 'react'
+import classNames from 'classnames'
+import { FlagIcon } from '@/components/common/flag-icon'
+import { COUNTRIES } from '@/components/common/flag-icon/config'
 
 export type LanguageIconProps = {
   code: string
@@ -9,9 +9,9 @@ export type LanguageIconProps = {
 }
 
 export const LanguageIcon: FC<LanguageIconProps> = (props) => {
-  const { code } = props;
-  const area = (code.split("-")[1] || code).toLowerCase();
-  const inCountries = !!COUNTRIES.find((item) => item.code === area);
+  const { code } = props
+  const area = (code.split('-')[1] || code).toLowerCase()
+  const inCountries = !!COUNTRIES.find((item) => item.code === area)
   return (
     <div
       className={classNames(
@@ -21,7 +21,7 @@ export const LanguageIcon: FC<LanguageIconProps> = (props) => {
       )}
     >
       {inCountries ? (
-        <FlagIcon code={area} className="!w-full !h-full" />
+        <FlagIcon className="!w-full !h-full" code={area} />
       ) : (
         <span className="font-bold text-muted-foreground leading-none">{code}</span>
       )}

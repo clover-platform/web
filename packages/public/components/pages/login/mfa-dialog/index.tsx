@@ -1,8 +1,7 @@
-
+import { useCallback } from 'react'
+import { Dialog, type DialogProps, Loading } from '@easykit/design'
 import { OTPInput } from '@clover/public/components/common/input/otp'
 import { t } from '@clover/public/utils/locale.client'
-import { Dialog, type DialogProps, Loading } from '@easykit/design'
-import { useCallback } from 'react'
 
 type FormData = {
   code: string
@@ -32,11 +31,11 @@ export const MFADialog = <T = unknown>(props: MFADialogProps<T>) => {
 
   return (
     <Dialog
-      visible={visible}
+      className="!max-w-[340px]"
+      maskClosable={false}
       onCancel={onCancel}
       title={t('二次验证')}
-      maskClosable={false}
-      className="!max-w-[340px]"
+      visible={visible}
       {...rest}
     >
       <Loading loading={isPending}>

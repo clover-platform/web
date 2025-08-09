@@ -1,7 +1,7 @@
+import type { FC } from 'react'
 import { Button } from '@easykit/design'
 import { CheckCircledIcon } from '@radix-ui/react-icons'
 import { useRouter } from 'next/navigation'
-import type { FC } from 'react'
 import { useTranslation } from 'react-i18next'
 
 export type InvitePageJoinedProps = {
@@ -24,7 +24,7 @@ export const InvitePageJoined: FC<InvitePageJoinedProps> = (props) => {
       </div>
       <div>
         <span className="text-muted-foreground">{t('你已经加入该项目')}</span>
-        <Button onClick={detail} className="p-1" variant="link">
+        <Button className="p-1" onClick={detail} variant="link">
           {t('查看详情')}
         </Button>
       </div>

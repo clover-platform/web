@@ -1,8 +1,8 @@
-import {middlewareHandler} from "@clover/public/plugin/middleware";
 import type { NextRequest } from 'next/server'
+import { middlewareHandler } from '@clover/public/plugin/middleware'
 
 export async function middleware(request: NextRequest) {
-  return await middlewareHandler(request);
+  return await middlewareHandler(request)
 }
 
 export const config = {

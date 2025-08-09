@@ -24,7 +24,7 @@ import type { Account } from '@clover/public/types/account'
 import type { CommonConfig } from '@clover/public/types/config'
 import type { Project } from '@clover/public/types/project'
 import type { Team } from '@clover/public/types/team'
-import { getRootDomain } from '@clover/public/utils'
+import { getRootDomain } from '@clover/public/utils' 
 import { getQueryClient } from '@clover/public/utils/query'
 
 export type AtomValues = Iterable<

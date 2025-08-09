@@ -1,5 +1,6 @@
-import { get } from '@clover/public/utils/rest'
 import type { AppsItem, CommonConfig } from '../types/config'
+
+import { get } from '@clover/public/utils/rest'
 
 export const apps = () => get<AppsItem[]>('@main/config/app/list')
 

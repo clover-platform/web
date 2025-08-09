@@ -1,10 +1,10 @@
-import type { Module } from '@/types/module'
+import { type FC, useCallback } from 'react'
 import { IconTeam } from '@arco-iconbox/react-clover'
 import { Action, Tooltip } from '@easykit/design'
 import { ArrowUpRight } from 'lucide-react'
 import { useRouter } from 'next/navigation'
-import { type FC, useCallback } from 'react'
 import { useTranslation } from 'react-i18next'
+import type { Module } from '@/types/module'
 
 export type CollectModuleItemProps = {
   module: Module
@@ -25,10 +25,10 @@ export const CollectModuleItem: FC<CollectModuleItemProps> = (props) => {
 
   return (
     <div className="group flex cursor-pointer items-center justify-center space-x-2 rounded-md p-2 hover:bg-secondary">
-      <div onClick={onClick} className="flex h-8 w-8 items-center justify-center rounded-md bg-primary text-white">
+      <div className="flex h-8 w-8 items-center justify-center rounded-md bg-primary text-white" onClick={onClick}>
         <IconTeam />
       </div>
-      <div onClick={onClick} className="flex-1">
+      <div className="flex-1" onClick={onClick}>
         <span>{module.name}</span>
         <span className="ml-1 opacity-60">@{module.identifier}</span>
       </div>

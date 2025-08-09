@@ -1,24 +1,25 @@
 'use client'
 
-import { AppBreadcrumb } from '@/components/common/app-breadcrumb'
-import { MainPage } from '@/components/common/main-page'
-import type { MainLayoutProps } from '@/components/layout/main'
-import { useCollectProject } from '@/hooks/use.collect.project'
-import { useCollectTeam } from '@/hooks/use.collect.team'
-import { type ListParams, addCollect, cancelCollect, deleteTeam, leaveTeam, list } from '@/rest/team'
+import { getColumns, getFilters, getRowActions, getTabs } from './config/table'
+
+import { useCallback, useMemo, useState } from 'react'
+import { BreadcrumbItem, BreadcrumbPage, Button, Card, DataTable, useAlert, useMessage } from '@easykit/design'
+import { useMutation, useQueryClient } from '@tanstack/react-query'
+import Link from 'next/link'
+import { useRouter, useSearchParams } from 'next/navigation'
+import { useTranslation } from 'react-i18next'
 import { TabsTitle } from '@clover/public/components/common/tabs-title'
 import { TitleBar } from '@clover/public/components/common/title-bar'
 import { useCurrentTeam } from '@clover/public/components/layout/hooks/main'
 import { useLayoutConfig } from '@clover/public/components/layout/hooks/use.layout.config'
 import { useListQuery } from '@clover/public/hooks'
 import type { Team } from '@clover/public/types/team'
-import { BreadcrumbItem, BreadcrumbPage, Button, Card, DataTable, useAlert, useMessage } from '@easykit/design'
-import { useMutation, useQueryClient } from '@tanstack/react-query'
-import Link from 'next/link'
-import { useRouter, useSearchParams } from 'next/navigation'
-import { useCallback, useMemo, useState } from 'react'
-import { useTranslation } from 'react-i18next'
-import { getColumns, getFilters, getRowActions, getTabs } from './config/table'
+import { AppBreadcrumb } from '@/components/common/app-breadcrumb'
+import { MainPage } from '@/components/common/main-page'
+import type { MainLayoutProps } from '@/components/layout/main'
+import { useCollectProject } from '@/hooks/use.collect.project'
+import { useCollectTeam } from '@/hooks/use.collect.team'
+import { addCollect, cancelCollect, deleteTeam, type ListParams, leaveTeam, list } from '@/rest/team'
 
 const initialParams = {
   keyword: '',
@@ -122,21 +123,19 @@ export const TeamPage = () => {
           <BreadcrumbPage>{title}</BreadcrumbPage>
         </BreadcrumbItem>
       </AppBreadcrumb>
-      <TitleBar title={title} actions={actions} border={false} />
+      <TitleBar actions={actions} border={false} title={title} />
       <Card>
         <TabsTitle active={active} items={getTabs()} onChange={setActive} />
         <DataTable<Team>
-          inCard={true}
+          columns={getColumns(team?.id)}
+          data={data}
           filter={{
             items: getFilters(),
             defaultValues: initialParams,
             query: query,
           }}
+          inCard={true}
           load={load}
-          pagination={pagination}
-          columns={getColumns(team?.id)}
-          rowActions={(t) => getRowActions(t, team?.id)}
-          data={data}
           loading={loading}
           onRowActionClick={({ id: key }, { original }) => {
             const { id, teamKey } = original
@@ -174,6 +173,8 @@ export const TeamPage = () => {
               })
             }
           }}
+          pagination={pagination}
+          rowActions={(t) => getRowActions(t, team?.id)}
         />
       </Card>
     </MainPage>

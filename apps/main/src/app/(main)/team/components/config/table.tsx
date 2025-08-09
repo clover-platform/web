@@ -1,9 +1,9 @@
 import { IconTeam } from '@arco-iconbox/react-clover'
+import { Badge, type DataTableColumn, type DropdownMenuItemProps, type FilterItemProps, Input } from '@easykit/design'
 import type { TabsTitleItem } from '@clover/public/components/common/tabs-title'
 import { UserItem } from '@clover/public/components/common/user-item'
 import type { Team } from '@clover/public/types/team'
 import { t } from '@clover/public/utils/locale.client'
-import { Badge, type DataTableColumn, type DropdownMenuItemProps, type FilterItemProps, Input } from '@easykit/design'
 
 export const getTabs = (): TabsTitleItem[] => [
   {
@@ -32,8 +32,8 @@ export const getColumns = (currentTeamId?: number): DataTableColumn<Team>[] => [
         <div className="flex items-center space-x-1">
           <div className="flex h-6 w-6 items-center justify-center rounded-md bg-secondary text-secondary-foreground">
             {original.cover ? (
-              // biome-ignore lint/nursery/noImgElement: <explanation>
-              <img className="h-full w-full object-cover" alt="Cover" src={original.cover} />
+              // biome-ignore lint/performance/noImgElement: Cover
+              <img alt="Cover" className="h-full w-full object-cover" src={original.cover} />
             ) : (
               <IconTeam />
             )}

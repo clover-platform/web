@@ -1,13 +1,14 @@
-import { type EditEntryData, edit } from '@/rest/entry'
-import { filesState } from '@/state/worktop'
-import type { Entry } from '@/types/module/entry'
+import { EntryEditForm } from '../../form/edit'
+
+import { type FC, useEffect, useState } from 'react'
 import { Button, Dialog, type DialogProps, useMessage } from '@easykit/design'
 import { useMutation } from '@tanstack/react-query'
 import { useAtom } from 'jotai/index'
 import { useParams } from 'next/navigation'
-import { type FC, useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { EntryEditForm } from '../../form/edit'
+import { type EditEntryData, edit } from '@/rest/entry'
+import { filesState } from '@/state/worktop'
+import type { Entry } from '@/types/module/entry'
 
 export type CreateEntryModalProps = {
   entry: Entry
@@ -49,13 +50,13 @@ export const EditEntryModal: FC<CreateEntryModalProps> = (props) => {
   }, [props.visible])
 
   return (
-    <Dialog {...props} title={t('编辑词条')} maskClosable={false}>
+    <Dialog {...props} maskClosable={false} title={t('编辑词条')}>
       <EntryEditForm defaultValues={entry} key={formKey} onSubmit={(data) => onSubmit(data as EditEntryData)}>
         <div className="flex items-center justify-end space-x-2">
           <Button loading={loading} type="submit">
             {t('保存')}
           </Button>
-          <Button variant="outline" type="button" onClick={() => props.onCancel?.()}>
+          <Button onClick={() => props.onCancel?.()} type="button" variant="outline">
             {t('取消')}
           </Button>
         </div>

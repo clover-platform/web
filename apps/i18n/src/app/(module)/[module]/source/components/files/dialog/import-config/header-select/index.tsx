@@ -1,7 +1,7 @@
-import { useModuleInfo } from '@/hooks/use.module.info'
-import { Select, type SelectOptionProps, type SelectProps } from '@easykit/design'
 import { type FC, useMemo } from 'react'
+import { Select, type SelectOptionProps, type SelectProps } from '@easykit/design'
 import { useTranslation } from 'react-i18next'
+import { useModuleInfo } from '@/hooks/use.module.info'
 
 export type HeaderSelectProps = Omit<SelectProps, 'options'> & {
   disabledKeys?: string[]

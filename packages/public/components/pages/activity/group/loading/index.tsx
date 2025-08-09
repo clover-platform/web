@@ -1,5 +1,6 @@
-import { Skeleton } from '@easykit/design'
 import { ActivityGroupItemLoading } from './item'
+
+import { Skeleton } from '@easykit/design'
 
 export const ActivityGroupLoading = () => {
   return (

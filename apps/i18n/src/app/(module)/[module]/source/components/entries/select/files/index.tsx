@@ -1,11 +1,11 @@
+import { type FC, useCallback, useEffect, useMemo, useState } from 'react'
+import { ComboSelect, type ComboSelectOptionProps, type ComboSelectProps } from '@easykit/design'
+import { debounce } from 'es-toolkit'
+import { useTranslation } from 'react-i18next'
 import { FileName } from '@/components/common/file-name'
 import { useModule } from '@/hooks'
 import { searchFile } from '@/rest/source'
 import type { File } from '@/types/module/source'
-import { ComboSelect, type ComboSelectOptionProps, type ComboSelectProps } from '@easykit/design'
-import { debounce } from 'es-toolkit'
-import { type FC, useCallback, useEffect, useMemo, useState } from 'react'
-import { useTranslation } from 'react-i18next'
 
 export type FilesSelectProps = ComboSelectProps<File>
 
@@ -23,7 +23,7 @@ export const FilesSelect: FC<FilesSelectProps> = (props) => {
         setInitLoading(false)
         setResult(
           data?.data?.map((item) => ({
-            label: <FileName iconClassName="size-4" file={item} />,
+            label: <FileName file={item} iconClassName="size-4" />,
             value: `${item.id}`,
             raw: item,
           })) ?? []
@@ -47,21 +47,21 @@ export const FilesSelect: FC<FilesSelectProps> = (props) => {
   return (
     <ComboSelect
       {...props}
-      initLoading={initLoading}
-      options={options}
-      loading={loading}
-      placeholder={t('请选择')}
-      multiple={true}
-      search={true}
       className="min-w-[180px]"
+      filter={(_value, search, option) => {
+        return option?.raw?.name.includes(search) ?? false
+      }}
+      initLoading={initLoading}
+      loading={loading}
+      multiple={true}
       onSearch={(value) => {
         setLoading(true)
         setResult([])
         onSearch(value)
       }}
-      filter={(_value, search, option) => {
-        return option?.raw?.name.includes(search) ?? false
-      }}
+      options={options}
+      placeholder={t('请选择')}
+      search={true}
     />
   )
 }

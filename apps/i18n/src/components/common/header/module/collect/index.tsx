@@ -1,8 +1,9 @@
-import { useCollectModule } from '@/hooks/use.collect.module'
-import { Empty } from "@easykit/design"
-import { useTranslation } from "react-i18next"
 import { CollectModuleItem } from './item'
 import { CollectLoadingItem } from './loading'
+
+import { Empty } from '@easykit/design'
+import { useTranslation } from 'react-i18next'
+import { useCollectModule } from '@/hooks/use.collect.module'
 
 export const ModuleCollect = () => {
   const { t } = useTranslation()

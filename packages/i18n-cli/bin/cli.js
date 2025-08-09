@@ -1,8 +1,10 @@
 #!/usr/bin/env node
 import Module from 'node:module'
+import { I18nClient } from '../lib/client.js'
+
 import chalk from 'chalk'
 import program from 'commander'
-import { I18nClient } from '../lib/client.js'
+
 const require = Module.createRequire(import.meta.url)
 const pkg = require('../package.json')
 

@@ -1,6 +1,6 @@
+import { object, string, type z } from 'zod'
 import { t } from '@clover/public/utils/locale.client'
 import { CODE, EMAIL, PASSWORD } from '@clover/public/utils/regular'
-import { object, string, type z } from 'zod'
 
 const code = t('请输入6位数字验证码')
 

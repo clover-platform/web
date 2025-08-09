@@ -1,11 +1,11 @@
-import type { FileFormData } from '@/config/schema/module/file'
-import { updateBatch } from '@/rest/source'
+import { type FC, useMemo } from 'react'
 import { Alert, Button, Dialog, type DialogProps, Space, useMessage } from '@easykit/design'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { Info } from 'lucide-react'
 import { useParams } from 'next/navigation'
-import { type FC, useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
+import type { FileFormData } from '@/config/schema/module/file'
+import { updateBatch } from '@/rest/source'
 
 export type UpdateBatchDialogProps = DialogProps & {
   files: FileFormData['files']
@@ -37,9 +37,9 @@ export const UpdateBatchDialog: FC<UpdateBatchDialogProps> = (props) => {
   }, [files])
 
   return (
-    <Dialog {...props} title={t('文件重复')} maskClosable={false}>
+    <Dialog {...props} maskClosable={false} title={t('文件重复')}>
       {errorFiles.length > 0 && (
-        <Alert className="mb-4" title={t('上传失败')} icon={<Info />} variant="destructive">
+        <Alert className="mb-4" icon={<Info />} title={t('上传失败')} variant="destructive">
           <div>{t('以下文件上传失败，请重新上传')}</div>
           <ul className="ml-2 list-disc">
             {errorFiles.map((file) => (
@@ -49,7 +49,7 @@ export const UpdateBatchDialog: FC<UpdateBatchDialogProps> = (props) => {
         </Alert>
       )}
       {repeatedFiles.length > 0 && (
-        <Alert className="mb-4" title={t('重复提示')} icon={<Info />}>
+        <Alert className="mb-4" icon={<Info />} title={t('重复提示')}>
           <div>{t('以下文件重复，是否更新？')}</div>
           <ul className="ml-2 list-disc">
             {repeatedFiles.map((file) => (
@@ -61,12 +61,12 @@ export const UpdateBatchDialog: FC<UpdateBatchDialogProps> = (props) => {
       <Space className="justify-end">
         <Button
           loading={loading}
-          type="button"
           onClick={() => mutate({ module: module as string, files: files.filter((file) => file.error === 'repeated') })}
+          type="button"
         >
           {t('更新')}
         </Button>
-        <Button variant="outline" type="button" onClick={() => props.onCancel?.()}>
+        <Button onClick={() => props.onCancel?.()} type="button" variant="outline">
           {t('取消')}
         </Button>
       </Space>

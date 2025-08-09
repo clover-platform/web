@@ -1,5 +1,6 @@
-import { Skeleton } from '@easykit/design'
 import { ProjectItemLoading } from '../../../project/item/loading'
+
+import { Skeleton } from '@easykit/design'
 
 export const ProjectGroupLoading = () => {
   return (

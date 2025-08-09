@@ -1,5 +1,5 @@
-import { myCollect } from '@/rest/module'
 import { useQuery, useQueryClient } from '@tanstack/react-query'
+import { myCollect } from '@/rest/module'
 
 export const useCollectModule = () => {
   const { data, isLoading } = useQuery({

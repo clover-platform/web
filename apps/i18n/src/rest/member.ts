@@ -1,6 +1,6 @@
-import type { Member } from '@/types/module/member'
 import type { PageData } from '@clover/public/types/rest'
 import { get, resultWrapper } from '@clover/public/utils/rest'
+import type { Member } from '@/types/module/member'
 
 export type MemberQuery = {
   module?: string

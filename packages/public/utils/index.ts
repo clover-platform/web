@@ -1,4 +1,5 @@
 import { EMAIL, URL as URL_REG } from './regular'
+
 const isProd = process.env.NODE_ENV === 'production'
 
 const langList = [
@@ -98,7 +99,7 @@ function loadScript(id: string, url: string) {
     }
     if (script.readyState) {
       const originEvent = script.onreadystatechange
-      // biome-ignore lint/suspicious/noExplicitAny: <explanation>
+      // biome-ignore lint/suspicious/noExplicitAny: event
       script.onreadystatechange = function (event: any) {
         script.loaded = true
         if (this.readyState === 'loaded' || this.readyState === 'complete') {
@@ -111,7 +112,7 @@ function loadScript(id: string, url: string) {
       }
     } else {
       const originEvent = script.onload
-      // biome-ignore lint/suspicious/noExplicitAny: <explanation>
+      // biome-ignore lint/suspicious/noExplicitAny: event
       script.onload = (event: any) => {
         script.loaded = true
         if (originEvent) {
@@ -126,7 +127,7 @@ function loadScript(id: string, url: string) {
 
 function loadStyle(id: string, url: string) {
   return new Promise((resolve) => {
-    // biome-ignore lint/suspicious/noExplicitAny: <explanation>
+    // biome-ignore lint/suspicious/noExplicitAny: link
     let link = document.getElementById(id) as any
     if (!link) {
       link = document.createElement('link')
@@ -140,7 +141,7 @@ function loadStyle(id: string, url: string) {
       return
     }
     const originEvent = link.onload
-    // biome-ignore lint/suspicious/noExplicitAny: <explanation>
+    // biome-ignore lint/suspicious/noExplicitAny: event
     link.onload = (event: any) => {
       if (originEvent) {
         originEvent(event)

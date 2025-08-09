@@ -1,11 +1,11 @@
+import { EditCard } from './edit-card'
 
-import { useProfile } from '@clover/public/hooks'
+import { type FC, useState } from 'react'
 import { Action, Alert, Card } from '@easykit/design'
 import { ContentViewer } from '@easykit/editor'
 import { Pencil2Icon } from '@radix-ui/react-icons'
-import { type FC, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { EditCard } from './edit-card'
+import { useProfile } from '@clover/public/hooks'
 
 export type ReadMeProps = {
   readme?: string
@@ -37,7 +37,7 @@ export const ReadMe: FC<ReadMeProps> = (props) => {
   )
 
   return isEdit ? (
-    <EditCard readme={readme} id={id} onCancel={() => setIsEdit(false)} />
+    <EditCard id={id} onCancel={() => setIsEdit(false)} readme={readme} />
   ) : readme ? (
     <Card title={readmeTitle}>
       <ContentViewer value={readme} />
@@ -53,4 +53,3 @@ export const ReadMe: FC<ReadMeProps> = (props) => {
     </Alert>
   ) : null
 }
-

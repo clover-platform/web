@@ -1,7 +1,8 @@
+import { SearchInput } from './input'
+
 import { Button } from '@easykit/design'
 import { Plus } from 'lucide-react'
 import { useTranslation } from 'react-i18next'
-import { SearchInput } from './input'
 
 export const Search = () => {
   const { t } = useTranslation()

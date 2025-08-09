@@ -1,6 +1,6 @@
+import { type FC, type ReactNode, useState } from 'react'
 import { Action, DropdownMenu, DropdownMenuTrigger } from '@easykit/design'
 import { ChevronDownIcon } from '@radix-ui/react-icons'
-import { type FC, type ReactNode, useState } from 'react'
 
 export type NavItemConfig = {
   id: string
@@ -19,9 +19,9 @@ export const NavItem: FC<NavItemProps> = (props) => {
   const [open, setOpen] = useState(false)
   return (
     <li>
-      <DropdownMenu open={open} onOpenChange={setOpen}>
+      <DropdownMenu onOpenChange={setOpen} open={open}>
         <DropdownMenuTrigger asChild>
-          <Action className="!py-1 !outline-none space-x-1" active={config.id === active}>
+          <Action active={config.id === active} className="!py-1 !outline-none space-x-1">
             <span>{config.title}</span>
             <ChevronDownIcon className={open ? 'rotate-180' : ''} />
           </Action>

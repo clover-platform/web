@@ -1,13 +1,9 @@
 'use client'
-import { ModuleBreadcrumb } from '@/components/common/breadcrumb/module'
-import type { ModuleLayoutProps } from '@/components/layout/module'
-import { dashboard } from '@/rest/module'
-import { languagesState } from '@/state/public'
-import type { Language } from '@/types/public'
-import { MainPage } from '@clover/public/components/common/page'
-import { TitleBar } from '@clover/public/components/common/title-bar'
-import { useLayoutConfig } from '@clover/public/components/layout/hooks/use.layout.config'
-import { i18n } from '@clover/public/utils/locale.client'
+import { DetailInfoItem } from './detail/info-item'
+import { DetailTitle } from './detail/title'
+import { LanguageItem } from './language-item'
+import { MemberItem } from './member-item'
+
 import {
   BreadcrumbItem,
   BreadcrumbPage,
@@ -30,10 +26,15 @@ import { useQuery } from '@tanstack/react-query'
 import { useAtom } from 'jotai'
 import { useParams, useRouter } from 'next/navigation'
 import { useTranslation } from 'react-i18next'
-import { DetailInfoItem } from './detail/info-item'
-import { DetailTitle } from './detail/title'
-import { LanguageItem } from './language-item'
-import { MemberItem } from './member-item'
+import { MainPage } from '@clover/public/components/common/page'
+import { TitleBar } from '@clover/public/components/common/title-bar'
+import { useLayoutConfig } from '@clover/public/components/layout/hooks/use.layout.config'
+import { i18n } from '@clover/public/utils/locale.client'
+import { ModuleBreadcrumb } from '@/components/common/breadcrumb/module'
+import type { ModuleLayoutProps } from '@/components/layout/module'
+import { dashboard } from '@/rest/module'
+import { languagesState } from '@/state/public'
+import type { Language } from '@/types/public'
 
 export const DashboardPage = () => {
   useLayoutConfig<ModuleLayoutProps>({
@@ -53,11 +54,7 @@ export const DashboardPage = () => {
     router.push(`/${module}/all/worktop?target=${item.code}`)
   }
 
-  const actions = (
-    <Space>
-      
-    </Space>
-  )
+  const actions = <Space />
 
   const title = t('概览')
 
@@ -68,7 +65,7 @@ export const DashboardPage = () => {
           <BreadcrumbPage>{title}</BreadcrumbPage>
         </BreadcrumbItem>
       </ModuleBreadcrumb>
-      <TitleBar title={title} actions={actions} border={false} />
+      <TitleBar actions={actions} border={false} title={title} />
       <Loading>
         <div className="flex items-start justify-start gap-4">
           <Card className="w-0 flex-1 flex-shrink-0">
@@ -90,7 +87,7 @@ export const DashboardPage = () => {
                     </TableRow>
                   )}
                   {languages?.map((item) => (
-                    <LanguageItem onClick={() => onRowClick(item)} key={item.id} {...item} />
+                    <LanguageItem key={item.id} onClick={() => onRowClick(item)} {...item} />
                   ))}
                 </TableBody>
               </Table>
@@ -109,10 +106,10 @@ export const DashboardPage = () => {
               <DetailInfoItem label={t('项目成员')}>{count?.memberCount || '--'}</DetailInfoItem>
               <DetailInfoItem label={t('词条')}>{count?.wordCount || '--'}</DetailInfoItem>
               <DetailInfoItem label={t('创建时间')}>
-                <ValueFormatter value={detail?.createTime} formatters={['time']} />
+                <ValueFormatter formatters={['time']} value={detail?.createTime} />
               </DetailInfoItem>
               <DetailInfoItem label={t('更新时间')}>
-                <ValueFormatter value={detail?.updateTime} formatters={['time']} />
+                <ValueFormatter formatters={['time']} value={detail?.updateTime} />
               </DetailInfoItem>
             </div>
             <Separator className="my-4" />

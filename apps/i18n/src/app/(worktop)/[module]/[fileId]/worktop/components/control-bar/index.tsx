@@ -1,3 +1,24 @@
+import { FileAction } from './action/file'
+import { LanguageAction } from './action/language'
+import { MenuSheet } from './menu-sheet'
+
+import { useCallback, useState } from 'react'
+import {
+  IconBack,
+  IconChatGPT,
+  IconLeftSidebar,
+  IconMenu,
+  IconRightSidebar,
+  IconSetting,
+} from '@arco-iconbox/react-clover'
+import { Progress, Separator, Spin, Tooltip, useMessage } from '@easykit/design'
+import { ReloadIcon } from '@radix-ui/react-icons'
+import { useAtom } from 'jotai'
+import { useParams, useRouter } from 'next/navigation'
+import { useTranslation } from 'react-i18next'
+import { Action } from '@clover/public/components/common/action'
+import { ThemeSwitcher } from '@clover/public/components/common/theme-switcher'
+import bus from '@clover/public/events'
 import { ENTRY_RELOAD } from '@/events/worktop'
 import { sync as syncAll } from '@/rest/entry'
 import {
@@ -7,26 +28,6 @@ import {
   leftSideOpenState,
   rightSideOpenState,
 } from '@/state/worktop'
-import {
-  IconBack,
-  IconChatGPT,
-  IconLeftSidebar,
-  IconMenu,
-  IconRightSidebar,
-  IconSetting,
-} from '@arco-iconbox/react-clover'
-import { Action } from '@clover/public/components/common/action'
-import { ThemeSwitcher } from '@clover/public/components/common/theme-switcher'
-import bus from '@clover/public/events'
-import { Progress, Separator, Spin, Tooltip, useMessage } from '@easykit/design'
-import { ReloadIcon } from '@radix-ui/react-icons'
-import { useAtom } from 'jotai'
-import { useParams, useRouter } from 'next/navigation'
-import { useCallback, useState } from 'react'
-import { useTranslation } from 'react-i18next'
-import { FileAction } from './action/file'
-import { LanguageAction } from './action/language'
-import { MenuSheet } from './menu-sheet'
 
 export const ControlBar = () => {
   const { module } = useParams()
@@ -79,9 +80,9 @@ export const ControlBar = () => {
     <div className="sticky top-0 w-full">
       <div className="border-b">
         <Progress
+          className="h-1 rounded-none"
           style={{ width: `${Math.ceil((count.translated / count.total) * 100)}%` }}
           value={Math.ceil((count.verified / count.translated) * 100)}
-          className="h-1 rounded-none"
         />
       </div>
       <div className="flex items-center justify-center border-b px-2 py-1 shadow-sm">
@@ -92,10 +93,10 @@ export const ControlBar = () => {
           <Action className="!px-1.5 h-8 w-8" onClick={showMenu}>
             <IconMenu className="text-lg" />
           </Action>
-          <Separator orientation="vertical" className="h-5" />
+          <Separator className="h-5" orientation="vertical" />
           <LanguageAction onClick={showMenuByLanguage} />
           <FileAction onClick={showMenuByFile} />
-          <Separator orientation="vertical" className="h-5" />
+          <Separator className="h-5" orientation="vertical" />
           <Tooltip content={t('刷新')}>
             <Action className="!px-1.5 h-8 w-8" onClick={refresh}>
               <ReloadIcon className="text-lg" />
@@ -108,20 +109,20 @@ export const ControlBar = () => {
           </Tooltip>
         </div>
         <div className="flex flex-1 items-center justify-end space-x-1">
-          <Action onClick={() => setLeftSideOpen(!leftSideOpen)} active={leftSideOpen} className="!px-1.5 h-8 w-8">
+          <Action active={leftSideOpen} className="!px-1.5 h-8 w-8" onClick={() => setLeftSideOpen(!leftSideOpen)}>
             <IconLeftSidebar className="text-lg" />
           </Action>
-          <Action onClick={() => setRightSideOpen(!rightSideOpen)} active={rightSideOpen} className="!px-1.5 h-8 w-8">
+          <Action active={rightSideOpen} className="!px-1.5 h-8 w-8" onClick={() => setRightSideOpen(!rightSideOpen)}>
             <IconRightSidebar className="text-lg" />
           </Action>
-          <Separator orientation="vertical" className="h-5" />
+          <Separator className="h-5" orientation="vertical" />
           <Action className="!px-1.5 h-8 w-8">
             <IconSetting className="text-lg" />
           </Action>
-          <ThemeSwitcher size="sm" activeClassName="bg-[rgba(31,30,36,0.08)] dark:bg-secondary" />
+          <ThemeSwitcher activeClassName="bg-[rgba(31,30,36,0.08)] dark:bg-secondary" size="sm" />
         </div>
       </div>
-      <MenuSheet active={menuActive} open={menuOpen} onOpenChange={setMenuOpen} />
+      <MenuSheet active={menuActive} onOpenChange={setMenuOpen} open={menuOpen} />
     </div>
   )
 }

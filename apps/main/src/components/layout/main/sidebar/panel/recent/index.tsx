@@ -1,14 +1,15 @@
-import { recent } from '@/rest/project'
-import { useTimeAgo } from '@clover/public/hooks'
-import type { Project } from '@clover/public/types/project'
-import { Button, Empty, Input, ScrollArea } from '@easykit/design'
-import { useInfiniteQuery } from '@tanstack/react-query'
-import dayjs from 'dayjs'
-import { useMemo } from 'react'
-import { useTranslation } from 'react-i18next'
 import { ProjectGroup } from './group'
 import { ProjectGroupLoading } from './group/loading'
 import type { ProjectGroup as ProjectGroupType } from './types'
+
+import { useMemo } from 'react'
+import { Button, Empty, Input, ScrollArea } from '@easykit/design'
+import { useInfiniteQuery } from '@tanstack/react-query'
+import dayjs from 'dayjs'
+import { useTranslation } from 'react-i18next'
+import { useTimeAgo } from '@clover/public/hooks'
+import type { Project } from '@clover/public/types/project'
+import { recent } from '@/rest/project'
 
 export const PAGE_SIZE = 5
 
@@ -63,7 +64,7 @@ export const RecentPanel = () => {
             {items.length === 0 && <Empty text={t('暂无动态')} />}
             <div className="flex flex-col gap-sm">
               {items.map((item) => (
-                <ProjectGroup key={item.time} item={item} />
+                <ProjectGroup item={item} key={item.time} />
               ))}
             </div>
             {hasNextPage ? (

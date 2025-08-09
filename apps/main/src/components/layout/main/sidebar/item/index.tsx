@@ -1,9 +1,10 @@
+import type { SidebarItemProps as SidebarItemPropsConfig } from '../config'
+
+import { type FC, useMemo, useState } from 'react'
 import { Action, Dropdown, Popover, PopoverContent, PopoverTrigger, Separator } from '@easykit/design'
 import classNames from 'classnames'
 import { ChevronDown, ChevronRight } from 'lucide-react'
 import Link from 'next/link'
-import { type FC, useMemo, useState } from 'react'
-import type { SidebarItemProps as SidebarItemPropsConfig } from '../config'
 
 export type SidebarItemProps = SidebarItemPropsConfig & {
   active?: string
@@ -32,9 +33,9 @@ export const SidebarItem: FC<SidebarItemProps> = (props) => {
   const action = useMemo(() => {
     return (
       <Action
-        onClick={children ? () => setIsOpen(!isOpen) : undefined}
-        className="group flex w-full items-center justify-center gap-1 py-1 text-sm"
         active={active === id}
+        className="group flex w-full items-center justify-center gap-1 py-1 text-sm"
+        onClick={children ? () => setIsOpen(!isOpen) : undefined}
       >
         <div className="flex size-6 items-center justify-center">
           {children ? (
@@ -76,7 +77,7 @@ export const SidebarItem: FC<SidebarItemProps> = (props) => {
 
   if (dropdownItems?.length)
     return (
-      <Dropdown items={dropdownItems} asChild side="right" align="start">
+      <Dropdown align="start" asChild items={dropdownItems} side="right">
         {action}
       </Dropdown>
     )
@@ -85,7 +86,7 @@ export const SidebarItem: FC<SidebarItemProps> = (props) => {
     return (
       <Popover>
         <PopoverTrigger asChild>{action}</PopoverTrigger>
-        <PopoverContent side="right" align="start" className={panelClassName}>
+        <PopoverContent align="start" className={panelClassName} side="right">
           {panel}
         </PopoverContent>
       </Popover>

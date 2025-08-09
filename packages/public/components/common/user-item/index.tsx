@@ -1,7 +1,7 @@
-import type { User } from '@clover/public/types/account'
-import { Avatar, HoverCard, HoverCardContent, HoverCardTrigger } from '@easykit/design'
 import { type FC, useMemo } from 'react'
+import { Avatar, HoverCard, HoverCardContent, HoverCardTrigger } from '@easykit/design'
 import { useTranslation } from 'react-i18next'
+import type { User } from '@clover/public/types/account'
 export type UserItemProps = {
   info: User
   className?: string
@@ -13,15 +13,15 @@ export const UserItem: FC<UserItemProps> = (props) => {
   const { t } = useTranslation()
 
   const avatar = useMemo(() => {
-    return <Avatar className={className} src={info.avatar} fallback={firstLetter} />
+    return <Avatar className={className} fallback={firstLetter} src={info.avatar} />
   }, [info, className, firstLetter])
 
   return (
     <HoverCard>
       <HoverCardTrigger>{avatar}</HoverCardTrigger>
-      <HoverCardContent side="top" className="border-none p-0">
+      <HoverCardContent className="border-none p-0" side="top">
         <div className="flex items-center justify-center space-x-4 rounded-t-md bg-primary p-4 text-white">
-          <Avatar src={info.avatar} fallback={firstLetter} fallbackClassName="text-secondary-foreground" />
+          <Avatar fallback={firstLetter} fallbackClassName="text-secondary-foreground" src={info.avatar} />
           <div className="flex-1 font-medium text-lg">{info.username}</div>
         </div>
         <div className="flex flex-wrap space-x-3 p-3">

@@ -1,5 +1,4 @@
-
-import { revisionList } from '@/rest/source'
+import type { FC } from 'react'
 import {
   Badge,
   Dialog,
@@ -17,8 +16,8 @@ import {
 } from '@easykit/design'
 import { useQuery } from '@tanstack/react-query'
 import { useParams } from 'next/navigation'
-import type { FC } from 'react'
 import { useTranslation } from 'react-i18next'
+import { revisionList } from '@/rest/source'
 
 export type RevisionDialogProps = {
   fileId: number
@@ -39,9 +38,9 @@ export const RevisionDialog: FC<RevisionDialogProps> = (props) => {
     <Dialog
       className="w-[90vw] max-w-[800px] duration-200"
       {...rest}
-      visible={visible}
-      title={t('变更记录')}
       maskClosable={false}
+      title={t('变更记录')}
+      visible={visible}
     >
       <Loading loading={isLoading}>
         <ScrollArea className="relative w-[calc(90vw-50px)] max-w-[calc(800px-50px)] duration-200">
@@ -59,7 +58,7 @@ export const RevisionDialog: FC<RevisionDialogProps> = (props) => {
             <TableBody>
               {isLoading || !data?.length ? (
                 <TableRow>
-                  <TableCell colSpan={6} className="text-center">
+                  <TableCell className="text-center" colSpan={6}>
                     <Empty text={isLoading ? t('加载中...') : t('暂无变更记录')} />
                   </TableCell>
                 </TableRow>

@@ -1,9 +1,4 @@
-import { ProjectSwitcher } from '@clover/public/components/common/switcher/project'
-import { useCurrentTeam } from '@clover/public/components/layout/hooks/main'
-import { AccountInfo } from '@clover/public/components/layout/main/header/profile-menu/account-info'
-import { useMainApp } from '@clover/public/hooks'
-import { logout } from '@clover/public/rest/auth'
-import { accountInfoState } from '@clover/public/state/account'
+import { type FC, type ReactNode, useCallback, useMemo, useState } from 'react'
 import {
   Action,
   Avatar,
@@ -17,8 +12,13 @@ import {
 } from '@easykit/design'
 import { useAtomValue } from 'jotai'
 import Link from 'next/link'
-import { type FC, type ReactNode, useCallback, useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
+import { ProjectSwitcher } from '@clover/public/components/common/switcher/project'
+import { useCurrentTeam } from '@clover/public/components/layout/hooks/main'
+import { AccountInfo } from '@clover/public/components/layout/main/header/profile-menu/account-info'
+import { useMainApp } from '@clover/public/hooks'
+import { logout } from '@clover/public/rest/auth'
+import { accountInfoState } from '@clover/public/state/account'
 
 export type ProfileMenuProps = {
   extra?: ReactNode
@@ -68,10 +68,10 @@ export const ProfileMenu: FC<ProfileMenuProps> = (props) => {
   }, [isMainAppSameOrigin, mainApp?.href])
 
   return (
-    <DropdownMenu open={open} onOpenChange={setOpen}>
+    <DropdownMenu onOpenChange={setOpen} open={open}>
       <DropdownMenuTrigger asChild>
-        <Action className="!outline-none !rounded-full !p-0.5" active={open}>
-          <Avatar className="h-7 w-7" src={account.avatar!} alt="cover" fallback={account.username.slice(0, 1)} />
+        <Action active={open} className="!outline-none !rounded-full !p-0.5">
+          <Avatar alt="cover" className="h-7 w-7" fallback={account.username.slice(0, 1)} src={account.avatar!} />
         </Action>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end" className="w-64 p-0">
@@ -82,12 +82,12 @@ export const ProfileMenu: FC<ProfileMenuProps> = (props) => {
             <DropdownMenuItem>{t('个人资料')}</DropdownMenuItem>
           </Link>
         ) : (
-          <Link href={`${baseUrl}profile/${account.username}`} target="_blank" rel="noopener noreferrer">
+          <Link href={`${baseUrl}profile/${account.username}`} rel="noopener noreferrer" target="_blank">
             <DropdownMenuItem>{t('个人资料')}</DropdownMenuItem>
           </Link>
         )}
         <DropdownMenuItem className="p-0">
-          <ProjectSwitcher title={t('切换团队')} teamId={team?.id}>
+          <ProjectSwitcher teamId={team?.id} title={t('切换团队')}>
             <div className="flex w-full items-center justify-start space-x-1 px-2 py-1.5">
               <span>{t('切换团队')}</span>
               <span className="text-secondary-foreground/60">{`@${team?.name}`}</span>

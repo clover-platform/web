@@ -1,10 +1,11 @@
 'use client'
 
-import LoginLink from '@/components/common/login/link'
-import { LoginForm } from '@clover/public/components/pages/login/form'
+import Quick from './quick'
+
 import { Divider } from '@easykit/design'
 import { useTranslation } from 'react-i18next'
-import Quick from './quick'
+import { LoginForm } from '@clover/public/components/pages/login/form'
+import LoginLink from '@/components/common/login/link'
 
 const LoginPage = () => {
   const { t } = useTranslation()

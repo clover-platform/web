@@ -1,6 +1,6 @@
+import { object, string, type z } from 'zod'
 import { t } from '@clover/public/utils/locale.client'
 import { USERNAME } from '@clover/public/utils/regular'
-import { object, string, type z } from 'zod'
 
 export const getSchema = () =>
   object({

@@ -1,17 +1,18 @@
-import { type OTPBindData, otpBind } from '@/rest/profile/security/mfa'
+import SecretItem from '../secret'
+
+import { type FC, useState } from 'react'
+import { Button, Dialog, Form, FormItem, useMessage } from '@easykit/design'
+import { useMutation } from '@tanstack/react-query'
+import { useAtomValue } from 'jotai'
+import { useTranslation } from 'react-i18next'
+import { object, string } from 'zod'
 import { CodeInput } from '@clover/public/components/common/input/code'
 import { EmailCodeInput } from '@clover/public/components/common/input/email-code'
 import { type SendEmailCodeData, sendEmailCode } from '@clover/public/rest/common'
 import { accountInfoState } from '@clover/public/state/account'
 import { t } from '@clover/public/utils/locale.client'
 import { CODE } from '@clover/public/utils/regular'
-import { Button, Dialog, Form, FormItem, useMessage } from '@easykit/design'
-import { useMutation } from '@tanstack/react-query'
-import { useAtomValue } from 'jotai'
-import { type FC, useState } from 'react'
-import { useTranslation } from 'react-i18next'
-import { object, string } from 'zod'
-import SecretItem from '../secret'
+import { type OTPBindData, otpBind } from '@/rest/profile/security/mfa'
 
 const getSchema = () =>
   object({
@@ -40,28 +41,28 @@ export const EnableModal: FC<EnableModalProps> = (props) => {
 
   return (
     <p>
-      <button type="button" onClick={() => setVisible(true)} className="cursor-pointer">
+      <button className="cursor-pointer" onClick={() => setVisible(true)} type="button">
         {title}
       </button>
-      <Dialog visible={visible} title={title} maskClosable={false} onCancel={() => setVisible(false)}>
+      <Dialog maskClosable={false} onCancel={() => setVisible(false)} title={title} visible={visible}>
         <Form<OTPBindData> onSubmit={(data) => mutate(data)} schema={getSchema()}>
           <SecretItem />
           <FormItem
-            name="code"
             label={t('邮箱验证码（{{email}}）', {
               email: account.email,
             })}
+            name="code"
           >
             <EmailCodeInput<SendEmailCodeData>
-              placeholder={t('请输入邮箱验证码')}
               api={sendEmailCode}
               data={{ action: 'otp-enable', email: account.email }}
+              placeholder={t('请输入邮箱验证码')}
             />
           </FormItem>
-          <FormItem name="otpCode" label={t('验证码')}>
+          <FormItem label={t('验证码')} name="otpCode">
             <CodeInput placeholder={t('请输入身份验证 App 验证码')} />
           </FormItem>
-          <Button loading={isPending} type="submit" long>
+          <Button loading={isPending} long type="submit">
             {t('启用')}
           </Button>
         </Form>

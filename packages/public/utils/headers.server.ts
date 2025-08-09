@@ -1,6 +1,7 @@
-import { getToken } from '@clover/public/utils/token'
-import { cookies } from 'next/headers'
 import { getLocale } from './locale.server'
+
+import { cookies } from 'next/headers'
+import { getToken } from '@clover/public/utils/token'
 
 export const get = async () => {
   const headers: Record<string, unknown> = {
@@ -11,7 +12,7 @@ export const get = async () => {
     'CLIENT-SYSTEM-VERSION': '',
     'CLIENT-TIMESTAMP': Date.now(),
   }
-  const token = await getToken(cookies);
+  const token = await getToken(cookies)
   if (token) headers.Authorization = `Bearer ${token.token}`
-  return headers;
+  return headers
 }

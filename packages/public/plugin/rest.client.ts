@@ -1,13 +1,13 @@
-import bus from '@clover/public/events';
-import {UNAUTHORIZED} from "@clover/public/events/auth";
+import type { AxiosResponse } from 'axios'
+import bus from '@clover/public/events'
+import { UNAUTHORIZED } from '@clover/public/events/auth'
 import type { RestResult } from '@clover/public/types/rest'
-import {get} from "@clover/public/utils/headers.client";
+import { get } from '@clover/public/utils/headers.client'
 // Rest 配置
 import { alias, config } from '@clover/public/utils/rest'
-import type { AxiosResponse } from 'axios'
 
 config({
-  // biome-ignore lint/suspicious/noExplicitAny: <explanation>
+  // biome-ignore lint/suspicious/noExplicitAny: onResponse
   onResponse: (data: RestResult<any>, response: AxiosResponse) => {
     const { url } = response.config
     const { code } = data
@@ -21,14 +21,14 @@ config({
 alias({
   '@main': {
     url: '/api/main',
-    headers: get
+    headers: get,
   },
   '@assets': {
     url: '/api/assets',
-    headers: get
+    headers: get,
   },
   '@account': {
     url: '/api/account',
-    headers: get
+    headers: get,
   },
-});
+})

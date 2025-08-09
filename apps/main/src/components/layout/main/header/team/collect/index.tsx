@@ -1,11 +1,11 @@
-import { CollectLoadingItem } from '@/components/layout/main/header/collect-loading'
-import {CollectTeamItem} from "@/components/layout/main/header/team/collect/item";
-import {useCollectTeam} from "@/hooks/use.collect.team";
 import { Empty } from '@easykit/design'
-import { useTranslation } from "react-i18next";
+import { useTranslation } from 'react-i18next'
+import { CollectLoadingItem } from '@/components/layout/main/header/collect-loading'
+import { CollectTeamItem } from '@/components/layout/main/header/team/collect/item'
+import { useCollectTeam } from '@/hooks/use.collect.team'
 export const TeamCollect = () => {
-  const { loading, collect } = useCollectTeam();
-  const { t } = useTranslation();
+  const { loading, collect } = useCollectTeam()
+  const { t } = useTranslation()
   return (
     <div>
       {loading ? (
@@ -16,5 +16,5 @@ export const TeamCollect = () => {
         <Empty text={t('你关注的团队在此处显示')} />
       )}
     </div>
-  ) 
+  )
 }

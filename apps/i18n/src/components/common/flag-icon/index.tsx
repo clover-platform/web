@@ -1,4 +1,5 @@
 import 'flag-icons/css/flag-icons.min.css'
+
 import type { FC } from 'react'
 
 export type FlagIconProps = {

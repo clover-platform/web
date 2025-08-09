@@ -1,9 +1,10 @@
-import classNames from 'classnames'
 import { type FC, type Ref, useCallback, useEffect, useImperativeHandle, useRef, useState } from 'react'
+import classNames from 'classnames'
 import Tribute from 'tributejs'
 import './index.scss'
-import { htmlEscape } from '@clover/public/components/common/editor/mentions/tools'
+
 import { useTranslation } from 'react-i18next'
+import { htmlEscape } from '@clover/public/components/common/editor/mentions/tools'
 
 export type CommentEditorProps = {
   className?: string
@@ -69,10 +70,10 @@ export const MentionsEditor: FC<CommentEditorProps> = ({ ref, ...props }) => {
 
   return (
     <div
+      className={classNames('comment-editor', 'max-h-32 min-h-20 p-2 outline-none', props.className)}
+      data-tip={t('输入 @ 以提及其他人')}
       onInput={onInput}
       ref={editorRef}
-      data-tip={t('输入 @ 以提及其他人')}
-      className={classNames('comment-editor', 'max-h-32 min-h-20 p-2 outline-none', props.className)}
     />
   )
 }

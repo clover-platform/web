@@ -1,10 +1,11 @@
-import { t } from '@clover/public/utils/locale.client'
-import { Space } from '@easykit/design'
-import type { ReactNode } from 'react'
 import { Entries } from './entries'
 import { AddButton } from './entries/button/add'
 import { Files } from './files'
 import { UploadButton } from './files/button/upload'
+
+import type { ReactNode } from 'react'
+import { Space } from '@easykit/design'
+import { t } from '@clover/public/utils/locale.client'
 
 export type TabItem = {
   id: string

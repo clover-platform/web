@@ -1,9 +1,9 @@
-import { OtpInfo } from '@/components/common/account/otp-info'
-import { otpSecret } from '@/rest/profile/security/mfa'
+import type { FC, PropsWithChildren } from 'react'
 import { FormItem } from '@easykit/design'
 import { useQuery } from '@tanstack/react-query'
-import type { FC, PropsWithChildren } from 'react'
 import { useTranslation } from 'react-i18next'
+import { OtpInfo } from '@/components/common/account/otp-info'
+import { otpSecret } from '@/rest/profile/security/mfa'
 
 export type SecretItemProps = PropsWithChildren
 
@@ -15,8 +15,8 @@ const SecretItem: FC<SecretItemProps> = () => {
   })
 
   return (
-    <FormItem name="qrcode" label={t('身份验证 App 密钥')}>
-      <OtpInfo loading={isLoading} secret={data?.secret} qrcode={data?.qrcode} />
+    <FormItem label={t('身份验证 App 密钥')} name="qrcode">
+      <OtpInfo loading={isLoading} qrcode={data?.qrcode} secret={data?.secret} />
     </FormItem>
   )
 }

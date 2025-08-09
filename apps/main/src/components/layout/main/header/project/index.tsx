@@ -1,12 +1,12 @@
-import { ProjectCollect } from '@/components/layout/main/header/project/collect'
 import { DropdownMenuContent, DropdownMenuItem, DropdownMenuSeparator } from '@easykit/design'
 import Link from 'next/link'
-import { useTranslation } from "react-i18next";
+import { useTranslation } from 'react-i18next'
+import { ProjectCollect } from '@/components/layout/main/header/project/collect'
 
 export const Project = () => {
-  const { t } = useTranslation();
+  const { t } = useTranslation()
   return (
-    <DropdownMenuContent className="w-96" align="start">
+    <DropdownMenuContent align="start" className="w-96">
       <ProjectCollect />
       <DropdownMenuSeparator />
       <Link href="/project">
@@ -16,5 +16,5 @@ export const Project = () => {
         <DropdownMenuItem>{t('创建项目')}</DropdownMenuItem>
       </Link>
     </DropdownMenuContent>
-  ) 
+  )
 }

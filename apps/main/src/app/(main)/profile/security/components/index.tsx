@@ -1,14 +1,15 @@
 'use client'
 
-import { ProfileBreadcrumbBase } from '@/components/common/breadcrumb/profile'
-import { MainPage } from '@/components/common/main-page'
-import type { MainLayoutProps } from '@/components/layout/main'
-import { TitleBar } from '@clover/public/components/common/title-bar'
-import { useLayoutConfig } from '@clover/public/components/layout/hooks/use.layout.config'
+import { Password } from './password'
+
 import { BreadcrumbItem, BreadcrumbPage, Card } from '@easykit/design'
 import Link from 'next/link'
 import { useTranslation } from 'react-i18next'
-import { Password } from './password'
+import { TitleBar } from '@clover/public/components/common/title-bar'
+import { useLayoutConfig } from '@clover/public/components/layout/hooks/use.layout.config'
+import { ProfileBreadcrumbBase } from '@/components/common/breadcrumb/profile'
+import { MainPage } from '@/components/common/main-page'
+import type { MainLayoutProps } from '@/components/layout/main'
 
 export const SecurityPage = () => {
   const { t } = useTranslation()

@@ -1,11 +1,11 @@
-import { IconCreateTeam } from "@arco-iconbox/react-clover";
-import { IconTitle } from '@clover/public/components/common/icon-title'
-import {useStateLoader} from "@clover/public/components/layout/hooks/use.state.loader";
-import { type TeamInitFormData, getSchema } from '@clover/public/config/schema/layout/guide'
-import { init } from '@clover/public/rest/team'
+import { IconCreateTeam } from '@arco-iconbox/react-clover'
 import { Alert, Button, Form, FormItem, Input, Space, useMessage } from '@easykit/design'
 import { useMutation } from '@tanstack/react-query'
 import { useTranslation } from 'react-i18next'
+import { IconTitle } from '@clover/public/components/common/icon-title'
+import { useStateLoader } from '@clover/public/components/layout/hooks/use.state.loader'
+import { getSchema, type TeamInitFormData } from '@clover/public/config/schema/layout/guide'
+import { init } from '@clover/public/rest/team'
 
 export const Guide = () => {
   const msg = useMessage()
@@ -30,15 +30,15 @@ export const Guide = () => {
   return (
     <div className="w-full max-w-[480px]">
       <IconTitle
-        icon={<IconCreateTeam fontSize={40} className="text-primary" />}
-        title={t('创建团队')}
         description={description}
+        icon={<IconCreateTeam className="text-primary" fontSize={40} />}
+        title={t('创建团队')}
       />
-      <Form<TeamInitFormData> schema={getSchema()} onSubmit={(data) => mutate(data)} className="mt-10">
-        <FormItem name="name" label={t('团队名称')}>
+      <Form<TeamInitFormData> className="mt-10" onSubmit={(data) => mutate(data)} schema={getSchema()}>
+        <FormItem label={t('团队名称')} name="name">
           <Input placeholder={t('请输入')} />
         </FormItem>
-        <FormItem name="key" label={t('唯一标识')}>
+        <FormItem label={t('唯一标识')} name="key">
           <Input placeholder={t('请输入')} />
         </FormItem>
         <Alert className="bg-secondary text-secondary-foreground">{t('将会同时创建名为"默认项目"的初始项目。')}</Alert>

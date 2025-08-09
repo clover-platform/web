@@ -1,9 +1,9 @@
-import { Action } from '@clover/public/components/common/action'
+import { type FC, useCallback, useMemo, useState } from 'react'
 import { Alert, useMessage } from '@easykit/design'
 import { CheckCircledIcon, CopyIcon, EyeClosedIcon, EyeOpenIcon } from '@radix-ui/react-icons'
-import { type FC, useCallback, useMemo, useState } from 'react'
 import { CopyToClipboard } from 'react-copy-to-clipboard'
 import { useTranslation } from 'react-i18next'
+import { Action } from '@clover/public/components/common/action'
 
 export type TokenDisplayProps = {
   token: string
@@ -25,17 +25,17 @@ export const TokenDisplay: FC<TokenDisplayProps> = (props) => {
   }, [visible])
 
   return (
-    <Alert title={t('您的新个人访问令牌')} icon={<CheckCircledIcon />} className="bg-success">
+    <Alert className="bg-success" icon={<CheckCircledIcon />} title={t('您的新个人访问令牌')}>
       <div className="flex items-center justify-center rounded-sm border bg-white">
         <div className="flex-1 px-2">{content}</div>
-        <Action onClick={toggle} className="rounded-none">
+        <Action className="rounded-none" onClick={toggle}>
           {visible ? <EyeOpenIcon /> : <EyeClosedIcon />}
         </Action>
         <CopyToClipboard
-          text={token}
           onCopy={() => {
             msg.success(t('已复制到剪贴板'))
           }}
+          text={token}
         >
           <Action className="rounded-none rounded-r">
             <CopyIcon />

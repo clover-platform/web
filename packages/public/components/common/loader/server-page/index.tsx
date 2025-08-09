@@ -1,7 +1,6 @@
-
-import { getQueryClient } from '@clover/public/utils/query'
-import { HydrationBoundary, type QueryClient, dehydrate } from '@tanstack/react-query'
 import type { ReactElement } from 'react'
+import { dehydrate, HydrationBoundary, type QueryClient } from '@tanstack/react-query'
+import { getQueryClient } from '@clover/public/utils/query'
 
 export type ServerPageLoaderProps<P> = {
   loader: (client: QueryClient, params: P) => Promise<boolean>

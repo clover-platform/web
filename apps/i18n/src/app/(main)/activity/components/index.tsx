@@ -1,14 +1,14 @@
 'use client'
 
-import { AppBreadcrumb } from '@/components/common/breadcrumb/app'
-import type { MainLayoutProps } from '@/components/layout/main'
-import { list } from '@/rest/activity'
+import { BreadcrumbItem, BreadcrumbPage, Card } from '@easykit/design'
+import { useTranslation } from 'react-i18next'
 import { MainPage } from '@clover/public/components/common/page'
 import { TitleBar } from '@clover/public/components/common/title-bar'
 import { useLayoutConfig } from '@clover/public/components/layout/hooks/use.layout.config'
 import { ActivityList } from '@clover/public/components/pages/activity'
-import { BreadcrumbItem, BreadcrumbPage, Card } from '@easykit/design'
-import { useTranslation } from 'react-i18next'
+import { AppBreadcrumb } from '@/components/common/breadcrumb/app'
+import type { MainLayoutProps } from '@/components/layout/main'
+import { list } from '@/rest/activity'
 
 export const ActivityPage = () => {
   useLayoutConfig<MainLayoutProps>({
@@ -16,7 +16,7 @@ export const ActivityPage = () => {
   })
   const { t } = useTranslation()
   const title = t('动态')
-  
+
   return (
     <MainPage>
       <AppBreadcrumb>

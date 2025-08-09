@@ -1,7 +1,8 @@
-import { Button } from '@easykit/design'
-import { type FC, useState } from 'react'
-import { useTranslation } from 'react-i18next'
 import { ImportConfigDialog } from '../../dialog/import-config'
+
+import { type FC, useState } from 'react'
+import { Button } from '@easykit/design'
+import { useTranslation } from 'react-i18next'
 
 export type ImportConfigButtonProps = {
   fileId: number
@@ -14,15 +15,15 @@ export const ImportConfigButton: FC<ImportConfigButtonProps> = (props) => {
   return (
     <>
       <Button
-        variant="outline"
-        size="sm"
         onClick={() => {
           setOpen(true)
         }}
+        size="sm"
+        variant="outline"
       >
         {t('导入配置')}
       </Button>
-      <ImportConfigDialog fileId={fileId} visible={open} onCancel={() => setOpen(false)} />
+      <ImportConfigDialog fileId={fileId} onCancel={() => setOpen(false)} visible={open} />
     </>
   )
 }

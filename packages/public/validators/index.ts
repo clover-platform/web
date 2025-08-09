@@ -1,8 +1,9 @@
-import { t } from '@clover/public/utils/locale.client'
 import { isPassword } from '../utils/account'
 import { EMAIL, USERNAME } from '../utils/regular'
 
-// biome-ignore lint/suspicious/noExplicitAny: <explanation>
+import { t } from '@clover/public/utils/locale.client'
+
+// biome-ignore lint/suspicious/noExplicitAny: value
 export const email = (value: any, callback: (msg?: string) => void) => {
   if (!value) return callback()
   if (!EMAIL.test(value)) {
@@ -11,7 +12,7 @@ export const email = (value: any, callback: (msg?: string) => void) => {
   callback()
 }
 
-// biome-ignore lint/suspicious/noExplicitAny: <explanation>
+// biome-ignore lint/suspicious/noExplicitAny: value
 export const username = (value: any, callback: (msg?: string) => void) => {
   if (!value) return callback()
   if (!USERNAME.test(value)) {
@@ -20,7 +21,7 @@ export const username = (value: any, callback: (msg?: string) => void) => {
   callback()
 }
 
-// biome-ignore lint/suspicious/noExplicitAny: <explanation>
+// biome-ignore lint/suspicious/noExplicitAny: value
 export const samePassword = (value: any, callback: (msg?: string) => void, target: any) => {
   if (!value) return callback()
   if (value !== target) {
@@ -29,7 +30,7 @@ export const samePassword = (value: any, callback: (msg?: string) => void, targe
   callback()
 }
 
-// biome-ignore lint/suspicious/noExplicitAny: <explanation>
+// biome-ignore lint/suspicious/noExplicitAny: value
 export const setPassword = (value: any, callback: (msg?: string) => void) => {
   if (!value) return callback()
   if (!isPassword(value)) {

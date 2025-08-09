@@ -1,13 +1,7 @@
 'use client'
 
-import { AppBreadcrumb } from '@/components/common/breadcrumb/app'
-import type { MainLayoutProps } from '@/components/layout/main'
-import type { ModuleFormData } from '@/config/schema/module'
-import { create } from '@/rest/module'
-import BackButton from '@clover/public/components/common/button/back'
-import { MainPage } from '@clover/public/components/common/page'
-import { TitleBar } from '@clover/public/components/common/title-bar'
-import { useLayoutConfig } from '@clover/public/components/layout/hooks/use.layout.config'
+import ModuleForm from './form'
+
 import {
   BreadcrumbItem,
   BreadcrumbLink,
@@ -22,7 +16,14 @@ import { useMutation, useQueryClient } from '@tanstack/react-query'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { useTranslation } from 'react-i18next'
-import ModuleForm from './form'
+import BackButton from '@clover/public/components/common/button/back'
+import { MainPage } from '@clover/public/components/common/page'
+import { TitleBar } from '@clover/public/components/common/title-bar'
+import { useLayoutConfig } from '@clover/public/components/layout/hooks/use.layout.config'
+import { AppBreadcrumb } from '@/components/common/breadcrumb/app'
+import type { MainLayoutProps } from '@/components/layout/main'
+import type { ModuleFormData } from '@/config/schema/module'
+import { create } from '@/rest/module'
 
 export const CreateModulePage = () => {
   const { t } = useTranslation()

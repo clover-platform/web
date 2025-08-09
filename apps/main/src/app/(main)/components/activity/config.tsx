@@ -1,5 +1,5 @@
-import { Empty } from '@easykit/design'
 import type { ReactNode } from 'react'
+import { Empty } from '@easykit/design'
 import { useTranslation } from 'react-i18next'
 
 export type Tab = {

@@ -1,4 +1,5 @@
-import {IconNotice, IconShare} from "@arco-iconbox/react-clover";
+import { useState } from 'react'
+import { IconNotice, IconShare } from '@arco-iconbox/react-clover'
 import {
   Action,
   DropdownMenu,
@@ -10,17 +11,16 @@ import {
   TabsList,
   TabsTrigger,
 } from '@easykit/design'
-import {useState} from "react";
-import { useTranslation } from "react-i18next";
+import { useTranslation } from 'react-i18next'
 
 export const Notice = () => {
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(false)
   const { t } = useTranslation()
 
   return (
-    <DropdownMenu open={open} onOpenChange={setOpen}>
+    <DropdownMenu onOpenChange={setOpen} open={open}>
       <DropdownMenuTrigger asChild>
-        <Action className="!outline-none" active={open}>
+        <Action active={open} className="!outline-none">
           <IconNotice />
         </Action>
       </DropdownMenuTrigger>

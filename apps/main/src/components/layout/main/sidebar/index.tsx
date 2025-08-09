@@ -1,10 +1,10 @@
-
-import { LangSelect } from '@clover/public/components/common/select/lang'
-import { ThemeSwitcher } from '@clover/public/components/common/theme-switcher'
-import { ScrollArea } from '@easykit/design'
-import type { FC } from 'react'
 import { useSidebarItems } from './config'
 import { SidebarItem } from './item'
+
+import type { FC } from 'react'
+import { ScrollArea } from '@easykit/design'
+import { LangSelect } from '@clover/public/components/common/select/lang'
+import { ThemeSwitcher } from '@clover/public/components/common/theme-switcher'
 
 export type SidebarProps = {
   active?: string

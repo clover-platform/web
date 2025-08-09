@@ -1,8 +1,8 @@
-import type { RestResult } from '@clover/public/types/rest'
-import { useMessage } from '@easykit/design'
 import { useCallback, useState } from 'react'
+import { useMessage } from '@easykit/design'
+import type { RestResult } from '@clover/public/types/rest'
 
-// biome-ignore lint/suspicious/noExplicitAny: <explanation>
+// biome-ignore lint/suspicious/noExplicitAny: params
 export const useFetch = <T, P = any>(
   api: (params?: P) => Promise<RestResult<T>>,
   options?: {

@@ -1,13 +1,13 @@
-import type { RestResult } from '@clover/public/types/rest'
+import { useCallback, useMemo, useRef, useState } from 'react'
 import { useMessage } from '@easykit/design'
 import { cloneDeep, pick } from 'es-toolkit'
 import { usePathname, useRouter, useSearchParams } from 'next/navigation'
-import { useCallback, useMemo, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
+import type { RestResult } from '@clover/public/types/rest'
 export interface TableLoaderOptions {
-  // biome-ignore lint/suspicious/noExplicitAny: <explanation>
+  // biome-ignore lint/suspicious/noExplicitAny: initialParams
   initialParams: any
-  // biome-ignore lint/suspicious/noExplicitAny: <explanation>
+  // biome-ignore lint/suspicious/noExplicitAny: action
   action: (data: any) => Promise<RestResult<any>>
   withURL?: boolean
   encodeParams?: string[]
@@ -23,7 +23,7 @@ export const useUrlQuery = () => {
   const searchParams = useSearchParams()
   return useMemo(() => {
     const params = new URLSearchParams(searchParams)
-    // biome-ignore lint/suspicious/noExplicitAny: <explanation>
+    // biome-ignore lint/suspicious/noExplicitAny: query
     const query: any = {}
     for (const key of params.keys()) {
       query[key] = params.get(key) || ''
@@ -33,7 +33,7 @@ export const useUrlQuery = () => {
 }
 
 const standardRestParams = (params = {}) =>
-  // biome-ignore lint/suspicious/noExplicitAny: <explanation>
+  // biome-ignore lint/suspicious/noExplicitAny: params
   Object.entries(params).reduce((prev: any, next) => {
     const [key, value] = next
     let v = value
@@ -70,11 +70,11 @@ export const useTableLoader = <D>(options: TableLoaderOptions) => {
   const req = useRef(Object.assign(cloneDeep(initialParams) || {}, reqInit, finalUrlParam))
 
   const onLoad = useCallback(
-    // biome-ignore lint/suspicious/noExplicitAny: <explanation>
+    // biome-ignore lint/suspicious/noExplicitAny: params
     async (params: any) => {
       try {
         setLoading(true)
-        // biome-ignore lint/suspicious/noExplicitAny: <explanation>
+        // biome-ignore lint/suspicious/noExplicitAny: params
         let mergedParams: Record<string, any>
         if (params) {
           mergedParams = { ...req.current, ...params }
@@ -86,7 +86,7 @@ export const useTableLoader = <D>(options: TableLoaderOptions) => {
           const queryString = new URLSearchParams(mergedParams).toString()
           router.replace(`${path}?${queryString}`)
         }
-        // biome-ignore lint/suspicious/noExplicitAny: <explanation>
+        // biome-ignore lint/suspicious/noExplicitAny: params
         const data: any = standardRestParams(pick(mergedParams, legalKeys.current))
         if (encodeParamsRef.current) {
           for (const key of encodeParamsRef.current) {
@@ -100,7 +100,7 @@ export const useTableLoader = <D>(options: TableLoaderOptions) => {
         } else {
           msg.error(message || t('网络错误'))
         }
-        // biome-ignore lint/suspicious/noExplicitAny: <explanation>
+        // biome-ignore lint/suspicious/noExplicitAny: error
       } catch (error: any) {
         msg.error(error.message || t('网络错误'))
       } finally {

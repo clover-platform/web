@@ -1,8 +1,7 @@
-
+import { type FC, useCallback } from 'react'
+import { useRouter } from 'next/navigation'
 import { ICONS } from '@clover/public/config/icons'
 import type { AppsItem as AppsItemProps } from '@clover/public/types/config'
-import {useRouter} from "next/navigation";
-import { type FC, useCallback } from 'react'
 
 export const AppsItem: FC<AppsItemProps & { onClick: () => void }> = (props) => {
   const { name, description, appId, href, onClick } = props
@@ -18,7 +17,7 @@ export const AppsItem: FC<AppsItemProps & { onClick: () => void }> = (props) => 
   }, [href, router, onClick])
 
   return (
-    <div onClick={openApp} className="flex cursor-pointer items-start space-x-4 rounded-md p-2 hover:bg-secondary/80">
+    <div className="flex cursor-pointer items-start space-x-4 rounded-md p-2 hover:bg-secondary/80" onClick={openApp}>
       <div className="flex h-10 w-10 items-center justify-center rounded-md bg-primary text-2xl text-white">
         {ICONS[appId]}
       </div>

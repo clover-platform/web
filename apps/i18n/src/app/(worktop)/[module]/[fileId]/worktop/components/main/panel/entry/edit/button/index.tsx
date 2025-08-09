@@ -1,10 +1,11 @@
-import type { Entry } from '@/types/module/entry'
-import { Action } from '@clover/public/components/common/action'
+import { EditEntryModal } from '../modal'
+
+import { type FC, useState } from 'react'
 import { Tooltip } from '@easykit/design'
 import { Pencil1Icon } from '@radix-ui/react-icons'
-import { type FC, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { EditEntryModal } from '../modal'
+import { Action } from '@clover/public/components/common/action'
+import type { Entry } from '@/types/module/entry'
 
 export type EditEntryButtonProps = {
   entry: Entry
@@ -25,12 +26,12 @@ export const EditEntryButton: FC<EditEntryButtonProps> = (props) => {
       </Tooltip>
       <EditEntryModal
         entry={entry}
-        visible={visible}
         onCancel={() => setVisible(false)}
         onSuccess={() => {
           setVisible(false)
           props.onSuccess?.()
         }}
+        visible={visible}
       />
     </>
   )

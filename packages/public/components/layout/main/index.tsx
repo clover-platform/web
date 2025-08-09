@@ -1,15 +1,16 @@
-import {LoginLayout} from "@clover/public/components/layout/login";
-import { Footer, type FooterProps } from '@clover/public/components/layout/main/footer'
-import {Guide} from "@clover/public/components/layout/main/guide";
-import { Header, type HeaderProps } from '@clover/public/components/layout/main/header'
-import {useAppsLoader} from "@clover/public/hooks/use.apps.loader";
-import { isLoginState } from '@clover/public/state/account'
-import { projectsState, teamsState } from '@clover/public/state/public'
-import classNames from 'classnames'
-import { useAtomValue } from 'jotai'
-import { type FC, type PropsWithChildren, useEffect, useMemo } from 'react'
 import { LoadingLayout } from '../loading'
 import { useRestoreSettings } from './hooks'
+
+import { type FC, type PropsWithChildren, useEffect, useMemo } from 'react'
+import classNames from 'classnames'
+import { useAtomValue } from 'jotai'
+import { LoginLayout } from '@clover/public/components/layout/login'
+import { Footer, type FooterProps } from '@clover/public/components/layout/main/footer'
+import { Guide } from '@clover/public/components/layout/main/guide'
+import { Header, type HeaderProps } from '@clover/public/components/layout/main/header'
+import { useAppsLoader } from '@clover/public/hooks/use.apps.loader'
+import { isLoginState } from '@clover/public/state/account'
+import { projectsState, teamsState } from '@clover/public/state/public'
 
 export type MainLayoutProps = PropsWithChildren<{
   headerProps?: HeaderProps
@@ -30,15 +31,15 @@ export const MainLayout: FC<MainLayoutProps> = (props) => {
     container = true,
     loading = false,
   } = props
-  const teams = useAtomValue(teamsState);
-  const projects = useAtomValue(projectsState);
-  const isLogin = useAtomValue(isLoginState);
+  const teams = useAtomValue(teamsState)
+  const projects = useAtomValue(projectsState)
+  const isLogin = useAtomValue(isLoginState)
   const needInit = useMemo(() => isLogin && !(teams?.length && projects.length), [teams, projects, isLogin])
-  const {load} = useAppsLoader();
+  const { load } = useAppsLoader()
   useRestoreSettings()
 
   useEffect(() => {
-    load().then();
+    load().then()
   }, [load])
 
   return needInit ? (

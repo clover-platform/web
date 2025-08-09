@@ -1,8 +1,9 @@
-import { Button, Dialog, type DialogProps } from '@easykit/design'
 import { type FC, useRef } from 'react'
+import { Button, Dialog, type DialogProps } from '@easykit/design'
 import Cropper, { type ReactCropperElement } from 'react-cropper'
 import { useTranslation } from 'react-i18next'
 import 'cropperjs/dist/cropper.css'
+
 import classNames from 'classnames'
 
 export type CropperDialogProps = DialogProps & {
@@ -23,9 +24,9 @@ export const CropperDialog: FC<CropperDialogProps> = (props) => {
   }
 
   return (
-    <Dialog visible={visible} maskClosable={false} title={t('裁剪图片')} {...rest}>
+    <Dialog maskClosable={false} title={t('裁剪图片')} visible={visible} {...rest}>
       <div className="-mb-2 flex flex-col items-center space-y-4">
-        <Cropper ref={cropperRef} src={src} className={classNames('max-h-[80vh] w-full', props.cropperClassName)} />
+        <Cropper className={classNames('max-h-[80vh] w-full', props.cropperClassName)} ref={cropperRef} src={src} />
         <div className="flex w-full justify-end space-x-2">
           <Button onClick={crop}>{t('确定')}</Button>
           <Button onClick={onCancel} variant="outline">

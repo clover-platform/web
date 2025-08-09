@@ -1,5 +1,6 @@
-import { useMemo } from 'react'
 import type { RestResult } from '../types/rest'
+
+import { useMemo } from 'react'
 
 export type UseResultDataOptions<T> = {
   data?: RestResult<T>

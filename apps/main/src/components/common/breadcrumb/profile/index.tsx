@@ -1,10 +1,10 @@
-import { AppBreadcrumb } from '@/components/common/app-breadcrumb'
-import { accountInfoState } from '@clover/public/state/account'
+import type { FC, PropsWithChildren } from 'react'
 import { BreadcrumbItem, BreadcrumbLink, BreadcrumbSeparator } from '@easykit/design'
 import { useAtomValue } from 'jotai/index'
 import Link from 'next/link'
-import type { FC, PropsWithChildren } from 'react'
 import { useTranslation } from 'react-i18next'
+import { accountInfoState } from '@clover/public/state/account'
+import { AppBreadcrumb } from '@/components/common/app-breadcrumb'
 
 export type BreadcrumbBase = PropsWithChildren
 

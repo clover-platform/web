@@ -1,8 +1,8 @@
+import type { FC, PropsWithChildren } from 'react'
+import { Progress, TableCell, TableRow, Tooltip } from '@easykit/design'
+import { useTranslation } from 'react-i18next'
 import { LanguageIcon } from '@/components/common/language-icon'
 import type { LanguageWithCount } from '@/types/public'
-import { Progress, TableCell, TableRow, Tooltip } from '@easykit/design'
-import type { FC, PropsWithChildren } from 'react'
-import { useTranslation } from 'react-i18next'
 export type LanguageItemProps = {
   onClick?: () => void
 } & PropsWithChildren<LanguageWithCount>
@@ -18,12 +18,12 @@ export const LanguageItem: FC<LanguageItemProps> = (props) => {
     <TableRow onClick={props.onClick}>
       <TableCell>
         <div className="flex items-center justify-start">
-          <LanguageIcon code={props.code} className="mr-2" /> {props.name}
+          <LanguageIcon className="mr-2" code={props.code} /> {props.name}
         </div>
       </TableCell>
       <TableCell>
         <div className="w-full rounded-full border">
-          <Progress value={verifiedPercent} style={{ width: `${translatedPercent}%` }} />
+          <Progress style={{ width: `${translatedPercent}%` }} value={verifiedPercent} />
         </div>
       </TableCell>
       <TableCell className="text-right">

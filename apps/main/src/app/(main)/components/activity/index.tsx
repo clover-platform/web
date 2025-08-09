@@ -1,6 +1,7 @@
+import { useTabs } from './config'
+
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@easykit/design'
 import { useTranslation } from 'react-i18next'
-import { useTabs } from './config'
 
 export const Activity = () => {
   const { t } = useTranslation()

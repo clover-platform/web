@@ -1,5 +1,5 @@
-import classNames from 'classnames'
 import { type PropsWithChildren, useMemo } from 'react'
+import classNames from 'classnames'
 
 export type LogoType = 'normal' | 'light' | 'dark'
 

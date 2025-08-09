@@ -1,6 +1,7 @@
-import type { FC } from 'react'
 import { ProjectItem } from '../../project/item'
 import type { ProjectGroup as ProjectGroupType } from '../types'
+
+import type { FC } from 'react'
 
 export type ProjectGroupProps = {
   item: ProjectGroupType

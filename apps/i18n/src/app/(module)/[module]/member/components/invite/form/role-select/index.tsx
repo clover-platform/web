@@ -1,5 +1,4 @@
-import { useDocumentClick } from '@clover/public/hooks'
-import { t } from '@clover/public/utils/locale.client'
+import { type FC, useRef, useState } from 'react'
 import {
   Button,
   Checkbox,
@@ -11,8 +10,9 @@ import {
   DropdownMenuTrigger,
 } from '@easykit/design'
 import { ChevronDownIcon } from '@radix-ui/react-icons'
-import { type FC, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
+import { useDocumentClick } from '@clover/public/hooks'
+import { t } from '@clover/public/utils/locale.client'
 
 export type RoleSelectProps = {
   value?: string[]
@@ -69,7 +69,7 @@ export const RoleSelect: FC<RoleSelectProps> = (props) => {
   return (
     <DropdownMenu open={open}>
       <DropdownMenuTrigger asChild>
-        <Button ref={buttonRef} variant="outline" onClick={() => setOpen(true)}>
+        <Button onClick={() => setOpen(true)} ref={buttonRef} variant="outline">
           {selected.length > 0 ? (
             <div className="flex w-full items-center justify-start">
               <div className="flex flex-1 items-center justify-start gap-2">
@@ -88,7 +88,7 @@ export const RoleSelect: FC<RoleSelectProps> = (props) => {
           )}
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent ref={contentRef} align="start" className="w-96">
+      <DropdownMenuContent align="start" className="w-96" ref={contentRef}>
         <DropdownMenuLabel>{t('请选择角色')}</DropdownMenuLabel>
         <DropdownMenuSeparator />
         {ROLE_OPTIONS.map((option) => {

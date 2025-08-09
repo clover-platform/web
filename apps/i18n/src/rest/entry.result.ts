@@ -1,5 +1,5 @@
-import type { EntryResultPage } from '@/types/module/entry'
 import { del, get, post, put, resultWrapper } from '@clover/public/utils/rest'
+import type { EntryResultPage } from '@/types/module/entry'
 
 export type SaveEntryResultData = {
   module: string
@@ -41,7 +41,7 @@ export type DeleteResultData = {
   fileId?: number
 }
 export const deleteResult = (data: DeleteResultData) =>
-  resultWrapper(del<unknown>(`@i18n/${data.module}/file/${data.fileId}/entry/${data.entryId}/result/${data.id}`)) 
+  resultWrapper(del<unknown>(`@i18n/${data.module}/file/${data.fileId}/entry/${data.entryId}/result/${data.id}`))
 
 export type ApproveResultData = {
   module: string

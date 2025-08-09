@@ -1,6 +1,6 @@
-import type { AccessToken } from '@/types/profile/access/token'
 import type { PageData } from '@clover/public/types/rest'
 import { del, get, post, resultWrapper } from '@clover/public/utils/rest'
+import type { AccessToken } from '@/types/profile/access/token'
 
 export type ListParams = {
   page?: number

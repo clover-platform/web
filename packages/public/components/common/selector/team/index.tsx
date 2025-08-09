@@ -1,14 +1,14 @@
-import {teamsState} from "@clover/public/state/public";
+import { type FC, useMemo } from 'react'
 import { Select, type SelectProps } from '@easykit/design'
 import { useAtomValue } from 'jotai'
-import { type FC, useMemo } from 'react'
-import { useTranslation } from "react-i18next";
+import { useTranslation } from 'react-i18next'
+import { teamsState } from '@clover/public/state/public'
 
-export type TeamSelectorProps = Omit<SelectProps, "options">;
+export type TeamSelectorProps = Omit<SelectProps, 'options'>
 
-export const TeamSelector: FC<TeamSelectorProps> = (props) =>{
-  const teams = useAtomValue(teamsState);
-  const { t } = useTranslation();
+export const TeamSelector: FC<TeamSelectorProps> = (props) => {
+  const teams = useAtomValue(teamsState)
+  const { t } = useTranslation()
   const options = useMemo(() => {
     return teams.map((team) => {
       return {
@@ -17,5 +17,5 @@ export const TeamSelector: FC<TeamSelectorProps> = (props) =>{
       }
     })
   }, [teams])
-  return <Select placeholder={t('请选择')} options={options} className="min-w-48 max-w-96" allowClear {...props} />
+  return <Select allowClear className="min-w-48 max-w-96" options={options} placeholder={t('请选择')} {...props} />
 }

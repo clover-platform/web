@@ -1,10 +1,11 @@
-import { FileName } from '@/components/common/file-name'
-import type { File } from '@/types/module/source'
-import { t } from '@clover/public/utils/locale.client'
-import type { DataTableColumn } from '@easykit/design'
-import { type DropdownMenuItemProps, type FilterItemProps, Input } from '@easykit/design'
 import { FileRevision } from './common/revision'
 import { WordCount } from './common/word-count'
+
+import type { DataTableColumn } from '@easykit/design'
+import { type DropdownMenuItemProps, type FilterItemProps, Input } from '@easykit/design'
+import { t } from '@clover/public/utils/locale.client'
+import { FileName } from '@/components/common/file-name'
+import type { File } from '@/types/module/source'
 
 export const getColumns = (): DataTableColumn<File>[] => [
   {
@@ -20,10 +21,10 @@ export const getColumns = (): DataTableColumn<File>[] => [
     className: 'w-[100px] min-w-[100px]',
     cell: ({ row }) => (
       <WordCount
-        wordCount={row.original.wordCount}
         fileId={row.original.id}
-        revisionVersion={row.original.revisionVersion}
         importStatus={row.original.importStatus}
+        revisionVersion={row.original.revisionVersion}
+        wordCount={row.original.wordCount}
       />
     ),
   },
@@ -33,7 +34,7 @@ export const getColumns = (): DataTableColumn<File>[] => [
     className: 'w-[100px] min-w-[100px]',
     cell: ({ row }) =>
       row.original.importStatus === 1 ? (
-        <FileRevision version={row.original.revisionVersion} fileId={row.original.id} />
+        <FileRevision fileId={row.original.id} version={row.original.revisionVersion} />
       ) : (
         <div className="text-center">--</div>
       ),

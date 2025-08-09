@@ -1,6 +1,6 @@
-import { currentEntryState, entriesState, filesState } from '@/state/worktop'
+import { useMemo } from 'react'
 import { useAtom } from 'jotai/index'
-import { useMemo } from "react";
+import { currentEntryState, entriesState, filesState } from '@/state/worktop'
 
 export const useCurrentFile = () => {
   const [entries] = useAtom(entriesState)

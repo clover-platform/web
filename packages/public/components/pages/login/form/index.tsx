@@ -1,15 +1,16 @@
+import { MFADialog } from '../mfa-dialog'
+
+import { type FC, type ReactNode, useCallback, useState } from 'react'
+import { Button, Form, FormItem, Input, useMessage } from '@easykit/design'
+import { useMutation } from '@tanstack/react-query'
+import { cloneDeep, isUndefined } from 'es-toolkit'
+import { useSearchParams } from 'next/navigation'
+import { useTranslation } from 'react-i18next'
 import { getSchema } from '@clover/public/config/schema/login'
 import { useEncrypt } from '@clover/public/hooks'
 import { type LoginRestData, login } from '@clover/public/rest/auth'
 import { RestError } from '@clover/public/utils/rest'
 import { setToken } from '@clover/public/utils/token'
-import { Button, Form, FormItem, Input, useMessage } from '@easykit/design'
-import { useMutation } from '@tanstack/react-query'
-import { cloneDeep, isUndefined } from 'es-toolkit'
-import { useSearchParams } from 'next/navigation'
-import { type FC, type ReactNode, useCallback, useState } from 'react'
-import { useTranslation } from 'react-i18next'
-import { MFADialog } from '../mfa-dialog'
 
 export type LoginFormProps = {
   passwordLabel: ReactNode
@@ -68,11 +69,11 @@ export const LoginForm: FC<LoginFormProps> = (props) => {
 
   return (
     <>
-      <Form<LoginRestData> schema={getSchema()} onSubmit={(data) => onSubmit(data)}>
-        <FormItem name="username" label={t('邮箱或用户名')}>
+      <Form<LoginRestData> onSubmit={(data) => onSubmit(data)} schema={getSchema()}>
+        <FormItem label={t('邮箱或用户名')} name="username">
           <Input placeholder={t('请输入邮箱或用户名')} />
         </FormItem>
-        <FormItem name="password" label={passwordLabel}>
+        <FormItem label={passwordLabel} name="password">
           <Input placeholder={t('请输入密码')} type="password" />
         </FormItem>
         <div>
@@ -82,11 +83,11 @@ export const LoginForm: FC<LoginFormProps> = (props) => {
         </div>
       </Form>
       <MFADialog<LoginRestData>
-        isPending={isPending}
-        visible={visible}
-        onCancel={onCancel}
         formData={formData}
+        isPending={isPending}
+        onCancel={onCancel}
         onSubmit={onSubmit}
+        visible={visible}
       />
     </>
   )

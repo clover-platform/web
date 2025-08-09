@@ -1,10 +1,10 @@
-import { uploadHandle } from '@clover/public/utils/file'
+import { type FC, useEffect, useRef, useState } from 'react'
 import {
-  type UploadFile,
   Uploader as UploaderComponent,
   type UploaderProps as UploaderPropsType,
+  type UploadFile,
 } from '@easykit/design'
-import { type FC, useEffect, useRef, useState } from 'react'
+import { uploadHandle } from '@clover/public/utils/file'
 
 export type FileProps = {
   name: string
@@ -95,5 +95,5 @@ export const Uploader: FC<UploaderProps> = ({ onChange, value, ...props }) => {
     onChange?.(doneFiles.map(uploadFileToFileProps))
   }
 
-  return <UploaderComponent value={files} onChange={handleFilesChange} uploadHandle={uploadHandle} {...props} />
+  return <UploaderComponent onChange={handleFilesChange} uploadHandle={uploadHandle} value={files} {...props} />
 }
