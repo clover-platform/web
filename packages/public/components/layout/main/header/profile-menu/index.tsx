@@ -74,7 +74,7 @@ export const ProfileMenu: FC<ProfileMenuProps> = (props) => {
           <Avatar alt="cover" className="h-7 w-7" fallback={account.username.slice(0, 1)} src={account.avatar!} />
         </Action>
       </DropdownMenuTrigger>
-      <DropdownMenuContent align="end" className="w-64 p-0">
+      <DropdownMenuContent align="end" className="z-100 w-64 p-0">
         <AccountInfo />
         <DropdownMenuSeparator />
         {isMainAppSameOrigin ? (

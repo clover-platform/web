@@ -16,6 +16,7 @@ import {
 import { useMutation } from '@tanstack/react-query'
 import Link from 'next/link'
 import { useTranslation } from 'react-i18next'
+import { PageHeader } from '@clover/public/components/common/page/header'
 import { TitleBar } from '@clover/public/components/common/title-bar'
 import { useLayoutConfig } from '@clover/public/components/layout/hooks/use.layout.config'
 import { useListQuery } from '@clover/public/hooks'
@@ -57,39 +58,43 @@ export const AccessTokensPage = () => {
 
   return (
     <MainPage>
-      <ProfileBreadcrumbBase>
-        <BreadcrumbItem>
-          <BreadcrumbLink asChild={true}>
-            <Link href="/profile/security">{t('安全设置')}</Link>
-          </BreadcrumbLink>
-        </BreadcrumbItem>
-        <BreadcrumbSeparator />
-        <BreadcrumbItem>
-          <BreadcrumbPage>{title}</BreadcrumbPage>
-        </BreadcrumbItem>
-      </ProfileBreadcrumbBase>
-      <TitleBar actions={actions} title={title} />
-      <Card>
-        <DataTable<AccessToken>
-          columns={getColumns()}
-          data={data}
-          inCard={true}
-          load={load}
-          loading={loading || revoking}
-          onRowActionClick={({ id: key }, { original }) => {
-            const { id } = original
-            if (key === 'revoke') {
-              alert.confirm({
-                title: t('撤销令牌'),
-                description: t('撤销后将无法再使用该令牌，且该操作无法恢复。'),
-                onOk: () => revokeToken(id),
-              })
-            }
-          }}
-          pagination={pagination}
-          rowActions={(row) => getRowActions(row)}
-        />
-      </Card>
+      <PageHeader>
+        <ProfileBreadcrumbBase>
+          <BreadcrumbItem>
+            <BreadcrumbLink asChild={true}>
+              <Link href="/profile/security">{t('安全设置')}</Link>
+            </BreadcrumbLink>
+          </BreadcrumbItem>
+          <BreadcrumbSeparator />
+          <BreadcrumbItem>
+            <BreadcrumbPage>{title}</BreadcrumbPage>
+          </BreadcrumbItem>
+        </ProfileBreadcrumbBase>
+        <TitleBar actions={actions} title={title} />
+      </PageHeader>
+      <div className="container">
+        <Card>
+          <DataTable<AccessToken>
+            columns={getColumns()}
+            data={data}
+            inCard={true}
+            load={load}
+            loading={loading || revoking}
+            onRowActionClick={({ id: key }, { original }) => {
+              const { id } = original
+              if (key === 'revoke') {
+                alert.confirm({
+                  title: t('撤销令牌'),
+                  description: t('撤销后将无法再使用该令牌，且该操作无法恢复。'),
+                  onOk: () => revokeToken(id),
+                })
+              }
+            }}
+            pagination={pagination}
+            rowActions={(row) => getRowActions(row)}
+          />
+        </Card>
+      </div>
     </MainPage>
   )
 }

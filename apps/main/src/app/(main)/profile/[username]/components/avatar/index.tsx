@@ -2,6 +2,7 @@ import { type FC, useState } from 'react'
 import { Button, Avatar as EasykitAvatar, Spin, Uploader, type UploadFile, useMessage } from '@easykit/design'
 import { Pencil2Icon } from '@radix-ui/react-icons'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
+import classNames from 'classnames'
 import { useParams } from 'next/navigation'
 import { useTranslation } from 'react-i18next'
 import { CropperDialog } from '@clover/public/components/common/cropper/dialog'
@@ -81,9 +82,9 @@ export const Avatar: FC<AvatarProps> = (props) => {
   }
 
   return (
-    <div className="!h-[300px] relative w-full">
+    <div className="group relative">
       <EasykitAvatar
-        className="h-full w-full"
+        className="size-16"
         fallback={fallback}
         fallbackClassName="text-2xl bg-black/5 dark:bg-white/5"
         src={src}
@@ -101,13 +102,15 @@ export const Avatar: FC<AvatarProps> = (props) => {
             showFileList={false}
             value={files}
           >
-            <Button
-              className="-translate-x-1/2 absolute bottom-0 left-1/2 translate-y-1/2"
-              disabled={uploading || isPending}
-              variant="outline"
+            <div
+              className={classNames(
+                'absolute top-0 right-0 bottom-0 left-0 items-center justify-center rounded-full',
+                'bg-black/50 text-white/80',
+                'hidden group-hover:flex'
+              )}
             >
-              {uploading || isPending ? <Spin /> : <Pencil2Icon />} {t('编辑')}
-            </Button>
+              {uploading || isPending ? <Spin /> : <Pencil2Icon />}
+            </div>
           </Uploader>
           <CropperDialog onCancel={() => setVisible(false)} onCrop={onCrop} src={fileSrc} visible={visible} />
         </>

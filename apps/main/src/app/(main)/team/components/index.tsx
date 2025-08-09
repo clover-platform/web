@@ -8,6 +8,7 @@ import { useMutation, useQueryClient } from '@tanstack/react-query'
 import Link from 'next/link'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { useTranslation } from 'react-i18next'
+import { PageHeader } from '@clover/public/components/common/page/header'
 import { TabsTitle } from '@clover/public/components/common/tabs-title'
 import { TitleBar } from '@clover/public/components/common/title-bar'
 import { useCurrentTeam } from '@clover/public/components/layout/hooks/main'
@@ -118,65 +119,69 @@ export const TeamPage = () => {
 
   return (
     <MainPage>
-      <AppBreadcrumb>
-        <BreadcrumbItem>
-          <BreadcrumbPage>{title}</BreadcrumbPage>
-        </BreadcrumbItem>
-      </AppBreadcrumb>
-      <TitleBar actions={actions} border={false} title={title} />
-      <Card>
-        <TabsTitle active={active} items={getTabs()} onChange={setActive} />
-        <DataTable<Team>
-          columns={getColumns(team?.id)}
-          data={data}
-          filter={{
-            items: getFilters(),
-            defaultValues: initialParams,
-            query: query,
-          }}
-          inCard={true}
-          load={load}
-          loading={loading}
-          onRowActionClick={({ id: key }, { original }) => {
-            const { id, teamKey } = original
-            if (key === 'delete') {
-              alert.confirm({
-                title: t('删除团队'),
-                description: (
-                  <>
-                    {t('团队下的所有项目将会被删除。')}
-                    <br />
-                    {t('确定删除团队吗？')}
-                  </>
-                ),
-                onOk: () => deleteTeamMutation(id),
-              })
-            } else if (['info', 'member'].includes(key)) {
-              router.push(`/team/${teamKey}?tab=${key}`)
-            } else if (key === 'collect') {
-              alert.confirm({
-                title: t('收藏团队'),
-                description: t('确定收藏团队吗？'),
-                onOk: () => addCollectMutation(id),
-              })
-            } else if (key === 'collect.cancel') {
-              alert.confirm({
-                title: t('取消收藏团队'),
-                description: t('确定取消收藏团队吗？'),
-                onOk: () => cancelCollectMutation(id),
-              })
-            } else if (key === 'leave') {
-              alert.confirm({
-                title: t('退出团队'),
-                description: t('退出团队将会退出团队下的所有项目，确定退出团队吗？'),
-                onOk: () => leaveTeamMutation(id),
-              })
-            }
-          }}
-          pagination={pagination}
-          rowActions={(t) => getRowActions(t, team?.id)}
-        />
-      </Card>
+      <PageHeader>
+        <AppBreadcrumb>
+          <BreadcrumbItem>
+            <BreadcrumbPage>{title}</BreadcrumbPage>
+          </BreadcrumbItem>
+        </AppBreadcrumb>
+        <TitleBar actions={actions} border={false} title={title} />
+        <TabsTitle active={active} className="-mb-md" items={getTabs()} onChange={setActive} />
+      </PageHeader>
+      <div className="container">
+        <Card>
+          <DataTable<Team>
+            columns={getColumns(team?.id)}
+            data={data}
+            filter={{
+              items: getFilters(),
+              defaultValues: initialParams,
+              query: query,
+            }}
+            inCard={true}
+            load={load}
+            loading={loading}
+            onRowActionClick={({ id: key }, { original }) => {
+              const { id, teamKey } = original
+              if (key === 'delete') {
+                alert.confirm({
+                  title: t('删除团队'),
+                  description: (
+                    <>
+                      {t('团队下的所有项目将会被删除。')}
+                      <br />
+                      {t('确定删除团队吗？')}
+                    </>
+                  ),
+                  onOk: () => deleteTeamMutation(id),
+                })
+              } else if (['info', 'member'].includes(key)) {
+                router.push(`/team/${teamKey}?tab=${key}`)
+              } else if (key === 'collect') {
+                alert.confirm({
+                  title: t('收藏团队'),
+                  description: t('确定收藏团队吗？'),
+                  onOk: () => addCollectMutation(id),
+                })
+              } else if (key === 'collect.cancel') {
+                alert.confirm({
+                  title: t('取消收藏团队'),
+                  description: t('确定取消收藏团队吗？'),
+                  onOk: () => cancelCollectMutation(id),
+                })
+              } else if (key === 'leave') {
+                alert.confirm({
+                  title: t('退出团队'),
+                  description: t('退出团队将会退出团队下的所有项目，确定退出团队吗？'),
+                  onOk: () => leaveTeamMutation(id),
+                })
+              }
+            }}
+            pagination={pagination}
+            rowActions={(t) => getRowActions(t, team?.id)}
+          />
+        </Card>
+      </div>
     </MainPage>
   )
 }

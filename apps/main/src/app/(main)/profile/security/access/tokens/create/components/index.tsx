@@ -19,6 +19,7 @@ import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { useTranslation } from 'react-i18next'
 import BackButton from '@clover/public/components/common/button/back'
+import { PageHeader } from '@clover/public/components/common/page/header'
 import { TitleBar } from '@clover/public/components/common/title-bar'
 import { useLayoutConfig } from '@clover/public/components/layout/hooks/use.layout.config'
 import { ProfileBreadcrumbBase } from '@/components/common/breadcrumb/profile'
@@ -49,43 +50,47 @@ export const AccessTokensCreatePage = () => {
 
   return (
     <MainPage>
-      <ProfileBreadcrumbBase>
-        <BreadcrumbItem>
-          <BreadcrumbLink asChild={true}>
-            <Link href="/profile/security">{t('安全设置')}</Link>
-          </BreadcrumbLink>
-        </BreadcrumbItem>
-        <BreadcrumbSeparator />
-        <BreadcrumbItem>
-          <BreadcrumbLink asChild={true}>
-            <Link href="/profile/security/access/tokens">{t('访问令牌')}</Link>
-          </BreadcrumbLink>
-        </BreadcrumbItem>
-        <BreadcrumbSeparator />
-        <BreadcrumbItem>
-          <BreadcrumbPage>{title}</BreadcrumbPage>
-        </BreadcrumbItem>
-      </ProfileBreadcrumbBase>
-      <TitleBar title={title} />
-      <Card>
-        {token ? (
-          <div className="space-y-2">
-            <TokenDisplay token={token} />
-            <Space>
-              <Button onClick={() => router.push('/profile/security/access/tokens')}>{t('确定')}</Button>
-            </Space>
-          </div>
-        ) : (
-          <AccessTokenForm onSubmit={createToken}>
-            <Space>
-              <Button loading={creating} type="submit">
-                {t('提交')}
-              </Button>
-              <BackButton />
-            </Space>
-          </AccessTokenForm>
-        )}
-      </Card>
+      <PageHeader>
+        <ProfileBreadcrumbBase>
+          <BreadcrumbItem>
+            <BreadcrumbLink asChild={true}>
+              <Link href="/profile/security">{t('安全设置')}</Link>
+            </BreadcrumbLink>
+          </BreadcrumbItem>
+          <BreadcrumbSeparator />
+          <BreadcrumbItem>
+            <BreadcrumbLink asChild={true}>
+              <Link href="/profile/security/access/tokens">{t('访问令牌')}</Link>
+            </BreadcrumbLink>
+          </BreadcrumbItem>
+          <BreadcrumbSeparator />
+          <BreadcrumbItem>
+            <BreadcrumbPage>{title}</BreadcrumbPage>
+          </BreadcrumbItem>
+        </ProfileBreadcrumbBase>
+        <TitleBar title={title} />
+      </PageHeader>
+      <div className="container">
+        <Card>
+          {token ? (
+            <div className="space-y-2">
+              <TokenDisplay token={token} />
+              <Space>
+                <Button onClick={() => router.push('/profile/security/access/tokens')}>{t('确定')}</Button>
+              </Space>
+            </div>
+          ) : (
+            <AccessTokenForm onSubmit={createToken}>
+              <Space>
+                <Button loading={creating} type="submit">
+                  {t('提交')}
+                </Button>
+                <BackButton />
+              </Space>
+            </AccessTokenForm>
+          )}
+        </Card>
+      </div>
     </MainPage>
   )
 }
