@@ -133,13 +133,13 @@ const LinkPage = (props: LinkPageProps) => {
                   <Image
                     alt={t('头像')}
                     height={28}
-                    // biome-ignore lint/suspicious/noExplicitAny: <explanation>
+                    // biome-ignore lint/suspicious/noExplicitAny: avatar
                     src={(user as any).avatar}
                     width={28}
                   />
                 </div>
                 <div className="ml-[5px]">
-                  {/* biome-ignore lint/suspicious/noExplicitAny: <explanation> */}
+                  {/* biome-ignore lint/suspicious/noExplicitAny: username */}
                   {(user as any).username}
                 </div>
               </>

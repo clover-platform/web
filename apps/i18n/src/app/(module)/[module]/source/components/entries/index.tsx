@@ -25,6 +25,7 @@ export const Entries = () => {
     key: 'module:source:entries',
     action: entryList,
   })
+  console.log(alert, msg, t, refetch)
 
   return (
     <Card>

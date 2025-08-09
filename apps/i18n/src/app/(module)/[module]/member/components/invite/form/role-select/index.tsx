@@ -46,9 +46,9 @@ const ROLE_OPTIONS: RoleOption[] = [
 export const RoleSelect: FC<RoleSelectProps> = (props) => {
   const { t } = useTranslation()
   const [open, setOpen] = useState(false)
-  // biome-ignore lint/suspicious/noExplicitAny: <explanation>
+  // biome-ignore lint/suspicious/noExplicitAny: contentRef
   const contentRef = useRef<any>(null)
-  // biome-ignore lint/suspicious/noExplicitAny: <explanation>
+  // biome-ignore lint/suspicious/noExplicitAny: buttonRef
   const buttonRef = useRef<any>(null)
   const [selected, setSelected] = useState<string[]>(props.value || [])
   useDocumentClick([buttonRef, contentRef], () => {

@@ -74,7 +74,7 @@ export const RevisionDialog: FC<RevisionDialogProps> = (props) => {
                     {row.current ? (
                       <Badge variant="outline">{t('当前')}</Badge>
                     ) : (
-                      // biome-ignore lint/a11y/useValidAnchor: <explanation>
+                      // biome-ignore lint/a11y/useValidAnchor: <还原>
                       <a className="cursor-pointer hover:text-primary">{t('还原')}</a>
                     )}
                   </TableCell>

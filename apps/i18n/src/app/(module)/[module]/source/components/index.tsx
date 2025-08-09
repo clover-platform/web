@@ -20,7 +20,7 @@ export const SourcePage = () => {
   const { t } = useTranslation()
   const pathname = usePathname()
   const router = useRouter()
-  const [active, setActive] = useQueryState('type', {
+  const [active, _setActive] = useQueryState('type', {
     defaultValue: 'files',
     clearOnDefault: false,
   })

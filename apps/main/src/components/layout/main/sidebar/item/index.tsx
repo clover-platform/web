@@ -66,7 +66,7 @@ export const SidebarItem: FC<SidebarItemProps> = (props) => {
         ) : null}
       </Action>
     )
-  }, [active, id, icon, title, extra, panel, children, isOpen])
+  }, [active, id, icon, title, extra, panel, children, isOpen, extraHold])
 
   const actionWithHref = useMemo(() => {
     if (!href) return action

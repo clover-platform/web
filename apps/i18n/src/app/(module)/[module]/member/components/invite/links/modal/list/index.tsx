@@ -40,7 +40,7 @@ export const InviteLinkListModal: FC<InviteLinkListModalProps> = (props) => {
         <ScrollArea className="h-full w-full">
           <div className="mr-2 space-y-6">
             {!loading && listData.map((item) => <InviteLinkItem item={item} key={item.id} onRevoke={onRevoke} />)}
-            {/* biome-ignore lint/suspicious/noArrayIndexKey: <explanation> */}
+            {/* biome-ignore lint/suspicious/noArrayIndexKey: <loading> */}
             {loading && Array.from({ length: 3 }).map((_, index) => <InviteLinkItemLoading key={index} />)}
             {!loading && listData.length === 0 && <Empty text={t('暂无链接')} />}
           </div>

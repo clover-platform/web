@@ -1,6 +1,6 @@
 import { HeaderSelect } from './header-select'
 
-import { type FC, useEffect, useMemo, useState } from 'react'
+import { type FC, useCallback, useEffect, useMemo, useState } from 'react'
 import {
   Alert,
   Button,
@@ -54,12 +54,6 @@ export const ImportConfigDialog: FC<ImportConfigDialogProps> = (props) => {
     enabled: visible,
   })
 
-  useEffect(() => {
-    if (!visible) {
-      reset()
-    }
-  }, [visible])
-
   // 处理导入
   const handleImport = () => {
     // 校验必需字段
@@ -88,10 +82,16 @@ export const ImportConfigDialog: FC<ImportConfigDialogProps> = (props) => {
   }
 
   // 重置选择
-  const reset = () => {
+  const reset = useCallback(() => {
     setSelects({})
     setSkipFirstRow(false)
-  }
+  }, [])
+
+  useEffect(() => {
+    if (!visible) {
+      reset()
+    }
+  }, [visible, reset])
 
   const footer = (
     <div className="flex gap-2">
