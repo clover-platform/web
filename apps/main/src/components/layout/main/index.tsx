@@ -31,7 +31,7 @@ export const MainLayout: FC<MainLayoutProps> = (origin) => {
       headerProps={{
         logoUrl: '/',
         appName: t('项目'),
-        className: 'bg-background dark:bg-black/50 sticky top-0 z-100',
+        className: 'bg-background dark:bg-black/50 sticky top-0 z-50',
         extra: <Search />,
       }}
       loading={!isLogin}

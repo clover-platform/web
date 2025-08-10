@@ -14,10 +14,17 @@ const initialParams = {
 
 export const Entries = () => {
   const { module } = useParams()
-  const alert = useAlert()
-  const msg = useMessage()
-  const { t } = useTranslation()
-  const { loading, data, pagination, load, query, refetch } = useListQuery<Entry, EntryListQuery>({
+  const _alert = useAlert()
+  const _msg = useMessage()
+  const { t: _t } = useTranslation()
+  const {
+    loading,
+    data,
+    pagination,
+    load,
+    query,
+    refetch: _refetch,
+  } = useListQuery<Entry, EntryListQuery>({
     params: {
       module: module as string,
     },
@@ -25,7 +32,6 @@ export const Entries = () => {
     key: 'module:source:entries',
     action: entryList,
   })
-  console.log(alert, msg, t, refetch)
 
   return (
     <Card>

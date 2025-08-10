@@ -7,6 +7,7 @@ import Link from 'next/link'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { useTranslation } from 'react-i18next'
 import { MainPage } from '@clover/public/components/common/page'
+import { PageHeader } from '@clover/public/components/common/page/header'
 import { TabsTitle } from '@clover/public/components/common/tabs-title'
 import { TitleBar } from '@clover/public/components/common/title-bar'
 import { useLayoutConfig } from '@clover/public/components/layout/hooks/use.layout.config'
@@ -104,56 +105,60 @@ export const ModulePage = () => {
 
   return (
     <MainPage>
-      <AppBreadcrumb>
-        <BreadcrumbItem>
-          <BreadcrumbPage>{title}</BreadcrumbPage>
-        </BreadcrumbItem>
-      </AppBreadcrumb>
-      <TitleBar actions={actions} border={false} title={title} />
-      <Card>
-        <TabsTitle active={active} items={getTabs()} onChange={setActive} />
-        <DataTable<Module>
-          columns={getColumns()}
-          data={data}
-          filter={{
-            items: getFilters(),
-            defaultValues: initialParams,
-            query: query,
-          }}
-          inCard={true}
-          load={load}
-          loading={loading}
-          onRowActionClick={({ id: key }, { original }) => {
-            const { identifier } = original
-            if (key === 'detail') {
+      <PageHeader>
+        <AppBreadcrumb>
+          <BreadcrumbItem>
+            <BreadcrumbPage>{title}</BreadcrumbPage>
+          </BreadcrumbItem>
+        </AppBreadcrumb>
+        <TitleBar actions={actions} title={title} />
+        <TabsTitle active={active} className="-mb-md" items={getTabs()} onChange={setActive} />
+      </PageHeader>
+      <div className="container">
+        <Card>
+          <DataTable<Module>
+            columns={getColumns()}
+            data={data}
+            filter={{
+              items: getFilters(),
+              defaultValues: initialParams,
+              query: query,
+            }}
+            inCard={true}
+            load={load}
+            loading={loading}
+            onRowActionClick={({ id: key }, { original }) => {
+              const { identifier } = original
+              if (key === 'detail') {
+                router.push(`/${identifier}/dashboard`)
+              } else if (key === 'activity') {
+                router.push(`/${identifier}/activity`)
+              } else if (key === 'delete') {
+                remove(identifier!)
+              } else if (key === 'collect') {
+                alert.confirm({
+                  title: t('收藏模块'),
+                  description: t('确定收藏模块吗？'),
+                  onOk: () => addCollectMutation(identifier!),
+                })
+              } else if (key === 'collect.cancel') {
+                alert.confirm({
+                  title: t('取消收藏模块'),
+                  description: t('确定取消收藏模块吗？'),
+                  onOk: () => cancelCollectMutation(identifier!),
+                })
+              }
+            }}
+            onRowClick={(row) => {
+              const { identifier } = row.original
               router.push(`/${identifier}/dashboard`)
-            } else if (key === 'activity') {
-              router.push(`/${identifier}/activity`)
-            } else if (key === 'delete') {
-              remove(identifier!)
-            } else if (key === 'collect') {
-              alert.confirm({
-                title: t('收藏模块'),
-                description: t('确定收藏模块吗？'),
-                onOk: () => addCollectMutation(identifier!),
-              })
-            } else if (key === 'collect.cancel') {
-              alert.confirm({
-                title: t('取消收藏模块'),
-                description: t('确定取消收藏模块吗？'),
-                onOk: () => cancelCollectMutation(identifier!),
-              })
-            }
-          }}
-          onRowClick={(row) => {
-            const { identifier } = row.original
-            router.push(`/${identifier}/dashboard`)
-          }}
-          pagination={pagination}
-          rowActions={(row) => ROW_ACTIONS(profile, row)}
-          showHeader={false}
-        />
-      </Card>
+            }}
+            pagination={pagination}
+            rowActions={(row) => ROW_ACTIONS(profile, row)}
+            showHeader={false}
+          />
+        </Card>
+      </div>
     </MainPage>
   )
 }

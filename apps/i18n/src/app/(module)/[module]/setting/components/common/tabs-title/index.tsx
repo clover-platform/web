@@ -18,5 +18,5 @@ export const SettingTabsTitle: FC<SettingTabsTitleProps> = (props) => {
     [m, router]
   )
 
-  return <TabsTitle active={props.active} items={getTabs()} onChange={onChange} />
+  return <TabsTitle active={props.active} className="-mb-md" items={getTabs()} onChange={onChange} />
 }

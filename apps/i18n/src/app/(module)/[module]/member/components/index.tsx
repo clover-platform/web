@@ -9,6 +9,7 @@ import { BreadcrumbItem, BreadcrumbPage, Card, DataTable } from '@easykit/design
 import { useSearchParams } from 'next/navigation'
 import { useTranslation } from 'react-i18next'
 import { MainPage } from '@clover/public/components/common/page'
+import { PageHeader } from '@clover/public/components/common/page/header'
 import { TabsTitle } from '@clover/public/components/common/tabs-title'
 import { TitleBar } from '@clover/public/components/common/title-bar'
 import { useLayoutConfig } from '@clover/public/components/layout/hooks/use.layout.config'
@@ -51,33 +52,37 @@ export const MemberPage = () => {
 
   return (
     <MainPage>
-      <ModuleBreadcrumb>
-        <BreadcrumbItem>
-          <BreadcrumbPage>{title}</BreadcrumbPage>
-        </BreadcrumbItem>
-      </ModuleBreadcrumb>
-      <TitleBar actions={actions} border={false} title={title} />
-      <Card>
-        <TabsTitle active={active} items={getTabs()} onChange={setActive} />
-        <DataTable<Member>
-          columns={getColumns()}
-          data={data}
-          filter={{
-            items: getFilters(),
-            defaultValues: initialParams,
-            query: query,
-          }}
-          inCard={true}
-          load={load}
-          loading={loading}
-          onRowActionClick={({ id: key }, { original }) => {
-            const { id } = original
-            console.log(key, id)
-          }}
-          pagination={pagination}
-          rowActions={getRowActions()}
-        />
-      </Card>
+      <PageHeader>
+        <ModuleBreadcrumb>
+          <BreadcrumbItem>
+            <BreadcrumbPage>{title}</BreadcrumbPage>
+          </BreadcrumbItem>
+        </ModuleBreadcrumb>
+        <TitleBar actions={actions} border={false} title={title} />
+        <TabsTitle active={active} className="-mb-md" items={getTabs()} onChange={setActive} />
+      </PageHeader>
+      <div className="container">
+        <Card>
+          <DataTable<Member>
+            columns={getColumns()}
+            data={data}
+            filter={{
+              items: getFilters(),
+              defaultValues: initialParams,
+              query: query,
+            }}
+            inCard={true}
+            load={load}
+            loading={loading}
+            onRowActionClick={({ id: key }, { original }) => {
+              const { id } = original
+              console.log(key, id)
+            }}
+            pagination={pagination}
+            rowActions={getRowActions()}
+          />
+        </Card>
+      </div>
     </MainPage>
   )
 }

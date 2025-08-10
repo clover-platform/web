@@ -1,10 +1,9 @@
 import { type FC, useState } from 'react'
-import { Button, Avatar as EasykitAvatar, Spin, Uploader, type UploadFile, useMessage } from '@easykit/design'
+import { Avatar as EasykitAvatar, Spin, Uploader, type UploadFile, useMessage } from '@easykit/design'
 import { Pencil2Icon } from '@radix-ui/react-icons'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import classNames from 'classnames'
 import { useParams } from 'next/navigation'
-import { useTranslation } from 'react-i18next'
 import { CropperDialog } from '@clover/public/components/common/cropper/dialog'
 import { useStateLoader } from '@clover/public/components/layout/hooks/use.state.loader'
 import { useProfile } from '@clover/public/hooks'
@@ -28,7 +27,6 @@ export const Avatar: FC<AvatarProps> = (props) => {
   const queryClient = useQueryClient()
   const { username } = useParams()
   const load = useStateLoader()
-  const { t } = useTranslation()
   const m = useMessage()
   const [files, setFiles] = useState<UploadFile[]>([])
 

@@ -36,11 +36,12 @@ export const ModuleLayout: FC<ModuleLayoutProps> = (origin) => {
   return (
     <PublicMainLayout
       className="bg-secondary dark:bg-background"
+      container={false}
       footerProps={{ simple: true }}
       headerProps={{
         logoUrl: '/',
         appName: t('国际化'),
-        className: 'bg-background dark:bg-black/50',
+        className: 'bg-background dark:bg-black/50 sticky top-0 z-50',
         extra: <Header active={props.active} />,
       }}
       loading={!isLogin}

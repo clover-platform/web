@@ -6,7 +6,7 @@ export type PageProps = PropsWithChildren<{
 }>
 
 export const Page: FC<PageProps> = (props) => {
-  return <div className={classNames('flex flex-col gap-lg', props.className)}>{props.children}</div>
+  return <div className={classNames('flex flex-col gap-lg py-lg', props.className)}>{props.children}</div>
 }
 
 export const MainPage = Page

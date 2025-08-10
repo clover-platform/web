@@ -27,6 +27,7 @@ import { useAtom } from 'jotai'
 import { useParams, useRouter } from 'next/navigation'
 import { useTranslation } from 'react-i18next'
 import { MainPage } from '@clover/public/components/common/page'
+import { PageHeader } from '@clover/public/components/common/page/header'
 import { TitleBar } from '@clover/public/components/common/title-bar'
 import { useLayoutConfig } from '@clover/public/components/layout/hooks/use.layout.config'
 import { i18n } from '@clover/public/utils/locale.client'
@@ -60,14 +61,16 @@ export const DashboardPage = () => {
 
   return (
     <MainPage>
-      <ModuleBreadcrumb>
-        <BreadcrumbItem>
-          <BreadcrumbPage>{title}</BreadcrumbPage>
-        </BreadcrumbItem>
-      </ModuleBreadcrumb>
-      <TitleBar actions={actions} border={false} title={title} />
+      <PageHeader>
+        <ModuleBreadcrumb>
+          <BreadcrumbItem>
+            <BreadcrumbPage>{title}</BreadcrumbPage>
+          </BreadcrumbItem>
+        </ModuleBreadcrumb>
+        <TitleBar actions={actions} border={false} title={title} />
+      </PageHeader>
       <Loading>
-        <div className="flex items-start justify-start gap-4">
+        <div className="container flex items-start justify-start gap-4">
           <Card className="w-0 flex-1 flex-shrink-0">
             <ScrollArea className="w-full pb-2">
               <Table className="min-w-[600px]">

@@ -5,6 +5,7 @@ import { BreadcrumbItem, BreadcrumbLink, BreadcrumbPage, BreadcrumbSeparator, Ca
 import Link from 'next/link'
 import { useTranslation } from 'react-i18next'
 import { MainPage } from '@clover/public/components/common/page'
+import { PageHeader } from '@clover/public/components/common/page/header'
 import { TitleBar } from '@clover/public/components/common/title-bar'
 import { ModuleBreadcrumb } from '@/components/common/breadcrumb/module'
 import { useModule } from '@/hooks/use.module'
@@ -21,22 +22,24 @@ export const SettingBasePage: FC<SettingBasePageProps> = (props) => {
 
   return (
     <MainPage>
-      <ModuleBreadcrumb>
-        <BreadcrumbItem>
-          <BreadcrumbLink asChild={true}>
-            <Link href={`/${m}/setting`}>{t('设置')}</Link>
-          </BreadcrumbLink>
-        </BreadcrumbItem>
-        <BreadcrumbSeparator />
-        <BreadcrumbItem>
-          <BreadcrumbPage>{title}</BreadcrumbPage>
-        </BreadcrumbItem>
-      </ModuleBreadcrumb>
-      <TitleBar border={false} title={title} />
-      <Card contentClassName="gap-2 flex flex-col">
+      <PageHeader>
+        <ModuleBreadcrumb>
+          <BreadcrumbItem>
+            <BreadcrumbLink asChild={true}>
+              <Link href={`/${m}/setting`}>{t('设置')}</Link>
+            </BreadcrumbLink>
+          </BreadcrumbItem>
+          <BreadcrumbSeparator />
+          <BreadcrumbItem>
+            <BreadcrumbPage>{title}</BreadcrumbPage>
+          </BreadcrumbItem>
+        </ModuleBreadcrumb>
+        <TitleBar border={false} title={title} />
         <SettingTabsTitle active={active} />
-        {props.children}
-      </Card>
+      </PageHeader>
+      <div className="container">
+        <Card contentClassName="gap-2 flex flex-col">{props.children}</Card>
+      </div>
     </MainPage>
   )
 }

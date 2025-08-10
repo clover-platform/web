@@ -7,7 +7,7 @@ import { useTranslation } from 'react-i18next'
 export const Module = () => {
   const { t } = useTranslation()
   return (
-    <DropdownMenuContent align="start" className="w-96">
+    <DropdownMenuContent align="start" className="z-100 w-96">
       <ModuleCollect />
       <DropdownMenuSeparator />
       <Link href="/">

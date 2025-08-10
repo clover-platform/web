@@ -18,6 +18,7 @@ import { useRouter } from 'next/navigation'
 import { useTranslation } from 'react-i18next'
 import BackButton from '@clover/public/components/common/button/back'
 import { MainPage } from '@clover/public/components/common/page'
+import { PageHeader } from '@clover/public/components/common/page/header'
 import { TitleBar } from '@clover/public/components/common/title-bar'
 import { useLayoutConfig } from '@clover/public/components/layout/hooks/use.layout.config'
 import { AppBreadcrumb } from '@/components/common/breadcrumb/app'
@@ -50,28 +51,32 @@ export const CreateModulePage = () => {
 
   return (
     <MainPage>
-      <AppBreadcrumb>
-        <BreadcrumbItem>
-          <BreadcrumbLink asChild={true}>
-            <Link href="/">{t('模块')}</Link>
-          </BreadcrumbLink>
-        </BreadcrumbItem>
-        <BreadcrumbSeparator />
-        <BreadcrumbItem>
-          <BreadcrumbPage>{t('创建模块')}</BreadcrumbPage>
-        </BreadcrumbItem>
-      </AppBreadcrumb>
-      <TitleBar title={t('创建模块')} />
-      <Card>
-        <ModuleForm onSubmit={onSubmit}>
-          <Space>
-            <Button loading={isPending} type="submit">
-              {t('提交')}
-            </Button>
-            <BackButton />
-          </Space>
-        </ModuleForm>
-      </Card>
+      <PageHeader>
+        <AppBreadcrumb>
+          <BreadcrumbItem>
+            <BreadcrumbLink asChild={true}>
+              <Link href="/">{t('模块')}</Link>
+            </BreadcrumbLink>
+          </BreadcrumbItem>
+          <BreadcrumbSeparator />
+          <BreadcrumbItem>
+            <BreadcrumbPage>{t('创建模块')}</BreadcrumbPage>
+          </BreadcrumbItem>
+        </AppBreadcrumb>
+        <TitleBar title={t('创建模块')} />
+      </PageHeader>
+      <div className="container">
+        <Card>
+          <ModuleForm onSubmit={onSubmit}>
+            <Space>
+              <Button loading={isPending} type="submit">
+                {t('提交')}
+              </Button>
+              <BackButton />
+            </Space>
+          </ModuleForm>
+        </Card>
+      </div>
     </MainPage>
   )
 }
