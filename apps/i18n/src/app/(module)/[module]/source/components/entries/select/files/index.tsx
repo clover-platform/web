@@ -1,5 +1,6 @@
 import { type FC, useCallback, useEffect, useMemo, useState } from 'react'
 import { ComboSelect, type ComboSelectOptionProps, type ComboSelectProps } from '@easykit/design'
+import classNames from 'classnames'
 import { debounce } from 'es-toolkit'
 import { useTranslation } from 'react-i18next'
 import { FileName } from '@/components/common/file-name'
@@ -7,9 +8,12 @@ import { useModule } from '@/hooks'
 import { searchFile } from '@/rest/source'
 import type { File } from '@/types/module/source'
 
-export type FilesSelectProps = ComboSelectProps<File>
+export type FilesSelectProps = ComboSelectProps<File> & {
+  className?: string
+}
 
 export const FilesSelect: FC<FilesSelectProps> = (props) => {
+  const { className } = props
   const { t } = useTranslation()
   const m = useModule()
   const [result, setResult] = useState<ComboSelectOptionProps<File>[]>([])
@@ -47,7 +51,7 @@ export const FilesSelect: FC<FilesSelectProps> = (props) => {
   return (
     <ComboSelect
       {...props}
-      className="min-w-[180px]"
+      className={classNames('min-w-[180px]', className)}
       filter={(_value, search, option) => {
         return option?.raw?.name.includes(search) ?? false
       }}

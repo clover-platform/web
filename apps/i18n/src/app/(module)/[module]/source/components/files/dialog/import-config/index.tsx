@@ -130,7 +130,7 @@ export const ImportConfigDialog: FC<ImportConfigDialogProps> = (props) => {
 
   return (
     <Dialog
-      className="w-[90vw] max-w-[960px] duration-200"
+      className="!max-w-[960px] w-[90vw] duration-200"
       footer={footer}
       maskClosable={false}
       title={t('导入配置')}

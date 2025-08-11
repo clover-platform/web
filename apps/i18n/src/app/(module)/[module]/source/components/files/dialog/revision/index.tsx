@@ -36,7 +36,7 @@ export const RevisionDialog: FC<RevisionDialogProps> = (props) => {
 
   return (
     <Dialog
-      className="w-[90vw] max-w-[800px] duration-200"
+      className="!max-w-[800px] w-[90vw] duration-200"
       {...rest}
       maskClosable={false}
       title={t('变更记录')}

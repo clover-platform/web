@@ -7,7 +7,7 @@ import { getSchema, type ModuleFormData } from '@/config/schema/module'
 export interface ModuleFormProps extends PropsWithChildren {
   onSubmit?: (data: ModuleFormData) => void
   defaultValues?: ModuleFormData
-}
+} 
 
 const ModuleForm: FC<ModuleFormProps> = (props) => {
   const { defaultValues = {} } = props
