@@ -1,5 +1,6 @@
 import type { PageData } from '@clover/public/types/rest'
 import { del, get, post, put, resultWrapper } from '@clover/public/utils/rest'
+import type { AddEntryFormData } from '@/app/(module)/[module]/source/components/entries/dialog/add/schema'
 import type { EntryEditFormData } from '@/config/pages/entry/edit/form'
 import type { CreateEntryFormData } from '@/config/pages/entry/form'
 import type { CountEntryData, CountEntryQuery, Entry } from '@/types/module/entry'
@@ -72,3 +73,15 @@ export const count = (query: CountEntryQuery) =>
       query
     )
   )
+
+export type FileEntryBatchRequestEntry = {
+  identifier: string
+  value: string
+  context: string
+}
+
+export type BatchAddEntryData = {
+  module: string
+} & AddEntryFormData
+export const batchAddEntry = (data: BatchAddEntryData) =>
+  resultWrapper(post<unknown, BatchAddEntryData>(`@i18n/${data.module}/file/entry/batch/add`, data))

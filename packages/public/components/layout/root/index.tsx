@@ -12,6 +12,7 @@ import { setCookie } from 'cookies-next'
 import i18next from 'i18next'
 import { Provider, type WritableAtom } from 'jotai'
 import { useHydrateAtoms } from 'jotai/utils'
+import Cookies from 'js-cookie'
 import { ThemeProvider, useTheme } from 'next-themes'
 import { NuqsAdapter } from 'nuqs/adapters/next/app'
 import { I18nextProvider } from 'react-i18next'
@@ -24,7 +25,7 @@ import type { Account } from '@clover/public/types/account'
 import type { CommonConfig } from '@clover/public/types/config'
 import type { Project } from '@clover/public/types/project'
 import type { Team } from '@clover/public/types/team'
-import { getRootDomain } from '@clover/public/utils' 
+import { getRootDomain, isServer } from '@clover/public/utils'
 import { getQueryClient } from '@clover/public/utils/query'
 
 export type AtomValues = Iterable<
@@ -62,13 +63,17 @@ export type RootLayoutProps = PropsWithChildren<{
   locale: string
   config?: CommonConfig
   atomValues?: AtomValues
+  theme: string
 }>
 
 export const RootLayout: FC<RootLayoutProps> = (props) => {
-  const { children, isLogin, accountInfo, teams, projects, locale, config, atomValues = [] } = props
+  const { children, isLogin, accountInfo, teams, projects, locale, config, atomValues = [], theme } = props
 
   i18next.changeLanguage(locale)
   const queryClient = getQueryClient()
+  if (!isServer) {
+    localStorage.removeItem('theme')
+  }
 
   return (
     <NuqsAdapter>
@@ -97,7 +102,7 @@ export const RootLayout: FC<RootLayoutProps> = (props) => {
             ]}
           >
             <ConfigProvider locale={locales[locale]}>
-              <ThemeProvider attribute="class" defaultTheme="system" disableTransitionOnChange enableSystem>
+              <ThemeProvider attribute="class" defaultTheme={theme} disableTransitionOnChange enableSystem>
                 <ThemeSyncProvider>
                   <QueryClientProvider client={queryClient}>
                     {children}

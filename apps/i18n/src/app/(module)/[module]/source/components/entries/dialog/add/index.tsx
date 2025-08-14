@@ -4,7 +4,10 @@ import { type AddEntryFormData, useSchema } from './schema'
 
 import type { FC } from 'react'
 import { Alert, Button, Dialog, type DialogProps, Form, FormItem } from '@easykit/design'
+import { useMutation } from '@tanstack/react-query'
 import { useTranslation } from 'react-i18next'
+import { useModule } from '@/hooks'
+import { batchAddEntry } from '@/rest/entry'
 
 export type AddEntryDialogProps = DialogProps
 
@@ -12,26 +15,37 @@ export const AddEntryDialog: FC<AddEntryDialogProps> = (props) => {
   const { t } = useTranslation()
   const schema = useSchema()
   const form = Form.useForm<AddEntryFormData>()
-  const fileIdList = Form.useWatch('fileIdList', form)
-
-  console.log('fileIdList', fileIdList)
+  const m = useModule()
+  const { mutate, isPending } = useMutation({
+    mutationFn: batchAddEntry,
+    onSuccess: () => {},
+    onError: (error) => {
+      console.error(error)
+    },
+  })
 
   const handleSubmit = () => {
     form.submit()
   }
 
   const onSubmit = (data: AddEntryFormData) => {
-    console.log(data)
+    mutate({
+      ...data,
+      module: m,
+    })
   }
 
   return (
     <Dialog
       {...props}
       className="sm:!max-w-7xl w-10/12"
+      closable={!isPending}
       footer={
         <div className="flex gap-2">
-          <Button onClick={handleSubmit}>{t('添加')}</Button>
-          <Button onClick={props.onCancel} variant="outline">
+          <Button loading={isPending} onClick={handleSubmit}>
+            {t('添加')}
+          </Button>
+          <Button disabled={isPending} onClick={props.onCancel} variant="outline">
             {t('取消')}
           </Button>
         </div>
